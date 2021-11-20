@@ -16,7 +16,6 @@ type Damage struct {
 	Poison   float32 `json:"poison,omitempty"`
 	Curse    float32 `json:"curse,omitempty"`
 	Stunning float32 `json:"stunning,omitempty"`
-	// todo
 }
 
 func (d Damage) String() string {

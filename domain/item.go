@@ -22,12 +22,3 @@ func (i Item) String() string {
 		"Item: id: %s, name: %s, type: %s, description: %s",
 		i.Id, i.Name, i.Type, i.Description)
 }
-
-type Equipment struct {
-	Item
-	Equipped bool `json:"equipped"`
-}
-
-func (e Equipment) String() string {
-	return fmt.Sprintf("Equipment: equipped: %t", e.Equipped)
-}

@@ -93,9 +93,3 @@ func (a UnitAttributes) String() string {
 	}
 	return strings.Join(props, ", ")
 }
-
-type UnitEnhancement struct {
-	UnitBaseAttributes
-	UnitAttributes
-	UnitResistance
-}
