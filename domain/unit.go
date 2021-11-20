@@ -1,5 +1,10 @@
 package domain
 
+import (
+	"fmt"
+	"strings"
+)
+
 type Unit struct {
 	State       UnitState               `json:"state"`
 	Stats       UnitStats               `json:"stats"`
@@ -21,6 +26,20 @@ type UnitBaseAttributes struct {
 	Mana    float32 `json:"mana"`
 }
 
+func (a UnitBaseAttributes) String() string {
+	props := []string{}
+	if a.Health != 0 {
+		props = append(props, fmt.Sprintf("health: %g", a.Health))
+	}
+	if a.Stamina != 0 {
+		props = append(props, fmt.Sprintf("stamina: %g", a.Stamina))
+	}
+	if a.Mana != 0 {
+		props = append(props, fmt.Sprintf("mana: %g", a.Mana))
+	}
+	return strings.Join(props, ", ")
+}
+
 type UnitState struct {
 	UnitBaseAttributes
 }
@@ -28,6 +47,11 @@ type UnitState struct {
 type UnitProgress struct {
 	Level      float32 `json:"level"`
 	Experience float32 `json:"experience"`
+}
+
+func (p UnitProgress) String() string {
+	return fmt.Sprintf("level: %g, experience: %g",
+		p.Level, p.Experience)
 }
 
 type UnitResistance struct {
@@ -44,8 +68,34 @@ type UnitAttributes struct {
 	Luck         float32 `json:"luck"`
 }
 
+func (a UnitAttributes) String() string {
+	props := []string{}
+	if a.Strength != 0 {
+		props = append(props, fmt.Sprintf("strength: %g", a.Strength))
+	}
+	if a.Physique != 0 {
+		props = append(props, fmt.Sprintf("physique: %g", a.Physique))
+	}
+	if a.Dexterity != 0 {
+		props = append(props, fmt.Sprintf("dexterity: %g", a.Dexterity))
+	}
+	if a.Endurance != 0 {
+		props = append(props, fmt.Sprintf("endurance: %g", a.Endurance))
+	}
+	if a.Intelligence != 0 {
+		props = append(props, fmt.Sprintf("intelligence: %g", a.Intelligence))
+	}
+	if a.Holy != 0 {
+		props = append(props, fmt.Sprintf("holy: %g", a.Holy))
+	}
+	if a.Luck != 0 {
+		props = append(props, fmt.Sprintf("luck: %g", a.Luck))
+	}
+	return strings.Join(props, ", ")
+}
+
 type UnitEnhancement struct {
-	UnitBaseAttributes `json:"unitBaseAttributes"`
-	UnitAttributes     `json:"unitAttributes"`
-	UnitResistance     `json:"unitResistance"`
+	UnitBaseAttributes
+	UnitAttributes
+	UnitResistance
 }
