@@ -15,8 +15,8 @@ func main() {
 func accumulateResistance() {
 	unit := domain.Unit{}
 	equipment := jsonToItem(
-		&domain.Weapon{},
-		`{
+		&[]domain.Weapon{},
+		`[{
 			"name": "The thing",
 			"equipped": true,
 			"enhancement": [
@@ -26,13 +26,15 @@ func accumulateResistance() {
 					"stabbing": 0
 				},
 				{
-					"cold": 5
+					"cold": 5,
+					"cutting": -2
 				}
 			]
-		}`).(*domain.Weapon)
-	unit.Items = append(unit.Items, *equipment)
-	resistance := unit.TotalResistance()
-	fmt.Print(resistance)
+		}]`).(*[]domain.Weapon)
+	for _, v := range *equipment {
+		unit.Items = append(unit.Items, v)
+	}
+	fmt.Printf("Total resistance: {%v}", unit.TotalResistance())
 }
 
 func printWeapon() {
@@ -49,7 +51,7 @@ func printWeapon() {
 			"requirements": {
 				"strength": 50
 			},
-			"damage": [
+			"impact": [
 				{
 					"cutting": 30,
 					"crushing": 5,

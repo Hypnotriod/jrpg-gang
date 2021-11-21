@@ -2,6 +2,6 @@ package domain
 
 type Potion struct {
 	Item
-	Damage      []DamageImpact          `json:"damage,omitempty"`
+	Impact      []DamageImpact          `json:"impact,omitempty"`
 	Enhancement []UnitEnhancementImpact `json:"enhancement,omitempty"`
 }

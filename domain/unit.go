@@ -8,7 +8,7 @@ import (
 type Unit struct {
 	State       UnitState               `json:"state"`
 	Stats       UnitStats               `json:"stats"`
-	Damage      []DamageImpact          `json:"damage"`
+	Impact      []DamageImpact          `json:"impact"`
 	Enhancement []UnitEnhancementImpact `json:"enhancement"`
 	Items       []interface{}           `json:"items"`
 }

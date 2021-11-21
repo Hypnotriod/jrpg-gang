@@ -5,19 +5,19 @@ type UnitResistance struct {
 }
 
 func (r *UnitResistance) Accumulate(resistance *UnitResistance) {
-	r.Stabbing += resistance.Stabbing
-	r.Cutting += resistance.Cutting
-	r.Crushing += resistance.Crushing
-	r.Fire += resistance.Fire
-	r.Cold += resistance.Cold
-	r.Lighting += resistance.Lighting
-	r.Fear += resistance.Fear
-	r.Poison += resistance.Poison
-	r.Curse += resistance.Curse
-	r.Stunning += resistance.Stunning
+	r.Damage.Accumulate(&resistance.Damage)
 }
 
-func AccumulateResistanceByEquipment(resistance *UnitResistance, item interface{}, checkEquipped bool) *UnitResistance {
+func (u *Unit) ItemsResistance(checkEquipped bool) *UnitResistance {
+	var resistance *UnitResistance = &UnitResistance{}
+	for _, item := range u.Items {
+		resistance.Accumulate(u.ItemResistance(item, checkEquipped))
+	}
+	return resistance
+}
+
+func (u *Unit) ItemResistance(item interface{}, checkEquipped bool) *UnitResistance {
+	var resistance *UnitResistance = &UnitResistance{}
 	equipment, ok := AsEquipment(item)
 	if !ok || checkEquipped && !equipment.Equipped {
 		return resistance
@@ -31,8 +31,6 @@ func AccumulateResistanceByEquipment(resistance *UnitResistance, item interface{
 func (u *Unit) TotalResistance() *UnitResistance {
 	var resistance *UnitResistance = &UnitResistance{}
 	resistance.Accumulate(&u.Stats.Resistance)
-	for _, item := range u.Items {
-		AccumulateResistanceByEquipment(resistance, item, true)
-	}
+	resistance.Accumulate(u.ItemsResistance(true))
 	return resistance
 }
