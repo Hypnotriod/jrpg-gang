@@ -10,7 +10,7 @@ type Unit struct {
 	Stats       UnitStats               `json:"stats"`
 	Damage      []DamageImpact          `json:"damage"`
 	Enhancement []UnitEnhancementImpact `json:"enhancement"`
-	Items       []Item                  `json:"items"`
+	Items       []interface{}           `json:"items"`
 }
 
 type UnitStats struct {
@@ -52,10 +52,6 @@ type UnitProgress struct {
 func (p UnitProgress) String() string {
 	return fmt.Sprintf("level: %g, experience: %g",
 		p.Level, p.Experience)
-}
-
-type UnitResistance struct {
-	Damage
 }
 
 type UnitAttributes struct {

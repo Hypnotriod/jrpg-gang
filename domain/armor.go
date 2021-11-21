@@ -4,7 +4,6 @@ import "fmt"
 
 type Armor struct {
 	Equipment
-	Enhancement []UnitEnhancement `json:"enhancement"`
 }
 
 func (a Armor) String() string {
