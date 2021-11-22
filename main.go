@@ -7,14 +7,28 @@ import (
 )
 
 func main() {
+	printUnit()
 	printArmor()
 	printWeapon()
 	accumulateResistance()
 }
 
+func printUnit() {
+	unit := jsonToObject(
+		&domain.Unit{},
+		`{
+			"state": {
+				"health": 100,
+				"stamina": 100,
+				"mana": 100
+			}
+		}`).(*domain.Unit)
+	fmt.Println(*unit)
+}
+
 func accumulateResistance() {
 	unit := domain.Unit{}
-	equipment := jsonToItem(
+	equipment := jsonToObject(
 		&[]domain.Weapon{},
 		`[{
 			"name": "The thing",
@@ -34,11 +48,11 @@ func accumulateResistance() {
 	for _, v := range *equipment {
 		unit.Items = append(unit.Items, v)
 	}
-	fmt.Printf("Total resistance: {%v}", unit.TotalResistance())
+	fmt.Printf("Total resistance: {%v}\n", unit.TotalResistance())
 }
 
 func printWeapon() {
-	weapon := jsonToItem(
+	weapon := jsonToObject(
 		&domain.Weapon{},
 		`{
 			"id": "1111",
@@ -70,7 +84,7 @@ func printWeapon() {
 }
 
 func printArmor() {
-	armor := jsonToItem(
+	armor := jsonToObject(
 		&domain.Armor{},
 		`{
 			"id": "2222",
@@ -94,7 +108,7 @@ func printArmor() {
 	fmt.Println(armor)
 }
 
-func jsonToItem(object interface{}, config string) interface{} {
+func jsonToObject(object interface{}, config string) interface{} {
 	err := json.Unmarshal([]byte(config), object)
 	if err != nil {
 		fmt.Printf("Can't parse %T: %v", object, err)

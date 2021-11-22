@@ -3,58 +3,87 @@ package domain
 import (
 	"fmt"
 	"strings"
+
+	"jrpg-gang/util"
 )
 
 type Damage struct {
-	Stabbing float32 `json:"stabbing,omitempty"`
-	Cutting  float32 `json:"cutting,omitempty"`
-	Crushing float32 `json:"crushing,omitempty"`
-	Fire     float32 `json:"fire,omitempty"`
-	Cold     float32 `json:"cold,omitempty"`
-	Lighting float32 `json:"lighting,omitempty"`
-	Poison   float32 `json:"poison,omitempty"`
-	Fear     float32 `json:"fear,omitempty"`
-	Curse    float32 `json:"curse,omitempty"`
-	Stunning float32 `json:"stunning,omitempty"`
+	Stabbing   float32 `json:"stabbing,omitempty"`
+	Cutting    float32 `json:"cutting,omitempty"`
+	Crushing   float32 `json:"crushing,omitempty"`
+	Fire       float32 `json:"fire,omitempty"`
+	Cold       float32 `json:"cold,omitempty"`
+	Lighting   float32 `json:"lighting,omitempty"`
+	Poison     float32 `json:"poison,omitempty"`
+	Stunning   float32 `json:"stunning,omitempty"`
+	Exhaustion float32 `json:"exhaustion,omitempty"`
+	Fear       float32 `json:"fear,omitempty"`
+	Curse      float32 `json:"curse,omitempty"`
 }
 
-func (r *Damage) Accumulate(damage *Damage) {
-	r.Stabbing += damage.Stabbing
-	r.Cutting += damage.Cutting
-	r.Crushing += damage.Crushing
-	r.Fire += damage.Fire
-	r.Cold += damage.Cold
-	r.Lighting += damage.Lighting
-	r.Poison += damage.Poison
-	r.Fear += damage.Fear
-	r.Curse += damage.Curse
-	r.Stunning += damage.Stunning
+func (d *Damage) Accumulate(damage Damage) {
+	d.Stabbing += damage.Stabbing
+	d.Cutting += damage.Cutting
+	d.Crushing += damage.Crushing
+	d.Fire += damage.Fire
+	d.Cold += damage.Cold
+	d.Lighting += damage.Lighting
+	d.Poison += damage.Poison
+	d.Stunning += damage.Stunning
+	d.Exhaustion += damage.Exhaustion
+	d.Fear += damage.Fear
+	d.Curse += damage.Curse
 }
 
-func (r *Damage) Reduce(damage *Damage) {
-	r.Stabbing -= damage.Stabbing
-	r.Cutting -= damage.Cutting
-	r.Crushing -= damage.Crushing
-	r.Fire -= damage.Fire
-	r.Cold -= damage.Cold
-	r.Lighting -= damage.Lighting
-	r.Poison -= damage.Poison
-	r.Fear -= damage.Fear
-	r.Curse -= damage.Curse
-	r.Stunning -= damage.Stunning
+func (d *Damage) Reduce(damage Damage) {
+	d.Stabbing -= damage.Stabbing
+	d.Cutting -= damage.Cutting
+	d.Crushing -= damage.Crushing
+	d.Fire -= damage.Fire
+	d.Cold -= damage.Cold
+	d.Lighting -= damage.Lighting
+	d.Poison -= damage.Poison
+	d.Stunning -= damage.Stunning
+	d.Exhaustion -= damage.Exhaustion
+	d.Fear -= damage.Fear
+	d.Curse -= damage.Curse
 }
 
-func (r *Damage) Normalize() {
-	r.Stabbing = maxFloat32(r.Stabbing, 0)
-	r.Cutting = maxFloat32(r.Cutting, 0)
-	r.Crushing = maxFloat32(r.Crushing, 0)
-	r.Fire = maxFloat32(r.Fire, 0)
-	r.Cold = maxFloat32(r.Cold, 0)
-	r.Lighting = maxFloat32(r.Lighting, 0)
-	r.Poison = maxFloat32(r.Poison, 0)
-	r.Fear = maxFloat32(r.Fear, 0)
-	r.Curse = maxFloat32(r.Curse, 0)
-	r.Stunning = maxFloat32(r.Stunning, 0)
+func (d *Damage) Enchance(attributes UnitAttributes) {
+	d.Stabbing = util.AccumulateIfNotZerosFloat32(d.Stabbing, attributes.Dexterity)
+	d.Cutting = util.AccumulateIfNotZerosFloat32(d.Cutting, attributes.Strength)
+	d.Crushing = util.AccumulateIfNotZerosFloat32(d.Crushing, attributes.Strength)
+	d.Fire = util.AccumulateIfNotZerosFloat32(d.Fire, attributes.Intelligence)
+	d.Cold = util.AccumulateIfNotZerosFloat32(d.Cold, attributes.Intelligence)
+	d.Lighting = util.AccumulateIfNotZerosFloat32(d.Lighting, attributes.Intelligence)
+	d.Stunning = util.AccumulateIfNotZerosFloat32(d.Stunning, attributes.Strength)
+	d.Exhaustion = util.AccumulateIfNotZerosFloat32(d.Exhaustion, attributes.Intelligence)
+}
+
+func (d *Damage) Normalize() {
+	d.Stabbing = util.MaxFloat32(d.Stabbing, 0)
+	d.Cutting = util.MaxFloat32(d.Cutting, 0)
+	d.Crushing = util.MaxFloat32(d.Crushing, 0)
+	d.Fire = util.MaxFloat32(d.Fire, 0)
+	d.Cold = util.MaxFloat32(d.Cold, 0)
+	d.Lighting = util.MaxFloat32(d.Lighting, 0)
+	d.Poison = util.MaxFloat32(d.Poison, 0)
+	d.Stunning = util.MaxFloat32(d.Stunning, 0)
+	d.Exhaustion = util.MaxFloat32(d.Exhaustion, 0)
+	d.Fear = util.MaxFloat32(d.Fear, 0)
+	d.Curse = util.MaxFloat32(d.Curse, 0)
+}
+
+func (d *Damage) Apply(state *UnitState) {
+	state.Health -= d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lighting + d.Poison
+	state.Stamina -= d.Stunning
+	state.Mana -= d.Exhaustion
+	state.Curse += d.Curse
+	state.Fear += d.Fear
+
+	state.Health = util.MaxFloat32(state.Health, 0)
+	state.Stamina = util.MaxFloat32(state.Stamina, 0)
+	state.Mana = util.MaxFloat32(state.Mana, 0)
 }
 
 func (d Damage) String() string {

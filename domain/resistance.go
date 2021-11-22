@@ -5,7 +5,7 @@ type UnitResistance struct {
 }
 
 func (r *UnitResistance) Accumulate(resistance *UnitResistance) {
-	r.Damage.Accumulate(&resistance.Damage)
+	r.Damage.Accumulate(resistance.Damage)
 }
 
 func (u *Unit) ItemsResistance(checkEquipped bool) *UnitResistance {
@@ -32,5 +32,6 @@ func (u *Unit) TotalResistance() *UnitResistance {
 	var resistance *UnitResistance = &UnitResistance{}
 	resistance.Accumulate(&u.Stats.Resistance)
 	resistance.Accumulate(u.ItemsResistance(true))
+	resistance.Normalize()
 	return resistance
 }

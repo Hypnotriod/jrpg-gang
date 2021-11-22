@@ -1,11 +1,14 @@
 package domain
 
 import (
-	"math/rand"
+	"jrpg-gang/util"
 )
 
 func (u *Unit) ApplyDamage(damage Damage) {
-	// todo: implement
+	resistance := u.TotalResistance()
+	damage.Reduce(resistance.Damage)
+	damage.Normalize()
+	damage.Apply(&u.State)
 }
 
 func (u *Unit) Attack(target *Unit, impact []DamageImpact) (*Damage, bool) {
@@ -13,22 +16,20 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) (*Damage, bool) {
 	var success bool = false
 	for _, i := range impact {
 		// todo: find better formula?
-		chance := i.Chance + u.Stats.Attributes.Luck
-		rnd := rand.Float32() * 100
-		if chance <= rnd {
+		chance := i.Chance + u.Stats.Attributes.Luck - u.State.Curse
+		if !util.CheckRandomChance(chance) {
 			continue
 		}
 		success = true
-		damage.Accumulate(&i.Damage)
+		damage.Accumulate(i.Damage)
 		switch i.Type {
 		case ImpactTypeTemporal, ImpactTypePermanent:
 			u.Impact = append(u.Impact, i)
 		}
 	}
-
-	resistance := target.TotalResistance()
-	damage.Reduce(&resistance.Damage)
-	damage.Normalize()
-	target.ApplyDamage(*damage)
+	if success {
+		damage.Enchance(u.Stats.Attributes)
+		target.ApplyDamage(*damage)
+	}
 	return damage, success
 }

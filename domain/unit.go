@@ -6,6 +6,7 @@ import (
 )
 
 type Unit struct {
+	Name        string                  `json:"name"`
 	State       UnitState               `json:"state"`
 	Stats       UnitStats               `json:"stats"`
 	Impact      []DamageImpact          `json:"impact"`
@@ -42,6 +43,8 @@ func (a UnitBaseAttributes) String() string {
 
 type UnitState struct {
 	UnitBaseAttributes
+	Fear  float32 `json:"fear"`
+	Curse float32 `json:"curse"`
 }
 
 type UnitProgress struct {
@@ -60,7 +63,6 @@ type UnitAttributes struct {
 	Dexterity    float32 `json:"dexterity"`
 	Endurance    float32 `json:"endurance"`
 	Intelligence float32 `json:"intelligence"`
-	Holy         float32 `json:"holy"`
 	Luck         float32 `json:"luck"`
 }
 
@@ -80,9 +82,6 @@ func (a UnitAttributes) String() string {
 	}
 	if a.Intelligence != 0 {
 		props = append(props, fmt.Sprintf("intelligence: %g", a.Intelligence))
-	}
-	if a.Holy != 0 {
-		props = append(props, fmt.Sprintf("holy: %g", a.Holy))
 	}
 	if a.Luck != 0 {
 		props = append(props, fmt.Sprintf("luck: %g", a.Luck))
