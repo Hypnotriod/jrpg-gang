@@ -11,8 +11,8 @@ func (u *Unit) ApplyDamage(damage Damage) {
 	damage.Apply(&u.State)
 }
 
-func (u *Unit) Attack(target *Unit, impact []DamageImpact) (*Damage, bool) {
-	var damage *Damage = &Damage{}
+func (u *Unit) Attack(target *Unit, impact []DamageImpact) (Damage, bool) {
+	var damage Damage = Damage{}
 	var success bool = false
 	for _, i := range impact {
 		// todo: find better formula?
@@ -29,7 +29,7 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) (*Damage, bool) {
 	}
 	if success {
 		damage.Enchance(u.Stats.Attributes)
-		target.ApplyDamage(*damage)
+		target.ApplyDamage(damage)
 	}
 	return damage, success
 }
