@@ -14,5 +14,6 @@ func (a Armor) String() string {
 		a.Condition,
 		a.Equipped,
 		a.Requirements,
-		a.Enhancement)
+		a.Enhancement,
+	)
 }

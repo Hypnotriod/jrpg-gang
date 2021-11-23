@@ -8,7 +8,7 @@ import (
 )
 
 func TestPrintArmor(t *testing.T) {
-	armor := util.JsonToObject(
+	armor, ok := util.JsonToObject(
 		&domain.Armor{},
 		`{
 			"id": "2222",
@@ -29,11 +29,14 @@ func TestPrintArmor(t *testing.T) {
 				}
 			]
 		}`)
+	if !ok {
+		t.Fatal()
+	}
 	fmt.Println(armor)
 }
 
 func TestPrintWeapon(t *testing.T) {
-	weapon := util.JsonToObject(
+	weapon, ok := util.JsonToObject(
 		&domain.Weapon{},
 		`{
 			"id": "1111",
@@ -61,18 +64,8 @@ func TestPrintWeapon(t *testing.T) {
 				}
 			]
 		}`)
+	if !ok {
+		t.Fatal()
+	}
 	fmt.Println(weapon)
-}
-
-func TestPrintUnit(t *testing.T) {
-	unit := util.JsonToObject(
-		&domain.Unit{},
-		`{
-			"state": {
-				"health": 100,
-				"stamina": 100,
-				"mana": 100
-			}
-		}`).(*domain.Unit)
-	fmt.Println(*unit)
 }

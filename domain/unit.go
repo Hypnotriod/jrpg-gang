@@ -14,11 +14,33 @@ type Unit struct {
 	Items       []interface{}           `json:"items"`
 }
 
+func (u Unit) String() string {
+	return fmt.Sprintf(
+		"Unit: name: %s, state: {%v}, stats: {%v}, impact: %v, enhancement: %v, items: %v",
+		u.Name,
+		u.State,
+		u.Stats,
+		u.Impact,
+		u.Enhancement,
+		u.Items,
+	)
+}
+
 type UnitStats struct {
 	Progress       UnitProgress       `json:"progress"`
 	BaseAttributes UnitBaseAttributes `json:"baseAttributes"`
 	Attributes     UnitAttributes     `json:"attributes"`
 	Resistance     UnitResistance     `json:"resistance"`
+}
+
+func (s UnitStats) String() string {
+	return fmt.Sprintf(
+		"%v, attributes: {%v, %v}, resistance: {%v}",
+		s.Progress,
+		s.BaseAttributes,
+		s.Attributes,
+		s.Resistance,
+	)
 }
 
 type UnitBaseAttributes struct {

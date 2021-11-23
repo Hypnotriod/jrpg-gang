@@ -17,5 +17,6 @@ func (w Weapon) String() string {
 		w.SlotsNumber,
 		w.Impact,
 		w.Requirements,
-		w.Enhancement)
+		w.Enhancement,
+	)
 }

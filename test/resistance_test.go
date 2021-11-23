@@ -9,7 +9,7 @@ import (
 
 func TestAccumulateResistance(t *testing.T) {
 	unit := domain.Unit{}
-	equipment := util.JsonToObject(
+	equipment, ok := util.JsonToObject(
 		&[]domain.Weapon{},
 		`[{
 			"name": "The thing",
@@ -25,8 +25,11 @@ func TestAccumulateResistance(t *testing.T) {
 					"cutting": -2
 				}
 			]
-		}]`).(*[]domain.Weapon)
-	for _, v := range *equipment {
+		}]`)
+	if !ok {
+		t.Fatal()
+	}
+	for _, v := range *equipment.(*[]domain.Weapon) {
 		unit.Items = append(unit.Items, v)
 	}
 	fmt.Printf("Total resistance: {%v}\n", unit.TotalResistance())
