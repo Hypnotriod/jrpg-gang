@@ -1,5 +1,7 @@
 package domain
 
+import "fmt"
+
 type ImpactType string
 
 const (
@@ -17,6 +19,15 @@ type Impact struct {
 type DamageImpact struct {
 	Impact
 	Damage
+}
+
+func (d DamageImpact) String() string {
+	return fmt.Sprintf(
+		"{damage: {%s, duration: %g, chance: %g}}",
+		d.Damage.String(),
+		d.Impact.Duration,
+		d.Impact.Chance,
+	)
 }
 
 type UnitEnhancementImpact struct {

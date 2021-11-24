@@ -17,6 +17,7 @@ type Damage struct {
 	Poison     float32 `json:"poison,omitempty"`
 	Stunning   float32 `json:"stunning,omitempty"`
 	Exhaustion float32 `json:"exhaustion,omitempty"`
+	Bleeding   float32 `json:"bleeding,omitempty"`
 	Fear       float32 `json:"fear,omitempty"`
 	Curse      float32 `json:"curse,omitempty"`
 }
@@ -31,6 +32,7 @@ func (d *Damage) Accumulate(damage Damage) {
 	d.Poison += damage.Poison
 	d.Stunning += damage.Stunning
 	d.Exhaustion += damage.Exhaustion
+	d.Bleeding += damage.Bleeding
 	d.Fear += damage.Fear
 	d.Curse += damage.Curse
 }
@@ -45,6 +47,7 @@ func (d *Damage) Reduce(damage Damage) {
 	d.Poison -= damage.Poison
 	d.Stunning -= damage.Stunning
 	d.Exhaustion -= damage.Exhaustion
+	d.Bleeding -= damage.Bleeding
 	d.Fear -= damage.Fear
 	d.Curse -= damage.Curse
 }
@@ -58,6 +61,7 @@ func (d *Damage) Enchance(attributes UnitAttributes) {
 	d.Lighting = util.AccumulateIfNotZerosFloat32(d.Lighting, attributes.Intelligence)
 	d.Stunning = util.AccumulateIfNotZerosFloat32(d.Stunning, attributes.Strength)
 	d.Exhaustion = util.AccumulateIfNotZerosFloat32(d.Exhaustion, attributes.Intelligence)
+	d.Bleeding = util.AccumulateIfNotZerosFloat32(d.Exhaustion, attributes.Dexterity)
 }
 
 func (d *Damage) Normalize() {
@@ -70,12 +74,13 @@ func (d *Damage) Normalize() {
 	d.Poison = util.MaxFloat32(d.Poison, 0)
 	d.Stunning = util.MaxFloat32(d.Stunning, 0)
 	d.Exhaustion = util.MaxFloat32(d.Exhaustion, 0)
+	d.Bleeding = util.MaxFloat32(d.Bleeding, 0)
 	d.Fear = util.MaxFloat32(d.Fear, 0)
 	d.Curse = util.MaxFloat32(d.Curse, 0)
 }
 
 func (d *Damage) Apply(state *UnitState) {
-	state.Health -= d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lighting + d.Poison
+	state.Health -= d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lighting + d.Poison + d.Bleeding
 	state.Stamina -= d.Stunning
 	state.Mana -= d.Exhaustion
 	state.Curse += d.Curse
@@ -107,17 +112,23 @@ func (d Damage) String() string {
 	if d.Lighting != 0 {
 		props = append(props, fmt.Sprintf("lighting: %g", d.Lighting))
 	}
-	if d.Fear != 0 {
-		props = append(props, fmt.Sprintf("fear: %g", d.Fear))
-	}
 	if d.Poison != 0 {
 		props = append(props, fmt.Sprintf("poison: %g", d.Poison))
 	}
-	if d.Curse != 0 {
-		props = append(props, fmt.Sprintf("curse: %g", d.Curse))
-	}
 	if d.Stunning != 0 {
 		props = append(props, fmt.Sprintf("stunning: %g", d.Stunning))
+	}
+	if d.Exhaustion != 0 {
+		props = append(props, fmt.Sprintf("exhaustion: %g", d.Exhaustion))
+	}
+	if d.Bleeding != 0 {
+		props = append(props, fmt.Sprintf("eleeding: %g", d.Bleeding))
+	}
+	if d.Fear != 0 {
+		props = append(props, fmt.Sprintf("fear: %g", d.Fear))
+	}
+	if d.Curse != 0 {
+		props = append(props, fmt.Sprintf("curse: %g", d.Curse))
 	}
 
 	return strings.Join(props, ", ")
