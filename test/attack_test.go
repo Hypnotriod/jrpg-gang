@@ -8,12 +8,18 @@ import (
 func TestAttackUnit(t *testing.T) {
 	baseSword := getBaseSword(t)
 	northTroll := getNorthTroll(t)
-	weakHero := getWeakHero(t)
-	weakHero.Items = append(northTroll.Items, baseSword)
+	weakLuckyHero := getWeakLuckyHero(t)
+	weakLuckyHero.Items = append(northTroll.Items, baseSword)
 	baseSword.Equipped = true
-	damage, success := weakHero.Attack(northTroll, baseSword.Impact)
-	fmt.Println(weakHero)
+	fmt.Println(weakLuckyHero)
+	fmt.Println()
 	fmt.Println(northTroll)
-	fmt.Printf("damage: %v, success: %t\n", damage, success)
+	fmt.Println()
+	damage, tempImpact, success := weakLuckyHero.Attack(northTroll, baseSword.Impact)
+	fmt.Printf("Attack with damage: {%v}, impact: %v, success: %t\n", damage, tempImpact, success)
+	fmt.Println()
 	fmt.Println(northTroll)
+	fmt.Println()
+	fmt.Println(weakLuckyHero)
+	fmt.Println()
 }

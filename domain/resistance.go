@@ -8,6 +8,14 @@ func (r *UnitResistance) Accumulate(resistance UnitResistance) {
 	r.Damage.Accumulate(resistance.Damage)
 }
 
+func (u *Unit) EnchantmentResistance() UnitResistance {
+	var resistance UnitResistance = UnitResistance{}
+	for _, enhancement := range u.Enhancement {
+		resistance.Accumulate(enhancement.UnitResistance)
+	}
+	return resistance
+}
+
 func (u *Unit) ItemsResistance(checkEquipped bool) UnitResistance {
 	var resistance UnitResistance = UnitResistance{}
 	for _, item := range u.Items {
@@ -32,6 +40,7 @@ func (u *Unit) TotalResistance() *UnitResistance {
 	var resistance *UnitResistance = &UnitResistance{}
 	resistance.Accumulate(u.Stats.Resistance)
 	resistance.Accumulate(u.ItemsResistance(true))
+	resistance.Accumulate(u.EnchantmentResistance())
 	resistance.Normalize()
 	return resistance
 }

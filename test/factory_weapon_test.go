@@ -18,26 +18,24 @@ func getBaseSword(t *testing.T) *domain.Weapon {
 			"slot": "weapon",
 			"slotsNumber": 1,
 			"requirements": {
-				"strength": 50
+				"strength": 5
 			},
 			"impact": [
 				{
-					"chance": 75,
+					"chance": 30,
 					"cutting": 30,
-					"crushing": 5,
-					"stabbing": 0
+					"crushing": 5
 				},
 				{
 					"duration": 3,
-					"chance": 35,
+					"chance": 5,
 					"bleeding": 3
 				}
 			],
 			"enhancement": [
 				{
 					"cutting": 30,
-					"crushing": 5,
-					"stabbing": 0
+					"crushing": 5
 				}
 			]
 		}`)

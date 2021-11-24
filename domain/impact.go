@@ -13,12 +13,11 @@ type DamageImpact struct {
 }
 
 func (d DamageImpact) String() string {
-	return fmt.Sprintf(
-		"{%s, chance: %g, duration: %g}",
-		d.Damage.String(),
-		d.Impact.Chance,
-		d.Impact.Duration,
-	)
+	if d.Chance != 0 {
+		return fmt.Sprintf("{%s, chance: %g, duration: %g}", d.Damage.String(), d.Impact.Chance, d.Impact.Duration)
+	} else {
+		return fmt.Sprintf("{%s, duration: %g}", d.Damage.String(), d.Impact.Duration)
+	}
 }
 
 type UnitEnhancementImpact struct {

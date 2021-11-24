@@ -52,6 +52,21 @@ func (d *Damage) Reduce(damage Damage) {
 	d.Curse -= damage.Curse
 }
 
+func (d *Damage) HasEffect() bool {
+	return d.Stabbing != 0 ||
+		d.Cutting != 0 ||
+		d.Crushing != 0 ||
+		d.Fire != 0 ||
+		d.Cold != 0 ||
+		d.Lighting != 0 ||
+		d.Poison != 0 ||
+		d.Stunning != 0 ||
+		d.Exhaustion != 0 ||
+		d.Bleeding != 0 ||
+		d.Fear != 0 ||
+		d.Curse != 0
+}
+
 func (d *Damage) Enchance(attributes UnitAttributes) {
 	d.Stabbing = util.AccumulateIfNotZerosFloat32(d.Stabbing, attributes.Dexterity)
 	d.Cutting = util.AccumulateIfNotZerosFloat32(d.Cutting, attributes.Strength)
