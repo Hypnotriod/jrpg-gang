@@ -58,7 +58,7 @@ func TestPrintWeapon(t *testing.T) {
 				},
 				{
 					"chance": 35,
-					"eleeding": 3
+					"bleeding": 3
 				}
 			],
 			"enhancement": [
