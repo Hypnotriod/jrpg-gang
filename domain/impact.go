@@ -14,10 +14,10 @@ type DamageImpact struct {
 
 func (d DamageImpact) String() string {
 	return fmt.Sprintf(
-		"{damage: {%s, duration: %g, chance: %g}}",
+		"{%s, chance: %g, duration: %g}",
 		d.Damage.String(),
-		d.Impact.Duration,
 		d.Impact.Chance,
+		d.Impact.Duration,
 	)
 }
 
