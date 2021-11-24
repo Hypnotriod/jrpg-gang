@@ -122,7 +122,7 @@ func (d Damage) String() string {
 		props = append(props, fmt.Sprintf("exhaustion: %g", d.Exhaustion))
 	}
 	if d.Bleeding != 0 {
-		props = append(props, fmt.Sprintf("eleeding: %g", d.Bleeding))
+		props = append(props, fmt.Sprintf("bleeding: %g", d.Bleeding))
 	}
 	if d.Fear != 0 {
 		props = append(props, fmt.Sprintf("fear: %g", d.Fear))
