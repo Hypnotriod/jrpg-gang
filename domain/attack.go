@@ -14,17 +14,16 @@ func (u *Unit) ApplyDamage(damage Damage) {
 func (u *Unit) Attack(target *Unit, impact []DamageImpact) (Damage, bool) {
 	var damage Damage = Damage{}
 	var success bool = false
-	for _, i := range impact {
+	for _, imp := range impact {
 		// todo: find better formula?
-		chance := i.Chance + u.Stats.Attributes.Luck - u.State.Curse
+		chance := imp.Chance + u.Stats.Attributes.Luck - u.State.Curse
 		if !util.CheckRandomChance(chance) {
 			continue
 		}
 		success = true
-		damage.Accumulate(i.Damage)
-		switch i.Type {
-		case ImpactTypeTemporal, ImpactTypePermanent:
-			u.Impact = append(u.Impact, i)
+		damage.Accumulate(imp.Damage)
+		if imp.Duration != 0 {
+			u.Impact = append(u.Impact, imp)
 		}
 	}
 	if success {
