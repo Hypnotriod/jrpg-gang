@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func getWeakLuckyHero(t *testing.T) *domain.Unit {
+func getAgileHero(t *testing.T) *domain.Unit {
 	unit, ok := util.JsonToObject(
 		&domain.Unit{},
 		`{
@@ -27,10 +27,10 @@ func getWeakLuckyHero(t *testing.T) *domain.Unit {
 				"attributes": {
 					"strength": 5,
 					"physique": 5,
-					"dexterity": 5,
+					"agility": 35,
 					"endurance": 5,
 					"intelligence": 5,
-					"luck": 100
+					"luck": 5
 				},
 				"resistance": {
 					"stabbing": 5,
@@ -74,10 +74,10 @@ func getNorthTroll(t *testing.T) *domain.Unit {
 				"attributes": {
 					"strength": 15,
 					"physique": 20,
-					"dexterity": 5,
+					"agility": 5,
 					"endurance": 30,
 					"intelligence": 0,
-					"luck": 20
+					"luck": 5
 				},
 				"resistance": {
 					"stabbing": 10,

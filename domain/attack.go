@@ -4,7 +4,7 @@ import (
 	"jrpg-gang/util"
 )
 
-func (u *Unit) ApplyPermanentDamage(damage Damage) Damage {
+func (u *Unit) ApplyInstantDamage(damage Damage) Damage {
 	resistance := u.TotalResistance()
 	damage.Reduce(resistance.Damage)
 	damage.Normalize()
@@ -23,15 +23,18 @@ func (u *Unit) ApplyTemporalImpact(impact DamageImpact) bool {
 	return false
 }
 
-func (u *Unit) CalculateAttackChance(target *Unit, impact DamageImpact) float32 {
-	// todo: find better formula
-	return u.TotalLuck(true) + impact.Chance
+func (u *Unit) CalculateCritilalAttackChance() float32 {
+	return u.TotalLuck(true)
 }
 
-func (u *Unit) Attack(target *Unit, impact []DamageImpact) (Damage, []DamageImpact, bool) {
-	var permanentDamage Damage = Damage{}
+func (u *Unit) CalculateAttackChance(target *Unit, impact DamageImpact) float32 {
+	chance := u.TotalAgility(true) - target.TotalAgility(true) + impact.Chance
+	return util.MaxFloat32(chance, MINIMAL_CHANCE)
+}
+
+func (u *Unit) Attack(target *Unit, impact []DamageImpact) (Damage, []DamageImpact) {
+	var instantDamage Damage = Damage{}
 	var temporalImpact []DamageImpact = []DamageImpact{}
-	var success bool = false
 	for _, imp := range impact {
 		chance := u.CalculateAttackChance(target, imp)
 		if !util.CheckRandomChance(chance) {
@@ -41,16 +44,18 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) (Damage, []DamageImpa
 			imp.Chance = 0
 			if target.ApplyTemporalImpact(imp) {
 				temporalImpact = append(temporalImpact, imp)
-				success = true
 			}
 		} else {
-			permanentDamage.Accumulate(imp.Damage)
-			success = true
+			instantDamage.Accumulate(imp.Damage)
 		}
 	}
-	if success {
-		permanentDamage.Enchance(u.Stats.Attributes)
-		permanentDamage = target.ApplyPermanentDamage(permanentDamage)
+	if instantDamage.HasEffect() {
+		instantDamage.Enchance(u.Stats.Attributes)
+		criticalChance := u.CalculateCritilalAttackChance()
+		if util.CheckRandomChance(criticalChance) {
+			instantDamage.Multiply(CRITICAL_FACTOR)
+		}
+		instantDamage = target.ApplyInstantDamage(instantDamage)
 	}
-	return permanentDamage, temporalImpact, success
+	return instantDamage, temporalImpact
 }

@@ -68,7 +68,7 @@ func (d *Damage) HasEffect() bool {
 }
 
 func (d *Damage) Enchance(attributes UnitAttributes) {
-	d.Stabbing = util.AccumulateIfNotZerosFloat32(d.Stabbing, attributes.Dexterity)
+	d.Stabbing = util.AccumulateIfNotZerosFloat32(d.Stabbing, attributes.Strength)
 	d.Cutting = util.AccumulateIfNotZerosFloat32(d.Cutting, attributes.Strength)
 	d.Crushing = util.AccumulateIfNotZerosFloat32(d.Crushing, attributes.Strength)
 	d.Fire = util.AccumulateIfNotZerosFloat32(d.Fire, attributes.Intelligence)
@@ -76,7 +76,22 @@ func (d *Damage) Enchance(attributes UnitAttributes) {
 	d.Lighting = util.AccumulateIfNotZerosFloat32(d.Lighting, attributes.Intelligence)
 	d.Stunning = util.AccumulateIfNotZerosFloat32(d.Stunning, attributes.Strength)
 	d.Exhaustion = util.AccumulateIfNotZerosFloat32(d.Exhaustion, attributes.Intelligence)
-	d.Bleeding = util.AccumulateIfNotZerosFloat32(d.Exhaustion, attributes.Dexterity)
+	d.Bleeding = util.AccumulateIfNotZerosFloat32(d.Exhaustion, attributes.Strength)
+}
+
+func (d *Damage) Multiply(factor float32) {
+	d.Stabbing = util.MultiplyIfNotZerosFloat32(d.Stabbing, factor)
+	d.Cutting = util.MultiplyIfNotZerosFloat32(d.Cutting, factor)
+	d.Crushing = util.MultiplyIfNotZerosFloat32(d.Crushing, factor)
+	d.Fire = util.MultiplyIfNotZerosFloat32(d.Fire, factor)
+	d.Cold = util.MultiplyIfNotZerosFloat32(d.Cold, factor)
+	d.Lighting = util.MultiplyIfNotZerosFloat32(d.Lighting, factor)
+	d.Poison = util.MultiplyIfNotZerosFloat32(d.Poison, factor)
+	d.Stunning = util.MultiplyIfNotZerosFloat32(d.Stunning, factor)
+	d.Exhaustion = util.MultiplyIfNotZerosFloat32(d.Exhaustion, factor)
+	d.Bleeding = util.MultiplyIfNotZerosFloat32(d.Bleeding, factor)
+	d.Fear = util.MultiplyIfNotZerosFloat32(d.Fear, factor)
+	d.Curse = util.MultiplyIfNotZerosFloat32(d.Curse, factor)
 }
 
 func (d *Damage) Normalize() {

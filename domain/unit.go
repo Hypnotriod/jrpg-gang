@@ -82,7 +82,7 @@ func (p UnitProgress) String() string {
 type UnitAttributes struct {
 	Strength     float32 `json:"strength"`
 	Physique     float32 `json:"physique"`
-	Dexterity    float32 `json:"dexterity"`
+	Agility      float32 `json:"agility"`
 	Endurance    float32 `json:"endurance"`
 	Intelligence float32 `json:"intelligence"`
 	Luck         float32 `json:"luck"`
@@ -96,8 +96,8 @@ func (a UnitAttributes) String() string {
 	if a.Physique != 0 {
 		props = append(props, fmt.Sprintf("physique: %g", a.Physique))
 	}
-	if a.Dexterity != 0 {
-		props = append(props, fmt.Sprintf("dexterity: %g", a.Dexterity))
+	if a.Agility != 0 {
+		props = append(props, fmt.Sprintf("agility: %g", a.Agility))
 	}
 	if a.Endurance != 0 {
 		props = append(props, fmt.Sprintf("endurance: %g", a.Endurance))
@@ -109,4 +109,44 @@ func (a UnitAttributes) String() string {
 		props = append(props, fmt.Sprintf("luck: %g", a.Luck))
 	}
 	return strings.Join(props, ", ")
+}
+
+func (u *Unit) TotalAgility(checkEquipment bool) float32 {
+	var agility float32 = u.Stats.Attributes.Agility - u.State.Curse
+	for _, e := range u.Enhancement {
+		agility += e.Agility
+	}
+	if !checkEquipment {
+		return agility
+	}
+	for _, item := range u.Items {
+		equipment, ok := AsEquipment(item)
+		if !ok || !equipment.Equipped {
+			continue
+		}
+		for _, e := range equipment.Enhancement {
+			agility += e.Agility
+		}
+	}
+	return agility
+}
+
+func (u *Unit) TotalLuck(checkEquipment bool) float32 {
+	var luck float32 = u.Stats.Attributes.Luck - u.State.Curse
+	for _, e := range u.Enhancement {
+		luck += e.Luck
+	}
+	if !checkEquipment {
+		return luck
+	}
+	for _, item := range u.Items {
+		equipment, ok := AsEquipment(item)
+		if !ok || !equipment.Equipped {
+			continue
+		}
+		for _, e := range equipment.Enhancement {
+			luck += e.Luck
+		}
+	}
+	return luck
 }

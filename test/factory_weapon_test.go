@@ -22,13 +22,13 @@ func getBaseSword(t *testing.T) *domain.Weapon {
 			},
 			"impact": [
 				{
-					"chance": 30,
+					"chance": 40,
 					"cutting": 30,
 					"crushing": 5
 				},
 				{
 					"duration": 3,
-					"chance": 5,
+					"chance": 15,
 					"bleeding": 3
 				}
 			],
