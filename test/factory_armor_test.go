@@ -21,10 +21,12 @@ func getBaseGloves(t *testing.T) *domain.Weapon {
 			},
 			"enhancement": [
 				{
-					"cutting": 10,
-					"crushing": 2,
-					"stabbing": 5,
-					"curse": 5
+					"resistance": {
+						"cutting": 10,
+						"crushing": 2,
+						"stabbing": 5,
+						"curse": 5
+					}
 				}
 			]
 		}`)

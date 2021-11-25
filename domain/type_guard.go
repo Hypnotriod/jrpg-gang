@@ -10,6 +10,12 @@ func AsEquipment(item interface{}) (*Equipment, bool) {
 		r, ok = &v.Equipment, true
 	case Armor:
 		r, ok = &v.Equipment, true
+	case *Equipment:
+		r, ok = v, true
+	case *Weapon:
+		r, ok = &v.Equipment, true
+	case *Armor:
+		r, ok = &v.Equipment, true
 	}
 	return r, ok
 }

@@ -5,22 +5,23 @@ import (
 )
 
 func (u *Unit) ApplyInstantDamage(damage Damage) Damage {
-	resistance := u.TotalResistance()
-	damage.Reduce(resistance.Damage)
+	totalEnhancement := u.TotalEnhancement(true)
+	totalEnhancement.Resistance.Accumulate(u.Stats.Resistance)
+	damage.Reduce(totalEnhancement.Resistance.Damage)
 	damage.Normalize()
 	damage.Apply(&u.State)
 	return damage
 }
 
-func (u *Unit) ApplyTemporalImpact(impact DamageImpact) bool {
-	resistance := u.TotalResistance()
-	impact.Reduce(resistance.Damage)
+func (u *Unit) ApplyTemporalImpact(impact DamageImpact) DamageImpact {
+	totalEnhancement := u.TotalEnhancement(true)
+	totalEnhancement.Resistance.Accumulate(u.Stats.Resistance)
+	impact.Reduce(totalEnhancement.Resistance.Damage)
 	impact.Normalize()
 	if impact.HasEffect() {
 		u.Impact = append(u.Impact, impact)
-		return true
 	}
-	return false
+	return impact
 }
 
 func (u *Unit) CalculateCritilalAttackChance() float32 {
@@ -32,30 +33,30 @@ func (u *Unit) CalculateAttackChance(target *Unit, impact DamageImpact) float32 
 	return util.MaxFloat32(chance, MINIMAL_CHANCE)
 }
 
-func (u *Unit) Attack(target *Unit, impact []DamageImpact) (Damage, []DamageImpact) {
-	var instantDamage Damage = Damage{}
-	var temporalImpact []DamageImpact = []DamageImpact{}
+func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageImpact) {
+	instantDamage := []Damage{}
+	temporalImpact := []DamageImpact{}
+	totalEnhancement := u.TotalEnhancement(true)
+	totalEnhancement.Attributes.Accumulate(u.Stats.Attributes)
 	for _, imp := range impact {
-		chance := u.CalculateAttackChance(target, imp)
-		if !util.CheckRandomChance(chance) {
+		if !util.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
 			continue
+		}
+		imp.Enchance(totalEnhancement.Attributes, totalEnhancement.Damage)
+		if util.CheckRandomChance(u.CalculateCritilalAttackChance()) {
+			imp.Damage.Multiply(CRITICAL_FACTOR)
+			imp.Damage.IsCritical = true
 		}
 		if imp.Duration != 0 {
 			imp.Chance = 0
-			if target.ApplyTemporalImpact(imp) {
+			if tmpImp := target.ApplyTemporalImpact(imp); tmpImp.HasEffect() {
 				temporalImpact = append(temporalImpact, imp)
 			}
 		} else {
-			instantDamage.Accumulate(imp.Damage)
+			if instDmg := target.ApplyInstantDamage(imp.Damage); instDmg.HasEffect() {
+				instantDamage = append(instantDamage, instDmg)
+			}
 		}
-	}
-	if instantDamage.HasEffect() {
-		instantDamage.Enchance(u.Stats.Attributes)
-		criticalChance := u.CalculateCritilalAttackChance()
-		if util.CheckRandomChance(criticalChance) {
-			instantDamage.Multiply(CRITICAL_FACTOR)
-		}
-		instantDamage = target.ApplyInstantDamage(instantDamage)
 	}
 	return instantDamage, temporalImpact
 }

@@ -1,22 +1,19 @@
 package domain
 
+import "fmt"
+
 type UnitEnhancement struct {
-	UnitBaseAttributes
-	UnitAttributes
-	UnitResistance
+	BaseAttributes UnitBaseAttributes `json:"baseAttributes,omitempty"`
+	Attributes     UnitAttributes     `json:"attributes,omitempty"`
+	Resistance     UnitResistance     `json:"resistance,omitempty"`
+	Damage         Damage             `json:"damage,omitempty"`
 }
 
 func (u *UnitEnhancement) Accumulate(enhancement UnitEnhancement) {
-	u.UnitBaseAttributes.Health += enhancement.UnitBaseAttributes.Health
-	u.UnitBaseAttributes.Mana += enhancement.UnitBaseAttributes.Mana
-	u.UnitBaseAttributes.Stamina += enhancement.UnitBaseAttributes.Stamina
-
-	u.UnitAttributes.Strength += enhancement.UnitAttributes.Strength
-	u.UnitAttributes.Physique += enhancement.UnitAttributes.Physique
-	u.UnitAttributes.Agility += enhancement.UnitAttributes.Agility
-	u.UnitAttributes.Endurance += enhancement.UnitAttributes.Endurance
-	u.UnitAttributes.Intelligence += enhancement.UnitAttributes.Intelligence
-	u.UnitAttributes.Luck += enhancement.UnitAttributes.Luck
+	u.BaseAttributes.Accumulate(enhancement.BaseAttributes)
+	u.Attributes.Accumulate(enhancement.Attributes)
+	u.Resistance.Accumulate(enhancement.Resistance)
+	u.Damage.Accumulate(enhancement.Damage)
 }
 
 func (u *Unit) TotalEnhancement(checkEquipment bool) *UnitEnhancement {
@@ -37,4 +34,14 @@ func (u *Unit) TotalEnhancement(checkEquipment bool) *UnitEnhancement {
 		}
 	}
 	return enhancement
+}
+
+func (e UnitEnhancement) String() string {
+	return fmt.Sprintf(
+		"baseAttributes: {%v}, attributes: {%v}, resistance: {%v}, damage: {%v}",
+		e.BaseAttributes,
+		e.Attributes,
+		e.Resistance,
+		e.Damage,
+	)
 }

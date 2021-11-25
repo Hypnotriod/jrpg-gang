@@ -20,6 +20,7 @@ type Damage struct {
 	Bleeding   float32 `json:"bleeding,omitempty"`
 	Fear       float32 `json:"fear,omitempty"`
 	Curse      float32 `json:"curse,omitempty"`
+	IsCritical bool
 }
 
 func (d *Damage) Accumulate(damage Damage) {
@@ -67,7 +68,7 @@ func (d *Damage) HasEffect() bool {
 		d.Curse != 0
 }
 
-func (d *Damage) Enchance(attributes UnitAttributes) {
+func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Stabbing = util.AccumulateIfNotZerosFloat32(d.Stabbing, attributes.Strength)
 	d.Cutting = util.AccumulateIfNotZerosFloat32(d.Cutting, attributes.Strength)
 	d.Crushing = util.AccumulateIfNotZerosFloat32(d.Crushing, attributes.Strength)
@@ -76,7 +77,20 @@ func (d *Damage) Enchance(attributes UnitAttributes) {
 	d.Lighting = util.AccumulateIfNotZerosFloat32(d.Lighting, attributes.Intelligence)
 	d.Stunning = util.AccumulateIfNotZerosFloat32(d.Stunning, attributes.Strength)
 	d.Exhaustion = util.AccumulateIfNotZerosFloat32(d.Exhaustion, attributes.Intelligence)
-	d.Bleeding = util.AccumulateIfNotZerosFloat32(d.Exhaustion, attributes.Strength)
+	d.Bleeding = util.AccumulateIfNotZerosFloat32(d.Bleeding, attributes.Strength)
+
+	d.Stabbing = util.AccumulateIfNotZerosFloat32(d.Stabbing, damage.Stabbing)
+	d.Cutting = util.AccumulateIfNotZerosFloat32(d.Cutting, damage.Cutting)
+	d.Crushing = util.AccumulateIfNotZerosFloat32(d.Crushing, damage.Crushing)
+	d.Fire = util.AccumulateIfNotZerosFloat32(d.Fire, damage.Fire)
+	d.Cold = util.AccumulateIfNotZerosFloat32(d.Cold, damage.Cold)
+	d.Lighting = util.AccumulateIfNotZerosFloat32(d.Lighting, damage.Lighting)
+	d.Poison = util.AccumulateIfNotZerosFloat32(d.Poison, damage.Poison)
+	d.Stunning = util.AccumulateIfNotZerosFloat32(d.Stunning, damage.Stunning)
+	d.Exhaustion = util.AccumulateIfNotZerosFloat32(d.Exhaustion, damage.Exhaustion)
+	d.Bleeding = util.AccumulateIfNotZerosFloat32(d.Bleeding, damage.Bleeding)
+	d.Fear = util.AccumulateIfNotZerosFloat32(d.Fear, damage.Fear)
+	d.Curse = util.AccumulateIfNotZerosFloat32(d.Curse, damage.Curse)
 }
 
 func (d *Damage) Multiply(factor float32) {
@@ -159,6 +173,9 @@ func (d Damage) String() string {
 	}
 	if d.Curse != 0 {
 		props = append(props, fmt.Sprintf("curse: %g", d.Curse))
+	}
+	if d.IsCritical {
+		props = append(props, "critical!")
 	}
 
 	return strings.Join(props, ", ")

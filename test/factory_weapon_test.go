@@ -34,9 +34,10 @@ func getBaseSword(t *testing.T) *domain.Weapon {
 			],
 			"enhancement": [
 				{
-					"cutting": 30,
-					"crushing": 5
-				}
+					"damage": {
+						"cutting": 30
+					}
+				}	
 			]
 		}`)
 	if !ok {

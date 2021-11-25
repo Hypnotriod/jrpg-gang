@@ -2,7 +2,6 @@ package domain
 
 import (
 	"fmt"
-	"strings"
 )
 
 type Unit struct {
@@ -43,26 +42,6 @@ func (s UnitStats) String() string {
 	)
 }
 
-type UnitBaseAttributes struct {
-	Health  float32 `json:"health"`
-	Stamina float32 `json:"stamina"`
-	Mana    float32 `json:"mana"`
-}
-
-func (a UnitBaseAttributes) String() string {
-	props := []string{}
-	if a.Health != 0 {
-		props = append(props, fmt.Sprintf("health: %g", a.Health))
-	}
-	if a.Stamina != 0 {
-		props = append(props, fmt.Sprintf("stamina: %g", a.Stamina))
-	}
-	if a.Mana != 0 {
-		props = append(props, fmt.Sprintf("mana: %g", a.Mana))
-	}
-	return strings.Join(props, ", ")
-}
-
 type UnitState struct {
 	UnitBaseAttributes
 	Fear  float32 `json:"fear"`
@@ -79,42 +58,10 @@ func (p UnitProgress) String() string {
 		p.Level, p.Experience)
 }
 
-type UnitAttributes struct {
-	Strength     float32 `json:"strength"`
-	Physique     float32 `json:"physique"`
-	Agility      float32 `json:"agility"`
-	Endurance    float32 `json:"endurance"`
-	Intelligence float32 `json:"intelligence"`
-	Luck         float32 `json:"luck"`
-}
-
-func (a UnitAttributes) String() string {
-	props := []string{}
-	if a.Strength != 0 {
-		props = append(props, fmt.Sprintf("strength: %g", a.Strength))
-	}
-	if a.Physique != 0 {
-		props = append(props, fmt.Sprintf("physique: %g", a.Physique))
-	}
-	if a.Agility != 0 {
-		props = append(props, fmt.Sprintf("agility: %g", a.Agility))
-	}
-	if a.Endurance != 0 {
-		props = append(props, fmt.Sprintf("endurance: %g", a.Endurance))
-	}
-	if a.Intelligence != 0 {
-		props = append(props, fmt.Sprintf("intelligence: %g", a.Intelligence))
-	}
-	if a.Luck != 0 {
-		props = append(props, fmt.Sprintf("luck: %g", a.Luck))
-	}
-	return strings.Join(props, ", ")
-}
-
 func (u *Unit) TotalAgility(checkEquipment bool) float32 {
 	var agility float32 = u.Stats.Attributes.Agility - u.State.Curse
 	for _, e := range u.Enhancement {
-		agility += e.Agility
+		agility += e.Attributes.Agility
 	}
 	if !checkEquipment {
 		return agility
@@ -125,7 +72,7 @@ func (u *Unit) TotalAgility(checkEquipment bool) float32 {
 			continue
 		}
 		for _, e := range equipment.Enhancement {
-			agility += e.Agility
+			agility += e.Attributes.Agility
 		}
 	}
 	return agility
@@ -134,7 +81,7 @@ func (u *Unit) TotalAgility(checkEquipment bool) float32 {
 func (u *Unit) TotalLuck(checkEquipment bool) float32 {
 	var luck float32 = u.Stats.Attributes.Luck - u.State.Curse
 	for _, e := range u.Enhancement {
-		luck += e.Luck
+		luck += e.Attributes.Luck
 	}
 	if !checkEquipment {
 		return luck
@@ -145,7 +92,7 @@ func (u *Unit) TotalLuck(checkEquipment bool) float32 {
 			continue
 		}
 		for _, e := range equipment.Enhancement {
-			luck += e.Luck
+			luck += e.Attributes.Luck
 		}
 	}
 	return luck
