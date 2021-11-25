@@ -59,7 +59,7 @@ func (p UnitProgress) String() string {
 }
 
 func (u *Unit) TotalAgility(checkEquipment bool) float32 {
-	var agility float32 = u.Stats.Attributes.Agility - u.State.Curse
+	var agility float32 = u.Stats.Attributes.Agility
 	for _, e := range u.Enhancement {
 		agility += e.Attributes.Agility
 	}
@@ -79,7 +79,7 @@ func (u *Unit) TotalAgility(checkEquipment bool) float32 {
 }
 
 func (u *Unit) TotalLuck(checkEquipment bool) float32 {
-	var luck float32 = u.Stats.Attributes.Luck - u.State.Curse
+	var luck float32 = u.Stats.Attributes.Luck
 	for _, e := range u.Enhancement {
 		luck += e.Attributes.Luck
 	}

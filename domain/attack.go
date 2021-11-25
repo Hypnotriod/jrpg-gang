@@ -25,11 +25,11 @@ func (u *Unit) ApplyTemporalImpact(impact DamageImpact) DamageImpact {
 }
 
 func (u *Unit) CalculateCritilalAttackChance() float32 {
-	return u.TotalLuck(true)
+	return u.TotalLuck(true) - u.State.Curse
 }
 
 func (u *Unit) CalculateAttackChance(target *Unit, impact DamageImpact) float32 {
-	chance := u.TotalAgility(true) - target.TotalAgility(true) + impact.Chance
+	chance := (u.TotalAgility(true) - u.State.Curse) - (target.TotalAgility(true) - target.State.Curse) + impact.Chance
 	return util.MaxFloat32(chance, MINIMAL_CHANCE)
 }
 
