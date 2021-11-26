@@ -21,7 +21,12 @@ func TestAttackUnit(t *testing.T) {
 	fmt.Printf("Attack with damage: %v, impact: %v\n", damage, tempImpact)
 	fmt.Println()
 	fmt.Println(northTroll)
-	fmt.Println()
-	fmt.Println(hero)
-	fmt.Println()
+	for len(northTroll.Impact) > 0 {
+		fmt.Println()
+		fmt.Println("Turn Passed")
+		fmt.Println()
+		northTroll.ApplyImpactOnNextTurn()
+		northTroll.ReduceEnhancementOnNextTurn()
+		fmt.Println(northTroll)
+	}
 }
