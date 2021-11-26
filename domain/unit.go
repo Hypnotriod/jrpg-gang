@@ -25,13 +25,10 @@ func (u Unit) String() string {
 	)
 }
 
-func (u *Unit) TotalAgility(checkEquipment bool) float32 {
+func (u *Unit) TotalAgility() float32 {
 	var agility float32 = u.Stats.Attributes.Agility
 	for _, e := range u.Enhancement {
 		agility += e.Attributes.Agility
-	}
-	if !checkEquipment {
-		return agility
 	}
 	for _, item := range u.Items {
 		equipment, ok := AsEquipment(item)
@@ -45,13 +42,10 @@ func (u *Unit) TotalAgility(checkEquipment bool) float32 {
 	return agility
 }
 
-func (u *Unit) TotalLuck(checkEquipment bool) float32 {
+func (u *Unit) TotalLuck() float32 {
 	var luck float32 = u.Stats.Attributes.Luck
 	for _, e := range u.Enhancement {
 		luck += e.Attributes.Luck
-	}
-	if !checkEquipment {
-		return luck
 	}
 	for _, item := range u.Items {
 		equipment, ok := AsEquipment(item)
@@ -65,13 +59,10 @@ func (u *Unit) TotalLuck(checkEquipment bool) float32 {
 	return luck
 }
 
-func (u *Unit) TotalEnhancement(checkEquipment bool) *UnitEnhancement {
+func (u *Unit) TotalEnhancement() *UnitEnhancement {
 	var enhancement *UnitEnhancement = &UnitEnhancement{}
 	for _, e := range u.Enhancement {
 		enhancement.Accumulate(e.UnitEnhancement)
-	}
-	if !checkEquipment {
-		return enhancement
 	}
 	for _, item := range u.Items {
 		equipment, ok := AsEquipment(item)

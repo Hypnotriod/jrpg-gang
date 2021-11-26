@@ -36,5 +36,5 @@ func TestAccumulateResistance(t *testing.T) {
 	for _, v := range *equipment.(*[]domain.Weapon) {
 		unit.Items = append(unit.Items, v)
 	}
-	fmt.Printf("Total enhancement: {%v}\n", unit.TotalEnhancement(true))
+	fmt.Printf("Total enhancement: {%v}\n", unit.TotalEnhancement())
 }

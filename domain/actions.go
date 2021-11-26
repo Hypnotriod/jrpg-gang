@@ -3,7 +3,7 @@ package domain
 import "jrpg-gang/util"
 
 func (u *Unit) ApplyDamage(damage Damage) Damage {
-	totalEnhancement := u.TotalEnhancement(true)
+	totalEnhancement := u.TotalEnhancement()
 	totalEnhancement.Resistance.Accumulate(u.Stats.Resistance)
 	damage.Reduce(totalEnhancement.Resistance.Damage)
 	damage.Normalize()
@@ -12,7 +12,7 @@ func (u *Unit) ApplyDamage(damage Damage) Damage {
 }
 
 func (u *Unit) AccumulateImpact(impact DamageImpact) DamageImpact {
-	totalEnhancement := u.TotalEnhancement(true)
+	totalEnhancement := u.TotalEnhancement()
 	totalEnhancement.Resistance.Accumulate(u.Stats.Resistance)
 	impact.Reduce(totalEnhancement.Resistance.Damage)
 	impact.Normalize()
@@ -23,18 +23,18 @@ func (u *Unit) AccumulateImpact(impact DamageImpact) DamageImpact {
 }
 
 func (u *Unit) CalculateCritilalAttackChance() float32 {
-	return u.TotalLuck(true) - u.State.Curse
+	return u.TotalLuck() - u.State.Curse
 }
 
 func (u *Unit) CalculateAttackChance(target *Unit, impact DamageImpact) float32 {
-	chance := (u.TotalAgility(true) - u.State.Curse) - (target.TotalAgility(true) - target.State.Curse) + impact.Chance
+	chance := (u.TotalAgility() - u.State.Curse) - (target.TotalAgility() - target.State.Curse) + impact.Chance
 	return util.MaxFloat32(chance, MINIMAL_CHANCE)
 }
 
 func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageImpact) {
 	instantDamage := []Damage{}
 	temporalImpact := []DamageImpact{}
-	totalEnhancement := u.TotalEnhancement(true)
+	totalEnhancement := u.TotalEnhancement()
 	totalEnhancement.Attributes.Accumulate(u.Stats.Attributes)
 	for _, imp := range impact {
 		if !util.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
