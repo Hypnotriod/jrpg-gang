@@ -48,6 +48,15 @@ type UnitState struct {
 	Curse float32 `json:"curse"`
 }
 
+func (s UnitState) String() string {
+	return fmt.Sprintf(
+		"%s, fear: %g, curse: %g",
+		s.UnitBaseAttributes.String(),
+		s.Fear,
+		s.Curse,
+	)
+}
+
 type UnitProgress struct {
 	Level      float32 `json:"level"`
 	Experience float32 `json:"experience"`

@@ -20,7 +20,7 @@ type Damage struct {
 	Bleeding   float32 `json:"bleeding,omitempty"`
 	Fear       float32 `json:"fear,omitempty"`
 	Curse      float32 `json:"curse,omitempty"`
-	IsCritical bool
+	IsCritical bool    `json:"isCritical,omitempty"`
 }
 
 func (d *Damage) Accumulate(damage Damage) {

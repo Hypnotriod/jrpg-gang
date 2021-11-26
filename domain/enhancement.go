@@ -9,11 +9,11 @@ type UnitEnhancement struct {
 	Damage         Damage             `json:"damage,omitempty"`
 }
 
-func (u *UnitEnhancement) Accumulate(enhancement UnitEnhancement) {
-	u.BaseAttributes.Accumulate(enhancement.BaseAttributes)
-	u.Attributes.Accumulate(enhancement.Attributes)
-	u.Resistance.Accumulate(enhancement.Resistance)
-	u.Damage.Accumulate(enhancement.Damage)
+func (e *UnitEnhancement) Accumulate(enhancement UnitEnhancement) {
+	e.BaseAttributes.Accumulate(enhancement.BaseAttributes)
+	e.Attributes.Accumulate(enhancement.Attributes)
+	e.Resistance.Accumulate(enhancement.Resistance)
+	e.Damage.Accumulate(enhancement.Damage)
 }
 
 func (u *Unit) TotalEnhancement(checkEquipment bool) *UnitEnhancement {

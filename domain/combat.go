@@ -4,7 +4,7 @@ import (
 	"jrpg-gang/util"
 )
 
-func (u *Unit) ApplyInstantDamage(damage Damage) Damage {
+func (u *Unit) ApplyDamage(damage Damage) Damage {
 	totalEnhancement := u.TotalEnhancement(true)
 	totalEnhancement.Resistance.Accumulate(u.Stats.Resistance)
 	damage.Reduce(totalEnhancement.Resistance.Damage)
@@ -13,7 +13,7 @@ func (u *Unit) ApplyInstantDamage(damage Damage) Damage {
 	return damage
 }
 
-func (u *Unit) ApplyTemporalImpact(impact DamageImpact) DamageImpact {
+func (u *Unit) AccumulateImpact(impact DamageImpact) DamageImpact {
 	totalEnhancement := u.TotalEnhancement(true)
 	totalEnhancement.Resistance.Accumulate(u.Stats.Resistance)
 	impact.Reduce(totalEnhancement.Resistance.Damage)
@@ -49,14 +49,37 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageIm
 		}
 		if imp.Duration != 0 {
 			imp.Chance = 0
-			if tmpImp := target.ApplyTemporalImpact(imp); tmpImp.HasEffect() {
+			if tmpImp := target.AccumulateImpact(imp); tmpImp.HasEffect() {
 				temporalImpact = append(temporalImpact, imp)
 			}
 		} else {
-			if instDmg := target.ApplyInstantDamage(imp.Damage); instDmg.HasEffect() {
+			if instDmg := target.ApplyDamage(imp.Damage); instDmg.HasEffect() {
 				instantDamage = append(instantDamage, instDmg)
 			}
 		}
 	}
 	return instantDamage, temporalImpact
+}
+
+func (u *Unit) ApplyImpact() Damage {
+	var damage Damage
+	for _, impact := range u.Impact {
+		damage.Accumulate(impact.Damage)
+		if impact.Duration > 0 {
+			impact.Duration--
+		}
+	}
+	damage.Apply(&u.State)
+	u.FilterImpact()
+	return damage
+}
+
+func (u *Unit) FilterImpact() {
+	var filteredImpact []DamageImpact
+	for _, impact := range u.Impact {
+		if impact.Duration == 0 {
+			filteredImpact = append(filteredImpact, impact)
+		}
+	}
+	u.Impact = filteredImpact
 }
