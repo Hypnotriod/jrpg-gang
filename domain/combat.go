@@ -61,7 +61,7 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageIm
 	return instantDamage, temporalImpact
 }
 
-func (u *Unit) ApplyImpact() Damage {
+func (u *Unit) ApplyImpactOnNextTurn() Damage {
 	var damage Damage
 	for _, impact := range u.Impact {
 		damage.Accumulate(impact.Damage)

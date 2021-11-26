@@ -45,3 +45,22 @@ func (e UnitEnhancement) String() string {
 		e.Damage,
 	)
 }
+
+func (u *Unit) ReduceEnhancementOnNextTurn() {
+	for _, enhancement := range u.Enhancement {
+		if enhancement.Duration > 0 {
+			enhancement.Duration--
+		}
+	}
+	u.FilterEnhancement()
+}
+
+func (u *Unit) FilterEnhancement() {
+	var filteredEnhancement []UnitEnhancementImpact
+	for _, enhancement := range u.Enhancement {
+		if enhancement.Duration == 0 {
+			filteredEnhancement = append(filteredEnhancement, enhancement)
+		}
+	}
+	u.Enhancement = filteredEnhancement
+}
