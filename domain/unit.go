@@ -25,48 +25,6 @@ func (u Unit) String() string {
 	)
 }
 
-type UnitStats struct {
-	Progress       UnitProgress       `json:"progress"`
-	BaseAttributes UnitBaseAttributes `json:"baseAttributes"`
-	Attributes     UnitAttributes     `json:"attributes"`
-	Resistance     UnitResistance     `json:"resistance"`
-}
-
-func (s UnitStats) String() string {
-	return fmt.Sprintf(
-		"%v, attributes: {%v, %v}, resistance: {%v}",
-		s.Progress,
-		s.BaseAttributes,
-		s.Attributes,
-		s.Resistance,
-	)
-}
-
-type UnitState struct {
-	UnitBaseAttributes
-	Fear  float32 `json:"fear"`
-	Curse float32 `json:"curse"`
-}
-
-func (s UnitState) String() string {
-	return fmt.Sprintf(
-		"%s, fear: %g, curse: %g",
-		s.UnitBaseAttributes.String(),
-		s.Fear,
-		s.Curse,
-	)
-}
-
-type UnitProgress struct {
-	Level      float32 `json:"level"`
-	Experience float32 `json:"experience"`
-}
-
-func (p UnitProgress) String() string {
-	return fmt.Sprintf("level: %g, experience: %g",
-		p.Level, p.Experience)
-}
-
 func (u *Unit) TotalAgility(checkEquipment bool) float32 {
 	var agility float32 = u.Stats.Attributes.Agility
 	for _, e := range u.Enhancement {
@@ -105,4 +63,24 @@ func (u *Unit) TotalLuck(checkEquipment bool) float32 {
 		}
 	}
 	return luck
+}
+
+func (u *Unit) TotalEnhancement(checkEquipment bool) *UnitEnhancement {
+	var enhancement *UnitEnhancement = &UnitEnhancement{}
+	for _, e := range u.Enhancement {
+		enhancement.Accumulate(e.UnitEnhancement)
+	}
+	if !checkEquipment {
+		return enhancement
+	}
+	for _, item := range u.Items {
+		equipment, ok := AsEquipment(item)
+		if !ok || !equipment.Equipped {
+			continue
+		}
+		for _, e := range equipment.Enhancement {
+			enhancement.Accumulate(e)
+		}
+	}
+	return enhancement
 }

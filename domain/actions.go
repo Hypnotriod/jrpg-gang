@@ -1,8 +1,6 @@
 package domain
 
-import (
-	"jrpg-gang/util"
-)
+import "jrpg-gang/util"
 
 func (u *Unit) ApplyDamage(damage Damage) Damage {
 	totalEnhancement := u.TotalEnhancement(true)
@@ -82,4 +80,23 @@ func (u *Unit) FilterImpact() {
 		}
 	}
 	u.Impact = filteredImpact
+}
+
+func (u *Unit) ReduceEnhancementOnNextTurn() {
+	for _, enhancement := range u.Enhancement {
+		if enhancement.Duration > 0 {
+			enhancement.Duration--
+		}
+	}
+	u.FilterEnhancement()
+}
+
+func (u *Unit) FilterEnhancement() {
+	var filteredEnhancement []UnitEnhancementImpact
+	for _, enhancement := range u.Enhancement {
+		if enhancement.Duration == 0 {
+			filteredEnhancement = append(filteredEnhancement, enhancement)
+		}
+	}
+	u.Enhancement = filteredEnhancement
 }
