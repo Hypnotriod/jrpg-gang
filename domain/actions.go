@@ -3,18 +3,18 @@ package domain
 import "jrpg-gang/util"
 
 func (u *Unit) ApplyDamage(damage Damage) Damage {
-	totalEnhancement := u.TotalEnhancement()
-	totalEnhancement.Resistance.Accumulate(u.Stats.Resistance)
-	damage.Reduce(totalEnhancement.Resistance.Damage)
+	resistance := u.TotalEnhancement().Resistance
+	resistance.Accumulate(u.Stats.Resistance)
+	damage.Reduce(resistance.Damage)
 	damage.Normalize()
 	damage.Apply(&u.State)
 	return damage
 }
 
 func (u *Unit) AccumulateImpact(impact DamageImpact) DamageImpact {
-	totalEnhancement := u.TotalEnhancement()
-	totalEnhancement.Resistance.Accumulate(u.Stats.Resistance)
-	impact.Reduce(totalEnhancement.Resistance.Damage)
+	resistance := u.TotalEnhancement().Resistance
+	resistance.Accumulate(u.Stats.Resistance)
+	impact.Reduce(resistance.Damage)
 	impact.Normalize()
 	if impact.HasEffect() {
 		u.Impact = append(u.Impact, impact)
@@ -22,8 +22,9 @@ func (u *Unit) AccumulateImpact(impact DamageImpact) DamageImpact {
 	return impact
 }
 
-func (u *Unit) CalculateCritilalAttackChance() float32 {
-	return u.TotalLuck() - u.State.Curse
+func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
+	chance := (u.TotalLuck() - u.State.Curse) - (target.TotalLuck() - target.State.Curse)
+	return util.MaxFloat32(chance, MINIMAL_CHANCE)
 }
 
 func (u *Unit) CalculateAttackChance(target *Unit, impact DamageImpact) float32 {
@@ -41,7 +42,7 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageIm
 			continue
 		}
 		imp.Enchance(totalEnhancement.Attributes, totalEnhancement.Damage)
-		if util.CheckRandomChance(u.CalculateCritilalAttackChance()) {
+		if util.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
 			imp.Damage.Multiply(CRITICAL_FACTOR)
 			imp.Damage.IsCritical = true
 		}
@@ -80,6 +81,14 @@ func (u *Unit) FilterImpact() {
 		}
 	}
 	u.Impact = filteredImpact
+}
+
+func (u *Unit) ApplyRecoveryOnNextTurn() {
+	recovery := u.TotalEnhancement().Recovery
+	attributes := u.TotalEnhancement().BaseAttributes
+	attributes.Accumulate(u.Stats.BaseAttributes)
+	u.State.Accumulate(recovery)
+	u.State.Normalize(attributes)
 }
 
 func (u *Unit) ReduceEnhancementOnNextTurn() {
