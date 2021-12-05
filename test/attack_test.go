@@ -25,7 +25,7 @@ func TestAttackUnit(t *testing.T) {
 		fmt.Println()
 		fmt.Println("Turn Passed")
 		fmt.Println()
-		northTroll.ApplyImpactOnNextTurn()
+		northTroll.ApplyDamageImpactOnNextTurn()
 		northTroll.ReduceEnhancementOnNextTurn()
 		fmt.Println(northTroll)
 	}

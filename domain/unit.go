@@ -59,6 +59,23 @@ func (u *Unit) TotalLuck() float32 {
 	return luck
 }
 
+func (u *Unit) TotalInitiative() float32 {
+	var initiative float32 = u.Stats.Attributes.Initiative
+	for _, e := range u.Enhancement {
+		initiative += e.Attributes.Initiative
+	}
+	for _, item := range u.Items {
+		equipment, ok := AsEquipment(item)
+		if !ok || !equipment.Equipped {
+			continue
+		}
+		for _, e := range equipment.Enhancement {
+			initiative += e.Attributes.Initiative
+		}
+	}
+	return initiative
+}
+
 func (u *Unit) TotalEnhancement() *UnitEnhancement {
 	var enhancement *UnitEnhancement = &UnitEnhancement{}
 	for _, e := range u.Enhancement {

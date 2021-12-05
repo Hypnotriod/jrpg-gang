@@ -7,7 +7,9 @@ func (u *Unit) ApplyDamage(damage Damage) Damage {
 	resistance.Accumulate(u.Stats.Resistance)
 	damage.Reduce(resistance.Damage)
 	damage.Normalize()
-	damage.Apply(&u.State)
+	if damage.HasEffect() {
+		damage.Apply(&u.State)
+	}
 	return damage
 }
 
@@ -39,7 +41,7 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageIm
 	totalEnhancement.Attributes.Accumulate(u.Stats.Attributes)
 	for _, imp := range impact {
 		if !util.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
-			continue
+			break
 		}
 		imp.Enchance(totalEnhancement.Attributes, totalEnhancement.Damage)
 		if util.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
@@ -47,20 +49,18 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageIm
 			imp.Damage.IsCritical = true
 		}
 		if imp.Duration != 0 {
-			imp.Chance = 0
-			if tmpImp := target.AccumulateImpact(imp); tmpImp.HasEffect() {
-				temporalImpact = append(temporalImpact, imp)
-			}
+			tmpImp := target.AccumulateImpact(imp)
+			tmpImp.Chance = 0
+			temporalImpact = append(temporalImpact, tmpImp)
 		} else {
-			if instDmg := target.ApplyDamage(imp.Damage); instDmg.HasEffect() {
-				instantDamage = append(instantDamage, instDmg)
-			}
+			instDmg := target.ApplyDamage(imp.Damage)
+			instantDamage = append(instantDamage, instDmg)
 		}
 	}
 	return instantDamage, temporalImpact
 }
 
-func (u *Unit) ApplyImpactOnNextTurn() Damage {
+func (u *Unit) ApplyDamageImpactOnNextTurn() Damage {
 	var damage Damage
 	for i := range u.Impact {
 		damage.Accumulate(u.Impact[i].Damage)
@@ -83,9 +83,10 @@ func (u *Unit) FilterImpact() {
 	u.Impact = filteredImpact
 }
 
-func (u *Unit) ApplyRecoveryOnNextTurn() {
-	recovery := u.TotalEnhancement().Recovery
-	attributes := u.TotalEnhancement().BaseAttributes
+func (u *Unit) ApplyRecoverylEnhancementOnNextTurn() {
+	enhancement := u.TotalEnhancement()
+	recovery := enhancement.Recovery
+	attributes := enhancement.BaseAttributes
 	attributes.Accumulate(u.Stats.BaseAttributes)
 	u.State.Accumulate(recovery)
 	u.State.Normalize(attributes)
