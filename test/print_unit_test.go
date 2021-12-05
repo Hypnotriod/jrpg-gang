@@ -6,5 +6,5 @@ import (
 )
 
 func TestPrintUnit(t *testing.T) {
-	fmt.Println(getNorthTroll(t))
+	fmt.Println(newNorthTroll(t))
 }

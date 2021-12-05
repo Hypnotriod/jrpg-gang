@@ -10,5 +10,5 @@ func TestPrintArmor(t *testing.T) {
 }
 
 func TestPrintWeapon(t *testing.T) {
-	fmt.Println(getBaseSword(t))
+	fmt.Println(newBaseSword(t))
 }

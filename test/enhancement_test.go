@@ -8,7 +8,7 @@ import (
 )
 
 func TestAccumulateResistance(t *testing.T) {
-	unit := getAgileHero(t)
+	unit := newAgileHero(t)
 	equipment, ok := util.JsonToObject(
 		&[]domain.Weapon{},
 		`[

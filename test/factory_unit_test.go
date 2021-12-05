@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func getAgileHero(t *testing.T) *domain.Unit {
+func newAgileHero(t *testing.T) *domain.Unit {
 	unit, ok := util.JsonToObject(
 		&domain.Unit{},
 		`{
@@ -53,7 +53,7 @@ func getAgileHero(t *testing.T) *domain.Unit {
 	return unit.(*domain.Unit)
 }
 
-func getNorthTroll(t *testing.T) *domain.Unit {
+func newNorthTroll(t *testing.T) *domain.Unit {
 	unit, ok := util.JsonToObject(
 		&domain.Unit{},
 		`{

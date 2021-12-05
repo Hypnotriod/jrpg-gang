@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func getBaseSword(t *testing.T) *domain.Weapon {
+func newBaseSword(t *testing.T) *domain.Weapon {
 	weapon, ok := util.JsonToObject(
 		&domain.Weapon{},
 		`{

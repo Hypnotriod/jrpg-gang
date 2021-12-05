@@ -8,9 +8,9 @@ import (
 
 func TestAttackUnit(t *testing.T) {
 	util.ApplyRandomSeed()
-	baseSword := getBaseSword(t)
-	northTroll := getNorthTroll(t)
-	hero := getAgileHero(t)
+	baseSword := newBaseSword(t)
+	northTroll := newNorthTroll(t)
+	hero := newAgileHero(t)
 	hero.Items = append(northTroll.Items, baseSword)
 	baseSword.Equipped = true
 	fmt.Println(hero)
