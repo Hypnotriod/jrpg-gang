@@ -5,9 +5,9 @@ import "fmt"
 type ItemType string
 
 const (
-	ItemTypeArmor  ItemType = "armor"
-	ItemTypeWeapon ItemType = "weapon"
-	ItemTypePotion ItemType = "potion"
+	ItemTypeArmor      ItemType = "armor"
+	ItemTypeWeapon     ItemType = "weapon"
+	ItemTypeDisposable ItemType = "disposable"
 )
 
 type Item struct {

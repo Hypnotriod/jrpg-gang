@@ -26,12 +26,17 @@ func (u *Unit) AccumulateImpact(impact DamageImpact) DamageImpact {
 
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
 	chance := (u.TotalLuck() - u.State.Curse) - (target.TotalLuck() - target.State.Curse)
-	return util.MaxFloat32(chance, MINIMAL_CHANCE)
+	return util.MaxFloat32(chance, util.MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateAttackChance(target *Unit, impact DamageImpact) float32 {
 	chance := (u.TotalAgility() - u.State.Curse) - (target.TotalAgility() - target.State.Curse) + impact.Chance
-	return util.MaxFloat32(chance, MINIMAL_CHANCE)
+	return util.MaxFloat32(chance, util.MINIMUM_CHANCE)
+}
+
+func (u *Unit) CalculateEnchancementChance(enhancement UnitEnhancementImpact) float32 {
+	chance := (u.TotalIntelligence() - u.State.Curse) + enhancement.Chance
+	return util.MaxFloat32(chance, util.MINIMUM_CHANCE)
 }
 
 func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageImpact) {
@@ -58,6 +63,27 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageIm
 		}
 	}
 	return instantDamage, temporalImpact
+}
+
+func (u *Unit) Enhance(target *Unit, enhancement []UnitEnhancementImpact) ([]UnitState, []UnitEnhancementImpact) {
+	instantRecovery := []UnitState{}
+	temporalEnhancement := []UnitEnhancementImpact{}
+	for _, ench := range enhancement {
+		if ench.Chance != 0 && !util.CheckRandomChance(u.CalculateEnchancementChance(ench)) {
+			break
+		}
+		if ench.Duration != 0 {
+			target.Enhancement = append(target.Enhancement, ench)
+			temporalEnhancement = append(temporalEnhancement, ench)
+		} else {
+			totalEnhancement := target.TotalEnhancement()
+			totalEnhancement.BaseAttributes.Accumulate(target.Stats.BaseAttributes)
+			target.State.Accumulate(ench.Recovery)
+			target.State.Normalize(totalEnhancement.BaseAttributes)
+			instantRecovery = append(instantRecovery, ench.Recovery)
+		}
+	}
+	return instantRecovery, temporalEnhancement
 }
 
 func (u *Unit) ApplyDamageImpactOnNextTurn() Damage {

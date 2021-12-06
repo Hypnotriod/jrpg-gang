@@ -42,6 +42,23 @@ func (u *Unit) TotalAgility() float32 {
 	return agility
 }
 
+func (u *Unit) TotalIntelligence() float32 {
+	var intelligence float32 = u.Stats.Attributes.Intelligence
+	for _, e := range u.Enhancement {
+		intelligence += e.Attributes.Intelligence
+	}
+	for _, item := range u.Items {
+		equipment, ok := AsEquipment(item)
+		if !ok || !equipment.Equipped {
+			continue
+		}
+		for _, e := range equipment.Enhancement {
+			intelligence += e.Attributes.Intelligence
+		}
+	}
+	return intelligence
+}
+
 func (u *Unit) TotalLuck() float32 {
 	var luck float32 = u.Stats.Attributes.Luck
 	for _, e := range u.Enhancement {

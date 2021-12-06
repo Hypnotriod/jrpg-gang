@@ -24,3 +24,11 @@ type UnitEnhancementImpact struct {
 	Impact
 	UnitEnhancement
 }
+
+func (e UnitEnhancementImpact) String() string {
+	if e.Chance != 0 {
+		return fmt.Sprintf("%s, chance: %g, duration: %d", e.UnitEnhancement.String(), e.Chance, e.Duration)
+	} else {
+		return fmt.Sprintf("%s, duration: %d", e.UnitEnhancement.String(), e.Duration)
+	}
+}

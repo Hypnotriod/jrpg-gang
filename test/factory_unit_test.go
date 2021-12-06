@@ -21,8 +21,8 @@ func newAgileHero(t *testing.T) *domain.Unit {
 					"experience": 35000
 				},
 				"baseAttributes": {
-					"health": 50,
-					"stamina": 50
+					"health": 100,
+					"stamina": 100
 				},
 				"attributes": {
 					"strength": 5,

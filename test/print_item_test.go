@@ -6,7 +6,7 @@ import (
 )
 
 func TestPrintArmor(t *testing.T) {
-	fmt.Println(getBaseGloves(t))
+	fmt.Println(newBaseGloves(t))
 }
 
 func TestPrintWeapon(t *testing.T) {
