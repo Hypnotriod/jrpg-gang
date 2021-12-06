@@ -24,6 +24,14 @@ func (u *Unit) AccumulateImpact(impact DamageImpact) DamageImpact {
 	return impact
 }
 
+func (u *Unit) ApplyRecovery(recovery UnitState) {
+	enhancement := u.TotalEnhancement()
+	attributes := enhancement.BaseAttributes
+	attributes.Accumulate(u.Stats.BaseAttributes)
+	u.State.Accumulate(recovery)
+	u.State.Normalize(attributes)
+}
+
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
 	chance := (u.TotalLuck() - u.State.Curse) - (target.TotalLuck() - target.State.Curse)
 	return util.MaxFloat32(chance, util.MINIMUM_CHANCE)
@@ -50,7 +58,7 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageIm
 		}
 		imp.Enchance(totalEnhancement.Attributes, totalEnhancement.Damage)
 		if util.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
-			imp.Damage.Multiply(CRITICAL_FACTOR)
+			imp.Damage.Multiply(CRITICAL_DAMAGE_FACTOR)
 			imp.Damage.IsCritical = true
 		}
 		if imp.Duration != 0 {
@@ -76,10 +84,7 @@ func (u *Unit) Enhance(target *Unit, enhancement []UnitEnhancementImpact) ([]Uni
 			target.Enhancement = append(target.Enhancement, ench)
 			temporalEnhancement = append(temporalEnhancement, ench)
 		} else {
-			totalEnhancement := target.TotalEnhancement()
-			totalEnhancement.BaseAttributes.Accumulate(target.Stats.BaseAttributes)
-			target.State.Accumulate(ench.Recovery)
-			target.State.Normalize(totalEnhancement.BaseAttributes)
+			target.ApplyRecovery(ench.Recovery)
 			instantRecovery = append(instantRecovery, ench.Recovery)
 		}
 	}

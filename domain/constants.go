@@ -1,3 +1,3 @@
 package domain
 
-const CRITICAL_FACTOR float32 = 2
+const CRITICAL_DAMAGE_FACTOR float32 = 2
