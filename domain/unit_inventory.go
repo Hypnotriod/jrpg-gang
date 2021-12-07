@@ -4,6 +4,7 @@ import "fmt"
 
 type UnitInventory struct {
 	Weapon     []Weapon     `json:"weapon,omitempty"`
+	Spell      []Spell      `json:"spell,omitempty"`
 	Armor      []Armor      `json:"armor,omitempty"`
 	Disposable []Disposable `json:"disposable,omitempty"`
 }
@@ -56,6 +57,12 @@ func (i *UnitInventory) Add(item interface{}) bool {
 	case *Weapon:
 		i.Weapon = append(i.Weapon, *v)
 		return true
+	case Spell:
+		i.Spell = append(i.Spell, v)
+		return true
+	case *Spell:
+		i.Spell = append(i.Spell, *v)
+		return true
 	case Armor:
 		i.Armor = append(i.Armor, v)
 		return true
@@ -78,6 +85,11 @@ func (i *UnitInventory) Get(id string) interface{} {
 			return &i.Weapon[n]
 		}
 	}
+	for n := range i.Spell {
+		if i.Spell[n].Id == id {
+			return &i.Spell[n]
+		}
+	}
 	for n := range i.Armor {
 		if i.Armor[n].Id == id {
 			return &i.Armor[n]
@@ -95,6 +107,15 @@ func (i *UnitInventory) GetWeapon(id string) *Weapon {
 	for n := range i.Weapon {
 		if i.Weapon[n].Id == id {
 			return &i.Weapon[n]
+		}
+	}
+	return nil
+}
+
+func (i *UnitInventory) GetSpell(id string) *Spell {
+	for n := range i.Spell {
+		if i.Spell[n].Id == id {
+			return &i.Spell[n]
 		}
 	}
 	return nil
