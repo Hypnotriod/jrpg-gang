@@ -11,7 +11,7 @@ func TestAttackUnit(t *testing.T) {
 	baseSword := newBaseSword(t)
 	northTroll := newNorthTroll(t)
 	hero := newAgileHero(t)
-	hero.Items = append(northTroll.Items, baseSword)
+	hero.Inventory.Weapon = append(northTroll.Inventory.Weapon, *baseSword)
 	baseSword.Equipped = true
 	fmt.Println(hero)
 	fmt.Println()

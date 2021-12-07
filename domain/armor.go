@@ -8,7 +8,7 @@ type Armor struct {
 
 func (a Armor) String() string {
 	return fmt.Sprintf(
-		"Armor: name: %s, description: %s, condition: %g, equipped: %t, requirements: {%v}, enhancement: %v",
+		"%s, description: %s, condition: %g, equipped: %t, requirements: {%v}, enhancement: %v",
 		a.Name,
 		a.Description,
 		a.Condition,
