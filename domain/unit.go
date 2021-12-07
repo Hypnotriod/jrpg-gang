@@ -10,7 +10,7 @@ type Unit struct {
 	Stats       UnitStats               `json:"stats"`
 	Impact      []DamageImpact          `json:"impact"`
 	Enhancement []UnitEnhancementImpact `json:"enhancement"`
-	Inventory   Inventory               `json:"inventory"`
+	Inventory   UnitInventory           `json:"inventory"`
 	Slots       map[EquipmentSlot]uint  `json:"slots"`
 }
 

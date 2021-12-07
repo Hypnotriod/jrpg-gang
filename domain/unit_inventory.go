@@ -2,19 +2,19 @@ package domain
 
 import "fmt"
 
-type Inventory struct {
+type UnitInventory struct {
 	Weapon     []Weapon     `json:"weapon,omitempty"`
 	Armor      []Armor      `json:"armor,omitempty"`
 	Disposable []Disposable `json:"disposable,omitempty"`
 }
 
-func (i Inventory) String() string {
+func (i UnitInventory) String() string {
 	return fmt.Sprintf(
 		"weapon: %v, armor: %v, disposable: %v",
 		i.Weapon, i.Armor, i.Disposable)
 }
 
-func (i *Inventory) GetEquipment(equipped bool) []*Equipment {
+func (i *UnitInventory) GetEquipment(equipped bool) []*Equipment {
 	equipment := []*Equipment{}
 	for n := range i.Armor {
 		item := &i.Armor[n].Equipment
@@ -31,7 +31,7 @@ func (i *Inventory) GetEquipment(equipped bool) []*Equipment {
 	return equipment
 }
 
-func (i *Inventory) GetEquipmentBySlot(slot EquipmentSlot, equipped bool) []*Equipment {
+func (i *UnitInventory) GetEquipmentBySlot(slot EquipmentSlot, equipped bool) []*Equipment {
 	equipment := []*Equipment{}
 	for n := range i.Armor {
 		item := &i.Armor[n].Equipment
@@ -48,7 +48,7 @@ func (i *Inventory) GetEquipmentBySlot(slot EquipmentSlot, equipped bool) []*Equ
 	return equipment
 }
 
-func (i *Inventory) Add(item interface{}) bool {
+func (i *UnitInventory) Add(item interface{}) bool {
 	switch v := item.(type) {
 	case Weapon:
 		i.Weapon = append(i.Weapon, v)
@@ -72,7 +72,7 @@ func (i *Inventory) Add(item interface{}) bool {
 	return false
 }
 
-func (i *Inventory) Get(id string) interface{} {
+func (i *UnitInventory) Get(id string) interface{} {
 	for n := range i.Weapon {
 		if i.Weapon[n].Id == id {
 			return &i.Weapon[n]
@@ -91,7 +91,7 @@ func (i *Inventory) Get(id string) interface{} {
 	return nil
 }
 
-func (i *Inventory) GetWeapon(id string) *Weapon {
+func (i *UnitInventory) GetWeapon(id string) *Weapon {
 	for n := range i.Weapon {
 		if i.Weapon[n].Id == id {
 			return &i.Weapon[n]
@@ -100,7 +100,7 @@ func (i *Inventory) GetWeapon(id string) *Weapon {
 	return nil
 }
 
-func (i *Inventory) GetArmor(id string) *Armor {
+func (i *UnitInventory) GetArmor(id string) *Armor {
 	for n := range i.Armor {
 		if i.Armor[n].Id == id {
 			return &i.Armor[n]
@@ -109,7 +109,7 @@ func (i *Inventory) GetArmor(id string) *Armor {
 	return nil
 }
 
-func (i *Inventory) GetDisposable(id string) *Disposable {
+func (i *UnitInventory) GetDisposable(id string) *Disposable {
 	for n := range i.Disposable {
 		if i.Disposable[n].Id == id {
 			return &i.Disposable[n]
