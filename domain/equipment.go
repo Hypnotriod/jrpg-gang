@@ -8,8 +8,8 @@ const (
 	EquipmentSlotHead   EquipmentSlot = "head"
 	EquipmentSlotNeck   EquipmentSlot = "neck"
 	EquipmentSlotBody   EquipmentSlot = "body"
-	EquipmentSlotHands  EquipmentSlot = "hands"
-	EquipmentSlotLegs   EquipmentSlot = "legs"
+	EquipmentSlotHands  EquipmentSlot = "hand"
+	EquipmentSlotLegs   EquipmentSlot = "leg"
 	EquipmentSlotWeapon EquipmentSlot = "weapon"
 )
 
