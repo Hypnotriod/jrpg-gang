@@ -10,7 +10,7 @@ func newSmallHealthPotion(t *testing.T) *domain.Disposable {
 	disposable, ok := util.JsonToObject(
 		&domain.Disposable{},
 		`{
-			"id": "xyz",
+			"uid": 2000,
 			"type": "disposable",
 			"name": "Small Health Potion",
 			"description": "Small health potion",

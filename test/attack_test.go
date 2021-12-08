@@ -14,7 +14,7 @@ func TestAttackUnit(t *testing.T) {
 	fmt.Println()
 	fmt.Println(northTroll)
 	fmt.Println()
-	damage, tempImpact := hero.Attack(northTroll, hero.Inventory.GetWeapon("weapon-0001").Impact)
+	damage, tempImpact := hero.Attack(northTroll, hero.Inventory.GetWeapon(4000).Impact)
 	fmt.Printf("Attack with damage: %v, impact: %v\n", damage, tempImpact)
 	fmt.Println()
 	fmt.Println(northTroll)

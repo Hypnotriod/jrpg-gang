@@ -1,8 +1,8 @@
 package domain
 
-func (u *Unit) Equip(id string) bool {
+func (u *Unit) Equip(uid uint) bool {
 	var equipment *Equipment
-	item := u.Inventory.Get(id)
+	item := u.Inventory.Get(uid)
 	if item == nil {
 		return false
 	}
@@ -22,10 +22,10 @@ func (u *Unit) Equip(id string) bool {
 	return true
 }
 
-func (u *Unit) Unequip(id string) bool {
+func (u *Unit) Unequip(uid uint) bool {
 	equipment := u.Inventory.GetEquipment(true)
 	for i := range equipment {
-		if equipment[i].Id == id {
+		if equipment[i].Uid == uid {
 			equipment[i].Equipped = false
 			return true
 		}

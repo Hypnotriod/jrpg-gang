@@ -19,8 +19,8 @@ func TestEquipItem(t *testing.T) {
 	fmt.Println(hero)
 	fmt.Println()
 
-	hero.Equip(weapon.Id)
-	hero.Equip(gloves.Id)
+	hero.Equip(weapon.Uid)
+	hero.Equip(gloves.Uid)
 
 	fmt.Println(hero)
 }

@@ -10,7 +10,7 @@ func newBaseGloves(t *testing.T) *domain.Weapon {
 	weapon, ok := util.JsonToObject(
 		&domain.Weapon{},
 		`{
-			"id": "2222",
+			"uid": 1000,
 			"type": "armor",
 			"name": "Gloves",
 			"description": "Base gloves",

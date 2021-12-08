@@ -79,60 +79,60 @@ func (i *UnitInventory) Add(item interface{}) bool {
 	return false
 }
 
-func (i *UnitInventory) Get(id string) interface{} {
+func (i *UnitInventory) Get(uid uint) interface{} {
 	for n := range i.Weapon {
-		if i.Weapon[n].Id == id {
+		if i.Weapon[n].Uid == uid {
 			return &i.Weapon[n]
 		}
 	}
 	for n := range i.Spell {
-		if i.Spell[n].Id == id {
+		if i.Spell[n].Uid == uid {
 			return &i.Spell[n]
 		}
 	}
 	for n := range i.Armor {
-		if i.Armor[n].Id == id {
+		if i.Armor[n].Uid == uid {
 			return &i.Armor[n]
 		}
 	}
 	for n := range i.Disposable {
-		if i.Disposable[n].Id == id {
+		if i.Disposable[n].Uid == uid {
 			return &i.Disposable[n]
 		}
 	}
 	return nil
 }
 
-func (i *UnitInventory) GetWeapon(id string) *Weapon {
+func (i *UnitInventory) GetWeapon(uid uint) *Weapon {
 	for n := range i.Weapon {
-		if i.Weapon[n].Id == id {
+		if i.Weapon[n].Uid == uid {
 			return &i.Weapon[n]
 		}
 	}
 	return nil
 }
 
-func (i *UnitInventory) GetSpell(id string) *Spell {
+func (i *UnitInventory) GetSpell(uid uint) *Spell {
 	for n := range i.Spell {
-		if i.Spell[n].Id == id {
+		if i.Spell[n].Uid == uid {
 			return &i.Spell[n]
 		}
 	}
 	return nil
 }
 
-func (i *UnitInventory) GetArmor(id string) *Armor {
+func (i *UnitInventory) GetArmor(uid uint) *Armor {
 	for n := range i.Armor {
-		if i.Armor[n].Id == id {
+		if i.Armor[n].Uid == uid {
 			return &i.Armor[n]
 		}
 	}
 	return nil
 }
 
-func (i *UnitInventory) GetDisposable(id string) *Disposable {
+func (i *UnitInventory) GetDisposable(uid uint) *Disposable {
 	for n := range i.Disposable {
-		if i.Disposable[n].Id == id {
+		if i.Disposable[n].Uid == uid {
 			return &i.Disposable[n]
 		}
 	}

@@ -11,7 +11,7 @@ const (
 )
 
 type Item struct {
-	Id          string   `json:"id"`
+	Uid         uint     `json:"uid"`
 	Name        string   `json:"name"`
 	Type        ItemType `json:"type"`
 	Description string   `json:"description,omitempty"`
@@ -19,6 +19,6 @@ type Item struct {
 
 func (i Item) String() string {
 	return fmt.Sprintf(
-		"Item: id: %s, name: %s, type: %s, description: %s",
-		i.Id, i.Name, i.Type, i.Description)
+		"name: %s, uid: %d, type: %s, description: %s",
+		i.Name, i.Uid, i.Type, i.Description)
 }

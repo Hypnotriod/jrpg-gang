@@ -112,7 +112,7 @@ func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
 			"inventory": {
 				"weapon": [
 					{
-						"id": "weapon-0001",
+						"uid": 4000,
 						"type": "weapon",
 						"name": "Sword",
 						"description": "Base one hand sword",
