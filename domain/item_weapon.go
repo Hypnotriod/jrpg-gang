@@ -9,10 +9,11 @@ type Weapon struct {
 
 func (w Weapon) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, condition: %g, equipped: %t, slots: %d, impact: %v, requirements: {%v}, enhancement: {%v}",
+		"%s, description: %s, condition: %g, strength: %g, equipped: %t, slots: %d, impact: %v, requirements: {%v}, enhancement: {%v}",
 		w.Name,
 		w.Description,
 		w.Condition,
+		w.Strength,
 		w.Equipped,
 		w.SlotsNumber,
 		w.Impact,
