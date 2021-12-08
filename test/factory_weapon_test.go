@@ -14,7 +14,7 @@ func newBaseSword(t *testing.T) *domain.Weapon {
 			"type": "weapon",
 			"name": "Sword",
 			"description": "Base one hand sword",
-			"condition": 100,
+			"durability": 700,
 			"slot": "weapon",
 			"slotsNumber": 1,
 			"requirements": {

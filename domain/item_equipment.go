@@ -15,7 +15,7 @@ const (
 
 type Equipment struct {
 	Item
-	Condition    float32           `json:"condition"`
+	Wearout      float32           `json:"wearout"`
 	Durability   float32           `json:"durability"`
 	Slot         EquipmentSlot     `json:"slot"`
 	SlotsNumber  uint              `json:"slotsNumber"`
@@ -26,6 +26,10 @@ type Equipment struct {
 
 func (e Equipment) String() string {
 	return fmt.Sprintf(
-		"%s, type: %s, description: %s, slot: %s, slots: %d, equipped: %t, condition: %g, durability: %g, requirements: {%v}, enhancement: %v",
-		e.Name, e.Type, e.Description, e.Slot, e.SlotsNumber, e.Equipped, e.Condition, e.Durability, e.Requirements, e.Enhancement)
+		"%s, type: %s, description: %s, slot: %s, slots: %d, equipped: %t, wearout: %g, durability: %g, requirements: {%v}, enhancement: %v",
+		e.Name, e.Type, e.Description, e.Slot, e.SlotsNumber, e.Equipped, e.Wearout, e.Durability, e.Requirements, e.Enhancement)
+}
+
+func (e *Equipment) IncreaseWearOut() {
+	e.Wearout++
 }

@@ -116,7 +116,7 @@ func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
 						"type": "weapon",
 						"name": "Sword",
 						"description": "Base one hand sword",
-						"condition": 100,
+						"durability": 700,
 						"slot": "weapon",
 						"slotsNumber": 1,
 						"equipped": true,
@@ -191,6 +191,31 @@ func newNorthTroll(t *testing.T) *domain.Unit {
 					"fear": 5,
 					"curse": 0
 				}
+			},
+			"inventory": {
+				"armor": [
+					{
+						"uid": 2000,
+						"type": "armor",
+						"name": "Rusty Helmet",
+						"description": "Rusty helmet",
+						"wearout": 35,
+						"durability": 40,
+						"slot": "head",
+						"slotsNumber": 1,
+						"equipped": true,
+						"requirements": {
+							"strength": 5
+						},
+						"enhancement": [
+							{
+								"resistance": {
+									"stunning": 20
+								}
+							}	
+						]
+					}
+				]
 			}
 		}`)
 	if !ok {

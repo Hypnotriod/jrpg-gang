@@ -14,7 +14,7 @@ func newBaseGloves(t *testing.T) *domain.Weapon {
 			"type": "armor",
 			"name": "Gloves",
 			"description": "Base gloves",
-			"condition": 100,
+			"durability": 500,
 			"requirements": {
 				"strength": 10,
 				"endurance": 30

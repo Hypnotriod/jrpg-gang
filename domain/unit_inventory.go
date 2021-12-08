@@ -15,6 +15,30 @@ func (i UnitInventory) String() string {
 		i.Weapon, i.Armor, i.Disposable)
 }
 
+func (i *UnitInventory) IncreaseArmorWearOut(equipped bool) {
+	for n := range i.Armor {
+		item := &i.Armor[n]
+		if item.Equipped || !equipped {
+			item.IncreaseWearOut()
+		}
+	}
+}
+
+func (i *UnitInventory) CheckEquipmentWeareout() {
+	for n := range i.Armor {
+		item := &i.Armor[n].Equipment
+		if item.Equipped || item.Wearout >= item.Durability {
+			item.Equipped = false
+		}
+	}
+	for n := range i.Weapon {
+		item := &i.Weapon[n].Equipment
+		if item.Equipped || item.Wearout >= item.Durability {
+			item.Equipped = false
+		}
+	}
+}
+
 func (i *UnitInventory) GetEquipment(equipped bool) []*Equipment {
 	equipment := []*Equipment{}
 	for n := range i.Armor {

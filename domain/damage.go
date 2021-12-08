@@ -53,15 +53,19 @@ func (d *Damage) Reduce(damage Damage) {
 	d.Curse -= damage.Curse
 }
 
-func (d *Damage) HasEffect() bool {
+func (d *Damage) HasPhysicalEffect() bool {
 	return d.Stabbing != 0 ||
 		d.Cutting != 0 ||
 		d.Crushing != 0 ||
 		d.Fire != 0 ||
 		d.Cold != 0 ||
 		d.Lighting != 0 ||
+		d.Stunning != 0
+}
+
+func (d *Damage) HasEffect() bool {
+	return d.HasPhysicalEffect() ||
 		d.Poison != 0 ||
-		d.Stunning != 0 ||
 		d.Exhaustion != 0 ||
 		d.Bleeding != 0 ||
 		d.Fear != 0 ||
