@@ -18,8 +18,8 @@ func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint) UseInventoryItem
 		u.useWeaponOnTarget(&action, target, v)
 	case *Disposable:
 		u.useDisposableOnTarget(&action, target, v)
-	case *Spell:
-		u.useSpellOnTarget(&action, target, v)
+	case *Magic:
+		u.useMagicOnTarget(&action, target, v)
 	}
 	return action
 }
@@ -43,11 +43,11 @@ func (u *Unit) useDisposableOnTarget(action *UseInventoryItemActionResult, targe
 	action.TemporalEnhancement = append(action.TemporalEnhancement, tmpEnch...)
 }
 
-func (u *Unit) useSpellOnTarget(action *UseInventoryItemActionResult, target *Unit, spell *Spell) {
-	instDmg, tmpImp := u.Attack(target, spell.Impact)
+func (u *Unit) useMagicOnTarget(action *UseInventoryItemActionResult, target *Unit, magic *Magic) {
+	instDmg, tmpImp := u.Attack(target, magic.Impact)
 	action.InstantDamage = append(action.InstantDamage, instDmg...)
 	action.TemporalImpact = append(action.TemporalImpact, tmpImp...)
-	instRec, tmpEnch := u.Enhance(target, spell.Enhancement)
+	instRec, tmpEnch := u.Enhance(target, magic.Enhancement)
 	action.InstantRecovery = append(action.InstantRecovery, instRec...)
 	action.TemporalEnhancement = append(action.TemporalEnhancement, tmpEnch...)
 }

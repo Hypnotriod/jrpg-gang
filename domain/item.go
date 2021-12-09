@@ -7,7 +7,7 @@ type ItemType string
 const (
 	ItemTypeArmor      ItemType = "armor"
 	ItemTypeWeapon     ItemType = "weapon"
-	ItemTypeSpell      ItemType = "spell"
+	ItemTypeMagic      ItemType = "magic"
 	ItemTypeDisposable ItemType = "disposable"
 )
 

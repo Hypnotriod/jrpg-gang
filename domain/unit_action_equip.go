@@ -14,7 +14,7 @@ func (u *Unit) Equip(uid uint) bool {
 	default:
 		return false
 	}
-	if equipment.SlotsNumber > u.Slots[equipment.Slot] || equipment.Wearout >= equipment.Durability {
+	if equipment.SlotsNumber > u.Slots[equipment.Slot] || equipment.IsBroken() {
 		return false
 	}
 	u.UnequipBySlot(equipment.Slot, equipment.SlotsNumber)

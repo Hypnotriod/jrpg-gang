@@ -1,6 +1,6 @@
 package domain
 
-type Spell struct {
+type Magic struct {
 	Item
 	Requirements UnitAttributes          `json:"requirements"`
 	Impact       []DamageImpact          `json:"impact,omitempty"`

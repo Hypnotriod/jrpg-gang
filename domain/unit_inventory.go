@@ -4,7 +4,7 @@ import "fmt"
 
 type UnitInventory struct {
 	Weapon     []Weapon     `json:"weapon,omitempty"`
-	Spell      []Spell      `json:"spell,omitempty"`
+	Magic      []Magic      `json:"magic,omitempty"`
 	Armor      []Armor      `json:"armor,omitempty"`
 	Disposable []Disposable `json:"disposable,omitempty"`
 }
@@ -27,13 +27,13 @@ func (i *UnitInventory) IncreaseArmorWearOut(equipped bool) {
 func (i *UnitInventory) CheckEquipmentWeareout() {
 	for n := range i.Armor {
 		item := &i.Armor[n].Equipment
-		if item.Equipped || item.Wearout >= item.Durability {
+		if item.Equipped || item.IsBroken() {
 			item.Equipped = false
 		}
 	}
 	for n := range i.Weapon {
 		item := &i.Weapon[n].Equipment
-		if item.Equipped || item.Wearout >= item.Durability {
+		if item.Equipped || item.IsBroken() {
 			item.Equipped = false
 		}
 	}
@@ -81,11 +81,11 @@ func (i *UnitInventory) Add(item interface{}) bool {
 	case *Weapon:
 		i.Weapon = append(i.Weapon, *v)
 		return true
-	case Spell:
-		i.Spell = append(i.Spell, v)
+	case Magic:
+		i.Magic = append(i.Magic, v)
 		return true
-	case *Spell:
-		i.Spell = append(i.Spell, *v)
+	case *Magic:
+		i.Magic = append(i.Magic, *v)
 		return true
 	case Armor:
 		i.Armor = append(i.Armor, v)
@@ -109,9 +109,9 @@ func (i *UnitInventory) Get(uid uint) interface{} {
 			return &i.Weapon[n]
 		}
 	}
-	for n := range i.Spell {
-		if i.Spell[n].Uid == uid {
-			return &i.Spell[n]
+	for n := range i.Magic {
+		if i.Magic[n].Uid == uid {
+			return &i.Magic[n]
 		}
 	}
 	for n := range i.Armor {
@@ -136,10 +136,10 @@ func (i *UnitInventory) GetWeapon(uid uint) *Weapon {
 	return nil
 }
 
-func (i *UnitInventory) GetSpell(uid uint) *Spell {
-	for n := range i.Spell {
-		if i.Spell[n].Uid == uid {
-			return &i.Spell[n]
+func (i *UnitInventory) GetMagic(uid uint) *Magic {
+	for n := range i.Magic {
+		if i.Magic[n].Uid == uid {
+			return &i.Magic[n]
 		}
 	}
 	return nil

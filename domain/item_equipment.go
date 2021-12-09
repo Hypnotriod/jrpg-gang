@@ -33,3 +33,7 @@ func (e Equipment) String() string {
 func (e *Equipment) IncreaseWearOut() {
 	e.Wearout++
 }
+
+func (e *Equipment) IsBroken() bool {
+	return e.Wearout >= e.Durability
+}
