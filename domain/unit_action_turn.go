@@ -1,26 +1,26 @@
 package domain
 
-func (u *Unit) ApplyDamageImpactOnNextTurn() Damage {
+func (u *Unit) ApplyDamageOnNextTurn() Damage {
 	var damage Damage
-	for i := range u.Impact {
-		damage.Accumulate(u.Impact[i].Damage)
-		if u.Impact[i].Duration > 0 {
-			u.Impact[i].Duration--
+	for i := range u.Damage {
+		damage.Accumulate(u.Damage[i].Damage)
+		if u.Damage[i].Duration > 0 {
+			u.Damage[i].Duration--
 		}
 	}
 	damage.Apply(&u.State)
-	u.FilterImpact()
+	u.FilterDamage()
 	return damage
 }
 
-func (u *Unit) FilterImpact() {
-	var filteredImpact []DamageImpact
-	for _, impact := range u.Impact {
-		if impact.Duration != 0 {
-			filteredImpact = append(filteredImpact, impact)
+func (u *Unit) FilterDamage() {
+	var filteredDamage []DamageImpact
+	for _, damage := range u.Damage {
+		if damage.Duration != 0 {
+			filteredDamage = append(filteredDamage, damage)
 		}
 	}
-	u.Impact = filteredImpact
+	u.Damage = filteredDamage
 }
 
 func (u *Unit) ApplyRecoverylEnhancementOnNextTurn() {

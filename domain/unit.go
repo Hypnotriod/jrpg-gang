@@ -8,7 +8,7 @@ type Unit struct {
 	Name        string                  `json:"name"`
 	State       UnitState               `json:"state"`
 	Stats       UnitStats               `json:"stats"`
-	Impact      []DamageImpact          `json:"impact"`
+	Damage      []DamageImpact          `json:"damage"`
 	Enhancement []UnitEnhancementImpact `json:"enhancement"`
 	Inventory   UnitInventory           `json:"inventory"`
 	Slots       map[EquipmentSlot]uint  `json:"slots"`
@@ -16,11 +16,11 @@ type Unit struct {
 
 func (u Unit) String() string {
 	return fmt.Sprintf(
-		"%s, state: {%v}, stats: {%v}, impact: %v, enhancement: %v, inventory: {%v}, slots: %v",
+		"%s, state: {%v}, stats: {%v}, damage: %v, enhancement: %v, inventory: {%v}, slots: %v",
 		u.Name,
 		u.State,
 		u.Stats,
-		u.Impact,
+		u.Damage,
 		u.Enhancement,
 		u.Inventory,
 		u.Slots,

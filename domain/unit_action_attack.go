@@ -16,15 +16,15 @@ func (u *Unit) ApplyDamage(damage Damage) Damage {
 	return damage
 }
 
-func (u *Unit) AccumulateImpact(impact DamageImpact) DamageImpact {
+func (u *Unit) AccumulateDamageImpact(damage DamageImpact) DamageImpact {
 	resistance := u.TotalEnhancement().Resistance
 	resistance.Accumulate(u.Stats.Resistance)
-	impact.Reduce(resistance.Damage)
-	impact.Normalize()
-	if impact.HasEffect() {
-		u.Impact = append(u.Impact, impact)
+	damage.Reduce(resistance.Damage)
+	damage.Normalize()
+	if damage.HasEffect() {
+		u.Damage = append(u.Damage, damage)
 	}
-	return impact
+	return damage
 }
 
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
@@ -32,17 +32,17 @@ func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
 	return util.MaxFloat32(chance, util.MINIMUM_CHANCE)
 }
 
-func (u *Unit) CalculateAttackChance(target *Unit, impact DamageImpact) float32 {
-	chance := (u.TotalAgility() - u.State.Curse) - (target.TotalAgility() - target.State.Curse) + impact.Chance
+func (u *Unit) CalculateAttackChance(target *Unit, damage DamageImpact) float32 {
+	chance := (u.TotalAgility() - u.State.Curse) - (target.TotalAgility() - target.State.Curse) + damage.Chance
 	return util.MaxFloat32(chance, util.MINIMUM_CHANCE)
 }
 
-func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageImpact) {
+func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageImpact) {
 	instantDamage := []Damage{}
-	temporalImpact := []DamageImpact{}
+	temporalDamage := []DamageImpact{}
 	totalEnhancement := u.TotalEnhancement()
 	totalEnhancement.Attributes.Accumulate(u.Stats.Attributes)
-	for _, imp := range impact {
+	for _, imp := range damage {
 		if !util.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
 			break
 		}
@@ -52,13 +52,13 @@ func (u *Unit) Attack(target *Unit, impact []DamageImpact) ([]Damage, []DamageIm
 			imp.Damage.IsCritical = true
 		}
 		if imp.Duration != 0 {
-			tmpImp := target.AccumulateImpact(imp)
+			tmpImp := target.AccumulateDamageImpact(imp)
 			tmpImp.Chance = 0
-			temporalImpact = append(temporalImpact, tmpImp)
+			temporalDamage = append(temporalDamage, tmpImp)
 		} else {
 			instDmg := target.ApplyDamage(imp.Damage)
 			instantDamage = append(instantDamage, instDmg)
 		}
 	}
-	return instantDamage, temporalImpact
+	return instantDamage, temporalDamage
 }

@@ -123,7 +123,7 @@ func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
 						"requirements": {
 							"strength": 5
 						},
-						"impact": [
+						"damage": [
 							{
 								"chance": 40,
 								"cutting": 30,

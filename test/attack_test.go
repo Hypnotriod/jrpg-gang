@@ -8,21 +8,21 @@ import (
 
 func TestAttackUnit(t *testing.T) {
 	util.ApplyRandomSeed()
-	northTroll := newNorthTroll(t)
 	hero := newAgileHeroWithWeapon(t)
+	northTroll := newNorthTroll(t)
 	fmt.Println(hero)
 	fmt.Println()
 	fmt.Println(northTroll)
 	fmt.Println()
 	actionResult := hero.UseInventoryItemOnTarget(northTroll, 4000)
-	fmt.Printf("Attack with instant damage: %v, temporal impact: %v\n", actionResult.InstantDamage, actionResult.TemporalImpact)
+	fmt.Printf("%s attacks %s with: {%v}\n", hero.Name, northTroll.Name, actionResult)
 	fmt.Println()
 	fmt.Println(northTroll)
-	for len(northTroll.Impact) > 0 {
+	for len(northTroll.Damage) > 0 {
 		fmt.Println()
 		fmt.Println("Turn Passed")
 		fmt.Println()
-		northTroll.ApplyDamageImpactOnNextTurn()
+		northTroll.ApplyDamageOnNextTurn()
 		northTroll.ReduceEnhancementOnNextTurn()
 		fmt.Println(northTroll)
 	}

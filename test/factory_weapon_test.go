@@ -20,7 +20,7 @@ func newBaseSword(t *testing.T) *domain.Weapon {
 			"requirements": {
 				"strength": 5
 			},
-			"impact": [
+			"damage": [
 				{
 					"chance": 40,
 					"cutting": 30,
