@@ -103,7 +103,7 @@ func (i *UnitInventory) Add(item interface{}) bool {
 	return false
 }
 
-func (i *UnitInventory) Get(uid uint) interface{} {
+func (i *UnitInventory) Find(uid uint) interface{} {
 	for n := range i.Weapon {
 		if i.Weapon[n].Uid == uid {
 			return &i.Weapon[n]
@@ -127,7 +127,17 @@ func (i *UnitInventory) Get(uid uint) interface{} {
 	return nil
 }
 
-func (i *UnitInventory) GetWeapon(uid uint) *Weapon {
+func (i *UnitInventory) FindEquipment(uid uint) *Equipment {
+	equipment := i.GetEquipment(false)
+	for n := range equipment {
+		if equipment[n].Uid == uid {
+			return equipment[n]
+		}
+	}
+	return nil
+}
+
+func (i *UnitInventory) FindWeapon(uid uint) *Weapon {
 	for n := range i.Weapon {
 		if i.Weapon[n].Uid == uid {
 			return &i.Weapon[n]
@@ -136,7 +146,7 @@ func (i *UnitInventory) GetWeapon(uid uint) *Weapon {
 	return nil
 }
 
-func (i *UnitInventory) GetMagic(uid uint) *Magic {
+func (i *UnitInventory) FindMagic(uid uint) *Magic {
 	for n := range i.Magic {
 		if i.Magic[n].Uid == uid {
 			return &i.Magic[n]
@@ -145,7 +155,7 @@ func (i *UnitInventory) GetMagic(uid uint) *Magic {
 	return nil
 }
 
-func (i *UnitInventory) GetArmor(uid uint) *Armor {
+func (i *UnitInventory) FindArmor(uid uint) *Armor {
 	for n := range i.Armor {
 		if i.Armor[n].Uid == uid {
 			return &i.Armor[n]
@@ -154,7 +164,7 @@ func (i *UnitInventory) GetArmor(uid uint) *Armor {
 	return nil
 }
 
-func (i *UnitInventory) GetDisposable(uid uint) *Disposable {
+func (i *UnitInventory) FindDisposable(uid uint) *Disposable {
 	for n := range i.Disposable {
 		if i.Disposable[n].Uid == uid {
 			return &i.Disposable[n]

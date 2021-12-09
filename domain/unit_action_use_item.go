@@ -33,7 +33,7 @@ func (r UseInventoryItemActionResult) String() string {
 
 func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint) UseInventoryItemActionResult {
 	action := UseInventoryItemActionResult{}
-	item := u.Inventory.Get(uid)
+	item := u.Inventory.Find(uid)
 	if item == nil {
 		return action
 	}

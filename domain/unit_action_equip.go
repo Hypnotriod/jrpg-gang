@@ -1,20 +1,8 @@
 package domain
 
 func (u *Unit) Equip(uid uint) bool {
-	var equipment *Equipment
-	item := u.Inventory.Get(uid)
-	if item == nil {
-		return false
-	}
-	switch v := item.(type) {
-	case *Weapon:
-		equipment = &v.Equipment
-	case *Armor:
-		equipment = &v.Equipment
-	default:
-		return false
-	}
-	if equipment.SlotsNumber > u.Slots[equipment.Slot] || equipment.IsBroken() {
+	equipment := u.Inventory.FindEquipment(uid)
+	if equipment == nil || equipment.SlotsNumber > u.Slots[equipment.Slot] || equipment.IsBroken() {
 		return false
 	}
 	u.UnequipBySlot(equipment.Slot, equipment.SlotsNumber)
