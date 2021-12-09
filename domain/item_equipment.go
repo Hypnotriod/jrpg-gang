@@ -30,7 +30,7 @@ func (e Equipment) String() string {
 		e.Name, e.Type, e.Description, e.Slot, e.SlotsNumber, e.Equipped, e.Wearout, e.Durability, e.Requirements, e.Enhancement)
 }
 
-func (e *Equipment) IncreaseWearOut() {
+func (e *Equipment) IncreaseWearout() {
 	e.Wearout++
 }
 

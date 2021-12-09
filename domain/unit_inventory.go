@@ -15,11 +15,11 @@ func (i UnitInventory) String() string {
 		i.Weapon, i.Armor, i.Disposable)
 }
 
-func (i *UnitInventory) IncreaseArmorWearOut(equipped bool) {
+func (i *UnitInventory) IncreaseArmorWearout(equipped bool) {
 	for n := range i.Armor {
 		item := &i.Armor[n]
 		if item.Equipped || !equipped {
-			item.IncreaseWearOut()
+			item.IncreaseWearout()
 		}
 	}
 }

@@ -4,7 +4,7 @@ import "jrpg-gang/util"
 
 func (u *Unit) ApplyDamage(damage Damage) Damage {
 	if damage.HasPhysicalEffect() {
-		u.Inventory.IncreaseArmorWearOut(true)
+		u.Inventory.IncreaseArmorWearout(true)
 	}
 	resistance := u.TotalEnhancement().Resistance
 	resistance.Accumulate(u.Stats.Resistance)

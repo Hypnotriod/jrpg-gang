@@ -52,7 +52,7 @@ func (u *Unit) useWeaponOnTarget(action *UseInventoryItemActionResult, target *U
 	if !weapon.Equipped {
 		return
 	}
-	weapon.IncreaseWearOut()
+	weapon.IncreaseWearout()
 	instDmg, tmpImp := u.Attack(target, weapon.Damage)
 	action.InstantDamage = append(action.InstantDamage, instDmg...)
 	action.TemporalDamage = append(action.TemporalDamage, tmpImp...)
