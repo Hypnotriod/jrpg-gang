@@ -73,6 +73,15 @@ func (i *UnitInventory) GetEquipmentBySlot(slot EquipmentSlot, equipped bool) []
 	return equipment
 }
 
+func (i *UnitInventory) GetEquippedSlotsNumber(slot EquipmentSlot) uint {
+	var slotsNumber uint = 0
+	equipment := i.GetEquipmentBySlot(slot, true)
+	for n := range equipment {
+		slotsNumber += equipment[n].SlotsNumber
+	}
+	return slotsNumber
+}
+
 func (i *UnitInventory) Add(item interface{}) bool {
 	switch v := item.(type) {
 	case Weapon:

@@ -1,12 +1,13 @@
 package domain
 
 func (u *Unit) Equip(uid uint) bool {
-	equipment := u.Inventory.FindEquipment(uid)
-	if equipment == nil || equipment.SlotsNumber > u.Slots[equipment.Slot] || equipment.IsBroken() {
+	item := u.Inventory.FindEquipment(uid)
+	if item == nil || item.SlotsNumber > u.Slots[item.Slot] || item.IsBroken() {
 		return false
 	}
-	u.UnequipBySlot(equipment.Slot, equipment.SlotsNumber)
-	equipment.Equipped = true
+	freeSlots := u.GetFreeSlotsNumber(item.Slot)
+	u.UnequipBySlot(item.Slot, item.SlotsNumber-freeSlots)
+	item.Equipped = true
 	return true
 }
 
@@ -30,4 +31,8 @@ func (u *Unit) UnequipBySlot(slot EquipmentSlot, slotsToRemove uint) {
 		equipment[i].Equipped = false
 		slotsToRemove--
 	}
+}
+
+func (u *Unit) GetFreeSlotsNumber(slot EquipmentSlot) uint {
+	return u.Slots[slot] - u.Inventory.GetEquippedSlotsNumber(slot)
 }
