@@ -20,15 +20,15 @@ func (d DamageImpact) String() string {
 	}
 }
 
-type UnitEnhancementImpact struct {
+type UnitModificationImpact struct {
 	Impact
-	UnitEnhancement
+	UnitModification
 }
 
-func (e UnitEnhancementImpact) String() string {
+func (e UnitModificationImpact) String() string {
 	if e.Chance != 0 {
-		return fmt.Sprintf("%s, chance: %g, duration: %d", e.UnitEnhancement.String(), e.Chance, e.Duration)
+		return fmt.Sprintf("%s, chance: %g, duration: %d", e.UnitModification.String(), e.Chance, e.Duration)
 	} else {
-		return fmt.Sprintf("%s, duration: %d", e.UnitEnhancement.String(), e.Duration)
+		return fmt.Sprintf("%s, duration: %d", e.UnitModification.String(), e.Duration)
 	}
 }

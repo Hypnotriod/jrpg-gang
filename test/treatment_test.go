@@ -14,13 +14,13 @@ func TestUnitThreatment(t *testing.T) {
 	fmt.Println()
 	fmt.Println(hero)
 	fmt.Println()
-	instantRecovery, temporalEnhancement := hero.Enhance(hero, healthPotion.Enhancement)
-	fmt.Printf("instantRecovery: %v, temporalEnhancement: %v\n", instantRecovery, temporalEnhancement)
+	instantRecovery, temporalModification := hero.Modify(hero, healthPotion.Modification)
+	fmt.Printf("instantRecovery: %v, temporalModification: %v\n", instantRecovery, temporalModification)
 	fmt.Println()
 	fmt.Println(hero)
-	for len(hero.Enhancement) > 0 {
-		hero.ApplyRecoverylEnhancementOnNextTurn()
-		hero.ReduceEnhancementOnNextTurn()
+	for len(hero.Modification) > 0 {
+		hero.ApplyRecoverylOnNextTurn()
+		hero.ReduceModificationOnNextTurn()
 		fmt.Println()
 		fmt.Println("Turn Passed")
 		fmt.Println()

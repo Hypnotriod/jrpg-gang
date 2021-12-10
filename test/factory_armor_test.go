@@ -19,7 +19,7 @@ func newBaseGloves(t *testing.T) *domain.Weapon {
 				"strength": 10,
 				"endurance": 30
 			},
-			"enhancement": [
+			"modification": [
 				{
 					"resistance": {
 						"cutting": 10,

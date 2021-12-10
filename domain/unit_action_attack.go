@@ -6,7 +6,7 @@ func (u *Unit) ApplyDamage(damage Damage) Damage {
 	if damage.HasPhysicalEffect() {
 		u.Inventory.IncreaseArmorWearout(true)
 	}
-	resistance := u.TotalEnhancement().Resistance
+	resistance := u.TotalModification().Resistance
 	resistance.Accumulate(u.Stats.Resistance)
 	damage.Reduce(resistance.Damage)
 	damage.Normalize()
@@ -17,7 +17,7 @@ func (u *Unit) ApplyDamage(damage Damage) Damage {
 }
 
 func (u *Unit) AccumulateDamageImpact(damage DamageImpact) DamageImpact {
-	resistance := u.TotalEnhancement().Resistance
+	resistance := u.TotalModification().Resistance
 	resistance.Accumulate(u.Stats.Resistance)
 	damage.Reduce(resistance.Damage)
 	damage.Normalize()
@@ -40,13 +40,13 @@ func (u *Unit) CalculateAttackChance(target *Unit, damage DamageImpact) float32 
 func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageImpact) {
 	instantDamage := []Damage{}
 	temporalDamage := []DamageImpact{}
-	totalEnhancement := u.TotalEnhancement()
-	totalEnhancement.Attributes.Accumulate(u.Stats.Attributes)
+	totalModification := u.TotalModification()
+	totalModification.Attributes.Accumulate(u.Stats.Attributes)
 	for _, imp := range damage {
 		if !util.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
 			break
 		}
-		imp.Enchance(totalEnhancement.Attributes, totalEnhancement.Damage)
+		imp.Enchance(totalModification.Attributes, totalModification.Damage)
 		if util.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
 			imp.Damage.Multiply(CRITICAL_DAMAGE_FACTOR)
 			imp.Damage.IsCritical = true

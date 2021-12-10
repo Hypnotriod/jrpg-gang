@@ -6,26 +6,26 @@ import (
 )
 
 type UseInventoryItemActionResult struct {
-	InstantDamage       []Damage                `json:"instantDamage,omitempty"`
-	TemporalDamage      []DamageImpact          `json:"temporalDamage,omitempty"`
-	InstantRecovery     []UnitState             `json:"instantRecovery,omitempty"`
-	TemporalEnhancement []UnitEnhancementImpact `json:"temporalEnhancement,omitempty"`
+	InstantDamage        []Damage                 `json:"instantDamage,omitempty"`
+	TemporalDamage       []DamageImpact           `json:"temporalDamage,omitempty"`
+	InstantRecovery      []UnitState              `json:"instantRecovery,omitempty"`
+	TemporalModification []UnitModificationImpact `json:"temporalModification,omitempty"`
 }
 
 func (r UseInventoryItemActionResult) String() string {
 	props := []string{}
 
 	if len(r.InstantDamage) != 0 {
-		props = append(props, fmt.Sprintf("instantDamage: %v", r.InstantDamage))
+		props = append(props, fmt.Sprintf("instant damage: %v", r.InstantDamage))
 	}
 	if len(r.TemporalDamage) != 0 {
-		props = append(props, fmt.Sprintf("temporalDamage: %v", r.TemporalDamage))
+		props = append(props, fmt.Sprintf("temporal damage: %v", r.TemporalDamage))
 	}
 	if len(r.InstantRecovery) != 0 {
-		props = append(props, fmt.Sprintf("instantRecovery: %v", r.InstantRecovery))
+		props = append(props, fmt.Sprintf("instant recovery: %v", r.InstantRecovery))
 	}
-	if len(r.TemporalEnhancement) != 0 {
-		props = append(props, fmt.Sprintf("temporalEnhancement: %v", r.TemporalEnhancement))
+	if len(r.TemporalModification) != 0 {
+		props = append(props, fmt.Sprintf("temporal modification: %v", r.TemporalModification))
 	}
 
 	return strings.Join(props, ", ")
@@ -64,10 +64,10 @@ func (u *Unit) useDisposableOnTarget(action *UseInventoryItemActionResult, targe
 		action.InstantDamage = append(action.InstantDamage, instDmg...)
 		action.TemporalDamage = append(action.TemporalDamage, tmpImp...)
 	}
-	if len(disposable.Enhancement) != 0 {
-		instRec, tmpEnch := u.Enhance(target, disposable.Enhancement)
+	if len(disposable.Modification) != 0 {
+		instRec, tmpEnch := u.Modify(target, disposable.Modification)
 		action.InstantRecovery = append(action.InstantRecovery, instRec...)
-		action.TemporalEnhancement = append(action.TemporalEnhancement, tmpEnch...)
+		action.TemporalModification = append(action.TemporalModification, tmpEnch...)
 	}
 }
 
@@ -77,9 +77,9 @@ func (u *Unit) useMagicOnTarget(action *UseInventoryItemActionResult, target *Un
 		action.InstantDamage = append(action.InstantDamage, instDmg...)
 		action.TemporalDamage = append(action.TemporalDamage, tmpImp...)
 	}
-	if len(magic.Enhancement) != 0 {
-		instRec, tmpEnch := u.Enhance(target, magic.Enhancement)
+	if len(magic.Modification) != 0 {
+		instRec, tmpEnch := u.Modify(target, magic.Modification)
 		action.InstantRecovery = append(action.InstantRecovery, instRec...)
-		action.TemporalEnhancement = append(action.TemporalEnhancement, tmpEnch...)
+		action.TemporalModification = append(action.TemporalModification, tmpEnch...)
 	}
 }

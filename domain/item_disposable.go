@@ -4,16 +4,16 @@ import "fmt"
 
 type Disposable struct {
 	Item
-	Damage      []DamageImpact          `json:"damage,omitempty"`
-	Enhancement []UnitEnhancementImpact `json:"enhancement,omitempty"`
+	Damage       []DamageImpact           `json:"damage,omitempty"`
+	Modification []UnitModificationImpact `json:"modification,omitempty"`
 }
 
 func (d Disposable) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, enhancement: %v, damage: %v",
+		"%s, description: %s, modification: %v, damage: %v",
 		d.Name,
 		d.Description,
-		d.Enhancement,
+		d.Modification,
 		d.Damage,
 	)
 }

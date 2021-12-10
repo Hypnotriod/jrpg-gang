@@ -32,7 +32,7 @@ func newBaseSword(t *testing.T) *domain.Weapon {
 					"bleeding": 3
 				}
 			],
-			"enhancement": [
+			"modification": [
 				{
 					"damage": {
 						"cutting": 30

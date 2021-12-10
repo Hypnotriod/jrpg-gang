@@ -15,19 +15,19 @@ const (
 
 type Equipment struct {
 	Item
-	Wearout      float32           `json:"wearout"`
-	Durability   float32           `json:"durability"`
-	Slot         EquipmentSlot     `json:"slot"`
-	SlotsNumber  uint              `json:"slotsNumber"`
-	Equipped     bool              `json:"equipped"`
-	Requirements UnitAttributes    `json:"requirements"`
-	Enhancement  []UnitEnhancement `json:"enhancement"`
+	Wearout      float32            `json:"wearout"`
+	Durability   float32            `json:"durability"`
+	Slot         EquipmentSlot      `json:"slot"`
+	SlotsNumber  uint               `json:"slotsNumber"`
+	Equipped     bool               `json:"equipped"`
+	Requirements UnitAttributes     `json:"requirements"`
+	Modification []UnitModification `json:"modification"`
 }
 
 func (e Equipment) String() string {
 	return fmt.Sprintf(
-		"%s, type: %s, description: %s, slot: %s, slots: %d, equipped: %t, wearout: %g, durability: %g, requirements: {%v}, enhancement: %v",
-		e.Name, e.Type, e.Description, e.Slot, e.SlotsNumber, e.Equipped, e.Wearout, e.Durability, e.Requirements, e.Enhancement)
+		"%s, type: %s, description: %s, slot: %s, slots: %d, equipped: %t, wearout: %g, durability: %g, requirements: {%v}, modification: %v",
+		e.Name, e.Type, e.Description, e.Slot, e.SlotsNumber, e.Equipped, e.Wearout, e.Durability, e.Requirements, e.Modification)
 }
 
 func (e *Equipment) IncreaseWearout() {

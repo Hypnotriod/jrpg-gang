@@ -135,7 +135,7 @@ func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
 								"bleeding": 3
 							}
 						],
-						"enhancement": [
+						"modification": [
 							{
 								"damage": {
 									"cutting": 30
@@ -207,7 +207,7 @@ func newNorthTroll(t *testing.T) *domain.Unit {
 						"requirements": {
 							"strength": 5
 						},
-						"enhancement": [
+						"modification": [
 							{
 								"resistance": {
 									"exhaustion": 20

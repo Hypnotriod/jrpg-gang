@@ -23,30 +23,30 @@ func (u *Unit) FilterDamage() {
 	u.Damage = filteredDamage
 }
 
-func (u *Unit) ApplyRecoverylEnhancementOnNextTurn() {
-	enhancement := u.TotalEnhancement()
-	recovery := enhancement.Recovery
-	attributes := enhancement.BaseAttributes
+func (u *Unit) ApplyRecoverylOnNextTurn() {
+	modification := u.TotalModification()
+	recovery := modification.Recovery
+	attributes := modification.BaseAttributes
 	attributes.Accumulate(u.Stats.BaseAttributes)
 	u.State.Accumulate(recovery)
 	u.State.Normalize(attributes)
 }
 
-func (u *Unit) ReduceEnhancementOnNextTurn() {
-	for i := range u.Enhancement {
-		if u.Enhancement[i].Duration > 0 {
-			u.Enhancement[i].Duration--
+func (u *Unit) ReduceModificationOnNextTurn() {
+	for i := range u.Modification {
+		if u.Modification[i].Duration > 0 {
+			u.Modification[i].Duration--
 		}
 	}
-	u.FilterEnhancement()
+	u.FilterModification()
 }
 
-func (u *Unit) FilterEnhancement() {
-	var filteredEnhancement []UnitEnhancementImpact
-	for _, enhancement := range u.Enhancement {
-		if enhancement.Duration != 0 {
-			filteredEnhancement = append(filteredEnhancement, enhancement)
+func (u *Unit) FilterModification() {
+	var filteredModification []UnitModificationImpact
+	for _, modification := range u.Modification {
+		if modification.Duration != 0 {
+			filteredModification = append(filteredModification, modification)
 		}
 	}
-	u.Enhancement = filteredEnhancement
+	u.Modification = filteredModification
 }

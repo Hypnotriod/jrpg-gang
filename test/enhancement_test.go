@@ -15,7 +15,7 @@ func TestAccumulateResistance(t *testing.T) {
 			{
 			  "name": "The thing",
 			  "equipped": true,
-			  "enhancement": [
+			  "modification": [
 				{
 				  "damage": {
 					"cutting": 30,
@@ -34,5 +34,5 @@ func TestAccumulateResistance(t *testing.T) {
 		t.Fatal()
 	}
 	unit.Inventory.Weapon = append(unit.Inventory.Weapon, *equipment.(*[]domain.Weapon)...)
-	fmt.Printf("Total enhancement: {%v}\n", unit.TotalEnhancement())
+	fmt.Printf("Total modification: {%v}\n", unit.TotalModification())
 }

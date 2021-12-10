@@ -23,7 +23,7 @@ func TestAttackUnit(t *testing.T) {
 		fmt.Println("Turn Passed")
 		fmt.Println()
 		northTroll.ApplyDamageOnNextTurn()
-		northTroll.ReduceEnhancementOnNextTurn()
+		northTroll.ReduceModificationOnNextTurn()
 		fmt.Println(northTroll)
 	}
 }

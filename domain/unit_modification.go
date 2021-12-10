@@ -2,7 +2,7 @@ package domain
 
 import "fmt"
 
-type UnitEnhancement struct {
+type UnitModification struct {
 	BaseAttributes UnitBaseAttributes `json:"baseAttributes,omitempty"`
 	Attributes     UnitAttributes     `json:"attributes,omitempty"`
 	Resistance     UnitResistance     `json:"resistance,omitempty"`
@@ -10,15 +10,15 @@ type UnitEnhancement struct {
 	Recovery       UnitState          `json:"recovery,omitempty"`
 }
 
-func (e *UnitEnhancement) Accumulate(enhancement UnitEnhancement) {
-	e.BaseAttributes.Accumulate(enhancement.BaseAttributes)
-	e.Attributes.Accumulate(enhancement.Attributes)
-	e.Resistance.Accumulate(enhancement.Resistance)
-	e.Damage.Accumulate(enhancement.Damage)
-	e.Recovery.Accumulate(enhancement.Recovery)
+func (e *UnitModification) Accumulate(modification UnitModification) {
+	e.BaseAttributes.Accumulate(modification.BaseAttributes)
+	e.Attributes.Accumulate(modification.Attributes)
+	e.Resistance.Accumulate(modification.Resistance)
+	e.Damage.Accumulate(modification.Damage)
+	e.Recovery.Accumulate(modification.Recovery)
 }
 
-func (e UnitEnhancement) String() string {
+func (e UnitModification) String() string {
 	return fmt.Sprintf(
 		"baseAttributes: {%v}, attributes: {%v}, resistance: {%v}, damage: {%v}, revovery: {%v}",
 		e.BaseAttributes,
