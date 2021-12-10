@@ -10,6 +10,7 @@ type UseInventoryItemActionResult struct {
 	TemporalDamage       []DamageImpact           `json:"temporalDamage,omitempty"`
 	InstantRecovery      []UnitState              `json:"instantRecovery,omitempty"`
 	TemporalModification []UnitModificationImpact `json:"temporalModification,omitempty"`
+	Success              bool                     `json:"success"`
 }
 
 func (r UseInventoryItemActionResult) String() string {
@@ -27,6 +28,7 @@ func (r UseInventoryItemActionResult) String() string {
 	if len(r.TemporalModification) != 0 {
 		props = append(props, fmt.Sprintf("temporal modification: %v", r.TemporalModification))
 	}
+	props = append(props, fmt.Sprintf("success: %t", r.Success))
 
 	return strings.Join(props, ", ")
 }
@@ -56,6 +58,7 @@ func (u *Unit) useWeaponOnTarget(action *UseInventoryItemActionResult, target *U
 	instDmg, tmpImp := u.Attack(target, weapon.Damage)
 	action.InstantDamage = append(action.InstantDamage, instDmg...)
 	action.TemporalDamage = append(action.TemporalDamage, tmpImp...)
+	action.Success = true
 }
 
 func (u *Unit) useDisposableOnTarget(action *UseInventoryItemActionResult, target *Unit, disposable *Disposable) {
@@ -73,6 +76,7 @@ func (u *Unit) useDisposableOnTarget(action *UseInventoryItemActionResult, targe
 		action.InstantRecovery = append(action.InstantRecovery, instRec...)
 		action.TemporalModification = append(action.TemporalModification, tmpEnch...)
 	}
+	action.Success = true
 }
 
 func (u *Unit) useMagicOnTarget(action *UseInventoryItemActionResult, target *Unit, magic *Magic) {
@@ -86,4 +90,5 @@ func (u *Unit) useMagicOnTarget(action *UseInventoryItemActionResult, target *Un
 		action.InstantRecovery = append(action.InstantRecovery, instRec...)
 		action.TemporalModification = append(action.TemporalModification, tmpEnch...)
 	}
+	action.Success = true
 }
