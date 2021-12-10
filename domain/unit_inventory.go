@@ -181,3 +181,13 @@ func (i *UnitInventory) FindDisposable(uid uint) *Disposable {
 	}
 	return nil
 }
+
+func (i *UnitInventory) FilterDisposable() {
+	var filteredDisposable []Disposable
+	for _, disp := range i.Disposable {
+		if disp.Quantity != 0 {
+			filteredDisposable = append(filteredDisposable, disp)
+		}
+	}
+	i.Disposable = filteredDisposable
+}

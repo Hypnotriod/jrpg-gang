@@ -59,6 +59,10 @@ func (u *Unit) useWeaponOnTarget(action *UseInventoryItemActionResult, target *U
 }
 
 func (u *Unit) useDisposableOnTarget(action *UseInventoryItemActionResult, target *Unit, disposable *Disposable) {
+	if disposable.Quantity == 0 {
+		return
+	}
+	disposable.Quantity--
 	if len(disposable.Damage) != 0 {
 		instDmg, tmpImp := u.Attack(target, disposable.Damage)
 		action.InstantDamage = append(action.InstantDamage, instDmg...)

@@ -14,6 +14,7 @@ func newSmallHealthPotion(t *testing.T) *domain.Disposable {
 			"type": "disposable",
 			"name": "Small Health Potion",
 			"description": "Small health potion",
+			"quantity": 1,
 			"modification": [
 				{
 					"recovery": {
