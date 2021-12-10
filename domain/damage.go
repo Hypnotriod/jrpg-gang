@@ -15,8 +15,8 @@ type Damage struct {
 	Cold       float32 `json:"cold,omitempty"`
 	Lighting   float32 `json:"lighting,omitempty"`
 	Poison     float32 `json:"poison,omitempty"`
-	Stunning   float32 `json:"stunning,omitempty"`
 	Exhaustion float32 `json:"exhaustion,omitempty"`
+	ManaDrain  float32 `json:"manaDrain,omitempty"`
 	Bleeding   float32 `json:"bleeding,omitempty"`
 	Fear       float32 `json:"fear,omitempty"`
 	Curse      float32 `json:"curse,omitempty"`
@@ -31,8 +31,8 @@ func (d *Damage) Accumulate(damage Damage) {
 	d.Cold += damage.Cold
 	d.Lighting += damage.Lighting
 	d.Poison += damage.Poison
-	d.Stunning += damage.Stunning
 	d.Exhaustion += damage.Exhaustion
+	d.ManaDrain += damage.ManaDrain
 	d.Bleeding += damage.Bleeding
 	d.Fear += damage.Fear
 	d.Curse += damage.Curse
@@ -46,8 +46,8 @@ func (d *Damage) Reduce(damage Damage) {
 	d.Cold -= damage.Cold
 	d.Lighting -= damage.Lighting
 	d.Poison -= damage.Poison
-	d.Stunning -= damage.Stunning
 	d.Exhaustion -= damage.Exhaustion
+	d.ManaDrain -= damage.ManaDrain
 	d.Bleeding -= damage.Bleeding
 	d.Fear -= damage.Fear
 	d.Curse -= damage.Curse
@@ -59,14 +59,14 @@ func (d *Damage) HasPhysicalEffect() bool {
 		d.Crushing != 0 ||
 		d.Fire != 0 ||
 		d.Cold != 0 ||
-		d.Lighting != 0 ||
-		d.Stunning != 0
+		d.Lighting != 0
 }
 
 func (d *Damage) HasEffect() bool {
 	return d.HasPhysicalEffect() ||
 		d.Poison != 0 ||
 		d.Exhaustion != 0 ||
+		d.ManaDrain != 0 ||
 		d.Bleeding != 0 ||
 		d.Fear != 0 ||
 		d.Curse != 0
@@ -79,8 +79,8 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Fire = util.AccumulateIfNotZerosFloat32(d.Fire, attributes.Intelligence)
 	d.Cold = util.AccumulateIfNotZerosFloat32(d.Cold, attributes.Intelligence)
 	d.Lighting = util.AccumulateIfNotZerosFloat32(d.Lighting, attributes.Intelligence)
-	d.Stunning = util.AccumulateIfNotZerosFloat32(d.Stunning, attributes.Strength)
-	d.Exhaustion = util.AccumulateIfNotZerosFloat32(d.Exhaustion, attributes.Intelligence)
+	d.Exhaustion = util.AccumulateIfNotZerosFloat32(d.Exhaustion, attributes.Strength)
+	d.ManaDrain = util.AccumulateIfNotZerosFloat32(d.ManaDrain, attributes.Intelligence)
 	d.Bleeding = util.AccumulateIfNotZerosFloat32(d.Bleeding, attributes.Strength)
 
 	d.Stabbing = util.AccumulateIfNotZerosFloat32(d.Stabbing, damage.Stabbing)
@@ -90,8 +90,8 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Cold = util.AccumulateIfNotZerosFloat32(d.Cold, damage.Cold)
 	d.Lighting = util.AccumulateIfNotZerosFloat32(d.Lighting, damage.Lighting)
 	d.Poison = util.AccumulateIfNotZerosFloat32(d.Poison, damage.Poison)
-	d.Stunning = util.AccumulateIfNotZerosFloat32(d.Stunning, damage.Stunning)
 	d.Exhaustion = util.AccumulateIfNotZerosFloat32(d.Exhaustion, damage.Exhaustion)
+	d.ManaDrain = util.AccumulateIfNotZerosFloat32(d.ManaDrain, damage.ManaDrain)
 	d.Bleeding = util.AccumulateIfNotZerosFloat32(d.Bleeding, damage.Bleeding)
 	d.Fear = util.AccumulateIfNotZerosFloat32(d.Fear, damage.Fear)
 	d.Curse = util.AccumulateIfNotZerosFloat32(d.Curse, damage.Curse)
@@ -105,8 +105,8 @@ func (d *Damage) Multiply(factor float32) {
 	d.Cold = util.MultiplyIfNotZerosFloat32(d.Cold, factor)
 	d.Lighting = util.MultiplyIfNotZerosFloat32(d.Lighting, factor)
 	d.Poison = util.MultiplyIfNotZerosFloat32(d.Poison, factor)
-	d.Stunning = util.MultiplyIfNotZerosFloat32(d.Stunning, factor)
 	d.Exhaustion = util.MultiplyIfNotZerosFloat32(d.Exhaustion, factor)
+	d.ManaDrain = util.MultiplyIfNotZerosFloat32(d.ManaDrain, factor)
 	d.Bleeding = util.MultiplyIfNotZerosFloat32(d.Bleeding, factor)
 	d.Fear = util.MultiplyIfNotZerosFloat32(d.Fear, factor)
 	d.Curse = util.MultiplyIfNotZerosFloat32(d.Curse, factor)
@@ -120,8 +120,8 @@ func (d *Damage) Normalize() {
 	d.Cold = util.MaxFloat32(d.Cold, 0)
 	d.Lighting = util.MaxFloat32(d.Lighting, 0)
 	d.Poison = util.MaxFloat32(d.Poison, 0)
-	d.Stunning = util.MaxFloat32(d.Stunning, 0)
 	d.Exhaustion = util.MaxFloat32(d.Exhaustion, 0)
+	d.ManaDrain = util.MaxFloat32(d.ManaDrain, 0)
 	d.Bleeding = util.MaxFloat32(d.Bleeding, 0)
 	d.Fear = util.MaxFloat32(d.Fear, 0)
 	d.Curse = util.MaxFloat32(d.Curse, 0)
@@ -129,8 +129,8 @@ func (d *Damage) Normalize() {
 
 func (d *Damage) Apply(state *UnitState) {
 	state.Health -= d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lighting + d.Poison + d.Bleeding
-	state.Stamina -= d.Stunning
-	state.Mana -= d.Exhaustion
+	state.Stamina -= d.Exhaustion
+	state.Mana -= d.ManaDrain
 	state.Curse += d.Curse
 	state.Fear += d.Fear
 
@@ -163,11 +163,11 @@ func (d Damage) String() string {
 	if d.Poison != 0 {
 		props = append(props, fmt.Sprintf("poison: %g", d.Poison))
 	}
-	if d.Stunning != 0 {
-		props = append(props, fmt.Sprintf("stunning: %g", d.Stunning))
-	}
 	if d.Exhaustion != 0 {
 		props = append(props, fmt.Sprintf("exhaustion: %g", d.Exhaustion))
+	}
+	if d.ManaDrain != 0 {
+		props = append(props, fmt.Sprintf("mana drain: %g", d.ManaDrain))
 	}
 	if d.Bleeding != 0 {
 		props = append(props, fmt.Sprintf("bleeding: %g", d.Bleeding))

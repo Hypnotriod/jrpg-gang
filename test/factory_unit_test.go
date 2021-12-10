@@ -40,8 +40,8 @@ func newAgileHero(t *testing.T) *domain.Unit {
 					"cold": 5,
 					"lighting": 5,
 					"poison": 5,
-					"stunning": 5,
 					"exhaustion": 5,
+					"manaDrain": 5,
 					"fear": 5,
 					"curse": 5
 				}
@@ -95,8 +95,8 @@ func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
 					"cold": 5,
 					"lighting": 5,
 					"poison": 5,
-					"stunning": 5,
 					"exhaustion": 5,
+					"manaDrain": 5,
 					"fear": 5,
 					"curse": 5
 				}
@@ -186,8 +186,8 @@ func newNorthTroll(t *testing.T) *domain.Unit {
 					"cold": 50,
 					"lighting": 15,
 					"poison": 10,
-					"stunning": 20,
-					"exhaustion": 5,
+					"exhaustion": 20,
+					"manaDrain": 5,
 					"fear": 5,
 					"curse": 0
 				}
@@ -210,7 +210,7 @@ func newNorthTroll(t *testing.T) *domain.Unit {
 						"enhancement": [
 							{
 								"resistance": {
-									"stunning": 20
+									"exhaustion": 20
 								}
 							}	
 						]
