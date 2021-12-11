@@ -9,7 +9,9 @@ func (u *Unit) Equip(uid uint) bool {
 		return false
 	}
 	freeSlots := u.GetFreeSlotsNumber(item.Slot)
-	u.UnequipBySlot(item.Slot, item.SlotsNumber-freeSlots)
+	if freeSlots < item.SlotsNumber {
+		u.UnequipBySlot(item.Slot, item.SlotsNumber-freeSlots)
+	}
 	item.Equipped = true
 	return true
 }
