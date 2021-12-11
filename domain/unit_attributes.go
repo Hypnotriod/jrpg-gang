@@ -15,16 +15,6 @@ type UnitAttributes struct {
 	Luck         float32 `json:"luck"`
 }
 
-func (a *UnitAttributes) Accumulate(attributes UnitAttributes) {
-	a.Strength += attributes.Strength
-	a.Physique += attributes.Physique
-	a.Agility += attributes.Agility
-	a.Endurance += attributes.Endurance
-	a.Intelligence += attributes.Intelligence
-	a.Initiative += attributes.Initiative
-	a.Luck += attributes.Luck
-}
-
 func (a UnitAttributes) String() string {
 	props := []string{}
 	if a.Strength != 0 {
@@ -49,4 +39,14 @@ func (a UnitAttributes) String() string {
 		props = append(props, fmt.Sprintf("luck: %g", a.Luck))
 	}
 	return strings.Join(props, ", ")
+}
+
+func (a *UnitAttributes) Accumulate(attributes UnitAttributes) {
+	a.Strength += attributes.Strength
+	a.Physique += attributes.Physique
+	a.Agility += attributes.Agility
+	a.Endurance += attributes.Endurance
+	a.Intelligence += attributes.Intelligence
+	a.Initiative += attributes.Initiative
+	a.Luck += attributes.Luck
 }

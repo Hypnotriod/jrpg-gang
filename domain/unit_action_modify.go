@@ -12,7 +12,7 @@ func (u *Unit) ApplyRecovery(recovery UnitState) {
 	attributes := modification.BaseAttributes
 	attributes.Accumulate(u.Stats.BaseAttributes)
 	u.State.Accumulate(recovery)
-	u.State.Normalize(attributes)
+	u.State.NormalizeWithLimit(attributes)
 }
 
 func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]UnitState, []UnitModificationImpact) {

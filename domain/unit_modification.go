@@ -10,21 +10,21 @@ type UnitModification struct {
 	Recovery       UnitState          `json:"recovery,omitempty"`
 }
 
-func (e *UnitModification) Accumulate(modification UnitModification) {
-	e.BaseAttributes.Accumulate(modification.BaseAttributes)
-	e.Attributes.Accumulate(modification.Attributes)
-	e.Resistance.Accumulate(modification.Resistance)
-	e.Damage.Accumulate(modification.Damage)
-	e.Recovery.Accumulate(modification.Recovery)
-}
-
-func (e UnitModification) String() string {
+func (m UnitModification) String() string {
 	return fmt.Sprintf(
 		"baseAttributes: {%v}, attributes: {%v}, resistance: {%v}, damage: {%v}, revovery: {%v}",
-		e.BaseAttributes,
-		e.Attributes,
-		e.Resistance,
-		e.Damage,
-		e.Recovery,
+		m.BaseAttributes,
+		m.Attributes,
+		m.Resistance,
+		m.Damage,
+		m.Recovery,
 	)
+}
+
+func (m *UnitModification) Accumulate(modification UnitModification) {
+	m.BaseAttributes.Accumulate(modification.BaseAttributes)
+	m.Attributes.Accumulate(modification.Attributes)
+	m.Resistance.Accumulate(modification.Resistance)
+	m.Damage.Accumulate(modification.Damage)
+	m.Recovery.Accumulate(modification.Recovery)
 }

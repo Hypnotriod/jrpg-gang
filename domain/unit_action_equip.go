@@ -2,7 +2,10 @@ package domain
 
 func (u *Unit) Equip(uid uint) bool {
 	item := u.Inventory.FindEquipment(uid)
-	if item == nil || item.SlotsNumber > u.Slots[item.Slot] || item.IsBroken() {
+	if item == nil ||
+		item.SlotsNumber > u.Slots[item.Slot] ||
+		item.IsBroken() ||
+		u.CheckRequirements(item.Requirements) {
 		return false
 	}
 	freeSlots := u.GetFreeSlotsNumber(item.Slot)

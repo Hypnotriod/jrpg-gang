@@ -29,7 +29,7 @@ func (u *Unit) ApplyRecoverylOnNextTurn() {
 	attributes := modification.BaseAttributes
 	attributes.Accumulate(u.Stats.BaseAttributes)
 	u.State.Accumulate(recovery)
-	u.State.Normalize(attributes)
+	u.State.NormalizeWithLimit(attributes)
 }
 
 func (u *Unit) ReduceModificationOnNextTurn() {

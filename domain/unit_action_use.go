@@ -80,6 +80,9 @@ func (u *Unit) useDisposableOnTarget(action *UseInventoryItemActionResult, targe
 }
 
 func (u *Unit) useMagicOnTarget(action *UseInventoryItemActionResult, target *Unit, magic *Magic) {
+	if u.CheckRequirements(magic.Requirements) {
+		return
+	}
 	if len(magic.Damage) != 0 {
 		instDmg, tmpImp := u.Attack(target, magic.Damage)
 		action.InstantDamage = append(action.InstantDamage, instDmg...)

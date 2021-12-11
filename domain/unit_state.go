@@ -17,8 +17,14 @@ func (s *UnitState) Accumulate(state UnitState) {
 	s.Curse -= state.Curse
 }
 
-func (s *UnitState) Normalize(limit UnitBaseAttributes) {
-	s.UnitBaseAttributes.Normalize(limit)
+func (s *UnitState) NormalizeWithLimit(limit UnitBaseAttributes) {
+	s.UnitBaseAttributes.NormalizeWithLimit(limit)
+	s.Fear = util.MaxFloat32(s.Fear, 0)
+	s.Curse = util.MaxFloat32(s.Curse, 0)
+}
+
+func (s *UnitState) Normalize() {
+	s.UnitBaseAttributes.Normalize()
 	s.Fear = util.MaxFloat32(s.Fear, 0)
 	s.Curse = util.MaxFloat32(s.Curse, 0)
 }

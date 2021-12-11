@@ -17,10 +17,16 @@ func (a *UnitBaseAttributes) Accumulate(attributes UnitBaseAttributes) {
 	a.Stamina += attributes.Stamina
 }
 
-func (a *UnitBaseAttributes) Normalize(limit UnitBaseAttributes) {
+func (a *UnitBaseAttributes) NormalizeWithLimit(limit UnitBaseAttributes) {
 	a.Health = util.MinFloat32(a.Health, limit.Health)
 	a.Mana = util.MinFloat32(a.Mana, limit.Mana)
 	a.Stamina = util.MinFloat32(a.Stamina, limit.Stamina)
+}
+
+func (a *UnitBaseAttributes) Normalize() {
+	a.Health = util.MaxFloat32(a.Health, 0)
+	a.Mana = util.MaxFloat32(a.Mana, 0)
+	a.Stamina = util.MaxFloat32(a.Stamina, 0)
 }
 
 func (a UnitBaseAttributes) String() string {
