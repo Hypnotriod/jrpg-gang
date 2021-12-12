@@ -35,7 +35,8 @@ func (u *Unit) ApplyRecoverylOnNextTurn() {
 	recovery.Normalize()
 	u.State.Stamina += attributes.Endurance
 	u.State.Accumulate(recovery)
-	u.State.NormalizeWithLimit(baseAttributes)
+	u.State.Saturate(baseAttributes)
+	u.State.Normalize()
 }
 
 func (u *Unit) ReduceModificationOnNextTurn() {
