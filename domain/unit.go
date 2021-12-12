@@ -5,6 +5,8 @@ import (
 	"jrpg-gang/util"
 )
 
+type UnitSlots map[EquipmentSlot]uint
+
 type Unit struct {
 	Uid          uint                     `json:"uid"`
 	Name         string                   `json:"name"`
@@ -13,7 +15,7 @@ type Unit struct {
 	Damage       []DamageImpact           `json:"damage"`
 	Modification []UnitModificationImpact `json:"modification"`
 	Inventory    UnitInventory            `json:"inventory"`
-	Slots        map[EquipmentSlot]uint   `json:"slots"`
+	Slots        UnitSlots                `json:"slots"`
 }
 
 func (u Unit) String() string {
