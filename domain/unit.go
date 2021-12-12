@@ -2,6 +2,7 @@ package domain
 
 import (
 	"fmt"
+	"jrpg-gang/util"
 )
 
 type Unit struct {
@@ -38,7 +39,7 @@ func (u *Unit) TotalAgility() float32 {
 			agility += ench.Attributes.Agility
 		}
 	}
-	return agility
+	return util.MaxFloat32(agility, 0)
 }
 
 func (u *Unit) TotalIntelligence() float32 {
@@ -51,7 +52,7 @@ func (u *Unit) TotalIntelligence() float32 {
 			intelligence += ench.Attributes.Intelligence
 		}
 	}
-	return intelligence
+	return util.MaxFloat32(intelligence, 0)
 }
 
 func (u *Unit) TotalLuck() float32 {
@@ -64,7 +65,7 @@ func (u *Unit) TotalLuck() float32 {
 			luck += ench.Attributes.Luck
 		}
 	}
-	return luck
+	return util.MaxFloat32(luck, 0)
 }
 
 func (u *Unit) TotalInitiative() float32 {
@@ -77,7 +78,7 @@ func (u *Unit) TotalInitiative() float32 {
 			initiative += ench.Attributes.Initiative
 		}
 	}
-	return initiative
+	return util.MaxFloat32(initiative, 0)
 }
 
 func (u *Unit) TotalModification() *UnitModification {
