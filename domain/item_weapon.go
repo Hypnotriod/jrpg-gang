@@ -4,20 +4,22 @@ import "fmt"
 
 type Weapon struct {
 	Equipment
-	Damage []DamageImpact `json:"damage"`
+	UseCost UnitBaseAttributes `json:"useCost"`
+	Damage  []DamageImpact     `json:"damage"`
 }
 
 func (w Weapon) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, wearout: %g, durability: %g, equipped: %t, slots: %d, damage: %v, requirements: {%v}, modification: {%v}",
+		"%s, description: %s, wearout: %g, durability: %g, equipped: %t, slots: %d, requirements: {%v}, use cost: {%v}, damage: %v, modification: {%v}",
 		w.Name,
 		w.Description,
 		w.Wearout,
 		w.Durability,
 		w.Equipped,
 		w.SlotsNumber,
-		w.Damage,
 		w.Requirements,
+		w.UseCost,
+		w.Damage,
 		w.Modification,
 	)
 }

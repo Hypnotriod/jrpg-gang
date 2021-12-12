@@ -11,10 +11,25 @@ type UnitBaseAttributes struct {
 	Mana    float32 `json:"mana"`
 }
 
+func (a UnitBaseAttributes) String() string {
+	return fmt.Sprintf(
+		"health: %g, stamina: %g, mana: %g",
+		a.Health,
+		a.Stamina,
+		a.Mana,
+	)
+}
+
 func (a *UnitBaseAttributes) Accumulate(attributes UnitBaseAttributes) {
 	a.Health += attributes.Health
 	a.Mana += attributes.Mana
 	a.Stamina += attributes.Stamina
+}
+
+func (a *UnitBaseAttributes) Reduce(attributes UnitBaseAttributes) {
+	a.Health -= attributes.Health
+	a.Mana -= attributes.Mana
+	a.Stamina -= attributes.Stamina
 }
 
 func (a *UnitBaseAttributes) NormalizeWithLimit(limit UnitBaseAttributes) {
@@ -27,13 +42,4 @@ func (a *UnitBaseAttributes) Normalize() {
 	a.Health = util.MaxFloat32(a.Health, 0)
 	a.Mana = util.MaxFloat32(a.Mana, 0)
 	a.Stamina = util.MaxFloat32(a.Stamina, 0)
-}
-
-func (a UnitBaseAttributes) String() string {
-	return fmt.Sprintf(
-		"health: %g, stamina: %g, mana: %g",
-		a.Health,
-		a.Stamina,
-		a.Mana,
-	)
 }

@@ -141,7 +141,10 @@ func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
 									"cutting": 30
 								}
 							}	
-						]
+						],
+						"useCost": {
+							"stamina": 30
+						}
 					}
 				]
 			}

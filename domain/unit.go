@@ -5,6 +5,7 @@ import (
 )
 
 type Unit struct {
+	Uid          uint                     `json:"uid"`
 	Name         string                   `json:"name"`
 	State        UnitState                `json:"state"`
 	Stats        UnitStats                `json:"stats"`
@@ -89,13 +90,13 @@ func (u *Unit) TotalModification() *UnitModification {
 			modification.Accumulate(ench)
 		}
 	}
-	modification.Recovery.Normalize()
 	return modification
 }
 
 func (u *Unit) CheckRequirements(requirements UnitAttributes) bool {
 	attributes := u.TotalModification().Attributes
 	attributes.Accumulate(u.Stats.Attributes)
+	attributes.Normalize()
 	return attributes.Strength >= requirements.Strength &&
 		attributes.Physique >= requirements.Physique &&
 		attributes.Agility >= requirements.Agility &&
@@ -103,4 +104,10 @@ func (u *Unit) CheckRequirements(requirements UnitAttributes) bool {
 		attributes.Intelligence >= requirements.Intelligence &&
 		attributes.Initiative >= requirements.Initiative &&
 		attributes.Luck >= requirements.Luck
+}
+
+func (u *Unit) CheckUseCost(useCost UnitBaseAttributes) bool {
+	return u.State.Health >= useCost.Health &&
+		u.State.Mana >= useCost.Mana &&
+		u.State.Stamina >= useCost.Stamina
 }

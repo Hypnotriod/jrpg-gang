@@ -8,6 +8,7 @@ func (u *Unit) ApplyDamage(damage Damage) Damage {
 	}
 	resistance := u.TotalModification().Resistance
 	resistance.Accumulate(u.Stats.Resistance)
+	resistance.Normalize()
 	damage.Reduce(resistance.Damage)
 	damage.Normalize()
 	if damage.HasEffect() {
@@ -19,6 +20,7 @@ func (u *Unit) ApplyDamage(damage Damage) Damage {
 func (u *Unit) AccumulateDamageImpact(damage DamageImpact) DamageImpact {
 	resistance := u.TotalModification().Resistance
 	resistance.Accumulate(u.Stats.Resistance)
+	resistance.Normalize()
 	damage.Reduce(resistance.Damage)
 	damage.Normalize()
 	if damage.HasEffect() {
@@ -42,11 +44,13 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 	temporalDamage := []DamageImpact{}
 	totalModification := u.TotalModification()
 	totalModification.Attributes.Accumulate(u.Stats.Attributes)
+	totalModification.Attributes.Normalize()
 	for _, imp := range damage {
 		if !util.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
 			break
 		}
 		imp.Enchance(totalModification.Attributes, totalModification.Damage)
+		imp.Normalize()
 		if util.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
 			imp.Damage.Multiply(CRITICAL_DAMAGE_FACTOR)
 			imp.Damage.IsCritical = true

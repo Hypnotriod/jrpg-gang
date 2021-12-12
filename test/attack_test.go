@@ -17,6 +17,8 @@ func TestAttackUnit(t *testing.T) {
 	actionResult := hero.UseInventoryItemOnTarget(northTroll, 4000)
 	fmt.Printf("%s attacks %s with: {%v}\n", hero.Name, northTroll.Name, actionResult)
 	fmt.Println()
+	fmt.Println(hero)
+	fmt.Println()
 	fmt.Println(northTroll)
 	for len(northTroll.Damage) > 0 {
 		fmt.Println()

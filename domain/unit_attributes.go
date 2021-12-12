@@ -2,6 +2,7 @@ package domain
 
 import (
 	"fmt"
+	"jrpg-gang/util"
 	"strings"
 )
 
@@ -49,4 +50,14 @@ func (a *UnitAttributes) Accumulate(attributes UnitAttributes) {
 	a.Intelligence += attributes.Intelligence
 	a.Initiative += attributes.Initiative
 	a.Luck += attributes.Luck
+}
+
+func (a *UnitAttributes) Normalize() {
+	a.Strength = util.MaxFloat32(a.Strength, 0)
+	a.Physique = util.MaxFloat32(a.Physique, 0)
+	a.Agility = util.MaxFloat32(a.Agility, 0)
+	a.Endurance = util.MaxFloat32(a.Endurance, 0)
+	a.Intelligence = util.MaxFloat32(a.Intelligence, 0)
+	a.Initiative = util.MaxFloat32(a.Initiative, 0)
+	a.Luck = util.MaxFloat32(a.Luck, 0)
 }

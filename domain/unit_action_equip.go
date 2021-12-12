@@ -5,7 +5,7 @@ func (u *Unit) Equip(uid uint) bool {
 	if item == nil ||
 		item.SlotsNumber > u.Slots[item.Slot] ||
 		item.IsBroken() ||
-		u.CheckRequirements(item.Requirements) {
+		!u.CheckRequirements(item.Requirements) {
 		return false
 	}
 	freeSlots := u.GetFreeSlotsNumber(item.Slot)
