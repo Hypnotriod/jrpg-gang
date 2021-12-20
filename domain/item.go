@@ -9,6 +9,7 @@ const (
 	ItemTypeWeapon     ItemType = "weapon"
 	ItemTypeMagic      ItemType = "magic"
 	ItemTypeDisposable ItemType = "disposable"
+	ItemTypeAmmunition ItemType = "ammunition"
 )
 
 type Item struct {

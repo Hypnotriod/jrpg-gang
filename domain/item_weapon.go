@@ -4,9 +4,10 @@ import "fmt"
 
 type Weapon struct {
 	Equipment
-	Range   AttackRange        `json:"range"`
-	UseCost UnitBaseAttributes `json:"useCost"`
-	Damage  []DamageImpact     `json:"damage"`
+	AmmunitionKind string             `json:"ammunitionKind,omitempty"`
+	Range          AttackRange        `json:"range"`
+	UseCost        UnitBaseAttributes `json:"useCost"`
+	Damage         []DamageImpact     `json:"damage"`
 }
 
 func (w Weapon) String() string {
@@ -24,4 +25,8 @@ func (w Weapon) String() string {
 		w.Damage,
 		w.Modification,
 	)
+}
+
+func (w Weapon) RequiresAmmunition() bool {
+	return len(w.AmmunitionKind) != 0
 }
