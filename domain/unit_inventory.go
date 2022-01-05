@@ -7,12 +7,13 @@ type UnitInventory struct {
 	Magic      []Magic      `json:"magic,omitempty"`
 	Armor      []Armor      `json:"armor,omitempty"`
 	Disposable []Disposable `json:"disposable,omitempty"`
+	Ammunition []Ammunition `json:"ammunition,omitempty"`
 }
 
 func (i UnitInventory) String() string {
 	return fmt.Sprintf(
-		"weapon: %v, armor: %v, disposable: %v",
-		i.Weapon, i.Armor, i.Disposable)
+		"weapon: %v, armor: %v, disposable: %v, ammunition: %v",
+		i.Weapon, i.Armor, i.Disposable, i.Ammunition)
 }
 
 func (i *UnitInventory) IncreaseArmorWearout(equipped bool) {
@@ -108,6 +109,12 @@ func (i *UnitInventory) Add(item interface{}) bool {
 	case *Disposable:
 		i.Disposable = append(i.Disposable, *v)
 		return true
+	case Ammunition:
+		i.Ammunition = append(i.Ammunition, v)
+		return true
+	case *Ammunition:
+		i.Ammunition = append(i.Ammunition, *v)
+		return true
 	}
 	return false
 }
@@ -131,6 +138,11 @@ func (i *UnitInventory) Find(uid uint) interface{} {
 	for n := range i.Disposable {
 		if i.Disposable[n].Uid == uid {
 			return &i.Disposable[n]
+		}
+	}
+	for n := range i.Ammunition {
+		if i.Ammunition[n].Uid == uid {
+			return &i.Ammunition[n]
 		}
 	}
 	return nil
@@ -183,11 +195,45 @@ func (i *UnitInventory) FindDisposable(uid uint) *Disposable {
 }
 
 func (i *UnitInventory) FilterDisposable() {
-	var filteredDisposable []Disposable
+	var filtered []Disposable
 	for _, disp := range i.Disposable {
 		if disp.Quantity != 0 {
-			filteredDisposable = append(filteredDisposable, disp)
+			filtered = append(filtered, disp)
 		}
 	}
-	i.Disposable = filteredDisposable
+	i.Disposable = filtered
+}
+
+func (i *UnitInventory) FindAmmunition(uid uint) *Ammunition {
+	for n := range i.Ammunition {
+		if i.Ammunition[n].Uid == uid {
+			return &i.Ammunition[n]
+		}
+	}
+	return nil
+}
+
+func (i *UnitInventory) FindSelectedAmmunition() *Ammunition {
+	for n := range i.Ammunition {
+		if i.Ammunition[n].Selected {
+			return &i.Ammunition[n]
+		}
+	}
+	return nil
+}
+
+func (i *UnitInventory) SelectAmmunition(uid uint) {
+	for n := range i.Ammunition {
+		i.Ammunition[n].Selected = i.Ammunition[n].Uid == uid
+	}
+}
+
+func (i *UnitInventory) FilterAmmunition() {
+	var filtered []Ammunition
+	for _, amm := range i.Ammunition {
+		if amm.Quantity != 0 {
+			filtered = append(filtered, amm)
+		}
+	}
+	i.Ammunition = filtered
 }

@@ -38,8 +38,17 @@ func (u *Unit) useWeaponOnTarget(action *UseInventoryItemActionResult, target *U
 	if !weapon.Equipped || !u.CheckUseCost(weapon.UseCost) {
 		return
 	}
+	var damage []DamageImpact = weapon.Damage
+	if weapon.RequiresAmmunition() {
+		ammunition := u.Inventory.FindSelectedAmmunition()
+		if ammunition == nil || ammunition.Kind != weapon.AmmunitionKind || ammunition.Quantity == 0 {
+			return
+		}
+		ammunition.Quantity--
+		damage = ammunition.EnchanceDamageImpact(damage)
+	}
 	u.State.Reduce(weapon.UseCost)
-	instDmg, tmpImp := u.Attack(target, weapon.Damage)
+	instDmg, tmpImp := u.Attack(target, damage)
 	if len(instDmg) != 0 || len(tmpImp) != 0 {
 		weapon.IncreaseWearout()
 	}
