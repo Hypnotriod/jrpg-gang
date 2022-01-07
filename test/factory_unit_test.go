@@ -119,7 +119,6 @@ func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
 						"durability": 700,
 						"slot": "weapon",
 						"slotsNumber": 1,
-						"equipped": true,
 						"requirements": {
 							"strength": 5
 						},
@@ -145,6 +144,45 @@ func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
 						"useCost": {
 							"stamina": 30
 						}
+					},
+					{
+						"uid": 4001,
+						"type": "weapon",
+						"name": "Bow",
+						"description": "Base two hand bow",
+						"ammunitionKind": "arrow",
+						"durability": 700,
+						"slot": "weapon",
+						"slotsNumber": 2,
+						"requirements": {
+							"strength": 5
+						},
+						"damage": [
+							{
+								"chance": 40,
+								"stabbing": 30
+							}
+						]
+					}
+				],
+				"ammunition": [
+					{
+						"uid": 5000,
+						"name": "Arrow",
+						"type": "ammunition",
+						"description": "Base arrow",
+						"kind": "arrow",
+						"quantity": 5,
+						"damage": [
+							{
+								"stabbing": 10
+							},
+							{
+								"duration": 3,
+								"chance": 15,
+								"bleeding": 3
+							}
+						]
 					}
 				]
 			}
