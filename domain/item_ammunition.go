@@ -4,10 +4,10 @@ import "fmt"
 
 type Ammunition struct {
 	Item
-	Selected bool   `json:"selected"`
-	Kind     string `json:"kind"`
-	Quantity uint   `json:"quantity"`
-	Damage   Damage `json:"damage,omitempty"`
+	Selected bool           `json:"selected"`
+	Kind     string         `json:"kind"`
+	Quantity uint           `json:"quantity"`
+	Damage   []DamageImpact `json:"damage"`
 }
 
 func (a Ammunition) String() string {
@@ -24,9 +24,22 @@ func (a Ammunition) String() string {
 
 func (a *Ammunition) EnchanceDamageImpact(damage []DamageImpact) []DamageImpact {
 	result := []DamageImpact{}
+	instantDamage := DamageImpact{}
+	temporalDamage := []DamageImpact{}
+	for _, imp := range a.Damage {
+		if imp.Duration == 0 {
+			instantDamage.Accumulate(imp.Damage)
+			instantDamage.Chance += imp.Chance
+		} else {
+			temporalDamage = append(temporalDamage, imp)
+		}
+	}
 	for _, imp := range damage {
-		imp.Damage.Accumulate(a.Damage)
+		if imp.Duration == 0 {
+			imp.Damage.Accumulate(instantDamage.Damage)
+			imp.Chance += instantDamage.Chance
+		}
 		result = append(result, imp)
 	}
-	return result
+	return append(result, temporalDamage...)
 }
