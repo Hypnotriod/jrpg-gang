@@ -7,7 +7,7 @@ type Ammunition struct {
 	Selected bool           `json:"selected"`
 	Kind     string         `json:"kind"`
 	Quantity uint           `json:"quantity"`
-	Damage   []DamageImpact `json:"damage"`
+	Damage   []DamageImpact `json:"damage,omitempty"`
 }
 
 func (a Ammunition) String() string {
