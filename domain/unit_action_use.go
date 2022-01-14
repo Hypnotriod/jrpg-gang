@@ -2,6 +2,7 @@ package domain
 
 import (
 	"fmt"
+	"jrpg-gang/util"
 )
 
 type UseInventoryItemActionResult struct {
@@ -13,8 +14,12 @@ type UseInventoryItemActionResult struct {
 }
 
 func (r UseInventoryItemActionResult) String() string {
-	return fmt.Sprintf("instant damage: %v, temporal damage: %v, instant recovery: %v, temporal modification: %v, accomplished: %t",
-		r.InstantDamage, r.TemporalDamage, r.InstantRecovery, r.TemporalModification, r.Accomplished)
+	return fmt.Sprintf("instant damage: [%s], temporal damage: [%s], instant recovery: [%s], temporal modification: [%s], accomplished: %t",
+		util.AsCommaSeparatedSlice(r.InstantDamage),
+		util.AsCommaSeparatedSlice(r.TemporalDamage),
+		util.AsCommaSeparatedSlice(r.InstantRecovery),
+		util.AsCommaSeparatedSlice(r.TemporalModification),
+		r.Accomplished)
 }
 
 func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint) UseInventoryItemActionResult {

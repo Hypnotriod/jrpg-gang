@@ -1,6 +1,9 @@
 package domain
 
-import "fmt"
+import (
+	"fmt"
+	"jrpg-gang/util"
+)
 
 type Disposable struct {
 	Item
@@ -11,11 +14,11 @@ type Disposable struct {
 
 func (d Disposable) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, quantity: %d, modification: %v, damage: %v",
+		"%s, description: %s, quantity: %d, modification: [%s], damage: [%s]",
 		d.Name,
 		d.Description,
 		d.Quantity,
-		d.Modification,
-		d.Damage,
+		util.AsCommaSeparatedSlice(d.Modification),
+		util.AsCommaSeparatedSlice(d.Damage),
 	)
 }

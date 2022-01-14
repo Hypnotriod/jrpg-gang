@@ -1,6 +1,9 @@
 package domain
 
-import "fmt"
+import (
+	"fmt"
+	"jrpg-gang/util"
+)
 
 type Magic struct {
 	Item
@@ -13,13 +16,13 @@ type Magic struct {
 
 func (m Magic) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, requirements: {%v}, use cost: {%v}, range: {%v}, damage: %v, modification: {%v}",
+		"%s, description: %s, requirements: {%v}, use cost: {%v}, range: {%v}, damage: [%s], modification: [%s]",
 		m.Name,
 		m.Description,
 		m.Requirements,
 		m.UseCost,
 		m.Range,
-		m.Damage,
-		m.Modification,
+		util.AsCommaSeparatedSlice(m.Damage),
+		util.AsCommaSeparatedSlice(m.Modification),
 	)
 }

@@ -7,9 +7,6 @@ import (
 )
 
 func AsCommaSeparatedSlice(slice interface{}) string {
-	if reflect.TypeOf(slice).Kind() != reflect.Slice {
-		return ""
-	}
 	values := reflect.ValueOf(slice)
 	var sb strings.Builder
 	for i := 0; i < values.Len(); i++ {
