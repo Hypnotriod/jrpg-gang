@@ -193,6 +193,116 @@ func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
 	return unit.(*domain.Unit)
 }
 
+func newMagicianHeroWithMagic(t *testing.T) *domain.Unit {
+	unit, ok := util.JsonToObject(
+		&domain.Unit{},
+		`{
+			"name": "Sedrick",
+			"state": {
+				"health": 50,
+				"stamina": 30,
+				"mana": 100
+			},
+			"stats": {
+				"progress": {
+					"level": 2,
+					"experience": 35000
+				},
+				"baseAttributes": {
+					"health": 100,
+					"stamina": 30,
+					"mana": 100
+				},
+				"attributes": {
+					"strength": 5,
+					"physique": 5,
+					"agility": 5,
+					"endurance": 5,
+					"intelligence": 35,
+					"luck": 5
+				},
+				"resistance": {
+					"stabbing": 5,
+					"cutting": 5,
+					"crushing": 5,
+					"fire": 5,
+					"cold": 5,
+					"lighting": 5,
+					"poison": 5,
+					"exhaustion": 5,
+					"manaDrain": 5,
+					"fear": 5,
+					"curse": 5
+				}
+			},
+			"slots": {
+				"head": 1,
+				"neck": 1,
+				"body": 1,
+				"hand": 2,
+				"leg": 2,
+				"weapon": 2
+			},
+			"inventory": {
+				"magic": [
+					{
+						"uid": 3000,
+						"type": "magic",
+						"name": "Fire ball",
+						"description": "Base fire ball",
+						"requirements": {
+							"intelligence": 15
+						},
+						"damage": [
+							{
+								"chance": 40,
+								"fire": 30
+							},
+							{
+								"chance": 50,
+								"duration": 3,
+								"fire": 5
+							}
+						],
+						"useCost": {
+							"mana": 30
+						}
+					},
+					{
+						"uid": 3001,
+						"type": "magic",
+						"name": "Small healing",
+						"description": "Base small healing",
+						"requirements": {
+							"intelligence": 15
+						},
+						"modification": [
+							{
+								"chance": 50,
+								"recovery": {
+									"health": 30
+								}
+							},
+							{
+								"duration": 3,
+								"recovery": {
+									"health": 3
+								}
+							}
+						],
+						"useCost": {
+							"mana": 5
+						}
+					}
+				]
+			}
+		}`)
+	if !ok {
+		t.Fatal()
+	}
+	return unit.(*domain.Unit)
+}
+
 func newNorthTroll(t *testing.T) *domain.Unit {
 	unit, ok := util.JsonToObject(
 		&domain.Unit{},
