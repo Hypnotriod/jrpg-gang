@@ -14,9 +14,9 @@ type DamageImpact struct {
 
 func (d DamageImpact) String() string {
 	if d.Chance != 0 {
-		return fmt.Sprintf("{%s, chance: %g, duration: %d}", d.Damage.String(), d.Impact.Chance, d.Impact.Duration)
+		return fmt.Sprintf("%s, chance: %g, duration: %d", d.Damage.String(), d.Impact.Chance, d.Impact.Duration)
 	} else {
-		return fmt.Sprintf("{%s, duration: %d}", d.Damage.String(), d.Impact.Duration)
+		return fmt.Sprintf("%s, duration: %d", d.Damage.String(), d.Impact.Duration)
 	}
 }
 

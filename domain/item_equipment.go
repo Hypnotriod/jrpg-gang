@@ -1,6 +1,9 @@
 package domain
 
-import "fmt"
+import (
+	"fmt"
+	"jrpg-gang/util"
+)
 
 type EquipmentSlot string
 
@@ -26,8 +29,17 @@ type Equipment struct {
 
 func (e Equipment) String() string {
 	return fmt.Sprintf(
-		"%s, type: %s, description: %s, slot: %s, slots: %d, equipped: %t, wearout: %g, durability: %g, requirements: {%v}, modification: %v",
-		e.Name, e.Type, e.Description, e.Slot, e.SlotsNumber, e.Equipped, e.Wearout, e.Durability, e.Requirements, e.Modification)
+		"%s, type: %s, description: %s, slot: %s, slots: %d, equipped: %t, wearout: %g, durability: %g, requirements: {%v}, modification: [%s]",
+		e.Name,
+		e.Type,
+		e.Description,
+		e.Slot,
+		e.SlotsNumber,
+		e.Equipped,
+		e.Wearout,
+		e.Durability,
+		e.Requirements,
+		util.AsCommaSeparatedSlice(e.Modification))
 }
 
 func (e *Equipment) IncreaseWearout() {

@@ -1,6 +1,9 @@
 package domain
 
-import "fmt"
+import (
+	"fmt"
+	"jrpg-gang/util"
+)
 
 type Weapon struct {
 	Equipment
@@ -12,7 +15,7 @@ type Weapon struct {
 
 func (w Weapon) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, wearout: %g, durability: %g, equipped: %t, slots: %d, requirements: {%v}, use cost: {%v}, range: {%v}, damage: %v, modification: {%v}",
+		"%s, description: %s, wearout: %g, durability: %g, equipped: %t, slots: %d, requirements: {%v}, use cost: {%v}, range: {%v}, damage: [%s], modification: [%s]",
 		w.Name,
 		w.Description,
 		w.Wearout,
@@ -22,8 +25,8 @@ func (w Weapon) String() string {
 		w.Requirements,
 		w.UseCost,
 		w.Range,
-		w.Damage,
-		w.Modification,
+		util.AsCommaSeparatedSlice(w.Damage),
+		util.AsCommaSeparatedSlice(w.Modification),
 	)
 }
 

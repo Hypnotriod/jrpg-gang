@@ -1,6 +1,9 @@
 package domain
 
-import "fmt"
+import (
+	"fmt"
+	"jrpg-gang/util"
+)
 
 type UnitInventory struct {
 	Weapon     []Weapon     `json:"weapon,omitempty"`
@@ -12,8 +15,12 @@ type UnitInventory struct {
 
 func (i UnitInventory) String() string {
 	return fmt.Sprintf(
-		"weapon: %v, armor: %v, disposable: %v, ammunition: %v",
-		i.Weapon, i.Armor, i.Disposable, i.Ammunition)
+		"weapon: [%s], magic: [%s], armor: [%s], disposable: [%s], ammunition: [%s]",
+		util.AsCommaSeparatedSlice(i.Weapon),
+		util.AsCommaSeparatedSlice(i.Magic),
+		util.AsCommaSeparatedSlice(i.Armor),
+		util.AsCommaSeparatedSlice(i.Disposable),
+		util.AsCommaSeparatedSlice(i.Ammunition))
 }
 
 func (i *UnitInventory) IncreaseArmorWearout(equipped bool) {

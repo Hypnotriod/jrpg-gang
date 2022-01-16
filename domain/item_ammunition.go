@@ -1,6 +1,9 @@
 package domain
 
-import "fmt"
+import (
+	"fmt"
+	"jrpg-gang/util"
+)
 
 type Ammunition struct {
 	Item
@@ -12,13 +15,13 @@ type Ammunition struct {
 
 func (a Ammunition) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, kind: %s, quantity: %d, selected: %t, damage: %v",
+		"%s, description: %s, kind: %s, quantity: %d, selected: %t, damage: [%s]",
 		a.Name,
 		a.Description,
 		a.Kind,
 		a.Quantity,
 		a.Selected,
-		a.Damage,
+		util.AsCommaSeparatedSlice(a.Damage),
 	)
 }
 

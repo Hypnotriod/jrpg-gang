@@ -20,12 +20,12 @@ type Unit struct {
 
 func (u Unit) String() string {
 	return fmt.Sprintf(
-		"%s, state: {%v}, stats: {%v}, damage: %v, modification: %v, inventory: {%v}, slots: %v",
+		"%s, state: {%v}, stats: {%v}, damage: [%s], modification: [%s], inventory: {%v}, slots: %v",
 		u.Name,
 		u.State,
 		u.Stats,
-		u.Damage,
-		u.Modification,
+		util.AsCommaSeparatedSlice(u.Damage),
+		util.AsCommaSeparatedSlice(u.Modification),
 		u.Inventory,
 		u.Slots,
 	)
