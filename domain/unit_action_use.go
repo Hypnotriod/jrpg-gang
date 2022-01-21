@@ -2,46 +2,39 @@ package domain
 
 func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint) UseInventoryItemActionResult {
 	action := UseInventoryItemActionResult{}
-	action.ResultType = Accomplished
 	item := u.Inventory.Find(uid)
 	if item == nil {
-		action.ResultType = NotFound
-		return action
+		return *action.WithResultType(NotFound)
 	}
 	switch v := item.(type) {
 	case *Weapon:
-		u.useWeaponOnTarget(&action, target, v)
+		return *u.useWeaponOnTarget(&action, target, v)
 	case *Disposable:
-		u.useDisposableOnTarget(&action, target, v)
+		return *u.useDisposableOnTarget(&action, target, v)
 	case *Magic:
-		u.useMagicOnTarget(&action, target, v)
+		return *u.useMagicOnTarget(&action, target, v)
 	}
-	return action
+	return *action.WithResultType(NotAccomplished)
 }
 
-func (u *Unit) useWeaponOnTarget(action *UseInventoryItemActionResult, target *Unit, weapon *Weapon) {
+func (u *Unit) useWeaponOnTarget(action *UseInventoryItemActionResult, target *Unit, weapon *Weapon) *UseInventoryItemActionResult {
 	if !weapon.Equipped {
-		action.ResultType = IsNotEquipped
-		return
+		return action.WithResultType(IsNotEquipped)
 	}
 	if !u.CheckUseCost(weapon.UseCost) {
-		action.ResultType = CantUse
-		return
+		return action.WithResultType(CantUse)
 	}
 	var damage []DamageImpact = weapon.Damage
 	if weapon.RequiresAmmunition() {
 		ammunition := u.Inventory.FindSelectedAmmunition()
 		if ammunition == nil {
-			action.ResultType = HasNoAmmunition
-			return
+			return action.WithResultType(HasNoAmmunition)
 		}
 		if ammunition.Quantity == 0 {
-			action.ResultType = ZeroQuantity
-			return
+			return action.WithResultType(ZeroQuantity)
 		}
 		if ammunition.Kind != weapon.AmmunitionKind {
-			action.ResultType = IsNotCompatible
-			return
+			return action.WithResultType(IsNotCompatible)
 		}
 		ammunition.Quantity--
 		damage = ammunition.EnchanceDamageImpact(damage)
@@ -53,12 +46,12 @@ func (u *Unit) useWeaponOnTarget(action *UseInventoryItemActionResult, target *U
 	}
 	action.InstantDamage = append(action.InstantDamage, instDmg...)
 	action.TemporalDamage = append(action.TemporalDamage, tmpImp...)
+	return action.WithResultType(Accomplished)
 }
 
-func (u *Unit) useMagicOnTarget(action *UseInventoryItemActionResult, target *Unit, magic *Magic) {
+func (u *Unit) useMagicOnTarget(action *UseInventoryItemActionResult, target *Unit, magic *Magic) *UseInventoryItemActionResult {
 	if !u.CheckRequirements(magic.Requirements) || !u.CheckUseCost(magic.UseCost) {
-		action.ResultType = CantUse
-		return
+		return action.WithResultType(CantUse)
 	}
 	u.State.Reduce(magic.UseCost)
 	if len(magic.Damage) != 0 {
@@ -71,12 +64,12 @@ func (u *Unit) useMagicOnTarget(action *UseInventoryItemActionResult, target *Un
 		action.InstantRecovery = append(action.InstantRecovery, instRec...)
 		action.TemporalModification = append(action.TemporalModification, tmpEnch...)
 	}
+	return action.WithResultType(Accomplished)
 }
 
-func (u *Unit) useDisposableOnTarget(action *UseInventoryItemActionResult, target *Unit, disposable *Disposable) {
+func (u *Unit) useDisposableOnTarget(action *UseInventoryItemActionResult, target *Unit, disposable *Disposable) *UseInventoryItemActionResult {
 	if disposable.Quantity == 0 {
-		action.ResultType = ZeroQuantity
-		return
+		return action.WithResultType(ZeroQuantity)
 	}
 	disposable.Quantity--
 	if len(disposable.Damage) != 0 {
@@ -89,4 +82,5 @@ func (u *Unit) useDisposableOnTarget(action *UseInventoryItemActionResult, targe
 		action.InstantRecovery = append(action.InstantRecovery, instRec...)
 		action.TemporalModification = append(action.TemporalModification, tmpEnch...)
 	}
+	return action.WithResultType(Accomplished)
 }

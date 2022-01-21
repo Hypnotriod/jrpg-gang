@@ -9,6 +9,7 @@ type ActionResultType uint
 
 const (
 	Accomplished    ActionResultType = iota
+	NotAccomplished ActionResultType = iota
 	NotFound        ActionResultType = iota
 	IsNotEquipped   ActionResultType = iota
 	CantUse         ActionResultType = iota
@@ -22,6 +23,8 @@ func (r ActionResultType) String() string {
 	switch r {
 	case Accomplished:
 		result = "accomplished"
+	case NotAccomplished:
+		result = "not accomplished"
 	case NotFound:
 		result = "not found"
 	case IsNotEquipped:
@@ -53,4 +56,9 @@ func (r UseInventoryItemActionResult) String() string {
 		util.AsCommaSeparatedSlice(r.InstantRecovery),
 		util.AsCommaSeparatedSlice(r.TemporalModification),
 		r.ResultType)
+}
+
+func (r *UseInventoryItemActionResult) WithResultType(resultType ActionResultType) *UseInventoryItemActionResult {
+	r.ResultType = resultType
+	return r
 }
