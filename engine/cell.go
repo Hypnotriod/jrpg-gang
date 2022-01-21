@@ -5,10 +5,11 @@ import (
 )
 
 type CellConfiguration struct {
-	FractionId uint `json:"fraction_id"`
+	Position       Position `json:"position"`
+	UnitFractionId uint     `json:"unitFractionId"`
 }
 
 type Cell struct {
-	Unit   *domain.Unit       `json:"unit,omitempty"`
-	Config *CellConfiguration `json:"config,omitempty"`
+	CellConfiguration
+	Unit *domain.Unit `json:"unit,omitempty"`
 }
