@@ -1,36 +1,45 @@
 package engine
 
-import "jrpg-gang/domain"
-
 type Battlefield struct {
 	Cells [][]Cell `json:"cells"`
 }
 
 func NewBattlefield(size Size) *Battlefield {
-	bf := &Battlefield{}
+	b := &Battlefield{}
 	for x := uint(0); x < size.Width; x++ {
-		bf.Cells[x] = make([]Cell, size.Height)
+		b.Cells[x] = make([]Cell, size.Height)
 		for y := uint(0); y < size.Height; y++ {
-			bf.Cells[x][y].Position.X = int(x)
-			bf.Cells[x][y].Position.Y = int(y)
+			b.Cells[x][y].Position.X = int(x)
+			b.Cells[x][y].Position.Y = int(y)
 		}
 	}
-	return bf
+	return b
 }
 
-func (bf *Battlefield) PlaceUnitOnCell(config CellConfiguration, unit *domain.Unit) {
-	cell := bf.GetCell(config.Position)
+func (b *Battlefield) PlaceUnitOnCell(config CellConfiguration, unit *GameUnit) {
+	cell := b.GetCell(config.Position)
 	cell.Unit = unit
 	cell.CellConfiguration = config
 }
 
-func (bf *Battlefield) MoveUnit(fromCell *Cell, toCell *Cell) {
+func (b *Battlefield) MoveUnit(fromCell *Cell, toCell *Cell) {
 	toCell.CellConfiguration = fromCell.CellConfiguration
 	toCell.Unit = fromCell.Unit
 	fromCell.CellConfiguration = CellConfiguration{}
 	fromCell.Unit = nil
 }
 
-func (bf *Battlefield) GetCell(position Position) *Cell {
-	return &bf.Cells[position.X][position.Y]
+func (b *Battlefield) FindUnit(uid uint) *GameUnit {
+	for _, cells := range b.Cells {
+		for _, cell := range cells {
+			if cell.Unit != nil && cell.Unit.Uid == uid {
+				return cell.Unit
+			}
+		}
+	}
+	return nil
+}
+
+func (b *Battlefield) GetCell(position Position) *Cell {
+	return &b.Cells[position.X][position.Y]
 }

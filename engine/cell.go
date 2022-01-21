@@ -1,15 +1,10 @@
 package engine
 
-import (
-	"jrpg-gang/domain"
-)
-
 type CellConfiguration struct {
-	Position       Position `json:"position"`
-	UnitFractionId uint     `json:"unitFractionId"`
+	Position Position `json:"position"`
 }
 
 type Cell struct {
 	CellConfiguration
-	Unit *domain.Unit `json:"unit,omitempty"`
+	Unit *GameUnit `json:"unit,omitempty"`
 }
