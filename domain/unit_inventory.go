@@ -220,18 +220,24 @@ func (i *UnitInventory) FindAmmunition(uid uint) *Ammunition {
 	return nil
 }
 
-func (i *UnitInventory) FindSelectedAmmunition() *Ammunition {
+func (i *UnitInventory) FindEquippedAmmunition() *Ammunition {
 	for n := range i.Ammunition {
-		if i.Ammunition[n].Selected {
+		if i.Ammunition[n].Equipped {
 			return &i.Ammunition[n]
 		}
 	}
 	return nil
 }
 
-func (i *UnitInventory) SelectAmmunition(uid uint) {
+func (i *UnitInventory) EqipAmmunition(uid uint) {
 	for n := range i.Ammunition {
-		i.Ammunition[n].Selected = i.Ammunition[n].Uid == uid
+		i.Ammunition[n].Equipped = i.Ammunition[n].Uid == uid
+	}
+}
+
+func (i *UnitInventory) UnequipAmmunition() {
+	for n := range i.Ammunition {
+		i.Ammunition[n].Equipped = false
 	}
 }
 

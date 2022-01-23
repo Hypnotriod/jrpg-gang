@@ -7,7 +7,7 @@ import (
 
 type Ammunition struct {
 	Item
-	Selected bool           `json:"selected"`
+	Equipped bool           `json:"equipped"`
 	Kind     string         `json:"kind"`
 	Quantity uint           `json:"quantity"`
 	Damage   []DamageImpact `json:"damage,omitempty"`
@@ -15,12 +15,12 @@ type Ammunition struct {
 
 func (a Ammunition) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, kind: %s, quantity: %d, selected: %t, damage: [%s]",
+		"%s, description: %s, kind: %s, quantity: %d, equipped: %t, damage: [%s]",
 		a.Name,
 		a.Description,
 		a.Kind,
 		a.Quantity,
-		a.Selected,
+		a.Equipped,
 		util.AsCommaSeparatedSlice(a.Damage),
 	)
 }

@@ -40,7 +40,7 @@ func TestAttackUnitWithBow(t *testing.T) {
 	fmt.Println(northTroll)
 	fmt.Println()
 	hero.Equip(4001)
-	hero.SelectAmmunition(5000)
+	hero.Equip(5000)
 	actionResult := hero.UseInventoryItemOnTarget(northTroll, 4001)
 	fmt.Printf("%s attacks %s with: {%v}\n", hero.Name, northTroll.Name, actionResult)
 	fmt.Println()

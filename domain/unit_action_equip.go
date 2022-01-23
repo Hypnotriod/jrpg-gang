@@ -1,30 +1,46 @@
 package domain
 
-func (u *Unit) Equip(uid uint) bool {
-	item := u.Inventory.FindEquipment(uid)
-	if item == nil ||
-		item.SlotsNumber > u.Slots[item.Slot] ||
-		item.IsBroken() ||
-		!u.CheckRequirements(item.Requirements) {
-		return false
+func (u *Unit) Equip(uid uint) ActionResult {
+	action := ActionResult{}
+	if u.Inventory.FindAmmunition(uid) != nil {
+		u.Inventory.EqipAmmunition(uid)
+		return *action.WithResultType(Accomplished)
 	}
-	freeSlots := u.GetFreeSlotsNumber(item.Slot)
-	if freeSlots < item.SlotsNumber {
-		u.UnequipBySlot(item.Slot, item.SlotsNumber-freeSlots)
+	equipment := u.Inventory.FindEquipment(uid)
+	if equipment == nil {
+		return *action.WithResultType(NotFound)
 	}
-	item.Equipped = true
-	return true
+	if equipment.SlotsNumber > u.Slots[equipment.Slot] {
+		return *action.WithResultType(NotEnoughSlots)
+	}
+	if equipment.IsBroken() {
+		return *action.WithResultType(IsBroken)
+	}
+	if !u.CheckRequirements(equipment.Requirements) {
+		return *action.WithResultType(CantUse)
+	}
+	freeSlots := u.GetFreeSlotsNumber(equipment.Slot)
+	if freeSlots < equipment.SlotsNumber {
+		u.UnequipBySlot(equipment.Slot, equipment.SlotsNumber-freeSlots)
+	}
+	equipment.Equipped = true
+	return *action.WithResultType(Accomplished)
 }
 
-func (u *Unit) Unequip(uid uint) bool {
+func (u *Unit) Unequip(uid uint) ActionResult {
+	action := ActionResult{}
+	if u.Inventory.FindAmmunition(uid) != nil {
+		u.Inventory.UnequipAmmunition()
+		return *action.WithResultType(Accomplished)
+	}
 	equipment := u.Inventory.GetEquipment(true)
 	for i := range equipment {
 		if equipment[i].Uid == uid {
 			equipment[i].Equipped = false
-			return true
+			return *action.WithResultType(Accomplished)
 		}
 	}
-	return false
+	return *action.WithResultType(NotFound)
 }
 
 func (u *Unit) UnequipBySlot(slot EquipmentSlot, slotsToRemove uint) {

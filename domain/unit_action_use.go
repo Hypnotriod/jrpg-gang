@@ -1,7 +1,7 @@
 package domain
 
-func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint) UseInventoryItemActionResult {
-	action := UseInventoryItemActionResult{}
+func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint) ActionResult {
+	action := ActionResult{}
 	item := u.Inventory.Find(uid)
 	if item == nil {
 		return *action.WithResultType(NotFound)
@@ -17,24 +17,24 @@ func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint) UseInventoryItem
 	return *action.WithResultType(NotAccomplished)
 }
 
-func (u *Unit) useWeaponOnTarget(action *UseInventoryItemActionResult, target *Unit, weapon *Weapon) *UseInventoryItemActionResult {
+func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Weapon) *ActionResult {
 	if !weapon.Equipped {
-		return action.WithResultType(IsNotEquipped)
+		return action.WithResultType(NotEquipped)
 	}
 	if !u.CheckUseCost(weapon.UseCost) {
 		return action.WithResultType(CantUse)
 	}
 	var damage []DamageImpact = weapon.Damage
 	if weapon.RequiresAmmunition() {
-		ammunition := u.Inventory.FindSelectedAmmunition()
+		ammunition := u.Inventory.FindEquippedAmmunition()
 		if ammunition == nil {
-			return action.WithResultType(HasNoAmmunition)
+			return action.WithResultType(NoAmmunition)
 		}
 		if ammunition.Quantity == 0 {
 			return action.WithResultType(ZeroQuantity)
 		}
 		if ammunition.Kind != weapon.AmmunitionKind {
-			return action.WithResultType(IsNotCompatible)
+			return action.WithResultType(NotCompatible)
 		}
 		ammunition.Quantity--
 		damage = ammunition.EnchanceDamageImpact(damage)
@@ -49,7 +49,7 @@ func (u *Unit) useWeaponOnTarget(action *UseInventoryItemActionResult, target *U
 	return action.WithResultType(Accomplished)
 }
 
-func (u *Unit) useMagicOnTarget(action *UseInventoryItemActionResult, target *Unit, magic *Magic) *UseInventoryItemActionResult {
+func (u *Unit) useMagicOnTarget(action *ActionResult, target *Unit, magic *Magic) *ActionResult {
 	if !u.CheckRequirements(magic.Requirements) || !u.CheckUseCost(magic.UseCost) {
 		return action.WithResultType(CantUse)
 	}
@@ -67,7 +67,7 @@ func (u *Unit) useMagicOnTarget(action *UseInventoryItemActionResult, target *Un
 	return action.WithResultType(Accomplished)
 }
 
-func (u *Unit) useDisposableOnTarget(action *UseInventoryItemActionResult, target *Unit, disposable *Disposable) *UseInventoryItemActionResult {
+func (u *Unit) useDisposableOnTarget(action *ActionResult, target *Unit, disposable *Disposable) *ActionResult {
 	if disposable.Quantity == 0 {
 		return action.WithResultType(ZeroQuantity)
 	}
