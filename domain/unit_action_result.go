@@ -8,16 +8,18 @@ import (
 type ActionResultType string
 
 const (
-	Accomplished    ActionResultType = "accomplished"
-	NotAccomplished ActionResultType = "notAccomplished"
-	NotFound        ActionResultType = "notFound"
-	NotEquipped     ActionResultType = "notEquipped"
-	CantUse         ActionResultType = "cantUse"
-	NoAmmunition    ActionResultType = "noAmmunition"
-	NotCompatible   ActionResultType = "notCompatible"
-	ZeroQuantity    ActionResultType = "zeroQuantity"
-	NotEnoughSlots  ActionResultType = "notEnoughSlots"
-	IsBroken        ActionResultType = "isBroken"
+	ResultAccomplished    ActionResultType = "accomplished"
+	ResultNotAccomplished ActionResultType = "notAccomplished"
+	ResultNotFound        ActionResultType = "notFound"
+	ResultNotEmpty        ActionResultType = "notEmpty"
+	ResultNotEquipped     ActionResultType = "notEquipped"
+	ResultCantUse         ActionResultType = "cantUse"
+	ResultOutOfBounds     ActionResultType = "outOfBounds"
+	ResultNoAmmunition    ActionResultType = "noAmmunition"
+	ResultNotCompatible   ActionResultType = "notCompatible"
+	ResultZeroQuantity    ActionResultType = "zeroQuantity"
+	ResultNotEnoughSlots  ActionResultType = "notEnoughSlots"
+	ResultIsBroken        ActionResultType = "isBroken"
 )
 
 type ActionResult struct {
@@ -35,6 +37,11 @@ func (r ActionResult) String() string {
 		util.AsCommaSeparatedSlice(r.InstantRecovery),
 		util.AsCommaSeparatedSlice(r.TemporalModification),
 		r.ResultType)
+}
+
+func NewActionResult(resultType ActionResultType) *ActionResult {
+	action := &ActionResult{}
+	return action.WithResultType(resultType)
 }
 
 func (r *ActionResult) WithResultType(resultType ActionResultType) *ActionResult {
