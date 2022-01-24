@@ -24,7 +24,7 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 	if !u.CheckUseCost(weapon.UseCost) {
 		return action.WithResultType(ResultCantUse)
 	}
-	if !u.Position.CheckActionRange(target.Position, weapon.Range) {
+	if !weapon.Range.Check(u.Position, target.Position) {
 		return action.WithResultType(ResultNotReachable)
 	}
 	var damage []DamageImpact = weapon.Damage
@@ -56,7 +56,7 @@ func (u *Unit) useMagicOnTarget(action *ActionResult, target *Unit, magic *Magic
 	if !u.CheckRequirements(magic.Requirements) || !u.CheckUseCost(magic.UseCost) {
 		return action.WithResultType(ResultCantUse)
 	}
-	if !u.Position.CheckActionRange(target.Position, magic.Range) {
+	if !magic.Range.Check(u.Position, target.Position) {
 		return action.WithResultType(ResultNotReachable)
 	}
 	u.State.Reduce(magic.UseCost)

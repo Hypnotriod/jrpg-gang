@@ -2,7 +2,6 @@ package domain
 
 import (
 	"fmt"
-	"jrpg-gang/util"
 )
 
 type Position struct {
@@ -16,10 +15,4 @@ func (p Position) String() string {
 
 func (p *Position) Equals(position Position) bool {
 	return p.X == position.X && p.Y == position.Y
-}
-
-func (p *Position) CheckActionRange(position Position, actionRange ActionRange) bool {
-	minimum := util.AbsInt(position.X-p.X) >= actionRange.MinimumX && util.AbsInt(position.Y-p.Y) >= actionRange.MinimumY
-	maximum := util.AbsInt(position.X-p.X) <= actionRange.MaximumX && util.AbsInt(position.Y-p.Y) <= actionRange.MaximumY
-	return minimum && maximum
 }

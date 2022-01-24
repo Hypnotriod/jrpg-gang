@@ -1,6 +1,9 @@
 package domain
 
-import "fmt"
+import (
+	"fmt"
+	"jrpg-gang/util"
+)
 
 type ActionRange struct {
 	MinimumX int `json:"minimumX,omitempty"`
@@ -20,4 +23,10 @@ func (r ActionRange) String() string {
 		r.RadiusX,
 		r.RadiusY,
 	)
+}
+
+func (r *ActionRange) Check(p1 Position, p2 Position) bool {
+	minimum := util.AbsInt(p1.X-p2.X) >= r.MinimumX && util.AbsInt(p1.Y-p2.Y) >= r.MinimumY
+	maximum := util.AbsInt(p1.X-p2.X) <= r.MaximumX && util.AbsInt(p1.Y-p2.Y) <= r.MaximumY
+	return minimum && maximum
 }
