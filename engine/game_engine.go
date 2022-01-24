@@ -1,9 +1,19 @@
 package engine
 
-import "jrpg-gang/domain"
+import (
+	"fmt"
+	"jrpg-gang/domain"
+)
 
 type GameEngine struct {
-	Battlefield *Battlefield
+	Battlefield *Battlefield `json:"battlefield"`
+}
+
+func (e GameEngine) String() string {
+	return fmt.Sprintf(
+		"battlefield: {%v}",
+		e.Battlefield,
+	)
 }
 
 func NewGameEngine(battlefield *Battlefield) *GameEngine {

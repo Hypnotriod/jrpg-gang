@@ -16,11 +16,12 @@ type Unit struct {
 	Modification []UnitModificationImpact `json:"modification"`
 	Inventory    UnitInventory            `json:"inventory"`
 	Slots        UnitSlots                `json:"slots"`
+	Position     Position                 `json:"position"`
 }
 
 func (u Unit) String() string {
 	return fmt.Sprintf(
-		"%s, state: {%v}, stats: {%v}, damage: [%s], modification: [%s], inventory: {%v}, slots: %v",
+		"%s, state: {%v}, stats: {%v}, damage: [%s], modification: [%s], inventory: {%v}, slots: %v, position: {%v}",
 		u.Name,
 		u.State,
 		u.Stats,
@@ -28,6 +29,7 @@ func (u Unit) String() string {
 		util.AsCommaSeparatedSlice(u.Modification),
 		u.Inventory,
 		u.Slots,
+		u.Position,
 	)
 }
 

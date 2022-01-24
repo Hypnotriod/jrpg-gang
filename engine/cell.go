@@ -1,5 +1,7 @@
 package engine
 
+import "fmt"
+
 type CellType string
 
 const (
@@ -10,4 +12,12 @@ const (
 type Cell struct {
 	FractionId uint
 	Type       CellType
+}
+
+func (c Cell) String() string {
+	return fmt.Sprintf(
+		"fraction id: %d, type: %s",
+		c.FractionId,
+		c.Type,
+	)
 }

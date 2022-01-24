@@ -1,10 +1,22 @@
 package engine
 
-import "jrpg-gang/domain"
+import (
+	"fmt"
+	"jrpg-gang/domain"
+	"jrpg-gang/util"
+)
 
 type Battlefield struct {
 	Matrix [][]Cell    `json:"matrix"`
 	Units  []*GameUnit `json:"units"`
+}
+
+func (b Battlefield) String() string {
+	return fmt.Sprintf(
+		"matrix: %v, units: [%v]",
+		b.Matrix,
+		util.AsCommaSeparatedSlice(b.Units),
+	)
 }
 
 func NewBattlefield(matrix [][]Cell) *Battlefield {
@@ -29,7 +41,7 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit) domain.ActionResult {
 	return *result.WithResultType(domain.ResultAccomplished)
 }
 
-func (b *Battlefield) MoveUnit(uid uint, position Position) domain.ActionResult {
+func (b *Battlefield) MoveUnit(uid uint, position domain.Position) domain.ActionResult {
 	result := domain.ActionResult{}
 	if !b.checkPositionBounds(position) {
 		return *result.WithResultType(domain.ResultOutOfBounds)
@@ -58,24 +70,24 @@ func (b *Battlefield) FindUnitById(uid uint) *GameUnit {
 	return nil
 }
 
-func (b *Battlefield) FindUnitByPosition(position Position) *GameUnit {
+func (b *Battlefield) FindUnitByPosition(position domain.Position) *GameUnit {
 	for i := 0; i < len(b.Units); i++ {
-		if b.Units[i].Position.Equals(&position) {
+		if b.Units[i].Position.Equals(position) {
 			return b.Units[i]
 		}
 	}
 	return nil
 }
 
-func (b *Battlefield) checkPositionBounds(position Position) bool {
+func (b *Battlefield) checkPositionBounds(position domain.Position) bool {
 	return position.X >= 0 && position.Y >= 0 && position.X < len(b.Matrix) && position.Y < len(b.Matrix[0])
 }
 
-func (b *Battlefield) checkPositionFraction(position Position, fractionId uint) bool {
+func (b *Battlefield) checkPositionFraction(position domain.Position, fractionId uint) bool {
 	return b.Matrix[position.X][position.Y].FractionId == fractionId
 }
 
-func (b *Battlefield) checkPositionCanPlaceUnit(position Position) bool {
+func (b *Battlefield) checkPositionCanPlaceUnit(position domain.Position) bool {
 	cell := b.Matrix[position.X][position.Y]
 	return cell.Type == CellTypeSpace
 }

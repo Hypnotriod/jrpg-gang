@@ -8,7 +8,7 @@ import (
 type Weapon struct {
 	Equipment
 	AmmunitionKind string             `json:"ammunitionKind,omitempty"`
-	Range          AttackRange        `json:"range"`
+	Range          ActionRange        `json:"range"`
 	UseCost        UnitBaseAttributes `json:"useCost"`
 	Damage         []DamageImpact     `json:"damage"`
 }

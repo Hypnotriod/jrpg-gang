@@ -13,6 +13,7 @@ const (
 	ResultNotFound        ActionResultType = "notFound"
 	ResultNotEmpty        ActionResultType = "notEmpty"
 	ResultNotEquipped     ActionResultType = "notEquipped"
+	ResultNotReachable    ActionResultType = "notReachable"
 	ResultCantUse         ActionResultType = "cantUse"
 	ResultOutOfBounds     ActionResultType = "outOfBounds"
 	ResultNoAmmunition    ActionResultType = "noAmmunition"
