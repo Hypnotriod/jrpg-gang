@@ -88,6 +88,5 @@ func (b *Battlefield) checkPositionFraction(position domain.Position, fractionId
 }
 
 func (b *Battlefield) checkPositionCanPlaceUnit(position domain.Position) bool {
-	cell := b.Matrix[position.X][position.Y]
-	return cell.Type == CellTypeSpace
+	return b.Matrix[position.X][position.Y].CanPlaceUnit()
 }

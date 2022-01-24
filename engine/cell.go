@@ -21,3 +21,7 @@ func (c Cell) String() string {
 		c.Type,
 	)
 }
+
+func (c *Cell) CanPlaceUnit() bool {
+	return c.Type == CellTypeSpace
+}
