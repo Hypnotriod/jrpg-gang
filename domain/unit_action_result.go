@@ -26,7 +26,7 @@ const (
 type ActionResult struct {
 	InstantDamage        []Damage                 `json:"instantDamage,omitempty"`
 	TemporalDamage       []DamageImpact           `json:"temporalDamage,omitempty"`
-	InstantRecovery      []UnitState              `json:"instantRecovery,omitempty"`
+	InstantRecovery      []UnitRecovery           `json:"instantRecovery,omitempty"`
 	TemporalModification []UnitModificationImpact `json:"temporalModification,omitempty"`
 	ResultType           ActionResultType         `json:"resultType"`
 }

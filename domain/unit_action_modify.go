@@ -7,17 +7,17 @@ func (u *Unit) CalculateModificationChance(modification UnitModificationImpact) 
 	return util.MaxFloat32(chance, util.MINIMUM_CHANCE)
 }
 
-func (u *Unit) ApplyRecovery(recovery UnitState) {
+func (u *Unit) ApplyRecovery(recovery UnitRecovery) {
 	modification := u.TotalModification()
 	attributes := modification.BaseAttributes
 	attributes.Accumulate(u.Stats.BaseAttributes)
-	u.State.Accumulate(recovery)
+	u.State.Accumulate(recovery.UnitState)
 	u.State.Saturate(attributes)
 	u.State.Normalize()
 }
 
-func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]UnitState, []UnitModificationImpact) {
-	instantRecovery := []UnitState{}
+func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]UnitRecovery, []UnitModificationImpact) {
+	instantRecovery := []UnitRecovery{}
 	temporalModification := []UnitModificationImpact{}
 	for _, ench := range modification {
 		if ench.Chance != 0 && !util.CheckRandomChance(u.CalculateModificationChance(ench)) {

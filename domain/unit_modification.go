@@ -7,7 +7,7 @@ type UnitModification struct {
 	Attributes     UnitAttributes     `json:"attributes,omitempty"`
 	Resistance     UnitResistance     `json:"resistance,omitempty"`
 	Damage         Damage             `json:"damage,omitempty"`
-	Recovery       UnitState          `json:"recovery,omitempty"`
+	Recovery       UnitRecovery       `json:"recovery,omitempty"`
 }
 
 func (m UnitModification) String() string {

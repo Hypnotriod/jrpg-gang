@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"jrpg-gang/domain"
 	"jrpg-gang/util"
+	"sort"
 )
 
 type Battlefield struct {
@@ -84,9 +85,25 @@ func (b *Battlefield) checkPositionBounds(position domain.Position) bool {
 }
 
 func (b *Battlefield) checkPositionFraction(position domain.Position, fractionId uint) bool {
-	return b.Matrix[position.X][position.Y].FractionId == fractionId
+	return b.Matrix[position.X][position.Y].ContainsFractionId(fractionId)
 }
 
 func (b *Battlefield) checkPositionCanPlaceUnit(position domain.Position) bool {
 	return b.Matrix[position.X][position.Y].CanPlaceUnit()
+}
+
+func (b *Battlefield) FilterSurvivors() {
+	survivedUnits := []*GameUnit{}
+	for _, unit := range b.Units {
+		if unit.State.Health > 0 {
+			survivedUnits = append(survivedUnits, unit)
+		}
+	}
+	b.Units = survivedUnits
+}
+
+func (b *Battlefield) SortUnitsByInitiative() {
+	sort.SliceStable(b.Units, func(i, j int) bool {
+		return b.Units[i].TotalInitiative() < b.Units[j].TotalInitiative()
+	})
 }

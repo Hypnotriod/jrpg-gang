@@ -10,18 +10,27 @@ const (
 )
 
 type Cell struct {
-	FractionId uint
-	Type       CellType
+	FractionIds []uint   `json:"fractionIds"`
+	Type        CellType `json:"type"`
 }
 
 func (c Cell) String() string {
 	return fmt.Sprintf(
-		"fraction id: %d, type: %s",
-		c.FractionId,
+		"fraction id: %v, type: %s",
+		c.FractionIds,
 		c.Type,
 	)
 }
 
 func (c *Cell) CanPlaceUnit() bool {
 	return c.Type == CellTypeSpace
+}
+
+func (c *Cell) ContainsFractionId(fractionId uint) bool {
+	for _, v := range c.FractionIds {
+		if v == fractionId {
+			return true
+		}
+	}
+	return false
 }

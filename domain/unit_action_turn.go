@@ -23,7 +23,7 @@ func (u *Unit) FilterDamage() {
 	u.Damage = filteredDamage
 }
 
-func (u *Unit) ApplyRecoverylOnNextTurn() {
+func (u *Unit) ApplyRecoverylOnNextTurn() UnitRecovery {
 	modification := u.TotalModification()
 	recovery := modification.Recovery
 	attributes := modification.Attributes
@@ -34,9 +34,10 @@ func (u *Unit) ApplyRecoverylOnNextTurn() {
 	baseAttributes.Normalize()
 	recovery.Normalize()
 	u.State.Stamina += attributes.Endurance
-	u.State.Accumulate(recovery)
+	u.State.Accumulate(recovery.UnitState)
 	u.State.Saturate(baseAttributes)
 	u.State.Normalize()
+	return recovery
 }
 
 func (u *Unit) ReduceModificationOnNextTurn() {
