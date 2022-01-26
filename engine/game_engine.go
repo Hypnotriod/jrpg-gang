@@ -5,8 +5,9 @@ import (
 )
 
 type GameEngine struct {
-	Battlefield *Battlefield `json:"battlefield"`
-	State       GameState    `json:"state"`
+	Battlefield  *Battlefield `json:"battlefield"`
+	State        GameState    `json:"state"`
+	AllowedUsers []string     `json:"allowedUsers"`
 }
 
 func (e GameEngine) String() string {
