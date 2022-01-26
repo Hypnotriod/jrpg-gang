@@ -3,6 +3,8 @@ package engine
 import "jrpg-gang/domain"
 
 func (e *GameEngine) ExecuteAction(action GameAction) domain.ActionResult {
+	defer e.Unlock()
+	e.Lock()
 	switch action.Action {
 	case GameAtionUse:
 		return e.executeUseAction(action)

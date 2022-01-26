@@ -2,9 +2,11 @@ package engine
 
 import (
 	"fmt"
+	"sync"
 )
 
 type GameEngine struct {
+	*sync.RWMutex
 	Battlefield  *Battlefield `json:"battlefield"`
 	State        GameState    `json:"state"`
 	AllowedUsers []string     `json:"allowedUsers"`
@@ -25,6 +27,8 @@ func NewGameEngine(battlefield *Battlefield) *GameEngine {
 }
 
 func (e *GameEngine) GetActiveUnit() *GameUnit {
+	defer e.RUnlock()
+	e.RLock()
 	if uid, ok := e.State.GetActiveUnitUid(); ok {
 		return e.Battlefield.FindUnitById(uid)
 	}

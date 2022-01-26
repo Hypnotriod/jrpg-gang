@@ -3,9 +3,11 @@ package controller
 import (
 	"jrpg-gang/engine"
 	"jrpg-gang/util"
+	"sync"
 )
 
 type GameController struct {
+	*sync.RWMutex
 	uidGen           util.UidGen
 	engines          map[uint]*engine.GameEngine
 	userIdToEngineId map[string]uint
@@ -13,13 +15,11 @@ type GameController struct {
 
 func (c *GameController) HandleRequest(requestRaw string) string {
 	request := c.parseRequest(requestRaw)
-	if request == nil {
-		return ""
-	}
-	response := Response{}
-	switch request.Type {
-	case RequestCreateGameEngine:
-		c.createGameEngine(request, &response)
+	response := Response{Status: ResponseStatusOk}
+	if request != nil {
+		c.processRequest(request, &response)
+	} else {
+		response.Status = ResponseStatusMailformed
 	}
 	return util.ObjectToJson(response)
 }

@@ -1,10 +1,14 @@
 package engine
 
 func (e *GameEngine) StartRound() {
+	defer e.Unlock()
+	e.Lock()
 	e.State.MakeUnitsQueue(e.Battlefield.Units)
 }
 
 func (e *GameEngine) EndRound() EndTurnResult {
+	defer e.Unlock()
+	e.Lock()
 	result := EndTurnResult{}
 	for _, unit := range e.Battlefield.Units {
 		result.Recovery[unit.Uid] = unit.ApplyRecoverylOnNextTurn()
@@ -16,5 +20,7 @@ func (e *GameEngine) EndRound() EndTurnResult {
 }
 
 func (e *GameEngine) PrepareNextTurn() {
+	defer e.Unlock()
+	e.Lock()
 	e.State.UpdateUnitsQueue(e.Battlefield.Units)
 }

@@ -6,6 +6,7 @@ type RequestType string
 
 const (
 	RequestCreateGameEngine RequestType = "createEngine"
+	RequestJoin             RequestType = "join"
 )
 
 type Request struct {

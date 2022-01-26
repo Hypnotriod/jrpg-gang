@@ -3,7 +3,8 @@ package controller
 type ResponseStatus string
 
 const (
-	ResponseStatusOk ResponseStatus = "ok"
+	ResponseStatusOk         ResponseStatus = "ok"
+	ResponseStatusMailformed ResponseStatus = "mailformed"
 )
 
 type Response struct {
