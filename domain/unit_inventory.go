@@ -250,3 +250,23 @@ func (i *UnitInventory) FilterAmmunition() {
 	}
 	i.Ammunition = filtered
 }
+
+func (i *UnitInventory) GetItemType(uid uint) ItemType {
+	item := i.Find(uid)
+	if item == nil {
+		return ItemTypeNone
+	}
+	switch item.(type) {
+	case *Armor:
+		return ItemTypeMagic
+	case *Weapon:
+		return ItemTypeWeapon
+	case *Magic:
+		return ItemTypeMagic
+	case *Disposable:
+		return ItemTypeDisposable
+	case *Ammunition:
+		return ItemTypeAmmunition
+	}
+	return ItemTypeNone
+}

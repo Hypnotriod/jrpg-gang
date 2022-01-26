@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"jrpg-gang/domain"
 	"jrpg-gang/util"
-	"sort"
 )
 
 type Battlefield struct {
@@ -100,10 +99,4 @@ func (b *Battlefield) FilterSurvivors() {
 		}
 	}
 	b.Units = survivedUnits
-}
-
-func (b *Battlefield) SortUnitsByInitiative() {
-	sort.SliceStable(b.Units, func(i, j int) bool {
-		return b.Units[i].TotalInitiative() < b.Units[j].TotalInitiative()
-	})
 }

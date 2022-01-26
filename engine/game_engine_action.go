@@ -22,6 +22,14 @@ func (e *GameEngine) executeUseAction(action GameAction) domain.ActionResult {
 	if unit == nil || target == nil {
 		return *domain.NewActionResult(domain.ResultNotFound)
 	}
+	itemType := unit.Inventory.GetItemType(action.ItemUid)
+	if unit.FractionId == target.FractionId &&
+		(itemType == domain.ItemTypeWeapon || itemType == domain.ItemTypeMagic) {
+		return *domain.NewActionResult(domain.ResultNotAllowed)
+	}
+	if unit.FractionId != target.FractionId && itemType == domain.ItemTypeDisposable {
+		return *domain.NewActionResult(domain.ResultNotAllowed)
+	}
 	return unit.UseInventoryItemOnTarget(&target.Unit, action.ItemUid)
 }
 

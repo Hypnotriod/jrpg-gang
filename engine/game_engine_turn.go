@@ -1,6 +1,10 @@
 package engine
 
-func (e *GameEngine) EndTurn() EndTurnResult {
+func (e *GameEngine) StartRound() {
+	e.State.MakeUnitsQueue(e.Battlefield.Units)
+}
+
+func (e *GameEngine) EndRound() EndTurnResult {
 	result := EndTurnResult{}
 	for _, unit := range e.Battlefield.Units {
 		result.Recovery[unit.Uid] = unit.ApplyRecoverylOnNextTurn()
@@ -8,6 +12,9 @@ func (e *GameEngine) EndTurn() EndTurnResult {
 		unit.ReduceModificationOnNextTurn()
 	}
 	e.Battlefield.FilterSurvivors()
-	e.Battlefield.SortUnitsByInitiative()
 	return result
+}
+
+func (e *GameEngine) PrepareNextTurn() {
+	e.State.UpdateUnitsQueue(e.Battlefield.Units)
 }

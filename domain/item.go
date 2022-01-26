@@ -10,6 +10,7 @@ const (
 	ItemTypeMagic      ItemType = "magic"
 	ItemTypeDisposable ItemType = "disposable"
 	ItemTypeAmmunition ItemType = "ammunition"
+	ItemTypeNone       ItemType = "none"
 )
 
 type Item struct {

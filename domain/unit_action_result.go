@@ -10,6 +10,7 @@ type ActionResultType string
 const (
 	ResultAccomplished    ActionResultType = "accomplished"
 	ResultNotAccomplished ActionResultType = "notAccomplished"
+	ResultNotAllowed      ActionResultType = "notAllowed"
 	ResultNotFound        ActionResultType = "notFound"
 	ResultNotEmpty        ActionResultType = "notEmpty"
 	ResultNotEquipped     ActionResultType = "notEquipped"
