@@ -1,22 +1,50 @@
 package controller
 
-import "jrpg-gang/engine"
+import (
+	"jrpg-gang/engine"
+	"jrpg-gang/util"
+)
 
 type RequestType string
 
 const (
 	RequestCreateBattleRoom RequestType = "createBattleRoom"
-	RequestplaceUnit        RequestType = "placeUnit"
+	RequestPlaceUnit        RequestType = "placeUnit"
 )
 
 type Request struct {
 	UserId string      `json:"userId"`
 	Type   RequestType `json:"type"`
-	Data   RequestData `json:"data"`
 }
 
-type RequestData struct {
-	AllowedUsers []string        `json:"allowedUsers,omitempty"`
-	Matrix       [][]engine.Cell `json:"matrix,omitempty"`
-	Unit         engine.GameUnit `json:"unit,omitempty"`
+func parseRequest(requestRaw string) *Request {
+	if r, ok := util.JsonToObject(&Request{}, requestRaw); ok {
+		return r.(*Request)
+	}
+	return nil
+}
+
+type CreateBattleRoomRequest struct {
+	Request
+	AllowedUsers []string        `json:"allowedUsers"`
+	Matrix       [][]engine.Cell `json:"matrix"`
+}
+
+func parseCreateBattleRoomRequest(requestRaw string) *CreateBattleRoomRequest {
+	if r, ok := util.JsonToObject(&CreateBattleRoomRequest{}, requestRaw); ok {
+		return r.(*CreateBattleRoomRequest)
+	}
+	return nil
+}
+
+type PlaceUnitRequest struct {
+	Request
+	Unit engine.GameUnit `json:"unit"`
+}
+
+func parsePlaceUnitRequest(requestRaw string) *PlaceUnitRequest {
+	if r, ok := util.JsonToObject(&PlaceUnitRequest{}, requestRaw); ok {
+		return r.(*PlaceUnitRequest)
+	}
+	return nil
 }

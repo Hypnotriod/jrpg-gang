@@ -22,21 +22,14 @@ func NewGameController() *GameController {
 }
 
 func (c *GameController) HandleRequest(requestRaw string) string {
-	request := c.parseRequest(requestRaw)
-	response := Response{Status: ResponseStatusOk}
+	response := NewResponse()
+	request := parseRequest(requestRaw)
 	if request != nil {
-		c.processRequest(request, &response)
+		c.processRequest(request.Type, requestRaw, response)
 	} else {
 		response.Status = ResponseStatusMailformed
 	}
 	return util.ObjectToJson(response)
-}
-
-func (c *GameController) parseRequest(requestRaw string) *Request {
-	if request, ok := util.JsonToObject(&Request{}, requestRaw); ok {
-		return request.(*Request)
-	}
-	return nil
 }
 
 func (c *GameController) getEngineByUserId(userId string) (*engine.GameEngine, bool) {
