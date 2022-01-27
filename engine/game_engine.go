@@ -21,6 +21,7 @@ func (e GameEngine) String() string {
 
 func NewGameEngine(battlefield *Battlefield) *GameEngine {
 	engine := &GameEngine{}
+	engine.RWMutex = &sync.RWMutex{}
 	engine.Battlefield = battlefield
 	return engine
 }

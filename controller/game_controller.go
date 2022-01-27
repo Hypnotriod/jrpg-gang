@@ -13,6 +13,14 @@ type GameController struct {
 	userIdToEngineId map[string]uint
 }
 
+func NewGameController() *GameController {
+	controller := &GameController{}
+	controller.RWMutex = &sync.RWMutex{}
+	controller.engines = make(map[uint]*engine.GameEngine)
+	controller.userIdToEngineId = make(map[string]uint)
+	return controller
+}
+
 func (c *GameController) HandleRequest(requestRaw string) string {
 	request := c.parseRequest(requestRaw)
 	response := Response{Status: ResponseStatusOk}
