@@ -5,8 +5,8 @@ import "jrpg-gang/engine"
 type RequestType string
 
 const (
-	RequestCreateGameEngine RequestType = "createEngine"
-	RequestJoin             RequestType = "join"
+	RequestCreateBattleRoom RequestType = "createBattleRoom"
+	RequestplaceUnit        RequestType = "placeUnit"
 )
 
 type Request struct {
@@ -18,4 +18,5 @@ type Request struct {
 type RequestData struct {
 	AllowedUsers []string        `json:"allowedUsers,omitempty"`
 	Matrix       [][]engine.Cell `json:"matrix,omitempty"`
+	Unit         engine.GameUnit `json:"unit,omitempty"`
 }

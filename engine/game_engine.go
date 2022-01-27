@@ -7,9 +7,8 @@ import (
 
 type GameEngine struct {
 	*sync.RWMutex
-	Battlefield  *Battlefield `json:"battlefield"`
-	State        GameState    `json:"state"`
-	AllowedUsers []string     `json:"allowedUsers"`
+	Battlefield *Battlefield `json:"battlefield"`
+	State       GameState    `json:"state"`
 }
 
 func (e GameEngine) String() string {

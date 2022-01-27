@@ -30,3 +30,15 @@ func (c *GameController) parseRequest(requestRaw string) *Request {
 	}
 	return nil
 }
+
+func (c *GameController) getEngineByUserId(userId string) (*engine.GameEngine, bool) {
+	engineUid, ok := c.userIdToEngineId[userId]
+	if !ok {
+		return nil, false
+	}
+	engine, ok := c.engines[engineUid]
+	if !ok {
+		return nil, false
+	}
+	return engine, true
+}
