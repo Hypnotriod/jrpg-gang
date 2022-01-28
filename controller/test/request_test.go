@@ -12,8 +12,7 @@ import (
 func TestCreateBattleRoom(t *testing.T) {
 	controller := controller.NewController()
 	var result string
-	result = doJoinRequest(controller, "Megazilla999")
-	userId := parseUserId(result)
+	result, userId := doJoinRequest(controller, "Megazilla999")
 	fmt.Println(result)
 	result = doRequest(controller, "createBattleRoom", userId, `
 		"allowedUsers": ["user-id-1", "user-id-2"]
@@ -24,22 +23,23 @@ func TestCreateBattleRoom(t *testing.T) {
 func TestJoin(t *testing.T) {
 	controller := controller.NewController()
 	var result string
-	result = doJoinRequest(controller, "999Megazilla")
+	result, _ = doJoinRequest(controller, "999Megazilla")
 	fmt.Println(result)
-	result = doJoinRequest(controller, "Megazilla999")
+	result, _ = doJoinRequest(controller, "Megazilla999")
 	fmt.Println(result)
-	result = doJoinRequest(controller, "Megazilla999")
+	result, _ = doJoinRequest(controller, "Megazilla999")
 	fmt.Println(result)
 }
 
-func doJoinRequest(controller *controller.GameController, nickname string) string {
-	return controller.HandleRequest(fmt.Sprintf(`{
+func doJoinRequest(controller *controller.GameController, nickname string) (string, string) {
+	result := controller.HandleRequest(fmt.Sprintf(`{
 		"id": "%s",
 		"type": "join",
 		"nickName": "%s"
 	}`,
 		util.RandomId(),
 		nickname))
+	return result, parseUserId(result)
 }
 
 func parseUserId(str string) string {
