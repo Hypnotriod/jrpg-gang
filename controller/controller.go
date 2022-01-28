@@ -61,3 +61,8 @@ func (c *GameController) getEngineByUserId(userId string) (*engine.GameEngine, b
 	}
 	return engine, true
 }
+
+func (c *GameController) isUserExists(userId string) bool {
+	_, r := c.userIdToNickname[userId]
+	return r
+}

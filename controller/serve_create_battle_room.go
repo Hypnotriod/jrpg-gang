@@ -7,9 +7,11 @@ func (c *GameController) serveCreateBattleRoom(requestRaw string, response *Resp
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	// todo: verify request data
 	defer c.Unlock()
 	c.Lock()
+	if !c.isUserExists(request.UserId) {
+		return response.WithStatus(ResponseStatusNotAllowed)
+	}
 	battlefield := engine.NewBattlefield(request.Matrix)
 	engine := engine.NewGameEngine(battlefield)
 	engineUid := c.uidGen.Next()

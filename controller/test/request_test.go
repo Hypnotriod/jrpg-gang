@@ -3,40 +3,60 @@ package test
 import (
 	"fmt"
 	"jrpg-gang/controller"
+	"jrpg-gang/util"
+	"regexp"
+	"strings"
 	"testing"
 )
 
 func TestCreateBattleRoom(t *testing.T) {
 	controller := controller.NewController()
-	result := controller.HandleRequest(`{
-		"userId": "user-id-1",
-		"type": "createBattleRoom",
-		"data": {
-			"allowedUsers": ["user-id-1", "user-id-2"]
-		}
-	}`)
+	var result string
+	result = doJoinRequest(controller, "Megazilla999")
+	userId := parseUserId(result)
+	fmt.Println(result)
+	result = doRequest(controller, "createBattleRoom", userId, `
+		"allowedUsers": ["user-id-1", "user-id-2"]
+	`)
 	fmt.Println(result)
 }
 
 func TestJoin(t *testing.T) {
 	controller := controller.NewController()
 	var result string
-	result = controller.HandleRequest(`{
-		"id": "1234",
-		"type": "join",
-		"nickName": "999Megazilla"
-	}`)
+	result = doJoinRequest(controller, "999Megazilla")
 	fmt.Println(result)
-	result = controller.HandleRequest(`{
-		"id": "1234",
-		"type": "join",
-		"nickName": "Megazilla999"
-	}`)
+	result = doJoinRequest(controller, "Megazilla999")
 	fmt.Println(result)
-	result = controller.HandleRequest(`{
-		"id": "1234",
-		"type": "join",
-		"nickName": "Megazilla999"
-	}`)
+	result = doJoinRequest(controller, "Megazilla999")
 	fmt.Println(result)
+}
+
+func doJoinRequest(controller *controller.GameController, nickname string) string {
+	return controller.HandleRequest(fmt.Sprintf(`{
+		"id": "%s",
+		"type": "join",
+		"nickName": "%s"
+	}`,
+		util.RandomId(),
+		nickname))
+}
+
+func parseUserId(str string) string {
+	re := regexp.MustCompile(`"userId":"[a-z0-9]+`)
+	found := re.FindAllString(str, 1)
+	return strings.Split(found[0], `"userId":"`)[1]
+}
+
+func doRequest(controller *controller.GameController, requestType string, userId string, data string) string {
+	return controller.HandleRequest(fmt.Sprintf(`{
+		"id": "%s",
+		"type": "%s",
+		"userId": "%s",
+		"data": {%s}
+	}`,
+		util.RandomId(),
+		requestType,
+		userId,
+		data))
 }
