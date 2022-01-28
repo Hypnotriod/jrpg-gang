@@ -3,10 +3,11 @@ package controller
 type ResponseStatus string
 
 const (
-	ResponseStatusOk         ResponseStatus = "ok"
-	ResponseStatusError      ResponseStatus = "error"
-	ResponseStatusMailformed ResponseStatus = "mailformed"
-	ResponseStatusNotAllowed ResponseStatus = "notAllowed"
+	ResponseStatusOk            ResponseStatus = "ok"
+	ResponseStatusError         ResponseStatus = "error"
+	ResponseStatusMailformed    ResponseStatus = "mailformed"
+	ResponseStatusNotAllowed    ResponseStatus = "notAllowed"
+	ResponseStatusAlreadyExists ResponseStatus = "alreadyExists"
 )
 
 type ResponseDataKey string
@@ -17,6 +18,9 @@ const (
 )
 
 type Response struct {
+	Type   RequestType                     `json:"type"`
+	Id     string                          `json:"id"`
+	UserId string                          `json:"userId,omitempty"`
 	Status ResponseStatus                  `json:"status"`
 	Data   map[ResponseDataKey]interface{} `json:"data,omitempty"`
 }

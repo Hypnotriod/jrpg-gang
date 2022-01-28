@@ -8,18 +8,32 @@ import (
 type RequestType string
 
 const (
+	RequestJoin             RequestType = "join"
 	RequestCreateBattleRoom RequestType = "createBattleRoom"
 	RequestPlaceUnit        RequestType = "placeUnit"
 )
 
 type Request struct {
-	UserId string      `json:"userId"`
 	Type   RequestType `json:"type"`
+	Id     string      `json:"id"`
+	UserId string      `json:"userId,omitempty"`
 }
 
 func parseRequest(requestRaw string) *Request {
 	if r, ok := util.JsonToObject(&Request{}, requestRaw); ok {
 		return r.(*Request)
+	}
+	return nil
+}
+
+type JoinRequest struct {
+	Request
+	Nickname string `json:"nickname"`
+}
+
+func parseJoinRequest(requestRaw string) *JoinRequest {
+	if r, ok := util.JsonToObject(&JoinRequest{}, requestRaw); ok {
+		return r.(*JoinRequest)
 	}
 	return nil
 }
