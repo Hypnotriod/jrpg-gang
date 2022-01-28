@@ -8,7 +8,7 @@ import (
 type GameEngine struct {
 	*sync.RWMutex
 	Battlefield *Battlefield `json:"battlefield"`
-	State       GameState    `json:"state"`
+	State       *GameState   `json:"state"`
 }
 
 func (e GameEngine) String() string {
@@ -20,10 +20,11 @@ func (e GameEngine) String() string {
 }
 
 func NewGameEngine(battlefield *Battlefield) *GameEngine {
-	engine := &GameEngine{}
-	engine.RWMutex = &sync.RWMutex{}
-	engine.Battlefield = battlefield
-	return engine
+	e := &GameEngine{}
+	e.RWMutex = &sync.RWMutex{}
+	e.Battlefield = battlefield
+	e.State = NewGameState()
+	return e
 }
 
 func (e *GameEngine) GetActiveUnit() *GameUnit {

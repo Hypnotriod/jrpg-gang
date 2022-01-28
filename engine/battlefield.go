@@ -22,6 +22,7 @@ func (b Battlefield) String() string {
 func NewBattlefield(matrix [][]Cell) *Battlefield {
 	b := &Battlefield{}
 	b.Matrix = matrix
+	b.Units = []*GameUnit{}
 	return b
 }
 

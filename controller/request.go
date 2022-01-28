@@ -14,9 +14,8 @@ const (
 )
 
 type Request struct {
-	Type   RequestType `json:"type"`
-	Id     string      `json:"id"`
-	UserId string      `json:"userId,omitempty"`
+	Type RequestType `json:"type"`
+	Id   string      `json:"id"`
 }
 
 func parseRequest(requestRaw string) *Request {
@@ -28,7 +27,9 @@ func parseRequest(requestRaw string) *Request {
 
 type JoinRequest struct {
 	Request
-	Nickname string `json:"nickname"`
+	Data struct {
+		Nickname string `json:"nickname"`
+	} `json:"data"`
 }
 
 func parseJoinRequest(requestRaw string) *JoinRequest {
@@ -40,8 +41,11 @@ func parseJoinRequest(requestRaw string) *JoinRequest {
 
 type CreateBattleRoomRequest struct {
 	Request
-	AllowedUsers []string        `json:"allowedUsers"`
-	Matrix       [][]engine.Cell `json:"matrix"`
+	Data struct {
+		UserId       string          `json:"userId"`
+		AllowedUsers []string        `json:"allowedUsers"`
+		Matrix       [][]engine.Cell `json:"matrix"`
+	} `json:"data"`
 }
 
 func parseCreateBattleRoomRequest(requestRaw string) *CreateBattleRoomRequest {
@@ -53,7 +57,10 @@ func parseCreateBattleRoomRequest(requestRaw string) *CreateBattleRoomRequest {
 
 type PlaceUnitRequest struct {
 	Request
-	Unit engine.GameUnit `json:"unit"`
+	Data struct {
+		UserId string          `json:"userId"`
+		Unit   engine.GameUnit `json:"unit"`
+	} `json:"data"`
 }
 
 func parsePlaceUnitRequest(requestRaw string) *PlaceUnitRequest {

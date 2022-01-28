@@ -8,13 +8,13 @@ func (c *GameController) servePlaceUnit(requestRaw string, response *Response) *
 	// todo: verify request data
 	defer c.RUnlock()
 	c.RLock()
-	engine, ok := c.getEngineByUserId(request.UserId)
+	engine, ok := c.getEngineByUserId(request.Data.UserId)
 	if !ok {
 		return response.WithStatus(ResponseStatusError)
 	}
 	defer engine.Unlock()
 	engine.Lock()
-	actionResult := engine.Battlefield.PlaceUnit(&request.Unit)
+	actionResult := engine.Battlefield.PlaceUnit(&request.Data.Unit)
 	response.Data[DataKeyActionResult] = actionResult
 	response.Data[DataKeyGameState] = engine
 	return response.WithStatus(ResponseStatusOk)

@@ -11,6 +11,13 @@ type GameState struct {
 	InactiveUnits    []uint `json:"inactiveUnits"`
 }
 
+func NewGameState() *GameState {
+	s := &GameState{}
+	s.ActiveUnitsQueue = make([]uint, 0, 10)
+	s.InactiveUnits = make([]uint, 0, 10)
+	return s
+}
+
 func (s GameState) String() string {
 	return fmt.Sprintf(
 		"active units queue: {%v}, inactive units: {%v}",
