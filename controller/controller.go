@@ -30,24 +30,21 @@ func (c *GameController) HandleRequest(requestRaw string) string {
 	if request != nil {
 		response.Type = request.Type
 		response.Id = request.Id
-		c.serveRequest(request.Type, requestRaw, response)
-	} else {
-		response.WithStatus(ResponseStatusMailformed)
+		return c.serveRequest(request.Type, requestRaw, response)
 	}
-	return util.ObjectToJson(response)
+	return response.WithStatus(ResponseStatusMailformed)
 }
 
-func (c *GameController) serveRequest(requestType RequestType, requestRaw string, response *Response) {
+func (c *GameController) serveRequest(requestType RequestType, requestRaw string, response *Response) string {
 	switch requestType {
 	case RequestJoin:
-		c.serveJoin(requestRaw, response)
+		return c.serveJoin(requestRaw, response)
 	case RequestCreateBattleRoom:
-		c.serveCreateBattleRoom(requestRaw, response)
+		return c.serveCreateBattleRoom(requestRaw, response)
 	case RequestPlaceUnit:
-		c.servePlaceUnit(requestRaw, response)
-	default:
-		response.WithStatus(ResponseStatusMailformed)
+		return c.servePlaceUnit(requestRaw, response)
 	}
+	return response.WithStatus(ResponseStatusUnsupported)
 }
 
 func (c *GameController) getEngineByUserId(userId string) (*engine.GameEngine, bool) {

@@ -7,7 +7,7 @@ import (
 
 const USER_NICKNAME_REGEX string = `^[a-zA-Z][a-zA-Z0-9-_]+$`
 
-func (c *GameController) serveJoin(requestRaw string, response *Response) *Response {
+func (c *GameController) serveJoin(requestRaw string, response *Response) string {
 	request := parseJoinRequest(requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)

@@ -1,11 +1,14 @@
 package controller
 
+import "jrpg-gang/util"
+
 type ResponseStatus string
 
 const (
 	ResponseStatusOk            ResponseStatus = "ok"
 	ResponseStatusError         ResponseStatus = "error"
 	ResponseStatusMailformed    ResponseStatus = "mailformed"
+	ResponseStatusUnsupported   ResponseStatus = "unsupported"
 	ResponseStatusNotAllowed    ResponseStatus = "notAllowed"
 	ResponseStatusAlreadyExists ResponseStatus = "alreadyExists"
 )
@@ -31,7 +34,7 @@ func NewResponse() *Response {
 	return response
 }
 
-func (r *Response) WithStatus(status ResponseStatus) *Response {
+func (r *Response) WithStatus(status ResponseStatus) string {
 	r.Status = status
-	return r
+	return util.ObjectToJson(r)
 }

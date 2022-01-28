@@ -1,6 +1,6 @@
 package controller
 
-func (c *GameController) servePlaceUnit(requestRaw string, response *Response) *Response {
+func (c *GameController) servePlaceUnit(requestRaw string, response *Response) string {
 	request := parsePlaceUnitRequest(requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
