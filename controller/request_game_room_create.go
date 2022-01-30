@@ -2,16 +2,16 @@ package controller
 
 import "jrpg-gang/util"
 
-type CreateGameRoomRoomRequest struct {
+type CreateGameRoomRequest struct {
 	Request
 	Data struct {
 		Capacity uint `json:"capacity"`
 	} `json:"data"`
 }
 
-func parseCreateGameRoomRequest(requestRaw string) *CreateGameRoomRoomRequest {
-	if r, ok := util.JsonToObject(&CreateGameRoomRoomRequest{}, requestRaw); ok {
-		return r.(*CreateGameRoomRoomRequest)
+func parseCreateGameRoomRequest(requestRaw string) *CreateGameRoomRequest {
+	if r, ok := util.JsonToObject(&CreateGameRoomRequest{}, requestRaw); ok {
+		return r.(*CreateGameRoomRequest)
 	}
 	return nil
 }
@@ -21,16 +21,17 @@ func (c *GameController) handleCreateGameRoomRequest(requestRaw string, response
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	if c.rooms.ExistsForUserId(request.UserId) {
-		return response.WithStatus(ResponseStatusNotAllowed)
-	}
 	if request.Data.Capacity == 0 || request.Data.Capacity > GAME_ROOM_MAX_CAPACITY {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	room := &GameRoom{
-		HostId:   request.UserId,
-		Capacity: request.Data.Capacity,
+	if c.rooms.ExistsForUserId(request.UserId) {
+		return response.WithStatus(ResponseStatusNotAllowed)
 	}
+	hostUser, _ := c.users.Get(request.UserId)
+	room := NewGameRoom()
+	room.Capacity = request.Data.Capacity
+	room.Host = hostUser
 	c.rooms.Add(room)
+	response.Data[DataKeyRoom], _ = c.rooms.GetByUserId(hostUser.id)
 	return response.WithStatus(ResponseStatusOk)
 }

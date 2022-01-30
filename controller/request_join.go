@@ -19,8 +19,6 @@ func parseJoinRequest(requestRaw string) *JoinRequest {
 	return nil
 }
 
-const USER_NICKNAME_REGEX string = `^[a-zA-Z][a-zA-Z0-9-_]+$`
-
 func (c *GameController) handleJoinRequest(requestRaw string, response *Response) string {
 	request := parseJoinRequest(requestRaw)
 	if request == nil {
@@ -33,10 +31,9 @@ func (c *GameController) handleJoinRequest(requestRaw string, response *Response
 		return response.WithStatus(ResponseStatusAlreadyExists)
 	}
 	user := &User{
-		Id:       util.RandomId(),
 		Nickname: request.Data.Nickname,
 	}
 	c.users.AddUser(user)
-	response.Data[DataKeyUserId] = user.Id
+	response.Data[DataKeyUserId] = user.id
 	return response.WithStatus(ResponseStatusOk)
 }

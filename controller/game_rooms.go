@@ -1,39 +1,48 @@
 package controller
 
 import (
-	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"sync"
 )
 
 type GameRoom struct {
-	Uid      uint   `json:"uid"`
-	HostId   string `json:"hostId"`
-	Capacity uint   `json:"capacity"`
-	UserIds  []uint `json:"userIds"`
-	Engine   *engine.GameEngine
+	*sync.RWMutex
+	Uid         uint   `json:"uid"`
+	Capacity    uint   `json:"capacity"`
+	IsFull      bool   `json:"isFull"`
+	JoinedUsers []User `json:"joinedUsers"`
+	Host        User   `json:"host"`
+	// engine   *engine.GameEngine
+}
+
+func NewGameRoom() *GameRoom {
+	r := &GameRoom{}
+	r.RWMutex = &sync.RWMutex{}
+	r.JoinedUsers = []User{}
+	return r
 }
 
 type GameRooms struct {
 	sync.RWMutex
-	uidGen         util.UidGen
-	rooms          map[uint]*GameRoom
-	userIdToRoomId map[string]uint
+	uidGen          util.UidGen
+	rooms           map[uint]*GameRoom
+	userIdToRoomUid map[UserId]uint
 }
 
 func NewGameRooms() *GameRooms {
 	r := &GameRooms{}
 	r.rooms = make(map[uint]*GameRoom)
-	r.userIdToRoomId = make(map[string]uint)
+	r.userIdToRoomUid = make(map[UserId]uint)
 	return r
 }
 
 func (r *GameRooms) Add(room *GameRoom) {
 	defer r.Unlock()
 	r.Lock()
-	roomUid := r.uidGen.Next()
-	r.rooms[roomUid] = room
-	r.userIdToRoomId[room.HostId] = roomUid
+	room.Uid = r.uidGen.Next()
+	room.IsFull = len(room.JoinedUsers) >= int(room.Capacity)-1
+	r.rooms[room.Uid] = room
+	r.userIdToRoomUid[room.Host.id] = room.Uid
 }
 
 func (r *GameRooms) Remove(roomUid uint) bool {
@@ -46,10 +55,10 @@ func (r *GameRooms) Remove(roomUid uint) bool {
 	return true
 }
 
-func (r *GameRooms) RemoveByUserId(userId string) bool {
+func (r *GameRooms) RemoveByUserId(userId UserId) bool {
 	defer r.Unlock()
 	r.Lock()
-	roomUid, ok := r.userIdToRoomId[userId]
+	roomUid, ok := r.userIdToRoomUid[userId]
 	if !ok {
 		return false
 	}
@@ -57,10 +66,33 @@ func (r *GameRooms) RemoveByUserId(userId string) bool {
 	return true
 }
 
-func (r *GameRooms) ExistsForUserId(userId string) bool {
+func (r *GameRooms) AddUser(roomUid uint, user User) bool {
+	defer r.Unlock()
+	r.Lock()
+	room, ok := r.rooms[roomUid]
+	if !ok {
+		return false
+	}
+	if room.IsFull {
+		return false
+	}
+	room.JoinedUsers = append(room.JoinedUsers, user)
+	room.IsFull = len(room.JoinedUsers) >= int(room.Capacity)-1
+	r.userIdToRoomUid[user.id] = roomUid
+	return true
+}
+
+func (r *GameRooms) Has(uid uint) bool {
 	defer r.RUnlock()
 	r.RLock()
-	roomUid, ok := r.userIdToRoomId[userId]
+	_, ok := r.rooms[uid]
+	return ok
+}
+
+func (r *GameRooms) ExistsForUserId(userId UserId) bool {
+	defer r.RUnlock()
+	r.RLock()
+	roomUid, ok := r.userIdToRoomUid[userId]
 	if !ok {
 		return false
 	}
@@ -68,10 +100,10 @@ func (r *GameRooms) ExistsForUserId(userId string) bool {
 	return present
 }
 
-func (r *GameRooms) GetByUserId(userId string) (GameRoom, bool) {
+func (r *GameRooms) GetByUserId(userId UserId) (GameRoom, bool) {
 	defer r.RUnlock()
 	r.RLock()
-	roomUid, ok := r.userIdToRoomId[userId]
+	roomUid, ok := r.userIdToRoomUid[userId]
 	if !ok {
 		return GameRoom{}, false
 	}
@@ -80,4 +112,20 @@ func (r *GameRooms) GetByUserId(userId string) (GameRoom, bool) {
 		return GameRoom{}, false
 	}
 	return *room, ok
+}
+
+func (r *GameRooms) ResponseList() *[]GameRoom {
+	defer r.RUnlock()
+	r.RLock()
+	rooms := []GameRoom{}
+	for i := range r.rooms {
+		rooms = append(rooms, GameRoom{
+			Uid:         r.rooms[i].Uid,
+			Host:        r.rooms[i].Host,
+			Capacity:    r.rooms[i].Capacity,
+			IsFull:      r.rooms[i].IsFull,
+			JoinedUsers: r.rooms[i].JoinedUsers,
+		})
+	}
+	return &rooms
 }

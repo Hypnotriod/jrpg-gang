@@ -6,10 +6,12 @@ type ResponseStatus string
 
 const (
 	ResponseStatusOk            ResponseStatus = "ok"
+	ResponseStatusFailed        ResponseStatus = "failed"
 	ResponseStatusError         ResponseStatus = "error"
 	ResponseStatusMailformed    ResponseStatus = "mailformed"
 	ResponseStatusUnsupported   ResponseStatus = "unsupported"
 	ResponseStatusNotAllowed    ResponseStatus = "notAllowed"
+	ResponseStatusNotFound      ResponseStatus = "notFound"
 	ResponseStatusAlreadyExists ResponseStatus = "alreadyExists"
 )
 
@@ -19,6 +21,9 @@ const (
 	DataKeyActionResult ResponseDataKey = "actionResult"
 	DataKeyGameState    ResponseDataKey = "gameState"
 	DataKeyUserId       ResponseDataKey = "userId"
+	DataKeyRoom         ResponseDataKey = "room"
+	DataKeyRooms        ResponseDataKey = "rooms"
+	DataKeyUsersCount   ResponseDataKey = "usersCount"
 )
 
 type Response struct {

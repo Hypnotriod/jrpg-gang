@@ -8,13 +8,15 @@ type RequestType string
 
 const (
 	RequestJoin           RequestType = "join"
-	RequestCreateGameRoom RequestType = "createGameRoom"
+	RequestCreateGameRoom RequestType = "createRoom"
+	RequestJoinGameRoom   RequestType = "joinRoom"
+	RequestLobbyStatus    RequestType = "lobbyStatus"
 )
 
 type Request struct {
 	Type   RequestType `json:"type"`
 	Id     string      `json:"id"`
-	UserId string      `json:"userId,omitempty"`
+	UserId UserId      `json:"userId,omitempty"`
 }
 
 func parseRequest(requestRaw string) *Request {

@@ -42,3 +42,21 @@ func parseUserId(str string) string {
 	}
 	return strings.Split(found[0], `"userId":"`)[1]
 }
+
+func parseRoomUid(str string) string {
+	re := regexp.MustCompile(`"room":{"uid":[a-f0-9]+`)
+	found := re.FindAllString(str, 1)
+	if len(found) == 0 {
+		return ""
+	}
+	return strings.Split(found[0], `"room":{"uid":`)[1]
+}
+
+func parseStatus(str string) string {
+	re := regexp.MustCompile(`"status":"[a-zA-Z]+`)
+	found := re.FindAllString(str, 1)
+	if len(found) == 0 {
+		return ""
+	}
+	return strings.Split(found[0], `"status":"`)[1]
+}
