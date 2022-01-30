@@ -21,6 +21,19 @@ func doJoinRequest(controller *controller.GameController, nickname string) (stri
 	return result, parseUserId(result)
 }
 
+func doRequest(controller *controller.GameController, requestType controller.RequestType, userId string, data string) string {
+	return controller.HandleRequest(fmt.Sprintf(`{
+		"id": "%s",
+		"userId": "%s",
+		"type": "%s",
+		"data": {%s}
+	}`,
+		util.RandomId(),
+		userId,
+		requestType,
+		data))
+}
+
 func parseUserId(str string) string {
 	re := regexp.MustCompile(`"userId":"[a-z0-9]+`)
 	found := re.FindAllString(str, 1)
@@ -28,16 +41,4 @@ func parseUserId(str string) string {
 		return ""
 	}
 	return strings.Split(found[0], `"userId":"`)[1]
-}
-
-func doRequest(controller *controller.GameController, requestType controller.RequestType, userId string, data string) string {
-	return controller.HandleRequest(fmt.Sprintf(`{
-		"id": "%s",
-		"type": "%s",
-		"data": {"userId": "%s", %s}
-	}`,
-		util.RandomId(),
-		requestType,
-		userId,
-		data))
 }

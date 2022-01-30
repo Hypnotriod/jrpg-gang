@@ -18,12 +18,12 @@ type ResponseDataKey string
 const (
 	DataKeyActionResult ResponseDataKey = "actionResult"
 	DataKeyGameState    ResponseDataKey = "gameState"
+	DataKeyUserId       ResponseDataKey = "userId"
 )
 
 type Response struct {
 	Type   RequestType                     `json:"type"`
 	Id     string                          `json:"id"`
-	UserId string                          `json:"userId,omitempty"`
 	Status ResponseStatus                  `json:"status"`
 	Data   map[ResponseDataKey]interface{} `json:"data,omitempty"`
 }
