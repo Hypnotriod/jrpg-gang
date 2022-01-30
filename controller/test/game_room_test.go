@@ -25,3 +25,31 @@ func TestCreateGameRoom(t *testing.T) {
 	result = doRequest(cntrl, controller.RequestLobbyStatus, user1Id, ``)
 	fmt.Println(result)
 }
+
+func TestCreateGameRoomAsync(t *testing.T) {
+	const n int = 10000
+	var result string
+	cntrl := controller.NewController()
+	ch := make(chan string)
+	for i := 0; i < n; i++ {
+		go doCreateRoom(ch, cntrl, i)
+	}
+	for i := 0; i < n; i++ {
+		result = <-ch
+		status := parseStatus(result)
+		if status != "ok" {
+			fmt.Printf("create room failed: %s\n", result)
+		}
+	}
+	_, userId := doJoinRequest(cntrl, "Host")
+	result = doRequest(cntrl, controller.RequestLobbyStatus, userId, ``)
+	fmt.Println(result)
+}
+
+func doCreateRoom(ch chan<- string, cntrl *controller.GameController, i int) {
+	_, userId := doJoinRequest(cntrl, fmt.Sprintf("Megazilla%d", i))
+	result := doRequest(cntrl, controller.RequestCreateGameRoom, userId, `
+		"capacity": 4
+	`)
+	ch <- result
+}
