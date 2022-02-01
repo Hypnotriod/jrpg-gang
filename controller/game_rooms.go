@@ -7,9 +7,9 @@ import (
 
 type GameRoom struct {
 	*sync.RWMutex
+	isFull      bool
 	Uid         uint   `json:"uid"`
 	Capacity    uint   `json:"capacity"`
-	IsFull      bool   `json:"isFull"`
 	JoinedUsers []User `json:"joinedUsers"`
 	Host        User   `json:"host"`
 	// engine   *engine.GameEngine
@@ -40,7 +40,7 @@ func (r *GameRooms) Add(room *GameRoom) {
 	defer r.Unlock()
 	r.Lock()
 	room.Uid = r.uidGen.Next()
-	room.IsFull = len(room.JoinedUsers) >= int(room.Capacity)-1
+	room.isFull = len(room.JoinedUsers) >= int(room.Capacity)-1
 	r.rooms[room.Uid] = room
 	r.userIdToRoomUid[room.Host.id] = room.Uid
 }
@@ -73,11 +73,11 @@ func (r *GameRooms) AddUser(roomUid uint, user User) bool {
 	if !ok {
 		return false
 	}
-	if room.IsFull {
+	if room.isFull {
 		return false
 	}
 	room.JoinedUsers = append(room.JoinedUsers, user)
-	room.IsFull = len(room.JoinedUsers) >= int(room.Capacity)-1
+	room.isFull = len(room.JoinedUsers) >= int(room.Capacity)-1
 	r.userIdToRoomUid[user.id] = roomUid
 	return true
 }
@@ -119,13 +119,14 @@ func (r *GameRooms) ResponseList() *[]GameRoom {
 	r.RLock()
 	rooms := []GameRoom{}
 	for i := range r.rooms {
-		rooms = append(rooms, GameRoom{
-			Uid:         r.rooms[i].Uid,
-			Host:        r.rooms[i].Host,
-			Capacity:    r.rooms[i].Capacity,
-			IsFull:      r.rooms[i].IsFull,
-			JoinedUsers: r.rooms[i].JoinedUsers,
-		})
+		if !r.rooms[i].isFull {
+			rooms = append(rooms, GameRoom{
+				Uid:         r.rooms[i].Uid,
+				Host:        r.rooms[i].Host,
+				Capacity:    r.rooms[i].Capacity,
+				JoinedUsers: r.rooms[i].JoinedUsers,
+			})
+		}
 	}
 	return &rooms
 }
