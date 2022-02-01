@@ -2,12 +2,10 @@ package test
 
 import (
 	"fmt"
-	"jrpg-gang/util"
 	"testing"
 )
 
 func TestUnitThreatmentWithDisposable(t *testing.T) {
-	util.ApplyRandomSeed()
 	hero := newAgileHero(t)
 	hero.Inventory.Add(newSmallHealthPotion(t))
 	fmt.Println(hero.Inventory.FindDisposable(2000))
@@ -30,7 +28,6 @@ func TestUnitThreatmentWithDisposable(t *testing.T) {
 }
 
 func TestUnitThreatmentWithMagic(t *testing.T) {
-	util.ApplyRandomSeed()
 	hero := newMagicianHeroWithMagic(t)
 	fmt.Println(hero)
 	fmt.Println()

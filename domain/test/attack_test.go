@@ -2,12 +2,10 @@ package test
 
 import (
 	"fmt"
-	"jrpg-gang/util"
 	"testing"
 )
 
 func TestAttackUnitBySword(t *testing.T) {
-	util.ApplyRandomSeed()
 	hero := newAgileHeroWithWeapon(t)
 	northTroll := newNorthTroll(t)
 	fmt.Println(hero)
@@ -32,7 +30,6 @@ func TestAttackUnitBySword(t *testing.T) {
 }
 
 func TestAttackUnitWithBow(t *testing.T) {
-	util.ApplyRandomSeed()
 	hero := newAgileHeroWithWeapon(t)
 	northTroll := newNorthTroll(t)
 	fmt.Println(hero)

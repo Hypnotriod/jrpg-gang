@@ -31,12 +31,12 @@ func (u *Unit) AccumulateDamageImpact(damage DamageImpact) DamageImpact {
 
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
 	chance := (u.TotalLuck() - u.State.Curse) - (target.TotalLuck() - target.State.Curse)
-	return util.MaxFloat32(chance, util.MINIMUM_CHANCE)
+	return util.MaxFloat32(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateAttackChance(target *Unit, damage DamageImpact) float32 {
 	chance := (u.TotalAgility() - u.State.Curse) - (target.TotalAgility() - target.State.Curse) + damage.Chance
-	return util.MaxFloat32(chance, util.MINIMUM_CHANCE)
+	return util.MaxFloat32(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageImpact) {
@@ -46,12 +46,12 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 	totalModification.Attributes.Accumulate(u.Stats.Attributes)
 	totalModification.Attributes.Normalize()
 	for _, imp := range damage {
-		if !util.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
+		if !u.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
 			break
 		}
 		imp.Enchance(totalModification.Attributes, totalModification.Damage)
 		imp.Normalize()
-		if util.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
+		if u.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
 			imp.Damage.Multiply(CRITICAL_DAMAGE_FACTOR)
 			imp.Damage.IsCritical = true
 		}

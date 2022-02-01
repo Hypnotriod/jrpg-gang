@@ -3,11 +3,16 @@ package domain
 import (
 	"fmt"
 	"jrpg-gang/util"
+	"math/rand"
+	"time"
+
+	"github.com/seehuhn/mt19937"
 )
 
 type UnitSlots map[EquipmentSlot]uint
 
 type Unit struct {
+	rng          *rand.Rand
 	Uid          uint                     `json:"uid"`
 	Name         string                   `json:"name"`
 	State        UnitState                `json:"state"`
@@ -115,4 +120,17 @@ func (u *Unit) CheckUseCost(useCost UnitBaseAttributes) bool {
 	return u.State.Health >= useCost.Health &&
 		u.State.Mana >= useCost.Mana &&
 		u.State.Stamina >= useCost.Stamina
+}
+
+func (u *Unit) CheckRandomChance(percents float32) bool {
+	if u.rng == nil {
+		u.rng = rand.New(mt19937.New())
+		u.rng.Seed(time.Now().UnixNano())
+	}
+	rnd := u.rng.Float32() * MAXIMUM_CHANCE
+	return percents > rnd
+}
+
+func (u *Unit) SetRng(rng *rand.Rand) {
+	u.rng = rng
 }

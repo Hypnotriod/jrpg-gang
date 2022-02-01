@@ -4,7 +4,7 @@ import "jrpg-gang/util"
 
 func (u *Unit) CalculateModificationChance(modification UnitModificationImpact) float32 {
 	chance := (u.TotalIntelligence() - u.State.Curse) + modification.Chance
-	return util.MaxFloat32(chance, util.MINIMUM_CHANCE)
+	return util.MaxFloat32(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) ApplyRecovery(recovery UnitRecovery) {
@@ -20,7 +20,7 @@ func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]Un
 	instantRecovery := []UnitRecovery{}
 	temporalModification := []UnitModificationImpact{}
 	for _, ench := range modification {
-		if ench.Chance != 0 && !util.CheckRandomChance(u.CalculateModificationChance(ench)) {
+		if ench.Chance != 0 && !u.CheckRandomChance(u.CalculateModificationChance(ench)) {
 			break
 		}
 		if ench.Duration != 0 {

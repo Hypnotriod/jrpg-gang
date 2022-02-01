@@ -8,6 +8,8 @@ import (
 	"strings"
 )
 
+var uidGen *util.UidGen = util.NewUidGen()
+
 func doJoinRequest(controller *controller.GameController, nickname string) (string, string) {
 	result := controller.HandleRequest(fmt.Sprintf(`{
 		"id": "%s",
@@ -16,7 +18,7 @@ func doJoinRequest(controller *controller.GameController, nickname string) (stri
 			"nickName": "%s"
 		}
 	}`,
-		util.RandomId(),
+		uidGen.Hash(),
 		nickname))
 	return result, parseUserId(result)
 }
@@ -28,7 +30,7 @@ func doRequest(controller *controller.GameController, requestType controller.Req
 		"type": "%s",
 		"data": {%s}
 	}`,
-		util.RandomId(),
+		uidGen.Hash(),
 		userId,
 		requestType,
 		data))
