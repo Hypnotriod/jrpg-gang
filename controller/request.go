@@ -7,10 +7,12 @@ import (
 type RequestType string
 
 const (
-	RequestJoin           RequestType = "join"
-	RequestCreateGameRoom RequestType = "createRoom"
-	RequestJoinGameRoom   RequestType = "joinRoom"
-	RequestLobbyStatus    RequestType = "lobbyStatus"
+	RequestJoin            RequestType = "join"
+	RequestCreateGameRoom  RequestType = "createRoom"
+	RequestDestroyGameRoom RequestType = "destroyRoom"
+	RequestJoinGameRoom    RequestType = "joinRoom"
+	RequestLeaveGameRoom   RequestType = "leaveRoom"
+	RequestLobbyStatus     RequestType = "lobbyStatus"
 )
 
 type Request struct {

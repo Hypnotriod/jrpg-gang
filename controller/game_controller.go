@@ -33,10 +33,14 @@ func (c *GameController) serveRequest(request *Request, requestRaw string, respo
 	switch request.Type {
 	case RequestCreateGameRoom:
 		return c.handleCreateGameRoomRequest(requestRaw, response)
+	case RequestDestroyGameRoom:
+		return c.handleDestroyGameRoomRequest(requestRaw, response)
 	case RequestLobbyStatus:
 		return c.handleLobbyStatusRequest(requestRaw, response)
 	case RequestJoinGameRoom:
 		return c.handleJoinGameRoomRequest(requestRaw, response)
+	case RequestLeaveGameRoom:
+		return c.handleLeaveGameRoomRequest(requestRaw, response)
 	}
 	return response.WithStatus(ResponseStatusUnsupported)
 }

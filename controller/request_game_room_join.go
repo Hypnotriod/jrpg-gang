@@ -21,6 +21,9 @@ func (c *GameController) handleJoinGameRoomRequest(requestRaw string, response *
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
+	if c.rooms.ExistsForUserId(request.UserId) {
+		return response.WithStatus(ResponseStatusNotAllowed)
+	}
 	if !c.rooms.Has(request.Data.RoomUid) {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
