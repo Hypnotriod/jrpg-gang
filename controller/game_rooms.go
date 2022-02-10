@@ -27,13 +27,14 @@ func NewGameRoom() *GameRoom {
 
 type GameRooms struct {
 	sync.RWMutex
-	uidGen          util.UidGen
+	uidGen          *util.UidGen
 	rooms           map[uint]*GameRoom
 	userIdToRoomUid map[UserId]uint
 }
 
 func NewGameRooms() *GameRooms {
 	r := &GameRooms{}
+	r.uidGen = util.NewUidGen()
 	r.rooms = make(map[uint]*GameRoom)
 	r.userIdToRoomUid = make(map[UserId]uint)
 	return r

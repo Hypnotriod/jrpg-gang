@@ -12,6 +12,7 @@ const (
 type Cell struct {
 	FractionIds []uint   `json:"fractionIds"`
 	Type        CellType `json:"type"`
+	Kind        string   `json:"kind,omitempty"`
 }
 
 func (c Cell) String() string {
