@@ -19,8 +19,8 @@ func (e *GameEngine) ExecuteAction(action GameAction) domain.ActionResult {
 }
 
 func (e *GameEngine) executeUseAction(action GameAction) domain.ActionResult {
-	unit := e.Battlefield.FindUnitById(action.Uid)
-	target := e.Battlefield.FindUnitById(action.TargetUid)
+	unit := e.Spot.Battlefield.FindUnitById(action.Uid)
+	target := e.Spot.Battlefield.FindUnitById(action.TargetUid)
 	if unit == nil || target == nil {
 		return *domain.NewActionResult(domain.ResultNotFound)
 	}
@@ -36,7 +36,7 @@ func (e *GameEngine) executeUseAction(action GameAction) domain.ActionResult {
 }
 
 func (e *GameEngine) executeEquipAction(action GameAction) domain.ActionResult {
-	unit := e.Battlefield.FindUnitById(action.Uid)
+	unit := e.Spot.Battlefield.FindUnitById(action.Uid)
 	if unit == nil {
 		return *domain.NewActionResult(domain.ResultNotFound)
 	}
@@ -44,7 +44,7 @@ func (e *GameEngine) executeEquipAction(action GameAction) domain.ActionResult {
 }
 
 func (e *GameEngine) executeUnequipAction(action GameAction) domain.ActionResult {
-	unit := e.Battlefield.FindUnitById(action.Uid)
+	unit := e.Spot.Battlefield.FindUnitById(action.Uid)
 	if unit == nil {
 		return *domain.NewActionResult(domain.ResultNotFound)
 	}
@@ -52,5 +52,5 @@ func (e *GameEngine) executeUnequipAction(action GameAction) domain.ActionResult
 }
 
 func (e *GameEngine) executeMoveAction(action GameAction) domain.ActionResult {
-	return e.Battlefield.MoveUnit(action.Uid, action.Position)
+	return e.Spot.Battlefield.MoveUnit(action.Uid, action.Position)
 }

@@ -7,15 +7,15 @@ import (
 
 type GameEngine struct {
 	*sync.RWMutex
-	Battlefield *Battlefield `json:"battlefield"`
-	State       *GameState   `json:"state"`
-	scenario    *GameScenario
+	Spot     *Spot      `json:"spot"`
+	State    *GameState `json:"state"`
+	scenario *GameScenario
 }
 
 func (e GameEngine) String() string {
 	return fmt.Sprintf(
-		"battlefield: {%v}, state: {%v}",
-		e.Battlefield,
+		"spot: {%v}, state: {%v}",
+		e.Spot,
 		e.State,
 	)
 }
@@ -33,12 +33,12 @@ func (e *GameEngine) GetActiveUnit() *GameUnit {
 	defer e.RUnlock()
 	e.RLock()
 	if uid, ok := e.State.GetActiveUnitUid(); ok {
-		return e.Battlefield.FindUnitById(uid)
+		return e.Spot.Battlefield.FindUnitById(uid)
 	}
 	return nil
 }
 
 func (e *GameEngine) prepare() {
-	e.Battlefield = e.scenario.CurrentBattlefield()
+	e.Spot = e.scenario.CurrentSpot()
 	e.State = NewGameState()
 }
