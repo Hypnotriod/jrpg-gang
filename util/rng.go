@@ -8,24 +8,24 @@ import (
 	"github.com/seehuhn/mt19937"
 )
 
-type UidGen struct {
+type RndGen struct {
 	uidCounter uint
 	rng        *rand.Rand
 }
 
-func NewUidGen() *UidGen {
-	g := &UidGen{}
+func NewRndGen() *RndGen {
+	g := &RndGen{}
 	g.rng = rand.New(mt19937.New())
 	g.rng.Seed(time.Now().UnixNano())
 	return g
 }
 
-func (g *UidGen) Next() uint {
+func (g *RndGen) NextUid() uint {
 	g.uidCounter++
 	return g.uidCounter
 }
 
-func (g *UidGen) Hash() string {
+func (g *RndGen) Hash() string {
 	data := make([]byte, 16)
 	for n := 0; n < len(data); n += 4 {
 		u := g.rng.Uint32()
@@ -35,4 +35,9 @@ func (g *UidGen) Hash() string {
 		data[n+3] = byte(u >> 0)
 	}
 	return hex.EncodeToString(data[:])
+}
+
+func (g *RndGen) PickInt(values []int) int {
+	index := g.rng.Int() % len(values)
+	return values[index]
 }

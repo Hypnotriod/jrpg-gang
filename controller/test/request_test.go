@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-var uidGen *util.UidGen = util.NewUidGen()
+var rndGen *util.RndGen = util.NewRndGen()
 
 func doJoinRequest(controller *controller.GameController, nickname string) (string, string) {
 	result := controller.HandleRequest(fmt.Sprintf(`{
@@ -18,7 +18,7 @@ func doJoinRequest(controller *controller.GameController, nickname string) (stri
 			"nickName": "%s"
 		}
 	}`,
-		uidGen.Hash(),
+		rndGen.Hash(),
 		nickname))
 	return result, parseUserId(result)
 }
@@ -30,7 +30,7 @@ func doRequest(controller *controller.GameController, requestType controller.Req
 		"type": "%s",
 		"data": {%s}
 	}`,
-		uidGen.Hash(),
+		rndGen.Hash(),
 		userId,
 		requestType,
 		data))

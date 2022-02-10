@@ -14,14 +14,14 @@ type User struct {
 
 type Users struct {
 	sync.RWMutex
-	uidgen           *util.UidGen
+	rndGen           *util.RndGen
 	users            map[UserId]*User
 	userNicknameToId map[string]UserId
 }
 
 func NewUsers() *Users {
 	s := &Users{}
-	s.uidgen = util.NewUidGen()
+	s.rndGen = util.NewRndGen()
 	s.users = make(map[UserId]*User)
 	s.userNicknameToId = make(map[string]UserId)
 	return s
@@ -61,7 +61,7 @@ func (s *Users) GetByNickname(nickname string) (User, bool) {
 func (s *Users) AddUser(user *User) {
 	defer s.Unlock()
 	s.Lock()
-	user.id = UserId(s.uidgen.Hash())
+	user.id = UserId(s.rndGen.Hash())
 	s.users[user.id] = user
 	s.userNicknameToId[user.Nickname] = user.id
 }

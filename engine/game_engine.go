@@ -25,8 +25,7 @@ func NewGameEngine(scenario *GameScenario) *GameEngine {
 	e := &GameEngine{}
 	e.RWMutex = &sync.RWMutex{}
 	e.scenario = scenario
-	e.Battlefield = scenario.CurrentBattlefield()
-	e.State = NewGameState()
+	e.prepare()
 	return e
 }
 
@@ -37,4 +36,9 @@ func (e *GameEngine) GetActiveUnit() *GameUnit {
 		return e.Battlefield.FindUnitById(uid)
 	}
 	return nil
+}
+
+func (e *GameEngine) prepare() {
+	e.Battlefield = e.scenario.CurrentBattlefield()
+	e.State = NewGameState()
 }

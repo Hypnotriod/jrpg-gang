@@ -18,7 +18,7 @@ func TestJoin(t *testing.T) {
 }
 
 func TestJoinAsync(t *testing.T) {
-	const n int = 10000
+	const n int = 1000
 	var result string
 	cntrl := controller.NewController()
 	ch := make(chan string)
