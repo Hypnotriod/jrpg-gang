@@ -3,6 +3,7 @@ package test
 import (
 	"fmt"
 	"jrpg-gang/controller"
+	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"regexp"
 	"strings"
@@ -10,16 +11,18 @@ import (
 
 var rndGen *util.RndGen = util.NewRndGen()
 
-func doJoinRequest(controller *controller.GameController, nickname string) (string, string) {
+func doJoinRequest(controller *controller.GameController, nickname string, class engine.GameUnitClass) (string, string) {
 	result := controller.HandleRequest(fmt.Sprintf(`{
 		"id": "%s",
 		"type": "join",
 		"data": {
-			"nickName": "%s"
+			"nickName": "%s",
+			"class": "%s"
 		}
 	}`,
 		rndGen.Hash(),
-		nickname))
+		nickname,
+		class))
 	return result, parseUserId(result)
 }
 
@@ -61,4 +64,13 @@ func parseStatus(str string) string {
 		return ""
 	}
 	return strings.Split(found[0], `"status":"`)[1]
+}
+
+func parseUid(str string) string {
+	re := regexp.MustCompile(`"uid":[0-9]+`)
+	found := re.FindAllString(str, 1)
+	if len(found) == 0 {
+		return ""
+	}
+	return strings.Split(found[0], `"uid":`)[1]
 }

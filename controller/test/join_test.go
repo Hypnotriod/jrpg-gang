@@ -3,17 +3,18 @@ package test
 import (
 	"fmt"
 	"jrpg-gang/controller"
+	"jrpg-gang/engine"
 	"testing"
 )
 
 func TestJoin(t *testing.T) {
 	cntrl := controller.NewController()
 	var result string
-	result, _ = doJoinRequest(cntrl, "999Megazilla")
+	result, _ = doJoinRequest(cntrl, "999Megazilla", engine.UnitClassMage)
 	fmt.Println(result)
-	result, _ = doJoinRequest(cntrl, "Megazilla999")
+	result, _ = doJoinRequest(cntrl, "Megazilla999", engine.UnitClassMage)
 	fmt.Println(result)
-	result, _ = doJoinRequest(cntrl, "Megazilla999")
+	result, _ = doJoinRequest(cntrl, "Megazilla999", engine.UnitClassMage)
 	fmt.Println(result)
 }
 
@@ -32,12 +33,12 @@ func TestJoinAsync(t *testing.T) {
 			fmt.Printf("join failed: %s\n", result)
 		}
 	}
-	_, userId := doJoinRequest(cntrl, "Host")
+	_, userId := doJoinRequest(cntrl, "Host", engine.UnitClassMage)
 	result = doRequest(cntrl, controller.RequestLobbyStatus, userId, ``)
 	fmt.Println(result)
 }
 
 func doJoin(ch chan<- string, controller *controller.GameController, i int) {
-	result, _ := doJoinRequest(controller, fmt.Sprintf("Megazilla%d", i))
+	result, _ := doJoinRequest(controller, fmt.Sprintf("Megazilla%d", i), engine.UnitClassRogue)
 	ch <- result
 }

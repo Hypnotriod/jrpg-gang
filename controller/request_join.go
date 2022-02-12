@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"regexp"
 )
@@ -8,7 +9,8 @@ import (
 type JoinRequest struct {
 	Request
 	Data struct {
-		Nickname string `json:"nickname"`
+		Nickname string               `json:"nickname"`
+		Class    engine.GameUnitClass `json:"class"`
 	} `json:"data"`
 }
 
@@ -30,10 +32,17 @@ func (c *GameController) handleJoinRequest(requestRaw string, response *Response
 	if _, ok := c.users.GetByNickname(request.Data.Nickname); ok {
 		return response.WithStatus(ResponseStatusAlreadyExists)
 	}
+	unit := NewGameUnitByClass(request.Data.Class)
+	if unit == nil {
+		return response.WithStatus(ResponseStatusMailformed)
+	}
 	user := &User{
 		Nickname: request.Data.Nickname,
+		Class:    request.Data.Class,
+		unit:     unit,
 	}
 	c.users.AddUser(user)
 	response.Data[DataKeyUserId] = user.id
+	response.Data[DataKeyUnit] = unit
 	return response.WithStatus(ResponseStatusOk)
 }

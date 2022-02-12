@@ -5,6 +5,14 @@ import (
 	"jrpg-gang/domain"
 )
 
+type GameUnitClass string
+
+const (
+	UnitClassTank  GameUnitClass = "tank"
+	UnitClassRogue GameUnitClass = "rogue"
+	UnitClassMage  GameUnitClass = "mage"
+)
+
 type GameUnit struct {
 	domain.Unit
 	FractionId uint   `json:"fractionId"`

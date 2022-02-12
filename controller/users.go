@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"sync"
 )
@@ -8,8 +9,10 @@ import (
 type UserId string
 
 type User struct {
-	Nickname string `json:"nickname"`
+	Nickname string               `json:"nickname"`
+	Class    engine.GameUnitClass `json:"class"`
 	id       UserId
+	unit     *engine.GameUnit
 }
 
 type Users struct {

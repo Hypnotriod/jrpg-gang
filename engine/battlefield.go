@@ -26,18 +26,19 @@ func NewBattlefield(matrix [][]Cell) *Battlefield {
 	return b
 }
 
-func (b *Battlefield) PlaceUnit(unit *GameUnit) domain.ActionResult {
+func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) domain.ActionResult {
 	result := domain.ActionResult{}
-	if !b.checkPositionBounds(unit.Position) {
+	if !b.checkPositionBounds(position) {
 		return *result.WithResultType(domain.ResultOutOfBounds)
 	}
-	if !b.checkPositionCanPlaceUnit(unit.Position) || !b.checkPositionFraction(unit.Position, unit.FractionId) {
+	if !b.checkPositionCanPlaceUnit(position) || !b.checkPositionFraction(position, unit.FractionId) {
 		return *result.WithResultType(domain.ResultNotAccomplished)
 	}
-	unitAtPosition := b.FindUnitByPosition(unit.Position)
+	unitAtPosition := b.FindUnitByPosition(position)
 	if unitAtPosition != nil {
 		return *result.WithResultType(domain.ResultNotEmpty)
 	}
+	unit.Position = position
 	b.Units = append(b.Units, unit)
 	return *result.WithResultType(domain.ResultAccomplished)
 }
