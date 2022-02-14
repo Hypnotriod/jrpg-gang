@@ -11,6 +11,7 @@ const (
 	GameAtionUse     GameAtionType = "use"
 	GameAtionEquip   GameAtionType = "equip"
 	GameAtionUnequip GameAtionType = "unequip"
+	GameAtionPlace   GameAtionType = "place"
 	GameAtionMove    GameAtionType = "move"
 )
 

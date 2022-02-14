@@ -5,6 +5,7 @@ import (
 	"jrpg-gang/domain"
 )
 
+type UserId string
 type GameUnitClass string
 
 const (
@@ -16,7 +17,7 @@ const (
 type GameUnit struct {
 	domain.Unit
 	FractionId uint   `json:"fractionId"`
-	UserId     string `json:"userId,omitempty"`
+	UserId     UserId `json:"userId,omitempty"`
 }
 
 func (u GameUnit) String() string {

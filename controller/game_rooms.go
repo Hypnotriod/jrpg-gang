@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"sync"
 )
@@ -29,14 +30,14 @@ type GameRooms struct {
 	sync.RWMutex
 	rndGen          *util.RndGen
 	rooms           map[uint]*GameRoom
-	userIdToRoomUid map[UserId]uint
+	userIdToRoomUid map[engine.UserId]uint
 }
 
 func NewGameRooms() *GameRooms {
 	r := &GameRooms{}
 	r.rndGen = util.NewRndGen()
 	r.rooms = make(map[uint]*GameRoom)
-	r.userIdToRoomUid = make(map[UserId]uint)
+	r.userIdToRoomUid = make(map[engine.UserId]uint)
 	return r
 }
 
@@ -48,7 +49,7 @@ func (r *GameRooms) Add(room *GameRoom) {
 	r.userIdToRoomUid[room.Host.id] = room.Uid
 }
 
-func (r *GameRooms) RemoveByHostId(hostId UserId) bool {
+func (r *GameRooms) RemoveByHostId(hostId engine.UserId) bool {
 	defer r.Unlock()
 	r.Lock()
 	roomUid, ok := r.userIdToRoomUid[hostId]
@@ -82,7 +83,7 @@ func (r *GameRooms) AddUser(roomUid uint, user User) bool {
 	return true
 }
 
-func (r *GameRooms) RemoveUser(userId UserId) bool {
+func (r *GameRooms) RemoveUser(userId engine.UserId) bool {
 	defer r.Unlock()
 	r.Lock()
 	roomUid, ok := r.userIdToRoomUid[userId]
@@ -114,7 +115,7 @@ func (r *GameRooms) Has(uid uint) bool {
 	return ok
 }
 
-func (r *GameRooms) ExistsForUserId(userId UserId) bool {
+func (r *GameRooms) ExistsForUserId(userId engine.UserId) bool {
 	defer r.RUnlock()
 	r.RLock()
 	roomUid, ok := r.userIdToRoomUid[userId]
@@ -125,7 +126,7 @@ func (r *GameRooms) ExistsForUserId(userId UserId) bool {
 	return present
 }
 
-func (r *GameRooms) ExistsForHostId(hostId UserId) bool {
+func (r *GameRooms) ExistsForHostId(hostId engine.UserId) bool {
 	defer r.RUnlock()
 	r.RLock()
 	roomUid, ok := r.userIdToRoomUid[hostId]
@@ -139,7 +140,7 @@ func (r *GameRooms) ExistsForHostId(hostId UserId) bool {
 	return room.Host.id == hostId
 }
 
-func (r *GameRooms) GetByUserId(userId UserId) (GameRoom, bool) {
+func (r *GameRooms) GetByUserId(userId engine.UserId) (GameRoom, bool) {
 	defer r.RUnlock()
 	r.RLock()
 	roomUid, ok := r.userIdToRoomUid[userId]

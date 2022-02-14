@@ -7,8 +7,9 @@ import (
 )
 
 type Battlefield struct {
-	Matrix [][]Cell    `json:"matrix"`
-	Units  []*GameUnit `json:"units"`
+	Matrix     [][]Cell    `json:"matrix"`
+	Units      []*GameUnit `json:"units"`
+	unitsReady int
 }
 
 func (b Battlefield) String() string {
@@ -23,44 +24,49 @@ func NewBattlefield(matrix [][]Cell) *Battlefield {
 	b := &Battlefield{}
 	b.Matrix = matrix
 	b.Units = []*GameUnit{}
+	b.unitsReady = 0
 	return b
 }
 
-func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) domain.ActionResult {
+func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domain.ActionResult {
 	result := domain.ActionResult{}
+	if b.FindUnitById(unit.Uid) != nil {
+		return result.WithResultType(domain.ResultNotAllowed)
+	}
 	if !b.checkPositionBounds(position) {
-		return *result.WithResultType(domain.ResultOutOfBounds)
+		return result.WithResultType(domain.ResultOutOfBounds)
 	}
 	if !b.checkPositionCanPlaceUnit(position) || !b.checkPositionFraction(position, unit.FractionId) {
-		return *result.WithResultType(domain.ResultNotAccomplished)
+		return result.WithResultType(domain.ResultNotAccomplished)
 	}
 	unitAtPosition := b.FindUnitByPosition(position)
 	if unitAtPosition != nil {
-		return *result.WithResultType(domain.ResultNotEmpty)
+		return result.WithResultType(domain.ResultNotEmpty)
 	}
 	unit.Position = position
 	b.Units = append(b.Units, unit)
-	return *result.WithResultType(domain.ResultAccomplished)
+	b.unitsReady++
+	return result.WithResultType(domain.ResultAccomplished)
 }
 
-func (b *Battlefield) MoveUnit(uid uint, position domain.Position) domain.ActionResult {
+func (b *Battlefield) MoveUnit(uid uint, position domain.Position) *domain.ActionResult {
 	result := domain.ActionResult{}
 	if !b.checkPositionBounds(position) {
-		return *result.WithResultType(domain.ResultOutOfBounds)
+		return result.WithResultType(domain.ResultOutOfBounds)
 	}
 	unit := b.FindUnitById(uid)
-	if !b.checkPositionCanPlaceUnit(unit.Position) || !b.checkPositionFraction(unit.Position, unit.FractionId) {
-		return *result.WithResultType(domain.ResultNotAccomplished)
+	if !b.checkPositionCanPlaceUnit(position) || !b.checkPositionFraction(position, unit.FractionId) {
+		return result.WithResultType(domain.ResultNotAccomplished)
 	}
 	unitAtPosition := b.FindUnitByPosition(position)
 	if unit == nil {
-		return *result.WithResultType(domain.ResultNotFound)
+		return result.WithResultType(domain.ResultNotFound)
 	}
 	if unitAtPosition != nil {
-		return *result.WithResultType(domain.ResultNotEmpty)
+		return result.WithResultType(domain.ResultNotEmpty)
 	}
 	unit.Position = position
-	return *result.WithResultType(domain.ResultAccomplished)
+	return result.WithResultType(domain.ResultAccomplished)
 }
 
 func (b *Battlefield) FindUnitById(uid uint) *GameUnit {
@@ -101,4 +107,8 @@ func (b *Battlefield) FilterSurvivors() {
 		}
 	}
 	b.Units = survivedUnits
+}
+
+func (b *Battlefield) UnitsReady() int {
+	return b.unitsReady
 }

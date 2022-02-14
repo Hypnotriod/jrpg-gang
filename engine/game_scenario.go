@@ -20,9 +20,10 @@ func (s GameScenario) String() string {
 	)
 }
 
-func (s *GameScenario) Initialize() {
+func (s *GameScenario) Initialize(actors []*GameUnit) {
 	s.pathIndex = 0
 	s.rndGen = util.NewRndGen()
+	s.prepareMainActors(actors)
 	s.asignUids()
 	s.pickSpot()
 }
@@ -53,22 +54,32 @@ func (s *GameScenario) pickSpot() {
 func (s *GameScenario) asignUids() {
 	for i := range s.Spots {
 		for _, unit := range s.Spots[i].Battlefield.Units {
-			unit.Uid = s.rndGen.NextUid()
-			for j := range unit.Inventory.Ammunition {
-				unit.Inventory.Ammunition[j].Uid = s.rndGen.NextUid()
-			}
-			for j := range unit.Inventory.Armor {
-				unit.Inventory.Armor[j].Uid = s.rndGen.NextUid()
-			}
-			for j := range unit.Inventory.Disposable {
-				unit.Inventory.Disposable[j].Uid = s.rndGen.NextUid()
-			}
-			for j := range unit.Inventory.Magic {
-				unit.Inventory.Magic[j].Uid = s.rndGen.NextUid()
-			}
-			for j := range unit.Inventory.Weapon {
-				unit.Inventory.Weapon[j].Uid = s.rndGen.NextUid()
-			}
+			s.prepareUnit(unit)
 		}
+	}
+}
+
+func (s *GameScenario) prepareUnit(unit *GameUnit) {
+	unit.Uid = s.rndGen.NextUid()
+	for j := range unit.Inventory.Ammunition {
+		unit.Inventory.Ammunition[j].Uid = s.rndGen.NextUid()
+	}
+	for j := range unit.Inventory.Armor {
+		unit.Inventory.Armor[j].Uid = s.rndGen.NextUid()
+	}
+	for j := range unit.Inventory.Disposable {
+		unit.Inventory.Disposable[j].Uid = s.rndGen.NextUid()
+	}
+	for j := range unit.Inventory.Magic {
+		unit.Inventory.Magic[j].Uid = s.rndGen.NextUid()
+	}
+	for j := range unit.Inventory.Weapon {
+		unit.Inventory.Weapon[j].Uid = s.rndGen.NextUid()
+	}
+}
+
+func (s *GameScenario) prepareMainActors(actors []*GameUnit) {
+	for i := range actors {
+		s.prepareUnit(actors[i])
 	}
 }

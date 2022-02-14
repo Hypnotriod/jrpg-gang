@@ -6,13 +6,24 @@ import (
 	"sort"
 )
 
+type GamePhase string
+
+const (
+	GamePhaseNone             GamePhase = "none"
+	GamePhasePlaceUnit        GamePhase = "placeUnit"
+	GamePhaseMakeMoveOrAction GamePhase = "makeMoveOrAction"
+	GamePhaseMakeAction       GamePhase = "makeAction"
+)
+
 type GameState struct {
-	ActiveUnitsQueue []uint `json:"activeUnitsQueue"`
-	InactiveUnits    []uint `json:"inactiveUnits"`
+	Phase            GamePhase `json:"phase"`
+	ActiveUnitsQueue []uint    `json:"activeUnitsQueue"`
+	InactiveUnits    []uint    `json:"inactiveUnits"`
 }
 
 func NewGameState() *GameState {
 	s := &GameState{}
+	s.Phase = GamePhaseNone
 	s.ActiveUnitsQueue = make([]uint, 0, 10)
 	s.InactiveUnits = make([]uint, 0, 10)
 	return s
@@ -20,9 +31,10 @@ func NewGameState() *GameState {
 
 func (s GameState) String() string {
 	return fmt.Sprintf(
-		"active units queue: {%v}, inactive units: {%v}",
+		"active units queue: {%v}, inactive units: {%v}, phase: %s",
 		util.AsCommaSeparatedSlice(s.ActiveUnitsQueue),
 		util.AsCommaSeparatedSlice(s.InactiveUnits),
+		s.Phase,
 	)
 }
 
@@ -38,25 +50,19 @@ func (s *GameState) MakeUnitsQueue(units []*GameUnit) {
 }
 
 func (s *GameState) UpdateUnitsQueue(units []*GameUnit) {
+	if len(s.ActiveUnitsQueue) == 0 {
+		return
+	}
 	activeUnits := []*GameUnit{}
 	for _, unit := range units {
-		if s.IsUnitActive(unit.Uid) {
+		if s.isUnitActive(unit.Uid) {
 			activeUnits = append(activeUnits, unit)
 		}
 	}
 	s.ActiveUnitsQueue = make([]uint, 0, len(activeUnits))
-	sort.SliceStable(activeUnits, func(i, j int) bool {
+	sort.SliceStable(s.ActiveUnitsQueue, func(i, j int) bool {
 		return units[i].TotalInitiative() < units[j].TotalInitiative()
 	})
-}
-
-func (s *GameState) IsUnitActive(uid uint) bool {
-	for _, unitUid := range s.ActiveUnitsQueue {
-		if unitUid == uid {
-			return true
-		}
-	}
-	return false
 }
 
 func (s *GameState) ShiftUnitsQueue() {
@@ -66,9 +72,27 @@ func (s *GameState) ShiftUnitsQueue() {
 	}
 }
 
-func (s *GameState) GetActiveUnitUid() (uint, bool) {
+func (s *GameState) GetCurrentActiveUnitUid() (uint, bool) {
 	if len(s.ActiveUnitsQueue) == 0 {
 		return 0, false
 	}
 	return s.ActiveUnitsQueue[0], true
+}
+
+func (s *GameState) IsCurrentActiveUnit(unit *GameUnit) bool {
+	uid, ok := s.GetCurrentActiveUnitUid()
+	return ok && unit.Uid == uid
+}
+
+func (s *GameState) ChangePhase(phase GamePhase) {
+	s.Phase = phase
+}
+
+func (s *GameState) isUnitActive(uid uint) bool {
+	for _, unitUid := range s.ActiveUnitsQueue {
+		if unitUid == uid {
+			return true
+		}
+	}
+	return false
 }

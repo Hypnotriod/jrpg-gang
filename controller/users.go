@@ -6,38 +6,36 @@ import (
 	"sync"
 )
 
-type UserId string
-
 type User struct {
 	Nickname string               `json:"nickname"`
 	Class    engine.GameUnitClass `json:"class"`
-	id       UserId
+	id       engine.UserId
 	unit     *engine.GameUnit
 }
 
 type Users struct {
 	sync.RWMutex
 	rndGen           *util.RndGen
-	users            map[UserId]*User
-	userNicknameToId map[string]UserId
+	users            map[engine.UserId]*User
+	userNicknameToId map[string]engine.UserId
 }
 
 func NewUsers() *Users {
 	s := &Users{}
 	s.rndGen = util.NewRndGen()
-	s.users = make(map[UserId]*User)
-	s.userNicknameToId = make(map[string]UserId)
+	s.users = make(map[engine.UserId]*User)
+	s.userNicknameToId = make(map[string]engine.UserId)
 	return s
 }
 
-func (s *Users) Get(userId UserId) (User, bool) {
+func (s *Users) Get(userId engine.UserId) (User, bool) {
 	defer s.RUnlock()
 	s.RLock()
 	user, ok := s.users[userId]
 	return *user, ok
 }
 
-func (s *Users) Has(userId UserId) bool {
+func (s *Users) Has(userId engine.UserId) bool {
 	defer s.RUnlock()
 	s.RLock()
 	_, exists := s.users[userId]
@@ -64,7 +62,7 @@ func (s *Users) GetByNickname(nickname string) (User, bool) {
 func (s *Users) AddUser(user *User) {
 	defer s.Unlock()
 	s.Lock()
-	user.id = UserId(s.rndGen.Hash())
+	user.id = engine.UserId(s.rndGen.Hash())
 	s.users[user.id] = user
 	s.userNicknameToId[user.Nickname] = user.id
 }

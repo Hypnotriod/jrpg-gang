@@ -9,6 +9,7 @@ type GameEngine struct {
 	*sync.RWMutex
 	Spot     *Spot      `json:"spot"`
 	State    *GameState `json:"state"`
+	actors   []*GameUnit
 	scenario *GameScenario
 }
 
@@ -20,19 +21,18 @@ func (e GameEngine) String() string {
 	)
 }
 
-func NewGameEngine(scenario *GameScenario) *GameEngine {
-	scenario.Initialize()
+func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
+	scenario.Initialize(actors)
 	e := &GameEngine{}
 	e.RWMutex = &sync.RWMutex{}
 	e.scenario = scenario
+	e.actors = actors
 	e.prepare()
 	return e
 }
 
-func (e *GameEngine) GetActiveUnit() *GameUnit {
-	defer e.RUnlock()
-	e.RLock()
-	if uid, ok := e.State.GetActiveUnitUid(); ok {
+func (e *GameEngine) getActiveUnit() *GameUnit {
+	if uid, ok := e.State.GetCurrentActiveUnitUid(); ok {
 		return e.Spot.Battlefield.FindUnitById(uid)
 	}
 	return nil
@@ -41,4 +41,13 @@ func (e *GameEngine) GetActiveUnit() *GameUnit {
 func (e *GameEngine) prepare() {
 	e.Spot = e.scenario.CurrentSpot()
 	e.State = NewGameState()
+}
+
+func (e *GameEngine) findActorByUserId(userId UserId) *GameUnit {
+	for i := 0; i < len(e.actors); i++ {
+		if e.actors[i].UserId == userId {
+			return e.actors[i]
+		}
+	}
+	return nil
 }

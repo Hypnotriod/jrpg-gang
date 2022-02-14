@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/engine"
 	"jrpg-gang/util"
 )
 
@@ -16,9 +17,9 @@ const (
 )
 
 type Request struct {
-	Type   RequestType `json:"type"`
-	Id     string      `json:"id"`
-	UserId UserId      `json:"userId,omitempty"`
+	Type   RequestType   `json:"type"`
+	Id     string        `json:"id"`
+	UserId engine.UserId `json:"userId,omitempty"`
 }
 
 func parseRequest(requestRaw string) *Request {
