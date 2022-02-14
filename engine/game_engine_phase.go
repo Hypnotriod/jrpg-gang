@@ -7,6 +7,11 @@ func (e *GameEngine) UpdatePhase() {
 	if e.State.Phase == GamePhasePlaceUnit && e.Spot.Battlefield.UnitsReady() == len(e.actors) {
 		e.startRound()
 	}
+	if e.State.Phase == GamePhaseActionComplete {
+		e.State.ShiftUnitsQueue()
+		e.State.UpdateUnitsQueue(e.Spot.Battlefield.Units)
+		// todo: prepare next turn
+	}
 }
 
 func (e *GameEngine) startRound() {
@@ -19,8 +24,7 @@ func (e *GameEngine) onUnitMove() {
 }
 
 func (e *GameEngine) onUnitAction() {
-	e.State.ShiftUnitsQueue()
-	e.State.UpdateUnitsQueue(e.Spot.Battlefield.Units)
+	e.State.ChangePhase(GamePhaseActionComplete)
 }
 
 func (e *GameEngine) endRound() EndTurnResult {

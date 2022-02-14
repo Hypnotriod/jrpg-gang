@@ -13,6 +13,7 @@ const (
 	GamePhasePlaceUnit        GamePhase = "placeUnit"
 	GamePhaseMakeMoveOrAction GamePhase = "makeMoveOrAction"
 	GamePhaseMakeAction       GamePhase = "makeAction"
+	GamePhaseActionComplete   GamePhase = "actionComplete"
 )
 
 type GameState struct {
