@@ -159,14 +159,12 @@ func (r *GameRooms) ResponseList() *[]GameRoom {
 	r.RLock()
 	rooms := []GameRoom{}
 	for i := range r.rooms {
-		if !r.rooms[i].IsFull() {
-			rooms = append(rooms, GameRoom{
-				Uid:         r.rooms[i].Uid,
-				Host:        r.rooms[i].Host,
-				Capacity:    r.rooms[i].Capacity,
-				JoinedUsers: r.rooms[i].JoinedUsers,
-			})
-		}
+		rooms = append(rooms, GameRoom{
+			Uid:         r.rooms[i].Uid,
+			Host:        r.rooms[i].Host,
+			Capacity:    r.rooms[i].Capacity,
+			JoinedUsers: r.rooms[i].JoinedUsers,
+		})
 	}
 	return &rooms
 }

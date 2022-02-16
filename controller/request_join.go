@@ -36,11 +36,9 @@ func (c *GameController) handleJoinRequest(requestRaw string, response *Response
 	if unit == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	user := &User{
-		Nickname: request.Data.Nickname,
-		Class:    request.Data.Class,
-		unit:     unit,
-	}
+	user := NewUser(request.Data.Nickname,
+		request.Data.Class,
+		unit)
 	c.users.AddUser(user)
 	response.Data[DataKeyUserId] = user.id
 	response.Data[DataKeyUnit] = unit

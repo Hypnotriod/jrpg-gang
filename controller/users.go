@@ -9,8 +9,20 @@ import (
 type User struct {
 	Nickname string               `json:"nickname"`
 	Class    engine.GameUnitClass `json:"class"`
+	Level    uint                 `json:"level"`
 	id       engine.UserId
 	unit     *engine.GameUnit
+}
+
+func NewUser(nickname string,
+	class engine.GameUnitClass,
+	unit *engine.GameUnit) *User {
+	u := &User{}
+	u.Nickname = nickname
+	u.Class = class
+	u.Level = unit.Stats.Progress.Level
+	u.unit = unit
+	return u
 }
 
 type Users struct {
