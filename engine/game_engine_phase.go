@@ -19,14 +19,6 @@ func (e *GameEngine) startRound() {
 	e.State.ChangePhase(GamePhaseMakeMoveOrAction)
 }
 
-func (e *GameEngine) onUnitMove() {
-	e.State.ChangePhase(GamePhaseMakeAction)
-}
-
-func (e *GameEngine) onUnitAction() {
-	e.State.ChangePhase(GamePhaseActionComplete)
-}
-
 func (e *GameEngine) endRound() EndTurnResult {
 	result := EndTurnResult{}
 	for _, unit := range e.Spot.Battlefield.Units {
@@ -36,4 +28,12 @@ func (e *GameEngine) endRound() EndTurnResult {
 	}
 	e.Spot.Battlefield.FilterSurvivors()
 	return result
+}
+
+func (e *GameEngine) onUnitMoveAction() {
+	e.State.ChangePhase(GamePhaseMakeAction)
+}
+
+func (e *GameEngine) onUnitUseAction() {
+	e.State.ChangePhase(GamePhaseActionComplete)
 }

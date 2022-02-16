@@ -2,12 +2,13 @@ package engine
 
 import (
 	"fmt"
+	"jrpg-gang/domain"
 	"jrpg-gang/util"
 )
 
 type GameScenario struct {
-	Spots     []Spot  `json:"spots"`
-	Path      [][]int `json:"path"`
+	Spots     []Spot        `json:"spots"`
+	Path      []map[int]int `json:"path"`
 	spot      *Spot
 	pathIndex int
 	rndGen    *util.RndGen
@@ -23,8 +24,8 @@ func (s GameScenario) String() string {
 func (s *GameScenario) Initialize(actors []*GameUnit) {
 	s.pathIndex = 0
 	s.rndGen = util.NewRndGen()
-	s.prepareMainActors(actors)
-	s.asignUids()
+	s.prepareActors(actors)
+	s.prepareUnits()
 	s.pickSpot()
 }
 
@@ -47,11 +48,11 @@ func (s *GameScenario) CurrentBattlefield() *Battlefield {
 
 func (s *GameScenario) pickSpot() {
 	spots := s.Path[s.pathIndex]
-	index := s.rndGen.PickInt(spots)
+	index := s.rndGen.PickIntByWeight(spots)
 	s.spot = &s.Spots[index]
 }
 
-func (s *GameScenario) asignUids() {
+func (s *GameScenario) prepareUnits() {
 	for i := range s.Spots {
 		for _, unit := range s.Spots[i].Battlefield.Units {
 			s.prepareUnit(unit)
@@ -61,6 +62,27 @@ func (s *GameScenario) asignUids() {
 
 func (s *GameScenario) prepareUnit(unit *GameUnit) {
 	unit.Uid = s.rndGen.NextUid()
+	if unit.Damage == nil {
+		unit.Damage = []domain.DamageImpact{}
+	}
+	if unit.Modification == nil {
+		unit.Modification = []domain.UnitModificationImpact{}
+	}
+	if unit.Inventory.Ammunition == nil {
+		unit.Inventory.Ammunition = []domain.Ammunition{}
+	}
+	if unit.Inventory.Armor == nil {
+		unit.Inventory.Armor = []domain.Armor{}
+	}
+	if unit.Inventory.Disposable == nil {
+		unit.Inventory.Disposable = []domain.Disposable{}
+	}
+	if unit.Inventory.Magic == nil {
+		unit.Inventory.Magic = []domain.Magic{}
+	}
+	if unit.Inventory.Weapon == nil {
+		unit.Inventory.Weapon = []domain.Weapon{}
+	}
 	for j := range unit.Inventory.Ammunition {
 		unit.Inventory.Ammunition[j].Uid = s.rndGen.NextUid()
 	}
@@ -78,7 +100,7 @@ func (s *GameScenario) prepareUnit(unit *GameUnit) {
 	}
 }
 
-func (s *GameScenario) prepareMainActors(actors []*GameUnit) {
+func (s *GameScenario) prepareActors(actors []*GameUnit) {
 	for i := range actors {
 		s.prepareUnit(actors[i])
 	}

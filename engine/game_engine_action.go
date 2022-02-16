@@ -42,7 +42,7 @@ func (e *GameEngine) executeUseAction(action GameAction, userId UserId) *domain.
 	}
 	result := unit.UseInventoryItemOnTarget(&target.Unit, action.ItemUid)
 	if result.ResultType == domain.ResultAccomplished {
-		e.onUnitAction()
+		e.onUnitUseAction()
 	}
 	return result
 }
@@ -85,7 +85,7 @@ func (e *GameEngine) executeMoveAction(action GameAction, userId UserId) *domain
 	}
 	result := e.Spot.Battlefield.MoveUnit(action.Uid, action.Position)
 	if result.ResultType == domain.ResultAccomplished {
-		e.onUnitMove()
+		e.onUnitMoveAction()
 	}
 	return result
 }
