@@ -13,7 +13,7 @@ func NewGameUnitByClass(class engine.GameUnitClass) *engine.GameUnit {
 	case engine.UnitClassMage:
 		return newGameUnitMage()
 	case engine.UnitClassRogue:
-		return newGameUnitMage()
+		return newGameUnitRogue()
 	}
 	return nil
 }
