@@ -7,9 +7,8 @@ import (
 )
 
 type Battlefield struct {
-	Matrix     [][]Cell    `json:"matrix"`
-	Units      []*GameUnit `json:"units"`
-	unitsReady int
+	Matrix [][]Cell    `json:"matrix"`
+	Units  []*GameUnit `json:"units"`
 }
 
 func (b Battlefield) String() string {
@@ -24,7 +23,6 @@ func NewBattlefield(matrix [][]Cell) *Battlefield {
 	b := &Battlefield{}
 	b.Matrix = matrix
 	b.Units = []*GameUnit{}
-	b.unitsReady = 0
 	return b
 }
 
@@ -45,7 +43,6 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domai
 	}
 	unit.Position = position
 	b.Units = append(b.Units, unit)
-	b.unitsReady++
 	return result.WithResultType(domain.ResultAccomplished)
 }
 
@@ -109,6 +106,23 @@ func (b *Battlefield) FilterSurvivors() {
 	b.Units = survivedUnits
 }
 
-func (b *Battlefield) UnitsReady() int {
-	return b.unitsReady
+func (b *Battlefield) ContainsUnits(units []*GameUnit) int {
+	var count int = 0
+	for _, u1 := range units {
+		for _, u2 := range b.Units {
+			if u1.Uid == u2.Uid {
+				count++
+				break
+			}
+		}
+	}
+	return count
+}
+
+func (b *Battlefield) FractionsLeft() int {
+	var fractions map[uint]struct{} = map[uint]struct{}{}
+	for _, unit := range b.Units {
+		fractions[unit.FractionId] = struct{}{}
+	}
+	return len(fractions)
 }

@@ -4,14 +4,34 @@ func (e *GameEngine) UpdatePhase() {
 	if e.State.Phase == GamePhaseNone {
 		e.State.ChangePhase(GamePhasePlaceUnit)
 	}
-	if e.State.Phase == GamePhasePlaceUnit && e.Spot.Battlefield.UnitsReady() == len(e.actors) {
+	if e.State.Phase == GamePhasePlaceUnit &&
+		e.Spot.Battlefield.ContainsUnits(e.actors) == len(e.actors) {
 		e.startRound()
 	}
 	if e.State.Phase == GamePhaseActionComplete {
-		e.State.ShiftUnitsQueue()
-		e.State.UpdateUnitsQueue(e.Spot.Battlefield.Units)
-		// todo: prepare next turn
+		e.processActionComplete()
 	}
+	e.processAI()
+}
+
+func (e *GameEngine) processActionComplete() {
+	e.State.ShiftUnitsQueue()
+	e.State.UpdateUnitsQueue(e.Spot.Battlefield.Units)
+	if !e.State.HasActiveUnits() {
+		e.processRoundComplete()
+	} else {
+		e.processNextTurn()
+	}
+}
+
+func (e *GameEngine) processRoundComplete() {
+	e.endRound()
+	// todo: check battle over
+	e.startRound()
+}
+
+func (e *GameEngine) processNextTurn() {
+	e.State.ChangePhase(GamePhaseMakeMoveOrAction)
 }
 
 func (e *GameEngine) startRound() {

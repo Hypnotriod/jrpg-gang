@@ -89,6 +89,10 @@ func (s *GameState) ChangePhase(phase GamePhase) {
 	s.Phase = phase
 }
 
+func (s *GameState) HasActiveUnits() bool {
+	return len(s.ActiveUnitsQueue) != 0
+}
+
 func (s *GameState) isUnitActive(uid uint) bool {
 	for _, unitUid := range s.ActiveUnitsQueue {
 		if unitUid == uid {

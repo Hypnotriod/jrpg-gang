@@ -6,6 +6,8 @@ func (e *GameEngine) ExecuteAction(action GameAction, userId UserId) *domain.Act
 	defer e.Unlock()
 	e.Lock()
 	switch action.Action {
+	case GameAtionPlace:
+		return e.executePlaceAction(action, userId)
 	case GameAtionUse:
 		return e.executeUseAction(action, userId)
 	case GameAtionEquip:
@@ -14,10 +16,19 @@ func (e *GameEngine) ExecuteAction(action GameAction, userId UserId) *domain.Act
 		return e.executeUnequipAction(action, userId)
 	case GameAtionMove:
 		return e.executeMoveAction(action, userId)
-	case GameAtionPlace:
-		return e.executePlaceAction(action, userId)
 	}
 	return domain.NewActionResult(domain.ResultNotAccomplished)
+}
+
+func (e *GameEngine) executePlaceAction(action GameAction, userId UserId) *domain.ActionResult {
+	if e.State.Phase != GamePhasePlaceUnit {
+		return domain.NewActionResult(domain.ResultNotAllowed)
+	}
+	unit := e.findActorByUserId(userId)
+	if unit == nil {
+		return domain.NewActionResult(domain.ResultNotAllowed)
+	}
+	return e.Spot.Battlefield.PlaceUnit(unit, action.Position)
 }
 
 func (e *GameEngine) executeUseAction(action GameAction, userId UserId) *domain.ActionResult {
@@ -88,15 +99,4 @@ func (e *GameEngine) executeMoveAction(action GameAction, userId UserId) *domain
 		e.onUnitMoveAction()
 	}
 	return result
-}
-
-func (e *GameEngine) executePlaceAction(action GameAction, userId UserId) *domain.ActionResult {
-	if e.State.Phase != GamePhasePlaceUnit {
-		return domain.NewActionResult(domain.ResultNotAllowed)
-	}
-	unit := e.findActorByUserId(userId)
-	if unit == nil {
-		return domain.NewActionResult(domain.ResultNotAllowed)
-	}
-	return e.Spot.Battlefield.PlaceUnit(unit, action.Position)
 }
