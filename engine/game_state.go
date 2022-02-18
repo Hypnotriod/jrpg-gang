@@ -11,9 +11,11 @@ type GamePhase string
 const (
 	GamePhaseNone             GamePhase = "none"
 	GamePhasePlaceUnit        GamePhase = "placeUnit"
+	GamePhaseProcessAI        GamePhase = "processAI"
 	GamePhaseMakeMoveOrAction GamePhase = "makeMoveOrAction"
 	GamePhaseMakeAction       GamePhase = "makeAction"
 	GamePhaseActionComplete   GamePhase = "actionComplete"
+	GamePhaseBattleComplete   GamePhase = "battleComplete"
 )
 
 type GameState struct {

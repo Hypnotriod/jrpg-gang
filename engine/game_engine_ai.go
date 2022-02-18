@@ -1,15 +1,15 @@
 package engine
 
-func (e *GameEngine) processAI() {
-	for {
-		unit := e.getActiveUnit()
-		if unit == nil || len(unit.UserId) == 0 {
-			return
-		}
-		e.processUnitAI(unit)
+func (e *GameEngine) processAI(event *GameEvent) {
+	unit := e.getActiveUnit()
+	if len(unit.UserId) != 0 {
+		e.processUnitAI(event, unit)
+		e.state.ChangePhase(GamePhaseActionComplete)
+	} else {
+		e.state.ChangePhase(GamePhaseMakeMoveOrAction)
 	}
 }
 
-func (e *GameEngine) processUnitAI(unit *GameUnit) {
+func (e *GameEngine) processUnitAI(event *GameEvent, unit *GameUnit) {
 	// todo
 }

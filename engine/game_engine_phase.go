@@ -1,59 +1,65 @@
 package engine
 
-func (e *GameEngine) UpdatePhase() {
-	if e.State.Phase == GamePhaseNone {
-		e.State.ChangePhase(GamePhasePlaceUnit)
-	}
-	if e.State.Phase == GamePhasePlaceUnit &&
-		e.Spot.Battlefield.ContainsUnits(e.actors) == len(e.actors) {
+func (e *GameEngine) NextPhase(event *GameEvent) {
+	if e.state.Phase == GamePhaseNone {
+		e.state.ChangePhase(GamePhasePlaceUnit)
+	} else if e.state.Phase == GamePhasePlaceUnit &&
+		e.spot.Battlefield.ContainsUnits(e.actors) == len(e.actors) {
 		e.startRound()
+	} else if e.state.Phase == GamePhaseProcessAI {
+		e.processAI(event)
+	} else if e.state.Phase == GamePhaseActionComplete {
+		e.processActionComplete(event)
 	}
-	if e.State.Phase == GamePhaseActionComplete {
-		e.processActionComplete()
-	}
-	e.processAI()
 }
 
-func (e *GameEngine) processActionComplete() {
-	e.State.ShiftUnitsQueue()
-	e.State.UpdateUnitsQueue(e.Spot.Battlefield.Units)
-	if !e.State.HasActiveUnits() {
-		e.processRoundComplete()
+func (e *GameEngine) processActionComplete(event *GameEvent) {
+	e.state.ShiftUnitsQueue()
+	e.state.UpdateUnitsQueue(e.spot.Battlefield.Units)
+	if !e.state.HasActiveUnits() {
+		e.processRoundComplete(event)
 	} else {
 		e.processNextTurn()
 	}
 }
 
-func (e *GameEngine) processRoundComplete() {
-	e.endRound()
-	// todo: check battle over
-	e.startRound()
+func (e *GameEngine) processRoundComplete(event *GameEvent) {
+	e.endRound(event)
+	if e.spot.Battlefield.FractionsLeft() <= 1 {
+		e.processBattleComplete()
+	} else {
+		e.startRound()
+	}
+}
+
+func (e *GameEngine) processBattleComplete() {
+	e.state.ChangePhase(GamePhaseBattleComplete)
 }
 
 func (e *GameEngine) processNextTurn() {
-	e.State.ChangePhase(GamePhaseMakeMoveOrAction)
+	e.state.ChangePhase(GamePhaseProcessAI)
 }
 
 func (e *GameEngine) startRound() {
-	e.State.MakeUnitsQueue(e.Spot.Battlefield.Units)
-	e.State.ChangePhase(GamePhaseMakeMoveOrAction)
+	e.state.MakeUnitsQueue(e.spot.Battlefield.Units)
+	e.state.ChangePhase(GamePhaseProcessAI)
 }
 
-func (e *GameEngine) endRound() EndTurnResult {
-	result := EndTurnResult{}
-	for _, unit := range e.Spot.Battlefield.Units {
+func (e *GameEngine) endRound(event *GameEvent) {
+	result := &EndTurnResult{}
+	for _, unit := range e.spot.Battlefield.Units {
 		result.Recovery[unit.Uid] = unit.ApplyRecoverylOnNextTurn()
 		result.Damage[unit.Uid] = unit.ApplyDamageOnNextTurn()
 		unit.ReduceModificationOnNextTurn()
 	}
-	e.Spot.Battlefield.FilterSurvivors()
-	return result
+	e.spot.Battlefield.FilterSurvivors()
+	event.EndRoundResult = result
 }
 
 func (e *GameEngine) onUnitMoveAction() {
-	e.State.ChangePhase(GamePhaseMakeAction)
+	e.state.ChangePhase(GamePhaseMakeAction)
 }
 
 func (e *GameEngine) onUnitUseAction() {
-	e.State.ChangePhase(GamePhaseActionComplete)
+	e.state.ChangePhase(GamePhaseActionComplete)
 }
