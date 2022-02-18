@@ -21,9 +21,9 @@ func (s GameScenario) String() string {
 	)
 }
 
-func (s *GameScenario) Initialize(actors []*GameUnit) {
+func (s *GameScenario) Initialize(rndGen *util.RndGen, actors []*GameUnit) {
 	s.pathIndex = 0
-	s.rndGen = util.NewRndGen()
+	s.rndGen = rndGen
 	s.prepareActors(actors)
 	s.prepareUnits()
 	s.pickSpot()

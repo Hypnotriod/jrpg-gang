@@ -37,6 +37,10 @@ func (g *RndGen) Hash() string {
 	return hex.EncodeToString(data[:])
 }
 
+func (g *RndGen) PickIndex(n int) int {
+	return g.rng.Int() % n
+}
+
 func (g *RndGen) PickInt(values []int) int {
 	index := g.rng.Int() % len(values)
 	return values[index]

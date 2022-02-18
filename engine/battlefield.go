@@ -126,3 +126,16 @@ func (b *Battlefield) FractionsLeft() int {
 	}
 	return len(fractions)
 }
+
+func (b *Battlefield) FindReachableTargets(unit *GameUnit) map[uint]*GameUnit {
+	result := make(map[uint]*GameUnit)
+	for i := range unit.Inventory.Weapon {
+		weapon := &unit.Inventory.Weapon[i]
+		for _, target := range b.Units {
+			if target.FractionId != unit.FractionId && unit.CanReachWithWeapon(&target.Unit, weapon) {
+				result[weapon.Uid] = target
+			}
+		}
+	}
+	return result
+}

@@ -7,7 +7,7 @@ type EndTurnResult struct {
 	Recovery map[uint]domain.UnitRecovery `json:"recovery"`
 }
 
-type GameUserActionResult struct {
+type GameUnitActionResult struct {
 	Action GameAction          `json:"action"`
 	Result domain.ActionResult `json:"result"`
 }
@@ -15,6 +15,6 @@ type GameUserActionResult struct {
 type GameEvent struct {
 	State            *GameState            `json:"state,omitempty"`
 	Spot             *Spot                 `json:"spot,omitempty"`
-	UserActionResult *GameUserActionResult `json:"userActionResult,omitempty"`
+	UnitActionResult *GameUnitActionResult `json:"unitActionResult,omitempty"`
 	EndRoundResult   *EndTurnResult        `json:"endRoundResult,omitempty"`
 }

@@ -2,11 +2,13 @@ package engine
 
 import (
 	"fmt"
+	"jrpg-gang/util"
 	"sync"
 )
 
 type GameEngine struct {
 	*sync.RWMutex
+	rndGen   *util.RndGen
 	spot     *Spot
 	state    *GameState
 	actors   []*GameUnit
@@ -22,11 +24,12 @@ func (e GameEngine) String() string {
 }
 
 func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
-	scenario.Initialize(actors)
 	e := &GameEngine{}
 	e.RWMutex = &sync.RWMutex{}
 	e.scenario = scenario
 	e.actors = actors
+	e.rndGen = util.NewRndGen()
+	scenario.Initialize(e.rndGen, actors)
 	e.prepare()
 	return e
 }
