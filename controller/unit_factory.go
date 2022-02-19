@@ -66,7 +66,9 @@ func newGameUnitTank() *engine.GameUnit {
 				"hand": 2,
 				"leg": 2,
 				"weapon": 2
-			}
+			},
+			"damage": [],
+			"modification": []
 		}`)
 	return unit.(*engine.GameUnit)
 }
@@ -119,7 +121,9 @@ func newGameUnitRogue() *engine.GameUnit {
 				"hand": 2,
 				"leg": 2,
 				"weapon": 2
-			}
+			},
+			"damage": [],
+			"modification": []
 		}`)
 	return unit.(*engine.GameUnit)
 }
@@ -172,7 +176,9 @@ func newGameUnitMage() *engine.GameUnit {
 				"hand": 2,
 				"leg": 2,
 				"weapon": 2
-			}
+			},
+			"damage": [],
+			"modification": []
 		}`)
 	return unit.(*engine.GameUnit)
 }
