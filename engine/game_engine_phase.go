@@ -25,7 +25,7 @@ func (e *GameEngine) processActionComplete(event *GameEvent) {
 
 func (e *GameEngine) processRoundComplete(event *GameEvent) {
 	e.endRound(event)
-	if e.spot.Battlefield.FractionsLeft() <= 1 {
+	if e.spot.Battlefield.FractionsCount() <= 1 {
 		e.processBattleComplete()
 	} else {
 		e.startRound()

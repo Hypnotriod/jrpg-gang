@@ -3,7 +3,6 @@ package domain
 import (
 	"fmt"
 	"jrpg-gang/util"
-	"math"
 	"math/rand"
 	"time"
 
@@ -137,10 +136,5 @@ func (u *Unit) SetRng(rng *rand.Rand) {
 }
 
 func (u *Unit) CanReachWithWeapon(target *Unit, weapon *Weapon) bool {
-	distanceX := int(math.Abs(float64(target.Position.X - u.Position.X)))
-	distanceY := int(math.Abs(float64(target.Position.Y - u.Position.Y)))
-	return distanceX >= weapon.Range.MinimumX &&
-		distanceY >= weapon.Range.MinimumY &&
-		distanceY <= weapon.Range.MaximumX &&
-		distanceY <= weapon.Range.MaximumY
+	return weapon.Range.Check(u.Position, target.Position)
 }

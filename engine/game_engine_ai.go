@@ -1,5 +1,7 @@
 package engine
 
+import "jrpg-gang/domain"
+
 func (e *GameEngine) processAI(event *GameEvent) {
 	unit := e.getActiveUnit()
 	if len(unit.UserId) != 0 {
@@ -21,7 +23,23 @@ func (e *GameEngine) aiProcessUnit(event *GameEvent, unit *GameUnit) {
 }
 
 func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
-	// todo
+	position := domain.Position{}
+	for _, target := range e.spot.Battlefield.Units {
+		if target.FractionId == unit.FractionId {
+			continue
+		}
+		position.Y = target.Position.Y
+		position.X = target.Position.X + 1
+		if e.spot.Battlefield.CanMoveUnitTo(unit, position) {
+			e.spot.Battlefield.MoveUnit(target.Uid, position)
+			return true
+		}
+		position.X = target.Position.X - 1
+		if e.spot.Battlefield.CanMoveUnitTo(unit, position) {
+			e.spot.Battlefield.MoveUnit(target.Uid, position)
+			return true
+		}
+	}
 	return false
 }
 

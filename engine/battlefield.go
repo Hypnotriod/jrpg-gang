@@ -84,6 +84,12 @@ func (b *Battlefield) FindUnitByPosition(position domain.Position) *GameUnit {
 	return nil
 }
 
+func (b *Battlefield) CanMoveUnitTo(unit *GameUnit, position domain.Position) bool {
+	return b.checkPositionBounds(position) &&
+		b.checkPositionFraction(position, unit.FractionId) &&
+		b.checkPositionCanPlaceUnit(position)
+}
+
 func (b *Battlefield) checkPositionBounds(position domain.Position) bool {
 	return position.X >= 0 && position.Y >= 0 && position.X < len(b.Matrix) && position.Y < len(b.Matrix[0])
 }
@@ -119,8 +125,8 @@ func (b *Battlefield) ContainsUnits(units []*GameUnit) int {
 	return count
 }
 
-func (b *Battlefield) FractionsLeft() int {
-	var fractions map[uint]struct{} = map[uint]struct{}{}
+func (b *Battlefield) FractionsCount() int {
+	fractions := map[uint]struct{}{}
 	for _, unit := range b.Units {
 		fractions[unit.FractionId] = struct{}{}
 	}
@@ -128,7 +134,7 @@ func (b *Battlefield) FractionsLeft() int {
 }
 
 func (b *Battlefield) FindReachableTargets(unit *GameUnit) map[uint]*GameUnit {
-	result := make(map[uint]*GameUnit)
+	result := map[uint]*GameUnit{}
 	for i := range unit.Inventory.Weapon {
 		weapon := &unit.Inventory.Weapon[i]
 		for _, target := range b.Units {
