@@ -24,6 +24,7 @@ func newGameUnitTank() *engine.GameUnit {
 		&engine.GameUnit{},
 		`{
 			"name": "Tank",
+			"faction": 0,
 			"state": {
 				"health": 100,
 				"stamina": 100
@@ -79,6 +80,7 @@ func newGameUnitRogue() *engine.GameUnit {
 		&engine.GameUnit{},
 		`{
 			"name": "Rogue",
+			"faction": 0,
 			"state": {
 				"health": 100,
 				"stamina": 100
@@ -134,6 +136,7 @@ func newGameUnitMage() *engine.GameUnit {
 		&engine.GameUnit{},
 		`{
 			"name": "Mage",
+			"faction": 0,
 			"state": {
 				"health": 100,
 				"stamina": 100
