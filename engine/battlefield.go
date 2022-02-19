@@ -34,7 +34,7 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domai
 	if !b.checkPositionBounds(position) {
 		return result.WithResultType(domain.ResultOutOfBounds)
 	}
-	if !b.checkPositionCanPlaceUnit(position) || !b.checkPositionFraction(position, unit.FractionId) {
+	if !b.checkPositionCanPlaceUnit(position) || !b.checkPositionFaction(position, unit.Faction) {
 		return result.WithResultType(domain.ResultNotAccomplished)
 	}
 	unitAtPosition := b.FindUnitByPosition(position)
@@ -48,21 +48,22 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domai
 
 func (b *Battlefield) MoveUnit(uid uint, position domain.Position) *domain.ActionResult {
 	result := domain.ActionResult{}
-	if !b.checkPositionBounds(position) {
-		return result.WithResultType(domain.ResultOutOfBounds)
-	}
 	unit := b.FindUnitById(uid)
-	if !b.checkPositionCanPlaceUnit(position) || !b.checkPositionFraction(position, unit.FractionId) {
-		return result.WithResultType(domain.ResultNotAccomplished)
-	}
-	unitAtPosition := b.FindUnitByPosition(position)
 	if unit == nil {
 		return result.WithResultType(domain.ResultNotFound)
 	}
+	if !b.checkPositionBounds(position) {
+		return result.WithResultType(domain.ResultOutOfBounds)
+	}
+	if !b.checkPositionCanPlaceUnit(position) || !b.checkPositionFaction(position, unit.Faction) {
+		return result.WithResultType(domain.ResultNotAccomplished)
+	}
+	unitAtPosition := b.FindUnitByPosition(position)
 	if unitAtPosition != nil {
 		return result.WithResultType(domain.ResultNotEmpty)
 	}
 	unit.Position = position
+	b.UpdateCellsFactions()
 	return result.WithResultType(domain.ResultAccomplished)
 }
 
@@ -86,7 +87,7 @@ func (b *Battlefield) FindUnitByPosition(position domain.Position) *GameUnit {
 
 func (b *Battlefield) CanMoveUnitTo(unit *GameUnit, position domain.Position) bool {
 	return b.checkPositionBounds(position) &&
-		b.checkPositionFraction(position, unit.FractionId) &&
+		b.checkPositionFaction(position, unit.Faction) &&
 		b.checkPositionCanPlaceUnit(position)
 }
 
@@ -94,12 +95,35 @@ func (b *Battlefield) checkPositionBounds(position domain.Position) bool {
 	return position.X >= 0 && position.Y >= 0 && position.X < len(b.Matrix) && position.Y < len(b.Matrix[0])
 }
 
-func (b *Battlefield) checkPositionFraction(position domain.Position, fractionId uint) bool {
-	return b.Matrix[position.X][position.Y].ContainsFractionId(fractionId)
+func (b *Battlefield) checkPositionFaction(position domain.Position, faction GameUnitFaction) bool {
+	return b.Matrix[position.X][position.Y].ContainsFaction(faction)
 }
 
 func (b *Battlefield) checkPositionCanPlaceUnit(position domain.Position) bool {
 	return b.Matrix[position.X][position.Y].CanPlaceUnit()
+}
+
+func (b *Battlefield) UpdateCellsFactions() {
+	leftBound := -1
+	rightBound := len(b.Matrix[0])
+	for _, unit := range b.Units {
+		if unit.Faction == GameUnitFactionLeft {
+			leftBound = unit.Position.X
+		} else {
+			rightBound = unit.Position.X
+		}
+	}
+	for x := range b.Matrix {
+		for y := range b.Matrix[x] {
+			if x <= leftBound {
+				b.Matrix[x][y].Factions = []GameUnitFaction{GameUnitFactionLeft}
+			} else if x >= rightBound {
+				b.Matrix[x][y].Factions = []GameUnitFaction{GameUnitFactionRight}
+			} else {
+				b.Matrix[x][y].Factions = []GameUnitFaction{GameUnitFactionLeft, GameUnitFactionRight}
+			}
+		}
+	}
 }
 
 func (b *Battlefield) FilterSurvivors() {
@@ -125,12 +149,12 @@ func (b *Battlefield) ContainsUnits(units []*GameUnit) int {
 	return count
 }
 
-func (b *Battlefield) FractionsCount() int {
-	fractions := map[uint]struct{}{}
+func (b *Battlefield) FactionsCount() int {
+	factions := map[GameUnitFaction]struct{}{}
 	for _, unit := range b.Units {
-		fractions[unit.FractionId] = struct{}{}
+		factions[unit.Faction] = struct{}{}
 	}
-	return len(fractions)
+	return len(factions)
 }
 
 func (b *Battlefield) FindReachableTargets(unit *GameUnit) map[uint]*GameUnit {
@@ -138,7 +162,7 @@ func (b *Battlefield) FindReachableTargets(unit *GameUnit) map[uint]*GameUnit {
 	for i := range unit.Inventory.Weapon {
 		weapon := &unit.Inventory.Weapon[i]
 		for _, target := range b.Units {
-			if target.FractionId != unit.FractionId && unit.CanReachWithWeapon(&target.Unit, weapon) {
+			if target.Faction != unit.Faction && unit.CanReachWithWeapon(&target.Unit, weapon) {
 				result[weapon.Uid] = target
 			}
 		}

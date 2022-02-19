@@ -14,17 +14,24 @@ const (
 	UnitClassMage  GameUnitClass = "mage"
 )
 
+type GameUnitFaction uint
+
+const (
+	GameUnitFactionLeft  GameUnitFaction = 0
+	GameUnitFactionRight GameUnitFaction = 1
+)
+
 type GameUnit struct {
 	domain.Unit
-	FractionId uint   `json:"fractionId"`
-	UserId     UserId `json:"userId,omitempty"`
+	Faction GameUnitFaction `json:"faction"`
+	UserId  UserId          `json:"userId,omitempty"`
 }
 
 func (u GameUnit) String() string {
 	return fmt.Sprintf(
-		"%v, fraction: %d, user id: %s",
+		"%v, faction: %d, user id: %s",
 		u.Unit,
-		u.FractionId,
+		u.Faction,
 		u.UserId,
 	)
 }

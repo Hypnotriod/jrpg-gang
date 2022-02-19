@@ -24,20 +24,22 @@ func (e *GameEngine) aiProcessUnit(event *GameEvent, unit *GameUnit) {
 
 func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
 	position := domain.Position{}
+	ys := []int{-1, 0, 1}
 	for _, target := range e.spot.Battlefield.Units {
-		if target.FractionId == unit.FractionId {
+		if target.Faction == unit.Faction {
 			continue
 		}
-		position.Y = target.Position.Y
-		position.X = target.Position.X + 1
-		if e.spot.Battlefield.CanMoveUnitTo(unit, position) {
-			e.spot.Battlefield.MoveUnit(target.Uid, position)
-			return true
+		if target.Faction == GameUnitFactionLeft {
+			position.X = target.Position.X + 1
+		} else {
+			position.X = target.Position.X - 1
 		}
-		position.X = target.Position.X - 1
-		if e.spot.Battlefield.CanMoveUnitTo(unit, position) {
-			e.spot.Battlefield.MoveUnit(target.Uid, position)
-			return true
+		for _, y := range ys {
+			position.Y = target.Position.Y + y
+			if e.spot.Battlefield.CanMoveUnitTo(unit, position) {
+				e.spot.Battlefield.MoveUnit(target.Uid, position)
+				return true
+			}
 		}
 	}
 	return false
