@@ -10,8 +10,6 @@ func (e *GameEngine) NextPhase(event *GameEvent) {
 		e.processAI(event)
 	case GamePhaseActionComplete:
 		e.processActionComplete(event)
-	case GamePhaseRoundComplete:
-		e.processRoundComplete(event)
 	case GamePhaseBattleComplete:
 		e.processBattleComplete(event)
 	}
@@ -22,8 +20,7 @@ func (e *GameEngine) NextPhaseRequired() bool {
 		e.state.Phase == GamePhaseReadyForStartRound ||
 		e.state.Phase == GamePhaseMakeMoveOrActionAI ||
 		e.state.Phase == GamePhaseMakeActionAI ||
-		e.state.Phase == GamePhaseActionComplete ||
-		e.state.Phase == GamePhaseRoundComplete
+		e.state.Phase == GamePhaseActionComplete
 }
 
 func (e *GameEngine) processReadyToPlaceUnit() {
@@ -37,7 +34,7 @@ func (e *GameEngine) processStartRound() {
 
 func (e *GameEngine) processActionComplete(event *GameEvent) {
 	if !e.state.HasActiveUnits() {
-		e.state.ChangePhase(GamePhaseRoundComplete)
+		e.processRoundComplete(event)
 	} else {
 		e.switchToNextUnit()
 	}
@@ -77,7 +74,12 @@ func (e *GameEngine) endRound(event *GameEvent) {
 }
 
 func (e *GameEngine) onUnitMoveAction() {
-	e.state.ChangePhase(GamePhaseMakeAction)
+	unit := e.getActiveUnit()
+	if unit.HasUserId() {
+		e.state.ChangePhase(GamePhaseMakeAction)
+	} else {
+		e.state.ChangePhase(GamePhaseMakeActionAI)
+	}
 }
 
 func (e *GameEngine) onUnitUseAction() {
