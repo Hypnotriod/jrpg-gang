@@ -26,15 +26,19 @@ func (e *GameEngine) executePlaceAction(action GameAction, userId UserId) *domai
 	if unit == nil {
 		return domain.NewActionResult(domain.ResultNotAllowed)
 	}
-	return e.spot.Battlefield.PlaceUnit(unit, action.Position)
+	result := e.battlefield().PlaceUnit(unit, action.Position)
+	if result.ResultType == domain.ResultAccomplished {
+		e.onUnitPlaced()
+	}
+	return result
 }
 
 func (e *GameEngine) executeUseAction(action GameAction, userId UserId) *domain.ActionResult {
 	if e.state.Phase != GamePhaseMakeAction && e.state.Phase != GamePhaseMakeMoveOrAction {
 		return domain.NewActionResult(domain.ResultNotAllowed)
 	}
-	unit := e.spot.Battlefield.FindUnitById(action.Uid)
-	target := e.spot.Battlefield.FindUnitById(action.TargetUid)
+	unit := e.battlefield().FindUnitById(action.Uid)
+	target := e.battlefield().FindUnitById(action.TargetUid)
 	if unit == nil || target == nil {
 		return domain.NewActionResult(domain.ResultNotFound)
 	}
@@ -60,7 +64,7 @@ func (e *GameEngine) executeEquipAction(action GameAction, userId UserId) *domai
 	if e.state.Phase != GamePhaseMakeAction && e.state.Phase != GamePhaseMakeMoveOrAction {
 		return domain.NewActionResult(domain.ResultNotAllowed)
 	}
-	unit := e.spot.Battlefield.FindUnitById(action.Uid)
+	unit := e.battlefield().FindUnitById(action.Uid)
 	if unit == nil {
 		return domain.NewActionResult(domain.ResultNotFound)
 	}
@@ -74,7 +78,7 @@ func (e *GameEngine) executeUnequipAction(action GameAction, userId UserId) *dom
 	if e.state.Phase != GamePhaseMakeAction && e.state.Phase != GamePhaseMakeMoveOrAction {
 		return domain.NewActionResult(domain.ResultNotAllowed)
 	}
-	unit := e.spot.Battlefield.FindUnitById(action.Uid)
+	unit := e.battlefield().FindUnitById(action.Uid)
 	if unit == nil {
 		return domain.NewActionResult(domain.ResultNotFound)
 	}
@@ -88,11 +92,11 @@ func (e *GameEngine) executeMoveAction(action GameAction, userId UserId) *domain
 	if e.state.Phase != GamePhaseMakeMoveOrAction {
 		return domain.NewActionResult(domain.ResultNotAllowed)
 	}
-	unit := e.spot.Battlefield.FindUnitById(action.Uid)
+	unit := e.battlefield().FindUnitById(action.Uid)
 	if !e.state.IsCurrentActiveUnit(unit) || unit.UserId != userId {
 		return domain.NewActionResult(domain.ResultNotAllowed)
 	}
-	result := e.spot.Battlefield.MoveUnit(action.Uid, action.Position)
+	result := e.battlefield().MoveUnit(action.Uid, action.Position)
 	if result.ResultType == domain.ResultAccomplished {
 		e.onUnitMoveAction()
 	}

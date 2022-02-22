@@ -1,21 +1,24 @@
 package engine
 
 func (e *GameEngine) NextPhase(event *GameEvent) {
-	if e.state.Phase == GamePhaseNone {
+	switch e.state.Phase {
+	case GamePhaseReadyToPlaceUnit:
 		e.state.ChangePhase(GamePhasePlaceUnit)
-	} else if e.state.Phase == GamePhasePlaceUnit &&
-		e.spot.Battlefield.ContainsUnits(e.actors) == len(e.actors) {
+	case GamePhaseReadyForStartRound:
 		e.startRound()
-	} else if e.state.Phase == GamePhaseProcessAI {
+	case GamePhaseMakeMoveOrActionAI:
 		e.processAI(event)
-	} else if e.state.Phase == GamePhaseActionComplete {
+	case GamePhaseActionComplete:
 		e.processActionComplete(event)
 	}
 }
 
+func (e *GameEngine) NextPhaseRequired() bool {
+	return e.state.Phase != GamePhaseMakeMoveOrAction &&
+		e.state.Phase != GamePhaseMakeAction
+}
+
 func (e *GameEngine) processActionComplete(event *GameEvent) {
-	e.state.ShiftUnitsQueue()
-	e.state.UpdateUnitsQueue(e.spot.Battlefield.Units)
 	if !e.state.HasActiveUnits() {
 		e.processRoundComplete(event)
 	} else {
@@ -25,7 +28,7 @@ func (e *GameEngine) processActionComplete(event *GameEvent) {
 
 func (e *GameEngine) processRoundComplete(event *GameEvent) {
 	e.endRound(event)
-	if e.spot.Battlefield.FactionsCount() <= 1 {
+	if e.battlefield().FactionsCount() <= 1 {
 		e.processBattleComplete()
 	} else {
 		e.startRound()
@@ -37,22 +40,31 @@ func (e *GameEngine) processBattleComplete() {
 }
 
 func (e *GameEngine) processNextTurn() {
-	e.state.ChangePhase(GamePhaseProcessAI)
+	e.switchToNextUnit()
 }
 
 func (e *GameEngine) startRound() {
-	e.state.MakeUnitsQueue(e.spot.Battlefield.Units)
-	e.state.ChangePhase(GamePhaseProcessAI)
+	e.state.MakeUnitsQueue(e.battlefield().Units)
+	e.switchToNextUnit()
+}
+
+func (e *GameEngine) switchToNextUnit() {
+	unit := e.getActiveUnit()
+	if unit.HasUserId() {
+		e.state.ChangePhase(GamePhaseMakeMoveOrAction)
+	} else {
+		e.state.ChangePhase(GamePhaseMakeMoveOrActionAI)
+	}
 }
 
 func (e *GameEngine) endRound(event *GameEvent) {
 	result := &EndTurnResult{}
-	for _, unit := range e.spot.Battlefield.Units {
+	for _, unit := range e.battlefield().Units {
 		result.Recovery[unit.Uid] = unit.ApplyRecoverylOnNextTurn()
 		result.Damage[unit.Uid] = unit.ApplyDamageOnNextTurn()
 		unit.ReduceModificationOnNextTurn()
 	}
-	e.spot.Battlefield.FilterSurvivors()
+	e.battlefield().FilterSurvivors()
 	event.EndRoundResult = result
 }
 
@@ -61,5 +73,13 @@ func (e *GameEngine) onUnitMoveAction() {
 }
 
 func (e *GameEngine) onUnitUseAction() {
+	e.state.ShiftUnitsQueue()
+	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	e.state.ChangePhase(GamePhaseActionComplete)
+}
+
+func (e *GameEngine) onUnitPlaced() {
+	if e.battlefield().ContainsUnits(e.actors) == len(e.actors) {
+		e.state.ChangePhase(GamePhaseReadyForStartRound)
+	}
 }

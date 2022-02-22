@@ -9,13 +9,15 @@ import (
 type GamePhase string
 
 const (
-	GamePhaseNone             GamePhase = "none"
-	GamePhasePlaceUnit        GamePhase = "placeUnit"
-	GamePhaseProcessAI        GamePhase = "processAI"
-	GamePhaseMakeMoveOrAction GamePhase = "makeMoveOrAction"
-	GamePhaseMakeAction       GamePhase = "makeAction"
-	GamePhaseActionComplete   GamePhase = "actionComplete"
-	GamePhaseBattleComplete   GamePhase = "battleComplete"
+	GamePhaseReadyToPlaceUnit   GamePhase = "eeadyToPlaceUnit"
+	GamePhasePlaceUnit          GamePhase = "placeUnit"
+	GamePhaseReadyForStartRound GamePhase = "readyForStartRound"
+	GamePhaseMakeMoveOrActionAI GamePhase = "makeMoveOrActionAI"
+	GamePhaseMakeActionAI       GamePhase = "makeActionAI"
+	GamePhaseMakeMoveOrAction   GamePhase = "makeMoveOrAction"
+	GamePhaseMakeAction         GamePhase = "makeAction"
+	GamePhaseActionComplete     GamePhase = "actionComplete"
+	GamePhaseBattleComplete     GamePhase = "battleComplete"
 )
 
 type GameState struct {
@@ -26,7 +28,7 @@ type GameState struct {
 
 func NewGameState() *GameState {
 	s := &GameState{}
-	s.Phase = GamePhaseNone
+	s.Phase = GamePhaseReadyToPlaceUnit
 	s.ActiveUnitsQueue = make([]uint, 0, 10)
 	s.InactiveUnits = make([]uint, 0, 10)
 	return s

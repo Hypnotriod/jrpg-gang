@@ -4,28 +4,16 @@ import "jrpg-gang/domain"
 
 func (e *GameEngine) processAI(event *GameEvent) {
 	unit := e.getActiveUnit()
-	if len(unit.UserId) != 0 {
-		e.aiProcessUnit(event, unit)
-		e.state.ChangePhase(GamePhaseActionComplete)
-	} else {
-		e.state.ChangePhase(GamePhaseMakeMoveOrAction)
-	}
-}
-
-func (e *GameEngine) aiProcessUnit(event *GameEvent, unit *GameUnit) {
-	if e.aiTryToAttack(event, unit) {
-		return
-	}
-	if e.aiTryToMove(event, unit) {
-		e.aiTryToAttack(event, unit)
-		return
+	if !e.aiTryToAttack(event, unit) ||
+		!(e.state.Phase == GamePhaseMakeMoveOrAction && e.aiTryToMove(event, unit)) {
+		e.onUnitUseAction()
 	}
 }
 
 func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
 	position := domain.Position{}
 	yShift := []int{0, -1, 1}
-	for _, target := range e.spot.Battlefield.Units {
+	for _, target := range e.battlefield().Units {
 		if target.Faction == unit.Faction {
 			continue
 		}
@@ -36,8 +24,8 @@ func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
 		}
 		for _, y := range yShift {
 			position.Y = target.Position.Y + y
-			if e.spot.Battlefield.CanMoveUnitTo(unit, position) {
-				e.spot.Battlefield.MoveUnit(target.Uid, position)
+			if e.battlefield().CanMoveUnitTo(unit, position) {
+				e.aiMove(event, unit, position)
 				return true
 			}
 		}
@@ -45,8 +33,19 @@ func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
 	return false
 }
 
+func (e *GameEngine) aiMove(event *GameEvent, unit *GameUnit, position domain.Position) {
+	unitAction := &GameUnitActionResult{}
+	unitAction.Action = GameAction{
+		Action: GameAtionUse,
+		Uid:    unit.Uid,
+	}
+	unitAction.Result = *e.battlefield().MoveUnit(unit.Uid, position)
+	event.UnitActionResult = unitAction
+	e.onUnitMoveAction()
+}
+
 func (e *GameEngine) aiTryToAttack(event *GameEvent, unit *GameUnit) bool {
-	targets := e.spot.Battlefield.FindReachableTargets(unit)
+	targets := e.battlefield().FindReachableTargets(unit)
 	if len(targets) == 0 {
 		return false
 	}
@@ -73,4 +72,5 @@ func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target
 	}
 	unitAction.Result = *unit.UseInventoryItemOnTarget(&target.Unit, weaponUid)
 	event.UnitActionResult = unitAction
+	e.onUnitUseAction()
 }

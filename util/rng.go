@@ -17,6 +17,7 @@ func NewRndGen() *RndGen {
 	g := &RndGen{}
 	g.rng = rand.New(mt19937.New())
 	g.rng.Seed(time.Now().UnixNano())
+	g.uidCounter = 1
 	return g
 }
 
