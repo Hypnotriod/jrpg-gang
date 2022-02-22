@@ -3,13 +3,17 @@ package engine
 func (e *GameEngine) NextPhase(event *GameEvent) {
 	switch e.state.Phase {
 	case GamePhaseReadyToPlaceUnit:
-		e.state.ChangePhase(GamePhasePlaceUnit)
+		e.processReadyToPlaceUnit()
 	case GamePhaseReadyForStartRound:
-		e.startRound()
+		e.processStartRound()
 	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
 		e.processAI(event)
 	case GamePhaseActionComplete:
 		e.processActionComplete(event)
+	case GamePhaseRoundComplete:
+		e.processRoundComplete(event)
+	case GamePhaseBattleComplete:
+		e.processBattleComplete(event)
 	}
 }
 
@@ -18,37 +22,38 @@ func (e *GameEngine) NextPhaseRequired() bool {
 		e.state.Phase == GamePhaseReadyForStartRound ||
 		e.state.Phase == GamePhaseMakeMoveOrActionAI ||
 		e.state.Phase == GamePhaseMakeActionAI ||
-		e.state.Phase == GamePhaseActionComplete
+		e.state.Phase == GamePhaseActionComplete ||
+		e.state.Phase == GamePhaseRoundComplete
+}
+
+func (e *GameEngine) processReadyToPlaceUnit() {
+	e.state.ChangePhase(GamePhasePlaceUnit)
+}
+
+func (e *GameEngine) processStartRound() {
+	e.state.MakeUnitsQueue(e.battlefield().Units)
+	e.switchToNextUnit()
 }
 
 func (e *GameEngine) processActionComplete(event *GameEvent) {
 	if !e.state.HasActiveUnits() {
-		e.processRoundComplete(event)
+		e.state.ChangePhase(GamePhaseRoundComplete)
 	} else {
-		e.processNextTurn()
+		e.switchToNextUnit()
 	}
 }
 
 func (e *GameEngine) processRoundComplete(event *GameEvent) {
 	e.endRound(event)
 	if e.battlefield().FactionsCount() <= 1 {
-		e.processBattleComplete()
+		e.state.ChangePhase(GamePhaseBattleComplete)
 	} else {
-		e.startRound()
+		e.state.ChangePhase(GamePhaseReadyForStartRound)
 	}
 }
 
-func (e *GameEngine) processBattleComplete() {
-	e.state.ChangePhase(GamePhaseBattleComplete)
-}
-
-func (e *GameEngine) processNextTurn() {
-	e.switchToNextUnit()
-}
-
-func (e *GameEngine) startRound() {
-	e.state.MakeUnitsQueue(e.battlefield().Units)
-	e.switchToNextUnit()
+func (e *GameEngine) processBattleComplete(event *GameEvent) {
+	// todo
 }
 
 func (e *GameEngine) switchToNextUnit() {

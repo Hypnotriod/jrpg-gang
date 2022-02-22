@@ -17,6 +17,7 @@ const (
 	GamePhaseMakeMoveOrAction   GamePhase = "makeMoveOrAction"
 	GamePhaseMakeAction         GamePhase = "makeAction"
 	GamePhaseActionComplete     GamePhase = "actionComplete"
+	GamePhaseRoundComplete      GamePhase = "roundComplete"
 	GamePhaseBattleComplete     GamePhase = "battleComplete"
 )
 
