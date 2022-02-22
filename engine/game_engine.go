@@ -34,6 +34,18 @@ func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
 	return e
 }
 
+func (e *GameEngine) Dispose() {
+	e.scenario.Dispose()
+	e.state = nil
+	e.actors = nil
+	e.scenario = nil
+	e.rndGen = nil
+}
+
+func (e *GameEngine) GetPhase() GamePhase {
+	return e.state.Phase
+}
+
 func (e *GameEngine) battlefield() *Battlefield {
 	return &e.scenario.CurrentSpot().Battlefield
 }

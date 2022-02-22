@@ -9,9 +9,9 @@ import (
 type GameScenario struct {
 	Spots     []Spot        `json:"spots"`
 	Path      []map[int]int `json:"path"`
+	rndGen    *util.RndGen
 	spot      *Spot
 	pathIndex int
-	rndGen    *util.RndGen
 }
 
 func (s GameScenario) String() string {
@@ -27,6 +27,11 @@ func (s *GameScenario) Initialize(rndGen *util.RndGen, actors []*GameUnit) {
 	s.prepareActors(actors)
 	s.prepareUnits()
 	s.pickSpot()
+}
+
+func (s *GameScenario) Dispose() {
+	s.rndGen = nil
+	s.spot = nil
 }
 
 func (s *GameScenario) IsLastSpot() bool {

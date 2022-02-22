@@ -6,7 +6,7 @@ func (e *GameEngine) NextPhase(event *GameEvent) {
 		e.state.ChangePhase(GamePhasePlaceUnit)
 	case GamePhaseReadyForStartRound:
 		e.startRound()
-	case GamePhaseMakeMoveOrActionAI:
+	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
 		e.processAI(event)
 	case GamePhaseActionComplete:
 		e.processActionComplete(event)
@@ -14,8 +14,11 @@ func (e *GameEngine) NextPhase(event *GameEvent) {
 }
 
 func (e *GameEngine) NextPhaseRequired() bool {
-	return e.state.Phase != GamePhaseMakeMoveOrAction &&
-		e.state.Phase != GamePhaseMakeAction
+	return e.state.Phase == GamePhaseReadyToPlaceUnit ||
+		e.state.Phase == GamePhaseReadyForStartRound ||
+		e.state.Phase == GamePhaseMakeMoveOrActionAI ||
+		e.state.Phase == GamePhaseMakeActionAI ||
+		e.state.Phase == GamePhaseActionComplete
 }
 
 func (e *GameEngine) processActionComplete(event *GameEvent) {

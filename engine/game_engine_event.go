@@ -13,6 +13,7 @@ type GameUnitActionResult struct {
 }
 
 type GameEvent struct {
+	Phase            GamePhase             `json:"phase"`
 	State            *GameState            `json:"state"`
 	Spot             *Spot                 `json:"spot"`
 	UnitActionResult *GameUnitActionResult `json:"unitActionResult,omitempty"`
@@ -21,6 +22,7 @@ type GameEvent struct {
 
 func (e *GameEngine) NewGameEvent() *GameEvent {
 	event := &GameEvent{}
+	event.Phase = e.state.Phase
 	event.State = e.state
 	event.Spot = e.scenario.CurrentSpot()
 	return event
@@ -28,6 +30,7 @@ func (e *GameEngine) NewGameEvent() *GameEvent {
 
 func (e *GameEngine) NewGameEventWithUnitAction(action *GameAction) *GameEvent {
 	event := &GameEvent{}
+	event.Phase = e.state.Phase
 	event.UnitActionResult = &GameUnitActionResult{
 		Action: *action,
 	}

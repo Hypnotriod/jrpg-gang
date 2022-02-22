@@ -7,8 +7,9 @@ import (
 )
 
 type Battlefield struct {
-	Matrix [][]Cell    `json:"matrix"`
-	Units  []*GameUnit `json:"units"`
+	Matrix  [][]Cell    `json:"matrix"`
+	Units   []*GameUnit `json:"units"`
+	Corpses []*GameUnit `json:"corpses"`
 }
 
 func (b Battlefield) String() string {
@@ -23,7 +24,13 @@ func NewBattlefield(matrix [][]Cell) *Battlefield {
 	b := &Battlefield{}
 	b.Matrix = matrix
 	b.Units = []*GameUnit{}
+	b.Corpses = []*GameUnit{}
 	return b
+}
+
+func (b *Battlefield) Dispose() {
+	b.Units = nil
+	b.Corpses = nil
 }
 
 func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domain.ActionResult {
@@ -131,6 +138,8 @@ func (b *Battlefield) FilterSurvivors() {
 	for _, unit := range b.Units {
 		if unit.State.Health > 0 {
 			survivedUnits = append(survivedUnits, unit)
+		} else {
+			b.Corpses = append(b.Corpses, unit)
 		}
 	}
 	b.Units = survivedUnits
