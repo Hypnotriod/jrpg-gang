@@ -15,7 +15,7 @@ type Weapon struct {
 
 func (w Weapon) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, wearout: %g, durability: %g, equipped: %t, slots: %d, requirements: {%v}, use cost: {%v}, range: {%v}, damage: [%s], modification: [%s]",
+		"%s, description: %s, wearout: %g, durability: %g, equipped: %t, slots: %d, requirements: {%v}, use cost: {%v}, range: {%v}, damage: [%s], modification: [%s], uid: %d",
 		w.Name,
 		w.Description,
 		w.Wearout,
@@ -27,6 +27,7 @@ func (w Weapon) String() string {
 		w.Range,
 		util.AsCommaSeparatedSlice(w.Damage),
 		util.AsCommaSeparatedSlice(w.Modification),
+		w.Uid,
 	)
 }
 

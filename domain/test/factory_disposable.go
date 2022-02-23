@@ -7,7 +7,7 @@ import (
 )
 
 func newSmallHealthPotion(t *testing.T) *domain.Disposable {
-	disposable, ok := util.JsonToObject(
+	disposable, err := util.JsonToObject(
 		&domain.Disposable{},
 		`{
 			"uid": 2000,
@@ -30,7 +30,7 @@ func newSmallHealthPotion(t *testing.T) *domain.Disposable {
 				}
 			]
 		}`)
-	if !ok {
+	if err != nil {
 		t.Fatal()
 	}
 	return disposable.(*domain.Disposable)

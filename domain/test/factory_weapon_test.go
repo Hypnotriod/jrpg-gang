@@ -7,7 +7,7 @@ import (
 )
 
 func newBaseSword(t *testing.T) *domain.Weapon {
-	weapon, ok := util.JsonToObject(
+	weapon, err := util.JsonToObject(
 		&domain.Weapon{},
 		`{
 			"uid": 4000,
@@ -40,7 +40,7 @@ func newBaseSword(t *testing.T) *domain.Weapon {
 				}	
 			]
 		}`)
-	if !ok {
+	if err != nil {
 		t.Fatal()
 	}
 	return weapon.(*domain.Weapon)

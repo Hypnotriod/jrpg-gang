@@ -14,11 +14,12 @@ type Disposable struct {
 
 func (d Disposable) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, quantity: %d, modification: [%s], damage: [%s]",
+		"%s, description: %s, quantity: %d, modification: [%s], damage: [%s], uid: %d",
 		d.Name,
 		d.Description,
 		d.Quantity,
 		util.AsCommaSeparatedSlice(d.Modification),
 		util.AsCommaSeparatedSlice(d.Damage),
+		d.Uid,
 	)
 }

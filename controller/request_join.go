@@ -15,7 +15,7 @@ type JoinRequest struct {
 }
 
 func parseJoinRequest(requestRaw string) *JoinRequest {
-	if r, ok := util.JsonToObject(&JoinRequest{}, requestRaw); ok {
+	if r, err := util.JsonToObject(&JoinRequest{}, requestRaw); err != nil {
 		return r.(*JoinRequest)
 	}
 	return nil

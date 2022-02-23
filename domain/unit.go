@@ -13,7 +13,7 @@ type UnitSlots map[EquipmentSlot]uint
 
 type Unit struct {
 	rng          *rand.Rand
-	Uid          uint                     `json:"uid"`
+	Uid          uint                     `json:"uid,omitempty"`
 	Name         string                   `json:"name"`
 	State        UnitState                `json:"state"`
 	Stats        UnitStats                `json:"stats"`
@@ -26,7 +26,7 @@ type Unit struct {
 
 func (u Unit) String() string {
 	return fmt.Sprintf(
-		"%s, state: {%v}, stats: {%v}, damage: [%s], modification: [%s], inventory: {%v}, slots: %v, position: {%v}",
+		"%s, state: {%v}, stats: {%v}, damage: [%s], modification: [%s], inventory: {%v}, slots: %v, position: {%v}, uid: %d",
 		u.Name,
 		u.State,
 		u.Stats,
@@ -35,6 +35,7 @@ func (u Unit) String() string {
 		u.Inventory,
 		u.Slots,
 		u.Position,
+		u.Uid,
 	)
 }
 

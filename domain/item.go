@@ -14,7 +14,7 @@ const (
 )
 
 type Item struct {
-	Uid         uint     `json:"uid"`
+	Uid         uint     `json:"uid,omitempty"`
 	Name        string   `json:"name"`
 	Type        ItemType `json:"type"`
 	Description string   `json:"description,omitempty"`

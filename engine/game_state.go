@@ -9,7 +9,7 @@ import (
 type GamePhase string
 
 const (
-	GamePhaseReadyToPlaceUnit   GamePhase = "eeadyToPlaceUnit"
+	GamePhaseReadyToPlaceUnit   GamePhase = "readyToPlaceUnit"
 	GamePhasePlaceUnit          GamePhase = "placeUnit"
 	GamePhaseReadyForStartRound GamePhase = "readyForStartRound"
 	GamePhaseMakeMoveOrActionAI GamePhase = "makeMoveOrActionAI"

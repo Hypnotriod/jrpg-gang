@@ -15,13 +15,14 @@ type Ammunition struct {
 
 func (a Ammunition) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, kind: %s, quantity: %d, equipped: %t, damage: [%s]",
+		"%s, description: %s, kind: %s, quantity: %d, equipped: %t, damage: [%s], uid: %d",
 		a.Name,
 		a.Description,
 		a.Kind,
 		a.Quantity,
 		a.Equipped,
 		util.AsCommaSeparatedSlice(a.Damage),
+		a.Uid,
 	)
 }
 

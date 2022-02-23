@@ -16,7 +16,7 @@ type Magic struct {
 
 func (m Magic) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, requirements: {%v}, use cost: {%v}, range: {%v}, damage: [%s], modification: [%s]",
+		"%s, description: %s, requirements: {%v}, use cost: {%v}, range: {%v}, damage: [%s], modification: [%s], uid: %d",
 		m.Name,
 		m.Description,
 		m.Requirements,
@@ -24,5 +24,6 @@ func (m Magic) String() string {
 		m.Range,
 		util.AsCommaSeparatedSlice(m.Damage),
 		util.AsCommaSeparatedSlice(m.Modification),
+		m.Uid,
 	)
 }

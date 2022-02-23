@@ -23,7 +23,7 @@ type Request struct {
 }
 
 func parseRequest(requestRaw string) *Request {
-	if r, ok := util.JsonToObject(&Request{}, requestRaw); ok {
+	if r, err := util.JsonToObject(&Request{}, requestRaw); err != nil {
 		return r.(*Request)
 	}
 	return nil

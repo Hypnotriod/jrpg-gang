@@ -29,7 +29,7 @@ type Equipment struct {
 
 func (e Equipment) String() string {
 	return fmt.Sprintf(
-		"%s, type: %s, description: %s, slot: %s, slots: %d, equipped: %t, wearout: %g, durability: %g, requirements: {%v}, modification: [%s]",
+		"%s, type: %s, description: %s, slot: %s, slots: %d, equipped: %t, wearout: %g, durability: %g, requirements: {%v}, modification: [%s], uid: %d",
 		e.Name,
 		e.Type,
 		e.Description,
@@ -39,7 +39,9 @@ func (e Equipment) String() string {
 		e.Wearout,
 		e.Durability,
 		e.Requirements,
-		util.AsCommaSeparatedSlice(e.Modification))
+		util.AsCommaSeparatedSlice(e.Modification),
+		e.Uid,
+	)
 }
 
 func (e *Equipment) IncreaseWearout() {

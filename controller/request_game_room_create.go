@@ -10,7 +10,7 @@ type CreateGameRoomRequest struct {
 }
 
 func parseCreateGameRoomRequest(requestRaw string) *CreateGameRoomRequest {
-	if r, ok := util.JsonToObject(&CreateGameRoomRequest{}, requestRaw); ok {
+	if r, err := util.JsonToObject(&CreateGameRoomRequest{}, requestRaw); err != nil {
 		return r.(*CreateGameRoomRequest)
 	}
 	return nil

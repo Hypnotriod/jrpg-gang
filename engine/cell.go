@@ -12,12 +12,12 @@ const (
 type Cell struct {
 	Factions []GameUnitFaction `json:"factions"`
 	Type     CellType          `json:"type"`
-	Kind     string            `json:"kind,omitempty"`
+	Name     string            `json:"name,omitempty"`
 }
 
 func (c Cell) String() string {
 	return fmt.Sprintf(
-		"faction id: %v, type: %s",
+		"faction ids: %v, type: %s",
 		c.Factions,
 		c.Type,
 	)

@@ -9,7 +9,7 @@ import (
 
 func TestAccumulateResistance(t *testing.T) {
 	unit := newAgileHero(t)
-	equipment, ok := util.JsonToObject(
+	equipment, err := util.JsonToObject(
 		&[]domain.Weapon{},
 		`[
 			{
@@ -30,7 +30,7 @@ func TestAccumulateResistance(t *testing.T) {
 			  ]
 			}
 		]`)
-	if !ok {
+	if err != nil {
 		t.Fatal()
 	}
 	unit.Inventory.Weapon = append(unit.Inventory.Weapon, *equipment.(*[]domain.Weapon)...)

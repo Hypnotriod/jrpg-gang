@@ -7,7 +7,7 @@ import (
 )
 
 func newAgileHero(t *testing.T) *domain.Unit {
-	unit, ok := util.JsonToObject(
+	unit, err := util.JsonToObject(
 		&domain.Unit{},
 		`{
 			"name": "Patrick",
@@ -55,14 +55,14 @@ func newAgileHero(t *testing.T) *domain.Unit {
 				"weapon": 2
 			}
 		}`)
-	if !ok {
+	if err != nil {
 		t.Fatal()
 	}
 	return unit.(*domain.Unit)
 }
 
 func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
-	unit, ok := util.JsonToObject(
+	unit, err := util.JsonToObject(
 		&domain.Unit{},
 		`{
 			"name": "Patrick",
@@ -187,14 +187,14 @@ func newAgileHeroWithWeapon(t *testing.T) *domain.Unit {
 				]
 			}
 		}`)
-	if !ok {
+	if err != nil {
 		t.Fatal()
 	}
 	return unit.(*domain.Unit)
 }
 
 func newMagicianHeroWithMagic(t *testing.T) *domain.Unit {
-	unit, ok := util.JsonToObject(
+	unit, err := util.JsonToObject(
 		&domain.Unit{},
 		`{
 			"name": "Sedrick",
@@ -297,14 +297,14 @@ func newMagicianHeroWithMagic(t *testing.T) *domain.Unit {
 				]
 			}
 		}`)
-	if !ok {
+	if err != nil {
 		t.Fatal()
 	}
 	return unit.(*domain.Unit)
 }
 
 func newNorthTroll(t *testing.T) *domain.Unit {
-	unit, ok := util.JsonToObject(
+	unit, err := util.JsonToObject(
 		&domain.Unit{},
 		`{
 			"name": "North Troll",
@@ -369,7 +369,7 @@ func newNorthTroll(t *testing.T) *domain.Unit {
 				]
 			}
 		}`)
-	if !ok {
+	if err != nil {
 		t.Fatal()
 	}
 	return unit.(*domain.Unit)

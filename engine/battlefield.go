@@ -14,9 +14,10 @@ type Battlefield struct {
 
 func (b Battlefield) String() string {
 	return fmt.Sprintf(
-		"matrix: %v, units: [%v]",
+		"matrix: %v, units: [%v], corpses: [%s]",
 		b.Matrix,
 		util.AsCommaSeparatedSlice(b.Units),
+		util.AsCommaSeparatedSlice(b.Corpses),
 	)
 }
 

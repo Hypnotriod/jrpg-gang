@@ -11,7 +11,7 @@ type Armor struct {
 
 func (a Armor) String() string {
 	return fmt.Sprintf(
-		"%s, description: %s, wearout: %g, durability: %g, equipped: %t, requirements: {%v}, modification: [%s]",
+		"%s, description: %s, wearout: %g, durability: %g, equipped: %t, requirements: {%v}, modification: [%s], uid: %d",
 		a.Name,
 		a.Description,
 		a.Wearout,
@@ -19,5 +19,6 @@ func (a Armor) String() string {
 		a.Equipped,
 		a.Requirements,
 		util.AsCommaSeparatedSlice(a.Modification),
+		a.Uid,
 	)
 }
