@@ -18,24 +18,24 @@ func newBasicScenario(t *testing.T) *engine.GameScenario {
 							[
 								{"type": "space", "factions": [0]},
 								{"type": "space", "factions": [0]},
-								{"type": "space", "factions": [0]},
-								{"type": "space", "factions": [0]}
+								{"type": "space", "factions": [1]},
+								{"type": "space", "factions": [1]}
 							],
 							[
 								{"type": "space", "factions": [0]},
 								{"type": "obstacle", "factions": []},
-								{"type": "space", "factions": [0]},
-								{"type": "space", "factions": [0]}
+								{"type": "space", "factions": [1]},
+								{"type": "space", "factions": [1]}
 							],
 							[
-								{"type": "space", "factions": [1]},
-								{"type": "space", "factions": [1]},
+								{"type": "space", "factions": [0]},
+								{"type": "space", "factions": [0]},
 								{"type": "obstacle", "factions": []},
 								{"type": "space", "factions": [1]}
 							],
 							[
-								{"type": "space", "factions": [1]},
-								{"type": "space", "factions": [1]},
+								{"type": "space", "factions": [0]},
+								{"type": "space", "factions": [0]},
 								{"type": "space", "factions": [1]},
 								{"type": "space", "factions": [1]}
 							]
@@ -103,6 +103,10 @@ func newBasicScenario(t *testing.T) *engine.GameScenario {
 											]
 										}
 									]
+								},
+								"position": {
+									"x": 2,
+									"y": 1
 								}
 							}
 						]
@@ -125,7 +129,7 @@ func newGameUnitTank(t *testing.T) *engine.GameUnit {
 		`{
 			"name": "Tank",
 			"faction": 0,
-			"userId": "abcd1234",
+			"userId": "userId1",
 			"state": {
 				"health": 100,
 				"stamina": 100

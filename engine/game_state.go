@@ -9,7 +9,6 @@ import (
 type GamePhase string
 
 const (
-	GamePhaseReadyToPlaceUnit   GamePhase = "readyToPlaceUnit"
 	GamePhasePlaceUnit          GamePhase = "placeUnit"
 	GamePhaseReadyForStartRound GamePhase = "readyForStartRound"
 	GamePhaseMakeMoveOrActionAI GamePhase = "makeMoveOrActionAI"
@@ -28,7 +27,7 @@ type GameState struct {
 
 func NewGameState() *GameState {
 	s := &GameState{}
-	s.Phase = GamePhaseReadyToPlaceUnit
+	s.Phase = GamePhasePlaceUnit
 	s.ActiveUnitsQueue = make([]uint, 0, 10)
 	s.InactiveUnits = make([]uint, 0, 10)
 	return s
@@ -65,6 +64,9 @@ func (s *GameState) UpdateUnitsQueue(units []*GameUnit) {
 		}
 	}
 	s.ActiveUnitsQueue = make([]uint, 0, len(activeUnits))
+	for _, unit := range activeUnits {
+		s.ActiveUnitsQueue = append(s.ActiveUnitsQueue, unit.Uid)
+	}
 	sort.SliceStable(s.ActiveUnitsQueue, func(i, j int) bool {
 		return units[i].TotalInitiative() < units[j].TotalInitiative()
 	})

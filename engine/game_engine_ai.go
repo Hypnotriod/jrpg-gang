@@ -4,10 +4,13 @@ import "jrpg-gang/domain"
 
 func (e *GameEngine) processAI(event *GameEvent) {
 	unit := e.getActiveUnit()
-	if !e.aiTryToAttack(event, unit) ||
-		!(e.state.Phase == GamePhaseMakeMoveOrAction && e.aiTryToMove(event, unit)) {
-		e.onUnitUseAction()
+	if e.aiTryToAttack(event, unit) {
+		return
 	}
+	if e.state.Phase == GamePhaseMakeMoveOrActionAI && e.aiTryToMove(event, unit) {
+		return
+	}
+	e.onUnitUseAction()
 }
 
 func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {

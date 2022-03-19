@@ -7,6 +7,13 @@ type EndTurnResult struct {
 	Recovery map[uint]domain.UnitRecovery `json:"recovery"`
 }
 
+func NewEndTurnResult() *EndTurnResult {
+	result := &EndTurnResult{}
+	result.Damage = map[uint]domain.Damage{}
+	result.Recovery = map[uint]domain.UnitRecovery{}
+	return result
+}
+
 type GameUnitActionResult struct {
 	Action GameAction          `json:"action"`
 	Result domain.ActionResult `json:"result"`

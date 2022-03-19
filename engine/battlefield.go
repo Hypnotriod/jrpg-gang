@@ -50,6 +50,7 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domai
 		return result.WithResultType(domain.ResultNotEmpty)
 	}
 	unit.Position = position
+	result.Position = []domain.Position{position}
 	b.Units = append(b.Units, unit)
 	return result.WithResultType(domain.ResultAccomplished)
 }
@@ -71,6 +72,7 @@ func (b *Battlefield) MoveUnit(uid uint, position domain.Position) *domain.Actio
 		return result.WithResultType(domain.ResultNotEmpty)
 	}
 	unit.Position = position
+	result.Position = []domain.Position{position}
 	b.UpdateCellsFactions()
 	return result.WithResultType(domain.ResultAccomplished)
 }
