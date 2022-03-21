@@ -1,20 +1,20 @@
 package domain
 
 func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint) *ActionResult {
-	action := NewActionResult(AtionUse, ResultAccomplished)
+	result := NewActionResult()
 	item := u.Inventory.Find(uid)
 	if item == nil {
-		return action.WithResultType(ResultNotFound)
+		return result.WithResultType(ResultNotFound)
 	}
 	switch v := item.(type) {
 	case *Weapon:
-		return u.useWeaponOnTarget(action, target, v)
+		return u.useWeaponOnTarget(result, target, v)
 	case *Disposable:
-		return u.useDisposableOnTarget(action, target, v)
+		return u.useDisposableOnTarget(result, target, v)
 	case *Magic:
-		return u.useMagicOnTarget(action, target, v)
+		return u.useMagicOnTarget(result, target, v)
 	}
-	return action
+	return result.WithResultType(ResultNotAccomplished)
 }
 
 func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Weapon) *ActionResult {

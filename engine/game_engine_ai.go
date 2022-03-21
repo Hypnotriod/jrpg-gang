@@ -37,9 +37,9 @@ func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
 }
 
 func (e *GameEngine) aiMove(event *GameEvent, unit *GameUnit, position domain.Position) {
-	unitAction := &GameUnitActionResult{}
+	unitAction := NewGameUnitActionResult()
 	unitAction.Action = domain.Action{
-		Action: domain.AtionUse,
+		Action: domain.ActionMove,
 		Uid:    unit.Uid,
 	}
 	unitAction.Result = *e.battlefield().MoveUnit(unit.Uid, position)
@@ -66,9 +66,9 @@ func (e *GameEngine) aiTryToAttack(event *GameEvent, unit *GameUnit) bool {
 
 func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target *GameUnit, weaponUid uint) {
 	unit.Equip(weaponUid)
-	unitAction := &GameUnitActionResult{}
+	unitAction := NewGameUnitActionResult()
 	unitAction.Action = domain.Action{
-		Action:    domain.AtionUse,
+		Action:    domain.ActionUse,
 		Uid:       unit.Uid,
 		TargetUid: target.Uid,
 		ItemUid:   weaponUid,

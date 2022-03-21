@@ -25,7 +25,6 @@ const (
 )
 
 type ActionResult struct {
-	Action               AtionType                `json:"action"`
 	InstantDamage        []Damage                 `json:"instantDamage,omitempty"`
 	TemporalDamage       []DamageImpact           `json:"temporalDamage,omitempty"`
 	InstantRecovery      []UnitRecovery           `json:"instantRecovery,omitempty"`
@@ -35,8 +34,7 @@ type ActionResult struct {
 }
 
 func (r ActionResult) String() string {
-	return fmt.Sprintf("%s, instant damage: [%s], temporal damage: [%s], instant recovery: [%s], temporal modification: [%s], position: [%s], result: %s",
-		r.Action,
+	return fmt.Sprintf("instant damage: [%s], temporal damage: [%s], instant recovery: [%s], temporal modification: [%s], position: [%s], result: %s",
 		util.AsCommaSeparatedSlice(r.InstantDamage),
 		util.AsCommaSeparatedSlice(r.TemporalDamage),
 		util.AsCommaSeparatedSlice(r.InstantRecovery),
@@ -45,9 +43,9 @@ func (r ActionResult) String() string {
 		r.ResultType)
 }
 
-func NewActionResult(actionType AtionType, resultType ActionResultType) *ActionResult {
-	action := &ActionResult{Action: actionType}
-	return action.WithResultType(resultType)
+func NewActionResult() *ActionResult {
+	action := &ActionResult{}
+	return action
 }
 
 func (r *ActionResult) WithResultType(resultType ActionResultType) *ActionResult {

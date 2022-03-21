@@ -7,11 +7,11 @@ import (
 type AtionType string
 
 const (
-	AtionUse     AtionType = "use"
-	AtionEquip   AtionType = "equip"
-	AtionUnequip AtionType = "unequip"
-	AtionPlace   AtionType = "place"
-	AtionMove    AtionType = "move"
+	ActionUse     AtionType = "use"
+	ActionEquip   AtionType = "equip"
+	ActionUnequip AtionType = "unequip"
+	ActionPlace   AtionType = "place"
+	ActionMove    AtionType = "move"
 )
 
 type Action struct {

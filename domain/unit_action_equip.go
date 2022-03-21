@@ -1,7 +1,7 @@
 package domain
 
 func (u *Unit) Equip(uid uint) *ActionResult {
-	result := NewActionResult(AtionEquip, ResultAccomplished)
+	result := NewActionResult()
 	if u.Inventory.FindAmmunition(uid) != nil {
 		u.Inventory.EqipAmmunition(uid)
 		return result.WithResultType(ResultAccomplished)
@@ -24,23 +24,23 @@ func (u *Unit) Equip(uid uint) *ActionResult {
 		u.UnequipBySlot(equipment.Slot, equipment.SlotsNumber-freeSlots)
 	}
 	equipment.Equipped = true
-	return result
+	return result.WithResultType(ResultAccomplished)
 }
 
 func (u *Unit) Unequip(uid uint) *ActionResult {
-	action := NewActionResult(AtionUnequip, ResultAccomplished)
+	result := NewActionResult()
 	if u.Inventory.FindAmmunition(uid) != nil {
 		u.Inventory.UnequipAmmunition()
-		return action.WithResultType(ResultAccomplished)
+		return result.WithResultType(ResultAccomplished)
 	}
 	equipment := u.Inventory.GetEquipment(true)
 	for i := range equipment {
 		if equipment[i].Uid == uid {
 			equipment[i].Equipped = false
-			return action.WithResultType(ResultAccomplished)
+			return result.WithResultType(ResultAccomplished)
 		}
 	}
-	return action.WithResultType(ResultNotFound)
+	return result.WithResultType(ResultNotFound)
 }
 
 func (u *Unit) UnequipBySlot(slot EquipmentSlot, slotsToRemove uint) {
