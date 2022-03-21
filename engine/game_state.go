@@ -35,7 +35,7 @@ func NewGameState() *GameState {
 
 func (s GameState) String() string {
 	return fmt.Sprintf(
-		"active units queue: {%v}, inactive units: {%v}, phase: %s",
+		"active units queue: [%v], inactive units: [%v], phase: %s",
 		util.AsCommaSeparatedSlice(s.ActiveUnitsQueue),
 		util.AsCommaSeparatedSlice(s.InactiveUnits),
 		s.Phase,

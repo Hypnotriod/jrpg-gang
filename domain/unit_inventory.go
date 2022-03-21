@@ -16,11 +16,11 @@ type UnitInventory struct {
 func (i UnitInventory) String() string {
 	return fmt.Sprintf(
 		"weapon: [%s], magic: [%s], armor: [%s], disposable: [%s], ammunition: [%s]",
-		util.AsCommaSeparatedSlice(i.Weapon),
-		util.AsCommaSeparatedSlice(i.Magic),
-		util.AsCommaSeparatedSlice(i.Armor),
-		util.AsCommaSeparatedSlice(i.Disposable),
-		util.AsCommaSeparatedSlice(i.Ammunition))
+		util.AsCommaSeparatedObjectsSlice(i.Weapon),
+		util.AsCommaSeparatedObjectsSlice(i.Magic),
+		util.AsCommaSeparatedObjectsSlice(i.Armor),
+		util.AsCommaSeparatedObjectsSlice(i.Disposable),
+		util.AsCommaSeparatedObjectsSlice(i.Ammunition))
 }
 
 func (i *UnitInventory) IncreaseArmorWearout(equipped bool) {

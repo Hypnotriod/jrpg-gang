@@ -18,7 +18,7 @@ func (a Armor) String() string {
 		a.Durability,
 		a.Equipped,
 		a.Requirements,
-		util.AsCommaSeparatedSlice(a.Modification),
+		util.AsCommaSeparatedObjectsSlice(a.Modification),
 		a.Uid,
 	)
 }

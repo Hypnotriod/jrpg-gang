@@ -1,6 +1,9 @@
 package engine
 
-import "jrpg-gang/domain"
+import (
+	"fmt"
+	"jrpg-gang/domain"
+)
 
 type EndTurnResult struct {
 	Damage   map[uint]domain.Damage       `json:"damage"`
@@ -26,15 +29,29 @@ func NewGameUnitActionResult() *GameUnitActionResult {
 
 type GameEvent struct {
 	Phase            GamePhase             `json:"phase"`
+	NextPhase        GamePhase             `json:"nextPhase"`
 	State            *GameState            `json:"state"`
 	Spot             *Spot                 `json:"spot"`
 	UnitActionResult *GameUnitActionResult `json:"unitActionResult,omitempty"`
 	EndRoundResult   *EndTurnResult        `json:"endRoundResult,omitempty"`
 }
 
+func (e *GameEvent) String() string {
+	return fmt.Sprintf(
+		"phase: %s, next phase: %s, state: {%v}, spot: {%v}, unitActionResult: {%v}, endRoundResult: {%v}",
+		e.Phase,
+		e.NextPhase,
+		e.State,
+		e.Spot,
+		e.UnitActionResult,
+		e.EndRoundResult,
+	)
+}
+
 func (e *GameEngine) NewGameEvent() *GameEvent {
 	event := &GameEvent{}
 	event.Phase = e.state.Phase
+	event.NextPhase = e.state.Phase
 	event.State = e.state
 	event.Spot = e.scenario.CurrentSpot()
 	return event
@@ -43,6 +60,7 @@ func (e *GameEngine) NewGameEvent() *GameEvent {
 func (e *GameEngine) NewGameEventWithUnitAction(action *domain.Action) *GameEvent {
 	event := &GameEvent{}
 	event.Phase = e.state.Phase
+	event.NextPhase = e.state.Phase
 	event.UnitActionResult = NewGameUnitActionResult()
 	event.UnitActionResult.Action = *action
 	event.State = e.state

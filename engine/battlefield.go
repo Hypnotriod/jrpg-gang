@@ -16,8 +16,8 @@ func (b Battlefield) String() string {
 	return fmt.Sprintf(
 		"matrix: %v, units: [%v], corpses: [%s]",
 		b.Matrix,
-		util.AsCommaSeparatedSlice(b.Units),
-		util.AsCommaSeparatedSlice(b.Corpses),
+		util.AsCommaSeparatedObjectsSlice(b.Units),
+		util.AsCommaSeparatedObjectsSlice(b.Corpses),
 	)
 }
 
@@ -50,7 +50,6 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domai
 		return result.WithResultType(domain.ResultNotEmpty)
 	}
 	unit.Position = position
-	result.Position = []domain.Position{position}
 	b.Units = append(b.Units, unit)
 	return result.WithResultType(domain.ResultAccomplished)
 }
@@ -71,7 +70,6 @@ func (b *Battlefield) MoveUnit(uid uint, position domain.Position) *domain.Actio
 	if unitAtPosition != nil {
 		return result.WithResultType(domain.ResultNotEmpty)
 	}
-	result.Position = []domain.Position{unit.Position, position}
 	unit.Position = position
 	b.UpdateCellsFactions()
 	return result.WithResultType(domain.ResultAccomplished)

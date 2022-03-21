@@ -1,16 +1,19 @@
 package engine
 
-func (e *GameEngine) NextPhase(event *GameEvent) {
+func (e *GameEngine) NextPhase() *GameEvent {
+	result := e.NewGameEvent()
 	switch e.state.Phase {
 	case GamePhaseReadyForStartRound:
 		e.processStartRound()
 	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
-		e.processAI(event)
+		e.processAI(result)
 	case GamePhaseActionComplete:
-		e.processActionComplete(event)
+		e.processActionComplete(result)
 	case GamePhaseBattleComplete:
-		e.processBattleComplete(event)
+		e.processBattleComplete(result)
 	}
+	result.NextPhase = e.state.Phase
+	return result
 }
 
 func (e *GameEngine) NextPhaseRequired() bool {

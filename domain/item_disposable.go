@@ -18,8 +18,8 @@ func (d Disposable) String() string {
 		d.Name,
 		d.Description,
 		d.Quantity,
-		util.AsCommaSeparatedSlice(d.Modification),
-		util.AsCommaSeparatedSlice(d.Damage),
+		util.AsCommaSeparatedObjectsSlice(d.Modification),
+		util.AsCommaSeparatedObjectsSlice(d.Damage),
 		d.Uid,
 	)
 }

@@ -22,8 +22,8 @@ func (m Magic) String() string {
 		m.Requirements,
 		m.UseCost,
 		m.Range,
-		util.AsCommaSeparatedSlice(m.Damage),
-		util.AsCommaSeparatedSlice(m.Modification),
+		util.AsCommaSeparatedObjectsSlice(m.Damage),
+		util.AsCommaSeparatedObjectsSlice(m.Modification),
 		m.Uid,
 	)
 }

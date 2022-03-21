@@ -29,17 +29,15 @@ type ActionResult struct {
 	TemporalDamage       []DamageImpact           `json:"temporalDamage,omitempty"`
 	InstantRecovery      []UnitRecovery           `json:"instantRecovery,omitempty"`
 	TemporalModification []UnitModificationImpact `json:"temporalModification,omitempty"`
-	Position             []Position               `json:"position,omitempty"`
 	ResultType           ActionResultType         `json:"resultType"`
 }
 
 func (r ActionResult) String() string {
-	return fmt.Sprintf("instant damage: [%s], temporal damage: [%s], instant recovery: [%s], temporal modification: [%s], position: [%s], result: %s",
-		util.AsCommaSeparatedSlice(r.InstantDamage),
-		util.AsCommaSeparatedSlice(r.TemporalDamage),
-		util.AsCommaSeparatedSlice(r.InstantRecovery),
-		util.AsCommaSeparatedSlice(r.TemporalModification),
-		util.AsCommaSeparatedSlice(r.Position),
+	return fmt.Sprintf("instant damage: [%s], temporal damage: [%s], instant recovery: [%s], temporal modification: [%s], result: %s",
+		util.AsCommaSeparatedObjectsSlice(r.InstantDamage),
+		util.AsCommaSeparatedObjectsSlice(r.TemporalDamage),
+		util.AsCommaSeparatedObjectsSlice(r.InstantRecovery),
+		util.AsCommaSeparatedObjectsSlice(r.TemporalModification),
 		r.ResultType)
 }
 

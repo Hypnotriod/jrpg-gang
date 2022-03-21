@@ -2,20 +2,26 @@ package engine
 
 import "jrpg-gang/domain"
 
-func (e *GameEngine) ExecuteAction(action domain.Action, userId UserId) *domain.ActionResult {
+func (e *GameEngine) ExecuteUserAction(action domain.Action, userId UserId) *GameEvent {
+	result := e.NewGameEventWithUnitAction(&action)
+	var actionResult *domain.ActionResult
 	switch action.Action {
 	case domain.ActionPlace:
-		return e.executePlaceAction(action, userId)
+		actionResult = e.executePlaceAction(action, userId)
 	case domain.ActionUse:
-		return e.executeUseAction(action, userId)
+		actionResult = e.executeUseAction(action, userId)
 	case domain.ActionEquip:
-		return e.executeEquipAction(action, userId)
+		actionResult = e.executeEquipAction(action, userId)
 	case domain.ActionUnequip:
-		return e.executeUnequipAction(action, userId)
+		actionResult = e.executeUnequipAction(action, userId)
 	case domain.ActionMove:
-		return e.executeMoveAction(action, userId)
+		actionResult = e.executeMoveAction(action, userId)
+	default:
+		actionResult = domain.NewActionResult().WithResultType(domain.ResultNotAccomplished)
 	}
-	return domain.NewActionResult().WithResultType(domain.ResultNotAccomplished)
+	result.UnitActionResult.Result = *actionResult
+	result.NextPhase = e.state.Phase
+	return result
 }
 
 func (e *GameEngine) executePlaceAction(action domain.Action, userId UserId) *domain.ActionResult {

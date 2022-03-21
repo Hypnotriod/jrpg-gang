@@ -39,7 +39,7 @@ func (e Equipment) String() string {
 		e.Wearout,
 		e.Durability,
 		e.Requirements,
-		util.AsCommaSeparatedSlice(e.Modification),
+		util.AsCommaSeparatedObjectsSlice(e.Modification),
 		e.Uid,
 	)
 }

@@ -21,7 +21,7 @@ func (a Ammunition) String() string {
 		a.Kind,
 		a.Quantity,
 		a.Equipped,
-		util.AsCommaSeparatedSlice(a.Damage),
+		util.AsCommaSeparatedObjectsSlice(a.Damage),
 		a.Uid,
 	)
 }

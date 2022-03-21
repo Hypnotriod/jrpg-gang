@@ -79,10 +79,12 @@ func newBasicScenario(t *testing.T) *engine.GameScenario {
 										"curse": 0
 									}
 								},
+								"slots": {
+									"weapon": 1
+								},
 								"inventory": {
 									"armor": [
 										{
-											"uid": 2000,
 											"type": "armor",
 											"name": "Rusty Helmet",
 											"description": "Rusty helmet",
@@ -100,6 +102,35 @@ func newBasicScenario(t *testing.T) *engine.GameScenario {
 														"exhaustion": 20
 													}
 												}	
+											]
+										}
+									],
+									"weapon": [
+										{
+											"type": "weapon",
+											"name": "Axe",
+											"description": "Rusty Axe",
+											"durability": 700,
+											"slot": "weapon",
+											"slotsNumber": 1,
+											"requirements": {
+												"strength": 5
+											},
+											"range": {
+												"maximumX": 1,
+												"maximumY": 1
+											},
+											"damage": [
+												{
+													"chance": 40,
+													"cutting": 30,
+													"crushing": 5
+												},
+												{
+													"duration": 3,
+													"chance": 15,
+													"bleeding": 3
+												}
 											]
 										}
 									]

@@ -25,8 +25,8 @@ func (w Weapon) String() string {
 		w.Requirements,
 		w.UseCost,
 		w.Range,
-		util.AsCommaSeparatedSlice(w.Damage),
-		util.AsCommaSeparatedSlice(w.Modification),
+		util.AsCommaSeparatedObjectsSlice(w.Damage),
+		util.AsCommaSeparatedObjectsSlice(w.Modification),
 		w.Uid,
 	)
 }

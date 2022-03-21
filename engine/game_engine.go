@@ -19,7 +19,7 @@ func (e GameEngine) String() string {
 		"state: {%v}, scenario: {%v}, actors: [%s]",
 		e.state,
 		e.scenario,
-		util.AsCommaSeparatedSlice(e.actors),
+		util.AsCommaSeparatedObjectsSlice(e.actors),
 	)
 }
 
