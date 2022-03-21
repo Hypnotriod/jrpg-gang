@@ -120,6 +120,9 @@ func newBasicScenario(t *testing.T) *engine.GameScenario {
 												"maximumX": 1,
 												"maximumY": 1
 											},
+											"useCost": {
+												"stamina": 10
+											},
 											"damage": [
 												{
 													"chance": 40,
@@ -195,6 +198,41 @@ func newGameUnitTank(t *testing.T) *engine.GameUnit {
 					"fear": 5,
 					"curse": 5
 				}
+			},
+			"inventory": {
+				"weapon": [
+					{
+						"type": "weapon",
+						"name": "Axe",
+						"description": "Rusty Axe",
+						"durability": 700,
+						"slot": "weapon",
+						"slotsNumber": 1,
+						"equipped": true,
+						"requirements": {
+							"strength": 5
+						},
+						"range": {
+							"maximumX": 1,
+							"maximumY": 1
+						},
+						"useCost": {
+							"stamina": 10
+						},
+						"damage": [
+							{
+								"chance": 40,
+								"cutting": 30,
+								"crushing": 5
+							},
+							{
+								"duration": 3,
+								"chance": 15,
+								"bleeding": 3
+							}
+						]
+					}
+				]
 			},
 			"slots": {
 				"head": 1,
