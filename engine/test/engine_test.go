@@ -27,10 +27,10 @@ func gameLoop(t *testing.T, eng *engine.GameEngine) {
 	}
 }
 
-func placeUnitAction(x, y int) engine.GameAction {
-	return engine.GameAction{
+func placeUnitAction(x, y int) domain.Action {
+	return domain.Action{
 		Uid:      1,
-		Action:   engine.GameAtionPlace,
+		Action:   domain.AtionPlace,
 		Position: domain.Position{X: x, Y: y},
 	}
 }

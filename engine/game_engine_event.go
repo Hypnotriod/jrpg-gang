@@ -15,7 +15,7 @@ func NewEndTurnResult() *EndTurnResult {
 }
 
 type GameUnitActionResult struct {
-	Action GameAction          `json:"action"`
+	Action domain.Action       `json:"action"`
 	Result domain.ActionResult `json:"result"`
 }
 
@@ -35,7 +35,7 @@ func (e *GameEngine) NewGameEvent() *GameEvent {
 	return event
 }
 
-func (e *GameEngine) NewGameEventWithUnitAction(action *GameAction) *GameEvent {
+func (e *GameEngine) NewGameEventWithUnitAction(action *domain.Action) *GameEvent {
 	event := &GameEvent{}
 	event.Phase = e.state.Phase
 	event.UnitActionResult = &GameUnitActionResult{

@@ -35,7 +35,7 @@ func (b *Battlefield) Dispose() {
 }
 
 func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domain.ActionResult {
-	result := domain.ActionResult{}
+	result := domain.NewActionResult(domain.AtionPlace, domain.ResultAccomplished)
 	if b.FindUnitById(unit.Uid) != nil {
 		return result.WithResultType(domain.ResultNotAllowed)
 	}
@@ -52,11 +52,11 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domai
 	unit.Position = position
 	result.Position = []domain.Position{position}
 	b.Units = append(b.Units, unit)
-	return result.WithResultType(domain.ResultAccomplished)
+	return result
 }
 
 func (b *Battlefield) MoveUnit(uid uint, position domain.Position) *domain.ActionResult {
-	result := domain.ActionResult{}
+	result := domain.NewActionResult(domain.AtionMove, domain.ResultAccomplished)
 	unit := b.FindUnitById(uid)
 	if unit == nil {
 		return result.WithResultType(domain.ResultNotFound)
@@ -74,7 +74,7 @@ func (b *Battlefield) MoveUnit(uid uint, position domain.Position) *domain.Actio
 	unit.Position = position
 	result.Position = []domain.Position{position}
 	b.UpdateCellsFactions()
-	return result.WithResultType(domain.ResultAccomplished)
+	return result
 }
 
 func (b *Battlefield) FindUnitById(uid uint) *GameUnit {
