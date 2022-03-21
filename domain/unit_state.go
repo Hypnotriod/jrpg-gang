@@ -19,8 +19,8 @@ func (s *UnitState) Accumulate(state UnitState) {
 
 func (s *UnitState) Normalize() {
 	s.UnitBaseAttributes.Normalize()
-	s.Fear = util.MaxFloat32(s.Fear, 0)
-	s.Curse = util.MaxFloat32(s.Curse, 0)
+	s.Fear = util.Max(s.Fear, 0)
+	s.Curse = util.Max(s.Curse, 0)
 }
 
 func (s UnitState) String() string {

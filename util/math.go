@@ -1,38 +1,38 @@
 package util
 
-func AccumulateIfNotZerosFloat32(a, b float32) float32 {
+type Number interface {
+	float32 | float64 | int | int16 | int32 | int64
+}
+
+func AccumulateIfNotZeros[T Number](a, b T) T {
 	if a != 0 && b != 0 {
 		return a + b
-	} else {
-		return a
 	}
+	return a
 }
 
-func MultiplyIfNotZerosFloat32(a, b float32) float32 {
+func MultiplyIfNotZeros[T Number](a, b T) T {
 	if a != 0 && b != 0 {
 		return a * b
-	} else {
-		return a
 	}
+	return a
 }
 
-func MaxFloat32(a, b float32) float32 {
+func Max[T Number](a, b T) T {
 	if a > b {
 		return a
-	} else {
-		return b
 	}
+	return b
 }
 
-func MinFloat32(a, b float32) float32 {
+func Min[T Number](a, b T) T {
 	if a < b {
 		return a
-	} else {
-		return b
 	}
+	return b
 }
 
-func AbsInt(v int) int {
+func Abs[T Number](v T) T {
 	if v < 0 {
 		return -v
 	}

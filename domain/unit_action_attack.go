@@ -31,12 +31,12 @@ func (u *Unit) AccumulateDamageImpact(damage DamageImpact) DamageImpact {
 
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
 	chance := (u.TotalLuck() - u.State.Curse) - (target.TotalLuck() - target.State.Curse)
-	return util.MaxFloat32(chance, MINIMUM_CHANCE)
+	return util.Max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateAttackChance(target *Unit, damage DamageImpact) float32 {
 	chance := (u.TotalAgility() - u.State.Curse) - (target.TotalAgility() - target.State.Curse) + damage.Chance
-	return util.MaxFloat32(chance, MINIMUM_CHANCE)
+	return util.Max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageImpact) {

@@ -53,11 +53,11 @@ func (a *UnitAttributes) Accumulate(attributes UnitAttributes) {
 }
 
 func (a *UnitAttributes) Normalize() {
-	a.Strength = util.MaxFloat32(a.Strength, 0)
-	a.Physique = util.MaxFloat32(a.Physique, 0)
-	a.Agility = util.MaxFloat32(a.Agility, 0)
-	a.Endurance = util.MaxFloat32(a.Endurance, 0)
-	a.Intelligence = util.MaxFloat32(a.Intelligence, 0)
-	a.Initiative = util.MaxFloat32(a.Initiative, 0)
-	a.Luck = util.MaxFloat32(a.Luck, 0)
+	a.Strength = util.Max(a.Strength, 0)
+	a.Physique = util.Max(a.Physique, 0)
+	a.Agility = util.Max(a.Agility, 0)
+	a.Endurance = util.Max(a.Endurance, 0)
+	a.Intelligence = util.Max(a.Intelligence, 0)
+	a.Initiative = util.Max(a.Initiative, 0)
+	a.Luck = util.Max(a.Luck, 0)
 }

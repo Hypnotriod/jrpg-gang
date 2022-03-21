@@ -33,13 +33,13 @@ func (a *UnitBaseAttributes) Reduce(attributes UnitBaseAttributes) {
 }
 
 func (a *UnitBaseAttributes) Saturate(limit UnitBaseAttributes) {
-	a.Health = util.MinFloat32(a.Health, limit.Health)
-	a.Mana = util.MinFloat32(a.Mana, limit.Mana)
-	a.Stamina = util.MinFloat32(a.Stamina, limit.Stamina)
+	a.Health = util.Min(a.Health, limit.Health)
+	a.Mana = util.Min(a.Mana, limit.Mana)
+	a.Stamina = util.Min(a.Stamina, limit.Stamina)
 }
 
 func (a *UnitBaseAttributes) Normalize() {
-	a.Health = util.MaxFloat32(a.Health, MINIMUM_BASE_ATTRIBUTE_HEALTH)
-	a.Mana = util.MaxFloat32(a.Mana, MINIMUM_BASE_ATTRIBUTE_MANA)
-	a.Stamina = util.MaxFloat32(a.Stamina, MINIMUM_BASE_ATTRIBUTE_STAMINA)
+	a.Health = util.Max(a.Health, MINIMUM_BASE_ATTRIBUTE_HEALTH)
+	a.Mana = util.Max(a.Mana, MINIMUM_BASE_ATTRIBUTE_MANA)
+	a.Stamina = util.Max(a.Stamina, MINIMUM_BASE_ATTRIBUTE_STAMINA)
 }

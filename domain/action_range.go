@@ -26,7 +26,7 @@ func (r ActionRange) String() string {
 }
 
 func (r *ActionRange) Check(p1 Position, p2 Position) bool {
-	minimum := util.AbsInt(p1.X-p2.X) >= r.MinimumX && util.AbsInt(p1.Y-p2.Y) >= r.MinimumY
-	maximum := util.AbsInt(p1.X-p2.X) <= r.MaximumX && util.AbsInt(p1.Y-p2.Y) <= r.MaximumY
+	minimum := util.Abs(p1.X-p2.X) >= r.MinimumX && util.Abs(p1.Y-p2.Y) >= r.MinimumY
+	maximum := util.Abs(p1.X-p2.X) <= r.MaximumX && util.Abs(p1.Y-p2.Y) <= r.MaximumY
 	return minimum && maximum
 }
