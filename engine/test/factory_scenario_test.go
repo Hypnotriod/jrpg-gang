@@ -199,6 +199,13 @@ func newGameUnitTank(t *testing.T) *engine.GameUnit {
 					"curse": 5
 				}
 			},
+			"modification": [
+				{
+					"recovery": {
+						"stamina": 20
+					}
+				}
+			],
 			"inventory": {
 				"weapon": [
 					{
@@ -241,9 +248,7 @@ func newGameUnitTank(t *testing.T) *engine.GameUnit {
 				"hand": 2,
 				"leg": 2,
 				"weapon": 2
-			},
-			"damage": [],
-			"modification": []
+			}
 		}`)
 	return unit.(*engine.GameUnit)
 }

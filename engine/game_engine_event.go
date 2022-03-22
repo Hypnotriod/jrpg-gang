@@ -10,6 +10,14 @@ type EndTurnResult struct {
 	Recovery map[uint]domain.UnitRecovery `json:"recovery"`
 }
 
+func (r *EndTurnResult) String() string {
+	return fmt.Sprintf(
+		"damage: {%v}, recovery: {%v}",
+		r.Damage,
+		r.Recovery,
+	)
+}
+
 func NewEndTurnResult() *EndTurnResult {
 	result := &EndTurnResult{}
 	result.Damage = map[uint]domain.Damage{}
@@ -20,6 +28,14 @@ func NewEndTurnResult() *EndTurnResult {
 type GameUnitActionResult struct {
 	Action domain.Action       `json:"action"`
 	Result domain.ActionResult `json:"result"`
+}
+
+func (r *GameUnitActionResult) String() string {
+	return fmt.Sprintf(
+		"action: {%v}, result: {%v}",
+		r.Action,
+		r.Result,
+	)
 }
 
 func NewGameUnitActionResult() *GameUnitActionResult {

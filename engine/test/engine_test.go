@@ -25,6 +25,10 @@ func gameLoop(t *testing.T, eng *engine.GameEngine) {
 	}
 	event = eng.ExecuteUserAction(attackUnitAction(3, 2), "userId1")
 	fmt.Printf("attack action result: {%v}\n\n", event)
+	for eng.NextPhaseRequired() {
+		event = eng.NextPhase()
+		fmt.Printf("event phase result: {%v}\n\n", event)
+	}
 }
 
 func placeUnitAction(x, y int) domain.Action {
