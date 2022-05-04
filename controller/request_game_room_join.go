@@ -10,7 +10,7 @@ type JoinGameRoomRequest struct {
 }
 
 func parseJoinGameRoomRequest(requestRaw string) *JoinGameRoomRequest {
-	if r, err := util.JsonToObject(&JoinGameRoomRequest{}, requestRaw); err != nil {
+	if r, err := util.JsonToObject(&JoinGameRoomRequest{}, requestRaw); err == nil {
 		return r.(*JoinGameRoomRequest)
 	}
 	return nil

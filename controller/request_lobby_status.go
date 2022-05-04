@@ -7,7 +7,7 @@ type LobbyStatusRequest struct {
 }
 
 func parseLobbyStatusRequest(requestRaw string) *LobbyStatusRequest {
-	if r, err := util.JsonToObject(&LobbyStatusRequest{}, requestRaw); err != nil {
+	if r, err := util.JsonToObject(&LobbyStatusRequest{}, requestRaw); err == nil {
 		return r.(*LobbyStatusRequest)
 	}
 	return nil

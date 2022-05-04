@@ -10,13 +10,24 @@ type GameRoom struct {
 	*sync.RWMutex
 	Uid         uint   `json:"uid"`
 	Capacity    uint   `json:"capacity"`
+	ScenarioUid uint   `json:"scenarioUid"`
 	JoinedUsers []User `json:"joinedUsers"`
 	Host        User   `json:"host"`
-	// engine   *engine.GameEngine
 }
 
 func (r *GameRoom) IsFull() bool {
 	return len(r.JoinedUsers) >= int(r.Capacity)-1
+}
+
+func (r *GameRoom) GetActors() []*engine.GameUnit {
+	defer r.RUnlock()
+	r.RLock()
+	result := []*engine.GameUnit{}
+	for _, u := range r.JoinedUsers {
+		result = append(result, u.unit)
+	}
+	result = append(result, r.Host.unit)
+	return result
 }
 
 func NewGameRoom() *GameRoom {
@@ -95,7 +106,7 @@ func (r *GameRooms) RemoveUser(userId engine.UserId) bool {
 		return false
 	}
 	if room.Host.id == userId {
-		return r.RemoveByHostId(userId)
+		return false
 	}
 	delete(r.userIdToRoomUid, userId)
 	restUsers := []User{}

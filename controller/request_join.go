@@ -15,7 +15,7 @@ type JoinRequest struct {
 }
 
 func parseJoinRequest(requestRaw string) *JoinRequest {
-	if r, err := util.JsonToObject(&JoinRequest{}, requestRaw); err != nil {
+	if r, err := util.JsonToObject(&JoinRequest{}, requestRaw); err == nil {
 		return r.(*JoinRequest)
 	}
 	return nil
@@ -32,7 +32,7 @@ func (c *GameController) handleJoinRequest(requestRaw string, response *Response
 	if _, ok := c.users.GetByNickname(request.Data.Nickname); ok {
 		return response.WithStatus(ResponseStatusAlreadyExists)
 	}
-	unit := NewGameUnitByClass(request.Data.Class)
+	unit := NewGameUnitByClass(request.Data.Class) // todo: test purpose only
 	if unit == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}

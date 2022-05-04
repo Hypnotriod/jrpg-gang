@@ -57,5 +57,6 @@ func doCreateRoom(ch chan<- string, cntrl *controller.GameController, i int) {
 	result2 := doRequest(cntrl, controller.RequestJoinGameRoom, userId2, fmt.Sprintf(`
 		"roomUid": %s
 	`, roomUid))
+	// doRequest(cntrl, controller.RequestDestroyGameRoom, userId1, ``)
 	ch <- result2
 }

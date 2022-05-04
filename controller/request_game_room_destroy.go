@@ -7,7 +7,7 @@ type DestroyGameRoomRequest struct {
 }
 
 func parseDestroyGameRoomRequest(requestRaw string) *DestroyGameRoomRequest {
-	if r, err := util.JsonToObject(&DestroyGameRoomRequest{}, requestRaw); err != nil {
+	if r, err := util.JsonToObject(&DestroyGameRoomRequest{}, requestRaw); err == nil {
 		return r.(*DestroyGameRoomRequest)
 	}
 	return nil

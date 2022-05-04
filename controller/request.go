@@ -14,6 +14,7 @@ const (
 	RequestJoinGameRoom    RequestType = "joinRoom"
 	RequestLeaveGameRoom   RequestType = "leaveRoom"
 	RequestLobbyStatus     RequestType = "lobbyStatus"
+	RequestStartGame       RequestType = "startGame"
 )
 
 type Request struct {
@@ -23,7 +24,7 @@ type Request struct {
 }
 
 func parseRequest(requestRaw string) *Request {
-	if r, err := util.JsonToObject(&Request{}, requestRaw); err != nil {
+	if r, err := util.JsonToObject(&Request{}, requestRaw); err == nil {
 		return r.(*Request)
 	}
 	return nil

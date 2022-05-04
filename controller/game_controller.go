@@ -1,14 +1,16 @@
 package controller
 
 type GameController struct {
-	users *Users
-	rooms *GameRooms
+	users   *Users
+	rooms   *GameRooms
+	engines *GameEngines
 }
 
 func NewController() *GameController {
 	c := &GameController{}
 	c.users = NewUsers()
 	c.rooms = NewGameRooms()
+	c.engines = NewGameEngines()
 	return c
 }
 
@@ -41,6 +43,8 @@ func (c *GameController) serveRequest(request *Request, requestRaw string, respo
 		return c.handleJoinGameRoomRequest(requestRaw, response)
 	case RequestLeaveGameRoom:
 		return c.handleLeaveGameRoomRequest(requestRaw, response)
+	case RequestStartGame:
+		return c.handleStartGameRequest(requestRaw, response)
 	}
 	return response.WithStatus(ResponseStatusUnsupported)
 }

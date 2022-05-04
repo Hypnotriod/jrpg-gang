@@ -7,7 +7,7 @@ type LeaveGameRoomRequest struct {
 }
 
 func parseLeaveGameRoomRequest(requestRaw string) *LeaveGameRoomRequest {
-	if r, err := util.JsonToObject(&LeaveGameRoomRequest{}, requestRaw); err != nil {
+	if r, err := util.JsonToObject(&LeaveGameRoomRequest{}, requestRaw); err == nil {
 		return r.(*LeaveGameRoomRequest)
 	}
 	return nil
