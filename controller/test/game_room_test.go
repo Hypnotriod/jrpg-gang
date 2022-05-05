@@ -12,19 +12,24 @@ func TestCreateGameRoom(t *testing.T) {
 	var result string
 	result, user1Id := doJoinRequest(cntrl, "Megazilla999", engine.UnitClassTank)
 	fmt.Println(result)
+	fmt.Println()
 	result = doRequest(cntrl, controller.RequestCreateGameRoom, user1Id, `
 		"capacity": 2
 	`)
 	roomUid := parseRoomUid(result)
 	fmt.Println(result)
+	fmt.Println()
 	result, user2Id := doJoinRequest(cntrl, "Megazilla777", engine.UnitClassMage)
 	fmt.Println(result)
+	fmt.Println()
 	result = doRequest(cntrl, controller.RequestJoinGameRoom, user2Id, fmt.Sprintf(`
 		"roomUid": %s
 	`, roomUid))
 	fmt.Println(result)
+	fmt.Println()
 	result = doRequest(cntrl, controller.RequestLobbyStatus, user1Id, ``)
 	fmt.Println(result)
+	fmt.Println()
 }
 
 func TestCreateGameRoomAsync(t *testing.T) {

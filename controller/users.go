@@ -11,7 +11,7 @@ type User struct {
 	Class    engine.GameUnitClass `json:"class"`
 	Level    uint                 `json:"level"`
 	id       engine.UserId
-	unit     *engine.GameUnit
+	unit     engine.GameUnit
 }
 
 func NewUser(nickname string,
@@ -21,7 +21,7 @@ func NewUser(nickname string,
 	u.Nickname = nickname
 	u.Class = class
 	u.Level = unit.Stats.Progress.Level
-	u.unit = unit
+	u.unit = *unit
 	return u
 }
 

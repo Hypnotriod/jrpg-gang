@@ -14,6 +14,7 @@ const (
 	RequestJoinGameRoom    RequestType = "joinRoom"
 	RequestLeaveGameRoom   RequestType = "leaveRoom"
 	RequestLobbyStatus     RequestType = "lobbyStatus"
+	RequestUserStatus      RequestType = "userStatus"
 	RequestStartGame       RequestType = "startGame"
 )
 

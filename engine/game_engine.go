@@ -3,11 +3,9 @@ package engine
 import (
 	"fmt"
 	"jrpg-gang/util"
-	"sync"
 )
 
 type GameEngine struct {
-	*sync.RWMutex
 	rndGen   *util.RndGen
 	state    *GameState
 	actors   []*GameUnit
@@ -25,7 +23,6 @@ func (e GameEngine) String() string {
 
 func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
 	e := &GameEngine{}
-	e.RWMutex = &sync.RWMutex{}
 	e.rndGen = util.NewRndGen()
 	e.state = NewGameState()
 	e.scenario = scenario
@@ -55,6 +52,14 @@ func (e *GameEngine) getActiveUnit() *GameUnit {
 		return e.battlefield().FindUnitById(uid)
 	}
 	return nil
+}
+
+func (e *GameEngine) GetUserIds() []UserId {
+	result := []UserId{}
+	for _, unit := range e.actors {
+		result = append(result, unit.UserId)
+	}
+	return result
 }
 
 func (e *GameEngine) findActorByUserId(userId UserId) *GameUnit {

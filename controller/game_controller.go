@@ -39,6 +39,8 @@ func (c *GameController) serveRequest(request *Request, requestRaw string, respo
 		return c.handleDestroyGameRoomRequest(requestRaw, response)
 	case RequestLobbyStatus:
 		return c.handleLobbyStatusRequest(requestRaw, response)
+	case RequestUserStatus:
+		return c.handleUserStatusRequest(requestRaw, response)
 	case RequestJoinGameRoom:
 		return c.handleJoinGameRoomRequest(requestRaw, response)
 	case RequestLeaveGameRoom:

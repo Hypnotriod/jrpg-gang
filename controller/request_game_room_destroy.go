@@ -21,7 +21,7 @@ func (c *GameController) handleDestroyGameRoomRequest(requestRaw string, respons
 	if !c.rooms.ExistsForHostId(request.UserId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	if !c.rooms.RemoveByHostId(request.UserId) {
+	if _, ok := c.rooms.PopByHostId(request.UserId); !ok {
 		return response.WithStatus(ResponseStatusFailed)
 	}
 	return response.WithStatus(ResponseStatusOk)
