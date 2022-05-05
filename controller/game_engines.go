@@ -6,30 +6,42 @@ import (
 	"sync"
 )
 
+type GameEngineWrapper struct {
+	sync.RWMutex
+	engine *engine.GameEngine
+}
+
+func NewGameEngineWrapper() *GameEngineWrapper {
+	w := &GameEngineWrapper{}
+	return w
+}
+
 type GameEngines struct {
 	sync.RWMutex
 	rndGen         *util.RndGen
-	engines        []*engine.GameEngine
-	userIdToEngine map[engine.UserId]*engine.GameEngine
+	engines        []*GameEngineWrapper
+	userIdToEngine map[engine.UserId]*GameEngineWrapper
 }
 
 func NewGameEngines() *GameEngines {
 	e := &GameEngines{}
 	e.rndGen = util.NewRndGen()
-	e.userIdToEngine = make(map[engine.UserId]*engine.GameEngine)
+	e.userIdToEngine = make(map[engine.UserId]*GameEngineWrapper)
 	return e
 }
 
 func (e *GameEngines) Add(engine *engine.GameEngine) {
 	defer e.Unlock()
 	e.Lock()
-	e.engines = append(e.engines, engine)
+	wrapper := NewGameEngineWrapper()
+	wrapper.engine = engine
+	e.engines = append(e.engines, wrapper)
 	for _, userId := range engine.GetUserIds() {
-		e.userIdToEngine[userId] = engine
+		e.userIdToEngine[userId] = wrapper
 	}
 }
 
-func (e *GameEngines) HasUser(userId engine.UserId) bool {
+func (e *GameEngines) IsUserInGame(userId engine.UserId) bool {
 	defer e.RUnlock()
 	e.RLock()
 	_, ok := e.userIdToEngine[userId]
