@@ -1,27 +1,22 @@
 package controller
 
-import "jrpg-gang/util"
+import (
+	"jrpg-gang/engine"
+)
 
 type DestroyGameRoomRequest struct {
 	Request
 }
 
-func parseDestroyGameRoomRequest(requestRaw string) *DestroyGameRoomRequest {
-	if r, err := util.JsonToObject(&DestroyGameRoomRequest{}, requestRaw); err == nil {
-		return r.(*DestroyGameRoomRequest)
-	}
-	return nil
-}
-
-func (c *GameController) handleDestroyGameRoomRequest(requestRaw string, response *Response) string {
-	request := parseDestroyGameRoomRequest(requestRaw)
+func (c *GameController) handleDestroyGameRoomRequest(userId engine.UserId, requestRaw string, response *Response) string {
+	request := parseRequest(&DestroyGameRoomRequest{}, requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	if !c.rooms.ExistsForHostId(request.UserId) {
+	if !c.rooms.ExistsForHostId(userId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	if _, ok := c.rooms.PopByHostId(request.UserId); !ok {
+	if _, ok := c.rooms.PopByHostId(userId); !ok {
 		return response.WithStatus(ResponseStatusFailed)
 	}
 	return response.WithStatus(ResponseStatusOk)

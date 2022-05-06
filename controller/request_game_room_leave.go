@@ -1,27 +1,22 @@
 package controller
 
-import "jrpg-gang/util"
+import (
+	"jrpg-gang/engine"
+)
 
 type LeaveGameRoomRequest struct {
 	Request
 }
 
-func parseLeaveGameRoomRequest(requestRaw string) *LeaveGameRoomRequest {
-	if r, err := util.JsonToObject(&LeaveGameRoomRequest{}, requestRaw); err == nil {
-		return r.(*LeaveGameRoomRequest)
-	}
-	return nil
-}
-
-func (c *GameController) handleLeaveGameRoomRequest(requestRaw string, response *Response) string {
-	request := parseLeaveGameRoomRequest(requestRaw)
+func (c *GameController) handleLeaveGameRoomRequest(userId engine.UserId, requestRaw string, response *Response) string {
+	request := parseRequest(&LeaveGameRoomRequest{}, requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	if !c.rooms.ExistsForUserId(request.UserId) {
+	if !c.rooms.ExistsForUserId(userId) {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	if !c.rooms.RemoveUser(request.UserId) {
+	if !c.rooms.RemoveUser(userId) {
 		return response.WithStatus(ResponseStatusFailed)
 	}
 	return response.WithStatus(ResponseStatusOk)

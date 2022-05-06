@@ -1,6 +1,8 @@
 package controller
 
-import "jrpg-gang/util"
+import (
+	"jrpg-gang/engine"
+)
 
 type JoinGameRoomRequest struct {
 	Request
@@ -9,25 +11,18 @@ type JoinGameRoomRequest struct {
 	} `json:"data"`
 }
 
-func parseJoinGameRoomRequest(requestRaw string) *JoinGameRoomRequest {
-	if r, err := util.JsonToObject(&JoinGameRoomRequest{}, requestRaw); err == nil {
-		return r.(*JoinGameRoomRequest)
-	}
-	return nil
-}
-
-func (c *GameController) handleJoinGameRoomRequest(requestRaw string, response *Response) string {
-	request := parseJoinGameRoomRequest(requestRaw)
+func (c *GameController) handleJoinGameRoomRequest(userId engine.UserId, requestRaw string, response *Response) string {
+	request := parseRequest(&JoinGameRoomRequest{}, requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	if c.rooms.ExistsForUserId(request.UserId) {
+	if c.rooms.ExistsForUserId(userId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	if !c.rooms.Has(request.Data.RoomUid) {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	user, _ := c.users.Get(request.UserId)
+	user, _ := c.users.Get(userId)
 	if !c.rooms.AddUser(request.Data.RoomUid, user) {
 		return response.WithStatus(ResponseStatusFailed)
 	}

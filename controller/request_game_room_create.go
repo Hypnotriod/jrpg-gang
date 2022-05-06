@@ -1,6 +1,8 @@
 package controller
 
-import "jrpg-gang/util"
+import (
+	"jrpg-gang/engine"
+)
 
 type CreateGameRoomRequest struct {
 	Request
@@ -10,26 +12,19 @@ type CreateGameRoomRequest struct {
 	} `json:"data"`
 }
 
-func parseCreateGameRoomRequest(requestRaw string) *CreateGameRoomRequest {
-	if r, err := util.JsonToObject(&CreateGameRoomRequest{}, requestRaw); err == nil {
-		return r.(*CreateGameRoomRequest)
-	}
-	return nil
-}
-
-func (c *GameController) handleCreateGameRoomRequest(requestRaw string, response *Response) string {
-	request := parseCreateGameRoomRequest(requestRaw)
+func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, requestRaw string, response *Response) string {
+	request := parseRequest(&CreateGameRoomRequest{}, requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
 	if request.Data.Capacity == 0 || request.Data.Capacity > GAME_ROOM_MAX_CAPACITY {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	if c.rooms.ExistsForUserId(request.UserId) {
+	if c.rooms.ExistsForUserId(userId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	// todo: check available scenario
-	hostUser, _ := c.users.Get(request.UserId)
+	hostUser, _ := c.users.Get(userId)
 	room := NewGameRoom()
 	room.Capacity = request.Data.Capacity
 	room.ScenarioUid = request.Data.ScenarioUid

@@ -1,20 +1,15 @@
 package controller
 
-import "jrpg-gang/util"
+import (
+	"jrpg-gang/engine"
+)
 
 type LobbyStatusRequest struct {
 	Request
 }
 
-func parseLobbyStatusRequest(requestRaw string) *LobbyStatusRequest {
-	if r, err := util.JsonToObject(&LobbyStatusRequest{}, requestRaw); err == nil {
-		return r.(*LobbyStatusRequest)
-	}
-	return nil
-}
-
-func (c *GameController) handleLobbyStatusRequest(requestRaw string, response *Response) string {
-	request := parseLobbyStatusRequest(requestRaw)
+func (c *GameController) handleLobbyStatusRequest(userId engine.UserId, requestRaw string, response *Response) string {
+	request := parseRequest(&LobbyStatusRequest{}, requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}

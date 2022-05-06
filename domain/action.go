@@ -18,7 +18,7 @@ type Action struct {
 	Action    AtionType `json:"action"`
 	Uid       uint      `json:"uid"`
 	TargetUid uint      `json:"targetUid,omitempty"`
-	ItemUid   uint      `json:"item_uid,omitempty"`
+	ItemUid   uint      `json:"itemUid,omitempty"`
 	Position  Position  `json:"position,omitempty"`
 }
 

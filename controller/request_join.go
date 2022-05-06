@@ -2,7 +2,6 @@ package controller
 
 import (
 	"jrpg-gang/engine"
-	"jrpg-gang/util"
 	"regexp"
 )
 
@@ -14,15 +13,8 @@ type JoinRequest struct {
 	} `json:"data"`
 }
 
-func parseJoinRequest(requestRaw string) *JoinRequest {
-	if r, err := util.JsonToObject(&JoinRequest{}, requestRaw); err == nil {
-		return r.(*JoinRequest)
-	}
-	return nil
-}
-
 func (c *GameController) handleJoinRequest(requestRaw string, response *Response) string {
-	request := parseJoinRequest(requestRaw)
+	request := parseRequest(&JoinRequest{}, requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
