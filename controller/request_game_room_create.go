@@ -30,6 +30,6 @@ func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, reque
 	room.ScenarioUid = request.Data.ScenarioUid
 	room.Host = hostUser
 	c.rooms.Add(room)
-	response.Data[DataKeyRoom], _ = c.rooms.GetByUserId(hostUser.id)
+	response.Data[DataKeyRoom] = room
 	return response.WithStatus(ResponseStatusOk)
 }
