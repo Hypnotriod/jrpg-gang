@@ -15,10 +15,13 @@ func (c *GameController) handleGameActionRequest(userId engine.UserId, requestRa
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	result, ok := c.engines.ExecuteUserAction(request.Data, userId)
+	result, broadcastUserIds, ok := c.engines.ExecuteUserAction(request.Data, userId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	response.Data[DataKeyActionResult] = result
+	if len(broadcastUserIds) > 0 {
+		c.broadcastResponse(broadcastUserIds, response)
+	}
 	return response.WithStatus(ResponseStatusOk)
 }

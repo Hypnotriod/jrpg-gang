@@ -8,7 +8,8 @@ import (
 )
 
 func TestJoin(t *testing.T) {
-	cntrl := controller.NewController()
+	broadcaster := &Broadcaster{}
+	cntrl := controller.NewController(broadcaster)
 	var result string
 	result, _ = doJoinRequest(cntrl, "999Megazilla", engine.UnitClassMage)
 	fmt.Println(result)
@@ -21,7 +22,8 @@ func TestJoin(t *testing.T) {
 func TestJoinAsync(t *testing.T) {
 	const n int = 1000
 	var result string
-	cntrl := controller.NewController()
+	broadcaster := &Broadcaster{}
+	cntrl := controller.NewController(broadcaster)
 	ch := make(chan string)
 	for i := 0; i < n; i++ {
 		go doJoin(ch, cntrl, i)

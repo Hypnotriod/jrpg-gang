@@ -49,15 +49,19 @@ func (e *GameEngines) IsUserInGame(userId engine.UserId) bool {
 	return ok
 }
 
-func (e *GameEngines) ExecuteUserAction(action domain.Action, userId engine.UserId) (*engine.GameEvent, bool) {
+func (e *GameEngines) ExecuteUserAction(action domain.Action, userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
 	e.RLock()
 	wrapper, ok := e.userIdToEngine[userId]
 	e.RUnlock()
 	if !ok {
-		return nil, false
+		return nil, nil, false
 	}
 	wrapper.Lock()
 	result := wrapper.engine.ExecuteUserAction(action, userId)
+	broadcastUserIds := []engine.UserId{}
+	if result.UnitActionResult.Result.ResultType == domain.ResultAccomplished {
+		broadcastUserIds = wrapper.engine.GetRestUserIds(userId)
+	}
 	wrapper.Unlock()
-	return result, true
+	return result, broadcastUserIds, true
 }

@@ -2,17 +2,23 @@ package controller
 
 import "jrpg-gang/engine"
 
-type GameController struct {
-	users   *Users
-	rooms   *GameRooms
-	engines *GameEngines
+type GameControllerBroadcaster interface {
+	BroadcastGameMessage(userIds []engine.UserId, message string)
 }
 
-func NewController() *GameController {
+type GameController struct {
+	users       *Users
+	rooms       *GameRooms
+	engines     *GameEngines
+	broadcaster GameControllerBroadcaster
+}
+
+func NewController(broadcaster GameControllerBroadcaster) *GameController {
 	c := &GameController{}
 	c.users = NewUsers()
 	c.rooms = NewGameRooms()
 	c.engines = NewGameEngines()
+	c.broadcaster = broadcaster
 	return c
 }
 
@@ -58,4 +64,8 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 		return c.handleStartGameRequest(userId, requestRaw, response)
 	}
 	return response.WithStatus(ResponseStatusUnsupported)
+}
+
+func (c *GameController) broadcastResponse(userIds []engine.UserId, response *Response) {
+	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
 }
