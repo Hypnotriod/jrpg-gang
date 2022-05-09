@@ -75,6 +75,7 @@ func (s *Users) AddUser(user *User) {
 	defer s.Unlock()
 	s.Lock()
 	user.id = engine.UserId(s.rndGen.Hash())
+	user.unit.UserId = user.id
 	s.users[user.id] = user
 	s.userNicknameToId[user.Nickname] = user.id
 }

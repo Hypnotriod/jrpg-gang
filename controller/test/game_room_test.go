@@ -38,6 +38,9 @@ func TestCreateGameRoom(t *testing.T) {
 	result = doRequest(cntrl, controller.RequestLobbyStatus, user1Id, ``)
 	fmt.Println(result)
 	fmt.Println()
+	result = doRequest(cntrl, controller.RequestStartGame, user1Id, ``)
+	fmt.Println(result)
+	fmt.Println()
 }
 
 func TestCreateGameRoomAsync(t *testing.T) {
