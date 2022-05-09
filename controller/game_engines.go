@@ -65,3 +65,17 @@ func (e *GameEngines) ExecuteUserAction(action domain.Action, userId engine.User
 	wrapper.Unlock()
 	return result, broadcastUserIds, true
 }
+
+func (e *GameEngines) GameState(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
+	e.RLock()
+	wrapper, ok := e.userIdToEngine[userId]
+	e.RUnlock()
+	if !ok {
+		return nil, nil, false
+	}
+	wrapper.Lock()
+	result := wrapper.engine.NewGameEvent()
+	broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
+	wrapper.Unlock()
+	return result, broadcastUserIds, true
+}

@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/engine"
 	"jrpg-gang/util"
 )
 
@@ -16,17 +17,19 @@ const (
 	RequestUserStatus      RequestType = "userStatus"
 	RequestStartGame       RequestType = "startGame"
 	RequestGameAction      RequestType = "gameAction"
+	RequestGameState       RequestType = "gameState"
 )
 
 type Request struct {
-	Type RequestType `json:"type"`
-	Id   string      `json:"id"`
+	UserId engine.UserId `json:"userId,omitempty"`
+	Type   RequestType   `json:"type"`
+	Id     string        `json:"id"`
 }
 
 type ParsebleRequest interface {
 	*Request | *GameActionRequest | *CreateGameRoomRequest | *JoinRequest | *DestroyGameRoomRequest |
 		*LobbyStatusRequest | *UserStatusRequest | *JoinGameRoomRequest | *LeaveGameRoomRequest |
-		*StartGameRequest
+		*StartGameRequest | *GameStateRequest
 }
 
 func parseRequest[T ParsebleRequest](data T, requestRaw string) T {

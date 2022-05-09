@@ -22,19 +22,21 @@ func doJoinRequest(controller *controller.GameController, nickname string, class
 	}`,
 		rndGen.Hash(),
 		nickname,
-		class), engine.UserId(""))
+		class))
 	return result, parseUserId(result)
 }
 
 func doRequest(controller *controller.GameController, requestType controller.RequestType, userId string, data string) string {
 	return controller.HandleRequest(fmt.Sprintf(`{
 		"id": "%s",
+		"userId": "%s",
 		"type": "%s",
 		"data": {%s}
 	}`,
 		rndGen.Hash(),
+		userId,
 		requestType,
-		data), engine.UserId(userId))
+		data))
 }
 
 func parseUserId(str string) string {

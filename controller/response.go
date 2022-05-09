@@ -29,7 +29,7 @@ const (
 
 type Response struct {
 	Type   RequestType                     `json:"type"`
-	Id     string                          `json:"id"`
+	Id     string                          `json:"id,omitempty"`
 	Status ResponseStatus                  `json:"status"`
 	Data   map[ResponseDataKey]interface{} `json:"data,omitempty"`
 }
