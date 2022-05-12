@@ -2,7 +2,7 @@ package engine
 
 func (e *GameEngine) NextPhase() *GameEvent {
 	result := e.NewGameEvent()
-	switch e.state.Phase {
+	switch e.state.phase {
 	case GamePhaseReadyForStartRound:
 		e.processStartRound()
 	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
@@ -12,15 +12,15 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	case GamePhaseBattleComplete:
 		e.processBattleComplete(result)
 	}
-	result.NextPhase = e.state.Phase
+	result.NextPhase = e.state.phase
 	return result
 }
 
 func (e *GameEngine) NextPhaseRequired() bool {
-	return e.state.Phase == GamePhaseReadyForStartRound ||
-		e.state.Phase == GamePhaseMakeMoveOrActionAI ||
-		e.state.Phase == GamePhaseMakeActionAI ||
-		e.state.Phase == GamePhaseActionComplete
+	return e.state.phase == GamePhaseReadyForStartRound ||
+		e.state.phase == GamePhaseMakeMoveOrActionAI ||
+		e.state.phase == GamePhaseMakeActionAI ||
+		e.state.phase == GamePhaseActionComplete
 }
 
 func (e *GameEngine) processStartRound() {

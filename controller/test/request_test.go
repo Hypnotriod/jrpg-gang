@@ -12,7 +12,7 @@ import (
 var rndGen *util.RndGen = util.NewRndGen()
 
 func doJoinRequest(controller *controller.GameController, nickname string, class engine.GameUnitClass) (string, string) {
-	result := controller.HandleRequest(fmt.Sprintf(`{
+	userId, result := controller.HandleRequest(fmt.Sprintf(`{
 		"id": "%s",
 		"type": "join",
 		"data": {
@@ -23,11 +23,11 @@ func doJoinRequest(controller *controller.GameController, nickname string, class
 		rndGen.Hash(),
 		nickname,
 		class))
-	return result, parseUserId(result)
+	return result, string(userId)
 }
 
 func doRequest(controller *controller.GameController, requestType controller.RequestType, userId string, data string) string {
-	return controller.HandleRequest(fmt.Sprintf(`{
+	_, result := controller.HandleRequest(fmt.Sprintf(`{
 		"id": "%s",
 		"userId": "%s",
 		"type": "%s",
@@ -37,6 +37,7 @@ func doRequest(controller *controller.GameController, requestType controller.Req
 		userId,
 		requestType,
 		data))
+	return result
 }
 
 func parseUserId(str string) string {

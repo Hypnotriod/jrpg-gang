@@ -24,7 +24,7 @@ func (c *GameController) handleStartGameRequest(requestRaw string, response *Res
 	state := engine.NewGameEvent()
 	userIds := engine.GetUserIds()
 	c.broadcastGameState(userIds, state)
-	c.engines.Add(engine)
+	c.engines.Add(request.UserId, engine)
 
 	return response.WithStatus(ResponseStatusOk)
 }

@@ -66,8 +66,8 @@ func (e *GameEvent) String() string {
 
 func (e *GameEngine) NewGameEvent() *GameEvent {
 	event := &GameEvent{}
-	event.Phase = e.state.Phase
-	event.NextPhase = e.state.Phase
+	event.Phase = e.state.phase
+	event.NextPhase = e.state.phase
 	event.State = e.state
 	event.Spot = e.scenario.CurrentSpot()
 	return event
@@ -75,8 +75,8 @@ func (e *GameEngine) NewGameEvent() *GameEvent {
 
 func (e *GameEngine) NewGameEventWithUnitAction(action *domain.Action) *GameEvent {
 	event := &GameEvent{}
-	event.Phase = e.state.Phase
-	event.NextPhase = e.state.Phase
+	event.Phase = e.state.phase
+	event.NextPhase = e.state.phase
 	event.UnitActionResult = NewGameUnitActionResult()
 	event.UnitActionResult.Action = *action
 	event.State = e.state

@@ -40,7 +40,7 @@ func (e *GameEngine) Dispose() {
 }
 
 func (e *GameEngine) GetPhase() GamePhase {
-	return e.state.Phase
+	return e.state.phase
 }
 
 func (e *GameEngine) battlefield() *Battlefield {

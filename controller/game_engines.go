@@ -10,6 +10,7 @@ import (
 type GameEngineWrapper struct {
 	sync.RWMutex
 	engine *engine.GameEngine
+	hostId engine.UserId
 }
 
 func NewGameEngineWrapper() *GameEngineWrapper {
@@ -31,11 +32,12 @@ func NewGameEngines() *GameEngines {
 	return e
 }
 
-func (e *GameEngines) Add(engine *engine.GameEngine) {
+func (e *GameEngines) Add(hostId engine.UserId, engine *engine.GameEngine) {
 	defer e.Unlock()
 	e.Lock()
 	wrapper := NewGameEngineWrapper()
 	wrapper.engine = engine
+	wrapper.hostId = hostId
 	e.engines = append(e.engines, wrapper)
 	for _, userId := range engine.GetUserIds() {
 		e.userIdToEngine[userId] = wrapper
@@ -56,13 +58,30 @@ func (e *GameEngines) ExecuteUserAction(action domain.Action, userId engine.User
 	if !ok {
 		return nil, nil, false
 	}
+	defer wrapper.Unlock()
 	wrapper.Lock()
 	result := wrapper.engine.ExecuteUserAction(action, userId)
 	broadcastUserIds := []engine.UserId{}
 	if result.UnitActionResult.Result.ResultType == domain.ResultAccomplished {
 		broadcastUserIds = wrapper.engine.GetRestUserIds(userId)
 	}
-	wrapper.Unlock()
+	return result, broadcastUserIds, true
+}
+
+func (e *GameEngines) NextPhase(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
+	e.RLock()
+	wrapper, ok := e.userIdToEngine[userId]
+	e.RUnlock()
+	if !ok {
+		return nil, nil, false
+	}
+	defer wrapper.Unlock()
+	wrapper.Lock()
+	if wrapper.hostId != userId || !wrapper.engine.NextPhaseRequired() {
+		return nil, nil, false
+	}
+	result := wrapper.engine.NextPhase()
+	broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
 	return result, broadcastUserIds, true
 }
 

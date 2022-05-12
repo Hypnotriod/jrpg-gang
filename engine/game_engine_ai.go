@@ -7,7 +7,7 @@ func (e *GameEngine) processAI(event *GameEvent) {
 	if e.aiTryToAttack(event, unit) {
 		return
 	}
-	if e.state.Phase == GamePhaseMakeMoveOrActionAI && e.aiTryToMove(event, unit) {
+	if e.state.phase == GamePhaseMakeMoveOrActionAI && e.aiTryToMove(event, unit) {
 		return
 	}
 	e.onUnitUseAction()

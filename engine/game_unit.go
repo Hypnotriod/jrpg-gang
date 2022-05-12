@@ -9,6 +9,10 @@ type UserId string
 type GameUnitClass string
 
 const (
+	UserIdEmpty UserId = ""
+)
+
+const (
 	UnitClassTank  GameUnitClass = "tank"
 	UnitClassRogue GameUnitClass = "rogue"
 	UnitClassMage  GameUnitClass = "mage"

@@ -22,27 +22,29 @@ func NewController(broadcaster GameControllerBroadcaster) *GameController {
 	return c
 }
 
-func (c *GameController) HandleRequest(requestRaw string) string {
+func (c *GameController) HandleRequest(requestRaw string) (engine.UserId, string) {
 	response := NewResponse()
 	request := parseRequest(&Request{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMailformed)
 	}
 	response.Type = request.Type
 	response.Id = request.Id
-	return c.serveRequest(request, requestRaw, response)
-}
-
-func (c *GameController) serveRequest(request *Request, requestRaw string, response *Response) string {
 	if request.Type == RequestJoin {
 		return c.handleJoinRequest(requestRaw, response)
 	}
+	return engine.UserIdEmpty, c.serveRequest(request, requestRaw, response)
+}
+
+func (c *GameController) serveRequest(request *Request, requestRaw string, response *Response) string {
 	if !c.users.Has(request.UserId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
 	case RequestGameAction:
 		return c.handleGameActionRequest(requestRaw, response)
+	case RequestNextGamePhase:
+		return c.handleGameNextPhaseRequest(requestRaw, response)
 	case RequestGameState:
 		return c.handleGameStateRequest(requestRaw, response)
 	}

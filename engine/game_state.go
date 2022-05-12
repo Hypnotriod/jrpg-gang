@@ -20,14 +20,14 @@ const (
 )
 
 type GameState struct {
-	Phase            GamePhase `json:"phase"`
-	ActiveUnitsQueue []uint    `json:"activeUnitsQueue"`
-	InactiveUnits    []uint    `json:"inactiveUnits"`
+	ActiveUnitsQueue []uint `json:"activeUnitsQueue"`
+	InactiveUnits    []uint `json:"inactiveUnits"`
+	phase            GamePhase
 }
 
 func NewGameState() *GameState {
 	s := &GameState{}
-	s.Phase = GamePhasePlaceUnit
+	s.phase = GamePhasePlaceUnit
 	s.ActiveUnitsQueue = make([]uint, 0, 10)
 	s.InactiveUnits = make([]uint, 0, 10)
 	return s
@@ -38,7 +38,7 @@ func (s GameState) String() string {
 		"active units queue: [%v], inactive units: [%v], phase: %s",
 		util.AsCommaSeparatedSlice(s.ActiveUnitsQueue),
 		util.AsCommaSeparatedSlice(s.InactiveUnits),
-		s.Phase,
+		s.phase,
 	)
 }
 
@@ -92,7 +92,7 @@ func (s *GameState) IsCurrentActiveUnit(unit *GameUnit) bool {
 }
 
 func (s *GameState) ChangePhase(phase GamePhase) {
-	s.Phase = phase
+	s.phase = phase
 }
 
 func (s *GameState) HasActiveUnits() bool {

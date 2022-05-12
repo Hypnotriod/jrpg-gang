@@ -20,12 +20,12 @@ func (e *GameEngine) ExecuteUserAction(action domain.Action, userId UserId) *Gam
 		actionResult = domain.NewActionResult().WithResultType(domain.ResultNotAccomplished)
 	}
 	result.UnitActionResult.Result = *actionResult
-	result.NextPhase = e.state.Phase
+	result.NextPhase = e.state.phase
 	return result
 }
 
 func (e *GameEngine) executePlaceAction(action domain.Action, userId UserId) *domain.ActionResult {
-	if e.state.Phase != GamePhasePlaceUnit {
+	if e.state.phase != GamePhasePlaceUnit {
 		return domain.NewActionResult().WithResultType(domain.ResultNotAllowed)
 	}
 	unit := e.findActorByUserId(userId)
@@ -40,7 +40,7 @@ func (e *GameEngine) executePlaceAction(action domain.Action, userId UserId) *do
 }
 
 func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *domain.ActionResult {
-	if e.state.Phase != GamePhaseMakeAction && e.state.Phase != GamePhaseMakeMoveOrAction {
+	if e.state.phase != GamePhaseMakeAction && e.state.phase != GamePhaseMakeMoveOrAction {
 		return domain.NewActionResult().WithResultType(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnitById(action.Uid)
@@ -67,7 +67,7 @@ func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *doma
 }
 
 func (e *GameEngine) executeEquipAction(action domain.Action, userId UserId) *domain.ActionResult {
-	if e.state.Phase != GamePhaseMakeAction && e.state.Phase != GamePhaseMakeMoveOrAction {
+	if e.state.phase != GamePhaseMakeAction && e.state.phase != GamePhaseMakeMoveOrAction {
 		return domain.NewActionResult().WithResultType(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnitById(action.Uid)
@@ -81,7 +81,7 @@ func (e *GameEngine) executeEquipAction(action domain.Action, userId UserId) *do
 }
 
 func (e *GameEngine) executeUnequipAction(action domain.Action, userId UserId) *domain.ActionResult {
-	if e.state.Phase != GamePhaseMakeAction && e.state.Phase != GamePhaseMakeMoveOrAction {
+	if e.state.phase != GamePhaseMakeAction && e.state.phase != GamePhaseMakeMoveOrAction {
 		return domain.NewActionResult().WithResultType(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnitById(action.Uid)
@@ -95,7 +95,7 @@ func (e *GameEngine) executeUnequipAction(action domain.Action, userId UserId) *
 }
 
 func (e *GameEngine) executeMoveAction(action domain.Action, userId UserId) *domain.ActionResult {
-	if e.state.Phase != GamePhaseMakeMoveOrAction {
+	if e.state.phase != GamePhaseMakeMoveOrAction {
 		return domain.NewActionResult().WithResultType(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnitById(action.Uid)
