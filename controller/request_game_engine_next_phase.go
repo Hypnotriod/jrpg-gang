@@ -1,15 +1,17 @@
 package controller
 
+import "jrpg-gang/engine"
+
 type GameNextPhaseRequest struct {
 	Request
 }
 
-func (c *GameController) handleGameNextPhaseRequest(requestRaw string, response *Response) string {
+func (c *GameController) handleGameNextPhaseRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&GameNextPhaseRequest{}, requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	result, broadcastUserIds, ok := c.engines.NextPhase(request.UserId)
+	result, broadcastUserIds, ok := c.engines.NextPhase(userId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}

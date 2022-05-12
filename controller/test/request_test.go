@@ -11,8 +11,10 @@ import (
 
 var rndGen *util.RndGen = util.NewRndGen()
 
-func doJoinRequest(controller *controller.GameController, nickname string, class engine.GameUnitClass) (string, string) {
-	userId, result := controller.HandleRequest(fmt.Sprintf(`{
+func doJoinRequest(controller *controller.GameController, nickname string, class engine.GameUnitClass) (engine.UserId, string) {
+	return controller.HandleRequest(
+		engine.UserIdEmpty,
+		fmt.Sprintf(`{
 		"id": "%s",
 		"type": "join",
 		"data": {
@@ -20,23 +22,24 @@ func doJoinRequest(controller *controller.GameController, nickname string, class
 			"class": "%s"
 		}
 	}`,
-		rndGen.Hash(),
-		nickname,
-		class))
-	return result, string(userId)
+			rndGen.Hash(),
+			nickname,
+			class))
 }
 
-func doRequest(controller *controller.GameController, requestType controller.RequestType, userId string, data string) string {
-	_, result := controller.HandleRequest(fmt.Sprintf(`{
+func doRequest(controller *controller.GameController, requestType controller.RequestType, userId engine.UserId, data string) string {
+	_, result := controller.HandleRequest(
+		engine.UserId(userId),
+		fmt.Sprintf(`{
 		"id": "%s",
 		"userId": "%s",
 		"type": "%s",
 		"data": {%s}
 	}`,
-		rndGen.Hash(),
-		userId,
-		requestType,
-		data))
+			rndGen.Hash(),
+			userId,
+			requestType,
+			data))
 	return result
 }
 

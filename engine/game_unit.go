@@ -41,5 +41,5 @@ func (u GameUnit) String() string {
 }
 
 func (u *GameUnit) HasUserId() bool {
-	return len(u.UserId) != 0
+	return u.UserId != UserIdEmpty
 }

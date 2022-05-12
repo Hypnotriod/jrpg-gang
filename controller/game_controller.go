@@ -22,7 +22,7 @@ func NewController(broadcaster GameControllerBroadcaster) *GameController {
 	return c
 }
 
-func (c *GameController) HandleRequest(requestRaw string) (engine.UserId, string) {
+func (c *GameController) HandleRequest(userId engine.UserId, requestRaw string) (engine.UserId, string) {
 	response := NewResponse()
 	request := parseRequest(&Request{}, requestRaw)
 	if request == nil {
@@ -33,39 +33,39 @@ func (c *GameController) HandleRequest(requestRaw string) (engine.UserId, string
 	if request.Type == RequestJoin {
 		return c.handleJoinRequest(requestRaw, response)
 	}
-	return engine.UserIdEmpty, c.serveRequest(request, requestRaw, response)
+	return engine.UserIdEmpty, c.serveRequest(userId, request, requestRaw, response)
 }
 
-func (c *GameController) serveRequest(request *Request, requestRaw string, response *Response) string {
-	if !c.users.Has(request.UserId) {
+func (c *GameController) serveRequest(userId engine.UserId, request *Request, requestRaw string, response *Response) string {
+	if !c.users.Has(userId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
 	case RequestGameAction:
-		return c.handleGameActionRequest(requestRaw, response)
+		return c.handleGameActionRequest(userId, requestRaw, response)
 	case RequestNextGamePhase:
-		return c.handleGameNextPhaseRequest(requestRaw, response)
+		return c.handleGameNextPhaseRequest(userId, requestRaw, response)
 	case RequestGameState:
-		return c.handleGameStateRequest(requestRaw, response)
+		return c.handleGameStateRequest(userId, requestRaw, response)
 	}
-	if c.engines.IsUserInGame(request.UserId) {
+	if c.engines.IsUserInGame(userId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
 	case RequestCreateGameRoom:
-		return c.handleCreateGameRoomRequest(requestRaw, response)
+		return c.handleCreateGameRoomRequest(userId, requestRaw, response)
 	case RequestDestroyGameRoom:
-		return c.handleDestroyGameRoomRequest(requestRaw, response)
+		return c.handleDestroyGameRoomRequest(userId, requestRaw, response)
 	case RequestLobbyStatus:
-		return c.handleLobbyStatusRequest(requestRaw, response)
+		return c.handleLobbyStatusRequest(userId, requestRaw, response)
 	case RequestUserStatus:
-		return c.handleUserStatusRequest(requestRaw, response)
+		return c.handleUserStatusRequest(userId, requestRaw, response)
 	case RequestJoinGameRoom:
-		return c.handleJoinGameRoomRequest(requestRaw, response)
+		return c.handleJoinGameRoomRequest(userId, requestRaw, response)
 	case RequestLeaveGameRoom:
-		return c.handleLeaveGameRoomRequest(requestRaw, response)
+		return c.handleLeaveGameRoomRequest(userId, requestRaw, response)
 	case RequestStartGame:
-		return c.handleStartGameRequest(requestRaw, response)
+		return c.handleStartGameRequest(userId, requestRaw, response)
 	}
 	return response.WithStatus(ResponseStatusUnsupported)
 }

@@ -13,8 +13,10 @@ type GameEngineWrapper struct {
 	hostId engine.UserId
 }
 
-func NewGameEngineWrapper() *GameEngineWrapper {
+func NewGameEngineWrapper(hostId engine.UserId, engine *engine.GameEngine) *GameEngineWrapper {
 	w := &GameEngineWrapper{}
+	w.engine = engine
+	w.hostId = hostId
 	return w
 }
 
@@ -35,9 +37,7 @@ func NewGameEngines() *GameEngines {
 func (e *GameEngines) Add(hostId engine.UserId, engine *engine.GameEngine) {
 	defer e.Unlock()
 	e.Lock()
-	wrapper := NewGameEngineWrapper()
-	wrapper.engine = engine
-	wrapper.hostId = hostId
+	wrapper := NewGameEngineWrapper(hostId, engine)
 	e.engines = append(e.engines, wrapper)
 	for _, userId := range engine.GetUserIds() {
 		e.userIdToEngine[userId] = wrapper

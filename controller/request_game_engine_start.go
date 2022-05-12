@@ -8,12 +8,12 @@ type StartGameRequest struct {
 	Request
 }
 
-func (c *GameController) handleStartGameRequest(requestRaw string, response *Response) string {
+func (c *GameController) handleStartGameRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&StartGameRequest{}, requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	room, ok := c.rooms.PopByHostId(request.UserId)
+	room, ok := c.rooms.PopByHostId(userId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
@@ -24,7 +24,7 @@ func (c *GameController) handleStartGameRequest(requestRaw string, response *Res
 	state := engine.NewGameEvent()
 	userIds := engine.GetUserIds()
 	c.broadcastGameState(userIds, state)
-	c.engines.Add(request.UserId, engine)
+	c.engines.Add(userId, engine)
 
 	return response.WithStatus(ResponseStatusOk)
 }

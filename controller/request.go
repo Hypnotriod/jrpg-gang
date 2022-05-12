@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"jrpg-gang/engine"
 	"jrpg-gang/util"
 )
 
@@ -22,9 +21,8 @@ const (
 )
 
 type Request struct {
-	UserId engine.UserId `json:"userId,omitempty"`
-	Type   RequestType   `json:"type"`
-	Id     string        `json:"id"`
+	Type RequestType `json:"type"`
+	Id   string      `json:"id"`
 }
 
 type ParsebleRequest interface {

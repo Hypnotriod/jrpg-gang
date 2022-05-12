@@ -18,7 +18,7 @@ func TestCreateGameRoom(t *testing.T) {
 	broadcaster := &Broadcaster{}
 	cntrl := controller.NewController(broadcaster)
 	var result string
-	result, user1Id := doJoinRequest(cntrl, "Megazilla999", engine.UnitClassTank)
+	user1Id, result := doJoinRequest(cntrl, "Megazilla999", engine.UnitClassTank)
 	fmt.Println(result)
 	fmt.Println()
 	result = doRequest(cntrl, controller.RequestCreateGameRoom, user1Id, `
@@ -27,7 +27,7 @@ func TestCreateGameRoom(t *testing.T) {
 	roomUid := parseRoomUid(result)
 	fmt.Println(result)
 	fmt.Println()
-	result, user2Id := doJoinRequest(cntrl, "Megazilla777", engine.UnitClassMage)
+	user2Id, result := doJoinRequest(cntrl, "Megazilla777", engine.UnitClassMage)
 	fmt.Println(result)
 	fmt.Println()
 	result = doRequest(cntrl, controller.RequestJoinGameRoom, user2Id, fmt.Sprintf(`
@@ -62,18 +62,18 @@ func TestCreateGameRoomAsync(t *testing.T) {
 			fmt.Printf("create room failed: %s\n", result)
 		}
 	}
-	_, userId := doJoinRequest(cntrl, "Host", engine.UnitClassMage)
+	userId, _ := doJoinRequest(cntrl, "Host", engine.UnitClassMage)
 	result = doRequest(cntrl, controller.RequestLobbyStatus, userId, ``)
 	fmt.Println(result)
 }
 
 func doCreateRoom(ch chan<- string, cntrl *controller.GameController, i int) {
-	_, userId1 := doJoinRequest(cntrl, fmt.Sprintf("Megazilla%d", i), engine.UnitClassRogue)
+	userId1, _ := doJoinRequest(cntrl, fmt.Sprintf("Megazilla%d", i), engine.UnitClassRogue)
 	result1 := doRequest(cntrl, controller.RequestCreateGameRoom, userId1, `
 		"capacity": 4
 	`)
 	roomUid := parseUid(result1)
-	_, userId2 := doJoinRequest(cntrl, fmt.Sprintf("Megazilla%d_buddy1", i), engine.UnitClassTank)
+	userId2, _ := doJoinRequest(cntrl, fmt.Sprintf("Megazilla%d_buddy1", i), engine.UnitClassTank)
 	result2 := doRequest(cntrl, controller.RequestJoinGameRoom, userId2, fmt.Sprintf(`
 		"roomUid": %s
 	`, roomUid))
