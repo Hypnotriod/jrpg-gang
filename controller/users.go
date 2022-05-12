@@ -74,7 +74,12 @@ func (s *Users) GetByNickname(nickname string) (User, bool) {
 func (s *Users) AddUser(user *User) {
 	defer s.Unlock()
 	s.Lock()
-	user.id = engine.UserId(s.rndGen.Hash())
+	for {
+		user.id = engine.UserId(s.rndGen.Hash())
+		if _, ok := s.users[user.id]; !ok {
+			break
+		}
+	}
 	user.unit.UserId = user.id
 	s.users[user.id] = user
 	s.userNicknameToId[user.Nickname] = user.id
