@@ -13,7 +13,7 @@ type GameController struct {
 	broadcaster GameControllerBroadcaster
 }
 
-func NewController(broadcaster GameControllerBroadcaster) *GameController {
+func NewGameController(broadcaster GameControllerBroadcaster) *GameController {
 	c := &GameController{}
 	c.users = NewUsers()
 	c.rooms = NewGameRooms()
