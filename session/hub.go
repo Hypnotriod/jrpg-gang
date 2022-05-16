@@ -45,7 +45,7 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 	return hub
 }
 
-func (h *Hub) Strart(config HubConfig) error {
+func (h *Hub) Start() error {
 	return h.server.ListenAndServe()
 }
 
