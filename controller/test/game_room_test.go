@@ -16,7 +16,8 @@ func (b *Broadcaster) BroadcastGameMessage(userIds []engine.UserId, message stri
 
 func TestCreateGameRoom(t *testing.T) {
 	broadcaster := &Broadcaster{}
-	cntrl := controller.NewGameController(broadcaster)
+	cntrl := controller.NewGameController()
+	cntrl.RegisterBroadcaster(broadcaster)
 	var result string
 	user1Id, result := doJoinRequest(cntrl, "Megazilla999", engine.UnitClassTank)
 	fmt.Println(result)
@@ -50,7 +51,8 @@ func TestCreateGameRoomAsync(t *testing.T) {
 	const n int = 1000
 	var result string
 	broadcaster := &Broadcaster{}
-	cntrl := controller.NewGameController(broadcaster)
+	cntrl := controller.NewGameController()
+	cntrl.RegisterBroadcaster(broadcaster)
 	ch := make(chan string)
 	for i := 0; i < n; i++ {
 		go doCreateRoom(ch, cntrl, i)

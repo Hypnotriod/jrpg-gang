@@ -3,12 +3,14 @@ package session
 import (
 	"jrpg-gang/engine"
 	"log"
+	"sync"
 	"time"
 
 	"github.com/gorilla/websocket"
 )
 
 type Client struct {
+	sync.RWMutex
 	conn     *websocket.Conn
 	hub      *Hub
 	userId   engine.UserId
@@ -26,14 +28,21 @@ func NewClient(connection *websocket.Conn, hub *Hub) *Client {
 	return c
 }
 
+func (c *Client) WriteMessage(message string) {
+	defer c.Unlock()
+	c.Lock()
+	c.conn.WriteMessage(websocket.TextMessage, []byte(message))
+}
+
 func (c *Client) Serve() {
 	defer c.conn.Close()
+	defer c.hub.unregisterClient(c.userId)
 	c.conn.SetReadDeadline(time.Now().Add(c.pongWait))
 	for {
 		mt, message, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-				log.Printf("Client read message error: %v", err)
+				log.Printf("Client read message error: %v\r\n", err)
 			}
 			break
 		}
@@ -44,8 +53,9 @@ func (c *Client) Serve() {
 		userId, response := c.hub.controller.HandleRequest(c.userId, data)
 		if userId != engine.UserIdEmpty {
 			c.userId = userId
+			c.hub.registerClient(userId, c)
 		}
-		c.conn.WriteMessage(websocket.TextMessage, []byte(response))
+		c.WriteMessage(response)
 	}
 }
 
