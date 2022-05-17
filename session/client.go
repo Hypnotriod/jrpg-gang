@@ -2,10 +2,10 @@ package session
 
 import (
 	"jrpg-gang/engine"
-	"log"
 	"time"
 
 	"github.com/gorilla/websocket"
+	log "github.com/sirupsen/logrus"
 )
 
 type Client struct {

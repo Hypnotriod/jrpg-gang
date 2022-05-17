@@ -2,10 +2,10 @@ package session
 
 import (
 	"jrpg-gang/controller"
-	"log"
 	"net/http"
 
 	"github.com/gorilla/websocket"
+	log "github.com/sirupsen/logrus"
 )
 
 type HubConfig struct {
