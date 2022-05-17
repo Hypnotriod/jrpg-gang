@@ -42,7 +42,7 @@ func (c *Client) Serve() {
 		mt, message, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-				log.Printf("Client read message error: %v\r\n", err)
+				log.Error("Client read message error:", err)
 			}
 			break
 		}

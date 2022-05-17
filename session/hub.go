@@ -64,7 +64,7 @@ func (h *Hub) checkOrigin(r *http.Request) bool {
 func (h *Hub) serveWsRequest(writer http.ResponseWriter, request *http.Request) {
 	conn, err := h.upgrader.Upgrade(writer, request, nil)
 	if err != nil {
-		log.Printf("Can't serve ws request: %v\r\n", err)
+		log.Error("Can't serve ws request:", err)
 		return
 	}
 	go NewClient(conn, h).Serve()
