@@ -13,13 +13,17 @@ type GameController struct {
 	broadcaster GameControllerBroadcaster
 }
 
-func NewGameController(broadcaster GameControllerBroadcaster) *GameController {
+func NewGameController() *GameController {
 	c := &GameController{}
 	c.users = NewUsers()
 	c.rooms = NewGameRooms()
 	c.engines = NewGameEngines()
-	c.broadcaster = broadcaster
+	c.broadcaster = c
 	return c
+}
+
+func (c *GameController) RegisterBroadcaster(broadcaster GameControllerBroadcaster) {
+	c.broadcaster = broadcaster
 }
 
 func (c *GameController) HandleRequest(userId engine.UserId, requestRaw string) (engine.UserId, string) {
@@ -82,4 +86,7 @@ func (c *GameController) broadcastGameState(userIds []engine.UserId, state *engi
 	response.Type = RequestGameState
 	response.Data[DataKeyGameState] = state
 	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
+}
+
+func (c *GameController) BroadcastGameMessage(userIds []engine.UserId, message string) {
 }
