@@ -32,24 +32,13 @@ func doRequest(controller *controller.GameController, requestType controller.Req
 		engine.UserId(userId),
 		fmt.Sprintf(`{
 		"id": "%s",
-		"userId": "%s",
 		"type": "%s",
 		"data": {%s}
 	}`,
 			rndGen.Hash(),
-			userId,
 			requestType,
 			data))
 	return result
-}
-
-func parseUserId(str string) string {
-	re := regexp.MustCompile(`"userId":"[a-z0-9]+`)
-	found := re.FindAllString(str, 1)
-	if len(found) == 0 {
-		return ""
-	}
-	return strings.Split(found[0], `"userId":"`)[1]
 }
 
 func parseRoomUid(str string) string {

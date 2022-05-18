@@ -22,8 +22,11 @@ func NewGameController() *GameController {
 	return c
 }
 
-func (c *GameController) RegisterBroadcaster(broadcaster GameControllerBroadcaster) {
-	c.broadcaster = broadcaster
+func (c *GameController) Leave(userId engine.UserId) {
+	c.users.RemoveUser(userId)
+	if _, ok := c.rooms.PopByHostId(userId); ok || c.rooms.RemoveUser(userId) {
+		c.broadcastLobbyStatus(userId)
+	}
 }
 
 func (c *GameController) HandleRequest(userId engine.UserId, requestRaw string) (engine.UserId, string) {
@@ -72,21 +75,4 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 		return c.handleStartGameRequest(userId, requestRaw, response)
 	}
 	return response.WithStatus(ResponseStatusUnsupported)
-}
-
-func (c *GameController) broadcastGameAction(userIds []engine.UserId, result *engine.GameEvent) {
-	response := NewResponse()
-	response.Type = RequestGameAction
-	response.Data[DataKeyActionResult] = result
-	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
-}
-
-func (c *GameController) broadcastGameState(userIds []engine.UserId, state *engine.GameEvent) {
-	response := NewResponse()
-	response.Type = RequestGameState
-	response.Data[DataKeyGameState] = state
-	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
-}
-
-func (c *GameController) BroadcastGameMessage(userIds []engine.UserId, message string) {
 }

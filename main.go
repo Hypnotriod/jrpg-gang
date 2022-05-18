@@ -3,7 +3,7 @@ package main
 import (
 	"jrpg-gang/controller"
 	"jrpg-gang/session"
-	"log"
+	"net/http"
 )
 
 func main() {
@@ -12,13 +12,11 @@ func main() {
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
 		MaxMessageSize:  4096,
-		PongWaitSec:     60,
 	}
+
+	http.Handle("/", http.FileServer(http.Dir("./public")))
 
 	cntrl := controller.NewGameController()
 	hub := session.NewHub(config, cntrl)
-	err := hub.Start()
-	if err != nil {
-		log.Printf("Can't start: %v\r\n", err)
-	}
+	hub.Start()
 }

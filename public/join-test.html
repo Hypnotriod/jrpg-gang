@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>join-test</title>
+
+	<script>
+		let userId = '';
+		const joinDto = () => {
+			return {
+				id: '1234',
+				type: 'join',
+				data: {
+					nickName: 'Tester' + ~~(Math.random() * 10000),
+					class: 'tank',
+				}
+			}
+		}
+		const createRoomDto = () => {
+			return {
+				id: '1234',
+				userId,
+				type: 'createRoom',
+				data: {
+					capacity: 4,
+				}
+			}
+		}
+
+		const ws = new WebSocket('ws://localhost:3000/ws');
+		const scenario = [joinDto, createRoomDto];
+		const next = () => {
+			if (!scenario.length) return;
+			ws.send(JSON.stringify(scenario.shift()()));
+		}
+		ws.onopen = (event) => {
+			console.log('Joined:', event);
+			next();
+		}
+		ws.onclose = (event) => {
+			console.log('Disconnected:', event);
+		}
+		ws.onmessage = (event) => {
+			console.log('Message:', event.data);
+			const response = JSON.parse(event.data);
+			if (response.userId) {
+
+			}
+			next();
+		}
+		ws.onerror = function (evt) {
+			console.log('Error:', evt.data);
+		}
+
+
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>

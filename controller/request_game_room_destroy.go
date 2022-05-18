@@ -14,8 +14,13 @@ func (c *GameController) handleDestroyGameRoomRequest(userId engine.UserId, requ
 	if !c.rooms.ExistsForHostId(userId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	if _, ok := c.rooms.PopByHostId(userId); !ok {
+	room, ok := c.rooms.PopByHostId(userId)
+	if !ok {
 		return response.WithStatus(ResponseStatusFailed)
 	}
+	for _, actor := range room.GetActors() {
+		c.users.ChangeUserStatus(actor.UserId, UserStatusJoined)
+	}
+	c.broadcastLobbyStatus(userId)
 	return response.WithStatus(ResponseStatusOk)
 }

@@ -34,8 +34,10 @@ func (c *Client) WriteMessage(message string) {
 }
 
 func (c *Client) Serve() {
-	defer c.conn.Close()
-	defer c.hub.unregisterClient(c.userId)
+	defer func() {
+		c.hub.unregisterClient(c.userId)
+		c.conn.Close()
+	}()
 	for {
 		mt, message, err := c.conn.ReadMessage()
 		if err != nil {

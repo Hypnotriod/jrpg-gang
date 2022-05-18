@@ -6,10 +6,20 @@ import (
 	"sync"
 )
 
+type UserStatus int
+
+const (
+	UserStatusEmpty  UserStatus = (1 << 0)
+	UserStatusJoined UserStatus = (1 << 1)
+	UserStatusInRoom UserStatus = (1 << 2)
+	UserStatusInGame UserStatus = (1 << 3)
+)
+
 type User struct {
 	Nickname string               `json:"nickname"`
 	Class    engine.GameUnitClass `json:"class"`
 	Level    uint                 `json:"level"`
+	status   UserStatus
 	id       engine.UserId
 	unit     engine.GameUnit
 }
@@ -21,6 +31,7 @@ func NewUser(nickname string,
 	u.Nickname = nickname
 	u.Class = class
 	u.Level = unit.Stats.Progress.Level
+	u.status = UserStatusEmpty
 	u.unit = *unit
 	return u
 }
@@ -71,6 +82,30 @@ func (s *Users) GetByNickname(nickname string) (User, bool) {
 	return *user, ok
 }
 
+func (s *Users) GetIdsByStatus(status UserStatus) []engine.UserId {
+	defer s.RUnlock()
+	s.RLock()
+	result := []engine.UserId{}
+	for _, user := range s.users {
+		if user.status&status != 0 {
+			result = append(result, user.id)
+		}
+	}
+	return result
+}
+
+func (s *Users) GetIdsByStatusExcept(status UserStatus, userId engine.UserId) []engine.UserId {
+	defer s.RUnlock()
+	s.RLock()
+	result := []engine.UserId{}
+	for _, user := range s.users {
+		if user.id != userId && user.status&status != 0 {
+			result = append(result, user.id)
+		}
+	}
+	return result
+}
+
 func (s *Users) AddUser(user *User) {
 	defer s.Unlock()
 	s.Lock()
@@ -81,6 +116,28 @@ func (s *Users) AddUser(user *User) {
 		}
 	}
 	user.unit.UserId = user.id
+	user.status = UserStatusJoined
 	s.users[user.id] = user
 	s.userNicknameToId[user.Nickname] = user.id
+}
+
+func (s *Users) RemoveUser(userId engine.UserId) {
+	defer s.Unlock()
+	s.Lock()
+	user, ok := s.users[userId]
+	if !ok {
+		return
+	}
+	delete(s.userNicknameToId, user.Nickname)
+	delete(s.users, userId)
+}
+
+func (s *Users) ChangeUserStatus(userId engine.UserId, status UserStatus) {
+	defer s.Unlock()
+	s.Lock()
+	user, ok := s.users[userId]
+	if !ok {
+		return
+	}
+	user.status = status
 }

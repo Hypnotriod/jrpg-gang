@@ -1,0 +1,31 @@
+{
+	"tasks": [
+			{
+					"label": "Go build",
+					"type": "shell",
+					"command": "go",
+					"args": [
+							"build",
+							"-o",
+							"./release/program.exe",
+							"./"
+					],
+					"problemMatcher": [],
+					"group": {
+							"kind": "build",
+							"isDefault": true
+					}
+			},
+			{
+					"label": "Debug Stdin",
+					"type": "shell",
+					"command": "dlv debug ./ --headless --listen=:2340 --log --api-version=2",
+					"problemMatcher": [],
+					"group": {
+							"kind": "build",
+							"isDefault": true
+					}
+			}
+	],
+	"version": "2.0.0"
+}

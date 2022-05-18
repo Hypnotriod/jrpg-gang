@@ -29,5 +29,7 @@ func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, reque
 	room.Host = hostUser
 	c.rooms.Add(room)
 	response.Data[DataKeyRoom] = room
+	c.users.ChangeUserStatus(userId, UserStatusInRoom)
+	c.broadcastLobbyStatus(userId)
 	return response.WithStatus(ResponseStatusOk)
 }

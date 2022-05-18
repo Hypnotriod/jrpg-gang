@@ -66,21 +66,26 @@ func (h *Hub) serveWsRequest(writer http.ResponseWriter, request *http.Request) 
 		log.Error("Can't serve ws request:", err)
 		return
 	}
+	log.Info("Connection established")
 	NewClient(conn, h).Serve()
 }
 
 func (h *Hub) registerClient(client *Client) {
-	defer h.Unlock()
 	h.Lock()
 	h.clients[client.userId] = client
-	log.Info("Register Client (", client.userId, ")")
+	h.Unlock()
+	log.Info("Register Client: ", client.userId)
 }
 
 func (h *Hub) unregisterClient(userId engine.UserId) {
-	defer h.Unlock()
+	if userId == engine.UserIdEmpty {
+		return
+	}
 	h.Lock()
 	delete(h.clients, userId)
-	log.Info("Unregister Client (", userId, ")")
+	h.Unlock()
+	h.controller.Leave(userId)
+	log.Info("Unregister Client: ", userId)
 }
 
 func (h *Hub) getClient(userId engine.UserId) *Client {
