@@ -8,7 +8,6 @@
 	<title>join-test</title>
 
 	<script>
-		let userId = '';
 		const joinDto = () => {
 			return {
 				id: '1234',
@@ -22,7 +21,6 @@
 		const createRoomDto = () => {
 			return {
 				id: '1234',
-				userId,
 				type: 'createRoom',
 				data: {
 					capacity: 4,
@@ -46,9 +44,6 @@
 		ws.onmessage = (event) => {
 			console.log('Message:', event.data);
 			const response = JSON.parse(event.data);
-			if (response.userId) {
-
-			}
 			next();
 		}
 		ws.onerror = function (evt) {
