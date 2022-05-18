@@ -15,7 +15,6 @@ type HubConfig struct {
 	ReadBufferSize  int    `json:"readBufferSize"`
 	WriteBufferSize int    `json:"writeBufferSize"`
 	MaxMessageSize  int64  `json:"maxMessageSize"`
-	PongWaitSec     int64  `json:"pongWaitSec"`
 }
 
 type Hub struct {
@@ -67,19 +66,21 @@ func (h *Hub) serveWsRequest(writer http.ResponseWriter, request *http.Request) 
 		log.Error("Can't serve ws request:", err)
 		return
 	}
-	go NewClient(conn, h).Serve()
+	NewClient(conn, h).Serve()
 }
 
-func (h *Hub) registerClient(userId engine.UserId, client *Client) {
+func (h *Hub) registerClient(client *Client) {
 	defer h.Unlock()
 	h.Lock()
-	h.clients[userId] = client
+	h.clients[client.userId] = client
+	log.Info("Register Client (", client.userId, ")")
 }
 
 func (h *Hub) unregisterClient(userId engine.UserId) {
 	defer h.Unlock()
 	h.Lock()
 	delete(h.clients, userId)
+	log.Info("Unregister Client (", userId, ")")
 }
 
 func (h *Hub) getClient(userId engine.UserId) *Client {
