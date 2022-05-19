@@ -23,10 +23,9 @@ func config() session.HubConfig {
 }
 
 func main() {
-	config := config()
-
 	http.Handle("/", http.FileServer(http.Dir("./public")))
 
+	config := config()
 	cntrl := controller.NewGameController()
 	hub := session.NewHub(config, cntrl)
 	hub.Start()
