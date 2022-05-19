@@ -25,7 +25,7 @@ func NewGameController() *GameController {
 func (c *GameController) Leave(userId engine.UserId) {
 	c.users.RemoveUser(userId)
 	if _, ok := c.rooms.PopByHostId(userId); ok || c.rooms.RemoveUser(userId) {
-		c.broadcastLobbyStatus(userId)
+		c.broadcastLobbyStatusToAllExcept(userId)
 	}
 }
 
@@ -55,7 +55,7 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 	case RequestGameState:
 		return c.handleGameStateRequest(userId, requestRaw, response)
 	}
-	if c.engines.IsUserInGame(userId) {
+	if c.users.TestUserStatus(userId, UserStatusInGame) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {

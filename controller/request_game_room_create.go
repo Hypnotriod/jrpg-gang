@@ -30,6 +30,6 @@ func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, reque
 	c.rooms.Add(room)
 	response.Data[DataKeyRoom] = room
 	c.users.ChangeUserStatus(userId, UserStatusInRoom)
-	c.broadcastLobbyStatus(userId)
+	c.broadcastLobbyStatusToAllExcept(userId)
 	return response.WithStatus(ResponseStatusOk)
 }

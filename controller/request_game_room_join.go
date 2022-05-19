@@ -26,6 +26,6 @@ func (c *GameController) handleJoinGameRoomRequest(userId engine.UserId, request
 	}
 	response.Data[DataKeyRoom], _ = c.rooms.GetByUserId(user.id)
 	c.users.ChangeUserStatus(userId, UserStatusInRoom)
-	c.broadcastLobbyStatus(userId)
+	c.broadcastLobbyStatusToAllExcept(userId)
 	return response.WithStatus(ResponseStatusOk)
 }

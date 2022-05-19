@@ -9,10 +9,10 @@ import (
 type UserStatus int
 
 const (
-	UserStatusEmpty  UserStatus = (1 << 0)
-	UserStatusJoined UserStatus = (1 << 1)
-	UserStatusInRoom UserStatus = (1 << 2)
-	UserStatusInGame UserStatus = (1 << 3)
+	UserStatusNotJoined UserStatus = (1 << 0)
+	UserStatusJoined    UserStatus = (1 << 1)
+	UserStatusInRoom    UserStatus = (1 << 2)
+	UserStatusInGame    UserStatus = (1 << 3)
 )
 
 type User struct {
@@ -31,7 +31,7 @@ func NewUser(nickname string,
 	u.Nickname = nickname
 	u.Class = class
 	u.Level = unit.Stats.Progress.Level
-	u.status = UserStatusEmpty
+	u.status = UserStatusNotJoined
 	u.unit = *unit
 	return u
 }
@@ -140,4 +140,14 @@ func (s *Users) ChangeUserStatus(userId engine.UserId, status UserStatus) {
 		return
 	}
 	user.status = status
+}
+
+func (s *Users) TestUserStatus(userId engine.UserId, status UserStatus) bool {
+	defer s.RUnlock()
+	s.RLock()
+	user, ok := s.users[userId]
+	if !ok {
+		return false
+	}
+	return user.status&status != 0
 }

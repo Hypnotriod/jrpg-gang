@@ -19,7 +19,7 @@ func (c *GameController) broadcastGameState(userIds []engine.UserId, state *engi
 	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
 }
 
-func (c *GameController) broadcastLobbyStatus(userId engine.UserId) {
+func (c *GameController) broadcastLobbyStatusToAllExcept(userId engine.UserId) {
 	response := NewResponse()
 	response.Type = RequestLobbyStatus
 	response.Data[DataKeyRooms] = c.rooms.ResponseList()
