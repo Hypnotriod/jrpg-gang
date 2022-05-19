@@ -143,9 +143,9 @@ func (s *Users) ChangeUserStatus(userId engine.UserId, status UserStatus) {
 }
 
 func (s *Users) TestUserStatus(userId engine.UserId, status UserStatus) bool {
-	defer s.RUnlock()
 	s.RLock()
 	user, ok := s.users[userId]
+	s.RUnlock()
 	if !ok {
 		return false
 	}
