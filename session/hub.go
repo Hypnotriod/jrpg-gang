@@ -89,9 +89,9 @@ func (h *Hub) unregisterClient(userId engine.UserId) {
 }
 
 func (h *Hub) getClient(userId engine.UserId) *Client {
-	defer h.RUnlock()
 	h.RLock()
 	client, ok := h.clients[userId]
+	h.RUnlock()
 	if !ok {
 		return nil
 	}
