@@ -25,9 +25,9 @@ func NewClient(connection *websocket.Conn, hub *Hub) *Client {
 }
 
 func (c *Client) WriteMessage(message string) {
-	defer c.Unlock()
 	c.Lock()
 	err := c.conn.WriteMessage(websocket.TextMessage, []byte(message))
+	c.Unlock()
 	if err != nil && websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 		log.Error("Client (", c.userId, ") write message error:", err)
 	}
