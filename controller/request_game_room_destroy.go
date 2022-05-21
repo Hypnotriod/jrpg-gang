@@ -21,6 +21,6 @@ func (c *GameController) handleDestroyGameRoomRequest(userId engine.UserId, requ
 	for _, actor := range room.GetActors() {
 		c.users.ChangeUserStatus(actor.UserId, UserStatusJoined)
 	}
-	c.broadcastLobbyStatusToAllExcept(userId)
+	c.broadcastLobbyStatus()
 	return response.WithStatus(ResponseStatusOk)
 }

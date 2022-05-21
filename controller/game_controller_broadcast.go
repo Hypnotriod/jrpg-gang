@@ -19,12 +19,12 @@ func (c *GameController) broadcastGameState(userIds []engine.UserId, state *engi
 	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
 }
 
-func (c *GameController) broadcastLobbyStatusToAllExcept(userId engine.UserId) {
+func (c *GameController) broadcastLobbyStatus() {
 	response := NewResponse()
 	response.Type = RequestLobbyStatus
 	response.Data[DataKeyRooms] = c.rooms.ResponseList()
 	response.Data[DataKeyUsersCount] = c.users.TotalCount()
-	userIds := c.users.GetIdsByStatusExcept(UserStatusJoined|UserStatusInRoom, userId)
+	userIds := c.users.GetIdsByStatus(UserStatusJoined | UserStatusInRoom)
 	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
 }
 

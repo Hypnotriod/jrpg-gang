@@ -25,7 +25,7 @@ func NewGameController() *GameController {
 func (c *GameController) Leave(userId engine.UserId) {
 	c.users.RemoveUser(userId)
 	if _, ok := c.rooms.PopByHostId(userId); ok || c.rooms.RemoveUser(userId) {
-		c.broadcastLobbyStatusToAllExcept(userId)
+		c.broadcastLobbyStatus()
 	}
 }
 

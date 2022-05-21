@@ -18,6 +18,6 @@ func (c *GameController) handleLeaveGameRoomRequest(userId engine.UserId, reques
 		return response.WithStatus(ResponseStatusFailed)
 	}
 	c.users.ChangeUserStatus(userId, UserStatusJoined)
-	c.broadcastLobbyStatusToAllExcept(userId)
+	c.broadcastLobbyStatus()
 	return response.WithStatus(ResponseStatusOk)
 }
