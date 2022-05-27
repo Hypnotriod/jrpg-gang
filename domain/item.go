@@ -14,10 +14,11 @@ const (
 )
 
 type Item struct {
-	Uid         uint     `json:"uid,omitempty"`
-	Name        string   `json:"name"`
-	Type        ItemType `json:"type"`
-	Description string   `json:"description,omitempty"`
+	Uid         uint      `json:"uid,omitempty"`
+	Name        string    `json:"name"`
+	Type        ItemType  `json:"type"`
+	Price       UnitBooty `json:"price,"`
+	Description string    `json:"description,omitempty"`
 }
 
 func (i Item) String() string {

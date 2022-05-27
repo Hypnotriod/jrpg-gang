@@ -73,36 +73,8 @@ func (s *GameScenario) prepareUnit(unit *GameUnit) {
 	if unit.Modification == nil {
 		unit.Modification = []domain.UnitModificationImpact{}
 	}
-	if unit.Inventory.Ammunition == nil {
-		unit.Inventory.Ammunition = []domain.Ammunition{}
-	}
-	if unit.Inventory.Armor == nil {
-		unit.Inventory.Armor = []domain.Armor{}
-	}
-	if unit.Inventory.Disposable == nil {
-		unit.Inventory.Disposable = []domain.Disposable{}
-	}
-	if unit.Inventory.Magic == nil {
-		unit.Inventory.Magic = []domain.Magic{}
-	}
-	if unit.Inventory.Weapon == nil {
-		unit.Inventory.Weapon = []domain.Weapon{}
-	}
-	for j := range unit.Inventory.Ammunition {
-		unit.Inventory.Ammunition[j].Uid = s.rndGen.NextUid()
-	}
-	for j := range unit.Inventory.Armor {
-		unit.Inventory.Armor[j].Uid = s.rndGen.NextUid()
-	}
-	for j := range unit.Inventory.Disposable {
-		unit.Inventory.Disposable[j].Uid = s.rndGen.NextUid()
-	}
-	for j := range unit.Inventory.Magic {
-		unit.Inventory.Magic[j].Uid = s.rndGen.NextUid()
-	}
-	for j := range unit.Inventory.Weapon {
-		unit.Inventory.Weapon[j].Uid = s.rndGen.NextUid()
-	}
+	unit.Inventory.Prepare()
+	unit.Inventory.PopulateUids(s.rndGen)
 }
 
 func (s *GameScenario) prepareActors(actors []*GameUnit) {

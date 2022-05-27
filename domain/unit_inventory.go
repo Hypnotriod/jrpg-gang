@@ -155,6 +155,35 @@ func (i *UnitInventory) Find(uid uint) interface{} {
 	return nil
 }
 
+func (i *UnitInventory) FindItem(uid uint) *Item {
+	for n := range i.Weapon {
+		if i.Weapon[n].Uid == uid {
+			return &i.Weapon[n].Item
+		}
+	}
+	for n := range i.Magic {
+		if i.Magic[n].Uid == uid {
+			return &i.Magic[n].Item
+		}
+	}
+	for n := range i.Armor {
+		if i.Armor[n].Uid == uid {
+			return &i.Armor[n].Item
+		}
+	}
+	for n := range i.Disposable {
+		if i.Disposable[n].Uid == uid {
+			return &i.Disposable[n].Item
+		}
+	}
+	for n := range i.Ammunition {
+		if i.Ammunition[n].Uid == uid {
+			return &i.Ammunition[n].Item
+		}
+	}
+	return nil
+}
+
 func (i *UnitInventory) FindEquipment(uid uint) *Equipment {
 	equipment := i.GetEquipment(false)
 	for n := range equipment {
@@ -269,4 +298,40 @@ func (i *UnitInventory) GetItemType(uid uint) ItemType {
 		return ItemTypeAmmunition
 	}
 	return ItemTypeNone
+}
+
+func (i *UnitInventory) Prepare() {
+	if i.Ammunition == nil {
+		i.Ammunition = []Ammunition{}
+	}
+	if i.Armor == nil {
+		i.Armor = []Armor{}
+	}
+	if i.Disposable == nil {
+		i.Disposable = []Disposable{}
+	}
+	if i.Magic == nil {
+		i.Magic = []Magic{}
+	}
+	if i.Weapon == nil {
+		i.Weapon = []Weapon{}
+	}
+}
+
+func (i *UnitInventory) PopulateUids(rndGen *util.RndGen) {
+	for j := range i.Ammunition {
+		i.Ammunition[j].Uid = rndGen.NextUid()
+	}
+	for j := range i.Armor {
+		i.Armor[j].Uid = rndGen.NextUid()
+	}
+	for j := range i.Disposable {
+		i.Disposable[j].Uid = rndGen.NextUid()
+	}
+	for j := range i.Magic {
+		i.Magic[j].Uid = rndGen.NextUid()
+	}
+	for j := range i.Weapon {
+		i.Weapon[j].Uid = rndGen.NextUid()
+	}
 }

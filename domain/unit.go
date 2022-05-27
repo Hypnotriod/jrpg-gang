@@ -15,6 +15,7 @@ type Unit struct {
 	rng          *rand.Rand
 	Uid          uint                     `json:"uid,omitempty"`
 	Name         string                   `json:"name"`
+	Booty        UnitBooty                `json:"booty"`
 	State        UnitState                `json:"state"`
 	Stats        UnitStats                `json:"stats"`
 	Damage       []DamageImpact           `json:"damage"`
@@ -26,8 +27,9 @@ type Unit struct {
 
 func (u Unit) String() string {
 	return fmt.Sprintf(
-		"%s, state: {%v}, stats: {%v}, damage: [%s], modification: [%s], inventory: {%v}, slots: %v, position: {%v}, uid: %d",
+		"%s, booty: {%v}, state: {%v}, stats: {%v}, damage: [%s], modification: [%s], inventory: {%v}, slots: %v, position: {%v}, uid: %d",
 		u.Name,
+		u.Booty,
 		u.State,
 		u.Stats,
 		util.AsCommaSeparatedObjectsSlice(u.Damage),
