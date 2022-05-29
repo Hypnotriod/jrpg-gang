@@ -30,6 +30,16 @@
 				type: 'shopStatus',
 			}
 		}
+		const shopPurchaseDto = () => {
+			return {
+				id: '1234',
+				type: 'shopAction',
+				data: {
+					action: "buy",
+					itemUid: 1,
+				}
+			}
+		}
 		const createRoomDto = () => {
 			return {
 				id: '1234',
@@ -41,7 +51,14 @@
 		}
 
 		const ws = new WebSocket('ws://localhost:3000/ws');
-		const scenario = [joinDto, lobbyStatusDto, shopStatusDto, createRoomDto];
+		const scenario = [
+			joinDto,
+			lobbyStatusDto,
+			shopStatusDto,
+			shopPurchaseDto,
+			shopPurchaseDto,
+			createRoomDto
+		];
 		const next = () => {
 			if (!scenario.length) return;
 			ws.send(JSON.stringify(scenario.shift()()));

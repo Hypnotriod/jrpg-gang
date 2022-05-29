@@ -21,8 +21,8 @@ func (b *UnitBooty) Accumulate(booty UnitBooty) {
 }
 
 func (b *UnitBooty) Reduce(booty UnitBooty) {
-	b.Coins += booty.Coins
-	b.Ruby += booty.Ruby
+	b.Coins -= booty.Coins
+	b.Ruby -= booty.Ruby
 }
 
 func (b *UnitBooty) Normalize() {
@@ -31,6 +31,6 @@ func (b *UnitBooty) Normalize() {
 }
 
 func (b *UnitBooty) Check(booty UnitBooty) bool {
-	return b.Coins >= booty.Coins &&
-		b.Ruby >= booty.Ruby
+	return b.Coins <= booty.Coins &&
+		b.Ruby <= booty.Ruby
 }

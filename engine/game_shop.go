@@ -68,12 +68,14 @@ func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.Rnd
 	if itemRef := s.Items.FindDisposable(action.ItemUid); itemRef != nil {
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
+		itemClone.Quantity = 1
 		unit.Inventory.Add(itemClone)
 		return domain.NewActionResult().WithResultType(domain.ResultAccomplished)
 	}
 	if itemRef := s.Items.FindAmmunition(action.ItemUid); itemRef != nil {
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
+		itemClone.Quantity = 1
 		unit.Inventory.Add(itemClone)
 		return domain.NewActionResult().WithResultType(domain.ResultAccomplished)
 	}
