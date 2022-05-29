@@ -8,20 +8,21 @@ import (
 type ActionResultType string
 
 const (
-	ResultAccomplished    ActionResultType = "accomplished"
-	ResultNotAccomplished ActionResultType = "notAccomplished"
-	ResultNotAllowed      ActionResultType = "notAllowed"
-	ResultNotFound        ActionResultType = "notFound"
-	ResultNotEmpty        ActionResultType = "notEmpty"
-	ResultNotEquipped     ActionResultType = "notEquipped"
-	ResultNotReachable    ActionResultType = "notReachable"
-	ResultCantUse         ActionResultType = "cantUse"
-	ResultOutOfBounds     ActionResultType = "outOfBounds"
-	ResultNoAmmunition    ActionResultType = "noAmmunition"
-	ResultNotCompatible   ActionResultType = "notCompatible"
-	ResultZeroQuantity    ActionResultType = "zeroQuantity"
-	ResultNotEnoughSlots  ActionResultType = "notEnoughSlots"
-	ResultIsBroken        ActionResultType = "isBroken"
+	ResultAccomplished       ActionResultType = "accomplished"
+	ResultNotAccomplished    ActionResultType = "notAccomplished"
+	ResultNotAllowed         ActionResultType = "notAllowed"
+	ResultNotFound           ActionResultType = "notFound"
+	ResultNotEmpty           ActionResultType = "notEmpty"
+	ResultNotEquipped        ActionResultType = "notEquipped"
+	ResultNotReachable       ActionResultType = "notReachable"
+	ResultCantUse            ActionResultType = "cantUse"
+	ResultOutOfBounds        ActionResultType = "outOfBounds"
+	ResultNoAmmunition       ActionResultType = "noAmmunition"
+	ResultNotCompatible      ActionResultType = "notCompatible"
+	ResultZeroQuantity       ActionResultType = "zeroQuantity"
+	ResultNotEnoughSlots     ActionResultType = "notEnoughSlots"
+	ResultNotEnoughResources ActionResultType = "notEnoughResources"
+	ResultIsBroken           ActionResultType = "isBroken"
 )
 
 type ActionResult struct {

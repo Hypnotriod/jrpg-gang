@@ -1,29 +1,30 @@
 package controller
 
 import (
-	"jrpg-gang/shop"
+	"jrpg-gang/domain"
+	"jrpg-gang/engine"
 	"sync"
 )
 
 type Shop struct {
 	sync.RWMutex
-	shop *shop.GameShop
+	shop *engine.GameShop
 }
 
 func NewShop() *Shop {
 	s := &Shop{}
-	s.shop = shop.NewGameShop(NewTestShopItems())
+	s.shop = engine.NewGameShop(NewTestShopItems())
 	return s
 }
 
-func (s *Shop) GetStatus() shop.GameShop {
+func (s *Shop) GetStatus() engine.GameShop {
 	defer s.RUnlock()
 	s.RLock()
 	return *s.shop
 }
 
-func (s *Shop) Buy(user User, itemUid uint) bool {
+func (s *Shop) ExecuteAction(action domain.Action, user *User) *domain.ActionResult {
 	defer s.RUnlock()
 	s.RLock()
-	return s.shop.Buy(&user.unit.Unit, itemUid, user.rndGen)
+	return s.shop.ExecuteAction(action, &user.unit.Unit, user.rndGen)
 }

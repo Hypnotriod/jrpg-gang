@@ -7,19 +7,20 @@ import (
 type RequestType string
 
 const (
-	RequestJoin            RequestType = "join"
-	RequestCreateGameRoom  RequestType = "createRoom"
-	RequestDestroyGameRoom RequestType = "destroyRoom"
-	RequestJoinGameRoom    RequestType = "joinRoom"
-	RequestLeaveGameRoom   RequestType = "leaveRoom"
-	RequestLobbyStatus     RequestType = "lobbyStatus"
-	RequestUserStatus      RequestType = "userStatus"
-	RequestShopStatus      RequestType = "shopStatus"
-	RequestShopPurchase    RequestType = "shopPurchase"
-	RequestStartGame       RequestType = "startGame"
-	RequestGameAction      RequestType = "gameAction"
-	RequestNextGamePhase   RequestType = "nextGamePhase"
-	RequestGameState       RequestType = "gameState"
+	RequestJoin               RequestType = "join"
+	RequestCreateGameRoom     RequestType = "createRoom"
+	RequestDestroyGameRoom    RequestType = "destroyRoom"
+	RequestJoinGameRoom       RequestType = "joinRoom"
+	RequestLeaveGameRoom      RequestType = "leaveRoom"
+	RequestLobbyStatus        RequestType = "lobbyStatus"
+	RequestConfiguratorAction RequestType = "configuratorAction"
+	RequestUserStatus         RequestType = "userStatus"
+	RequestShopStatus         RequestType = "shopStatus"
+	RequestShopAction         RequestType = "shopAction"
+	RequestStartGame          RequestType = "startGame"
+	RequestGameAction         RequestType = "gameAction"
+	RequestNextGamePhase      RequestType = "nextGamePhase"
+	RequestGameState          RequestType = "gameState"
 )
 
 type Request struct {
@@ -30,7 +31,8 @@ type Request struct {
 type ParsebleRequest interface {
 	*Request | *GameActionRequest | *CreateGameRoomRequest | *JoinRequest | *DestroyGameRoomRequest |
 		*LobbyStatusRequest | *UserStatusRequest | *JoinGameRoomRequest | *LeaveGameRoomRequest |
-		*StartGameRequest | *GameStateRequest | *GameNextPhaseRequest | *ShopStatusRequest | *ShopPurchaseRequest
+		*StartGameRequest | *GameStateRequest | *GameNextPhaseRequest | *ShopStatusRequest | *ShopActionRequest |
+		*ConfiguratorActionRequest
 }
 
 func parseRequest[T ParsebleRequest](data T, requestRaw string) T {

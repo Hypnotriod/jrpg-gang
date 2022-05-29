@@ -9,11 +9,12 @@ type GameControllerBroadcaster interface {
 }
 
 type GameController struct {
-	users       *Users
-	rooms       *GameRooms
-	engines     *GameEngines
-	shop        *Shop
-	broadcaster GameControllerBroadcaster
+	users        *Users
+	rooms        *GameRooms
+	engines      *GameEngines
+	shop         *Shop
+	configurator *engine.UnitConfigurator
+	broadcaster  GameControllerBroadcaster
 }
 
 func NewGameController() *GameController {
@@ -22,6 +23,7 @@ func NewGameController() *GameController {
 	c.rooms = NewGameRooms()
 	c.engines = NewGameEngines()
 	c.shop = NewShop()
+	c.configurator = engine.NewUnitConfigurator()
 	c.broadcaster = c
 	return c
 }
@@ -63,10 +65,12 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
+	case RequestConfiguratorAction:
+		return c.handleConfiguratorActionRequest(userId, requestRaw, response)
 	case RequestShopStatus:
 		return c.handleShopStatusRequest(userId, requestRaw, response)
-	case RequestShopPurchase:
-		return c.handleShopPurchaseRequest(userId, requestRaw, response)
+	case RequestShopAction:
+		return c.handleShopActionRequest(userId, requestRaw, response)
 	case RequestCreateGameRoom:
 		return c.handleCreateGameRoomRequest(userId, requestRaw, response)
 	case RequestDestroyGameRoom:

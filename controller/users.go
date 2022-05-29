@@ -110,6 +110,16 @@ func (s *Users) GetIdsByStatusExcept(status UserStatus, userId engine.UserId) []
 	return result
 }
 
+func (s *Users) UpdateUnit(userId engine.UserId, unit *engine.GameUnit) {
+	defer s.Unlock()
+	s.Lock()
+	user, ok := s.users[userId]
+	if !ok {
+		return
+	}
+	user.unit = *unit
+}
+
 func (s *Users) AddUser(user *User) {
 	defer s.Unlock()
 	s.Lock()
