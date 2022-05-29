@@ -7,9 +7,9 @@ import (
 
 type Ammunition struct {
 	Item
-	Equipped bool           `json:"equipped"`
+	Equipped bool           `json:"equipped,omitempty"`
 	Kind     string         `json:"kind"`
-	Quantity uint           `json:"quantity"`
+	Quantity uint           `json:"quantity,omitempty"`
 	Damage   []DamageImpact `json:"damage,omitempty"`
 }
 

@@ -20,12 +20,10 @@ func NewTestShopItems() *domain.UnitInventory {
 			],
 			"ammunition": [
 				{
-					"uid": 5000,
 					"name": "Arrow",
 					"type": "ammunition",
 					"description": "Base arrow",
 					"kind": "arrow",
-					"quantity": 5,
 					"damage": [
 						{
 							"stabbing": 10
@@ -35,7 +33,10 @@ func NewTestShopItems() *domain.UnitInventory {
 							"chance": 15,
 							"bleeding": 3
 						}
-					]
+					],
+					"price": {
+						"coins": 100
+					}
 				}
 			]
 		}`)

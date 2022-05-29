@@ -24,6 +24,12 @@
 				type: 'lobbyStatus',
 			}
 		}
+		const shopStatusDto = () => {
+			return {
+				id: '1234',
+				type: 'shopStatus',
+			}
+		}
 		const createRoomDto = () => {
 			return {
 				id: '1234',
@@ -35,7 +41,7 @@
 		}
 
 		const ws = new WebSocket('ws://localhost:3000/ws');
-		const scenario = [joinDto, lobbyStatusDto, createRoomDto];
+		const scenario = [joinDto, lobbyStatusDto, shopStatusDto, createRoomDto];
 		const next = () => {
 			if (!scenario.length) return;
 			ws.send(JSON.stringify(scenario.shift()()));

@@ -7,7 +7,7 @@ import (
 
 type Disposable struct {
 	Item
-	Quantity     uint                     `json:"quantity"`
+	Quantity     uint                     `json:"quantity,omitempty"`
 	Damage       []DamageImpact           `json:"damage,omitempty"`
 	Modification []UnitModificationImpact `json:"modification,omitempty"`
 }

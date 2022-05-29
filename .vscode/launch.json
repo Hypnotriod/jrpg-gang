@@ -40,6 +40,13 @@
             "request": "launch",
             "url": "http://localhost:3000/",
             "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Launch Chrome against localhost",
+            "type": "pwa-chrome",
+            "request": "launch",
+            "url": "http://localhost:3000/",
+            "webRoot": "${workspaceFolder}"
         }
     ]
 }

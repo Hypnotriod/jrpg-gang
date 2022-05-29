@@ -16,6 +16,7 @@ func NewGameShop(items *domain.UnitInventory) *GameShop {
 	s.Items = items
 	s.Items.Prepare()
 	s.Items.PopulateUids(s.rndGen)
+	s.Items.UnequipAmmunition()
 	return s
 }
 

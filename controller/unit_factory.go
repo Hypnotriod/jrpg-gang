@@ -25,6 +25,9 @@ func newGameUnitTank() *engine.GameUnit {
 		`{
 			"name": "Tank",
 			"faction": 0,
+			"booty": {
+				"coins": 5000
+			},
 			"state": {
 				"health": 100,
 				"stamina": 100
