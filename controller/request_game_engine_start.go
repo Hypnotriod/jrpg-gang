@@ -24,7 +24,9 @@ func (c *GameController) handleStartGameRequest(userId engine.UserId, requestRaw
 	state := engine.NewGameEvent()
 	userIds := engine.GetUserIds()
 	for _, userId := range userIds {
+		actor := engine.FindActorByUserId(userId)
 		c.users.ChangeUserStatus(userId, UserStatusInGame)
+		c.users.ChangeUserUnitUid(userId, actor.Uid)
 	}
 	c.broadcastGameState(userIds, state)
 	c.broadcastLobbyStatus()

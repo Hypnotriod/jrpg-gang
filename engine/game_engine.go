@@ -72,7 +72,7 @@ func (e *GameEngine) GetRestUserIds(userId UserId) []UserId {
 	return result
 }
 
-func (e *GameEngine) findActorByUserId(userId UserId) *GameUnit {
+func (e *GameEngine) FindActorByUserId(userId UserId) *GameUnit {
 	for i := 0; i < len(e.actors); i++ {
 		if e.actors[i].userId == userId {
 			return e.actors[i]

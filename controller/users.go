@@ -19,6 +19,7 @@ type User struct {
 	Nickname string               `json:"nickname"`
 	Class    engine.GameUnitClass `json:"class"`
 	Level    uint                 `json:"level"`
+	UnitUid  uint                 `json:"unitUid,omitempty"`
 	rndGen   *util.RndGen
 	status   UserStatus
 	id       engine.UserId
@@ -60,6 +61,18 @@ func (s *Users) Get(userId engine.UserId) (User, bool) {
 	s.RLock()
 	user, ok := s.users[userId]
 	return *user, ok
+}
+
+func (s *Users) GetByIds(userIds []engine.UserId) []User {
+	defer s.RUnlock()
+	s.RLock()
+	result := []User{}
+	for _, user := range s.users {
+		if util.Contains(userIds, user.id) {
+			result = append(result, *user)
+		}
+	}
+	return result
 }
 
 func (s *Users) Has(userId engine.UserId) bool {
@@ -129,7 +142,7 @@ func (s *Users) AddUser(user *User) {
 			break
 		}
 	}
-	user.unit.ApplyUserData(user.id, user.Nickname)
+	user.unit.SetUserId(user.id)
 	user.status = UserStatusJoined
 	s.users[user.id] = user
 	s.userNicknameToId[user.Nickname] = user.id
@@ -144,6 +157,16 @@ func (s *Users) RemoveUser(userId engine.UserId) {
 	}
 	delete(s.userNicknameToId, user.Nickname)
 	delete(s.users, userId)
+}
+
+func (s *Users) ChangeUserUnitUid(userId engine.UserId, uid uint) {
+	defer s.Unlock()
+	s.Lock()
+	user, ok := s.users[userId]
+	if !ok {
+		return
+	}
+	user.UnitUid = uid
 }
 
 func (s *Users) ChangeUserStatus(userId engine.UserId, status UserStatus) {

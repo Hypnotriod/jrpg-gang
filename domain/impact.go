@@ -4,7 +4,7 @@ import "fmt"
 
 type Impact struct {
 	Duration int     `json:"duration,omitempty"`
-	Chance   float32 `json:"chance"`
+	Chance   float32 `json:"chance,omitempty"`
 }
 
 type DamageImpact struct {

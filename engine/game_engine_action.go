@@ -28,7 +28,7 @@ func (e *GameEngine) executePlaceAction(action domain.Action, userId UserId) *do
 	if e.state.phase != GamePhasePlaceUnit {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	unit := e.findActorByUserId(userId)
+	unit := e.FindActorByUserId(userId)
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}

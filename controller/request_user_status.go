@@ -15,6 +15,7 @@ func (c *GameController) handleUserStatusRequest(userId engine.UserId, requestRa
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
+	response.Data[DataKeyUserNickname] = user.Nickname
 	response.Data[DataKeyUserId] = user.id
 	response.Data[DataKeyUnit] = user.unit
 	return response.WithStatus(ResponseStatusOk)

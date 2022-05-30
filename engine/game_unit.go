@@ -27,18 +27,16 @@ const (
 
 type GameUnit struct {
 	domain.Unit
-	Faction      GameUnitFaction `json:"faction"`
-	UserNickname string          `json:"userNickname,omitempty"`
-	userId       UserId
+	Faction GameUnitFaction `json:"faction"`
+	userId  UserId
 }
 
 func (u GameUnit) String() string {
 	return fmt.Sprintf(
-		"%v, faction: %d, user id: %s, user nickname: %s",
+		"%v, faction: %d, user id: %s",
 		u.Unit,
 		u.Faction,
 		u.userId,
-		u.UserNickname,
 	)
 }
 
@@ -50,7 +48,6 @@ func (u *GameUnit) GetUserId() UserId {
 	return u.userId
 }
 
-func (u *GameUnit) ApplyUserData(userId UserId, userNickname string) {
+func (u *GameUnit) SetUserId(userId UserId) {
 	u.userId = userId
-	u.UserNickname = userNickname
 }

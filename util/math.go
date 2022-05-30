@@ -1,9 +1,5 @@
 package util
 
-type Number interface {
-	float32 | float64 | int | int16 | int32 | int64
-}
-
 func AccumulateIfNotZeros[T Number](a, b T) T {
 	if a != 0 && b != 0 {
 		return a + b

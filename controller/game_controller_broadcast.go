@@ -15,7 +15,9 @@ func (c *GameController) broadcastGameAction(userIds []engine.UserId, result *en
 func (c *GameController) broadcastGameState(userIds []engine.UserId, state *engine.GameEvent) {
 	response := NewResponse()
 	response.Type = RequestGameState
+	users := c.users.GetByIds(userIds)
 	response.Data[DataKeyGameState] = state
+	response.Data[DataKeyUsers] = users
 	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
 }
 
