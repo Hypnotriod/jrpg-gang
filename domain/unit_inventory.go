@@ -111,16 +111,32 @@ func (i *UnitInventory) Add(item interface{}) bool {
 		i.Armor = append(i.Armor, *v)
 		return true
 	case Disposable:
-		i.Disposable = append(i.Disposable, v)
+		if s := i.FindDisposableByCode(v.Code); s != nil {
+			s.Quantity += v.Quantity
+		} else {
+			i.Disposable = append(i.Disposable, v)
+		}
 		return true
 	case *Disposable:
-		i.Disposable = append(i.Disposable, *v)
+		if s := i.FindDisposableByCode(v.Code); s != nil {
+			s.Quantity += v.Quantity
+		} else {
+			i.Disposable = append(i.Disposable, *v)
+		}
 		return true
 	case Ammunition:
-		i.Ammunition = append(i.Ammunition, v)
+		if s := i.FindAmmunitionByCode(v.Code); s != nil {
+			s.Quantity += v.Quantity
+		} else {
+			i.Ammunition = append(i.Ammunition, v)
+		}
 		return true
 	case *Ammunition:
-		i.Ammunition = append(i.Ammunition, *v)
+		if s := i.FindAmmunitionByCode(v.Code); s != nil {
+			s.Quantity += v.Quantity
+		} else {
+			i.Ammunition = append(i.Ammunition, *v)
+		}
 		return true
 	}
 	return false
@@ -194,9 +210,34 @@ func (i *UnitInventory) FindEquipment(uid uint) *Equipment {
 	return nil
 }
 
+func (i *UnitInventory) FindEquipmentByCode(code ItemCode) *Equipment {
+	if code == ItemCodeEmpty {
+		return nil
+	}
+	equipment := i.GetEquipment(false)
+	for n := range equipment {
+		if equipment[n].Code == code {
+			return equipment[n]
+		}
+	}
+	return nil
+}
+
 func (i *UnitInventory) FindWeapon(uid uint) *Weapon {
 	for n := range i.Weapon {
 		if i.Weapon[n].Uid == uid {
+			return &i.Weapon[n]
+		}
+	}
+	return nil
+}
+
+func (i *UnitInventory) FindWeaponByCode(code ItemCode) *Weapon {
+	if code == ItemCodeEmpty {
+		return nil
+	}
+	for n := range i.Weapon {
+		if i.Weapon[n].Code == code {
 			return &i.Weapon[n]
 		}
 	}
@@ -212,6 +253,18 @@ func (i *UnitInventory) FindMagic(uid uint) *Magic {
 	return nil
 }
 
+func (i *UnitInventory) FindMagicByCode(code ItemCode) *Magic {
+	if code == ItemCodeEmpty {
+		return nil
+	}
+	for n := range i.Magic {
+		if i.Magic[n].Code == code {
+			return &i.Magic[n]
+		}
+	}
+	return nil
+}
+
 func (i *UnitInventory) FindArmor(uid uint) *Armor {
 	for n := range i.Armor {
 		if i.Armor[n].Uid == uid {
@@ -221,9 +274,33 @@ func (i *UnitInventory) FindArmor(uid uint) *Armor {
 	return nil
 }
 
+func (i *UnitInventory) FindArmorByCode(code ItemCode) *Armor {
+	if code == ItemCodeEmpty {
+		return nil
+	}
+	for n := range i.Armor {
+		if i.Armor[n].Code == code {
+			return &i.Armor[n]
+		}
+	}
+	return nil
+}
+
 func (i *UnitInventory) FindDisposable(uid uint) *Disposable {
 	for n := range i.Disposable {
 		if i.Disposable[n].Uid == uid {
+			return &i.Disposable[n]
+		}
+	}
+	return nil
+}
+
+func (i *UnitInventory) FindDisposableByCode(code ItemCode) *Disposable {
+	if code == ItemCodeEmpty {
+		return nil
+	}
+	for n := range i.Disposable {
+		if i.Disposable[n].Code == code {
 			return &i.Disposable[n]
 		}
 	}
@@ -243,6 +320,18 @@ func (i *UnitInventory) FilterDisposable() {
 func (i *UnitInventory) FindAmmunition(uid uint) *Ammunition {
 	for n := range i.Ammunition {
 		if i.Ammunition[n].Uid == uid {
+			return &i.Ammunition[n]
+		}
+	}
+	return nil
+}
+
+func (i *UnitInventory) FindAmmunitionByCode(code ItemCode) *Ammunition {
+	if code == ItemCodeEmpty {
+		return nil
+	}
+	for n := range i.Ammunition {
+		if i.Ammunition[n].Code == code {
 			return &i.Ammunition[n]
 		}
 	}

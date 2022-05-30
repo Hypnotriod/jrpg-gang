@@ -13,8 +13,13 @@ const (
 	ItemTypeNone       ItemType = "none"
 )
 
+type ItemCode string
+
+const ItemCodeEmpty ItemCode = ""
+
 type Item struct {
 	Uid         uint      `json:"uid,omitempty"`
+	Code        ItemCode  `json:"code"`
 	Name        string    `json:"name"`
 	Type        ItemType  `json:"type"`
 	Price       UnitBooty `json:"price,"`
@@ -23,6 +28,6 @@ type Item struct {
 
 func (i Item) String() string {
 	return fmt.Sprintf(
-		"name: %s, uid: %d, type: %s, description: %s",
-		i.Name, i.Uid, i.Type, i.Description)
+		"name: %s, code: %s, uid: %d, type: %s, description: %s",
+		i.Name, i.Code, i.Uid, i.Type, i.Description)
 }
