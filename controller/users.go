@@ -159,16 +159,6 @@ func (s *Users) RemoveUser(userId engine.UserId) {
 	delete(s.users, userId)
 }
 
-func (s *Users) ChangeUserUnitUid(userId engine.UserId, uid uint) {
-	defer s.Unlock()
-	s.Lock()
-	user, ok := s.users[userId]
-	if !ok {
-		return
-	}
-	user.UnitUid = uid
-}
-
 func (s *Users) ChangeUserStatus(userId engine.UserId, status UserStatus) {
 	defer s.Unlock()
 	s.Lock()
