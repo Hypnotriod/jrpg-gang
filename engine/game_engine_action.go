@@ -48,7 +48,7 @@ func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *doma
 	if unit == nil || target == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if !e.state.IsCurrentActiveUnit(unit) || unit.UserId != userId {
+	if !e.state.IsCurrentActiveUnit(unit) || unit.userId != userId {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	itemType := unit.Inventory.GetItemType(action.ItemUid)
@@ -74,7 +74,7 @@ func (e *GameEngine) executeEquipAction(action domain.Action, userId UserId) *do
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if !e.state.IsCurrentActiveUnit(unit) || unit.UserId != userId {
+	if !e.state.IsCurrentActiveUnit(unit) || unit.userId != userId {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	return unit.Equip(action.ItemUid)
@@ -88,7 +88,7 @@ func (e *GameEngine) executeUnequipAction(action domain.Action, userId UserId) *
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if !e.state.IsCurrentActiveUnit(unit) || unit.UserId != userId {
+	if !e.state.IsCurrentActiveUnit(unit) || unit.userId != userId {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	return unit.Unequip(action.ItemUid)
@@ -99,7 +99,7 @@ func (e *GameEngine) executeMoveAction(action domain.Action, userId UserId) *dom
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnitById(action.Uid)
-	if !e.state.IsCurrentActiveUnit(unit) || unit.UserId != userId {
+	if !e.state.IsCurrentActiveUnit(unit) || unit.userId != userId {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	result := e.battlefield().MoveUnit(action.Uid, *action.Position)

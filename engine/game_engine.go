@@ -57,7 +57,7 @@ func (e *GameEngine) getActiveUnit() *GameUnit {
 func (e *GameEngine) GetUserIds() []UserId {
 	result := []UserId{}
 	for _, unit := range e.actors {
-		result = append(result, unit.UserId)
+		result = append(result, unit.userId)
 	}
 	return result
 }
@@ -65,8 +65,8 @@ func (e *GameEngine) GetUserIds() []UserId {
 func (e *GameEngine) GetRestUserIds(userId UserId) []UserId {
 	result := []UserId{}
 	for _, unit := range e.actors {
-		if userId != unit.UserId {
-			result = append(result, unit.UserId)
+		if userId != unit.userId {
+			result = append(result, unit.userId)
 		}
 	}
 	return result
@@ -74,7 +74,7 @@ func (e *GameEngine) GetRestUserIds(userId UserId) []UserId {
 
 func (e *GameEngine) findActorByUserId(userId UserId) *GameUnit {
 	for i := 0; i < len(e.actors); i++ {
-		if e.actors[i].UserId == userId {
+		if e.actors[i].userId == userId {
 			return e.actors[i]
 		}
 	}

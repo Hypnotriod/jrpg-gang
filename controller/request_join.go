@@ -33,6 +33,6 @@ func (c *GameController) handleJoinRequest(requestRaw string, response *Response
 		unit)
 	c.users.AddUser(user)
 	response.Data[DataKeyUserId] = user.id
-	response.Data[DataKeyUnit] = unit
+	response.Data[DataKeyUnit] = user.unit
 	return user.id, response.WithStatus(ResponseStatusOk)
 }
