@@ -20,9 +20,9 @@ func (b *UnitBooty) Accumulate(booty UnitBooty) {
 	b.Ruby += booty.Ruby
 }
 
-func (b *UnitBooty) Reduce(booty UnitBooty) {
-	b.Coins -= booty.Coins
-	b.Ruby -= booty.Ruby
+func (b *UnitBooty) Reduce(booty UnitBooty, quantity uint) {
+	b.Coins -= booty.Coins * int(quantity)
+	b.Ruby -= booty.Ruby * int(quantity)
 }
 
 func (b *UnitBooty) Normalize() {
@@ -30,7 +30,7 @@ func (b *UnitBooty) Normalize() {
 	b.Ruby = util.Max(b.Ruby, 0)
 }
 
-func (b *UnitBooty) Check(booty UnitBooty) bool {
-	return b.Coins <= booty.Coins &&
-		b.Ruby <= booty.Ruby
+func (b *UnitBooty) Check(booty UnitBooty, quantity uint) bool {
+	return b.Coins*int(quantity) <= booty.Coins &&
+		b.Ruby*int(quantity) <= booty.Ruby
 }

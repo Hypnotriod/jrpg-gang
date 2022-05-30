@@ -20,16 +20,18 @@ type Action struct {
 	Uid       uint      `json:"uid,omitempty"`
 	TargetUid uint      `json:"targetUid,omitempty"`
 	ItemUid   uint      `json:"itemUid,omitempty"`
+	Quantity  uint      `json:"quantity,omitempty"`
 	Position  *Position `json:"position,omitempty"`
 }
 
 func (a Action) String() string {
 	return fmt.Sprintf(
-		"%s, uid: %d, target uid: %d, item uid: %d, position: {%v}",
+		"%s, uid: %d, target uid: %d, item uid: %d, quantity: %d, position: {%v}",
 		a.Action,
 		a.Uid,
 		a.TargetUid,
 		a.ItemUid,
+		a.Quantity,
 		a.Position,
 	)
 }
