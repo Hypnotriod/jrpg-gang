@@ -16,14 +16,12 @@ const (
 )
 
 type User struct {
-	Nickname string               `json:"nickname"`
-	Class    engine.GameUnitClass `json:"class"`
-	Level    uint                 `json:"level"`
-	UnitUid  uint                 `json:"unitUid,omitempty"`
-	rndGen   *util.RndGen
-	status   UserStatus
-	id       engine.UserId
-	unit     engine.GameUnit
+	engine.PlayerInfo
+	Level  uint `json:"level"`
+	rndGen *util.RndGen
+	status UserStatus
+	id     engine.UserId
+	unit   engine.GameUnit
 }
 
 func NewUser(nickname string,

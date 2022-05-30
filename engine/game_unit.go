@@ -27,8 +27,9 @@ const (
 
 type GameUnit struct {
 	domain.Unit
-	Faction GameUnitFaction `json:"faction"`
-	userId  UserId
+	Faction    GameUnitFaction `json:"faction"`
+	PlayerInfo *PlayerInfo     `json:"playerInfo,omitempty"`
+	userId     UserId
 }
 
 func (u GameUnit) String() string {

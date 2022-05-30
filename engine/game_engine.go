@@ -43,6 +43,14 @@ func (e *GameEngine) GetPhase() GamePhase {
 	return e.state.phase
 }
 
+func (e *GameEngine) GetPlayersInfo() []PlayerInfo {
+	result := []PlayerInfo{}
+	for _, unit := range e.actors {
+		result = append(result, *unit.PlayerInfo)
+	}
+	return result
+}
+
 func (e *GameEngine) battlefield() *Battlefield {
 	return &e.scenario.CurrentSpot().Battlefield
 }

@@ -48,6 +48,7 @@ type GameEvent struct {
 	NextPhase        GamePhase             `json:"nextPhase"`
 	State            *GameState            `json:"state"`
 	Spot             *Spot                 `json:"spot"`
+	PlayersInfo      []PlayerInfo          `json:"players,omitempty"`
 	UnitActionResult *GameUnitActionResult `json:"unitActionResult,omitempty"`
 	EndRoundResult   *EndTurnResult        `json:"endRoundResult,omitempty"`
 }
@@ -70,6 +71,7 @@ func (e *GameEngine) NewGameEvent() *GameEvent {
 	event.NextPhase = e.state.phase
 	event.State = e.state
 	event.Spot = e.scenario.CurrentSpot()
+	event.PlayersInfo = e.GetPlayersInfo()
 	return event
 }
 
@@ -81,5 +83,6 @@ func (e *GameEngine) NewGameEventWithUnitAction(action *domain.Action) *GameEven
 	event.UnitActionResult.Action = *action
 	event.State = e.state
 	event.Spot = e.scenario.CurrentSpot()
+	event.PlayersInfo = e.GetPlayersInfo()
 	return event
 }

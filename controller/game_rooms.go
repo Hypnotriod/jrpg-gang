@@ -18,20 +18,22 @@ func (r *GameRoom) IsFull() bool {
 	return len(r.JoinedUsers) >= int(r.Capacity)-1
 }
 
-func (r *GameRoom) GetUsers() []User {
-	result := []User{}
+func (r *GameRoom) GetUserIds() []engine.UserId {
+	result := []engine.UserId{}
 	for _, u := range r.JoinedUsers {
-		result = append(result, u)
+		result = append(result, u.id)
 	}
-	result = append(result, r.Host)
+	result = append(result, r.Host.id)
 	return result
 }
 
 func (r *GameRoom) GetActors() []*engine.GameUnit {
 	result := []*engine.GameUnit{}
 	for _, u := range r.JoinedUsers {
+		u.unit.PlayerInfo = &u.PlayerInfo
 		result = append(result, &u.unit)
 	}
+	r.Host.unit.PlayerInfo = &r.Host.PlayerInfo
 	result = append(result, &r.Host.unit)
 	return result
 }
