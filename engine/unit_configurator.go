@@ -17,5 +17,5 @@ func (c *UnitConfigurator) ExecuteAction(action domain.Action, unit *domain.Unit
 	case domain.ActionUnequip:
 		return unit.Unequip(action.ItemUid)
 	}
-	return domain.NewActionResult().WithResultType(domain.ResultNotAccomplished)
+	return domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 }

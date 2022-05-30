@@ -37,42 +37,42 @@ func (b *Battlefield) Dispose() {
 func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domain.ActionResult {
 	result := domain.NewActionResult()
 	if b.FindUnitById(unit.Uid) != nil {
-		return result.WithResultType(domain.ResultNotAllowed)
+		return result.WithResult(domain.ResultNotAllowed)
 	}
 	if !b.checkPositionBounds(position) {
-		return result.WithResultType(domain.ResultOutOfBounds)
+		return result.WithResult(domain.ResultOutOfBounds)
 	}
 	if !b.checkPositionCanPlaceUnit(position) || !b.checkPositionFaction(position, unit.Faction) {
-		return result.WithResultType(domain.ResultNotAccomplished)
+		return result.WithResult(domain.ResultNotAccomplished)
 	}
 	unitAtPosition := b.FindUnitByPosition(position)
 	if unitAtPosition != nil {
-		return result.WithResultType(domain.ResultNotEmpty)
+		return result.WithResult(domain.ResultNotEmpty)
 	}
 	unit.Position = position
 	b.Units = append(b.Units, unit)
-	return result.WithResultType(domain.ResultAccomplished)
+	return result.WithResult(domain.ResultAccomplished)
 }
 
 func (b *Battlefield) MoveUnit(uid uint, position domain.Position) *domain.ActionResult {
 	result := domain.NewActionResult()
 	unit := b.FindUnitById(uid)
 	if unit == nil {
-		return result.WithResultType(domain.ResultNotFound)
+		return result.WithResult(domain.ResultNotFound)
 	}
 	if !b.checkPositionBounds(position) {
-		return result.WithResultType(domain.ResultOutOfBounds)
+		return result.WithResult(domain.ResultOutOfBounds)
 	}
 	if !b.checkPositionCanPlaceUnit(position) || !b.checkPositionFaction(position, unit.Faction) {
-		return result.WithResultType(domain.ResultNotAccomplished)
+		return result.WithResult(domain.ResultNotAccomplished)
 	}
 	unitAtPosition := b.FindUnitByPosition(position)
 	if unitAtPosition != nil {
-		return result.WithResultType(domain.ResultNotEmpty)
+		return result.WithResult(domain.ResultNotEmpty)
 	}
 	unit.Position = position
 	b.UpdateCellsFactions()
-	return result.WithResultType(domain.ResultAccomplished)
+	return result.WithResult(domain.ResultAccomplished)
 }
 
 func (b *Battlefield) FindUnitById(uid uint) *GameUnit {

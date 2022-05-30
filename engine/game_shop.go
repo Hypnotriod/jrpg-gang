@@ -35,49 +35,49 @@ func (s *GameShop) ExecuteAction(action domain.Action, unit *domain.Unit, rndGen
 	case domain.ActionBuy:
 		return s.buy(action, unit, rndGen)
 	}
-	return domain.NewActionResult().WithResultType(domain.ResultNotAccomplished)
+	return domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 }
 
 func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.RndGen) *domain.ActionResult {
 	item := s.Items.FindItem(action.ItemUid)
 	if item == nil {
-		return domain.NewActionResult().WithResultType(domain.ResultNotFound)
+		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
 	if !item.Price.Check(unit.Booty) {
-		return domain.NewActionResult().WithResultType(domain.ResultNotEnoughResources)
+		return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
 	}
 	unit.Booty.Reduce(item.Price)
 	if itemRef := s.Items.FindWeapon(action.ItemUid); itemRef != nil {
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
 		unit.Inventory.Add(itemClone)
-		return domain.NewActionResult().WithResultType(domain.ResultAccomplished)
+		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
 	if itemRef := s.Items.FindMagic(action.ItemUid); itemRef != nil {
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
 		unit.Inventory.Add(itemClone)
-		return domain.NewActionResult().WithResultType(domain.ResultAccomplished)
+		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
 	if itemRef := s.Items.FindArmor(action.ItemUid); itemRef != nil {
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
 		unit.Inventory.Add(itemClone)
-		return domain.NewActionResult().WithResultType(domain.ResultAccomplished)
+		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
 	if itemRef := s.Items.FindDisposable(action.ItemUid); itemRef != nil {
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
 		itemClone.Quantity = 1
 		unit.Inventory.Add(itemClone)
-		return domain.NewActionResult().WithResultType(domain.ResultAccomplished)
+		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
 	if itemRef := s.Items.FindAmmunition(action.ItemUid); itemRef != nil {
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
 		itemClone.Quantity = 1
 		unit.Inventory.Add(itemClone)
-		return domain.NewActionResult().WithResultType(domain.ResultAccomplished)
+		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
-	return domain.NewActionResult().WithResultType(domain.ResultNotFound)
+	return domain.NewActionResult().WithResult(domain.ResultNotFound)
 }

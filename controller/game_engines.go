@@ -62,7 +62,7 @@ func (e *GameEngines) ExecuteUserAction(action domain.Action, userId engine.User
 	wrapper.Lock()
 	result := wrapper.engine.ExecuteUserAction(action, userId)
 	broadcastUserIds := []engine.UserId{}
-	if result.UnitActionResult.Result.ResultType == domain.ResultAccomplished {
+	if result.UnitActionResult.Result.Result == domain.ResultAccomplished {
 		broadcastUserIds = wrapper.engine.GetRestUserIds(userId)
 	}
 	return result, broadcastUserIds, true

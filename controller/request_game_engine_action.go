@@ -19,6 +19,7 @@ func (c *GameController) handleGameActionRequest(userId engine.UserId, requestRa
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
+	response.Data[DataKeyAction] = request.Data
 	response.Data[DataKeyActionResult] = result
 	if len(broadcastUserIds) > 0 {
 		c.broadcastGameAction(broadcastUserIds, result)

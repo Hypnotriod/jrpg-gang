@@ -41,7 +41,7 @@ func (e *GameEngine) aiMove(event *GameEvent, unit *GameUnit, position domain.Po
 	unitAction.Action = domain.Action{
 		Action:   domain.ActionMove,
 		Uid:      unit.Uid,
-		Position: position,
+		Position: &position,
 	}
 	unitAction.Result = *e.battlefield().MoveUnit(unit.Uid, position)
 	event.UnitActionResult = unitAction

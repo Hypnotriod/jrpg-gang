@@ -20,7 +20,7 @@ type Action struct {
 	Uid       uint      `json:"uid,omitempty"`
 	TargetUid uint      `json:"targetUid,omitempty"`
 	ItemUid   uint      `json:"itemUid,omitempty"`
-	Position  Position  `json:"position,omitempty"`
+	Position  *Position `json:"position,omitempty"`
 }
 
 func (a Action) String() string {

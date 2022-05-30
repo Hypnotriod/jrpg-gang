@@ -35,7 +35,7 @@ func placeUnitAction(x, y int) domain.Action {
 	return domain.Action{
 		Uid:      1,
 		Action:   domain.ActionPlace,
-		Position: domain.Position{X: x, Y: y},
+		Position: &domain.Position{X: x, Y: y},
 	}
 }
 

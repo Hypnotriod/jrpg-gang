@@ -18,6 +18,7 @@ const (
 type ResponseDataKey string
 
 const (
+	DataKeyAction       ResponseDataKey = "action"
 	DataKeyActionResult ResponseDataKey = "actionResult"
 	DataKeyGameState    ResponseDataKey = "gameState"
 	DataKeyUserId       ResponseDataKey = "userId"

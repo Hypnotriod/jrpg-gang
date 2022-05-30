@@ -20,10 +20,11 @@ func (c *GameController) handleShopActionRequest(userId engine.UserId, requestRa
 		return response.WithStatus(ResponseStatusNotFound)
 	}
 	actionResult := c.shop.ExecuteAction(request.Data, &user)
-	if actionResult.ResultType == domain.ResultAccomplished {
+	if actionResult.Result == domain.ResultAccomplished {
 		c.users.UpdateUnit(user.id, &user.unit)
 		response.Data[DataKeyUnit] = user.unit
 	}
+	response.Data[DataKeyAction] = request.Data
 	response.Data[DataKeyActionResult] = actionResult
 	return response.WithStatus(ResponseStatusOk)
 }

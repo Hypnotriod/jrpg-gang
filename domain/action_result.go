@@ -30,7 +30,7 @@ type ActionResult struct {
 	TemporalDamage       []DamageImpact           `json:"temporalDamage,omitempty"`
 	InstantRecovery      []UnitRecovery           `json:"instantRecovery,omitempty"`
 	TemporalModification []UnitModificationImpact `json:"temporalModification,omitempty"`
-	ResultType           ActionResultType         `json:"resultType"`
+	Result               ActionResultType         `json:"result"`
 }
 
 func (r ActionResult) String() string {
@@ -39,7 +39,7 @@ func (r ActionResult) String() string {
 		util.AsCommaSeparatedObjectsSlice(r.TemporalDamage),
 		util.AsCommaSeparatedObjectsSlice(r.InstantRecovery),
 		util.AsCommaSeparatedObjectsSlice(r.TemporalModification),
-		r.ResultType)
+		r.Result)
 }
 
 func NewActionResult() *ActionResult {
@@ -47,7 +47,7 @@ func NewActionResult() *ActionResult {
 	return action
 }
 
-func (r *ActionResult) WithResultType(resultType ActionResultType) *ActionResult {
-	r.ResultType = resultType
+func (r *ActionResult) WithResult(result ActionResultType) *ActionResult {
+	r.Result = result
 	return r
 }
