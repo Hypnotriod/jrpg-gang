@@ -50,7 +50,8 @@ func (c *GameController) HandleRequest(userId engine.UserId, requestRaw string) 
 }
 
 func (c *GameController) serveRequest(userId engine.UserId, request *Request, requestRaw string, response *Response) string {
-	if !c.users.Has(userId) {
+	status := c.users.GetUserStatus(userId)
+	if status == UserStatusNotFound {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
@@ -61,7 +62,7 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 	case RequestGameState:
 		return c.handleGameStateRequest(userId, requestRaw, response)
 	}
-	if c.users.TestUserStatus(userId, UserStatusInGame) {
+	if status.Test(UserStatusInGame) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
@@ -82,7 +83,7 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 	case RequestStartGame:
 		return c.handleStartGameRequest(userId, requestRaw, response)
 	}
-	if c.users.TestUserStatus(userId, UserStatusInRoom) {
+	if status.Test(UserStatusInRoom) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {

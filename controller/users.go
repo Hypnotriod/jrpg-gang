@@ -9,11 +9,16 @@ import (
 type UserStatus int
 
 const (
+	UserStatusNotFound  UserStatus = 0
 	UserStatusNotJoined UserStatus = (1 << 0)
 	UserStatusJoined    UserStatus = (1 << 1)
 	UserStatusInRoom    UserStatus = (1 << 2)
 	UserStatusInGame    UserStatus = (1 << 3)
 )
+
+func (s UserStatus) Test(status UserStatus) bool {
+	return s&status != 0
+}
 
 type User struct {
 	engine.PlayerInfo
@@ -167,12 +172,12 @@ func (s *Users) ChangeUserStatus(userId engine.UserId, status UserStatus) {
 	user.status = status
 }
 
-func (s *Users) TestUserStatus(userId engine.UserId, status UserStatus) bool {
+func (s *Users) GetUserStatus(userId engine.UserId) UserStatus {
 	s.RLock()
 	user, ok := s.users[userId]
 	s.RUnlock()
 	if !ok {
-		return false
+		return UserStatusNotFound
 	}
-	return user.status&status != 0
+	return user.status
 }
