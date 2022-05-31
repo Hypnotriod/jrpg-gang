@@ -65,12 +65,8 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
-	case RequestConfiguratorAction:
-		return c.handleConfiguratorActionRequest(userId, requestRaw, response)
 	case RequestShopStatus:
 		return c.handleShopStatusRequest(userId, requestRaw, response)
-	case RequestShopAction:
-		return c.handleShopActionRequest(userId, requestRaw, response)
 	case RequestCreateGameRoom:
 		return c.handleCreateGameRoomRequest(userId, requestRaw, response)
 	case RequestDestroyGameRoom:
@@ -86,5 +82,15 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 	case RequestStartGame:
 		return c.handleStartGameRequest(userId, requestRaw, response)
 	}
+	if c.users.TestUserStatus(userId, UserStatusInRoom) {
+		return response.WithStatus(ResponseStatusNotAllowed)
+	}
+	switch request.Type {
+	case RequestConfiguratorAction:
+		return c.handleConfiguratorActionRequest(userId, requestRaw, response)
+	case RequestShopAction:
+		return c.handleShopActionRequest(userId, requestRaw, response)
+	}
+
 	return response.WithStatus(ResponseStatusUnsupported)
 }

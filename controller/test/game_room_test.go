@@ -50,9 +50,7 @@ func TestCreateGameRoom(t *testing.T) {
 func TestCreateGameRoomAsync(t *testing.T) {
 	const n int = 1000
 	var result string
-	broadcaster := &Broadcaster{}
 	cntrl := controller.NewGameController()
-	cntrl.RegisterBroadcaster(broadcaster)
 	ch := make(chan string)
 	for i := 0; i < n; i++ {
 		go doCreateRoom(ch, cntrl, i)
