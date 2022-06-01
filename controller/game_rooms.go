@@ -6,41 +6,49 @@ import (
 	"sync"
 )
 
+type GameRoomInfo struct {
+	Uid         uint                `json:"uid"`
+	Capacity    uint                `json:"capacity"`
+	ScenarioUid uint                `json:"scenarioUid"`
+	JoinedUsers []engine.PlayerInfo `json:"joinedUsers"`
+	Host        engine.PlayerInfo   `json:"host"`
+}
+
 type GameRoom struct {
-	Uid         uint   `json:"uid"`
-	Capacity    uint   `json:"capacity"`
-	ScenarioUid uint   `json:"scenarioUid"`
-	JoinedUsers []User `json:"joinedUsers"`
-	Host        User   `json:"host"`
+	Uid         uint `json:"uid"`
+	Capacity    uint `json:"capacity"`
+	ScenarioUid uint `json:"scenarioUid"`
+	joinedUsers []User
+	host        User
 }
 
 func (r *GameRoom) IsFull() bool {
-	return len(r.JoinedUsers) >= int(r.Capacity)-1
+	return len(r.joinedUsers) >= int(r.Capacity)-1
 }
 
 func (r *GameRoom) GetUserIds() []engine.UserId {
 	result := []engine.UserId{}
-	for _, u := range r.JoinedUsers {
+	for _, u := range r.joinedUsers {
 		result = append(result, u.id)
 	}
-	result = append(result, r.Host.id)
+	result = append(result, r.host.id)
 	return result
 }
 
 func (r *GameRoom) GetActors() []*engine.GameUnit {
 	result := []*engine.GameUnit{}
-	for _, u := range r.JoinedUsers {
+	for _, u := range r.joinedUsers {
 		u.unit.PlayerInfo = &u.PlayerInfo
 		result = append(result, &u.unit)
 	}
-	r.Host.unit.PlayerInfo = &r.Host.PlayerInfo
-	result = append(result, &r.Host.unit)
+	r.host.unit.PlayerInfo = &r.host.PlayerInfo
+	result = append(result, &r.host.unit)
 	return result
 }
 
 func NewGameRoom() *GameRoom {
 	r := &GameRoom{}
-	r.JoinedUsers = []User{}
+	r.joinedUsers = []User{}
 	return r
 }
 
@@ -64,7 +72,7 @@ func (r *GameRooms) Add(room *GameRoom) {
 	r.Lock()
 	room.Uid = r.rndGen.NextUid()
 	r.rooms[room.Uid] = room
-	r.userIdToRoomUid[room.Host.id] = room.Uid
+	r.userIdToRoomUid[room.host.id] = room.Uid
 }
 
 func (r *GameRooms) PopByHostId(hostId engine.UserId) (*GameRoom, bool) {
@@ -78,10 +86,10 @@ func (r *GameRooms) PopByHostId(hostId engine.UserId) (*GameRoom, bool) {
 	if !ok {
 		return nil, false
 	}
-	if room.Host.id != hostId {
+	if room.host.id != hostId {
 		return nil, false
 	}
-	for _, u := range room.JoinedUsers {
+	for _, u := range room.joinedUsers {
 		delete(r.userIdToRoomUid, u.id)
 	}
 	delete(r.userIdToRoomUid, hostId)
@@ -99,7 +107,7 @@ func (r *GameRooms) AddUser(roomUid uint, user User) bool {
 	if room.IsFull() {
 		return false
 	}
-	room.JoinedUsers = append(room.JoinedUsers, user)
+	room.joinedUsers = append(room.joinedUsers, user)
 	r.userIdToRoomUid[user.id] = roomUid
 	return true
 }
@@ -115,17 +123,17 @@ func (r *GameRooms) RemoveUser(userId engine.UserId) bool {
 	if !ok {
 		return false
 	}
-	if room.Host.id == userId {
+	if room.host.id == userId {
 		return false
 	}
 	delete(r.userIdToRoomUid, userId)
 	restUsers := []User{}
-	for _, u := range room.JoinedUsers {
+	for _, u := range room.joinedUsers {
 		if u.id != userId {
 			restUsers = append(restUsers, u)
 		}
 	}
-	room.JoinedUsers = restUsers
+	room.joinedUsers = restUsers
 	return true
 }
 
@@ -158,7 +166,7 @@ func (r *GameRooms) ExistsForHostId(hostId engine.UserId) bool {
 	if !present {
 		return false
 	}
-	return room.Host.id == hostId
+	return room.host.id == hostId
 }
 
 func (r *GameRooms) GetByUserId(userId engine.UserId) (GameRoom, bool) {
@@ -175,17 +183,25 @@ func (r *GameRooms) GetByUserId(userId engine.UserId) (GameRoom, bool) {
 	return *room, ok
 }
 
-func (r *GameRooms) ResponseList() *[]GameRoom {
+func (r *GameRooms) ResponseList() *[]GameRoomInfo {
 	defer r.RUnlock()
 	r.RLock()
-	rooms := []GameRoom{}
+	rooms := []GameRoomInfo{}
 	for i := range r.rooms {
-		rooms = append(rooms, GameRoom{
+		rooms = append(rooms, GameRoomInfo{
 			Uid:         r.rooms[i].Uid,
-			Host:        r.rooms[i].Host,
+			Host:        r.rooms[i].host.PlayerInfo,
 			Capacity:    r.rooms[i].Capacity,
-			JoinedUsers: r.rooms[i].JoinedUsers,
+			JoinedUsers: toPlayerInfos(r.rooms[i].joinedUsers),
 		})
 	}
 	return &rooms
+}
+
+func toPlayerInfos(users []User) []engine.PlayerInfo {
+	result := []engine.PlayerInfo{}
+	for i := range users {
+		result = append(result, users[i].PlayerInfo)
+	}
+	return result
 }

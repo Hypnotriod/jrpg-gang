@@ -22,7 +22,6 @@ func (s UserStatus) Test(status UserStatus) bool {
 
 type User struct {
 	engine.PlayerInfo
-	Level  uint `json:"level"`
 	rndGen *util.RndGen
 	status UserStatus
 	id     engine.UserId

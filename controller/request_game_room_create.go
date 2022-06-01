@@ -26,7 +26,7 @@ func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, reque
 	room := NewGameRoom()
 	room.Capacity = request.Data.Capacity
 	room.ScenarioUid = request.Data.ScenarioUid
-	room.Host = hostUser
+	room.host = hostUser
 	c.rooms.Add(room)
 	response.Data[DataKeyRoom] = room
 	c.users.ChangeUserStatus(userId, UserStatusInRoom)
