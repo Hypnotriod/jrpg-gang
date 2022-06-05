@@ -47,7 +47,7 @@ func (c *Client) Serve() {
 			break
 		}
 		if mt != websocket.TextMessage {
-			continue
+			break
 		}
 		data := string(message)
 		userId, response := c.hub.controller.HandleRequest(c.userId, data)

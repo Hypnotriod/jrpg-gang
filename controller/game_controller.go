@@ -44,6 +44,9 @@ func (c *GameController) HandleRequest(userId engine.UserId, requestRaw string) 
 	response.Type = request.Type
 	response.Id = request.Id
 	if request.Type == RequestJoin {
+		if userId != engine.UserIdEmpty {
+			return engine.UserIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
+		}
 		return c.handleJoinRequest(requestRaw, response)
 	}
 	return engine.UserIdEmpty, c.serveRequest(userId, request, requestRaw, response)
