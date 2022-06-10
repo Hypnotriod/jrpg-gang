@@ -44,6 +44,22 @@ func (e *GameEngines) Add(hostId engine.UserId, engine *engine.GameEngine) {
 	}
 }
 
+func (e *GameEngines) ChangeHost(oldHostId engine.UserId, newHostId engine.UserId) bool {
+	e.RLock()
+	wrapper, ok := e.userIdToEngine[oldHostId]
+	e.RUnlock()
+	if !ok {
+		return false
+	}
+	defer wrapper.Unlock()
+	wrapper.Lock()
+	if wrapper.hostId != oldHostId {
+		return false
+	}
+	wrapper.hostId = newHostId
+	return true
+}
+
 func (e *GameEngines) IsUserInGame(userId engine.UserId) bool {
 	defer e.RUnlock()
 	e.RLock()
