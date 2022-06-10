@@ -23,7 +23,6 @@ func NewGameEngineWrapper(hostId engine.UserId, engine *engine.GameEngine) *Game
 type GameEngines struct {
 	sync.RWMutex
 	rndGen         *util.RndGen
-	engines        []*GameEngineWrapper
 	userIdToEngine map[engine.UserId]*GameEngineWrapper
 }
 
@@ -38,7 +37,6 @@ func (e *GameEngines) Add(hostId engine.UserId, engine *engine.GameEngine) {
 	defer e.Unlock()
 	e.Lock()
 	wrapper := NewGameEngineWrapper(hostId, engine)
-	e.engines = append(e.engines, wrapper)
 	for _, userId := range engine.GetUserIds() {
 		e.userIdToEngine[userId] = wrapper
 	}
@@ -116,18 +114,20 @@ func (e *GameEngines) GameState(userId engine.UserId) (*engine.GameEvent, []engi
 }
 
 func (e *GameEngines) RemoveUser(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
-	e.RLock()
+	e.Lock()
 	wrapper, ok := e.userIdToEngine[userId]
-	e.RUnlock()
 	if !ok {
+		e.Unlock()
 		return nil, nil, false
 	}
+	delete(e.userIdToEngine, userId)
+	e.Unlock()
 	defer wrapper.Lock()
 	wrapper.Lock()
 	wrapper.engine.RemoveActor(userId)
 	userIds := wrapper.engine.GetUserIds()
 	if len(userIds) == 0 {
-		// todo: dispose engine
+		wrapper.engine.Dispose()
 		return nil, nil, false
 	}
 	if wrapper.hostId == userId {
