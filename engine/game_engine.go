@@ -88,3 +88,22 @@ func (e *GameEngine) FindActorByUserId(userId UserId) *GameUnit {
 	}
 	return nil
 }
+
+func (e *GameEngine) RemoveActor(userId UserId) {
+	actor := e.FindActorByUserId(userId)
+	if actor == nil {
+		return
+	}
+	if e.state.isUnitActive(actor.Uid) {
+		e.onUnitUseAction()
+	}
+	e.battlefield().MoveToCorpsesById(actor.Uid)
+	e.state.UpdateUnitsQueue(e.battlefield().Units)
+	restActors := []*GameUnit{}
+	for i := 0; i < len(e.actors); i++ {
+		if e.actors[i].userId != userId {
+			restActors = append(restActors, e.actors[i])
+		}
+	}
+	e.actors = restActors
+}

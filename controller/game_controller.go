@@ -33,6 +33,9 @@ func (c *GameController) Leave(userId engine.UserId) {
 	if _, ok := c.rooms.PopByHostId(userId); ok || c.rooms.RemoveUser(userId) {
 		c.broadcastLobbyStatus()
 	}
+	if state, broadcastUserIds, ok := c.engines.RemoveUser(userId); ok {
+		c.broadcastGameState(broadcastUserIds, state)
+	}
 }
 
 func (c *GameController) HandleRequest(userId engine.UserId, requestRaw string) (engine.UserId, string) {

@@ -54,9 +54,6 @@ func (s *GameState) MakeUnitsQueue(units []*GameUnit) {
 }
 
 func (s *GameState) UpdateUnitsQueue(units []*GameUnit) {
-	if len(s.ActiveUnitsQueue) == 0 {
-		return
-	}
 	activeUnits := []*GameUnit{}
 	for _, unit := range units {
 		if s.isUnitActive(unit.Uid) {
