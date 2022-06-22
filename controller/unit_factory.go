@@ -63,6 +63,44 @@ func newGameUnitTank() *engine.GameUnit {
 					"curse": 5
 				}
 			},
+			"inventory": {
+				"weapon": [
+					{
+						"type": "weapon",
+						"name": "Base Sword",
+						"code": "sword-01",
+						"description": "Base one hand sword",
+						"durability": 700,
+						"slot": "weapon",
+						"slotsNumber": 1,
+						"requirements": {
+							"strength": 5
+						},
+						"damage": [
+							{
+								"chance": 40,
+								"cutting": 30,
+								"crushing": 5
+							},
+							{
+								"duration": 3,
+								"chance": 15,
+								"bleeding": 3
+							}
+						],
+						"modification": [
+							{
+								"damage": {
+									"cutting": 30
+								}
+							}	
+						],
+						"useCost": {
+							"stamina": 30
+						}
+					}
+				]
+			},
 			"slots": {
 				"head": 1,
 				"neck": 1,
@@ -118,6 +156,49 @@ func newGameUnitRogue() *engine.GameUnit {
 					"fear": 5,
 					"curse": 5
 				}
+			},
+			"inventory": {
+				"weapon": [
+					{
+						"type": "weapon",
+						"name": "Bow",
+						"code": "bow-01",
+						"description": "Base two hand bow",
+						"ammunitionKind": "arrow",
+						"durability": 700,
+						"slot": "weapon",
+						"slotsNumber": 2,
+						"requirements": {
+							"strength": 5
+						},
+						"damage": [
+							{
+								"chance": 40,
+								"stabbing": 30
+							}
+						]
+					}
+				],
+				"ammunition": [
+					{
+						"name": "Arrow",
+						"type": "ammunition",
+						"code": "arrow-01",
+						"description": "Base arrow",
+						"kind": "arrow",
+						"quantity": 50,
+						"damage": [
+							{
+								"stabbing": 10
+							},
+							{
+								"duration": 3,
+								"chance": 15,
+								"bleeding": 3
+							}
+						]
+					}
+				]
 			},
 			"slots": {
 				"head": 1,
