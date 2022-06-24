@@ -32,7 +32,7 @@ func (c *GameController) handleJoinRequest(requestRaw string, response *Response
 		request.Data.Class,
 		unit)
 	c.users.AddUser(user)
-	response.Data[DataKeyUserNickname] = user.Nickname
+	response.Data[PlayerInfo] = user.PlayerInfo
 	response.Data[DataKeyUserId] = user.id
 	response.Data[DataKeyUnit] = user.unit
 	return user.id, response.WithStatus(ResponseStatusOk)
