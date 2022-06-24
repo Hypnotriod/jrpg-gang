@@ -17,10 +17,32 @@ func NewTestShopItems() *domain.UnitInventory {
 			"armor": [
 			],
 			"disposable": [
+				{
+					"name": "Health Sm",
+					"type": "disposable",
+					"code": "health-potion-01",
+					"description": "Small health potion",
+					"modification": [
+						{
+							"recovery": {
+								"health": 35
+							}
+						},
+						{
+							"chance": 50,
+							"duration": 5,
+							"recovery": {
+								"health": 2
+							}
+						}
+					],
+					"price": {
+						"coins": 250
+					}
+				}
 			],
 			"ammunition": [
 				{
-					"code": "abc1",
 					"name": "Arrow",
 					"type": "ammunition",
 					"code": "arrow-01",
