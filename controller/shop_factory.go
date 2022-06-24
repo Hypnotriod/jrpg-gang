@@ -23,6 +23,7 @@ func NewTestShopItems() *domain.UnitInventory {
 					"code": "abc1",
 					"name": "Arrow",
 					"type": "ammunition",
+					"code": "arrow-01",
 					"description": "Base arrow",
 					"kind": "arrow",
 					"damage": [

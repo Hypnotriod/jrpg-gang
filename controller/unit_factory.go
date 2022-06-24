@@ -73,6 +73,7 @@ func newGameUnitTank() *engine.GameUnit {
 						"durability": 700,
 						"slot": "weapon",
 						"slotsNumber": 1,
+						"equipped": true,
 						"requirements": {
 							"strength": 5
 						},
@@ -122,6 +123,9 @@ func newGameUnitRogue() *engine.GameUnit {
 		`{
 			"name": "Rogue",
 			"faction": 0,
+			"booty": {
+				"coins": 5000
+			},
 			"state": {
 				"health": 100,
 				"stamina": 100
@@ -168,6 +172,7 @@ func newGameUnitRogue() *engine.GameUnit {
 						"durability": 700,
 						"slot": "weapon",
 						"slotsNumber": 2,
+						"equipped": true,
 						"requirements": {
 							"strength": 5
 						},
@@ -187,6 +192,7 @@ func newGameUnitRogue() *engine.GameUnit {
 						"description": "Base arrow",
 						"kind": "arrow",
 						"quantity": 50,
+						"equipped": true,
 						"damage": [
 							{
 								"stabbing": 10
@@ -221,6 +227,9 @@ func newGameUnitMage() *engine.GameUnit {
 		`{
 			"name": "Mage",
 			"faction": 0,
+			"booty": {
+				"coins": 5000
+			},
 			"state": {
 				"health": 100,
 				"stamina": 100
