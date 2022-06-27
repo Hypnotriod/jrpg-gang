@@ -39,6 +39,23 @@ func NewTestShopItems() *domain.UnitInventory {
 					"price": {
 						"coins": 250
 					}
+				},
+				{
+					"name": "Poison",
+					"type": "disposable",
+					"code": "poison-01",
+					"description": "Regular Poison",
+					"modification": [
+						{
+							"duration": 3,
+							"damage": {
+								"poison": 10
+							}
+						}
+					],
+					"price": {
+						"coins": 10
+					}
 				}
 			],
 			"ammunition": [
