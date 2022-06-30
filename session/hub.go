@@ -22,12 +22,12 @@ type HubConfig struct {
 
 type Hub struct {
 	sync.RWMutex
-	config       HubConfig
-	server       *http.Server
-	upgrader     *websocket.Upgrader
-	controller   *controller.GameController
-	clients      map[engine.UserId]*Client
-	clientTimers map[engine.UserId]*util.Timer
+	config      HubConfig
+	server      *http.Server
+	upgrader    *websocket.Upgrader
+	controller  *controller.GameController
+	clients     map[engine.UserId]*Client
+	leaveTimers map[engine.UserId]*util.Timer
 }
 
 func NewHub(config HubConfig, controller *controller.GameController) *Hub {
@@ -35,7 +35,7 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 	hub.config = config
 	hub.controller = controller
 	hub.clients = make(map[engine.UserId]*Client)
-	hub.clientTimers = make(map[engine.UserId]*util.Timer)
+	hub.leaveTimers = make(map[engine.UserId]*util.Timer)
 	hub.upgrader = &websocket.Upgrader{
 		CheckOrigin:     hub.checkOrigin,
 		ReadBufferSize:  config.ReadBufferSize,
@@ -78,9 +78,9 @@ func (h *Hub) serveWsRequest(writer http.ResponseWriter, request *http.Request) 
 func (h *Hub) registerClient(client *Client) {
 	h.Lock()
 	h.clients[client.userId] = client
-	if timer, ok := h.clientTimers[client.userId]; ok {
+	if timer, ok := h.leaveTimers[client.userId]; ok {
 		timer.Cancel()
-		delete(h.clientTimers, client.userId)
+		delete(h.leaveTimers, client.userId)
 		log.Info("Client back online: ", client.userId)
 	}
 	h.Unlock()
@@ -99,7 +99,7 @@ func (h *Hub) unregisterClient(userId engine.UserId) {
 		h.controller.Leave(userId)
 		log.Info("Unregister Client by timeout: ", userId)
 	})
-	h.clientTimers[userId] = timer
+	h.leaveTimers[userId] = timer
 	h.Unlock()
 }
 
