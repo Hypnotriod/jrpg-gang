@@ -52,6 +52,9 @@ func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *doma
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	itemType := unit.Inventory.GetItemType(action.ItemUid)
+	if itemType == domain.ItemTypeNone {
+		return domain.NewActionResult().WithResult(domain.ResultNotFound)
+	}
 	if unit.Faction == target.Faction &&
 		(itemType == domain.ItemTypeWeapon || itemType == domain.ItemTypeMagic) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)

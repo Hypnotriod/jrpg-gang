@@ -23,3 +23,7 @@ func (d Disposable) String() string {
 		d.Uid,
 	)
 }
+
+func (d *Disposable) IsHarmful() bool {
+	return len(d.Damage) > 0
+}

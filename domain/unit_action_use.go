@@ -77,6 +77,9 @@ func (u *Unit) useDisposableOnTarget(action *ActionResult, target *Unit, disposa
 	if disposable.Quantity == 0 {
 		return action.WithResult(ResultZeroQuantity)
 	}
+	if disposable.IsHarmful() {
+		return action.WithResult(ResultNotAllowed)
+	}
 	disposable.Quantity--
 	if len(disposable.Damage) != 0 {
 		instDmg, tmpImp := u.Attack(target, disposable.Damage)
