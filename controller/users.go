@@ -59,9 +59,9 @@ func NewUsers() *Users {
 }
 
 func (s *Users) Get(userId engine.UserId) (User, bool) {
-	defer s.RUnlock()
 	s.RLock()
 	user, ok := s.users[userId]
+	s.RUnlock()
 	if ok {
 		return *user, ok
 	} else {

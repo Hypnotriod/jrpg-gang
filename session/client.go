@@ -13,6 +13,7 @@ type Client struct {
 	conn   *websocket.Conn
 	hub    *Hub
 	userId engine.UserId
+	kicked bool
 }
 
 func NewClient(connection *websocket.Conn, hub *Hub) *Client {
@@ -20,6 +21,7 @@ func NewClient(connection *websocket.Conn, hub *Hub) *Client {
 	c.conn = connection
 	c.hub = hub
 	c.userId = engine.UserIdEmpty
+	c.kicked = false
 	c.conn.SetReadLimit(c.hub.config.MaxMessageSize)
 	return c
 }
@@ -34,10 +36,6 @@ func (c *Client) WriteMessage(message string) {
 }
 
 func (c *Client) Serve() {
-	defer func() {
-		c.hub.unregisterClient(c.userId)
-		c.conn.Close()
-	}()
 	for {
 		mt, message, err := c.conn.ReadMessage()
 		if err != nil {
@@ -57,4 +55,13 @@ func (c *Client) Serve() {
 		}
 		c.WriteMessage(response)
 	}
+	if !c.kicked {
+		c.hub.unregisterClient(c.userId)
+		c.conn.Close()
+	}
+}
+
+func (c *Client) Kick() {
+	c.kicked = true
+	c.conn.Close()
 }

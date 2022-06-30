@@ -77,6 +77,9 @@ func (h *Hub) serveWsRequest(writer http.ResponseWriter, request *http.Request) 
 
 func (h *Hub) registerClient(client *Client) {
 	h.Lock()
+	if oldClient, ok := h.clients[client.userId]; ok {
+		oldClient.Kick()
+	}
 	h.clients[client.userId] = client
 	if timer, ok := h.leaveTimers[client.userId]; ok {
 		timer.Cancel()
