@@ -12,13 +12,15 @@ func config() session.HubConfig {
 	rBuffSize := flag.Int("rBuffSize", 1024, "ws read buffer size")
 	wBuffSize := flag.Int("wBuffSize", 1024, "ws write buffer size")
 	maxMessageSize := flag.Int64("maxMessageSize", 4096, "connection max message size")
+	userOfflineTimeoutSec := flag.Int64("userOfflineTimeoutSec", 10, "user offline timeout in secnds")
 	flag.Parse()
 
 	return session.HubConfig{
-		Addres:          *addres,
-		ReadBufferSize:  *rBuffSize,
-		WriteBufferSize: *wBuffSize,
-		MaxMessageSize:  *maxMessageSize,
+		Addres:                *addres,
+		ReadBufferSize:        *rBuffSize,
+		WriteBufferSize:       *wBuffSize,
+		MaxMessageSize:        *maxMessageSize,
+		UserOfflineTimeoutSec: *userOfflineTimeoutSec,
 	}
 }
 

@@ -43,6 +43,12 @@ func NewResponse() *Response {
 	return response
 }
 
+func (r *Response) fillUserStatus(user *User) {
+	r.Data[PlayerInfo] = user.PlayerInfo
+	r.Data[DataKeyUserId] = user.id
+	r.Data[DataKeyUnit] = user.unit
+}
+
 func (r *Response) WithStatus(status ResponseStatus) string {
 	r.Status = status
 	return util.ObjectToJson(r)

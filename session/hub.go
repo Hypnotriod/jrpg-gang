@@ -3,27 +3,31 @@ package session
 import (
 	"jrpg-gang/controller"
 	"jrpg-gang/engine"
+	"jrpg-gang/util"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/gorilla/websocket"
 	log "github.com/sirupsen/logrus"
 )
 
 type HubConfig struct {
-	Addres          string `json:"addres"`
-	ReadBufferSize  int    `json:"readBufferSize"`
-	WriteBufferSize int    `json:"writeBufferSize"`
-	MaxMessageSize  int64  `json:"maxMessageSize"`
+	Addres                string `json:"addres"`
+	ReadBufferSize        int    `json:"readBufferSize"`
+	WriteBufferSize       int    `json:"writeBufferSize"`
+	MaxMessageSize        int64  `json:"maxMessageSize"`
+	UserOfflineTimeoutSec int64  `json:"userOfflineTimeoutSec"`
 }
 
 type Hub struct {
 	sync.RWMutex
-	config     HubConfig
-	server     *http.Server
-	upgrader   *websocket.Upgrader
-	controller *controller.GameController
-	clients    map[engine.UserId]*Client
+	config       HubConfig
+	server       *http.Server
+	upgrader     *websocket.Upgrader
+	controller   *controller.GameController
+	clients      map[engine.UserId]*Client
+	clientTimers map[engine.UserId]*util.Timer
 }
 
 func NewHub(config HubConfig, controller *controller.GameController) *Hub {
@@ -31,6 +35,7 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 	hub.config = config
 	hub.controller = controller
 	hub.clients = make(map[engine.UserId]*Client)
+	hub.clientTimers = make(map[engine.UserId]*util.Timer)
 	hub.upgrader = &websocket.Upgrader{
 		CheckOrigin:     hub.checkOrigin,
 		ReadBufferSize:  config.ReadBufferSize,
@@ -73,19 +78,29 @@ func (h *Hub) serveWsRequest(writer http.ResponseWriter, request *http.Request) 
 func (h *Hub) registerClient(client *Client) {
 	h.Lock()
 	h.clients[client.userId] = client
+	if timer, ok := h.clientTimers[client.userId]; ok {
+		timer.Cancel()
+		delete(h.clientTimers, client.userId)
+		log.Info("Client back online: ", client.userId)
+	}
 	h.Unlock()
 	log.Info("Register Client: ", client.userId)
 }
 
 func (h *Hub) unregisterClient(userId engine.UserId) {
 	if userId == engine.UserIdEmpty {
+		log.Info("Client left without joining")
 		return
 	}
+	log.Info("Client is offline: ", userId)
 	h.Lock()
 	delete(h.clients, userId)
+	timer := util.NewTimer(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
+		h.controller.Leave(userId)
+		log.Info("Unregister Client by timeout: ", userId)
+	})
+	h.clientTimers[userId] = timer
 	h.Unlock()
-	h.controller.Leave(userId)
-	log.Info("Unregister Client: ", userId)
 }
 
 func (h *Hub) getClient(userId engine.UserId) *Client {

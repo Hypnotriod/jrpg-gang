@@ -62,7 +62,11 @@ func (s *Users) Get(userId engine.UserId) (User, bool) {
 	defer s.RUnlock()
 	s.RLock()
 	user, ok := s.users[userId]
-	return *user, ok
+	if ok {
+		return *user, ok
+	} else {
+		return User{}, ok
+	}
 }
 
 func (s *Users) GetByIds(userIds []engine.UserId) []User {
