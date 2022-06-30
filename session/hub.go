@@ -99,6 +99,9 @@ func (h *Hub) unregisterClient(userId engine.UserId) {
 	h.Lock()
 	delete(h.clients, userId)
 	timer := util.NewTimer(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
+		h.Lock()
+		delete(h.leaveTimers, userId)
+		h.Unlock()
 		h.controller.Leave(userId)
 		log.Info("Unregister Client by timeout: ", userId)
 	})
