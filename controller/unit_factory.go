@@ -265,6 +265,83 @@ func newGameUnitMage() *engine.GameUnit {
 					"curse": 5
 				}
 			},
+			"inventory": {
+				"weapon": [
+					{
+						"type": "weapon",
+						"name": "Staff",
+						"code": "sorcerer-staff-01",
+						"description": "Base one hand Sorcerer Staff",
+						"ammunitionKind": "magicCharge",
+						"durability": 700,
+						"slot": "weapon",
+						"slotsNumber": 1,
+						"equipped": true,
+						"requirements": {
+							"intelligence": 5
+						},
+						"damage": [
+						]
+					}
+				],
+				"ammunition": [
+					{
+						"name": "Fire",
+						"type": "ammunition",
+						"code": "fire-charge-01",
+						"description": "Sorcerer staff Fire Charge",
+						"kind": "magicCharge",
+						"quantity": 25,
+						"equipped": true,
+						"damage": [
+							{
+								"fire": 15
+							},
+							{
+								"duration": 3,
+								"chance": 15,
+								"fire": 5
+							}
+						]
+					},
+					{
+						"name": "Cold",
+						"type": "ammunition",
+						"code": "cold-charge-01",
+						"description": "Sorcerer staff Cold Charge",
+						"kind": "magicCharge",
+						"quantity": 25,
+						"damage": [
+							{
+								"cold": 15
+							},
+							{
+								"duration": 3,
+								"chance": 15,
+								"cold": 5
+							}
+						]
+					},
+					{
+						"name": "Lighting",
+						"type": "ammunition",
+						"code": "lighting-charge-01",
+						"description": "Sorcerer staff Lighting Charge",
+						"kind": "magicCharge",
+						"quantity": 25,
+						"damage": [
+							{
+								"lighting": 15
+							},
+							{
+								"duration": 3,
+								"chance": 15,
+								"lighting": 5
+							}
+						]
+					}
+				]
+			},
 			"slots": {
 				"head": 1,
 				"neck": 1,

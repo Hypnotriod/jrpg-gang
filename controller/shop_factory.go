@@ -78,6 +78,66 @@ func NewTestShopItems() *domain.UnitInventory {
 					"price": {
 						"coins": 100
 					}
+				},
+				{
+					"name": "Fire",
+					"type": "ammunition",
+					"code": "fire-charge-01",
+					"description": "Sorcerer staff Fire Charge",
+					"kind": "magicCharge",
+					"damage": [
+						{
+							"fire": 15
+						},
+						{
+							"duration": 3,
+							"chance": 15,
+							"fire": 5
+						}
+					],
+					"price": {
+						"coins": 15
+					}
+				},
+				{
+					"name": "Cold",
+					"type": "ammunition",
+					"code": "cold-charge-01",
+					"description": "Sorcerer staff Cold Charge",
+					"kind": "magicCharge",
+					"damage": [
+						{
+							"cold": 15
+						},
+						{
+							"duration": 3,
+							"chance": 15,
+							"cold": 5
+						}
+					],
+					"price": {
+						"coins": 15
+					}
+				},
+				{
+					"name": "Lighting",
+					"type": "ammunition",
+					"code": "lighting-charge-01",
+					"description": "Sorcerer staff Lighting Charge",
+					"kind": "magicCharge",
+					"damage": [
+						{
+							"lighting": 15
+						},
+						{
+							"duration": 3,
+							"chance": 15,
+							"lighting": 5
+						}
+					],
+					"price": {
+						"coins": 15
+					}
 				}
 			]
 		}`)
