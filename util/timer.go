@@ -31,16 +31,18 @@ func NewTimerWithCancel(duration time.Duration, complete func(), cancel func()) 
 
 func (t *Timer) Cancel() {
 	t.mutex.Lock()
-	if !t.completed {
-		t.cancelled = true
-		t.timer.Stop()
-		t.cancel <- struct{}{}
+	if t.completed {
+		t.mutex.Unlock()
+		return
 	}
+	t.cancelled = true
+	t.timer.Stop()
 	t.mutex.Unlock()
+	t.cancel <- struct{}{}
 }
 
 func (t *Timer) wait(complete func(), cancel func()) {
-	for !t.completed && !t.cancelled {
+	for !t.completed {
 		select {
 		case <-t.timer.C:
 			t.mutex.Lock()
@@ -51,6 +53,7 @@ func (t *Timer) wait(complete func(), cancel func()) {
 			t.mutex.Unlock()
 		case <-t.cancel:
 			cancel()
+			break
 		}
 	}
 }
