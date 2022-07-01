@@ -36,19 +36,21 @@ func (t *Timer) Cancel() {
 		return
 	}
 	t.cancelled = true
-	t.timer.Stop()
 	t.mutex.Unlock()
+	t.timer.Stop()
 	t.cancel <- struct{}{}
 }
 
 func (t *Timer) wait(complete func(), cancel func()) {
-	for !t.completed {
+	for {
 		select {
 		case <-t.timer.C:
 			t.mutex.Lock()
 			if !t.cancelled {
 				t.completed = true
+				t.mutex.Unlock()
 				complete()
+				break
 			}
 			t.mutex.Unlock()
 		case <-t.cancel:
