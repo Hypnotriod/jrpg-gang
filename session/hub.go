@@ -80,8 +80,7 @@ func (h *Hub) registerClient(client *Client) {
 		oldClient.Kick()
 	}
 	h.clients[client.userId] = client
-	if timer, ok := h.leaveTimers[client.userId]; ok {
-		timer.Stop()
+	if timer, ok := h.leaveTimers[client.userId]; ok && timer.Stop() {
 		delete(h.leaveTimers, client.userId)
 		log.Info("Client back online: ", client.userId)
 	}
