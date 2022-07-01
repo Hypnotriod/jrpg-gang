@@ -3,7 +3,6 @@ package session
 import (
 	"jrpg-gang/controller"
 	"jrpg-gang/engine"
-	"jrpg-gang/util"
 	"net/http"
 	"sync"
 	"time"
@@ -27,7 +26,7 @@ type Hub struct {
 	upgrader    *websocket.Upgrader
 	controller  *controller.GameController
 	clients     map[engine.UserId]*Client
-	leaveTimers map[engine.UserId]*util.Timer
+	leaveTimers map[engine.UserId]*time.Timer
 }
 
 func NewHub(config HubConfig, controller *controller.GameController) *Hub {
@@ -35,7 +34,7 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 	hub.config = config
 	hub.controller = controller
 	hub.clients = make(map[engine.UserId]*Client)
-	hub.leaveTimers = make(map[engine.UserId]*util.Timer)
+	hub.leaveTimers = make(map[engine.UserId]*time.Timer)
 	hub.upgrader = &websocket.Upgrader{
 		CheckOrigin:     hub.checkOrigin,
 		ReadBufferSize:  config.ReadBufferSize,
@@ -82,7 +81,7 @@ func (h *Hub) registerClient(client *Client) {
 	}
 	h.clients[client.userId] = client
 	if timer, ok := h.leaveTimers[client.userId]; ok {
-		timer.Cancel()
+		timer.Stop()
 		delete(h.leaveTimers, client.userId)
 		log.Info("Client back online: ", client.userId)
 	}
@@ -98,7 +97,7 @@ func (h *Hub) unregisterClient(userId engine.UserId) {
 	log.Info("Client is offline: ", userId)
 	h.Lock()
 	delete(h.clients, userId)
-	h.leaveTimers[userId] = util.NewTimer(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
+	h.leaveTimers[userId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
 		h.Lock()
 		delete(h.leaveTimers, userId)
 		h.Unlock()
