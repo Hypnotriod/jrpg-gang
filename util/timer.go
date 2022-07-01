@@ -50,12 +50,12 @@ func (t *Timer) wait(complete func(), cancel func()) {
 				t.completed = true
 				t.mutex.Unlock()
 				complete()
-				break
+				return
 			}
 			t.mutex.Unlock()
 		case <-t.cancel:
 			cancel()
-			break
+			return
 		}
 	}
 }
