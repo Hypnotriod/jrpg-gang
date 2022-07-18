@@ -2,7 +2,35 @@ package domain
 
 import "jrpg-gang/util"
 
-func (u *Unit) ApplyDamage(damage Damage) Damage {
+func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageImpact) {
+	instantDamage := []Damage{}
+	temporalDamage := []DamageImpact{}
+	totalModification := u.TotalModification()
+	totalModification.Attributes.Accumulate(u.Stats.Attributes)
+	totalModification.Attributes.Normalize()
+	for _, imp := range damage {
+		if !u.CheckRandomChance(u.calculateAttackChance(target, imp)) {
+			break
+		}
+		imp.Enchance(totalModification.Attributes, totalModification.Damage)
+		imp.Normalize()
+		if u.CheckRandomChance(u.calculateCritilalAttackChance(target)) {
+			imp.Damage.Multiply(CRITICAL_DAMAGE_FACTOR)
+			imp.Damage.IsCritical = true
+		}
+		if imp.Duration != 0 {
+			tmpImp := target.accumulateDamageImpact(imp)
+			tmpImp.Chance = 0
+			temporalDamage = append(temporalDamage, tmpImp)
+		} else {
+			instDmg := target.applyDamage(imp.Damage)
+			instantDamage = append(instantDamage, instDmg)
+		}
+	}
+	return instantDamage, temporalDamage
+}
+
+func (u *Unit) applyDamage(damage Damage) Damage {
 	if damage.HasPhysicalEffect() {
 		u.Inventory.IncreaseArmorWearout(true)
 	}
@@ -17,7 +45,7 @@ func (u *Unit) ApplyDamage(damage Damage) Damage {
 	return damage
 }
 
-func (u *Unit) AccumulateDamageImpact(damage DamageImpact) DamageImpact {
+func (u *Unit) accumulateDamageImpact(damage DamageImpact) DamageImpact {
 	resistance := u.TotalModification().Resistance
 	resistance.Accumulate(u.Stats.Resistance)
 	resistance.Normalize()
@@ -29,40 +57,12 @@ func (u *Unit) AccumulateDamageImpact(damage DamageImpact) DamageImpact {
 	return damage
 }
 
-func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
+func (u *Unit) calculateCritilalAttackChance(target *Unit) float32 {
 	chance := (u.TotalLuck() - u.State.Curse) - (target.TotalLuck() - target.State.Curse)
 	return util.Max(chance, MINIMUM_CHANCE)
 }
 
-func (u *Unit) CalculateAttackChance(target *Unit, damage DamageImpact) float32 {
+func (u *Unit) calculateAttackChance(target *Unit, damage DamageImpact) float32 {
 	chance := (u.TotalAgility() - u.State.Curse) - (target.TotalAgility() - target.State.Curse) + damage.Chance
 	return util.Max(chance, MINIMUM_CHANCE)
-}
-
-func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageImpact) {
-	instantDamage := []Damage{}
-	temporalDamage := []DamageImpact{}
-	totalModification := u.TotalModification()
-	totalModification.Attributes.Accumulate(u.Stats.Attributes)
-	totalModification.Attributes.Normalize()
-	for _, imp := range damage {
-		if !u.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
-			break
-		}
-		imp.Enchance(totalModification.Attributes, totalModification.Damage)
-		imp.Normalize()
-		if u.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
-			imp.Damage.Multiply(CRITICAL_DAMAGE_FACTOR)
-			imp.Damage.IsCritical = true
-		}
-		if imp.Duration != 0 {
-			tmpImp := target.AccumulateDamageImpact(imp)
-			tmpImp.Chance = 0
-			temporalDamage = append(temporalDamage, tmpImp)
-		} else {
-			instDmg := target.ApplyDamage(imp.Damage)
-			instantDamage = append(instantDamage, instDmg)
-		}
-	}
-	return instantDamage, temporalDamage
 }
