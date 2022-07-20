@@ -28,6 +28,16 @@ func NewGameController() *GameController {
 	return c
 }
 
+func (c *GameController) ConnectionStatusChanged(userId engine.UserId, isOffline bool) {
+	c.users.ConnectionStatusChanged(userId, isOffline)
+	if c.rooms.ConnectionStatusChanged(userId, isOffline) {
+		c.broadcastLobbyStatus()
+	}
+	if state, broadcastUserIds, ok := c.engines.ConnectionStatusChanged(userId, isOffline); ok {
+		c.broadcastGameState(broadcastUserIds, state)
+	}
+}
+
 func (c *GameController) Leave(userId engine.UserId) {
 	c.users.RemoveUser(userId)
 	if _, ok := c.rooms.PopByHostId(userId); ok || c.rooms.RemoveUser(userId) {

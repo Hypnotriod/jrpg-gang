@@ -83,6 +83,7 @@ func (h *Hub) registerClient(client *Client) {
 	if timer, ok := h.leaveTimers[client.userId]; ok && timer.Stop() {
 		delete(h.leaveTimers, client.userId)
 		h.Unlock()
+		h.controller.ConnectionStatusChanged(client.userId, false)
 		log.Info("Client back online: ", client.userId)
 		return
 	}
@@ -95,7 +96,6 @@ func (h *Hub) unregisterClient(userId engine.UserId) {
 		log.Info("Client left without joining")
 		return
 	}
-	log.Info("Client is offline: ", userId)
 	h.Lock()
 	delete(h.clients, userId)
 	h.leaveTimers[userId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
@@ -106,6 +106,8 @@ func (h *Hub) unregisterClient(userId engine.UserId) {
 		log.Info("Unregister Client by timeout: ", userId)
 	})
 	h.Unlock()
+	h.controller.ConnectionStatusChanged(userId, true)
+	log.Info("Client went offline: ", userId)
 }
 
 func (h *Hub) getClient(userId engine.UserId) *Client {

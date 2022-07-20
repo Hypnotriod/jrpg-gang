@@ -35,6 +35,20 @@ func (r *GameRoom) GetUserIds() []engine.UserId {
 	return result
 }
 
+func (r *GameRoom) UpdateUserConnectionStatus(userId engine.UserId, isOffline bool) bool {
+	if r.host.id == userId {
+		r.host.IsOffline = isOffline
+		return true
+	}
+	for i := range r.joinedUsers {
+		if r.joinedUsers[i].id == userId {
+			r.joinedUsers[i].IsOffline = isOffline
+			return true
+		}
+	}
+	return false
+}
+
 func (r *GameRoom) GetActors() []*engine.GameUnit {
 	result := []*engine.GameUnit{}
 	for _, u := range r.joinedUsers {
@@ -181,6 +195,20 @@ func (r *GameRooms) GetByUserId(userId engine.UserId) (GameRoom, bool) {
 		return GameRoom{}, false
 	}
 	return *room, ok
+}
+
+func (r *GameRooms) ConnectionStatusChanged(userId engine.UserId, isOffline bool) bool {
+	defer r.Unlock()
+	r.Lock()
+	roomUid, ok := r.userIdToRoomUid[userId]
+	if !ok {
+		return false
+	}
+	room, ok := r.rooms[roomUid]
+	if !ok {
+		return false
+	}
+	return room.UpdateUserConnectionStatus(userId, isOffline)
 }
 
 func (r *GameRooms) ResponseList() *[]GameRoomInfo {

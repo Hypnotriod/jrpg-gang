@@ -105,12 +105,12 @@ func (s *Users) GetByNickname(nickname string) (User, bool) {
 	return *user, ok
 }
 
-func (s *Users) GetIdsByStatus(status UserStatus) []engine.UserId {
+func (s *Users) GetIdsByStatus(status UserStatus, onlineOnly bool) []engine.UserId {
 	defer s.RUnlock()
 	s.RLock()
 	result := []engine.UserId{}
 	for _, user := range s.users {
-		if user.status&status != 0 {
+		if user.status&status != 0 && (!onlineOnly || user.IsOffline == false) {
 			result = append(result, user.id)
 		}
 	}
@@ -183,4 +183,14 @@ func (s *Users) GetUserStatus(userId engine.UserId) UserStatus {
 		return UserStatusNotFound
 	}
 	return user.status
+}
+
+func (s *Users) ConnectionStatusChanged(userId engine.UserId, isOffline bool) {
+	defer s.Unlock()
+	s.Lock()
+	user, ok := s.users[userId]
+	if !ok {
+		return
+	}
+	user.IsOffline = isOffline
 }

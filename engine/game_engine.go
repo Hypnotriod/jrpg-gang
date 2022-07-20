@@ -89,10 +89,10 @@ func (e *GameEngine) FindActorByUserId(userId UserId) *GameUnit {
 	return nil
 }
 
-func (e *GameEngine) RemoveActor(userId UserId) {
+func (e *GameEngine) RemoveActor(userId UserId) bool {
 	actor := e.FindActorByUserId(userId)
 	if actor == nil {
-		return
+		return false
 	}
 	if e.state.isUnitActive(actor.Uid) {
 		e.onUnitUseAction()
@@ -106,4 +106,14 @@ func (e *GameEngine) RemoveActor(userId UserId) {
 		}
 	}
 	e.actors = restActors
+	return true
+}
+
+func (e *GameEngine) UpdateUserConnectionStatus(userId UserId, isOffline bool) bool {
+	actor := e.FindActorByUserId(userId)
+	if actor == nil {
+		return false
+	}
+	actor.PlayerInfo.IsOffline = isOffline
+	return true
 }

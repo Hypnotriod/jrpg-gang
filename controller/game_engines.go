@@ -137,3 +137,18 @@ func (e *GameEngines) RemoveUser(userId engine.UserId) (*engine.GameEvent, []eng
 	state := wrapper.engine.NewGameEvent()
 	return state, broadcastUserIds, true
 }
+
+func (e *GameEngines) ConnectionStatusChanged(userId engine.UserId, isOffline bool) (*engine.GameEvent, []engine.UserId, bool) {
+	e.RLock()
+	wrapper, ok := e.userIdToEngine[userId]
+	e.RUnlock()
+	if !ok {
+		return nil, nil, false
+	}
+	defer wrapper.Unlock()
+	wrapper.Lock()
+	wrapper.engine.UpdateUserConnectionStatus(userId, isOffline)
+	broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
+	state := wrapper.engine.NewGameEvent()
+	return state, broadcastUserIds, true
+}

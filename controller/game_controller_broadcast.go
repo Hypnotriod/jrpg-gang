@@ -5,6 +5,7 @@ import "jrpg-gang/engine"
 func (c *GameController) RegisterBroadcaster(broadcaster GameControllerBroadcaster) {
 	c.broadcaster = broadcaster
 }
+
 func (c *GameController) broadcastGameAction(userIds []engine.UserId, result *engine.GameEvent) {
 	response := NewResponse()
 	response.Type = RequestGameAction
@@ -24,7 +25,7 @@ func (c *GameController) broadcastLobbyStatus() {
 	response.Type = RequestLobbyStatus
 	response.Data[DataKeyRooms] = c.rooms.ResponseList()
 	response.Data[DataKeyUsersCount] = c.users.TotalCount()
-	userIds := c.users.GetIdsByStatus(UserStatusJoined | UserStatusInRoom)
+	userIds := c.users.GetIdsByStatus(UserStatusJoined|UserStatusInRoom, true)
 	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
 }
 
