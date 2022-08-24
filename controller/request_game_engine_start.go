@@ -28,6 +28,7 @@ func (c *GameController) handleStartGameRequest(userId engine.UserId, requestRaw
 	}
 	c.broadcastGameState(userIds, state)
 	c.broadcastLobbyStatus()
+	c.broadcastUsersStatus(userIds)
 	c.engines.Add(userId, engine)
 	return response.WithStatus(ResponseStatusOk)
 }

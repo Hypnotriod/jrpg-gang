@@ -122,7 +122,7 @@ func (e *GameEngines) RemoveUser(userId engine.UserId) (*engine.GameEvent, []eng
 	}
 	delete(e.userIdToEngine, userId)
 	e.Unlock()
-	defer wrapper.Lock()
+	defer wrapper.Unlock()
 	wrapper.Lock()
 	wrapper.engine.RemoveActor(userId)
 	userIds := wrapper.engine.GetUserIds()

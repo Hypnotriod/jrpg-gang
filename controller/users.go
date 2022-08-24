@@ -8,6 +8,15 @@ import (
 
 type UserStatus int
 
+type UserDisplayStatus string
+
+const (
+	UserDisplayStatusEmpty   UserDisplayStatus = ""
+	UserDisplayStatusInLobby UserDisplayStatus = "inLobby"
+	UserDisplayStatusInRoom  UserDisplayStatus = "inRoom"
+	UserDisplayStatusInGame  UserDisplayStatus = "inGame"
+)
+
 const (
 	UserStatusNotFound  UserStatus = 0
 	UserStatusNotJoined UserStatus = (1 << 0)
@@ -15,6 +24,19 @@ const (
 	UserStatusInRoom    UserStatus = (1 << 2)
 	UserStatusInGame    UserStatus = (1 << 3)
 )
+
+func (s UserStatus) Display() UserDisplayStatus {
+	if s.Test(UserStatusJoined) {
+		return UserDisplayStatusInLobby
+	}
+	if s.Test(UserStatusInGame) {
+		return UserDisplayStatusInGame
+	}
+	if s.Test(UserStatusInRoom) {
+		return UserDisplayStatusInRoom
+	}
+	return UserDisplayStatusEmpty
+}
 
 func (s UserStatus) Test(status UserStatus) bool {
 	return s&status != 0

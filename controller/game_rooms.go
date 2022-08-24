@@ -6,18 +6,20 @@ import (
 	"sync"
 )
 
+type GameRoomScenarioId string
+
 type GameRoomInfo struct {
 	Uid         uint                `json:"uid"`
 	Capacity    uint                `json:"capacity"`
-	ScenarioUid uint                `json:"scenarioUid"`
+	ScenarioId  GameRoomScenarioId  `json:"scenarioId"`
 	JoinedUsers []engine.PlayerInfo `json:"joinedUsers"`
 	Host        engine.PlayerInfo   `json:"host"`
 }
 
 type GameRoom struct {
-	Uid         uint `json:"uid"`
-	Capacity    uint `json:"capacity"`
-	ScenarioUid uint `json:"scenarioUid"`
+	Uid         uint               `json:"uid"`
+	Capacity    uint               `json:"capacity"`
+	ScenarioId  GameRoomScenarioId `json:"scenarioId"`
 	joinedUsers []User
 	host        User
 }

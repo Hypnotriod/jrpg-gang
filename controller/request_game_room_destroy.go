@@ -18,9 +18,11 @@ func (c *GameController) handleDestroyGameRoomRequest(userId engine.UserId, requ
 	if !ok {
 		return response.WithStatus(ResponseStatusFailed)
 	}
-	for _, userId := range room.GetUserIds() {
+	userIds := room.GetUserIds()
+	for _, userId := range userIds {
 		c.users.ChangeUserStatus(userId, UserStatusJoined)
 	}
 	c.broadcastLobbyStatus()
+	c.broadcastUsersStatus(userIds)
 	return response.WithStatus(ResponseStatusOk)
 }

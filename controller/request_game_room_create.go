@@ -5,8 +5,8 @@ import "jrpg-gang/engine"
 type CreateGameRoomRequest struct {
 	Request
 	Data struct {
-		Capacity    uint `json:"capacity"`
-		ScenarioUid uint `json:"scenarioUid"`
+		Capacity   uint               `json:"capacity"`
+		ScenarioId GameRoomScenarioId `json:"scenarioId"`
 	} `json:"data"`
 }
 
@@ -25,7 +25,7 @@ func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, reque
 	hostUser, _ := c.users.Get(userId)
 	room := NewGameRoom()
 	room.Capacity = request.Data.Capacity
-	room.ScenarioUid = request.Data.ScenarioUid
+	room.ScenarioId = request.Data.ScenarioId
 	room.host = hostUser
 	c.rooms.Add(room)
 	response.Data[DataKeyRoom] = room

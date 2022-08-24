@@ -23,6 +23,7 @@ const (
 	DataKeyGameState    ResponseDataKey = "gameState"
 	DataKeyUserId       ResponseDataKey = "userId"
 	PlayerInfo          ResponseDataKey = "playerInfo"
+	DataKeyStatus       ResponseDataKey = "status"
 	DataKeyUnit         ResponseDataKey = "unit"
 	DataKeyRoom         ResponseDataKey = "room"
 	DataKeyRooms        ResponseDataKey = "rooms"
@@ -47,6 +48,7 @@ func (r *Response) fillUserStatus(user *User) {
 	r.Data[PlayerInfo] = user.PlayerInfo
 	r.Data[DataKeyUserId] = user.id
 	r.Data[DataKeyUnit] = user.unit
+	r.Data[DataKeyStatus] = user.status.Display()
 }
 
 func (r *Response) WithStatus(status ResponseStatus) string {

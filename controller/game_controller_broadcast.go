@@ -20,6 +20,19 @@ func (c *GameController) broadcastGameState(userIds []engine.UserId, state *engi
 	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
 }
 
+func (c *GameController) broadcastUsersStatus(userIds []engine.UserId) {
+	for _, userId := range userIds {
+		user, ok := c.users.Get(userId)
+		if !ok {
+			continue
+		}
+		response := NewResponse()
+		response.Type = RequestUserStatus
+		response.fillUserStatus(&user)
+		c.broadcaster.BroadcastGameMessage([]engine.UserId{userId}, response.WithStatus(ResponseStatusOk))
+	}
+}
+
 func (c *GameController) broadcastLobbyStatus() {
 	response := NewResponse()
 	response.Type = RequestLobbyStatus
