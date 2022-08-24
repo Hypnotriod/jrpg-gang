@@ -132,7 +132,7 @@ func (s *Users) GetIdsByStatus(status UserStatus, onlineOnly bool) []engine.User
 	s.RLock()
 	result := []engine.UserId{}
 	for _, user := range s.users {
-		if user.status&status != 0 && (!onlineOnly || user.IsOffline == false) {
+		if user.status&status != 0 && (!onlineOnly || !user.IsOffline) {
 			result = append(result, user.id)
 		}
 	}
