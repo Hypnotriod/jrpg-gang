@@ -12,6 +12,7 @@ func NewTestScenario() *engine.GameScenario {
 			"spots": [
 				{
 					"name": "Winter Cave",
+					"code": "winter-cave-01",
 					"battlefield": {
 						"matrix": [
 							[

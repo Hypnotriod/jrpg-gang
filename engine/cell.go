@@ -12,7 +12,7 @@ const (
 type Cell struct {
 	Factions []GameUnitFaction `json:"factions"`
 	Type     CellType          `json:"type"`
-	Name     string            `json:"name,omitempty"`
+	Code     string            `json:"code,omitempty"`
 }
 
 func (c Cell) String() string {

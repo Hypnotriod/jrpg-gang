@@ -86,6 +86,7 @@ func (b *Battlefield) MoveToCorpsesById(uid uint) {
 			survivedUnits = append(survivedUnits, u)
 		}
 	}
+	b.Units = survivedUnits
 	b.Corpses = append(b.Corpses, unit)
 }
 
