@@ -16,33 +16,34 @@ func NewTestScenario() *engine.GameScenario {
 					"battlefield": {
 						"matrix": [
 							[
-								{"type": "space", "factions": [0]},
-								{"type": "space", "factions": [0]},
-								{"type": "space", "factions": [1]},
-								{"type": "space", "factions": [1]}
+								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]}
 							],
 							[
-								{"type": "space", "factions": [0]},
-								{"type": "obstacle", "factions": []},
-								{"type": "space", "factions": [1]},
-								{"type": "space", "factions": [1]}
+								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "obstacle", "code": "tile-rock-01", "factions": []},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]}
 							],
 							[
-								{"type": "space", "factions": [0]},
-								{"type": "space", "factions": [0]},
-								{"type": "obstacle", "factions": []},
-								{"type": "space", "factions": [1]}
+								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "obstacle", "code": "tile-rock-01", "factions": []},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]}
 							],
 							[
-								{"type": "space", "factions": [0]},
-								{"type": "space", "factions": [0]},
-								{"type": "space", "factions": [1]},
-								{"type": "space", "factions": [1]}
+								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]}
 							]
 						],
 						"units": [
 							{
 								"name": "North Troll",
+								"code": "troll-01",
 								"faction": 1,
 								"state": {
 									"health": 100,
