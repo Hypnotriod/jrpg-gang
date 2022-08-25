@@ -81,12 +81,9 @@ func (e *GameEngine) GetRestUserIds(userId UserId) []UserId {
 }
 
 func (e *GameEngine) FindActorByUserId(userId UserId) *GameUnit {
-	for i := 0; i < len(e.actors); i++ {
-		if e.actors[i].userId == userId {
-			return e.actors[i]
-		}
-	}
-	return nil
+	return util.Findp(e.actors, func(u *GameUnit) bool {
+		return u.userId == userId
+	})
 }
 
 func (e *GameEngine) RemoveActor(userId UserId) bool {

@@ -91,21 +91,15 @@ func (b *Battlefield) MoveToCorpsesById(uid uint) {
 }
 
 func (b *Battlefield) FindUnitById(uid uint) *GameUnit {
-	for i := 0; i < len(b.Units); i++ {
-		if b.Units[i].Uid == uid {
-			return b.Units[i]
-		}
-	}
-	return nil
+	return util.Findp(b.Units, func(u *GameUnit) bool {
+		return u.Uid == uid
+	})
 }
 
 func (b *Battlefield) FindUnitByPosition(position domain.Position) *GameUnit {
-	for i := 0; i < len(b.Units); i++ {
-		if b.Units[i].Position.Equals(position) {
-			return b.Units[i]
-		}
-	}
-	return nil
+	return util.Findp(b.Units, func(u *GameUnit) bool {
+		return u.Position.Equals(position)
+	})
 }
 
 func (b *Battlefield) CanMoveUnitTo(unit *GameUnit, position domain.Position) bool {
