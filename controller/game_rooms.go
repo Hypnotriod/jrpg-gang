@@ -53,12 +53,13 @@ func (r *GameRoom) UpdateUserConnectionStatus(userId engine.UserId, isOffline bo
 
 func (r *GameRoom) GetActors() []*engine.GameUnit {
 	result := []*engine.GameUnit{}
-	for _, u := range r.joinedUsers {
+	r.host.unit.PlayerInfo = &r.host.PlayerInfo
+	result = append(result, &r.host.unit)
+	for i := range r.joinedUsers {
+		u := r.joinedUsers[i]
 		u.unit.PlayerInfo = &u.PlayerInfo
 		result = append(result, &u.unit)
 	}
-	r.host.unit.PlayerInfo = &r.host.PlayerInfo
-	result = append(result, &r.host.unit)
 	return result
 }
 

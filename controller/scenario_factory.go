@@ -18,24 +18,24 @@ func NewTestScenario() *engine.GameScenario {
 							[
 								{"type": "space", "code": "tile-grass-01", "factions": [0]},
 								{"type": "space", "code": "tile-grass-01", "factions": [0]},
-								{"type": "space", "code": "tile-grass-01", "factions": [1]},
-								{"type": "space", "code": "tile-grass-01", "factions": [1]}
+								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "space", "code": "tile-grass-01", "factions": [0]}
 							],
 							[
 								{"type": "space", "code": "tile-grass-01", "factions": [0]},
 								{"type": "obstacle", "code": "tile-rock-01", "factions": []},
-								{"type": "space", "code": "tile-grass-01", "factions": [1]},
-								{"type": "space", "code": "tile-grass-01", "factions": [1]}
+								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "space", "code": "tile-grass-01", "factions": [0]}
 							],
 							[
-								{"type": "space", "code": "tile-grass-01", "factions": [0]},
-								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]},
 								{"type": "obstacle", "code": "tile-rock-01", "factions": []},
 								{"type": "space", "code": "tile-grass-01", "factions": [1]}
 							],
 							[
-								{"type": "space", "code": "tile-grass-01", "factions": [0]},
-								{"type": "space", "code": "tile-grass-01", "factions": [0]},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]},
+								{"type": "space", "code": "tile-grass-01", "factions": [1]},
 								{"type": "space", "code": "tile-grass-01", "factions": [1]},
 								{"type": "space", "code": "tile-grass-01", "factions": [1]}
 							]
