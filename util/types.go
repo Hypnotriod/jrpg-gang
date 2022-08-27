@@ -1,7 +1,7 @@
 package util
 
 type Integer interface {
-	int | int16 | int32 | int64
+	int | int16 | int32 | int64 | uint | uint16 | uint32 | uint64
 }
 
 type Float interface {

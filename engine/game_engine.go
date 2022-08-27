@@ -92,7 +92,7 @@ func (e *GameEngine) RemoveActor(userId UserId) bool {
 	if actor == nil {
 		return false
 	}
-	if e.state.isUnitActive(actor.Uid) {
+	if e.state.IsCurrentActiveUnit(actor) && e.isActionPhase() {
 		e.onUnitUseAction()
 	}
 	e.battlefield().MoveToCorpsesById(actor.Uid)

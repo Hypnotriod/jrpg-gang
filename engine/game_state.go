@@ -43,27 +43,24 @@ func (s GameState) String() string {
 }
 
 func (s *GameState) MakeUnitsQueue(units []*GameUnit) {
-	s.ActiveUnitsQueue = make([]uint, 0, len(units))
 	s.InactiveUnits = make([]uint, 0, len(units))
-	for _, unit := range units {
-		s.ActiveUnitsQueue = append(s.ActiveUnitsQueue, unit.Uid)
-	}
-	sort.SliceStable(s.ActiveUnitsQueue, func(i, j int) bool {
-		return units[i].TotalInitiative() < units[j].TotalInitiative()
+	s.ActiveUnitsQueue = util.Map(units, func(unit **GameUnit) uint {
+		return (*unit).Uid
 	})
+	s.sortActiveUnitsQueue(units)
 }
 
 func (s *GameState) UpdateUnitsQueue(units []*GameUnit) {
-	activeUnits := []*GameUnit{}
-	for _, unit := range units {
-		if s.isUnitActive(unit.Uid) {
-			activeUnits = append(activeUnits, unit)
-		}
-	}
-	s.ActiveUnitsQueue = make([]uint, 0, len(activeUnits))
-	for _, unit := range activeUnits {
-		s.ActiveUnitsQueue = append(s.ActiveUnitsQueue, unit.Uid)
-	}
+	activeUnits := util.Filterp(units, func(u *GameUnit) bool {
+		return s.isUnitActive(u.Uid)
+	})
+	s.ActiveUnitsQueue = util.Map(activeUnits, func(unit **GameUnit) uint {
+		return (*unit).Uid
+	})
+	s.sortActiveUnitsQueue(activeUnits)
+}
+
+func (s *GameState) sortActiveUnitsQueue(units []*GameUnit) {
 	sort.SliceStable(s.ActiveUnitsQueue, func(i, j int) bool {
 		return units[i].TotalInitiative() < units[j].TotalInitiative()
 	})
@@ -97,10 +94,5 @@ func (s *GameState) HasActiveUnits() bool {
 }
 
 func (s *GameState) isUnitActive(uid uint) bool {
-	for _, unitUid := range s.ActiveUnitsQueue {
-		if unitUid == uid {
-			return true
-		}
-	}
-	return false
+	return util.Contains(s.ActiveUnitsQueue, uid)
 }
