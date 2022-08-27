@@ -3,7 +3,7 @@ package engine
 func (e *GameEngine) NextPhase() *GameEvent {
 	result := e.NewGameEvent()
 	switch e.state.phase {
-	case GamePhaseReadyForStartRound:
+	case GamePhaseReadyForStartRound, GamePhasePlaceUnitBeforeStartRound:
 		e.processStartRound()
 	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
 		e.processAI(result)
@@ -18,9 +18,15 @@ func (e *GameEngine) NextPhase() *GameEvent {
 
 func (e *GameEngine) NextPhaseRequired() bool {
 	return e.state.phase == GamePhaseReadyForStartRound ||
+		e.state.phase == GamePhasePlaceUnitBeforeStartRound ||
 		e.state.phase == GamePhaseMakeMoveOrActionAI ||
 		e.state.phase == GamePhaseMakeActionAI ||
 		e.state.phase == GamePhaseActionComplete
+}
+
+func (e *GameEngine) prepareNextSpot() {
+	e.scenario.PrepareNextSpot(e.actors)
+	e.state.MakeUnitsQueue(e.battlefield().Units)
 }
 
 func (e *GameEngine) processStartRound() {
@@ -83,10 +89,4 @@ func (e *GameEngine) onUnitUseAction() {
 	e.state.ShiftUnitsQueue()
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	e.state.ChangePhase(GamePhaseActionComplete)
-}
-
-func (e *GameEngine) onUnitPlaced() {
-	if e.battlefield().ContainsUnits(e.actors) == len(e.actors) {
-		e.state.ChangePhase(GamePhaseReadyForStartRound)
-	}
 }

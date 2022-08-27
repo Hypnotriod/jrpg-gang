@@ -26,7 +26,11 @@ func (s *GameScenario) Initialize(rndGen *util.RndGen, actors []*GameUnit) {
 	s.rndGen = rndGen
 	s.prepareActors(actors)
 	s.prepareUnits()
+}
+
+func (s *GameScenario) PrepareNextSpot(actors []*GameUnit) {
 	s.pickSpot()
+	s.placeActors(actors)
 }
 
 func (s *GameScenario) Dispose() {
@@ -80,5 +84,10 @@ func (s *GameScenario) prepareUnit(unit *GameUnit) {
 func (s *GameScenario) prepareActors(actors []*GameUnit) {
 	for i := range actors {
 		s.prepareUnit(actors[i])
+		actors[i].PlayerInfo.UnitUid = actors[i].Uid
 	}
+}
+
+func (s *GameScenario) placeActors(actors []*GameUnit) {
+	s.spot.Battlefield.placeUnitsDefault(actors)
 }

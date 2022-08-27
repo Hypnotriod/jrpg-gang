@@ -25,18 +25,14 @@ func (e *GameEngine) ExecuteUserAction(action domain.Action, userId UserId) *Gam
 }
 
 func (e *GameEngine) executePlaceAction(action domain.Action, userId UserId) *domain.ActionResult {
-	if e.state.phase != GamePhasePlaceUnit {
+	if e.state.phase != GamePhasePlaceUnitBeforeStartRound {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	unit := e.FindActorByUserId(userId)
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	result := e.battlefield().PlaceUnit(unit, *action.Position)
-	if result.Result == domain.ResultAccomplished {
-		e.onUnitPlaced()
-	}
-	return result
+	return e.battlefield().PlaceUnit(unit, *action.Position)
 }
 
 func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *domain.ActionResult {

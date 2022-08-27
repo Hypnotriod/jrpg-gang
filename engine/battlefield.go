@@ -36,9 +36,6 @@ func (b *Battlefield) Dispose() {
 
 func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domain.ActionResult {
 	result := domain.NewActionResult()
-	if b.FindUnitById(unit.Uid) != nil {
-		return result.WithResult(domain.ResultNotAllowed)
-	}
 	if !b.checkPositionBounds(position) {
 		return result.WithResult(domain.ResultOutOfBounds)
 	}
@@ -50,7 +47,9 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domai
 		return result.WithResult(domain.ResultNotEmpty)
 	}
 	unit.Position = position
-	b.Units = append(b.Units, unit)
+	if b.FindUnitById(unit.Uid) == nil {
+		b.Units = append(b.Units, unit)
+	}
 	return result.WithResult(domain.ResultAccomplished)
 }
 
@@ -106,18 +105,6 @@ func (b *Battlefield) CanMoveUnitTo(unit *GameUnit, position domain.Position) bo
 	return b.checkPositionBounds(position) &&
 		b.checkPositionFaction(position, unit.Faction) &&
 		b.checkPositionCanPlaceUnit(position)
-}
-
-func (b *Battlefield) checkPositionBounds(position domain.Position) bool {
-	return position.X >= 0 && position.Y >= 0 && position.X < len(b.Matrix) && position.Y < len(b.Matrix[0])
-}
-
-func (b *Battlefield) checkPositionFaction(position domain.Position, faction GameUnitFaction) bool {
-	return b.Matrix[position.X][position.Y].ContainsFaction(faction)
-}
-
-func (b *Battlefield) checkPositionCanPlaceUnit(position domain.Position) bool {
-	return b.Matrix[position.X][position.Y].CanPlaceUnit()
 }
 
 func (b *Battlefield) UpdateCellsFactions() {
@@ -187,4 +174,47 @@ func (b *Battlefield) FindReachableTargets(unit *GameUnit) map[uint]*GameUnit {
 		}
 	}
 	return result
+}
+
+func (b *Battlefield) checkPositionBounds(position domain.Position) bool {
+	return position.X >= 0 && position.Y >= 0 && position.X < len(b.Matrix) && position.Y < len(b.Matrix[0])
+}
+
+func (b *Battlefield) checkPositionFaction(position domain.Position, faction GameUnitFaction) bool {
+	return b.Matrix[position.X][position.Y].ContainsFaction(faction)
+}
+
+func (b *Battlefield) checkPositionCanPlaceUnit(position domain.Position) bool {
+	return b.Matrix[position.X][position.Y].CanPlaceUnit()
+}
+
+func (b *Battlefield) tryToPlaceUnit(unit *GameUnit, position domain.Position) bool {
+	if !b.checkPositionCanPlaceUnit(position) ||
+		!b.checkPositionFaction(position, unit.Faction) ||
+		b.FindUnitByPosition(position) != nil {
+		return false
+	}
+	unit.Position = position
+	if b.FindUnitById(unit.Uid) == nil {
+		b.Units = append(b.Units, unit)
+	}
+	return true
+}
+
+func (b *Battlefield) placeUnitDefault(unit *GameUnit) {
+	var x, y int
+	for x = 0; x < len(b.Matrix); x++ {
+		for y = 0; y < len(b.Matrix[x]); y++ {
+			position := domain.Position{X: x, Y: y}
+			if b.tryToPlaceUnit(unit, position) {
+				return
+			}
+		}
+	}
+}
+
+func (b *Battlefield) placeUnitsDefault(units []*GameUnit) {
+	for _, unit := range units {
+		b.placeUnitDefault(unit)
+	}
 }
