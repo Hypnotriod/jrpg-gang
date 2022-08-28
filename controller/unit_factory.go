@@ -327,7 +327,7 @@ func newGameUnitMage() *engine.GameUnit {
 						],
 						"range": {
 							"maximumX": 3,
-							"maximumY": 3,
+							"maximumY": 3
 						}
 					}
 				],
