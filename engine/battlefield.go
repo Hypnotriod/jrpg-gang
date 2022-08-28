@@ -105,21 +105,25 @@ func (b *Battlefield) FindUnitByPosition(position domain.Position) *GameUnit {
 func (b *Battlefield) CanMoveUnitTo(unit *GameUnit, position domain.Position) bool {
 	return b.checkPositionBounds(position) &&
 		b.checkPositionFaction(position, unit.Faction) &&
-		b.checkPositionCanPlaceUnit(position)
+		b.checkPositionCanPlaceUnit(position) &&
+		b.FindUnitByPosition(position) == nil
 }
 
 func (b *Battlefield) UpdateCellsFactions() {
 	leftBound := -1
-	rightBound := len(b.Matrix[0])
+	rightBound := len(b.Matrix)
 	for _, unit := range b.Units {
 		if unit.Faction == GameUnitFactionLeft {
-			leftBound = unit.Position.X
+			leftBound = util.Max(unit.Position.X, leftBound)
 		} else {
-			rightBound = unit.Position.X
+			rightBound = util.Min(unit.Position.X, rightBound)
 		}
 	}
 	for x := range b.Matrix {
 		for y := range b.Matrix[x] {
+			if b.Matrix[x][y].Type == CellTypeObstacle {
+				continue
+			}
 			if x <= leftBound {
 				b.Matrix[x][y].Factions = []GameUnitFaction{GameUnitFactionLeft}
 			} else if x >= rightBound {

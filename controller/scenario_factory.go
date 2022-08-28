@@ -143,6 +143,89 @@ func NewTestScenario() *engine.GameScenario {
 									"x": 2,
 									"y": 1
 								}
+							},
+							{
+								"name": "Nasty Goblin",
+								"code": "goblin-01",
+								"faction": 1,
+								"state": {
+									"health": 100,
+									"stamina": 100
+								},
+								"stats": {
+									"progress": {
+										"level": 10,
+										"experience": 45550
+									},
+									"baseAttributes": {
+										"health": 100,
+										"stamina": 100
+									},
+									"attributes": {
+										"strength": 10,
+										"physique": 15,
+										"agility": 15,
+										"endurance": 30,
+										"intelligence": 0,
+										"luck": 5
+									},
+									"resistance": {
+										"stabbing": 10,
+										"cutting": 10,
+										"crushing": 20,
+										"fire": 5,
+										"cold": 5,
+										"lighting": 5,
+										"poison": 5,
+										"exhaustion": 5,
+										"manaDrain": 5,
+										"fear": 5,
+										"curse": 0
+									}
+								},
+								"slots": {
+									"weapon": 1
+								},
+								"inventory": {
+									"armor": [
+									],
+									"weapon": [
+										{
+											"type": "weapon",
+											"name": "Mace",
+											"description": "Rusty Mace",
+											"durability": 700,
+											"slot": "weapon",
+											"slotsNumber": 1,
+											"requirements": {
+												"strength": 5
+											},
+											"range": {
+												"maximumX": 1,
+												"maximumY": 1
+											},
+											"useCost": {
+												"stamina": 10
+											},
+											"damage": [
+												{
+													"chance": 40,
+													"cutting": 5,
+													"crushing": 30
+												},
+												{
+													"duration": 3,
+													"chance": 15,
+													"bleeding": 3
+												}
+											]
+										}
+									]
+								},
+								"position": {
+									"x": 2,
+									"y": 0
+								}
 							}
 						]
 					}

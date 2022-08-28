@@ -55,6 +55,12 @@ func (e *GameEngines) ChangeHost(oldHostId engine.UserId, newHostId engine.UserI
 		return false
 	}
 	wrapper.hostId = newHostId
+	if u := wrapper.engine.FindActorByUserId(oldHostId); u != nil {
+		u.PlayerInfo.IsHost = false
+	}
+	if u := wrapper.engine.FindActorByUserId(newHostId); u != nil {
+		u.PlayerInfo.IsHost = true
+	}
 	return true
 }
 
@@ -132,6 +138,9 @@ func (e *GameEngines) RemoveUser(userId engine.UserId) (*engine.GameEvent, []eng
 	}
 	if wrapper.hostId == userId {
 		wrapper.hostId = userIds[0]
+		if u := wrapper.engine.FindActorByUserId(wrapper.hostId); u != nil {
+			u.PlayerInfo.IsHost = true
+		}
 	}
 	broadcastUserIds := wrapper.engine.GetUserIds()
 	state := wrapper.engine.NewGameEvent()

@@ -77,6 +77,10 @@ func newGameUnitTank() *engine.GameUnit {
 						"requirements": {
 							"strength": 5
 						},
+						"range": {
+							"maximumX": 1,
+							"maximumY": 1
+						},
 						"damage": [
 							{
 								"chance": 40,
@@ -176,12 +180,51 @@ func newGameUnitRogue() *engine.GameUnit {
 						"requirements": {
 							"strength": 5
 						},
+						"range": {
+							"maximumX": 10,
+							"maximumY": 10,
+							"minimumX": 2
+						},
 						"damage": [
 							{
 								"chance": 40,
 								"stabbing": 30
 							}
-						]
+						],
+						"useCost": {
+							"stamina": 25
+						}
+					},
+					{
+						"type": "weapon",
+						"name": "Dagger",
+						"code": "dagger-01",
+						"description": "Sneaky one hand dagger",
+						"durability": 700,
+						"slot": "weapon",
+						"slotsNumber": 1,
+						"equipped": false,
+						"requirements": {
+							"strength": 5
+						},
+						"range": {
+							"maximumX": 1,
+							"maximumY": 1
+						},
+						"damage": [
+							{
+								"chance": 40,
+								"cutting": 15
+							},
+							{
+								"duration": 3,
+								"chance": 10,
+								"bleeding": 10
+							}
+						],
+						"useCost": {
+							"stamina": 15
+						}
 					}
 				],
 				"ammunition": [
@@ -281,7 +324,11 @@ func newGameUnitMage() *engine.GameUnit {
 							"intelligence": 5
 						},
 						"damage": [
-						]
+						],
+						"range": {
+							"maximumX": 3,
+							"maximumY": 3,
+						}
 					}
 				],
 				"ammunition": [

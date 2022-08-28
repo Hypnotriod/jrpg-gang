@@ -48,7 +48,7 @@ type GameEvent struct {
 	NextPhase        GamePhase             `json:"nextPhase"`
 	State            *GameState            `json:"state"`
 	Spot             *Spot                 `json:"spot"`
-	PlayersInfo      []PlayerInfo          `json:"players,omitempty"`
+	PlayersInfo      []PlayerInfo          `json:"players"`
 	UnitActionResult *GameUnitActionResult `json:"unitActionResult,omitempty"`
 	EndRoundResult   *EndTurnResult        `json:"endRoundResult,omitempty"`
 }
