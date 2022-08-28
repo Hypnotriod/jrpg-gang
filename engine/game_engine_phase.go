@@ -86,6 +86,7 @@ func (e *GameEngine) onUnitMoveAction() {
 }
 
 func (e *GameEngine) onUnitUseAction() {
+	e.battlefield().FilterSurvivors()
 	e.state.ShiftUnitsQueue()
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	e.state.ChangePhase(GamePhaseActionComplete)
