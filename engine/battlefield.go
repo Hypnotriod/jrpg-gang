@@ -85,6 +85,7 @@ func (b *Battlefield) MoveToCorpsesById(uid uint) {
 			survivedUnits = append(survivedUnits, u)
 		}
 	}
+	unit.IsDead = true
 	b.Units = survivedUnits
 	b.Corpses = append(b.Corpses, unit)
 }
@@ -136,6 +137,7 @@ func (b *Battlefield) FilterSurvivors() {
 		if unit.State.Health > 0 {
 			survivedUnits = append(survivedUnits, unit)
 		} else {
+			unit.IsDead = true
 			b.Corpses = append(b.Corpses, unit)
 		}
 	}

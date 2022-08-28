@@ -29,6 +29,7 @@ type GameUnit struct {
 	domain.Unit
 	Faction    GameUnitFaction `json:"faction"`
 	PlayerInfo *PlayerInfo     `json:"playerInfo,omitempty"`
+	IsDead     bool            `json:"isDead,omitempty"`
 	userId     UserId
 }
 

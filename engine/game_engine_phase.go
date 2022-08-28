@@ -3,7 +3,7 @@ package engine
 func (e *GameEngine) NextPhase() *GameEvent {
 	result := e.NewGameEvent()
 	switch e.state.phase {
-	case GamePhaseReadyForStartRound, GamePhasePlaceUnitBeforeStartRound:
+	case GamePhaseReadyForStartRound, GamePhasePrepareUnit:
 		e.processStartRound()
 	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
 		e.processAI(result)
@@ -18,7 +18,7 @@ func (e *GameEngine) NextPhase() *GameEvent {
 
 func (e *GameEngine) NextPhaseRequired() bool {
 	return e.state.phase == GamePhaseReadyForStartRound ||
-		e.state.phase == GamePhasePlaceUnitBeforeStartRound ||
+		e.state.phase == GamePhasePrepareUnit ||
 		e.state.phase == GamePhaseMakeMoveOrActionAI ||
 		e.state.phase == GamePhaseMakeActionAI ||
 		e.state.phase == GamePhaseActionComplete
