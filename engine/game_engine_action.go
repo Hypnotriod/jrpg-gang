@@ -76,7 +76,11 @@ func (e *GameEngine) executeEquipAction(action domain.Action, userId UserId) *do
 	if unit.IsDead || e.state.phase != GamePhasePrepareUnit && !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	return unit.Equip(action.ItemUid)
+	result := unit.Equip(action.ItemUid)
+	if e.state.phase == GamePhasePrepareUnit {
+		e.state.UpdateUnitsQueue(e.battlefield().Units)
+	}
+	return result
 }
 
 func (e *GameEngine) executeUnequipAction(action domain.Action, userId UserId) *domain.ActionResult {
@@ -90,7 +94,11 @@ func (e *GameEngine) executeUnequipAction(action domain.Action, userId UserId) *
 	if unit.IsDead || e.state.phase != GamePhasePrepareUnit && !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	return unit.Unequip(action.ItemUid)
+	result := unit.Unequip(action.ItemUid)
+	if e.state.phase == GamePhasePrepareUnit {
+		e.state.UpdateUnitsQueue(e.battlefield().Units)
+	}
+	return result
 }
 
 func (e *GameEngine) executeMoveAction(action domain.Action, userId UserId) *domain.ActionResult {
