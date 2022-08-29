@@ -83,7 +83,7 @@ func newGameUnitTank() *engine.GameUnit {
 						},
 						"damage": [
 							{
-								"chance": 40,
+								"chance": 50,
 								"cutting": 30,
 								"crushing": 5
 							},
@@ -186,10 +186,6 @@ func newGameUnitRogue() *engine.GameUnit {
 							"minimumX": 2
 						},
 						"damage": [
-							{
-								"chance": 40,
-								"stabbing": 30
-							}
 						],
 						"useCost": {
 							"stamina": 25
@@ -238,7 +234,8 @@ func newGameUnitRogue() *engine.GameUnit {
 						"equipped": true,
 						"damage": [
 							{
-								"stabbing": 10
+								"stabbing": 10,
+								"chance": 50
 							},
 							{
 								"duration": 3,
@@ -342,7 +339,8 @@ func newGameUnitMage() *engine.GameUnit {
 						"equipped": true,
 						"damage": [
 							{
-								"fire": 15
+								"fire": 15,
+								"chance": 50
 							},
 							{
 								"duration": 3,
@@ -360,7 +358,8 @@ func newGameUnitMage() *engine.GameUnit {
 						"quantity": 25,
 						"damage": [
 							{
-								"cold": 15
+								"cold": 15,
+								"chance": 50
 							},
 							{
 								"duration": 3,
@@ -378,7 +377,8 @@ func newGameUnitMage() *engine.GameUnit {
 						"quantity": 25,
 						"damage": [
 							{
-								"lighting": 15
+								"lighting": 15,
+								"chance": 50
 							},
 							{
 								"duration": 3,

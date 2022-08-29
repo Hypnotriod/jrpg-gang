@@ -112,11 +112,27 @@ func (e *GameEngines) GameState(userId engine.UserId) (*engine.GameEvent, []engi
 	if !ok {
 		return nil, nil, false
 	}
-	wrapper.Lock()
+	defer wrapper.RUnlock()
+	wrapper.RLock()
 	result := wrapper.engine.NewGameEvent()
 	broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
-	wrapper.Unlock()
 	return result, broadcastUserIds, true
+}
+
+func (e *GameEngines) PlayerInfo(userId engine.UserId) (engine.PlayerInfo, bool) {
+	e.RLock()
+	wrapper, ok := e.userIdToEngine[userId]
+	e.RUnlock()
+	if !ok {
+		return engine.PlayerInfo{}, false
+	}
+	defer wrapper.RUnlock()
+	wrapper.RLock()
+	unit := wrapper.engine.FindActorByUserId(userId)
+	if unit == nil || unit.PlayerInfo == nil {
+		return engine.PlayerInfo{}, false
+	}
+	return *unit.PlayerInfo, true
 }
 
 func (e *GameEngines) RemoveUser(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {

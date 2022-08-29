@@ -67,7 +67,8 @@ func NewTestShopItems() *domain.UnitInventory {
 					"kind": "arrow",
 					"damage": [
 						{
-							"stabbing": 10
+							"stabbing": 10,
+							"chance": 50
 						},
 						{
 							"duration": 3,
@@ -87,7 +88,8 @@ func NewTestShopItems() *domain.UnitInventory {
 					"kind": "magicCharge",
 					"damage": [
 						{
-							"fire": 15
+							"fire": 15,
+							"chance": 50
 						},
 						{
 							"duration": 3,
@@ -107,7 +109,8 @@ func NewTestShopItems() *domain.UnitInventory {
 					"kind": "magicCharge",
 					"damage": [
 						{
-							"cold": 15
+							"cold": 15,
+							"chance": 50
 						},
 						{
 							"duration": 3,
@@ -127,7 +130,8 @@ func NewTestShopItems() *domain.UnitInventory {
 					"kind": "magicCharge",
 					"damage": [
 						{
-							"lighting": 15
+							"lighting": 15,
+							"chance": 50
 						},
 						{
 							"duration": 3,

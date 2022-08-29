@@ -27,7 +27,6 @@ func (a Ammunition) String() string {
 }
 
 func (a *Ammunition) EnchanceDamageImpact(damage []DamageImpact) []DamageImpact {
-	result := []DamageImpact{}
 	instantDamage := DamageImpact{}
 	temporalDamage := []DamageImpact{}
 	for _, imp := range a.Damage {
@@ -40,10 +39,12 @@ func (a *Ammunition) EnchanceDamageImpact(damage []DamageImpact) []DamageImpact 
 	}
 	for _, imp := range damage {
 		if imp.Duration == 0 {
-			imp.Damage.Accumulate(instantDamage.Damage)
-			imp.Chance += instantDamage.Chance
+			instantDamage.Damage.Accumulate(imp.Damage)
+			instantDamage.Chance += imp.Chance
+		} else {
+			temporalDamage = append(temporalDamage, imp)
 		}
-		result = append(result, imp)
 	}
+	result := []DamageImpact{instantDamage}
 	return append(result, temporalDamage...)
 }
