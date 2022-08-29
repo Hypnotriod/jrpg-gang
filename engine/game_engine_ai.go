@@ -10,7 +10,7 @@ func (e *GameEngine) processAI(event *GameEvent) {
 	if e.state.phase == GamePhaseMakeMoveOrActionAI && e.aiTryToMove(event, unit) {
 		return
 	}
-	e.onUnitUseAction()
+	e.onUnitCompleteAction()
 }
 
 func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
@@ -76,5 +76,5 @@ func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target
 	}
 	unitAction.Result = *unit.UseInventoryItemOnTarget(&target.Unit, weaponUid)
 	event.UnitActionResult = unitAction
-	e.onUnitUseAction()
+	e.onUnitCompleteAction()
 }

@@ -16,6 +16,8 @@ func (e *GameEngine) ExecuteUserAction(action domain.Action, userId UserId) *Gam
 		actionResult = e.executeUnequipAction(action, userId)
 	case domain.ActionMove:
 		actionResult = e.executeMoveAction(action, userId)
+	case domain.ActionSkip:
+		actionResult = e.executeSkipAction(action, userId)
 	default:
 		actionResult = domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 	}
@@ -63,7 +65,7 @@ func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *doma
 	}
 	result := unit.UseInventoryItemOnTarget(&target.Unit, action.ItemUid)
 	if result.Result == domain.ResultAccomplished {
-		e.onUnitUseAction()
+		e.onUnitCompleteAction()
 	}
 	return result
 }
@@ -122,6 +124,21 @@ func (e *GameEngine) executeMoveAction(action domain.Action, userId UserId) *dom
 		e.onUnitMoveAction()
 	}
 	return result
+}
+
+func (e *GameEngine) executeSkipAction(action domain.Action, userId UserId) *domain.ActionResult {
+	if !e.isActionPhase() {
+		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+	}
+	unit := e.battlefield().FindUnitById(action.Uid)
+	if unit == nil {
+		return domain.NewActionResult().WithResult(domain.ResultNotFound)
+	}
+	if unit.IsDead || unit.userId != userId || !e.state.IsCurrentActiveUnit(unit) {
+		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+	}
+	e.onUnitCompleteAction()
+	return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 }
 
 func (e *GameEngine) isActionPhase() bool {

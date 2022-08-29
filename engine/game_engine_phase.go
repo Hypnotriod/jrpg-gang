@@ -85,7 +85,7 @@ func (e *GameEngine) onUnitMoveAction() {
 	}
 }
 
-func (e *GameEngine) onUnitUseAction() {
+func (e *GameEngine) onUnitCompleteAction() {
 	e.battlefield().FilterSurvivors()
 	e.battlefield().UpdateCellsFactions()
 	e.state.ShiftUnitsQueue()

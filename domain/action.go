@@ -13,6 +13,7 @@ const (
 	ActionPlace   AtionType = "place"
 	ActionMove    AtionType = "move"
 	ActionBuy     AtionType = "buy"
+	ActionSkip    AtionType = "skip"
 )
 
 type Action struct {
