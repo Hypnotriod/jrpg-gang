@@ -1,4 +1,4 @@
-package controller
+package factory
 
 import (
 	"jrpg-gang/engine"

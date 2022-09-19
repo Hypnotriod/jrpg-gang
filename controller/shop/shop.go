@@ -1,6 +1,8 @@
-package controller
+package shop
 
 import (
+	"jrpg-gang/controller/factory"
+	"jrpg-gang/controller/users"
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"sync"
@@ -13,7 +15,7 @@ type Shop struct {
 
 func NewShop() *Shop {
 	s := &Shop{}
-	s.shop = engine.NewGameShop(NewTestShopItems())
+	s.shop = engine.NewGameShop(factory.NewTestShopItems())
 	return s
 }
 
@@ -23,8 +25,8 @@ func (s *Shop) GetStatus() engine.GameShop {
 	return *s.shop
 }
 
-func (s *Shop) ExecuteAction(action domain.Action, user *User) *domain.ActionResult {
+func (s *Shop) ExecuteAction(action domain.Action, user *users.User) *domain.ActionResult {
 	defer s.mu.RUnlock()
 	s.mu.RLock()
-	return s.shop.ExecuteAction(action, &user.unit.Unit, user.rndGen)
+	return s.shop.ExecuteAction(action, &user.Unit.Unit, user.RndGen)
 }

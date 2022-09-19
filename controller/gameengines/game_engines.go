@@ -1,4 +1,4 @@
-package controller
+package gameengines
 
 import (
 	"jrpg-gang/domain"

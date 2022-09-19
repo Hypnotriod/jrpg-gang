@@ -1,6 +1,10 @@
 package controller
 
 import (
+	"jrpg-gang/controller/gameengines"
+	"jrpg-gang/controller/rooms"
+	"jrpg-gang/controller/shop"
+	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 )
 
@@ -9,20 +13,20 @@ type GameControllerBroadcaster interface {
 }
 
 type GameController struct {
-	users        *Users
-	rooms        *GameRooms
-	engines      *GameEngines
-	shop         *Shop
+	users        *users.Users
+	rooms        *rooms.GameRooms
+	engines      *gameengines.GameEngines
+	shop         *shop.Shop
 	configurator *engine.UnitConfigurator
 	broadcaster  GameControllerBroadcaster
 }
 
 func NewGameController() *GameController {
 	c := &GameController{}
-	c.users = NewUsers()
-	c.rooms = NewGameRooms()
-	c.engines = NewGameEngines()
-	c.shop = NewShop()
+	c.users = users.NewUsers()
+	c.rooms = rooms.NewGameRooms()
+	c.engines = gameengines.NewGameEngines()
+	c.shop = shop.NewShop()
 	c.configurator = engine.NewUnitConfigurator()
 	c.broadcaster = c
 	return c
@@ -67,7 +71,7 @@ func (c *GameController) HandleRequest(userId engine.UserId, requestRaw string) 
 
 func (c *GameController) serveRequest(userId engine.UserId, request *Request, requestRaw string, response *Response) string {
 	status := c.users.GetUserStatus(userId)
-	if status == UserStatusNotFound {
+	if status == users.UserStatusNotFound {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
@@ -80,7 +84,7 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 	case RequestPlayerInfo:
 		return c.handlePlayerInfoRequest(userId, requestRaw, response)
 	}
-	if status.Test(UserStatusInGame) {
+	if status.Test(users.UserStatusInGame) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
@@ -101,7 +105,7 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 	case RequestStartGame:
 		return c.handleStartGameRequest(userId, requestRaw, response)
 	}
-	if status.Test(UserStatusInRoom) {
+	if status.Test(users.UserStatusInRoom) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {

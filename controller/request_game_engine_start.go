@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"jrpg-gang/controller/factory"
+	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 )
 
@@ -18,13 +20,13 @@ func (c *GameController) handleStartGameRequest(userId engine.UserId, requestRaw
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	// todo: handle scenario
-	scenario := NewTestScenario()
+	scenario := factory.NewTestScenario()
 	actors := room.GetActors()
 	engine := engine.NewGameEngine(scenario, actors)
 	state := engine.NewGameEvent()
 	userIds := engine.GetUserIds()
 	for _, userId := range userIds {
-		c.users.ChangeUserStatus(userId, UserStatusInGame)
+		c.users.ChangeUserStatus(userId, users.UserStatusInGame)
 	}
 	c.broadcastGameState(userIds, state)
 	c.broadcastLobbyStatus()

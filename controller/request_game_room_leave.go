@@ -1,6 +1,9 @@
 package controller
 
-import "jrpg-gang/engine"
+import (
+	"jrpg-gang/controller/users"
+	"jrpg-gang/engine"
+)
 
 type LeaveGameRoomRequest struct {
 	Request
@@ -17,7 +20,7 @@ func (c *GameController) handleLeaveGameRoomRequest(userId engine.UserId, reques
 	if !c.rooms.RemoveUser(userId) {
 		return response.WithStatus(ResponseStatusFailed)
 	}
-	c.users.ChangeUserStatus(userId, UserStatusJoined)
+	c.users.ChangeUserStatus(userId, users.UserStatusJoined)
 	c.broadcastLobbyStatus()
 	return response.WithStatus(ResponseStatusOk)
 }

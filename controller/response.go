@@ -1,6 +1,9 @@
 package controller
 
-import "jrpg-gang/util"
+import (
+	"jrpg-gang/controller/users"
+	"jrpg-gang/util"
+)
 
 type ResponseStatus string
 
@@ -44,11 +47,11 @@ func NewResponse() *Response {
 	return response
 }
 
-func (r *Response) fillUserStatus(user *User) {
+func (r *Response) fillUserStatus(user *users.User) {
 	r.Data[DataKeyPlayerInfo] = user.PlayerInfo
-	r.Data[DataKeyUserId] = user.id
-	r.Data[DataKeyUnit] = user.unit
-	r.Data[DataKeyStatus] = user.status.Display()
+	r.Data[DataKeyUserId] = user.Id
+	r.Data[DataKeyUnit] = user.Unit
+	r.Data[DataKeyStatus] = user.Status.Display()
 }
 
 func (r *Response) WithStatus(status ResponseStatus) string {
