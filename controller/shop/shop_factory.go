@@ -1,4 +1,4 @@
-package controller
+package shop
 
 import (
 	"jrpg-gang/domain"
