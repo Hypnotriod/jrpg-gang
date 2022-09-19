@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/controller/rooms"
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 )
@@ -11,7 +12,7 @@ type GameControllerBroadcaster interface {
 
 type GameController struct {
 	users        *users.Users
-	rooms        *GameRooms
+	rooms        *rooms.GameRooms
 	engines      *GameEngines
 	shop         *Shop
 	configurator *engine.UnitConfigurator
@@ -21,7 +22,7 @@ type GameController struct {
 func NewGameController() *GameController {
 	c := &GameController{}
 	c.users = users.NewUsers()
-	c.rooms = NewGameRooms()
+	c.rooms = rooms.NewGameRooms()
 	c.engines = NewGameEngines()
 	c.shop = NewShop()
 	c.configurator = engine.NewUnitConfigurator()
