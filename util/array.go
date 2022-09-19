@@ -18,9 +18,9 @@ func IndexOf[T Ordered](values []T, value T) int {
 	return -1
 }
 
-func Find[T any](values []T, predicate func(value *T) bool) *T {
+func Find[T any](values []T, predicate func(value T) bool) *T {
 	for i := range values {
-		if predicate(&values[i]) {
+		if predicate(values[i]) {
 			return &values[i]
 		}
 	}
