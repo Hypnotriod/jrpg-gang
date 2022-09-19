@@ -1,6 +1,9 @@
 package controller
 
-import "jrpg-gang/engine"
+import (
+	"jrpg-gang/controller/users"
+	"jrpg-gang/engine"
+)
 
 type CreateGameRoomRequest struct {
 	Request
@@ -29,7 +32,7 @@ func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, reque
 	room.host = hostUser
 	c.rooms.Add(room)
 	response.Data[DataKeyRoom] = room
-	c.users.ChangeUserStatus(userId, UserStatusInRoom)
+	c.users.ChangeUserStatus(userId, users.UserStatusInRoom)
 	c.broadcastLobbyStatus()
 	return response.WithStatus(ResponseStatusOk)
 }

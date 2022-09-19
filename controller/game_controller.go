@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 )
 
@@ -9,7 +10,7 @@ type GameControllerBroadcaster interface {
 }
 
 type GameController struct {
-	users        *Users
+	users        *users.Users
 	rooms        *GameRooms
 	engines      *GameEngines
 	shop         *Shop
@@ -19,7 +20,7 @@ type GameController struct {
 
 func NewGameController() *GameController {
 	c := &GameController{}
-	c.users = NewUsers()
+	c.users = users.NewUsers()
 	c.rooms = NewGameRooms()
 	c.engines = NewGameEngines()
 	c.shop = NewShop()
@@ -67,7 +68,7 @@ func (c *GameController) HandleRequest(userId engine.UserId, requestRaw string) 
 
 func (c *GameController) serveRequest(userId engine.UserId, request *Request, requestRaw string, response *Response) string {
 	status := c.users.GetUserStatus(userId)
-	if status == UserStatusNotFound {
+	if status == users.UserStatusNotFound {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
@@ -80,7 +81,7 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 	case RequestPlayerInfo:
 		return c.handlePlayerInfoRequest(userId, requestRaw, response)
 	}
-	if status.Test(UserStatusInGame) {
+	if status.Test(users.UserStatusInGame) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
@@ -101,7 +102,7 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 	case RequestStartGame:
 		return c.handleStartGameRequest(userId, requestRaw, response)
 	}
-	if status.Test(UserStatusInRoom) {
+	if status.Test(users.UserStatusInRoom) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {

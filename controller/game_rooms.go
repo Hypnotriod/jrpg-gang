@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"sync"
@@ -20,8 +21,8 @@ type GameRoom struct {
 	Uid         uint               `json:"uid"`
 	Capacity    uint               `json:"capacity"`
 	ScenarioId  GameRoomScenarioId `json:"scenarioId"`
-	joinedUsers []User
-	host        User
+	joinedUsers []users.User
+	host        users.User
 }
 
 func (r *GameRoom) IsFull() bool {
@@ -31,19 +32,19 @@ func (r *GameRoom) IsFull() bool {
 func (r *GameRoom) GetUserIds() []engine.UserId {
 	result := []engine.UserId{}
 	for _, u := range r.joinedUsers {
-		result = append(result, u.id)
+		result = append(result, u.Id)
 	}
-	result = append(result, r.host.id)
+	result = append(result, r.host.Id)
 	return result
 }
 
 func (r *GameRoom) UpdateUserConnectionStatus(userId engine.UserId, isOffline bool) bool {
-	if r.host.id == userId {
+	if r.host.Id == userId {
 		r.host.IsOffline = isOffline
 		return true
 	}
 	for i := range r.joinedUsers {
-		if r.joinedUsers[i].id == userId {
+		if r.joinedUsers[i].Id == userId {
 			r.joinedUsers[i].IsOffline = isOffline
 			return true
 		}
@@ -53,20 +54,20 @@ func (r *GameRoom) UpdateUserConnectionStatus(userId engine.UserId, isOffline bo
 
 func (r *GameRoom) GetActors() []*engine.GameUnit {
 	result := []*engine.GameUnit{}
-	r.host.unit.PlayerInfo = &r.host.PlayerInfo
-	r.host.unit.PlayerInfo.IsHost = true
-	result = append(result, &r.host.unit)
+	r.host.Unit.PlayerInfo = &r.host.PlayerInfo
+	r.host.Unit.PlayerInfo.IsHost = true
+	result = append(result, &r.host.Unit)
 	for i := range r.joinedUsers {
 		u := r.joinedUsers[i]
-		u.unit.PlayerInfo = &u.PlayerInfo
-		result = append(result, &u.unit)
+		u.Unit.PlayerInfo = &u.PlayerInfo
+		result = append(result, &u.Unit)
 	}
 	return result
 }
 
 func NewGameRoom() *GameRoom {
 	r := &GameRoom{}
-	r.joinedUsers = []User{}
+	r.joinedUsers = []users.User{}
 	return r
 }
 
@@ -90,7 +91,7 @@ func (r *GameRooms) Add(room *GameRoom) {
 	r.mu.Lock()
 	room.Uid = r.rndGen.NextUid()
 	r.rooms[room.Uid] = room
-	r.userIdToRoomUid[room.host.id] = room.Uid
+	r.userIdToRoomUid[room.host.Id] = room.Uid
 }
 
 func (r *GameRooms) PopByHostId(hostId engine.UserId) (*GameRoom, bool) {
@@ -104,18 +105,18 @@ func (r *GameRooms) PopByHostId(hostId engine.UserId) (*GameRoom, bool) {
 	if !ok {
 		return nil, false
 	}
-	if room.host.id != hostId {
+	if room.host.Id != hostId {
 		return nil, false
 	}
 	for _, u := range room.joinedUsers {
-		delete(r.userIdToRoomUid, u.id)
+		delete(r.userIdToRoomUid, u.Id)
 	}
 	delete(r.userIdToRoomUid, hostId)
 	delete(r.rooms, roomUid)
 	return room, true
 }
 
-func (r *GameRooms) AddUser(roomUid uint, user User) bool {
+func (r *GameRooms) AddUser(roomUid uint, user users.User) bool {
 	defer r.mu.Unlock()
 	r.mu.Lock()
 	room, ok := r.rooms[roomUid]
@@ -126,7 +127,7 @@ func (r *GameRooms) AddUser(roomUid uint, user User) bool {
 		return false
 	}
 	room.joinedUsers = append(room.joinedUsers, user)
-	r.userIdToRoomUid[user.id] = roomUid
+	r.userIdToRoomUid[user.Id] = roomUid
 	return true
 }
 
@@ -141,13 +142,13 @@ func (r *GameRooms) RemoveUser(userId engine.UserId) bool {
 	if !ok {
 		return false
 	}
-	if room.host.id == userId {
+	if room.host.Id == userId {
 		return false
 	}
 	delete(r.userIdToRoomUid, userId)
-	restUsers := []User{}
+	restUsers := []users.User{}
 	for _, u := range room.joinedUsers {
-		if u.id != userId {
+		if u.Id != userId {
 			restUsers = append(restUsers, u)
 		}
 	}
@@ -184,7 +185,7 @@ func (r *GameRooms) ExistsForHostId(hostId engine.UserId) bool {
 	if !present {
 		return false
 	}
-	return room.host.id == hostId
+	return room.host.Id == hostId
 }
 
 func (r *GameRooms) GetByUserId(userId engine.UserId) (GameRoom, bool) {
@@ -230,7 +231,7 @@ func (r *GameRooms) ResponseList() *[]GameRoomInfo {
 	return &rooms
 }
 
-func toPlayerInfos(users []User) []engine.PlayerInfo {
+func toPlayerInfos(users []users.User) []engine.PlayerInfo {
 	result := []engine.PlayerInfo{}
 	for i := range users {
 		result = append(result, users[i].PlayerInfo)

@@ -19,10 +19,10 @@ func (c *GameController) handleConfiguratorActionRequest(userId engine.UserId, r
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	actionResult := c.configurator.ExecuteAction(request.Data, &user.unit.Unit)
+	actionResult := c.configurator.ExecuteAction(request.Data, &user.Unit.Unit)
 	if actionResult.Result == domain.ResultAccomplished {
-		c.users.UpdateUnit(user.id, &user.unit)
-		response.Data[DataKeyUnit] = user.unit
+		c.users.UpdateUnit(user.Id, &user.Unit)
+		response.Data[DataKeyUnit] = user.Unit
 	}
 	response.Data[DataKeyAction] = request.Data
 	response.Data[DataKeyActionResult] = actionResult

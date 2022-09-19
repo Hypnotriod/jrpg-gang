@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/controller/users"
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"sync"
@@ -23,8 +24,8 @@ func (s *Shop) GetStatus() engine.GameShop {
 	return *s.shop
 }
 
-func (s *Shop) ExecuteAction(action domain.Action, user *User) *domain.ActionResult {
+func (s *Shop) ExecuteAction(action domain.Action, user *users.User) *domain.ActionResult {
 	defer s.mu.RUnlock()
 	s.mu.RLock()
-	return s.shop.ExecuteAction(action, &user.unit.Unit, user.rndGen)
+	return s.shop.ExecuteAction(action, &user.Unit.Unit, user.RndGen)
 }

@@ -1,6 +1,9 @@
 package controller
 
-import "jrpg-gang/engine"
+import (
+	"jrpg-gang/controller/users"
+	"jrpg-gang/engine"
+)
 
 func (c *GameController) RegisterBroadcaster(broadcaster GameControllerBroadcaster) {
 	c.broadcaster = broadcaster
@@ -38,7 +41,7 @@ func (c *GameController) broadcastLobbyStatus() {
 	response.Type = RequestLobbyStatus
 	response.Data[DataKeyRooms] = c.rooms.ResponseList()
 	response.Data[DataKeyUsersCount] = c.users.TotalCount()
-	userIds := c.users.GetIdsByStatus(UserStatusJoined|UserStatusInRoom, true)
+	userIds := c.users.GetIdsByStatus(users.UserStatusJoined|users.UserStatusInRoom, true)
 	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
 }
 

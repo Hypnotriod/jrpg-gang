@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 	"regexp"
 )
@@ -25,7 +26,7 @@ func (c *GameController) handleJoinRequest(requestRaw string, response *Response
 			return engine.UserIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
 		}
 		response.fillUserStatus(&user)
-		return user.id, response.WithStatus(ResponseStatusOk)
+		return user.Id, response.WithStatus(ResponseStatusOk)
 	}
 	if matched, _ := regexp.MatchString(USER_NICKNAME_REGEX, request.Data.Nickname); !matched {
 		return engine.UserIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
@@ -37,8 +38,8 @@ func (c *GameController) handleJoinRequest(requestRaw string, response *Response
 	if unit == nil {
 		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMailformed)
 	}
-	user := NewUser(request.Data.Nickname, request.Data.Class, unit)
+	user := users.NewUser(request.Data.Nickname, request.Data.Class, unit)
 	c.users.AddUser(user)
 	response.fillUserStatus(user)
-	return user.id, response.WithStatus(ResponseStatusOk)
+	return user.Id, response.WithStatus(ResponseStatusOk)
 }

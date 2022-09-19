@@ -1,6 +1,9 @@
 package controller
 
-import "jrpg-gang/engine"
+import (
+	"jrpg-gang/controller/users"
+	"jrpg-gang/engine"
+)
 
 type JoinGameRoomRequest struct {
 	Request
@@ -24,8 +27,8 @@ func (c *GameController) handleJoinGameRoomRequest(userId engine.UserId, request
 	if !c.rooms.AddUser(request.Data.RoomUid, user) {
 		return response.WithStatus(ResponseStatusFailed)
 	}
-	response.Data[DataKeyRoom], _ = c.rooms.GetByUserId(user.id)
-	c.users.ChangeUserStatus(userId, UserStatusInRoom)
+	response.Data[DataKeyRoom], _ = c.rooms.GetByUserId(user.Id)
+	c.users.ChangeUserStatus(userId, users.UserStatusInRoom)
 	c.broadcastLobbyStatus()
 	return response.WithStatus(ResponseStatusOk)
 }

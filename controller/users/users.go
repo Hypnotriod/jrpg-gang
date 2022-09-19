@@ -1,69 +1,10 @@
-package controller
+package users
 
 import (
 	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"sync"
 )
-
-type UserStatus int
-
-type UserDisplayStatus string
-
-const (
-	UserDisplayStatusEmpty   UserDisplayStatus = ""
-	UserDisplayStatusInLobby UserDisplayStatus = "inLobby"
-	UserDisplayStatusInRoom  UserDisplayStatus = "inRoom"
-	UserDisplayStatusInGame  UserDisplayStatus = "inGame"
-)
-
-const (
-	UserStatusNotFound  UserStatus = 0
-	UserStatusNotJoined UserStatus = (1 << 0)
-	UserStatusJoined    UserStatus = (1 << 1)
-	UserStatusInRoom    UserStatus = (1 << 2)
-	UserStatusInGame    UserStatus = (1 << 3)
-)
-
-func (s UserStatus) Display() UserDisplayStatus {
-	if s.Test(UserStatusJoined) {
-		return UserDisplayStatusInLobby
-	}
-	if s.Test(UserStatusInGame) {
-		return UserDisplayStatusInGame
-	}
-	if s.Test(UserStatusInRoom) {
-		return UserDisplayStatusInRoom
-	}
-	return UserDisplayStatusEmpty
-}
-
-func (s UserStatus) Test(status UserStatus) bool {
-	return s&status != 0
-}
-
-type User struct {
-	engine.PlayerInfo
-	rndGen *util.RndGen
-	status UserStatus
-	id     engine.UserId
-	unit   engine.GameUnit
-}
-
-func NewUser(nickname string,
-	class engine.GameUnitClass,
-	unit *engine.GameUnit) *User {
-	u := &User{}
-	u.rndGen = util.NewRndGen()
-	u.Nickname = nickname
-	u.Class = class
-	u.Level = unit.Stats.Progress.Level
-	u.status = UserStatusNotJoined
-	u.unit = *unit
-	u.unit.Inventory.Prepare()
-	u.unit.Inventory.PopulateUids(u.rndGen)
-	return u
-}
 
 type Users struct {
 	mu               sync.RWMutex
@@ -96,7 +37,7 @@ func (s *Users) GetByIds(userIds []engine.UserId) []User {
 	s.mu.RLock()
 	result := []User{}
 	for _, user := range s.users {
-		if util.Contains(userIds, user.id) {
+		if util.Contains(userIds, user.Id) {
 			result = append(result, *user)
 		}
 	}
@@ -132,8 +73,8 @@ func (s *Users) GetIdsByStatus(status UserStatus, onlineOnly bool) []engine.User
 	s.mu.RLock()
 	result := []engine.UserId{}
 	for _, user := range s.users {
-		if user.status&status != 0 && (!onlineOnly || !user.IsOffline) {
-			result = append(result, user.id)
+		if user.Status&status != 0 && (!onlineOnly || !user.IsOffline) {
+			result = append(result, user.Id)
 		}
 	}
 	return result
@@ -144,8 +85,8 @@ func (s *Users) GetIdsByStatusExcept(status UserStatus, userId engine.UserId) []
 	s.mu.RLock()
 	result := []engine.UserId{}
 	for _, user := range s.users {
-		if user.id != userId && user.status&status != 0 {
-			result = append(result, user.id)
+		if user.Id != userId && user.Status&status != 0 {
+			result = append(result, user.Id)
 		}
 	}
 	return result
@@ -158,22 +99,22 @@ func (s *Users) UpdateUnit(userId engine.UserId, unit *engine.GameUnit) {
 	if !ok {
 		return
 	}
-	user.unit = *unit
+	user.Unit = *unit
 }
 
 func (s *Users) AddUser(user *User) {
 	defer s.mu.Unlock()
 	s.mu.Lock()
 	for {
-		user.id = engine.UserId(s.rndGen.Hash())
-		if _, ok := s.users[user.id]; !ok {
+		user.Id = engine.UserId(s.rndGen.Hash())
+		if _, ok := s.users[user.Id]; !ok {
 			break
 		}
 	}
-	user.unit.SetUserId(user.id)
-	user.status = UserStatusJoined
-	s.users[user.id] = user
-	s.userNicknameToId[user.Nickname] = user.id
+	user.Unit.SetUserId(user.Id)
+	user.Status = UserStatusJoined
+	s.users[user.Id] = user
+	s.userNicknameToId[user.Nickname] = user.Id
 }
 
 func (s *Users) RemoveUser(userId engine.UserId) {
@@ -194,7 +135,7 @@ func (s *Users) ChangeUserStatus(userId engine.UserId, status UserStatus) {
 	if !ok {
 		return
 	}
-	user.status = status
+	user.Status = status
 }
 
 func (s *Users) GetUserStatus(userId engine.UserId) UserStatus {
@@ -204,7 +145,7 @@ func (s *Users) GetUserStatus(userId engine.UserId) UserStatus {
 	if !ok {
 		return UserStatusNotFound
 	}
-	return user.status
+	return user.Status
 }
 
 func (s *Users) ConnectionStatusChanged(userId engine.UserId, isOffline bool) {
