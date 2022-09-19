@@ -14,17 +14,17 @@ type Users struct {
 }
 
 func NewUsers() *Users {
-	s := &Users{}
-	s.rndGen = util.NewRndGen()
-	s.users = make(map[engine.UserId]*User)
-	s.userNicknameToId = make(map[string]engine.UserId)
-	return s
+	u := &Users{}
+	u.rndGen = util.NewRndGen()
+	u.users = make(map[engine.UserId]*User)
+	u.userNicknameToId = make(map[string]engine.UserId)
+	return u
 }
 
-func (s *Users) Get(userId engine.UserId) (User, bool) {
-	s.mu.RLock()
-	user, ok := s.users[userId]
-	s.mu.RUnlock()
+func (u *Users) Get(userId engine.UserId) (User, bool) {
+	u.mu.RLock()
+	user, ok := u.users[userId]
+	u.mu.RUnlock()
 	if ok {
 		return *user, ok
 	} else {
@@ -32,11 +32,11 @@ func (s *Users) Get(userId engine.UserId) (User, bool) {
 	}
 }
 
-func (s *Users) GetByIds(userIds []engine.UserId) []User {
-	defer s.mu.RUnlock()
-	s.mu.RLock()
+func (u *Users) GetByIds(userIds []engine.UserId) []User {
+	defer u.mu.RUnlock()
+	u.mu.RLock()
 	result := []User{}
-	for _, user := range s.users {
+	for _, user := range u.users {
 		if util.Contains(userIds, user.Id) {
 			result = append(result, *user)
 		}
@@ -44,35 +44,35 @@ func (s *Users) GetByIds(userIds []engine.UserId) []User {
 	return result
 }
 
-func (s *Users) Has(userId engine.UserId) bool {
-	defer s.mu.RUnlock()
-	s.mu.RLock()
-	_, exists := s.users[userId]
+func (u *Users) Has(userId engine.UserId) bool {
+	defer u.mu.RUnlock()
+	u.mu.RLock()
+	_, exists := u.users[userId]
 	return exists
 }
 
-func (s *Users) TotalCount() int {
-	defer s.mu.RUnlock()
-	s.mu.RLock()
-	return len(s.users)
+func (u *Users) TotalCount() int {
+	defer u.mu.RUnlock()
+	u.mu.RLock()
+	return len(u.users)
 }
 
-func (s *Users) GetByNickname(nickname string) (User, bool) {
-	defer s.mu.RUnlock()
-	s.mu.RLock()
-	userId, ok := s.userNicknameToId[nickname]
+func (u *Users) GetByNickname(nickname string) (User, bool) {
+	defer u.mu.RUnlock()
+	u.mu.RLock()
+	userId, ok := u.userNicknameToId[nickname]
 	if !ok {
 		return User{}, false
 	}
-	user, ok := s.users[userId]
+	user, ok := u.users[userId]
 	return *user, ok
 }
 
-func (s *Users) GetIdsByStatus(status UserStatus, onlineOnly bool) []engine.UserId {
-	defer s.mu.RUnlock()
-	s.mu.RLock()
+func (u *Users) GetIdsByStatus(status UserStatus, onlineOnly bool) []engine.UserId {
+	defer u.mu.RUnlock()
+	u.mu.RLock()
 	result := []engine.UserId{}
-	for _, user := range s.users {
+	for _, user := range u.users {
 		if user.Status&status != 0 && (!onlineOnly || !user.IsOffline) {
 			result = append(result, user.Id)
 		}
@@ -80,11 +80,11 @@ func (s *Users) GetIdsByStatus(status UserStatus, onlineOnly bool) []engine.User
 	return result
 }
 
-func (s *Users) GetIdsByStatusExcept(status UserStatus, userId engine.UserId) []engine.UserId {
-	defer s.mu.RUnlock()
-	s.mu.RLock()
+func (u *Users) GetIdsByStatusExcept(status UserStatus, userId engine.UserId) []engine.UserId {
+	defer u.mu.RUnlock()
+	u.mu.RLock()
 	result := []engine.UserId{}
-	for _, user := range s.users {
+	for _, user := range u.users {
 		if user.Id != userId && user.Status&status != 0 {
 			result = append(result, user.Id)
 		}
@@ -92,66 +92,66 @@ func (s *Users) GetIdsByStatusExcept(status UserStatus, userId engine.UserId) []
 	return result
 }
 
-func (s *Users) UpdateUnit(userId engine.UserId, unit *engine.GameUnit) {
-	defer s.mu.Unlock()
-	s.mu.Lock()
-	user, ok := s.users[userId]
+func (u *Users) UpdateUnit(userId engine.UserId, unit *engine.GameUnit) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
+	user, ok := u.users[userId]
 	if !ok {
 		return
 	}
 	user.Unit = *unit
 }
 
-func (s *Users) AddUser(user *User) {
-	defer s.mu.Unlock()
-	s.mu.Lock()
+func (u *Users) AddUser(user *User) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
 	for {
-		user.Id = engine.UserId(s.rndGen.MakeId())
-		if _, ok := s.users[user.Id]; !ok {
+		user.Id = engine.UserId(u.rndGen.MakeId())
+		if _, ok := u.users[user.Id]; !ok {
 			break
 		}
 	}
 	user.Unit.SetUserId(user.Id)
 	user.Status = UserStatusJoined
-	s.users[user.Id] = user
-	s.userNicknameToId[user.Nickname] = user.Id
+	u.users[user.Id] = user
+	u.userNicknameToId[user.Nickname] = user.Id
 }
 
-func (s *Users) RemoveUser(userId engine.UserId) {
-	defer s.mu.Unlock()
-	s.mu.Lock()
-	user, ok := s.users[userId]
+func (u *Users) RemoveUser(userId engine.UserId) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
+	user, ok := u.users[userId]
 	if !ok {
 		return
 	}
-	delete(s.userNicknameToId, user.Nickname)
-	delete(s.users, userId)
+	delete(u.userNicknameToId, user.Nickname)
+	delete(u.users, userId)
 }
 
-func (s *Users) ChangeUserStatus(userId engine.UserId, status UserStatus) {
-	defer s.mu.Unlock()
-	s.mu.Lock()
-	user, ok := s.users[userId]
+func (u *Users) ChangeUserStatus(userId engine.UserId, status UserStatus) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
+	user, ok := u.users[userId]
 	if !ok {
 		return
 	}
 	user.Status = status
 }
 
-func (s *Users) GetUserStatus(userId engine.UserId) UserStatus {
-	s.mu.RLock()
-	user, ok := s.users[userId]
-	s.mu.RUnlock()
+func (u *Users) GetUserStatus(userId engine.UserId) UserStatus {
+	u.mu.RLock()
+	user, ok := u.users[userId]
+	u.mu.RUnlock()
 	if !ok {
 		return UserStatusNotFound
 	}
 	return user.Status
 }
 
-func (s *Users) ConnectionStatusChanged(userId engine.UserId, isOffline bool) {
-	defer s.mu.Unlock()
-	s.mu.Lock()
-	user, ok := s.users[userId]
+func (u *Users) ConnectionStatusChanged(userId engine.UserId, isOffline bool) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
+	user, ok := u.users[userId]
 	if !ok {
 		return
 	}
