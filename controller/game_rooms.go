@@ -71,7 +71,7 @@ func NewGameRoom() *GameRoom {
 }
 
 type GameRooms struct {
-	sync.RWMutex
+	mu              sync.RWMutex
 	rndGen          *util.RndGen
 	rooms           map[uint]*GameRoom
 	userIdToRoomUid map[engine.UserId]uint
@@ -86,16 +86,16 @@ func NewGameRooms() *GameRooms {
 }
 
 func (r *GameRooms) Add(room *GameRoom) {
-	defer r.Unlock()
-	r.Lock()
+	defer r.mu.Unlock()
+	r.mu.Lock()
 	room.Uid = r.rndGen.NextUid()
 	r.rooms[room.Uid] = room
 	r.userIdToRoomUid[room.host.id] = room.Uid
 }
 
 func (r *GameRooms) PopByHostId(hostId engine.UserId) (*GameRoom, bool) {
-	defer r.Unlock()
-	r.Lock()
+	defer r.mu.Unlock()
+	r.mu.Lock()
 	roomUid, ok := r.userIdToRoomUid[hostId]
 	if !ok {
 		return nil, false
@@ -116,8 +116,8 @@ func (r *GameRooms) PopByHostId(hostId engine.UserId) (*GameRoom, bool) {
 }
 
 func (r *GameRooms) AddUser(roomUid uint, user User) bool {
-	defer r.Unlock()
-	r.Lock()
+	defer r.mu.Unlock()
+	r.mu.Lock()
 	room, ok := r.rooms[roomUid]
 	if !ok {
 		return false
@@ -131,8 +131,8 @@ func (r *GameRooms) AddUser(roomUid uint, user User) bool {
 }
 
 func (r *GameRooms) RemoveUser(userId engine.UserId) bool {
-	defer r.Unlock()
-	r.Lock()
+	defer r.mu.Unlock()
+	r.mu.Lock()
 	roomUid, ok := r.userIdToRoomUid[userId]
 	if !ok {
 		return false
@@ -156,15 +156,15 @@ func (r *GameRooms) RemoveUser(userId engine.UserId) bool {
 }
 
 func (r *GameRooms) Has(uid uint) bool {
-	defer r.RUnlock()
-	r.RLock()
+	defer r.mu.RUnlock()
+	r.mu.RLock()
 	_, ok := r.rooms[uid]
 	return ok
 }
 
 func (r *GameRooms) ExistsForUserId(userId engine.UserId) bool {
-	defer r.RUnlock()
-	r.RLock()
+	defer r.mu.RUnlock()
+	r.mu.RLock()
 	roomUid, ok := r.userIdToRoomUid[userId]
 	if !ok {
 		return false
@@ -174,8 +174,8 @@ func (r *GameRooms) ExistsForUserId(userId engine.UserId) bool {
 }
 
 func (r *GameRooms) ExistsForHostId(hostId engine.UserId) bool {
-	defer r.RUnlock()
-	r.RLock()
+	defer r.mu.RUnlock()
+	r.mu.RLock()
 	roomUid, ok := r.userIdToRoomUid[hostId]
 	if !ok {
 		return false
@@ -188,8 +188,8 @@ func (r *GameRooms) ExistsForHostId(hostId engine.UserId) bool {
 }
 
 func (r *GameRooms) GetByUserId(userId engine.UserId) (GameRoom, bool) {
-	defer r.RUnlock()
-	r.RLock()
+	defer r.mu.RUnlock()
+	r.mu.RLock()
 	roomUid, ok := r.userIdToRoomUid[userId]
 	if !ok {
 		return GameRoom{}, false
@@ -202,8 +202,8 @@ func (r *GameRooms) GetByUserId(userId engine.UserId) (GameRoom, bool) {
 }
 
 func (r *GameRooms) ConnectionStatusChanged(userId engine.UserId, isOffline bool) bool {
-	defer r.Unlock()
-	r.Lock()
+	defer r.mu.Unlock()
+	r.mu.Lock()
 	roomUid, ok := r.userIdToRoomUid[userId]
 	if !ok {
 		return false
@@ -216,8 +216,8 @@ func (r *GameRooms) ConnectionStatusChanged(userId engine.UserId, isOffline bool
 }
 
 func (r *GameRooms) ResponseList() *[]GameRoomInfo {
-	defer r.RUnlock()
-	r.RLock()
+	defer r.mu.RUnlock()
+	r.mu.RLock()
 	rooms := []GameRoomInfo{}
 	for i := range r.rooms {
 		rooms = append(rooms, GameRoomInfo{

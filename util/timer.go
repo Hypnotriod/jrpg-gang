@@ -6,7 +6,7 @@ import (
 )
 
 type Timer struct {
-	mutex     sync.Mutex
+	mu        sync.Mutex
 	timer     *time.Timer
 	cancel    chan struct{}
 	cancelled bool
@@ -30,13 +30,13 @@ func NewTimerWithCancel(duration time.Duration, complete func(), cancel func()) 
 }
 
 func (t *Timer) Cancel() {
-	t.mutex.Lock()
+	t.mu.Lock()
 	if t.completed {
-		t.mutex.Unlock()
+		t.mu.Unlock()
 		return
 	}
 	t.cancelled = true
-	t.mutex.Unlock()
+	t.mu.Unlock()
 	t.timer.Stop()
 	t.cancel <- struct{}{}
 }
@@ -45,14 +45,14 @@ func (t *Timer) wait(complete func(), cancel func()) {
 	for {
 		select {
 		case <-t.timer.C:
-			t.mutex.Lock()
+			t.mu.Lock()
 			if !t.cancelled {
 				t.completed = true
-				t.mutex.Unlock()
+				t.mu.Unlock()
 				complete()
 				return
 			}
-			t.mutex.Unlock()
+			t.mu.Unlock()
 		case <-t.cancel:
 			cancel()
 			return

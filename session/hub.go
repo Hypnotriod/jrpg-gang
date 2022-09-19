@@ -20,7 +20,7 @@ type HubConfig struct {
 }
 
 type Hub struct {
-	sync.RWMutex
+	mu          sync.RWMutex
 	config      HubConfig
 	server      *http.Server
 	upgrader    *websocket.Upgrader
@@ -75,19 +75,19 @@ func (h *Hub) serveWsRequest(writer http.ResponseWriter, request *http.Request) 
 }
 
 func (h *Hub) registerClient(client *Client) {
-	h.Lock()
+	h.mu.Lock()
 	if oldClient, ok := h.clients[client.userId]; ok {
 		oldClient.Kick()
 	}
 	h.clients[client.userId] = client
 	if timer, ok := h.leaveTimers[client.userId]; ok && timer.Stop() {
 		delete(h.leaveTimers, client.userId)
-		h.Unlock()
+		h.mu.Unlock()
 		h.controller.ConnectionStatusChanged(client.userId, false)
 		log.Info("Client back online: ", client.userId)
 		return
 	}
-	h.Unlock()
+	h.mu.Unlock()
 	log.Info("Register Client: ", client.userId)
 }
 
@@ -96,24 +96,24 @@ func (h *Hub) unregisterClient(userId engine.UserId) {
 		log.Info("Client left without joining")
 		return
 	}
-	h.Lock()
+	h.mu.Lock()
 	delete(h.clients, userId)
 	h.leaveTimers[userId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
-		h.Lock()
+		h.mu.Lock()
 		delete(h.leaveTimers, userId)
-		h.Unlock()
+		h.mu.Unlock()
 		h.controller.Leave(userId)
 		log.Info("Unregister Client by timeout: ", userId)
 	})
-	h.Unlock()
+	h.mu.Unlock()
 	h.controller.ConnectionStatusChanged(userId, true)
 	log.Info("Client went offline: ", userId)
 }
 
 func (h *Hub) getClient(userId engine.UserId) *Client {
-	h.RLock()
+	h.mu.RLock()
 	client, ok := h.clients[userId]
-	h.RUnlock()
+	h.mu.RUnlock()
 	if !ok {
 		return nil
 	}

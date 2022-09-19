@@ -7,45 +7,45 @@ import (
 	"sync"
 )
 
-type GameEngineWrapper struct {
+type gameEngineWrapper struct {
 	sync.RWMutex
 	engine *engine.GameEngine
 	hostId engine.UserId
 }
 
-func NewGameEngineWrapper(hostId engine.UserId, engine *engine.GameEngine) *GameEngineWrapper {
-	w := &GameEngineWrapper{}
+func newGameEngineWrapper(hostId engine.UserId, engine *engine.GameEngine) *gameEngineWrapper {
+	w := &gameEngineWrapper{}
 	w.engine = engine
 	w.hostId = hostId
 	return w
 }
 
 type GameEngines struct {
-	sync.RWMutex
+	mu             sync.RWMutex
 	rndGen         *util.RndGen
-	userIdToEngine map[engine.UserId]*GameEngineWrapper
+	userIdToEngine map[engine.UserId]*gameEngineWrapper
 }
 
 func NewGameEngines() *GameEngines {
 	e := &GameEngines{}
 	e.rndGen = util.NewRndGen()
-	e.userIdToEngine = make(map[engine.UserId]*GameEngineWrapper)
+	e.userIdToEngine = make(map[engine.UserId]*gameEngineWrapper)
 	return e
 }
 
 func (e *GameEngines) Add(hostId engine.UserId, engine *engine.GameEngine) {
-	defer e.Unlock()
-	e.Lock()
-	wrapper := NewGameEngineWrapper(hostId, engine)
+	defer e.mu.Unlock()
+	e.mu.Lock()
+	wrapper := newGameEngineWrapper(hostId, engine)
 	for _, userId := range engine.GetUserIds() {
 		e.userIdToEngine[userId] = wrapper
 	}
 }
 
 func (e *GameEngines) ChangeHost(oldHostId engine.UserId, newHostId engine.UserId) bool {
-	e.RLock()
+	e.mu.RLock()
 	wrapper, ok := e.userIdToEngine[oldHostId]
-	e.RUnlock()
+	e.mu.RUnlock()
 	if !ok {
 		return false
 	}
@@ -65,16 +65,16 @@ func (e *GameEngines) ChangeHost(oldHostId engine.UserId, newHostId engine.UserI
 }
 
 func (e *GameEngines) IsUserInGame(userId engine.UserId) bool {
-	defer e.RUnlock()
-	e.RLock()
+	defer e.mu.RUnlock()
+	e.mu.RLock()
 	_, ok := e.userIdToEngine[userId]
 	return ok
 }
 
 func (e *GameEngines) ExecuteUserAction(action domain.Action, userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
-	e.RLock()
+	e.mu.RLock()
 	wrapper, ok := e.userIdToEngine[userId]
-	e.RUnlock()
+	e.mu.RUnlock()
 	if !ok {
 		return nil, nil, false
 	}
@@ -89,9 +89,9 @@ func (e *GameEngines) ExecuteUserAction(action domain.Action, userId engine.User
 }
 
 func (e *GameEngines) NextPhase(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
-	e.RLock()
+	e.mu.RLock()
 	wrapper, ok := e.userIdToEngine[userId]
-	e.RUnlock()
+	e.mu.RUnlock()
 	if !ok {
 		return nil, nil, false
 	}
@@ -106,9 +106,9 @@ func (e *GameEngines) NextPhase(userId engine.UserId) (*engine.GameEvent, []engi
 }
 
 func (e *GameEngines) GameState(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
-	e.RLock()
+	e.mu.RLock()
 	wrapper, ok := e.userIdToEngine[userId]
-	e.RUnlock()
+	e.mu.RUnlock()
 	if !ok {
 		return nil, nil, false
 	}
@@ -120,9 +120,9 @@ func (e *GameEngines) GameState(userId engine.UserId) (*engine.GameEvent, []engi
 }
 
 func (e *GameEngines) PlayerInfo(userId engine.UserId) (engine.PlayerInfo, bool) {
-	e.RLock()
+	e.mu.RLock()
 	wrapper, ok := e.userIdToEngine[userId]
-	e.RUnlock()
+	e.mu.RUnlock()
 	if !ok {
 		return engine.PlayerInfo{}, false
 	}
@@ -136,14 +136,14 @@ func (e *GameEngines) PlayerInfo(userId engine.UserId) (engine.PlayerInfo, bool)
 }
 
 func (e *GameEngines) RemoveUser(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
-	e.Lock()
+	e.mu.Lock()
 	wrapper, ok := e.userIdToEngine[userId]
 	if !ok {
-		e.Unlock()
+		e.mu.Unlock()
 		return nil, nil, false
 	}
 	delete(e.userIdToEngine, userId)
-	e.Unlock()
+	e.mu.Unlock()
 	defer wrapper.Unlock()
 	wrapper.Lock()
 	wrapper.engine.RemoveActor(userId)
@@ -164,9 +164,9 @@ func (e *GameEngines) RemoveUser(userId engine.UserId) (*engine.GameEvent, []eng
 }
 
 func (e *GameEngines) ConnectionStatusChanged(userId engine.UserId, isOffline bool) (*engine.GameEvent, []engine.UserId, bool) {
-	e.RLock()
+	e.mu.RLock()
 	wrapper, ok := e.userIdToEngine[userId]
-	e.RUnlock()
+	e.mu.RUnlock()
 	if !ok {
 		return nil, nil, false
 	}

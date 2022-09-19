@@ -7,7 +7,7 @@ import (
 )
 
 type Shop struct {
-	sync.RWMutex
+	mu   sync.RWMutex
 	shop *engine.GameShop
 }
 
@@ -18,13 +18,13 @@ func NewShop() *Shop {
 }
 
 func (s *Shop) GetStatus() engine.GameShop {
-	defer s.RUnlock()
-	s.RLock()
+	defer s.mu.RUnlock()
+	s.mu.RLock()
 	return *s.shop
 }
 
 func (s *Shop) ExecuteAction(action domain.Action, user *User) *domain.ActionResult {
-	defer s.RUnlock()
-	s.RLock()
+	defer s.mu.RUnlock()
+	s.mu.RLock()
 	return s.shop.ExecuteAction(action, &user.unit.Unit, user.rndGen)
 }

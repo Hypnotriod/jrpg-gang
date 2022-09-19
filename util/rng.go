@@ -34,7 +34,7 @@ func (g *RndGen) Hash() string {
 		data[n+2] = byte(u >> 8)
 		data[n+3] = byte(u >> 0)
 	}
-	return hex.EncodeToString(data[:])
+	return hex.EncodeToString(data)
 }
 
 func (g *RndGen) PickIndex(n int) int {

@@ -9,7 +9,7 @@ import (
 )
 
 type Client struct {
-	sync.RWMutex
+	mu     sync.Mutex
 	conn   *websocket.Conn
 	hub    *Hub
 	userId engine.UserId
@@ -29,9 +29,9 @@ func NewClient(connection *websocket.Conn, hub *Hub) *Client {
 }
 
 func (c *Client) WriteMessage(message string) {
-	c.Lock()
+	c.mu.Lock()
 	err := c.conn.WriteMessage(websocket.TextMessage, []byte(message))
-	c.Unlock()
+	c.mu.Unlock()
 	if err != nil && websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 		log.Error("Client (", c.userId, ") write message error:", err)
 	}
@@ -57,8 +57,8 @@ func (c *Client) Serve() {
 		}
 		c.WriteMessage(response)
 	}
-	defer c.Unlock()
-	c.Lock()
+	defer c.mu.Unlock()
+	c.mu.Lock()
 	c.left = true
 	if !c.kicked {
 		c.hub.unregisterClient(c.userId)
@@ -67,8 +67,8 @@ func (c *Client) Serve() {
 }
 
 func (c *Client) Kick() {
-	defer c.Unlock()
-	c.Lock()
+	defer c.mu.Unlock()
+	c.mu.Lock()
 	c.kicked = true
 	if !c.left {
 		c.conn.Close()
