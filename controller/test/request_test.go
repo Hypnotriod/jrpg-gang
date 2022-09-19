@@ -22,7 +22,7 @@ func doJoinRequest(controller *controller.GameController, nickname string, class
 			"class": "%s"
 		}
 	}`,
-			rndGen.Hash(),
+			rndGen.MakeId(),
 			nickname,
 			class))
 }
@@ -35,7 +35,7 @@ func doRequest(controller *controller.GameController, requestType controller.Req
 		"type": "%s",
 		"data": {%s}
 	}`,
-			rndGen.Hash(),
+			rndGen.MakeId(),
 			requestType,
 			data))
 	return result

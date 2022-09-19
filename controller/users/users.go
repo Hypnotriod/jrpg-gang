@@ -106,7 +106,7 @@ func (s *Users) AddUser(user *User) {
 	defer s.mu.Unlock()
 	s.mu.Lock()
 	for {
-		user.Id = engine.UserId(s.rndGen.Hash())
+		user.Id = engine.UserId(s.rndGen.MakeId())
 		if _, ok := s.users[user.Id]; !ok {
 			break
 		}
