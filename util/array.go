@@ -36,16 +36,7 @@ func Findp[T any](values []*T, predicate func(value *T) bool) *T {
 	return nil
 }
 
-func Any[T any](values []T, predicate func(value *T) bool) bool {
-	for i := range values {
-		if predicate(&values[i]) {
-			return true
-		}
-	}
-	return false
-}
-
-func Anyp[T any](values []*T, predicate func(value *T) bool) bool {
+func Any[T any](values []T, predicate func(value T) bool) bool {
 	for i := range values {
 		if predicate(values[i]) {
 			return true
@@ -54,19 +45,7 @@ func Anyp[T any](values []*T, predicate func(value *T) bool) bool {
 	return false
 }
 
-func Every[T any](values []T, predicate func(value *T) bool) bool {
-	if len(values) == 0 {
-		return false
-	}
-	for i := range values {
-		if !predicate(&values[i]) {
-			return false
-		}
-	}
-	return true
-}
-
-func Everyp[T any](values []*T, predicate func(value *T) bool) bool {
+func Every[T any](values []T, predicate func(value T) bool) bool {
 	if len(values) == 0 {
 		return false
 	}
@@ -78,18 +57,8 @@ func Everyp[T any](values []*T, predicate func(value *T) bool) bool {
 	return true
 }
 
-func Filter[T any](values []T, predicate func(value *T) bool) []T {
+func Filter[T any](values []T, predicate func(value T) bool) []T {
 	result := []T{}
-	for i := range values {
-		if predicate(&values[i]) {
-			result = append(result, values[i])
-		}
-	}
-	return result
-}
-
-func Filterp[T any](values []*T, predicate func(value *T) bool) []*T {
-	result := []*T{}
 	for i := range values {
 		if predicate(values[i]) {
 			result = append(result, values[i])
@@ -98,16 +67,8 @@ func Filterp[T any](values []*T, predicate func(value *T) bool) []*T {
 	return result
 }
 
-func Map[T any, J any](values []T, mapper func(value *T) J) []J {
+func Map[T any, J any](values []T, mapper func(value T) J) []J {
 	result := make([]J, 0, len(values))
-	for i := range values {
-		result = append(result, mapper(&values[i]))
-	}
-	return result
-}
-
-func Mapp[T any, J any](values []*T, mapper func(value *T) *J) []*J {
-	result := []*J{}
 	for i := range values {
 		result = append(result, mapper(values[i]))
 	}
