@@ -1,4 +1,4 @@
-package shop
+package factory
 
 import (
 	"jrpg-gang/domain"

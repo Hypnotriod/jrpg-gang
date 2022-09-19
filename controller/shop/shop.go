@@ -1,6 +1,7 @@
 package shop
 
 import (
+	"jrpg-gang/controller/factory"
 	"jrpg-gang/controller/users"
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
@@ -14,7 +15,7 @@ type Shop struct {
 
 func NewShop() *Shop {
 	s := &Shop{}
-	s.shop = engine.NewGameShop(NewTestShopItems())
+	s.shop = engine.NewGameShop(factory.NewTestShopItems())
 	return s
 }
 
