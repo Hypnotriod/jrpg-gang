@@ -42,10 +42,10 @@ func newGameUnitTank() *engine.GameUnit {
 					"stamina": 100
 				},
 				"attributes": {
-					"strength": 5,
-					"physique": 5,
-					"agility": 5,
-					"endurance": 5,
+					"strength": 15,
+					"physique": 15,
+					"agility": 15,
+					"endurance": 15,
 					"intelligence": 5,
 					"luck": 5
 				},
@@ -144,12 +144,12 @@ func newGameUnitRogue() *engine.GameUnit {
 					"stamina": 100
 				},
 				"attributes": {
-					"strength": 5,
-					"physique": 5,
-					"agility": 5,
+					"strength": 10,
+					"physique": 10,
+					"agility": 20,
 					"endurance": 5,
-					"intelligence": 5,
-					"luck": 5
+					"intelligence": 10,
+					"luck": 15
 				},
 				"resistance": {
 					"stabbing": 5,
@@ -286,9 +286,9 @@ func newGameUnitMage() *engine.GameUnit {
 				"attributes": {
 					"strength": 5,
 					"physique": 5,
-					"agility": 5,
+					"agility": 10,
 					"endurance": 5,
-					"intelligence": 5,
+					"intelligence": 25,
 					"luck": 5
 				},
 				"resistance": {

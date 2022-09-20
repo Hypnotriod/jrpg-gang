@@ -67,16 +67,16 @@ func NewTestScenario() *engine.GameScenario {
 										"luck": 5
 									},
 									"resistance": {
-										"stabbing": 10,
-										"cutting": 10,
+										"stabbing": 0,
+										"cutting": 0,
 										"crushing": 20,
-										"fire": 5,
+										"fire": 0,
 										"cold": 50,
-										"lighting": 15,
-										"poison": 10,
-										"exhaustion": 20,
-										"manaDrain": 5,
-										"fear": 5,
+										"lighting": 0,
+										"poison": 0,
+										"exhaustion": 5,
+										"manaDrain": 0,
+										"fear": 0,
 										"curse": 0
 									}
 								},
@@ -170,16 +170,16 @@ func NewTestScenario() *engine.GameScenario {
 										"luck": 5
 									},
 									"resistance": {
-										"stabbing": 10,
-										"cutting": 10,
-										"crushing": 20,
-										"fire": 5,
-										"cold": 5,
-										"lighting": 5,
-										"poison": 5,
-										"exhaustion": 5,
-										"manaDrain": 5,
-										"fear": 5,
+										"stabbing": 5,
+										"cutting": 5,
+										"crushing": 0,
+										"fire": 0,
+										"cold": 0,
+										"lighting": 0,
+										"poison": 15,
+										"exhaustion": 0,
+										"manaDrain": 0,
+										"fear": 0,
 										"curse": 0
 									}
 								},

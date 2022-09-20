@@ -18,6 +18,7 @@ const (
 	RequestShopStatus         RequestType = "shopStatus"
 	RequestShopAction         RequestType = "shopAction"
 	RequestStartGame          RequestType = "startGame"
+	RequestLeaveGame          RequestType = "leaveGame"
 	RequestGameAction         RequestType = "gameAction"
 	RequestNextGamePhase      RequestType = "nextGamePhase"
 	RequestGameState          RequestType = "gameState"
@@ -33,7 +34,7 @@ type ParsebleRequest interface {
 	*Request | *GameActionRequest | *CreateGameRoomRequest | *JoinRequest | *DestroyGameRoomRequest |
 		*LobbyStatusRequest | *UserStatusRequest | *JoinGameRoomRequest | *LeaveGameRoomRequest |
 		*StartGameRequest | *GameStateRequest | *GameNextPhaseRequest | *ShopStatusRequest | *ShopActionRequest |
-		*ConfiguratorActionRequest | *PlayerInfoRequest
+		*ConfiguratorActionRequest | *PlayerInfoRequest | *GameLeaveRequest
 }
 
 func parseRequest[T ParsebleRequest](data T, requestRaw string) T {

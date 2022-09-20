@@ -83,6 +83,8 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 		return c.handleGameStateRequest(userId, requestRaw, response)
 	case RequestPlayerInfo:
 		return c.handlePlayerInfoRequest(userId, requestRaw, response)
+	case RequestLeaveGame:
+		return c.handleGameLeaveRequest(userId, requestRaw, response)
 	}
 	if status.Test(users.UserStatusInGame) {
 		return response.WithStatus(ResponseStatusNotAllowed)

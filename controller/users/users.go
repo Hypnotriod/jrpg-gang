@@ -1,6 +1,7 @@
 package users
 
 import (
+	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"sync"
@@ -100,6 +101,32 @@ func (u *Users) UpdateUnit(userId engine.UserId, unit *engine.GameUnit) {
 		return
 	}
 	user.Unit = *unit
+}
+
+func (u *Users) UpdateWithUnitOnGameComplete(userId engine.UserId, unit *domain.Unit) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
+	user, ok := u.users[userId]
+	if !ok {
+		return
+	}
+	user.Unit.Stats = unit.Stats
+	user.Unit.Booty = unit.Booty
+	user.Unit.Inventory = unit.Inventory
+	user.Unit.Inventory.Prepare()
+	user.Unit.Inventory.PopulateUids(user.RndGen)
+}
+
+func (u *Users) ResetUser(userId engine.UserId) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
+	user, ok := u.users[userId]
+	if !ok {
+		return
+	}
+	user.IsHost = false
+	user.Status = UserStatusJoined
+	user.RndGen.ResetUidGen()
 }
 
 func (u *Users) AddUser(user *User) {

@@ -25,6 +25,10 @@ func (g *RndGen) NextUid() uint {
 	return g.uidCounter
 }
 
+func (g *RndGen) ResetUidGen() {
+	g.uidCounter = 0
+}
+
 func (g *RndGen) MakeId() string {
 	data := make([]byte, 16)
 	for n := 0; n < len(data); n += 4 {
