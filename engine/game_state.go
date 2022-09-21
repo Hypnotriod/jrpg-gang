@@ -44,25 +44,25 @@ func (s GameState) String() string {
 
 func (s *GameState) MakeUnitsQueue(units []*GameUnit) {
 	s.InactiveUnits = make([]uint, 0, len(units))
+	s.sortActiveUnitsQueue(units)
 	s.ActiveUnitsQueue = util.Map(units, func(unit *GameUnit) uint {
 		return unit.Uid
 	})
-	s.sortActiveUnitsQueue(units)
 }
 
 func (s *GameState) UpdateUnitsQueue(units []*GameUnit) {
 	activeUnits := util.Filter(units, func(u *GameUnit) bool {
 		return s.isUnitActive(u.Uid)
 	})
+	s.sortActiveUnitsQueue(activeUnits)
 	s.ActiveUnitsQueue = util.Map(activeUnits, func(unit *GameUnit) uint {
 		return unit.Uid
 	})
-	s.sortActiveUnitsQueue(activeUnits)
 }
 
 func (s *GameState) sortActiveUnitsQueue(units []*GameUnit) {
-	sort.SliceStable(s.ActiveUnitsQueue, func(i, j int) bool {
-		return units[i].TotalInitiative() < units[j].TotalInitiative()
+	sort.SliceStable(units, func(i, j int) bool {
+		return units[i].TotalInitiative() > units[j].TotalInitiative()
 	})
 }
 
