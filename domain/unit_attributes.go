@@ -7,13 +7,13 @@ import (
 )
 
 type UnitAttributes struct {
-	Strength     float32 `json:"strength"`
-	Physique     float32 `json:"physique"`
-	Agility      float32 `json:"agility"`
-	Endurance    float32 `json:"endurance"`
-	Intelligence float32 `json:"intelligence"`
-	Initiative   float32 `json:"initiative"`
-	Luck         float32 `json:"luck"`
+	Strength     float32 `json:"strength"`     // enhances (stabbing, cutting, crushing, exhaustion, bleeding) damage
+	Physique     float32 `json:"physique"`     // affects stun chance
+	Agility      float32 `json:"agility"`      // affects attack chance
+	Endurance    float32 `json:"endurance"`    // stamina recovery
+	Intelligence float32 `json:"intelligence"` // enhances (fire, cold, lighting, manaDrain) damage
+	Initiative   float32 `json:"initiative"`   // affects turn order
+	Luck         float32 `json:"luck"`         // affects critical chance
 }
 
 func (a UnitAttributes) String() string {

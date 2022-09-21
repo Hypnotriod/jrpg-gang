@@ -8,19 +8,20 @@ import (
 )
 
 type Damage struct {
-	Stabbing   float32 `json:"stabbing,omitempty"`
-	Cutting    float32 `json:"cutting,omitempty"`
-	Crushing   float32 `json:"crushing,omitempty"`
-	Fire       float32 `json:"fire,omitempty"`
-	Cold       float32 `json:"cold,omitempty"`
-	Lighting   float32 `json:"lighting,omitempty"`
-	Poison     float32 `json:"poison,omitempty"`
-	Exhaustion float32 `json:"exhaustion,omitempty"`
-	ManaDrain  float32 `json:"manaDrain,omitempty"`
-	Bleeding   float32 `json:"bleeding,omitempty"`
-	Fear       float32 `json:"fear,omitempty"`
-	Curse      float32 `json:"curse,omitempty"`
-	IsCritical bool    `json:"isCritical,omitempty"`
+	Stabbing   float32 `json:"stabbing,omitempty"`   // affects health
+	Cutting    float32 `json:"cutting,omitempty"`    // affects health
+	Crushing   float32 `json:"crushing,omitempty"`   // affects health
+	Fire       float32 `json:"fire,omitempty"`       // affects health
+	Cold       float32 `json:"cold,omitempty"`       // affects health
+	Lighting   float32 `json:"lighting,omitempty"`   // affects health
+	Poison     float32 `json:"poison,omitempty"`     // affects health
+	Exhaustion float32 `json:"exhaustion,omitempty"` // affects stamina
+	ManaDrain  float32 `json:"manaDrain,omitempty"`  // affects mana
+	Bleeding   float32 `json:"bleeding,omitempty"`   // affects health
+	Fear       float32 `json:"fear,omitempty"`       // affects fear
+	Curse      float32 `json:"curse,omitempty"`      // affects curse
+	IsCritical bool    `json:"isCritical,omitempty"` // critical damage flag
+	IsStunned  bool    `json:"isStunned,omitempty"`  // stun flag
 }
 
 func (d *Damage) Accumulate(damage Damage) {
@@ -51,6 +52,10 @@ func (d *Damage) Reduce(damage Damage) {
 	d.Bleeding -= damage.Bleeding
 	d.Fear -= damage.Fear
 	d.Curse -= damage.Curse
+}
+
+func (d *Damage) PhysicalDamage() float32 {
+	return d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lighting
 }
 
 func (d *Damage) HasPhysicalEffect() bool {

@@ -66,6 +66,12 @@ func (s *GameState) sortActiveUnitsQueue(units []*GameUnit) {
 	})
 }
 
+func (s *GameState) PopStunnedUnitFromQueue(unitUid uint) {
+	s.ActiveUnitsQueue = util.Filter(s.ActiveUnitsQueue, func(uid uint) bool {
+		return unitUid != uid
+	})
+}
+
 func (s *GameState) ShiftUnitsQueue() {
 	if len(s.ActiveUnitsQueue) != 0 {
 		s.InactiveUnits = append(s.InactiveUnits, s.ActiveUnitsQueue[0])

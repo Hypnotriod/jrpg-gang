@@ -1,5 +1,7 @@
 package engine
 
+import "jrpg-gang/domain"
+
 func (e *GameEngine) NextPhase() *GameEvent {
 	result := e.NewGameEvent()
 	switch e.state.phase {
@@ -58,6 +60,7 @@ func (e *GameEngine) processBattleComplete(event *GameEvent) {
 
 func (e *GameEngine) switchToNextUnit() {
 	unit := e.getActiveUnit()
+	unit.State.IsStunned = false
 	if unit.HasUserId() {
 		e.state.ChangePhase(GamePhaseMakeMoveOrAction)
 	} else {
@@ -82,6 +85,12 @@ func (e *GameEngine) onUnitMoveAction() {
 		e.state.ChangePhase(GamePhaseMakeAction)
 	} else {
 		e.state.ChangePhase(GamePhaseMakeActionAI)
+	}
+}
+
+func (e *GameEngine) onUnitUseAction(targetUid uint, actionResult *domain.ActionResult) {
+	if actionResult != nil && actionResult.WithStun() {
+		e.state.PopStunnedUnitFromQueue(targetUid)
 	}
 }
 

@@ -7,8 +7,9 @@ import (
 
 type UnitState struct {
 	UnitBaseAttributes
-	Fear  float32 `json:"fear"`
-	Curse float32 `json:"curse"`
+	Fear      float32 `json:"fear"`                // ???
+	Curse     float32 `json:"curse"`               // reduces action chance
+	IsStunned bool    `json:"isStunned,omitempty"` // stun flag
 }
 
 func (s *UnitState) Accumulate(state UnitState) {

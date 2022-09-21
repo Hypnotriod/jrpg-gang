@@ -164,7 +164,7 @@ func NewTestScenario() *engine.GameScenario {
 									},
 									"attributes": {
 										"strength": 10,
-										"physique": 15,
+										"physique": 5,
 										"agility": 15,
 										"endurance": 30,
 										"intelligence": 0,

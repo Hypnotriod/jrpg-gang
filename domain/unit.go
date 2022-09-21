@@ -56,6 +56,19 @@ func (u *Unit) TotalAgility() float32 {
 	return util.Max(agility, 0)
 }
 
+func (u *Unit) TotalPhysique() float32 {
+	var physique float32 = u.Stats.Attributes.Physique
+	for _, ench := range u.Modification {
+		physique += ench.Attributes.Physique
+	}
+	for _, item := range u.Inventory.GetEquipment(true) {
+		for _, ench := range item.Modification {
+			physique += ench.Attributes.Physique
+		}
+	}
+	return util.Max(physique, 0)
+}
+
 func (u *Unit) TotalIntelligence() float32 {
 	var intelligence float32 = u.Stats.Attributes.Intelligence
 	for _, ench := range u.Modification {
@@ -83,6 +96,9 @@ func (u *Unit) TotalLuck() float32 {
 }
 
 func (u *Unit) TotalInitiative() float32 {
+	if u.State.IsStunned {
+		return 0
+	}
 	var initiative float32 = u.Stats.Attributes.Initiative
 	for _, ench := range u.Modification {
 		initiative += ench.Attributes.Initiative

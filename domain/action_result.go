@@ -42,6 +42,12 @@ func (r ActionResult) String() string {
 		r.Result)
 }
 
+func (r *ActionResult) WithStun() bool {
+	return util.Any(r.InstantDamage, func(damage Damage) bool {
+		return damage.IsStunned
+	})
+}
+
 func NewActionResult() *ActionResult {
 	action := &ActionResult{}
 	return action

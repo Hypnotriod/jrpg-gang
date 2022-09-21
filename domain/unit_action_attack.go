@@ -3,6 +3,7 @@ package domain
 import "jrpg-gang/util"
 
 func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageImpact) {
+	wasStunned := target.State.IsStunned
 	instantDamage := []Damage{}
 	temporalDamage := []DamageImpact{}
 	totalModification := u.TotalModification()
@@ -14,7 +15,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 		}
 		imp.Enchance(totalModification.Attributes, totalModification.Damage)
 		imp.Normalize()
-		if u.CheckRandomChance(u.calculateCritilalAttackChance(target)) {
+		if wasStunned || u.CheckRandomChance(u.calculateCritilalAttackChance(target)) {
 			imp.Damage.Multiply(CRITICAL_DAMAGE_FACTOR)
 			imp.Damage.IsCritical = true
 		}
@@ -25,6 +26,10 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 		} else {
 			instDmg := target.applyDamage(imp.Damage)
 			instantDamage = append(instantDamage, instDmg)
+			if u.CheckRandomChance(target.calculateStunChance(u, imp)) {
+				target.State.IsStunned = true
+				instDmg.IsStunned = true
+			}
 		}
 	}
 	return instantDamage, temporalDamage
@@ -55,6 +60,11 @@ func (u *Unit) accumulateDamageImpact(damage DamageImpact) DamageImpact {
 		u.Damage = append(u.Damage, damage)
 	}
 	return damage
+}
+
+func (u *Unit) calculateStunChance(target *Unit, damage DamageImpact) float32 {
+	chance := (u.TotalPhysique() - u.State.Curse) - (damage.PhysicalDamage() - target.State.Curse)
+	return util.Max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) calculateCritilalAttackChance(target *Unit) float32 {

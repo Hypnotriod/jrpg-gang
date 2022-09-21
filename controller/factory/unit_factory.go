@@ -97,7 +97,7 @@ func newGameUnitTank() *engine.GameUnit {
 						"modification": [
 							{
 								"damage": {
-									"cutting": 30
+									"stabbing": 10
 								}
 							}	
 						],
@@ -274,7 +274,8 @@ func newGameUnitMage() *engine.GameUnit {
 			},
 			"state": {
 				"health": 100,
-				"stamina": 100
+				"stamina": 100,
+				"mana": 100
 			},
 			"stats": {
 				"progress": {
@@ -328,6 +329,10 @@ func newGameUnitMage() *engine.GameUnit {
 						"range": {
 							"maximumX": 3,
 							"maximumY": 3
+						},
+						"useCost": {
+							"mana": 15,
+							"stamina": 5
 						}
 					}
 				],

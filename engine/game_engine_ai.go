@@ -74,7 +74,9 @@ func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target
 		TargetUid: target.Uid,
 		ItemUid:   weaponUid,
 	}
-	unitAction.Result = *unit.UseInventoryItemOnTarget(&target.Unit, weaponUid)
+	result := unit.UseInventoryItemOnTarget(&target.Unit, weaponUid)
+	unitAction.Result = *result
 	event.UnitActionResult = unitAction
+	e.onUnitUseAction(target.Uid, result)
 	e.onUnitCompleteAction()
 }
