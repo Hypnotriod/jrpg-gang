@@ -186,6 +186,9 @@ func (d Damage) String() string {
 	if d.IsCritical {
 		props = append(props, "critical!")
 	}
+	if d.IsStunned {
+		props = append(props, "stunned!")
+	}
 
 	return strings.Join(props, ", ")
 }
