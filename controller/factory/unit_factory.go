@@ -75,7 +75,7 @@ func newGameUnitTank() *engine.GameUnit {
 						"slotsNumber": 1,
 						"equipped": true,
 						"requirements": {
-							"strength": 5
+							"physique": 15
 						},
 						"range": {
 							"maximumX": 1,
@@ -178,7 +178,7 @@ func newGameUnitRogue() *engine.GameUnit {
 						"slotsNumber": 2,
 						"equipped": true,
 						"requirements": {
-							"strength": 5
+							"physique": 10
 						},
 						"range": {
 							"maximumX": 10,
@@ -201,7 +201,7 @@ func newGameUnitRogue() *engine.GameUnit {
 						"slotsNumber": 1,
 						"equipped": false,
 						"requirements": {
-							"strength": 5
+							"physique": 5
 						},
 						"range": {
 							"maximumX": 1,
@@ -318,7 +318,7 @@ func newGameUnitMage() *engine.GameUnit {
 						"slotsNumber": 1,
 						"equipped": true,
 						"requirements": {
-							"intelligence": 5
+							"intelligence": 15
 						},
 						"damage": [
 						],
