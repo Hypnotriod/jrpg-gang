@@ -97,7 +97,7 @@ func (u *Unit) TotalLuck() float32 {
 
 func (u *Unit) TotalInitiative() float32 {
 	if u.State.IsStunned {
-		return 0
+		return -1
 	}
 	var initiative float32 = u.Stats.Attributes.Initiative
 	for _, ench := range u.Modification {
