@@ -71,6 +71,9 @@ func (s *GameScenario) prepareUnits() {
 
 func (s *GameScenario) prepareUnit(unit *GameUnit) {
 	unit.Uid = s.rndGen.NextUid()
+	if unit.State.IsEmpty() {
+		unit.State.UnitBaseAttributes = unit.Stats.BaseAttributes
+	}
 	if unit.Damage == nil {
 		unit.Damage = []domain.DamageImpact{}
 	}

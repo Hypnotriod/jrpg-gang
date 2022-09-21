@@ -12,6 +12,10 @@ type UnitState struct {
 	IsStunned bool    `json:"isStunned,omitempty"` // stun flag
 }
 
+func (s *UnitState) IsEmpty() bool {
+	return s.Fear == 0 && s.Curse == 0 && s.Health == 0 && s.Mana == 0 && s.Stamina == 0
+}
+
 func (s *UnitState) Accumulate(state UnitState) {
 	s.UnitBaseAttributes.Accumulate(state.UnitBaseAttributes)
 	s.Fear -= state.Fear

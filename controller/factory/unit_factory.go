@@ -28,10 +28,6 @@ func newGameUnitTank() *engine.GameUnit {
 			"booty": {
 				"coins": 5000
 			},
-			"state": {
-				"health": 100,
-				"stamina": 100
-			},
 			"stats": {
 				"progress": {
 					"level": 1,
@@ -130,10 +126,6 @@ func newGameUnitRogue() *engine.GameUnit {
 			"faction": 0,
 			"booty": {
 				"coins": 5000
-			},
-			"state": {
-				"health": 100,
-				"stamina": 100
 			},
 			"stats": {
 				"progress": {
@@ -272,11 +264,6 @@ func newGameUnitMage() *engine.GameUnit {
 			"booty": {
 				"coins": 5000
 			},
-			"state": {
-				"health": 100,
-				"stamina": 100,
-				"mana": 100
-			},
 			"stats": {
 				"progress": {
 					"level": 1,
@@ -284,7 +271,8 @@ func newGameUnitMage() *engine.GameUnit {
 				},
 				"baseAttributes": {
 					"health": 100,
-					"stamina": 100
+					"stamina": 100,
+					"mana": 100
 				},
 				"attributes": {
 					"strength": 5,

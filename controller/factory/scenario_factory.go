@@ -45,10 +45,6 @@ func NewTestScenario() *engine.GameScenario {
 								"name": "North Troll",
 								"code": "troll-01",
 								"faction": 1,
-								"state": {
-									"health": 100,
-									"stamina": 100
-								},
 								"stats": {
 									"progress": {
 										"level": 10,
@@ -149,10 +145,6 @@ func NewTestScenario() *engine.GameScenario {
 								"name": "Nasty Goblin",
 								"code": "goblin-01",
 								"faction": 1,
-								"state": {
-									"health": 100,
-									"stamina": 100
-								},
 								"stats": {
 									"progress": {
 										"level": 10,
