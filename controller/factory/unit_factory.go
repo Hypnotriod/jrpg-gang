@@ -47,6 +47,7 @@ func newGameUnitTank() *engine.GameUnit {
 					"agility": 15,
 					"endurance": 15,
 					"intelligence": 5,
+					"initiative": 5,
 					"luck": 5
 				},
 				"resistance": {
@@ -149,6 +150,7 @@ func newGameUnitRogue() *engine.GameUnit {
 					"agility": 20,
 					"endurance": 5,
 					"intelligence": 10,
+					"initiative": 20,
 					"luck": 15
 				},
 				"resistance": {
@@ -289,6 +291,7 @@ func newGameUnitMage() *engine.GameUnit {
 					"agility": 10,
 					"endurance": 5,
 					"intelligence": 25,
+					"initiative": 0,
 					"luck": 5
 				},
 				"resistance": {

@@ -64,6 +64,7 @@ func NewTestScenario() *engine.GameScenario {
 										"agility": 5,
 										"endurance": 30,
 										"intelligence": 0,
+										"initiative": 0,
 										"luck": 5
 									},
 									"resistance": {
@@ -167,6 +168,7 @@ func NewTestScenario() *engine.GameScenario {
 										"agility": 15,
 										"endurance": 30,
 										"intelligence": 0,
+										"initiative": 15,
 										"luck": 5
 									},
 									"resistance": {
