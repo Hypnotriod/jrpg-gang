@@ -34,8 +34,8 @@ func newGameUnitTank() *engine.GameUnit {
 					"experience": 0
 				},
 				"baseAttributes": {
-					"health": 100,
-					"stamina": 100
+					"health": 150,
+					"stamina": 150
 				},
 				"attributes": {
 					"strength": 15,
