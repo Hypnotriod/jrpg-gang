@@ -9,6 +9,8 @@ func (e *GameEngine) NextPhase() *GameEvent {
 		e.processStartRound()
 	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
 		e.processAI(result)
+	case GamePhaseRetreatAction:
+		e.processRetreatActionAI(result)
 	case GamePhaseActionComplete:
 		e.processActionComplete(result)
 	case GamePhaseBattleComplete:
@@ -23,6 +25,7 @@ func (e *GameEngine) NextPhaseRequired() bool {
 		e.state.phase == GamePhasePrepareUnit ||
 		e.state.phase == GamePhaseMakeMoveOrActionAI ||
 		e.state.phase == GamePhaseMakeActionAI ||
+		e.state.phase == GamePhaseRetreatAction ||
 		e.state.phase == GamePhaseActionComplete
 }
 
@@ -61,7 +64,9 @@ func (e *GameEngine) processBattleComplete(event *GameEvent) {
 func (e *GameEngine) switchToNextUnit() {
 	unit := e.getActiveUnit()
 	unit.State.IsStunned = false
-	if unit.HasUserId() {
+	if unit.CheckRandomChance(unit.CalculateRetreatChance()) {
+		e.state.ChangePhase(GamePhaseRetreatAction)
+	} else if unit.HasUserId() {
 		e.state.ChangePhase(GamePhaseMakeMoveOrAction)
 	} else {
 		e.state.ChangePhase(GamePhaseMakeMoveOrActionAI)

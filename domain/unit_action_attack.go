@@ -1,7 +1,5 @@
 package domain
 
-import "jrpg-gang/util"
-
 func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageImpact) {
 	wasStunned := target.State.IsStunned
 	instantDamage := []Damage{}
@@ -10,12 +8,12 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 	totalModification.Attributes.Accumulate(u.Stats.Attributes)
 	totalModification.Attributes.Normalize()
 	for _, imp := range damage {
-		if !u.CheckRandomChance(u.calculateAttackChance(target, imp)) {
+		if !u.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
 			break
 		}
 		imp.Enchance(totalModification.Attributes, totalModification.Damage)
 		imp.Normalize()
-		if wasStunned || u.CheckRandomChance(u.calculateCritilalAttackChance(target)) {
+		if wasStunned || u.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
 			imp.Damage.Multiply(CRITICAL_DAMAGE_FACTOR)
 			imp.Damage.IsCritical = true
 		}
@@ -25,7 +23,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 			temporalDamage = append(temporalDamage, tmpImp)
 		} else {
 			instDmg := target.applyDamage(imp.Damage)
-			if !wasStunned && u.CheckRandomChance(target.calculateStunChance(u, instDmg)) {
+			if !wasStunned && u.CheckRandomChance(target.CalculateStunChance(u, instDmg)) {
 				target.State.IsStunned = true
 				instDmg.IsStunned = true
 			}
@@ -63,19 +61,4 @@ func (u *Unit) accumulateDamageImpact(damage DamageImpact) DamageImpact {
 		u.Damage = append(u.Damage, damage)
 	}
 	return damage
-}
-
-func (u *Unit) calculateStunChance(target *Unit, damage Damage) float32 {
-	chance := (damage.PhysicalDamage() - target.State.Curse) - (u.TotalPhysique() - u.State.Curse)
-	return util.Max(chance, MINIMUM_CHANCE)
-}
-
-func (u *Unit) calculateCritilalAttackChance(target *Unit) float32 {
-	chance := (u.TotalLuck() - u.State.Curse) - (target.TotalLuck() - target.State.Curse)
-	return util.Max(chance, MINIMUM_CHANCE)
-}
-
-func (u *Unit) calculateAttackChance(target *Unit, damage DamageImpact) float32 {
-	chance := (u.TotalAgility() - u.State.Curse) - (target.TotalAgility() - target.State.Curse) + damage.Chance
-	return util.Max(chance, MINIMUM_CHANCE)
 }

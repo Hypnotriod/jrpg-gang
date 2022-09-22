@@ -159,3 +159,28 @@ func (u *Unit) SetRng(rng *rand.Rand) {
 func (u *Unit) CanReachWithWeapon(target *Unit, weapon *Weapon) bool {
 	return weapon.Range.Check(u.Position, target.Position)
 }
+
+func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
+	chance := (u.TotalLuck() - u.State.Curse) - (target.TotalLuck() - target.State.Curse)
+	return util.Max(chance, MINIMUM_CHANCE)
+}
+
+func (u *Unit) CalculateAttackChance(target *Unit, damage DamageImpact) float32 {
+	chance := (u.TotalAgility() - u.State.Curse) - (target.TotalAgility() - target.State.Curse) + damage.Chance
+	return util.Max(chance, MINIMUM_CHANCE)
+}
+
+func (u *Unit) CalculateModificationChance(modification UnitModificationImpact) float32 {
+	chance := (u.TotalIntelligence() - u.State.Curse) + modification.Chance
+	return util.Max(chance, MINIMUM_CHANCE)
+}
+
+func (u *Unit) CalculateStunChance(target *Unit, damage Damage) float32 {
+	chance := (damage.PhysicalDamage() - target.State.Curse) - (u.TotalPhysique() - u.State.Curse)
+	return util.Max(chance, MINIMUM_CHANCE)
+}
+
+func (u *Unit) CalculateRetreatChance() float32 {
+	chance := u.State.Fear
+	return util.Max(chance, 0)
+}

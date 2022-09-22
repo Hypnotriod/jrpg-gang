@@ -15,6 +15,7 @@ const (
 	GamePhaseMakeActionAI       GamePhase = "makeActionAI"
 	GamePhaseMakeMoveOrAction   GamePhase = "makeMoveOrAction"
 	GamePhaseMakeAction         GamePhase = "makeAction"
+	GamePhaseRetreatAction      GamePhase = "retreatAction"
 	GamePhaseActionComplete     GamePhase = "actionComplete"
 	GamePhaseBattleComplete     GamePhase = "battleComplete"
 )

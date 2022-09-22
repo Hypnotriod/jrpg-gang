@@ -7,7 +7,7 @@ import (
 
 type UnitState struct {
 	UnitBaseAttributes
-	Fear      float32 `json:"fear"`                // ???
+	Fear      float32 `json:"fear"`                // affects retreat chance
 	Curse     float32 `json:"curse"`               // reduces action chance
 	IsStunned bool    `json:"isStunned,omitempty"` // stun flag
 }

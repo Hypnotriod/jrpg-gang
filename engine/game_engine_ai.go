@@ -1,6 +1,9 @@
 package engine
 
-import "jrpg-gang/domain"
+import (
+	"jrpg-gang/domain"
+	"math/rand"
+)
 
 func (e *GameEngine) processAI(event *GameEvent) {
 	unit := e.getActiveUnit()
@@ -9,6 +12,39 @@ func (e *GameEngine) processAI(event *GameEvent) {
 	}
 	if e.state.phase == GamePhaseMakeMoveOrActionAI && e.aiTryToMove(event, unit) {
 		return
+	}
+	e.onUnitCompleteAction()
+}
+
+func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
+	unit := e.getActiveUnit()
+	matrix := &e.battlefield().Matrix
+	position := domain.Position{}
+	testColumn := func(x int) bool {
+		lenY := len((*matrix)[x])
+		yOffset := rand.Intn(lenY)
+		position.X = x
+		for y := 0; y < lenY; y++ {
+			position.Y = (yOffset + y) % lenY
+			if e.battlefield().CanMoveUnitTo(unit, position) {
+				e.aiMove(event, unit, position)
+				return true
+			}
+		}
+		return false
+	}
+	if unit.Faction == GameUnitFactionLeft {
+		for x := 0; x < len(*matrix); x++ {
+			if testColumn(x) {
+				break
+			}
+		}
+	} else {
+		for x := len(*matrix) - 1; x >= 0; x-- {
+			if testColumn(x) {
+				break
+			}
+		}
 	}
 	e.onUnitCompleteAction()
 }
