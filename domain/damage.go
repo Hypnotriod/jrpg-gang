@@ -87,6 +87,8 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Exhaustion = util.AccumulateIfNotZeros(d.Exhaustion, attributes.Strength)
 	d.ManaDrain = util.AccumulateIfNotZeros(d.ManaDrain, attributes.Intelligence)
 	d.Bleeding = util.AccumulateIfNotZeros(d.Bleeding, attributes.Strength)
+	d.Fear = util.AccumulateIfNotZeros(d.Fear, attributes.Intelligence)
+	d.Curse = util.AccumulateIfNotZeros(d.Curse, attributes.Intelligence)
 
 	d.Stabbing = util.AccumulateIfNotZeros(d.Stabbing, damage.Stabbing)
 	d.Cutting = util.AccumulateIfNotZeros(d.Cutting, damage.Cutting)
