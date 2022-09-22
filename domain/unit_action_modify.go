@@ -2,20 +2,6 @@ package domain
 
 import "jrpg-gang/util"
 
-func (u *Unit) CalculateModificationChance(modification UnitModificationImpact) float32 {
-	chance := (u.TotalIntelligence() - u.State.Curse) + modification.Chance
-	return util.Max(chance, MINIMUM_CHANCE)
-}
-
-func (u *Unit) ApplyRecovery(recovery UnitRecovery) {
-	modification := u.TotalModification()
-	attributes := modification.BaseAttributes
-	attributes.Accumulate(u.Stats.BaseAttributes)
-	u.State.Accumulate(recovery.UnitState)
-	u.State.Saturate(attributes)
-	u.State.Normalize()
-}
-
 func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]UnitRecovery, []UnitModificationImpact) {
 	instantRecovery := []UnitRecovery{}
 	temporalModification := []UnitModificationImpact{}
@@ -32,4 +18,18 @@ func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]Un
 		}
 	}
 	return instantRecovery, temporalModification
+}
+
+func (u *Unit) ApplyRecovery(recovery UnitRecovery) {
+	modification := u.TotalModification()
+	attributes := modification.BaseAttributes
+	attributes.Accumulate(u.Stats.BaseAttributes)
+	u.State.Accumulate(recovery.UnitState)
+	u.State.Saturate(attributes)
+	u.State.Normalize()
+}
+
+func (u *Unit) CalculateModificationChance(modification UnitModificationImpact) float32 {
+	chance := (u.TotalIntelligence() - u.State.Curse) + modification.Chance
+	return util.Max(chance, MINIMUM_CHANCE)
 }

@@ -25,12 +25,15 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 			temporalDamage = append(temporalDamage, tmpImp)
 		} else {
 			instDmg := target.applyDamage(imp.Damage)
-			if !wasStunned && u.CheckRandomChance(target.calculateStunChance(u, imp)) {
+			if !wasStunned && u.CheckRandomChance(target.calculateStunChance(u, instDmg)) {
 				target.State.IsStunned = true
 				instDmg.IsStunned = true
 			}
 			instantDamage = append(instantDamage, instDmg)
 		}
+	}
+	if wasStunned && len(instantDamage) != 0 {
+		target.State.IsStunned = false
 	}
 	return instantDamage, temporalDamage
 }
@@ -62,7 +65,7 @@ func (u *Unit) accumulateDamageImpact(damage DamageImpact) DamageImpact {
 	return damage
 }
 
-func (u *Unit) calculateStunChance(target *Unit, damage DamageImpact) float32 {
+func (u *Unit) calculateStunChance(target *Unit, damage Damage) float32 {
 	chance := (damage.PhysicalDamage() - target.State.Curse) - (u.TotalPhysique() - u.State.Curse)
 	return util.Max(chance, MINIMUM_CHANCE)
 }
