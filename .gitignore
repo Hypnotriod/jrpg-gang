@@ -1,3 +1,4 @@
 *.exe
 *.vsix
 *.code-workspace
+__debug_bin

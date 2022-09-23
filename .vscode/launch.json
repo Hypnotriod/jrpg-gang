@@ -36,14 +36,14 @@
         },
         {
             "name": "Launch Edge against localhost",
-            "type": "pwa-msedge",
+            "type": "msedge",
             "request": "launch",
             "url": "http://localhost:3000/",
             "webRoot": "${workspaceFolder}"
         },
         {
             "name": "Launch Chrome against localhost",
-            "type": "pwa-chrome",
+            "type": "chrome",
             "request": "launch",
             "url": "http://localhost:3000/",
             "webRoot": "${workspaceFolder}"
