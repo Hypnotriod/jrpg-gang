@@ -1,4 +1,4 @@
-package test
+package engine
 
 import (
 	"jrpg-gang/engine"

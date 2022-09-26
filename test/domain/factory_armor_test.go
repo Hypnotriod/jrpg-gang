@@ -1,4 +1,4 @@
-package test
+package domain
 
 import (
 	"jrpg-gang/domain"
