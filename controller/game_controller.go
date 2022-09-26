@@ -35,8 +35,8 @@ func NewGameController() *GameController {
 
 func (c *GameController) ConnectionStatusChanged(userId engine.UserId, isOffline bool) {
 	c.users.ConnectionStatusChanged(userId, isOffline)
-	if c.rooms.ConnectionStatusChanged(userId, isOffline) {
-		c.broadcastLobbyStatus()
+	if roomUid, ok := c.rooms.ConnectionStatusChanged(userId, isOffline); ok {
+		c.broadcastRoomStatus(roomUid)
 	}
 	if state, broadcastUserIds, ok := c.engines.ConnectionStatusChanged(userId, isOffline); ok {
 		c.broadcastGameState(broadcastUserIds, state)
@@ -45,8 +45,10 @@ func (c *GameController) ConnectionStatusChanged(userId engine.UserId, isOffline
 
 func (c *GameController) Leave(userId engine.UserId) {
 	c.users.RemoveUser(userId)
-	if _, ok := c.rooms.PopByHostId(userId); ok || c.rooms.RemoveUser(userId) {
-		c.broadcastLobbyStatus()
+	if room, ok := c.rooms.PopByHostId(userId); ok {
+		c.broadcastRoomStatus(room.Uid)
+	} else if roomUid, ok := c.rooms.RemoveUser(userId); ok {
+		c.broadcastRoomStatus(roomUid)
 	}
 	if state, broadcastUserIds, ok := c.engines.RemoveUser(userId); ok {
 		c.broadcastGameState(broadcastUserIds, state)

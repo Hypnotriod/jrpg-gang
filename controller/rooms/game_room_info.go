@@ -7,10 +7,10 @@ import (
 
 type GameRoomInfo struct {
 	Uid         uint                `json:"uid"`
-	Capacity    uint                `json:"capacity"`
-	ScenarioId  GameRoomScenarioId  `json:"scenarioId"`
+	Capacity    uint                `json:"capacity,omitempty"`
+	ScenarioId  GameRoomScenarioId  `json:"scenarioId,omitempty"`
 	JoinedUsers []engine.PlayerInfo `json:"joinedUsers"`
-	Host        engine.PlayerInfo   `json:"host"`
+	Host        engine.PlayerInfo   `json:"host,omitempty"`
 	Inactive    bool                `json:"inactive,omitempty"`
 }
 
@@ -26,6 +26,7 @@ func toGameRoomInfo(room *GameRoom) GameRoomInfo {
 	return GameRoomInfo{
 		Uid:         room.Uid,
 		Host:        room.host.PlayerInfo,
+		ScenarioId:  room.ScenarioId,
 		Capacity:    room.Capacity,
 		JoinedUsers: toPlayerInfos(room.joinedUsers),
 	}

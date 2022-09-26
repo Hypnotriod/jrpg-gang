@@ -36,20 +36,10 @@ func (c *GameController) broadcastUsersStatus(userIds []engine.UserId) {
 	}
 }
 
-func (c *GameController) broadcastLobbyStatus() {
-	response := NewResponse()
-	response.Type = RequestLobbyStatus
-	response.Data[DataKeyRooms] = c.rooms.GetAllRoomInfosList()
-	response.Data[DataKeyUsersCount] = c.users.TotalCount()
-	userIds := c.users.GetIdsByStatus(users.UserStatusJoined|users.UserStatusInRoom, true)
-	c.broadcaster.BroadcastGameMessageAsync(userIds, response.WithStatus(ResponseStatusOk))
-}
-
 func (c *GameController) broadcastRoomStatus(uid uint) {
 	response := NewResponse()
 	response.Type = RequestRoomStatus
 	response.Data[DataKeyRoom] = c.rooms.GetRoomInfoByUid(uid)
-	response.Data[DataKeyUsersCount] = c.users.TotalCount()
 	userIds := c.users.GetIdsByStatus(users.UserStatusJoined|users.UserStatusInRoom, true)
 	c.broadcaster.BroadcastGameMessageAsync(userIds, response.WithStatus(ResponseStatusOk))
 }

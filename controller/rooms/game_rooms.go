@@ -71,19 +71,19 @@ func (r *GameRooms) AddUser(roomUid uint, user users.User) bool {
 	return true
 }
 
-func (r *GameRooms) RemoveUser(userId engine.UserId) bool {
+func (r *GameRooms) RemoveUser(userId engine.UserId) (uint, bool) {
 	defer r.mu.Unlock()
 	r.mu.Lock()
 	roomUid, ok := r.userIdToRoomUid[userId]
 	if !ok {
-		return false
+		return roomUid, false
 	}
 	room, ok := r.rooms[roomUid]
 	if !ok {
-		return false
+		return roomUid, false
 	}
 	if room.host.Id == userId {
-		return false
+		return roomUid, false
 	}
 	delete(r.userIdToRoomUid, userId)
 	restUsers := []users.User{}
@@ -93,7 +93,7 @@ func (r *GameRooms) RemoveUser(userId engine.UserId) bool {
 		}
 	}
 	room.joinedUsers = restUsers
-	return true
+	return roomUid, true
 }
 
 func (r *GameRooms) Has(uid uint) bool {
@@ -139,18 +139,18 @@ func (r *GameRooms) ExistsForHostId(hostId engine.UserId) bool {
 	return room.host.Id == hostId
 }
 
-func (r *GameRooms) ConnectionStatusChanged(userId engine.UserId, isOffline bool) bool {
+func (r *GameRooms) ConnectionStatusChanged(userId engine.UserId, isOffline bool) (uint, bool) {
 	defer r.mu.Unlock()
 	r.mu.Lock()
 	roomUid, ok := r.userIdToRoomUid[userId]
 	if !ok {
-		return false
+		return roomUid, false
 	}
 	room, ok := r.rooms[roomUid]
 	if !ok {
-		return false
+		return roomUid, false
 	}
-	return room.UpdateUserConnectionStatus(userId, isOffline)
+	return roomUid, room.UpdateUserConnectionStatus(userId, isOffline)
 }
 
 func (r *GameRooms) GetAllRoomInfosList() []GameRoomInfo {
