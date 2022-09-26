@@ -1,6 +1,9 @@
 package engine
 
-import "jrpg-gang/domain"
+import (
+	"jrpg-gang/domain"
+	"jrpg-gang/util"
+)
 
 func (e *GameEngine) NextPhase() *GameEvent {
 	result := e.NewGameEvent()
@@ -80,7 +83,8 @@ func (e *GameEngine) endRound(event *GameEvent) {
 		result.Damage[unit.Uid] = unit.ApplyDamageOnNextTurn()
 		unit.ReduceModificationOnNextTurn()
 	}
-	e.battlefield().FilterSurvivors()
+	corpses := e.battlefield().FilterSurvivors()
+	e.applyExperience(corpses)
 	event.EndRoundResult = result
 }
 
@@ -100,9 +104,31 @@ func (e *GameEngine) onUnitUseAction(targetUid uint, actionResult *domain.Action
 }
 
 func (e *GameEngine) onUnitCompleteAction() {
-	e.battlefield().FilterSurvivors()
+	corpses := e.battlefield().FilterSurvivors()
+	e.applyExperience(corpses)
 	e.battlefield().UpdateCellsFactions()
 	e.state.ShiftUnitsQueue()
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	e.state.ChangePhase(GamePhaseActionComplete)
+}
+
+func (e *GameEngine) applyExperience(corpses []*GameUnit) {
+	if len(corpses) == 0 {
+		return
+	}
+	leftUnits := e.battlefield().GetUnitsByFraction(GameUnitFactionLeft)
+	if len(leftUnits) == 0 {
+		return
+	}
+	rightCorpses := util.Filter(corpses, func(corpse *GameUnit) bool {
+		return corpse.Faction == GameUnitFactionRight
+	})
+	totalExperience := util.Reduce(rightCorpses, 0, func(acc uint, corpse *GameUnit) uint {
+		return acc + corpse.Stats.Progress.Experience
+	})
+	experience := totalExperience / uint(len(leftUnits))
+	for _, unit := range leftUnits {
+		unit.Stats.Progress.Experience += experience
+	}
+	leftUnits[0].Stats.Progress.Experience += totalExperience % uint(len(leftUnits))
 }

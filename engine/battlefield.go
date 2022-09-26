@@ -135,17 +135,20 @@ func (b *Battlefield) UpdateCellsFactions() {
 	}
 }
 
-func (b *Battlefield) FilterSurvivors() {
+func (b *Battlefield) FilterSurvivors() []*GameUnit {
+	newCorpses := []*GameUnit{}
 	survivedUnits := []*GameUnit{}
 	for _, unit := range b.Units {
 		if unit.State.Health > 0 {
 			survivedUnits = append(survivedUnits, unit)
 		} else {
 			unit.IsDead = true
+			newCorpses = append(newCorpses, unit)
 			b.Corpses = append(b.Corpses, unit)
 		}
 	}
 	b.Units = survivedUnits
+	return newCorpses
 }
 
 func (b *Battlefield) ContainsUnits(units []*GameUnit) int {
@@ -167,6 +170,12 @@ func (b *Battlefield) FactionsCount() int {
 		factions[unit.Faction] = struct{}{}
 	}
 	return len(factions)
+}
+
+func (b *Battlefield) GetUnitsByFraction(fraction GameUnitFaction) []*GameUnit {
+	return util.Filter(b.Units, func(unit *GameUnit) bool {
+		return unit.Faction == fraction
+	})
 }
 
 func (b *Battlefield) FindReachableTargets(unit *GameUnit) map[uint]*GameUnit {
