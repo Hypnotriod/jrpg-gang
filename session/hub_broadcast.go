@@ -7,8 +7,8 @@ type broadcast struct {
 	message string
 }
 
-func (h *Hub) broadcastGameMessageRoutine(broadcastPoll <-chan broadcast) {
-	for br := range broadcastPoll {
+func (h *Hub) broadcastGameMessageRoutine(broadcastPool <-chan broadcast) {
+	for br := range broadcastPool {
 		if client := h.getClient(br.userId); client != nil {
 			client.WriteMessage(br.message)
 		}
@@ -17,7 +17,7 @@ func (h *Hub) broadcastGameMessageRoutine(broadcastPoll <-chan broadcast) {
 
 func (h *Hub) BroadcastGameMessageAsync(userIds []engine.UserId, message string) {
 	for _, userId := range userIds {
-		h.broadcastPoll <- broadcast{userId, message}
+		h.broadcastPool <- broadcast{userId, message}
 	}
 }
 

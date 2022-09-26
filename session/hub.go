@@ -28,7 +28,7 @@ type Hub struct {
 	controller    *controller.GameController
 	clients       map[engine.UserId]*Client
 	leaveTimers   map[engine.UserId]*time.Timer
-	broadcastPoll chan broadcast
+	broadcastPool chan broadcast
 }
 
 func NewHub(config HubConfig, controller *controller.GameController) *Hub {
@@ -45,15 +45,15 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 	hub.server = &http.Server{
 		Addr: config.Addres,
 	}
-	hub.broadcastPoll = make(chan broadcast, config.BroadcastPoolSize)
+	hub.broadcastPool = make(chan broadcast, config.BroadcastPoolSize)
 	controller.RegisterBroadcaster(hub)
 	http.HandleFunc("/ws", hub.serveWsRequest)
 	return hub
 }
 
 func (h *Hub) Start() error {
-	for n := cap(h.broadcastPoll); n > 0; n-- {
-		go h.broadcastGameMessageRoutine(h.broadcastPoll)
+	for n := cap(h.broadcastPool); n > 0; n-- {
+		go h.broadcastGameMessageRoutine(h.broadcastPool)
 	}
 	return h.server.ListenAndServe()
 }
