@@ -2,6 +2,7 @@ package engine
 
 import (
 	"fmt"
+	"jrpg-gang/domain"
 	"jrpg-gang/util"
 )
 
@@ -28,8 +29,15 @@ func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
 	e.scenario = scenario
 	e.actors = actors
 	e.scenario.Initialize(e.rndGen, actors)
+	e.prepareActors(actors)
 	e.prepareNextSpot(actors)
 	return e
+}
+
+func (e *GameEngine) prepareActors(actors []*GameUnit) {
+	for _, actor := range actors {
+		actor.Booty = domain.UnitBooty{}
+	}
 }
 
 func (e *GameEngine) Dispose() {
@@ -107,18 +115,12 @@ func (e *GameEngine) RemoveActor(userId UserId) bool {
 	return true
 }
 
-func (e *GameEngine) TakeAShare(userId UserId) bool {
-	actor := e.FindActorByUserId(userId)
-	if actor == nil || !e.canTakeAShare() {
-		return false
-	}
+func (e *GameEngine) TakeAShare() domain.UnitBooty {
 	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
-	if len(leftUnits) == 0 {
-		return false
+	if !e.canTakeAShare() || len(leftUnits) == 0 {
+		return domain.UnitBooty{}
 	}
-	share := e.state.Booty.TakeAShare(len(leftUnits))
-	actor.Booty.Accumulate(share)
-	return true
+	return e.state.Booty.TakeAShare(len(leftUnits))
 }
 
 func (e *GameEngine) UpdateUserConnectionStatus(userId UserId, isOffline bool) bool {
