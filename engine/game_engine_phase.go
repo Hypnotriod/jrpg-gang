@@ -142,9 +142,13 @@ func (e *GameEngine) applyExperience(corpses []*GameUnit) {
 	totalExperience := util.Reduce(rightCorpses, 0, func(acc uint, corpse *GameUnit) uint {
 		return acc + corpse.Stats.Progress.Experience
 	})
-	experience := totalExperience / uint(len(leftUnits))
+	unitExperience := totalExperience / uint(len(leftUnits))
+	totalExperience -= unitExperience * uint(len(leftUnits))
 	for _, unit := range leftUnits {
-		unit.Stats.Progress.Experience += experience
+		unit.Stats.Progress.Experience += unitExperience
+		if totalExperience > 0 {
+			unit.Stats.Progress.Experience += 1
+			totalExperience--
+		}
 	}
-	leftUnits[0].Stats.Progress.Experience += totalExperience % uint(len(leftUnits))
 }
