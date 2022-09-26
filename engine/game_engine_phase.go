@@ -32,8 +32,8 @@ func (e *GameEngine) NextPhaseRequired() bool {
 		e.state.phase == GamePhaseActionComplete
 }
 
-func (e *GameEngine) prepareNextSpot() {
-	e.scenario.PrepareNextSpot(e.actors)
+func (e *GameEngine) prepareNextSpot(actors []*GameUnit) {
+	e.scenario.PrepareNextSpot(actors)
 	e.state.MakeUnitsQueue(e.battlefield().Units)
 }
 
@@ -61,7 +61,12 @@ func (e *GameEngine) processRoundComplete(event *GameEvent) {
 }
 
 func (e *GameEngine) processBattleComplete(event *GameEvent) {
-	// todo
+	if e.scenario.IsLastSpot() {
+		// todo
+	} else {
+		e.prepareNextSpot(e.battlefield().Units)
+		e.state.ChangePhase(GamePhasePrepareUnit)
+	}
 }
 
 func (e *GameEngine) switchToNextUnit() {

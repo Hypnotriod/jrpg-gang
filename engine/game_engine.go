@@ -28,7 +28,7 @@ func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
 	e.scenario = scenario
 	e.actors = actors
 	e.scenario.Initialize(e.rndGen, actors)
-	e.prepareNextSpot()
+	e.prepareNextSpot(actors)
 	return e
 }
 
