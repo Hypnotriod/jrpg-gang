@@ -13,14 +13,14 @@ func (c *GameController) broadcastGameAction(userIds []engine.UserId, result *en
 	response := NewResponse()
 	response.Type = RequestGameAction
 	response.Data[DataKeyActionResult] = result
-	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
+	c.broadcaster.BroadcastGameMessageSync(userIds, response.WithStatus(ResponseStatusOk))
 }
 
 func (c *GameController) broadcastGameState(userIds []engine.UserId, state *engine.GameEvent) {
 	response := NewResponse()
 	response.Type = RequestGameState
 	response.Data[DataKeyGameState] = state
-	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
+	c.broadcaster.BroadcastGameMessageSync(userIds, response.WithStatus(ResponseStatusOk))
 }
 
 func (c *GameController) broadcastUsersStatus(userIds []engine.UserId) {
@@ -32,18 +32,30 @@ func (c *GameController) broadcastUsersStatus(userIds []engine.UserId) {
 		response := NewResponse()
 		response.Type = RequestUserStatus
 		response.fillUserStatus(&user)
-		c.broadcaster.BroadcastGameMessage([]engine.UserId{userId}, response.WithStatus(ResponseStatusOk))
+		c.broadcaster.BroadcastGameMessageAsync([]engine.UserId{userId}, response.WithStatus(ResponseStatusOk))
 	}
 }
 
 func (c *GameController) broadcastLobbyStatus() {
 	response := NewResponse()
 	response.Type = RequestLobbyStatus
-	response.Data[DataKeyRooms] = c.rooms.ResponseList()
+	response.Data[DataKeyRooms] = c.rooms.GetAllRoomInfosList()
 	response.Data[DataKeyUsersCount] = c.users.TotalCount()
 	userIds := c.users.GetIdsByStatus(users.UserStatusJoined|users.UserStatusInRoom, true)
-	c.broadcaster.BroadcastGameMessage(userIds, response.WithStatus(ResponseStatusOk))
+	c.broadcaster.BroadcastGameMessageAsync(userIds, response.WithStatus(ResponseStatusOk))
 }
 
-func (c *GameController) BroadcastGameMessage(userIds []engine.UserId, message string) {
+func (c *GameController) broadcastRoomStatus(uid uint) {
+	response := NewResponse()
+	response.Type = RequestRoomStatus
+	response.Data[DataKeyRoom] = c.rooms.GetRoomInfoByUid(uid)
+	response.Data[DataKeyUsersCount] = c.users.TotalCount()
+	userIds := c.users.GetIdsByStatus(users.UserStatusJoined|users.UserStatusInRoom, true)
+	c.broadcaster.BroadcastGameMessageAsync(userIds, response.WithStatus(ResponseStatusOk))
+}
+
+func (c *GameController) BroadcastGameMessageSync(userIds []engine.UserId, message string) {
+}
+
+func (c *GameController) BroadcastGameMessageAsync(userIds []engine.UserId, message string) {
 }

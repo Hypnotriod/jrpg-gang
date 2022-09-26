@@ -9,7 +9,8 @@ import (
 )
 
 type GameControllerBroadcaster interface {
-	BroadcastGameMessage(userIds []engine.UserId, message string)
+	BroadcastGameMessageSync(userIds []engine.UserId, message string)
+	BroadcastGameMessageAsync(userIds []engine.UserId, message string)
 }
 
 type GameController struct {

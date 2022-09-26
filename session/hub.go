@@ -15,18 +15,20 @@ type HubConfig struct {
 	Addres                string `json:"addres"`
 	ReadBufferSize        int    `json:"readBufferSize"`
 	WriteBufferSize       int    `json:"writeBufferSize"`
+	BroadcastPoolSize     int    `json:"broadcastPoolSize"`
 	MaxMessageSize        int64  `json:"maxMessageSize"`
 	UserOfflineTimeoutSec int64  `json:"userOfflineTimeoutSec"`
 }
 
 type Hub struct {
-	mu          sync.RWMutex
-	config      HubConfig
-	server      *http.Server
-	upgrader    *websocket.Upgrader
-	controller  *controller.GameController
-	clients     map[engine.UserId]*Client
-	leaveTimers map[engine.UserId]*time.Timer
+	mu            sync.RWMutex
+	config        HubConfig
+	server        *http.Server
+	upgrader      *websocket.Upgrader
+	controller    *controller.GameController
+	clients       map[engine.UserId]*Client
+	leaveTimers   map[engine.UserId]*time.Timer
+	broadcastPoll chan broadcast
 }
 
 func NewHub(config HubConfig, controller *controller.GameController) *Hub {
@@ -43,21 +45,17 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 	hub.server = &http.Server{
 		Addr: config.Addres,
 	}
+	hub.broadcastPoll = make(chan broadcast, config.BroadcastPoolSize)
 	controller.RegisterBroadcaster(hub)
 	http.HandleFunc("/ws", hub.serveWsRequest)
 	return hub
 }
 
 func (h *Hub) Start() error {
-	return h.server.ListenAndServe()
-}
-
-func (h *Hub) BroadcastGameMessage(userIds []engine.UserId, message string) {
-	for _, userId := range userIds {
-		if client := h.getClient(userId); client != nil {
-			client.WriteMessage(message)
-		}
+	for n := cap(h.broadcastPoll); n > 0; n-- {
+		go h.broadcastGameMessageRoutine(h.broadcastPoll)
 	}
+	return h.server.ListenAndServe()
 }
 
 func (h *Hub) checkOrigin(r *http.Request) bool {

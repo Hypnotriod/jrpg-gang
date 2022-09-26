@@ -11,7 +11,7 @@ func (c *GameController) handleLobbyStatusRequest(userId engine.UserId, requestR
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	response.Data[DataKeyRooms] = c.rooms.ResponseList()
+	response.Data[DataKeyRooms] = c.rooms.GetAllRoomInfosList()
 	response.Data[DataKeyUsersCount] = c.users.TotalCount()
 	return response.WithStatus(ResponseStatusOk)
 }

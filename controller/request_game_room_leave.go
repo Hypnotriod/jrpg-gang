@@ -14,13 +14,14 @@ func (c *GameController) handleLeaveGameRoomRequest(userId engine.UserId, reques
 	if request == nil {
 		return response.WithStatus(ResponseStatusMailformed)
 	}
-	if !c.rooms.ExistsForUserId(userId) {
+	roomUid, ok := c.rooms.GetUidByUserId(userId)
+	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
 	if !c.rooms.RemoveUser(userId) {
 		return response.WithStatus(ResponseStatusFailed)
 	}
 	c.users.ChangeUserStatus(userId, users.UserStatusJoined)
-	c.broadcastLobbyStatus()
+	c.broadcastRoomStatus(roomUid)
 	return response.WithStatus(ResponseStatusOk)
 }

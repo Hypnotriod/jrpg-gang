@@ -22,9 +22,13 @@ func NewGameRooms() *GameRooms {
 	return r
 }
 
-func (r *GameRooms) Add(room *GameRoom) {
+func (r *GameRooms) Create(capacity uint, scenarioId GameRoomScenarioId, hostUser users.User) {
 	defer r.mu.Unlock()
 	r.mu.Lock()
+	room := newGameRoom()
+	room.Capacity = capacity
+	room.ScenarioId = scenarioId
+	room.host = hostUser
 	room.Uid = r.rndGen.NextUid()
 	r.rooms[room.Uid] = room
 	r.userIdToRoomUid[room.host.Id] = room.Uid
@@ -110,6 +114,17 @@ func (r *GameRooms) ExistsForUserId(userId engine.UserId) bool {
 	return present
 }
 
+func (r *GameRooms) GetUidByUserId(userId engine.UserId) (uint, bool) {
+	defer r.mu.RUnlock()
+	r.mu.RLock()
+	roomUid, ok := r.userIdToRoomUid[userId]
+	if !ok {
+		return 0, false
+	}
+	_, present := r.rooms[roomUid]
+	return roomUid, present
+}
+
 func (r *GameRooms) ExistsForHostId(hostId engine.UserId) bool {
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -122,20 +137,6 @@ func (r *GameRooms) ExistsForHostId(hostId engine.UserId) bool {
 		return false
 	}
 	return room.host.Id == hostId
-}
-
-func (r *GameRooms) GetByUserId(userId engine.UserId) (GameRoom, bool) {
-	defer r.mu.RUnlock()
-	r.mu.RLock()
-	roomUid, ok := r.userIdToRoomUid[userId]
-	if !ok {
-		return GameRoom{}, false
-	}
-	room, ok := r.rooms[roomUid]
-	if !ok {
-		return GameRoom{}, false
-	}
-	return *room, ok
 }
 
 func (r *GameRooms) ConnectionStatusChanged(userId engine.UserId, isOffline bool) bool {
@@ -152,25 +153,35 @@ func (r *GameRooms) ConnectionStatusChanged(userId engine.UserId, isOffline bool
 	return room.UpdateUserConnectionStatus(userId, isOffline)
 }
 
-func (r *GameRooms) ResponseList() *[]GameRoomInfo {
+func (r *GameRooms) GetAllRoomInfosList() []GameRoomInfo {
 	defer r.mu.RUnlock()
 	r.mu.RLock()
 	rooms := []GameRoomInfo{}
 	for i := range r.rooms {
-		rooms = append(rooms, GameRoomInfo{
-			Uid:         r.rooms[i].Uid,
-			Host:        r.rooms[i].host.PlayerInfo,
-			Capacity:    r.rooms[i].Capacity,
-			JoinedUsers: toPlayerInfos(r.rooms[i].joinedUsers),
-		})
+		rooms = append(rooms, toGameRoomInfo(r.rooms[i]))
 	}
-	return &rooms
+	return rooms
 }
 
-func toPlayerInfos(users []users.User) []engine.PlayerInfo {
-	result := []engine.PlayerInfo{}
-	for i := range users {
-		result = append(result, users[i].PlayerInfo)
+func (r *GameRooms) GetRoomInfoByUid(uid uint) GameRoomInfo {
+	defer r.mu.RUnlock()
+	r.mu.RLock()
+	if room, ok := r.rooms[uid]; ok {
+		return toGameRoomInfo(room)
 	}
-	return result
+	return toInactiveGameRoomInfo(uid)
+}
+
+func (r *GameRooms) GetRoomInfoByUserId(userId engine.UserId) GameRoomInfo {
+	defer r.mu.RUnlock()
+	r.mu.RLock()
+	roomUid, ok := r.userIdToRoomUid[userId]
+	if !ok {
+		return GameRoomInfo{}
+	}
+	room, ok := r.rooms[roomUid]
+	if !ok {
+		return toInactiveGameRoomInfo(roomUid)
+	}
+	return toGameRoomInfo(room)
 }

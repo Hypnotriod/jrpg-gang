@@ -27,14 +27,14 @@ func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, reque
 	}
 	// todo: check available scenario
 	hostUser, _ := c.users.Get(userId)
-	room := rooms.NewGameRoom(
+	c.rooms.Create(
 		request.Data.Capacity,
 		request.Data.ScenarioId,
 		hostUser,
 	)
-	c.rooms.Add(room)
-	response.Data[DataKeyRoom] = room
 	c.users.ChangeUserStatus(userId, users.UserStatusInRoom)
-	c.broadcastLobbyStatus()
+	roomInfo := c.rooms.GetRoomInfoByUserId(userId)
+	response.Data[DataKeyRoom] = roomInfo
+	c.broadcastRoomStatus(roomInfo.Uid)
 	return response.WithStatus(ResponseStatusOk)
 }

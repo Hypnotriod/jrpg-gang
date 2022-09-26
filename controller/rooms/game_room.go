@@ -7,14 +7,6 @@ import (
 
 type GameRoomScenarioId string
 
-type GameRoomInfo struct {
-	Uid         uint                `json:"uid"`
-	Capacity    uint                `json:"capacity"`
-	ScenarioId  GameRoomScenarioId  `json:"scenarioId"`
-	JoinedUsers []engine.PlayerInfo `json:"joinedUsers"`
-	Host        engine.PlayerInfo   `json:"host"`
-}
-
 type GameRoom struct {
 	Uid         uint               `json:"uid"`
 	Capacity    uint               `json:"capacity"`
@@ -63,11 +55,8 @@ func (r *GameRoom) GetActors() []*engine.GameUnit {
 	return result
 }
 
-func NewGameRoom(capacity uint, scenarioId GameRoomScenarioId, host users.User) *GameRoom {
+func newGameRoom() *GameRoom {
 	r := &GameRoom{}
-	r.Capacity = capacity
-	r.ScenarioId = scenarioId
-	r.host = host
 	r.joinedUsers = []users.User{}
 	return r
 }

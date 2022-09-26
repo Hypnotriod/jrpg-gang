@@ -9,7 +9,12 @@ import (
 
 type Broadcaster struct{}
 
-func (b *Broadcaster) BroadcastGameMessage(userIds []engine.UserId, message string) {
+func (b *Broadcaster) BroadcastGameMessageSync(userIds []engine.UserId, message string) {
+	fmt.Println(message)
+	fmt.Println()
+}
+
+func (b *Broadcaster) BroadcastGameMessageAsync(userIds []engine.UserId, message string) {
 	fmt.Println(message)
 	fmt.Println()
 }
