@@ -151,6 +151,7 @@ func (e *GameEngines) LeaveGame(userId engine.UserId) (*engine.GameEvent, []engi
 		u.PlayerInfo.IsHost = false
 		unit = u.Unit
 	}
+	wrapper.engine.TakeAShare(userId)
 	wrapper.engine.RemoveActor(userId)
 	userIds := wrapper.engine.GetUserIds()
 	var state *engine.GameEvent

@@ -107,6 +107,20 @@ func (e *GameEngine) RemoveActor(userId UserId) bool {
 	return true
 }
 
+func (e *GameEngine) TakeAShare(userId UserId) bool {
+	actor := e.FindActorByUserId(userId)
+	if actor == nil || !e.canTakeAShare() {
+		return false
+	}
+	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
+	if len(leftUnits) == 0 {
+		return false
+	}
+	share := e.state.Booty.TakeAShare(len(leftUnits))
+	actor.Booty.Accumulate(share)
+	return true
+}
+
 func (e *GameEngine) UpdateUserConnectionStatus(userId UserId, isOffline bool) bool {
 	actor := e.FindActorByUserId(userId)
 	if actor == nil {

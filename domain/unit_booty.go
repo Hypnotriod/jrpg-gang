@@ -25,6 +25,14 @@ func (b *UnitBooty) Reduce(booty UnitBooty, quantity uint) {
 	b.Ruby -= booty.Ruby * int(quantity)
 }
 
+func (b *UnitBooty) TakeAShare(participants int) UnitBooty {
+	share := UnitBooty{}
+	share.Coins = b.Coins / participants
+	share.Ruby = b.Ruby / participants
+	b.Reduce(share, 1)
+	return share
+}
+
 func (b *UnitBooty) Normalize() {
 	b.Coins = util.Max(b.Coins, 0)
 	b.Ruby = util.Max(b.Ruby, 0)

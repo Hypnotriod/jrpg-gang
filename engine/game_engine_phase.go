@@ -52,21 +52,20 @@ func (e *GameEngine) processActionComplete(event *GameEvent) {
 }
 
 func (e *GameEngine) processRoundComplete(event *GameEvent) {
-	e.endRound(event)
-	if e.battlefield().FactionsCount() <= 1 {
-		e.state.ChangePhase(GamePhaseBattleComplete)
+	if e.endRound(event) {
+		if e.scenario.IsLastSpot() {
+			e.state.ChangePhase(GamePhaseDungeonComplete)
+		} else {
+			e.state.ChangePhase(GamePhaseBattleComplete)
+		}
 	} else {
 		e.state.ChangePhase(GamePhaseReadyForStartRound)
 	}
 }
 
 func (e *GameEngine) processBattleComplete(event *GameEvent) {
-	if e.scenario.IsLastSpot() {
-		// todo
-	} else {
-		e.prepareNextSpot(e.battlefield().Units)
-		e.state.ChangePhase(GamePhasePrepareUnit)
-	}
+	e.prepareNextSpot(e.battlefield().Units)
+	e.state.ChangePhase(GamePhasePrepareUnit)
 }
 
 func (e *GameEngine) switchToNextUnit() {
@@ -81,7 +80,7 @@ func (e *GameEngine) switchToNextUnit() {
 	}
 }
 
-func (e *GameEngine) endRound(event *GameEvent) {
+func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
 	result := NewEndTurnResult()
 	for _, unit := range e.battlefield().Units {
 		result.Recovery[unit.Uid] = unit.ApplyRecoverylOnNextTurn()
@@ -91,6 +90,11 @@ func (e *GameEngine) endRound(event *GameEvent) {
 	corpses := e.battlefield().FilterSurvivors()
 	e.applyExperience(corpses)
 	event.EndRoundResult = result
+	isLastRound = e.battlefield().FactionsCount() <= 1
+	if isLastRound {
+		e.accumulateBooty(event)
+	}
+	return
 }
 
 func (e *GameEngine) onUnitMoveAction() {
@@ -117,11 +121,18 @@ func (e *GameEngine) onUnitCompleteAction() {
 	e.state.ChangePhase(GamePhaseActionComplete)
 }
 
+func (e *GameEngine) accumulateBooty(event *GameEvent) {
+	index := e.rndGen.PickIndex(len(e.scenario.CurrentSpot().Booty))
+	booty := e.scenario.CurrentSpot().Booty[index]
+	e.state.Booty.Accumulate(booty)
+	event.EndRoundResult.Booty = booty
+}
+
 func (e *GameEngine) applyExperience(corpses []*GameUnit) {
 	if len(corpses) == 0 {
 		return
 	}
-	leftUnits := e.battlefield().GetUnitsByFraction(GameUnitFactionLeft)
+	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
 	if len(leftUnits) == 0 {
 		return
 	}

@@ -145,3 +145,7 @@ func (e *GameEngine) executeSkipAction(action domain.Action, userId UserId) *dom
 func (e *GameEngine) isActionPhase() bool {
 	return e.state.phase == GamePhaseMakeAction || e.state.phase == GamePhaseMakeMoveOrAction
 }
+
+func (e *GameEngine) canTakeAShare() bool {
+	return e.state.phase == GamePhaseBattleComplete || e.state.phase == GamePhaseDungeonComplete
+}

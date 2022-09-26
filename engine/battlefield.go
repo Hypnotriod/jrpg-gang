@@ -172,9 +172,9 @@ func (b *Battlefield) FactionsCount() int {
 	return len(factions)
 }
 
-func (b *Battlefield) GetUnitsByFraction(fraction GameUnitFaction) []*GameUnit {
+func (b *Battlefield) GetUnitsByFaction(faction GameUnitFaction) []*GameUnit {
 	return util.Filter(b.Units, func(unit *GameUnit) bool {
-		return unit.Faction == fraction
+		return unit.Faction == faction
 	})
 }
 
