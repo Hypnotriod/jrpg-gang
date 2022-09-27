@@ -67,6 +67,13 @@ func Filter[T any](values []T, predicate func(value T) bool) []T {
 	return result
 }
 
+func Reduce[T, J any](values []T, accumulator J, reducer func(accumulator J, value T) J) J {
+	for i := range values {
+		accumulator = reducer(accumulator, values[i])
+	}
+	return accumulator
+}
+
 func Map[T any, J any](values []T, mapper func(value T) J) []J {
 	result := make([]J, 0, len(values))
 	for i := range values {

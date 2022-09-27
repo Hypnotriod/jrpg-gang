@@ -3,6 +3,7 @@ package domain
 import (
 	"fmt"
 	"jrpg-gang/util"
+	"math"
 )
 
 type UnitBooty struct {
@@ -23,6 +24,15 @@ func (b *UnitBooty) Accumulate(booty UnitBooty) {
 func (b *UnitBooty) Reduce(booty UnitBooty, quantity uint) {
 	b.Coins -= booty.Coins * int(quantity)
 	b.Ruby -= booty.Ruby * int(quantity)
+}
+
+func (b *UnitBooty) TakeAShare(participants int) UnitBooty {
+	share := UnitBooty{
+		Coins: int(math.Ceil(float64(b.Coins) / float64(participants))),
+		Ruby:  int(math.Ceil(float64(b.Ruby) / float64(participants))),
+	}
+	b.Reduce(share, 1)
+	return share
 }
 
 func (b *UnitBooty) Normalize() {

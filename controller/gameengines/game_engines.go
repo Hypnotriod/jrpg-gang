@@ -150,6 +150,8 @@ func (e *GameEngines) LeaveGame(userId engine.UserId) (*engine.GameEvent, []engi
 	if u := wrapper.engine.FindActorByUserId(userId); u != nil {
 		u.PlayerInfo.IsHost = false
 		unit = u.Unit
+		share := wrapper.engine.TakeAShare()
+		unit.Booty.Accumulate(share)
 	}
 	wrapper.engine.RemoveActor(userId)
 	userIds := wrapper.engine.GetUserIds()

@@ -1,6 +1,9 @@
 package engine
 
-import "jrpg-gang/domain"
+import (
+	"jrpg-gang/domain"
+	"jrpg-gang/util"
+)
 
 func (e *GameEngine) NextPhase() *GameEvent {
 	result := e.NewGameEvent()
@@ -29,8 +32,8 @@ func (e *GameEngine) NextPhaseRequired() bool {
 		e.state.phase == GamePhaseActionComplete
 }
 
-func (e *GameEngine) prepareNextSpot() {
-	e.scenario.PrepareNextSpot(e.actors)
+func (e *GameEngine) prepareNextSpot(actors []*GameUnit) {
+	e.scenario.PrepareNextSpot(actors)
 	e.state.MakeUnitsQueue(e.battlefield().Units)
 }
 
@@ -49,16 +52,20 @@ func (e *GameEngine) processActionComplete(event *GameEvent) {
 }
 
 func (e *GameEngine) processRoundComplete(event *GameEvent) {
-	e.endRound(event)
-	if e.battlefield().FactionsCount() <= 1 {
-		e.state.ChangePhase(GamePhaseBattleComplete)
+	if e.endRound(event) {
+		if e.scenario.IsLastSpot() {
+			e.state.ChangePhase(GamePhaseDungeonComplete)
+		} else {
+			e.state.ChangePhase(GamePhaseBattleComplete)
+		}
 	} else {
 		e.state.ChangePhase(GamePhaseReadyForStartRound)
 	}
 }
 
 func (e *GameEngine) processBattleComplete(event *GameEvent) {
-	// todo
+	e.prepareNextSpot(e.battlefield().Units)
+	e.state.ChangePhase(GamePhasePrepareUnit)
 }
 
 func (e *GameEngine) switchToNextUnit() {
@@ -73,15 +80,21 @@ func (e *GameEngine) switchToNextUnit() {
 	}
 }
 
-func (e *GameEngine) endRound(event *GameEvent) {
+func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
 	result := NewEndTurnResult()
 	for _, unit := range e.battlefield().Units {
 		result.Recovery[unit.Uid] = unit.ApplyRecoverylOnNextTurn()
 		result.Damage[unit.Uid] = unit.ApplyDamageOnNextTurn()
 		unit.ReduceModificationOnNextTurn()
 	}
-	e.battlefield().FilterSurvivors()
+	corpses := e.battlefield().FilterSurvivors()
+	e.applyExperience(corpses)
 	event.EndRoundResult = result
+	isLastRound = e.battlefield().FactionsCount() <= 1
+	if isLastRound {
+		e.accumulateBooty(event)
+	}
+	return
 }
 
 func (e *GameEngine) onUnitMoveAction() {
@@ -100,9 +113,42 @@ func (e *GameEngine) onUnitUseAction(targetUid uint, actionResult *domain.Action
 }
 
 func (e *GameEngine) onUnitCompleteAction() {
-	e.battlefield().FilterSurvivors()
+	corpses := e.battlefield().FilterSurvivors()
+	e.applyExperience(corpses)
 	e.battlefield().UpdateCellsFactions()
 	e.state.ShiftUnitsQueue()
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	e.state.ChangePhase(GamePhaseActionComplete)
+}
+
+func (e *GameEngine) accumulateBooty(event *GameEvent) {
+	index := e.rndGen.PickIndex(len(e.scenario.CurrentSpot().Booty))
+	booty := e.scenario.CurrentSpot().Booty[index]
+	e.state.Booty.Accumulate(booty)
+	event.EndRoundResult.Booty = booty
+}
+
+func (e *GameEngine) applyExperience(corpses []*GameUnit) {
+	if len(corpses) == 0 {
+		return
+	}
+	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
+	if len(leftUnits) == 0 {
+		return
+	}
+	rightCorpses := util.Filter(corpses, func(corpse *GameUnit) bool {
+		return corpse.Faction == GameUnitFactionRight
+	})
+	totalExperience := util.Reduce(rightCorpses, 0, func(acc uint, corpse *GameUnit) uint {
+		return acc + corpse.Stats.Progress.Experience
+	})
+	unitExperience := totalExperience / uint(len(leftUnits))
+	totalExperience -= unitExperience * uint(len(leftUnits))
+	for _, unit := range leftUnits {
+		unit.Stats.Progress.Experience += unitExperience
+		if totalExperience > 0 {
+			unit.Stats.Progress.Experience += 1
+			totalExperience--
+		}
+	}
 }

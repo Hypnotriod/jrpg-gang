@@ -110,8 +110,8 @@ func (u *Users) UpdateWithUnitOnGameComplete(userId engine.UserId, unit *domain.
 	if !ok {
 		return
 	}
-	user.Unit.Stats = unit.Stats
-	user.Unit.Booty = unit.Booty
+	user.Unit.Stats.Progress = unit.Stats.Progress
+	user.Unit.Booty.Accumulate(unit.Booty)
 	user.Unit.Inventory = unit.Inventory
 	user.Unit.Inventory.Prepare()
 	user.Unit.Inventory.PopulateUids(user.RndGen)

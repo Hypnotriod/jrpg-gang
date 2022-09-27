@@ -13,6 +13,17 @@ func NewTestScenario() *engine.GameScenario {
 				{
 					"name": "Winter Cave",
 					"code": "winter-cave-01",
+					"booty": [
+						{
+							"coins": 2000
+						},
+						{
+							"coins": 3000
+						},
+						{
+							"ruby": 10
+						}
+					],
 					"battlefield": {
 						"matrix": [
 							[
