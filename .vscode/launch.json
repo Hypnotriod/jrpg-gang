@@ -6,24 +6,10 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceFolder}",
-            "env": {},
-            "args": [
-                "-address=:3000"
-            ]
-        },
-        {
-            "name": "Launch Debug TLS",
-            "type": "go",
-            "request": "launch",
-            "mode": "auto",
-            "program": "${workspaceFolder}",
-            "env": {},
-            "args": [
-                "-address=:3000",
-                "-cert=private/cert.pem",
-                "-key=private/key.pem"
-            ]
+            "program": "${workspaceFolder}/cmd/default",
+            "env": {
+                "PORT": "3000"
+            }
         },
         {
             "name": "Attach Debug",

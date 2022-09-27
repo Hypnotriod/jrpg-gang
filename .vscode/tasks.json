@@ -8,7 +8,7 @@
 				"build",
 				"-o",
 				"./release/program.exe",
-				"./"
+				"./cmd/default/"
 			],
 			"problemMatcher": [],
 			"group": {
@@ -19,7 +19,7 @@
 		{
 			"label": "Debug Stdin",
 			"type": "shell",
-			"command": "dlv debug ./ --headless --listen=:2340 --log --api-version=2",
+			"command": "dlv debug ./cmd/default/ --headless --listen=:2340 --log --api-version=2",
 			"problemMatcher": [],
 			"group": {
 				"kind": "build",

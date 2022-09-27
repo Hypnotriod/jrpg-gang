@@ -12,7 +12,7 @@ import (
 )
 
 type HubConfig struct {
-	Addres                string `json:"addres"`
+	Port                  string `json:"port"`
 	ReadBufferSize        int    `json:"readBufferSize"`
 	WriteBufferSize       int    `json:"writeBufferSize"`
 	BroadcastPoolSize     int    `json:"broadcastPoolSize"`
@@ -43,7 +43,7 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 		WriteBufferSize: config.WriteBufferSize,
 	}
 	hub.server = &http.Server{
-		Addr: config.Addres,
+		Addr: ":" + config.Port,
 	}
 	hub.broadcastPool = make(chan broadcast, config.BroadcastPoolSize)
 	controller.RegisterBroadcaster(hub)

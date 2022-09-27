@@ -5,10 +5,18 @@ import (
 	"jrpg-gang/controller"
 	"jrpg-gang/session"
 	"net/http"
+	"os"
 )
 
+func getenv(key string, defaultValue string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+	return defaultValue
+}
+
 func config() session.HubConfig {
-	addres := flag.String("address", ":3000", "host address")
+	port := getenv("PORT", "3000")
 	rBuffSize := flag.Int("rBuffSize", 1024, "ws read buffer size")
 	wBuffSize := flag.Int("wBuffSize", 1024, "ws write buffer size")
 	broadcastPoolSizeSize := flag.Int("broadcastPoolSizeSize", 32, "broadcast pool size")
@@ -17,7 +25,7 @@ func config() session.HubConfig {
 	flag.Parse()
 
 	return session.HubConfig{
-		Addres:                *addres,
+		Port:                  port,
 		ReadBufferSize:        *rBuffSize,
 		WriteBufferSize:       *wBuffSize,
 		BroadcastPoolSize:     *broadcastPoolSizeSize,
