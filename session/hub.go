@@ -15,7 +15,8 @@ type HubConfig struct {
 	Port                  string `json:"port"`
 	ReadBufferSize        int    `json:"readBufferSize"`
 	WriteBufferSize       int    `json:"writeBufferSize"`
-	BroadcastPoolSize     int    `json:"broadcastPoolSize"`
+	BroadcasterPoolSize   int    `json:"broadcasterPoolSize"`
+	BroadcastQueueSize    int    `json:"broadcastQueueSize"`
 	MaxMessageSize        int64  `json:"maxMessageSize"`
 	UserOfflineTimeoutSec int64  `json:"userOfflineTimeoutSec"`
 }
@@ -45,14 +46,14 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 	hub.server = &http.Server{
 		Addr: ":" + config.Port,
 	}
-	hub.broadcastPool = make(chan broadcast, config.BroadcastPoolSize)
+	hub.broadcastPool = make(chan broadcast, config.BroadcastQueueSize)
 	controller.RegisterBroadcaster(hub)
 	http.HandleFunc("/ws", hub.serveWsRequest)
 	return hub
 }
 
 func (h *Hub) Start() error {
-	for n := cap(h.broadcastPool); n > 0; n-- {
+	for n := h.config.BroadcasterPoolSize; n > 0; n-- {
 		go h.broadcastGameMessageRoutine(h.broadcastPool)
 	}
 	return h.server.ListenAndServe()

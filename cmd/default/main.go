@@ -19,7 +19,8 @@ func config() session.HubConfig {
 	port := getenv("PORT", "3000")
 	rBuffSize := flag.Int("rBuffSize", 1024, "ws read buffer size")
 	wBuffSize := flag.Int("wBuffSize", 1024, "ws write buffer size")
-	broadcastPoolSizeSize := flag.Int("broadcastPoolSizeSize", 32, "broadcast pool size")
+	broadcasterPoolSize := flag.Int("broadcasterPoolSize", 32, "broadcaster routines pool size")
+	broadcastQueueSize := flag.Int("broadcastQueueSize", 4096, "broadcast channel queue size")
 	maxMessageSize := flag.Int64("maxMessageSize", 4096, "connection max message size")
 	userOfflineTimeoutSec := flag.Int64("userOfflineTimeoutSec", 10, "user offline timeout in secnds")
 	flag.Parse()
@@ -28,7 +29,8 @@ func config() session.HubConfig {
 		Port:                  port,
 		ReadBufferSize:        *rBuffSize,
 		WriteBufferSize:       *wBuffSize,
-		BroadcastPoolSize:     *broadcastPoolSizeSize,
+		BroadcasterPoolSize:   *broadcasterPoolSize,
+		BroadcastQueueSize:    *broadcastQueueSize,
 		MaxMessageSize:        *maxMessageSize,
 		UserOfflineTimeoutSec: *userOfflineTimeoutSec,
 	}
