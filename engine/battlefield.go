@@ -172,6 +172,16 @@ func (b *Battlefield) FactionsCount() int {
 	return len(factions)
 }
 
+func (b *Battlefield) FactionUnitsCount(faction GameUnitFaction) int {
+	result := 0
+	for _, unit := range b.Units {
+		if unit.Faction == faction {
+			result++
+		}
+	}
+	return result
+}
+
 func (b *Battlefield) GetUnitsByFaction(faction GameUnitFaction) []*GameUnit {
 	return util.Filter(b.Units, func(unit *GameUnit) bool {
 		return unit.Faction == faction

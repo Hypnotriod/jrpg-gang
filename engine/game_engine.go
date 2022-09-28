@@ -116,11 +116,11 @@ func (e *GameEngine) RemoveActor(userId UserId) bool {
 }
 
 func (e *GameEngine) TakeAShare() domain.UnitBooty {
-	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
-	if !e.canTakeAShare() || len(leftUnits) == 0 {
+	leftUnits := e.battlefield().FactionUnitsCount(GameUnitFactionLeft)
+	if !e.canTakeAShare() || leftUnits == 0 {
 		return domain.UnitBooty{}
 	}
-	return e.state.Booty.TakeAShare(len(leftUnits))
+	return e.state.Booty.TakeAShare(leftUnits)
 }
 
 func (e *GameEngine) UpdateUserConnectionStatus(userId UserId, isOffline bool) bool {

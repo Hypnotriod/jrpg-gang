@@ -91,7 +91,7 @@ func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
 	e.applyExperience(corpses)
 	event.EndRoundResult = result
 	isLastRound = e.battlefield().FactionsCount() <= 1
-	if isLastRound {
+	if isLastRound && e.battlefield().FactionUnitsCount(GameUnitFactionLeft) != 0 {
 		e.accumulateBooty(event)
 	}
 	return
