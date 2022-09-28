@@ -26,6 +26,7 @@ func (c *GameController) handleJoinRequest(requestRaw string, response *Response
 		if !ok {
 			return engine.UserIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
 		}
+		user.IsOffline = false
 		response.fillUserStatus(&user)
 		return user.Id, response.WithStatus(ResponseStatusOk)
 	}

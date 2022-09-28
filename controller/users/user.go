@@ -11,6 +11,7 @@ type UserDisplayStatus string
 
 const (
 	UserDisplayStatusEmpty   UserDisplayStatus = ""
+	UserDisplayStatusJoined  UserDisplayStatus = "joined"
 	UserDisplayStatusInLobby UserDisplayStatus = "inLobby"
 	UserDisplayStatusInRoom  UserDisplayStatus = "inRoom"
 	UserDisplayStatusInGame  UserDisplayStatus = "inGame"
@@ -20,12 +21,16 @@ const (
 	UserStatusNotFound  UserStatus = 0
 	UserStatusNotJoined UserStatus = (1 << 0)
 	UserStatusJoined    UserStatus = (1 << 1)
-	UserStatusInRoom    UserStatus = (1 << 2)
-	UserStatusInGame    UserStatus = (1 << 3)
+	UserStatusInLobby   UserStatus = (1 << 2)
+	UserStatusInRoom    UserStatus = (1 << 3)
+	UserStatusInGame    UserStatus = (1 << 4)
 )
 
 func (s UserStatus) Display() UserDisplayStatus {
 	if s.Test(UserStatusJoined) {
+		return UserDisplayStatusJoined
+	}
+	if s.Test(UserStatusInLobby) {
 		return UserDisplayStatusInLobby
 	}
 	if s.Test(UserStatusInGame) {

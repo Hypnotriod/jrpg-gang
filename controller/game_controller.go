@@ -93,6 +93,10 @@ func (c *GameController) serveRequest(userId engine.UserId, request *Request, re
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
+	case RequestEnterLobby:
+		return c.handleEnterLobbyRequest(userId, requestRaw, response)
+	case RequestExitLobby:
+		return c.handleExitLobbyRequest(userId, requestRaw, response)
 	case RequestShopStatus:
 		return c.handleShopStatusRequest(userId, requestRaw, response)
 	case RequestCreateGameRoom:

@@ -21,7 +21,7 @@ func (c *GameController) handleLeaveGameRoomRequest(userId engine.UserId, reques
 	if _, ok := c.rooms.RemoveUser(userId); !ok {
 		return response.WithStatus(ResponseStatusFailed)
 	}
-	c.users.ChangeUserStatus(userId, users.UserStatusJoined)
+	c.users.ChangeUserStatus(userId, users.UserStatusInLobby)
 	c.broadcastRoomStatus(roomUid)
 	return response.WithStatus(ResponseStatusOk)
 }

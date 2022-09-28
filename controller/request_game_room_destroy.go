@@ -23,7 +23,7 @@ func (c *GameController) handleDestroyGameRoomRequest(userId engine.UserId, requ
 	}
 	userIds := room.GetUserIds()
 	for _, userId := range userIds {
-		c.users.ChangeUserStatus(userId, users.UserStatusJoined)
+		c.users.ChangeUserStatus(userId, users.UserStatusInLobby)
 	}
 	c.broadcastRoomStatus(room.Uid)
 	c.broadcastUsersStatus(userIds)

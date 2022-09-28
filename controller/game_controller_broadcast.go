@@ -40,7 +40,8 @@ func (c *GameController) broadcastRoomStatus(uid uint) {
 	response := NewResponse()
 	response.Type = RequestRoomStatus
 	response.Data[DataKeyRoom] = c.rooms.GetRoomInfoByUid(uid)
-	userIds := c.users.GetIdsByStatus(users.UserStatusJoined|users.UserStatusInRoom, true)
+	response.Data[DataKeyUsersCount] = c.users.TotalCount()
+	userIds := c.users.GetIdsByStatus(users.UserStatusInLobby|users.UserStatusInRoom, true)
 	c.broadcaster.BroadcastGameMessageAsync(userIds, response.WithStatus(ResponseStatusOk))
 }
 
