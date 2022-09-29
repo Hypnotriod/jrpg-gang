@@ -93,16 +93,6 @@ func (u *Users) GetIdsByStatusExcept(status UserStatus, userId engine.UserId) []
 	return result
 }
 
-func (u *Users) UpdateUnit(userId engine.UserId, unit *engine.GameUnit) {
-	defer u.mu.Unlock()
-	u.mu.Lock()
-	user, ok := u.users[userId]
-	if !ok {
-		return
-	}
-	user.Unit = *unit
-}
-
 func (u *Users) UpdateWithUnitOnGameComplete(userId engine.UserId, unit *domain.Unit) {
 	defer u.mu.Unlock()
 	u.mu.Lock()
@@ -112,7 +102,7 @@ func (u *Users) UpdateWithUnitOnGameComplete(userId engine.UserId, unit *domain.
 	}
 	user.Unit.Stats.Progress = unit.Stats.Progress
 	user.Unit.Booty.Accumulate(unit.Booty)
-	user.Unit.Inventory = unit.Inventory
+	user.Unit.Inventory = *unit.Inventory.Clone()
 	user.Unit.Inventory.Prepare()
 	user.Unit.Inventory.PopulateUids(user.RndGen)
 }
@@ -124,7 +114,6 @@ func (u *Users) ResetUser(userId engine.UserId) {
 	if !ok {
 		return
 	}
-	user.IsHost = false
 	user.Status = UserStatusJoined
 	user.RndGen.ResetUidGen()
 }

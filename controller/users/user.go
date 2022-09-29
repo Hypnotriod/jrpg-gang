@@ -51,7 +51,7 @@ type User struct {
 	RndGen *util.RndGen
 	Status UserStatus
 	Id     engine.UserId
-	Unit   engine.GameUnit
+	Unit   *engine.GameUnit
 }
 
 func NewUser(nickname string,
@@ -63,7 +63,7 @@ func NewUser(nickname string,
 	u.Class = class
 	u.Level = unit.Stats.Progress.Level
 	u.Status = UserStatusNotJoined
-	u.Unit = *unit
+	u.Unit = unit
 	u.Unit.Inventory.Prepare()
 	u.Unit.Inventory.PopulateUids(u.RndGen)
 	return u

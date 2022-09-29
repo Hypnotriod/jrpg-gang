@@ -43,6 +43,23 @@ func (u Unit) String() string {
 	)
 }
 
+func (u *Unit) Clone() *Unit {
+	r := &Unit{}
+	r.rng = u.rng
+	r.Uid = u.Uid
+	r.Name = u.Name
+	r.Code = u.Code
+	r.Booty = u.Booty
+	r.State = u.State
+	r.Stats = u.Stats
+	r.Damage = append(r.Damage, u.Damage...)
+	r.Modification = append(r.Modification, u.Modification...)
+	r.Inventory = *u.Inventory.Clone()
+	r.Slots = util.CloneMap(u.Slots)
+	r.Position = u.Position
+	return r
+}
+
 func (u *Unit) TotalAgility() float32 {
 	var agility float32 = u.Stats.Attributes.Agility
 	for _, ench := range u.Modification {

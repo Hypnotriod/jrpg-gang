@@ -8,3 +8,7 @@ type PlayerInfo struct {
 	IsOffline bool          `json:"isOffline,omitempty"`
 	IsHost    bool          `json:"isHost,omitempty"`
 }
+
+func (p PlayerInfo) Clone() *PlayerInfo {
+	return &p
+}

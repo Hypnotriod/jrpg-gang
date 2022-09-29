@@ -23,6 +23,16 @@ func (i UnitInventory) String() string {
 		util.AsCommaSeparatedObjectsSlice(i.Ammunition))
 }
 
+func (i *UnitInventory) Clone() *UnitInventory {
+	r := &UnitInventory{}
+	r.Weapon = append(r.Weapon, i.Weapon...)
+	r.Magic = append(r.Magic, i.Magic...)
+	r.Armor = append(r.Armor, i.Armor...)
+	r.Disposable = append(r.Disposable, i.Disposable...)
+	r.Ammunition = append(r.Ammunition, i.Ammunition...)
+	return r
+}
+
 func (i *UnitInventory) IncreaseArmorWearout(equipped bool) {
 	for n := range i.Armor {
 		item := &i.Armor[n]

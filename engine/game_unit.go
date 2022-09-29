@@ -53,3 +53,15 @@ func (u *GameUnit) GetUserId() UserId {
 func (u *GameUnit) SetUserId(userId UserId) {
 	u.userId = userId
 }
+
+func (u *GameUnit) Clone() *GameUnit {
+	r := &GameUnit{}
+	r.Faction = u.Faction
+	r.IsDead = u.IsDead
+	r.userId = u.userId
+	r.Unit = *u.Unit.Clone()
+	if u.PlayerInfo != nil {
+		r.PlayerInfo = u.PlayerInfo.Clone()
+	}
+	return r
+}
