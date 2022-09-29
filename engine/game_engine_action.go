@@ -34,7 +34,7 @@ func (e *GameEngine) executePlaceAction(action domain.Action, userId UserId) *do
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if unit.IsDead || unit.userId != userId {
+	if unit.IsDead || unit.UserId != userId {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	return e.battlefield().PlaceUnit(unit, *action.Position)
@@ -49,7 +49,7 @@ func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *doma
 	if unit == nil || target == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if unit.IsDead || !e.state.IsCurrentActiveUnit(unit) || unit.userId != userId {
+	if unit.IsDead || !e.state.IsCurrentActiveUnit(unit) || unit.UserId != userId {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	itemType := unit.Inventory.GetItemType(action.ItemUid)
@@ -79,7 +79,7 @@ func (e *GameEngine) executeEquipAction(action domain.Action, userId UserId) *do
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if unit.IsDead || unit.userId != userId ||
+	if unit.IsDead || unit.UserId != userId ||
 		e.state.phase != GamePhasePrepareUnit && !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
@@ -98,7 +98,7 @@ func (e *GameEngine) executeUnequipAction(action domain.Action, userId UserId) *
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if unit.IsDead || unit.userId != userId ||
+	if unit.IsDead || unit.UserId != userId ||
 		e.state.phase != GamePhasePrepareUnit && !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
@@ -117,7 +117,7 @@ func (e *GameEngine) executeMoveAction(action domain.Action, userId UserId) *dom
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if unit.IsDead || unit.userId != userId || !e.state.IsCurrentActiveUnit(unit) {
+	if unit.IsDead || unit.UserId != userId || !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	result := e.battlefield().MoveUnit(unit.Uid, *action.Position)
@@ -135,7 +135,7 @@ func (e *GameEngine) executeSkipAction(action domain.Action, userId UserId) *dom
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if unit.IsDead || unit.userId != userId || !e.state.IsCurrentActiveUnit(unit) {
+	if unit.IsDead || unit.UserId != userId || !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	e.onUnitCompleteAction()

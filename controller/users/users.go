@@ -127,7 +127,7 @@ func (u *Users) AddUser(user *User) {
 			break
 		}
 	}
-	user.Unit.SetUserId(user.Id)
+	user.Unit.UserId = user.Id
 	user.Status = UserStatusJoined
 	u.users[user.Id] = user
 	u.userNicknameToId[user.Nickname] = user.Id
