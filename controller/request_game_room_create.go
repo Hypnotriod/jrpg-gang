@@ -17,7 +17,7 @@ type CreateGameRoomRequest struct {
 func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&CreateGameRoomRequest{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	if request.Data.Capacity == 0 || request.Data.Capacity > GAME_ROOM_MAX_CAPACITY {
 		return response.WithStatus(ResponseStatusNotAllowed)

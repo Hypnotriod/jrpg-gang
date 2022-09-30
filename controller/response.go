@@ -11,7 +11,7 @@ const (
 	ResponseStatusOk            ResponseStatus = "ok"
 	ResponseStatusFailed        ResponseStatus = "failed"
 	ResponseStatusError         ResponseStatus = "error"
-	ResponseStatusMailformed    ResponseStatus = "mailformed"
+	ResponseStatusMalformed     ResponseStatus = "malformed"
 	ResponseStatusUnsupported   ResponseStatus = "unsupported"
 	ResponseStatusNotAllowed    ResponseStatus = "notAllowed"
 	ResponseStatusNotFound      ResponseStatus = "notFound"

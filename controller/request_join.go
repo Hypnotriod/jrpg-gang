@@ -19,7 +19,7 @@ type JoinRequest struct {
 func (c *GameController) handleJoinRequest(requestRaw string, response *Response) (engine.UserId, string) {
 	request := parseRequest(&JoinRequest{}, requestRaw)
 	if request == nil {
-		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMailformed)
+		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMalformed)
 	}
 	if request.Data.UserId != engine.UserIdEmpty {
 		user, ok := c.users.Get(request.Data.UserId)
@@ -38,7 +38,7 @@ func (c *GameController) handleJoinRequest(requestRaw string, response *Response
 	}
 	unit := factory.NewGameUnitByClass(request.Data.Class) // todo: test purpose only
 	if unit == nil {
-		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMailformed)
+		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMalformed)
 	}
 	user := users.NewUser(request.Data.Nickname, request.Data.Class, unit)
 	c.users.AddUser(user)

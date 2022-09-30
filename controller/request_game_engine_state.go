@@ -9,7 +9,7 @@ type GameStateRequest struct {
 func (c *GameController) handleGameStateRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&GameStateRequest{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	result, _, ok := c.engines.GameState(userId)
 	if !ok {

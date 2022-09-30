@@ -9,7 +9,7 @@ type GameNextPhaseRequest struct {
 func (c *GameController) handleGameNextPhaseRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&GameNextPhaseRequest{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	result, broadcastUserIds, ok := c.engines.NextPhase(userId)
 	if !ok {

@@ -12,7 +12,7 @@ type LeaveGameRoomRequest struct {
 func (c *GameController) handleLeaveGameRoomRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&LeaveGameRoomRequest{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	roomUid, ok := c.rooms.GetUidByUserId(userId)
 	if !ok {

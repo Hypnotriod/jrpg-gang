@@ -15,7 +15,7 @@ type JoinGameRoomRequest struct {
 func (c *GameController) handleJoinGameRoomRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&JoinGameRoomRequest{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	if c.rooms.ExistsForUserId(userId) {
 		return response.WithStatus(ResponseStatusNotAllowed)

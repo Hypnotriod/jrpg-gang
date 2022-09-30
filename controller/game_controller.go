@@ -57,9 +57,9 @@ func (c *GameController) Leave(userId engine.UserId) {
 
 func (c *GameController) HandleRequest(userId engine.UserId, requestRaw string) (engine.UserId, string) {
 	response := NewResponse()
-	request := parseRequest(&Request{}, requestRaw)
+	request := parseRequestManual(requestRaw)
 	if request == nil {
-		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMailformed)
+		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMalformed)
 	}
 	response.Type = request.Type
 	response.Id = request.Id

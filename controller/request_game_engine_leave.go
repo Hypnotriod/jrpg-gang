@@ -11,7 +11,7 @@ type GameLeaveRequest struct {
 func (c *GameController) handleGameLeaveRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&GameLeaveRequest{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	result, broadcastUserIds, unit, ok := c.engines.LeaveGame(userId)
 	if !ok {

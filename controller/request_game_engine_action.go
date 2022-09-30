@@ -13,7 +13,7 @@ type GameActionRequest struct {
 func (c *GameController) handleGameActionRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&GameActionRequest{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	result, broadcastUserIds, ok := c.engines.ExecuteUserAction(request.Data, userId)
 	if !ok {

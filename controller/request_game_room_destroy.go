@@ -12,7 +12,7 @@ type DestroyGameRoomRequest struct {
 func (c *GameController) handleDestroyGameRoomRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&DestroyGameRoomRequest{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	if !c.rooms.ExistsForHostId(userId) {
 		return response.WithStatus(ResponseStatusNotAllowed)

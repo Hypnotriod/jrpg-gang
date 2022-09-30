@@ -9,7 +9,7 @@ type LobbyStatusRequest struct {
 func (c *GameController) handleLobbyStatusRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&LobbyStatusRequest{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	response.Data[DataKeyRooms] = c.rooms.GetAllRoomInfosList()
 	response.Data[DataKeyUsersCount] = c.users.TotalCount()

@@ -13,7 +13,7 @@ type ConfiguratorActionRequest struct {
 func (c *GameController) handleConfiguratorActionRequest(userId engine.UserId, requestRaw string, response *Response) string {
 	request := parseRequest(&ConfiguratorActionRequest{}, requestRaw)
 	if request == nil {
-		return response.WithStatus(ResponseStatusMailformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	user, ok := c.users.Get(userId)
 	if !ok {

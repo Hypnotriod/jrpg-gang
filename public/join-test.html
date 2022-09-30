@@ -8,10 +8,11 @@
 	<title>join-test</title>
 
 	<script>
+		const rndHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 		const joinDto = () => {
 			return {
 				type: 'join',
-				id: '1234',
+				id: rndHex(16),
 				data: {
 					nickName: 'Tester' + ~~(Math.random() * 10000),
 					class: 'tank',
@@ -21,19 +22,19 @@
 		const lobbyStatusDto = () => {
 			return {
 				type: 'lobbyStatus',
-				id: '1234',
+				id: rndHex(16),
 			}
 		}
 		const shopStatusDto = () => {
 			return {
 				type: 'shopStatus',
-				id: '1234',
+				id: rndHex(16),
 			}
 		}
 		const shopPurchaseDto = () => {
 			return {
 				type: 'shopAction',
-				id: '1234',
+				id: rndHex(16),
 				data: {
 					action: "buy",
 					itemUid: 1,
@@ -44,7 +45,7 @@
 		const createRoomDto = () => {
 			return {
 				type: 'createRoom',
-				id: '1234',
+				id: rndHex(16),
 				data: {
 					capacity: 4,
 				}
@@ -62,7 +63,9 @@
 		];
 		const next = () => {
 			if (!scenario.length) return;
-			ws.send(JSON.stringify(scenario.shift()()));
+			const request = JSON.stringify(scenario.shift()());
+			console.log('Request: ', request);
+			ws.send(request);
 		}
 		ws.onopen = (event) => {
 			console.log('Joined:', event);
@@ -72,7 +75,7 @@
 			console.log('Disconnected:', event);
 		}
 		ws.onmessage = (event) => {
-			console.log('Message:', event.data);
+			console.log('Response:', event.data);
 			const response = JSON.parse(event.data);
 			next();
 		}
