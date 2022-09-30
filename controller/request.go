@@ -55,7 +55,7 @@ func parseRequestManual(raw string) *Request {
 	if len(r) < 10 || r[0] != '{' || r[1] != '"' || r[2] != 't' || r[3] != 'y' || r[4] != 'p' || r[5] != 'e' || r[6] != '"' || r[7] != ':' || r[8] != '"' {
 		return nil
 	}
-	typeBytes := [16]byte{}
+	typeBytes := [32]byte{}
 	r = r[9:]
 	for i, c := range r {
 		if c == '"' {
