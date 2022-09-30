@@ -68,7 +68,7 @@ func parseRequestRegexp(raw string, typeIdRegexp *regexp.Regexp) *controller.Req
 	}
 }
 
-const requestRaw = "{\"type\":\"aAbcdefgzZ\",\"id\":\"cb077db43b627bb7\",\"key1\":\"qwertyuiop[asdfghjkl;\",\"key2\":true,\"key3\":1234567890}"
+const requestRaw = "{\"type\":\"aAbcdefgzZ\",\"id\":\"cb077db43b627bb7\",\"key1\":\"qwertyuiop[asdfghjkl;\",\"key2\":true,\"key3\":1234567890{\"innerKey\":\"1234abcd\"}}"
 
 func TestParseRequestManual(t *testing.T) {
 	if parseRequestManual(requestRaw) == nil {
