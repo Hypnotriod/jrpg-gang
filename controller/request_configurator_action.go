@@ -21,7 +21,6 @@ func (c *GameController) handleConfiguratorActionRequest(userId engine.UserId, r
 	}
 	actionResult := c.configurator.ExecuteAction(request.Data, &user.Unit.Unit)
 	if actionResult.Result == domain.ResultAccomplished {
-		c.users.UpdateUnit(user.Id, &user.Unit)
 		response.Data[DataKeyUnit] = user.Unit
 	}
 	response.Data[DataKeyAction] = request.Data

@@ -30,7 +30,7 @@ type GameUnit struct {
 	Faction    GameUnitFaction `json:"faction"`
 	PlayerInfo *PlayerInfo     `json:"playerInfo,omitempty"`
 	IsDead     bool            `json:"isDead,omitempty"`
-	userId     UserId
+	UserId     UserId          `json:"-"`
 }
 
 func (u GameUnit) String() string {
@@ -38,18 +38,22 @@ func (u GameUnit) String() string {
 		"%v, faction: %d, user id: %s",
 		u.Unit,
 		u.Faction,
-		u.userId,
+		u.UserId,
 	)
 }
 
 func (u *GameUnit) HasUserId() bool {
-	return u.userId != UserIdEmpty
+	return u.UserId != UserIdEmpty
 }
 
-func (u *GameUnit) GetUserId() UserId {
-	return u.userId
-}
-
-func (u *GameUnit) SetUserId(userId UserId) {
-	u.userId = userId
+func (u *GameUnit) Clone() *GameUnit {
+	r := &GameUnit{}
+	r.Faction = u.Faction
+	r.IsDead = u.IsDead
+	r.UserId = u.UserId
+	r.Unit = *u.Unit.Clone()
+	if u.PlayerInfo != nil {
+		r.PlayerInfo = u.PlayerInfo.Clone()
+	}
+	return r
 }

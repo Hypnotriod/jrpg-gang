@@ -21,7 +21,6 @@ func (c *GameController) handleShopActionRequest(userId engine.UserId, requestRa
 	}
 	actionResult := c.shop.ExecuteAction(request.Data, &user)
 	if actionResult.Result == domain.ResultAccomplished {
-		c.users.UpdateUnit(user.Id, &user.Unit)
 		response.Data[DataKeyUnit] = user.Unit
 	}
 	response.Data[DataKeyAction] = request.Data
