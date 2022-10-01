@@ -14,30 +14,19 @@ var rndGen *util.RndGen = util.NewRndGen()
 func doJoinRequest(controller *controller.GameController, nickname string, class engine.GameUnitClass) (engine.UserId, string) {
 	return controller.HandleRequest(
 		engine.UserIdEmpty,
-		fmt.Sprintf(`{
-		"id": "%s",
-		"type": "join",
-		"data": {
-			"nickName": "%s",
-			"class": "%s"
-		}
-	}`,
+		[]byte(fmt.Sprintf(`{"type":"join","id":"%s","data":{"nickName":"%s","class":"%s"}}`,
 			rndGen.MakeId(),
 			nickname,
-			class))
+			class)))
 }
 
 func doRequest(controller *controller.GameController, requestType controller.RequestType, userId engine.UserId, data string) string {
 	_, result := controller.HandleRequest(
 		engine.UserId(userId),
-		fmt.Sprintf(`{
-		"id": "%s",
-		"type": "%s",
-		"data": {%s}
-	}`,
-			rndGen.MakeId(),
+		[]byte(fmt.Sprintf(`{"type":"%s","id":"%s","data":{%s}}`,
 			requestType,
-			data))
+			rndGen.MakeId(),
+			data)))
 	return result
 }
 

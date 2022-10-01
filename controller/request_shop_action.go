@@ -5,21 +5,20 @@ import (
 	"jrpg-gang/engine"
 )
 
-type ShopActionRequest struct {
-	Request
-	Data domain.Action `json:"data"`
+type ShopActionRequestData struct {
+	domain.Action
 }
 
-func (c *GameController) handleShopActionRequest(userId engine.UserId, requestRaw string, response *Response) string {
-	request := parseRequest(&ShopActionRequest{}, requestRaw)
-	if request == nil {
+func (c *GameController) handleShopActionRequest(userId engine.UserId, request *Request, response *Response) string {
+	data := parseRequestData(&ShopActionRequestData{}, request.Data)
+	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)
 	}
 	user, ok := c.users.Get(userId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	actionResult := c.shop.ExecuteAction(request.Data, &user)
+	actionResult := c.shop.ExecuteAction(data.Action, &user)
 	if actionResult.Result == domain.ResultAccomplished {
 		response.Data[DataKeyUnit] = user.Unit
 	}

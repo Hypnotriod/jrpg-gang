@@ -5,21 +5,20 @@ import (
 	"jrpg-gang/engine"
 )
 
-type ConfiguratorActionRequest struct {
-	Request
-	Data domain.Action `json:"data"`
+type ConfiguratorActionRequestData struct {
+	domain.Action
 }
 
-func (c *GameController) handleConfiguratorActionRequest(userId engine.UserId, requestRaw string, response *Response) string {
-	request := parseRequest(&ConfiguratorActionRequest{}, requestRaw)
-	if request == nil {
+func (c *GameController) handleConfiguratorActionRequest(userId engine.UserId, request *Request, response *Response) string {
+	data := parseRequestData(&ConfiguratorActionRequestData{}, request.Data)
+	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)
 	}
 	user, ok := c.users.Get(userId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	actionResult := c.configurator.ExecuteAction(request.Data, &user.Unit.Unit)
+	actionResult := c.configurator.ExecuteAction(data.Action, &user.Unit.Unit)
 	if actionResult.Result == domain.ResultAccomplished {
 		response.Data[DataKeyUnit] = user.Unit
 	}

@@ -49,8 +49,7 @@ func (c *Client) Serve() {
 		if mt != websocket.TextMessage {
 			break
 		}
-		data := string(message)
-		userId, response := c.hub.controller.HandleRequest(c.userId, data)
+		userId, response := c.hub.controller.HandleRequest(c.userId, message)
 		if userId != engine.UserIdEmpty {
 			c.userId = userId
 			c.hub.registerClient(c)

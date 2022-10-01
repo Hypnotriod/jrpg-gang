@@ -5,15 +5,7 @@ import (
 	"jrpg-gang/engine"
 )
 
-type DestroyGameRoomRequest struct {
-	Request
-}
-
-func (c *GameController) handleDestroyGameRoomRequest(userId engine.UserId, requestRaw string, response *Response) string {
-	request := parseRequest(&DestroyGameRoomRequest{}, requestRaw)
-	if request == nil {
-		return response.WithStatus(ResponseStatusMalformed)
-	}
+func (c *GameController) handleDestroyGameRoomRequest(userId engine.UserId, request *Request, response *Response) string {
 	if !c.rooms.ExistsForHostId(userId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}

@@ -5,15 +5,7 @@ import (
 	"jrpg-gang/engine"
 )
 
-type LeaveGameRoomRequest struct {
-	Request
-}
-
-func (c *GameController) handleLeaveGameRoomRequest(userId engine.UserId, requestRaw string, response *Response) string {
-	request := parseRequest(&LeaveGameRoomRequest{}, requestRaw)
-	if request == nil {
-		return response.WithStatus(ResponseStatusMalformed)
-	}
+func (c *GameController) handleLeaveGameRoomRequest(userId engine.UserId, request *Request, response *Response) string {
 	roomUid, ok := c.rooms.GetUidByUserId(userId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)

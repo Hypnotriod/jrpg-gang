@@ -159,10 +159,11 @@ func (e *GameEngines) LeaveGame(userId engine.UserId) (*engine.GameEvent, []engi
 	if len(userIds) == 0 {
 		state = wrapper.engine.NewGameEvent()
 		wrapper.engine.Dispose()
-	} else if wrapper.hostId == userId {
-		wrapper.hostId = userIds[0]
-		if u := wrapper.engine.FindActorByUserId(wrapper.hostId); u != nil {
-			u.PlayerInfo.IsHost = true
+	} else {
+		if wrapper.hostId == userId {
+			wrapper.hostId = userIds[0]
+			newHost := wrapper.engine.FindActorByUserId(wrapper.hostId)
+			newHost.PlayerInfo.IsHost = true
 		}
 		state = wrapper.engine.NewGameEvent()
 	}

@@ -5,17 +5,16 @@ import (
 	"jrpg-gang/engine"
 )
 
-type GameActionRequest struct {
-	Request
-	Data domain.Action `json:"data"`
+type GameActionRequestData struct {
+	domain.Action
 }
 
-func (c *GameController) handleGameActionRequest(userId engine.UserId, requestRaw string, response *Response) string {
-	request := parseRequest(&GameActionRequest{}, requestRaw)
-	if request == nil {
+func (c *GameController) handleGameActionRequest(userId engine.UserId, request *Request, response *Response) string {
+	data := parseRequestData(&GameActionRequestData{}, request.Data)
+	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)
 	}
-	result, broadcastUserIds, ok := c.engines.ExecuteUserAction(request.Data, userId)
+	result, broadcastUserIds, ok := c.engines.ExecuteUserAction(data.Action, userId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
