@@ -26,7 +26,7 @@ func TestParseRequestManual(t *testing.T) {
 	if parseRequest([]byte(`{"type":12345,"id":"cb077db43b627bb7","key1":"qwertyuiop[asdfghjkl;"}`)) != nil {
 		t.FailNow()
 	}
-	if parseRequest([]byte(`{"type":"join","id":"0123456789abcdef0","key1":"qwertyuiop[asdfghjkl;"}`)) != nil {
+	if parseRequest([]byte(`{"type":"join","id":"0123456789abcdef0","key1":"qwertyuiop[asdfghjkl;"}`)) == nil {
 		t.FailNow()
 	}
 	if parseRequest([]byte(`{"type":")`)) != nil {

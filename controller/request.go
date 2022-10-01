@@ -1,6 +1,9 @@
 package controller
 
-import "encoding/json"
+import (
+	"bytes"
+	"encoding/json"
+)
 
 type RequestType string
 
@@ -48,7 +51,7 @@ func parseRequestData[T ParsebleRequestData](data T, requestRaw []byte) T {
 func parseRequest(r []byte) *Request {
 	var typeStr string
 	var idStr string
-	if len(r) < 10 || r[0] != '{' || r[1] != '"' || r[2] != 't' || r[3] != 'y' || r[4] != 'p' || r[5] != 'e' || r[6] != '"' || r[7] != ':' || r[8] != '"' {
+	if len(r) < 10 || !bytes.Equal(r[:9], []byte(`{"type":"`)) {
 		return nil
 	}
 	typeBytes := [32]byte{}
@@ -64,7 +67,7 @@ func parseRequest(r []byte) *Request {
 			typeBytes[i] = c
 		}
 	}
-	if len(r) < 8 || r[0] != ',' || r[1] != '"' || r[2] != 'i' || r[3] != 'd' || r[4] != '"' || r[5] != ':' || r[6] != '"' {
+	if len(r) < 8 || !bytes.Equal(r[:7], []byte(`,"id":"`)) {
 		return nil
 	}
 	r = r[7:]
@@ -80,7 +83,7 @@ func parseRequest(r []byte) *Request {
 			idBytes[i] = c
 		}
 	}
-	if len(r) < 10 || r[0] != ',' || r[1] != '"' || r[2] != 'd' || r[3] != 'a' || r[4] != 't' || r[5] != 'a' || r[6] != '"' || r[7] != ':' || r[8] != '{' {
+	if len(r) < 10 || !bytes.Equal(r[:9], []byte(`,"data":{`)) {
 		return &Request{
 			Type: RequestType(typeStr),
 			Id:   idStr,
