@@ -6,6 +6,7 @@ import (
 )
 
 type UnitInventory struct {
+	Codes      []ItemCode   `json:"codes,omitempty"`
 	Weapon     []Weapon     `json:"weapon,omitempty"`
 	Magic      []Magic      `json:"magic,omitempty"`
 	Armor      []Armor      `json:"armor,omitempty"`
@@ -100,7 +101,7 @@ func (i *UnitInventory) GetEquippedSlotsNumber(slot EquipmentSlot) uint {
 	return slotsNumber
 }
 
-func (i *UnitInventory) Add(item interface{}) bool {
+func (i *UnitInventory) Add(item any) bool {
 	switch v := item.(type) {
 	case Weapon:
 		i.Weapon = append(i.Weapon, v)
@@ -152,7 +153,7 @@ func (i *UnitInventory) Add(item interface{}) bool {
 	return false
 }
 
-func (i *UnitInventory) Find(uid uint) interface{} {
+func (i *UnitInventory) Find(uid uint) any {
 	for n := range i.Weapon {
 		if i.Weapon[n].Uid == uid {
 			return &i.Weapon[n]
@@ -432,5 +433,23 @@ func (i *UnitInventory) PopulateUids(rndGen *util.RndGen) {
 	}
 	for j := range i.Weapon {
 		i.Weapon[j].Uid = rndGen.NextUid()
+	}
+}
+
+func (i *UnitInventory) PopulateCodeToItemMap(codeToItem *map[ItemCode]any) {
+	for j := range i.Ammunition {
+		(*codeToItem)[i.Ammunition[j].Code] = &i.Ammunition[j]
+	}
+	for j := range i.Armor {
+		(*codeToItem)[i.Armor[j].Code] = &i.Armor[j]
+	}
+	for j := range i.Disposable {
+		(*codeToItem)[i.Disposable[j].Code] = &i.Disposable[j]
+	}
+	for j := range i.Magic {
+		(*codeToItem)[i.Magic[j].Code] = &i.Magic[j]
+	}
+	for j := range i.Weapon {
+		(*codeToItem)[i.Weapon[j].Code] = &i.Weapon[j]
 	}
 }

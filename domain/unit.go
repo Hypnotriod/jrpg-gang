@@ -11,11 +11,13 @@ import (
 
 type UnitSlots map[EquipmentSlot]uint
 
+type UnitCode string
+
 type Unit struct {
 	rng          *rand.Rand
 	Uid          uint                     `json:"uid,omitempty"`
 	Name         string                   `json:"name"`
-	Code         string                   `json:"code,omitempty"`
+	Code         UnitCode                 `json:"code,omitempty"`
 	Booty        UnitBooty                `json:"booty"`
 	State        UnitState                `json:"state"`
 	Stats        UnitStats                `json:"stats"`
