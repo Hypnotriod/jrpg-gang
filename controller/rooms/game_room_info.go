@@ -6,12 +6,12 @@ import (
 )
 
 type GameRoomInfo struct {
-	Uid         uint                `json:"uid"`
-	Capacity    uint                `json:"capacity,omitempty"`
-	ScenarioId  GameRoomScenarioId  `json:"scenarioId,omitempty"`
-	JoinedUsers []engine.PlayerInfo `json:"joinedUsers"`
-	Host        engine.PlayerInfo   `json:"host,omitempty"`
-	Inactive    bool                `json:"inactive,omitempty"`
+	Uid         uint                  `json:"uid"`
+	Capacity    uint                  `json:"capacity,omitempty"`
+	ScenarioId  engine.GameScenarioId `json:"scenarioId,omitempty"`
+	JoinedUsers []engine.PlayerInfo   `json:"joinedUsers"`
+	Host        engine.PlayerInfo     `json:"host,omitempty"`
+	Inactive    bool                  `json:"inactive,omitempty"`
 }
 
 func toInactiveGameRoomInfo(roomUid uint) GameRoomInfo {

@@ -1,14 +1,13 @@
 package controller
 
 import (
-	"jrpg-gang/controller/rooms"
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 )
 
 type CreateGameRoomRequestData struct {
-	Capacity   uint                     `json:"capacity"`
-	ScenarioId rooms.GameRoomScenarioId `json:"scenarioId"`
+	Capacity   uint                  `json:"capacity"`
+	ScenarioId engine.GameScenarioId `json:"scenarioId"`
 }
 
 func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, request *Request, response *Response) string {

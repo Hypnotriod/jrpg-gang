@@ -22,7 +22,7 @@ func NewGameRooms() *GameRooms {
 	return r
 }
 
-func (r *GameRooms) Create(capacity uint, scenarioId GameRoomScenarioId, hostUser users.User) {
+func (r *GameRooms) Create(capacity uint, scenarioId engine.GameScenarioId, hostUser users.User) {
 	defer r.mu.Unlock()
 	r.mu.Lock()
 	room := newGameRoom()

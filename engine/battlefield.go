@@ -6,10 +6,17 @@ import (
 	"jrpg-gang/util"
 )
 
+type BattlefieldUnitDescriptor struct {
+	Code     domain.UnitCode `json:"code"`
+	Faction  GameUnitFaction `json:"faction"`
+	Position domain.Position `json:"position"`
+}
+
 type Battlefield struct {
-	Matrix  [][]Cell    `json:"matrix"`
-	Units   []*GameUnit `json:"units"`
-	Corpses []*GameUnit `json:"corpses"`
+	Matrix         [][]Cell                    `json:"matrix"`
+	UnitDescriptor []BattlefieldUnitDescriptor `json:"unitDescriptor,omitempty"`
+	Units          []*GameUnit                 `json:"units"`
+	Corpses        []*GameUnit                 `json:"corpses"`
 }
 
 func (b Battlefield) String() string {
@@ -19,6 +26,24 @@ func (b Battlefield) String() string {
 		util.AsCommaSeparatedObjectsSlice(b.Units),
 		util.AsCommaSeparatedObjectsSlice(b.Corpses),
 	)
+}
+
+func (b *Battlefield) Clone() *Battlefield {
+	r := &Battlefield{}
+	r.Matrix = make([][]Cell, len(b.Matrix))
+	for x := range b.Matrix {
+		for y := range b.Matrix[x] {
+			r.Matrix[x] = append(r.Matrix[x], *b.Matrix[x][y].Clone())
+		}
+	}
+	r.UnitDescriptor = append(r.UnitDescriptor, b.UnitDescriptor...)
+	for i := range b.Units {
+		r.Units = append(r.Units, b.Units[i].Clone())
+	}
+	for i := range b.Corpses {
+		r.Corpses = append(r.Corpses, b.Corpses[i].Clone())
+	}
+	return r
 }
 
 func NewBattlefield(matrix [][]Cell) *Battlefield {

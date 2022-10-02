@@ -15,14 +15,15 @@ type GameControllerBroadcaster interface {
 }
 
 type GameController struct {
-	users        *users.Users
-	rooms        *rooms.GameRooms
-	engines      *gameengines.GameEngines
-	shop         *shop.Shop
-	configurator *engine.UnitConfigurator
-	itemsConfig  *config.GameItemsConfig
-	unitsConfig  *config.GameUnitsConfig
-	broadcaster  GameControllerBroadcaster
+	users          *users.Users
+	rooms          *rooms.GameRooms
+	engines        *gameengines.GameEngines
+	shop           *shop.Shop
+	configurator   *engine.UnitConfigurator
+	itemsConfig    *config.GameItemsConfig
+	unitsConfig    *config.GameUnitsConfig
+	scenarioConfig *config.GameScenariosConfig
+	broadcaster    GameControllerBroadcaster
 }
 
 func NewGameController() *GameController {
@@ -33,6 +34,7 @@ func NewGameController() *GameController {
 	c.shop = shop.NewShop()
 	c.itemsConfig = config.NewGameItemsConfig()
 	c.unitsConfig = config.NewGameUnitsConfig()
+	c.scenarioConfig = config.NewGameScenariosConfig()
 	c.configurator = engine.NewUnitConfigurator()
 	c.broadcaster = c
 	c.prepare()
@@ -43,10 +45,13 @@ func (c *GameController) prepare() {
 	if err := c.itemsConfig.Load(ITEMS_CONFIG_PATH); err != nil {
 		panic(err)
 	}
+	if err := c.shop.LoadItems(UNITS_CONFIG_PATH, c.itemsConfig); err != nil {
+		panic(err)
+	}
 	if err := c.unitsConfig.LoadUnits(UNITS_CONFIG_PATH, c.itemsConfig); err != nil {
 		panic(err)
 	}
-	if err := c.shop.LoadItems(UNITS_CONFIG_PATH, c.itemsConfig); err != nil {
+	if err := c.scenarioConfig.LoadScenarios(SCENARIO_CONFIG_PATH, c.unitsConfig); err != nil {
 		panic(err)
 	}
 }

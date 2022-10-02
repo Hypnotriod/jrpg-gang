@@ -6,6 +6,8 @@ import (
 	"jrpg-gang/util"
 )
 
+type GameScenarioId string
+
 type GameScenario struct {
 	Spots     []Spot        `json:"spots"`
 	Path      []map[int]int `json:"path"`
@@ -19,6 +21,15 @@ func (s GameScenario) String() string {
 		"spots: %v",
 		s.Spots,
 	)
+}
+
+func (s *GameScenario) Clone() *GameScenario {
+	r := &GameScenario{}
+	r.Path = s.Path
+	for i := range s.Spots {
+		r.Spots = append(r.Spots, *s.Spots[i].Clone())
+	}
+	return r
 }
 
 func (s *GameScenario) Initialize(rndGen *util.RndGen, actors []*GameUnit) {

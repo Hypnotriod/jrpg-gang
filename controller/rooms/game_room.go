@@ -5,12 +5,10 @@ import (
 	"jrpg-gang/engine"
 )
 
-type GameRoomScenarioId string
-
 type GameRoom struct {
-	Uid         uint               `json:"uid"`
-	Capacity    uint               `json:"capacity"`
-	ScenarioId  GameRoomScenarioId `json:"scenarioId"`
+	Uid         uint                  `json:"uid"`
+	Capacity    uint                  `json:"capacity"`
+	ScenarioId  engine.GameScenarioId `json:"scenarioId"`
 	joinedUsers []users.User
 	host        users.User
 }

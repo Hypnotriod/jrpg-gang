@@ -20,3 +20,12 @@ func (s Spot) String() string {
 		s.Battlefield,
 	)
 }
+
+func (s *Spot) Clone() *Spot {
+	r := &Spot{}
+	r.Name = s.Name
+	r.Code = s.Code
+	r.Battlefield = *s.Battlefield.Clone()
+	r.Booty = s.Booty
+	return r
+}

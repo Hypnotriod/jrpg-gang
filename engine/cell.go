@@ -23,6 +23,14 @@ func (c Cell) String() string {
 	)
 }
 
+func (c *Cell) Clone() *Cell {
+	r := &Cell{}
+	r.Factions = append(r.Factions, c.Factions...)
+	r.Type = c.Type
+	r.Code = c.Code
+	return r
+}
+
 func (c *Cell) CanPlaceUnit() bool {
 	return c.Type == CellTypeSpace
 }
