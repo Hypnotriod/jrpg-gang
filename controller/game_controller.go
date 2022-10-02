@@ -45,7 +45,7 @@ func (c *GameController) prepare() {
 	if err := c.itemsConfig.Load(ITEMS_CONFIG_PATH); err != nil {
 		panic(err)
 	}
-	if err := c.shop.LoadItems(UNITS_CONFIG_PATH, c.itemsConfig); err != nil {
+	if err := c.shop.LoadItems(SHOP_CONFIG_PATH, c.itemsConfig); err != nil {
 		panic(err)
 	}
 	if err := c.unitsConfig.LoadUnits(UNITS_CONFIG_PATH, c.itemsConfig); err != nil {

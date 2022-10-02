@@ -191,5 +191,112 @@
         },
         "damage": [],
         "modification": []
+    },
+    {
+        "name": "North Troll",
+        "code": "troll-01",
+        "stats": {
+            "progress": {
+                "level": 10,
+                "experience": 45550
+            },
+            "baseAttributes": {
+                "health": 100,
+                "stamina": 100
+            },
+            "attributes": {
+                "strength": 15,
+                "physique": 20,
+                "agility": 5,
+                "endurance": 30,
+                "intelligence": 0,
+                "initiative": 0,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 0,
+                "cutting": 0,
+                "crushing": 20,
+                "fire": 0,
+                "cold": 50,
+                "lighting": 0,
+                "poison": 0,
+                "exhaustion": 5,
+                "manaDrain": 0,
+                "fear": 0,
+                "curse": 0
+            }
+        },
+        "slots": {
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "rusty-axe-01",
+                    "equipped": true
+                },
+                {
+                    "code": "rusty-helmet-01",
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
+        "name": "Nasty Goblin",
+        "code": "goblin-01",
+        "faction": 1,
+        "stats": {
+            "progress": {
+                "level": 10,
+                "experience": 45550
+            },
+            "baseAttributes": {
+                "health": 100,
+                "stamina": 100
+            },
+            "attributes": {
+                "strength": 10,
+                "physique": 5,
+                "agility": 15,
+                "endurance": 30,
+                "intelligence": 0,
+                "initiative": 15,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 0,
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 15,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "fear": 0,
+                "curse": 0
+            }
+        },
+        "slots": {
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "rusty-mace-01",
+                    "equipped": true
+                },
+                {
+                    "code": "rusty-helmet-01",
+                    "equipped": true
+                }
+            ]
+        },
+        "position": {
+            "x": 2,
+            "y": 0
+        }
     }
 ]

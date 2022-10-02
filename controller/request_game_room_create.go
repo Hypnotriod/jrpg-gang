@@ -21,7 +21,9 @@ func (c *GameController) handleCreateGameRoomRequest(userId engine.UserId, reque
 	if c.rooms.ExistsForUserId(userId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	// todo: check available scenario
+	if !c.scenarioConfig.Has(data.ScenarioId) {
+		return response.WithStatus(ResponseStatusNotFound)
+	}
 	hostUser, _ := c.users.Get(userId)
 	c.rooms.Create(
 		data.Capacity,

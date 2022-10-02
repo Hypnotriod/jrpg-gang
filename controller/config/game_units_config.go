@@ -20,8 +20,8 @@ func NewGameUnitsConfig() *GameUnitsConfig {
 }
 
 func (c *GameUnitsConfig) GetByCode(code domain.UnitCode) *engine.GameUnit {
-	defer c.mu.RLock()
-	c.mu.RUnlock()
+	defer c.mu.RUnlock()
+	c.mu.RLock()
 	unit, ok := c.codeToUnit[code]
 	if !ok {
 		return nil

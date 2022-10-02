@@ -54,7 +54,9 @@ func (u *Unit) Clone() *Unit {
 	r.Booty = u.Booty
 	r.State = u.State
 	r.Stats = u.Stats
+	r.Damage = []DamageImpact{}
 	r.Damage = append(r.Damage, u.Damage...)
+	r.Modification = []UnitModificationImpact{}
 	r.Modification = append(r.Modification, u.Modification...)
 	r.Inventory = *u.Inventory.Clone()
 	r.Slots = util.CloneMap(u.Slots)

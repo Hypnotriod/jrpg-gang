@@ -25,6 +25,7 @@ func (c Cell) String() string {
 
 func (c *Cell) Clone() *Cell {
 	r := &Cell{}
+	r.Factions = []GameUnitFaction{}
 	r.Factions = append(r.Factions, c.Factions...)
 	r.Type = c.Type
 	r.Code = c.Code

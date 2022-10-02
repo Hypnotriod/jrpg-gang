@@ -17,6 +17,23 @@ func NewGameScenariosConfig() *GameScenariosConfig {
 	return c
 }
 
+func (c *GameScenariosConfig) Has(id engine.GameScenarioId) bool {
+	defer c.mu.RUnlock()
+	c.mu.RLock()
+	_, ok := c.scenarios[id]
+	return ok
+}
+
+func (c *GameScenariosConfig) Get(id engine.GameScenarioId) *engine.GameScenario {
+	defer c.mu.RUnlock()
+	c.mu.RLock()
+	scenario, ok := c.scenarios[id]
+	if !ok {
+		return nil
+	}
+	return scenario.Clone()
+}
+
 func (c *GameScenariosConfig) LoadScenarios(path string, unitsConfig *GameUnitsConfig) error {
 	obj := make(map[engine.GameScenarioId]*engine.GameScenario)
 	scenarios, err := util.ReadJsonFile(&obj, path)
@@ -39,6 +56,7 @@ func (c *GameScenariosConfig) prepare(scenarios *map[engine.GameScenarioId]*engi
 				unit.Faction = desc.Faction
 				v.Spots[n].Battlefield.Units = append(v.Spots[n].Battlefield.Units, unit)
 			}
+			v.Spots[n].Battlefield.UnitDescriptor = nil
 		}
 	}
 }
