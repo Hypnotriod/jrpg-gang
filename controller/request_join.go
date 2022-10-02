@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"jrpg-gang/controller/factory"
 	"jrpg-gang/controller/users"
+	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"regexp"
 )
@@ -33,7 +33,7 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 	if _, ok := c.users.GetByNickname(data.Nickname); ok {
 		return engine.UserIdEmpty, response.WithStatus(ResponseStatusAlreadyExists)
 	}
-	unit := factory.NewGameUnitByClass(data.Class) // todo: test purpose only
+	unit := c.unitsConfig.GetByCode(domain.UnitCode(data.Class))
 	if unit == nil {
 		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMalformed)
 	}

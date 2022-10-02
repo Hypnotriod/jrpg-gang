@@ -2,15 +2,30 @@ package util
 
 import (
 	"encoding/json"
+	"os"
 )
 
-func JsonToObject(object interface{}, config string) (interface{}, error) {
-	return object, json.Unmarshal([]byte(config), object)
+func JsonToObject(obj any, config string) (any, error) {
+	return obj, json.Unmarshal([]byte(config), obj)
 }
 
-func ObjectToJson(object interface{}) string {
-	if marshalled, err := json.Marshal(object); err == nil {
+func ObjectToJson(obj any) string {
+	if marshalled, err := json.Marshal(obj); err == nil {
 		return string(marshalled)
 	}
 	return ""
+}
+
+func ReadJsonFile[T any](obj *T, path string) (*T, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	decoder := json.NewDecoder(file)
+	err = decoder.Decode(obj)
+	if err != nil {
+		return nil, err
+	}
+	return obj, nil
 }

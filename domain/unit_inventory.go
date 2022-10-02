@@ -5,13 +5,19 @@ import (
 	"jrpg-gang/util"
 )
 
+type UnitInventoryDescriptor struct {
+	Code     ItemCode `json:"code"`
+	Quantity uint     `json:"quantity"`
+	Equipped bool     `json:"equipped,omitempty"`
+}
+
 type UnitInventory struct {
-	Codes      []ItemCode   `json:"codes,omitempty"`
-	Weapon     []Weapon     `json:"weapon,omitempty"`
-	Magic      []Magic      `json:"magic,omitempty"`
-	Armor      []Armor      `json:"armor,omitempty"`
-	Disposable []Disposable `json:"disposable,omitempty"`
-	Ammunition []Ammunition `json:"ammunition,omitempty"`
+	Descriptor []UnitInventoryDescriptor `json:"descriptor,omitempty"`
+	Weapon     []Weapon                  `json:"weapon,omitempty"`
+	Magic      []Magic                   `json:"magic,omitempty"`
+	Armor      []Armor                   `json:"armor,omitempty"`
+	Disposable []Disposable              `json:"disposable,omitempty"`
+	Ammunition []Ammunition              `json:"ammunition,omitempty"`
 }
 
 func (i UnitInventory) String() string {

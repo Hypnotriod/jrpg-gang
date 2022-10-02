@@ -1,0 +1,22 @@
+{
+    "descriptor": [
+        {
+            "code": "arrow-01"
+        },
+        {
+            "code": "fire-charge-01"
+        },
+        {
+            "code": "cold-charge-01"
+        },
+        {
+            "code": "lighting-charge-01"
+        },
+        {
+            "code": "health-potion-01"
+        },
+        {
+            "code": "poison-01"
+        }
+    ]
+}

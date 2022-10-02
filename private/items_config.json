@@ -1,0 +1,260 @@
+{
+    "weapon": [
+        {
+            "type": "weapon",
+            "name": "Base Sword",
+            "code": "sword-01",
+            "description": "Base one hand sword",
+            "durability": 700,
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {
+                "physique": 15
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 1
+            },
+            "damage": [
+                {
+                    "chance": 50,
+                    "cutting": 30,
+                    "crushing": 5
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3
+                }
+            ],
+            "modification": [
+                {
+                    "damage": {
+                        "stabbing": 10
+                    }
+                }
+            ],
+            "useCost": {
+                "stamina": 30
+            },
+            "price": {
+                "coins": 3000
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Bow",
+            "code": "bow-01",
+            "description": "Base two hand bow",
+            "ammunitionKind": "arrow",
+            "durability": 700,
+            "slot": "weapon",
+            "slotsNumber": 2,
+            "requirements": {
+                "physique": 10
+            },
+            "range": {
+                "maximumX": 10,
+                "maximumY": 10,
+                "minimumX": 2
+            },
+            "damage": [
+            ],
+            "useCost": {
+                "stamina": 25
+            },
+            "price": {
+                "coins": 3000
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Dagger",
+            "code": "dagger-01",
+            "description": "Sneaky one hand dagger",
+            "durability": 700,
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {
+                "physique": 5
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 1
+            },
+            "damage": [
+                {
+                    "chance": 40,
+                    "cutting": 15
+                },
+                {
+                    "duration": 3,
+                    "chance": 10,
+                    "bleeding": 10
+                }
+            ],
+            "useCost": {
+                "stamina": 15
+            },
+            "price": {
+                "coins": 2500
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Staff",
+            "code": "sorcerer-staff-01",
+            "description": "Base one hand Sorcerer Staff",
+            "ammunitionKind": "magicCharge",
+            "durability": 700,
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {
+                "intelligence": 15
+            },
+            "damage": [
+            ],
+            "range": {
+                "maximumX": 3,
+                "maximumY": 3
+            },
+            "useCost": {
+                "mana": 15,
+                "stamina": 5
+            },
+            "price": {
+                "coins": 3000
+            }
+        }
+    ],
+    "magic": [],
+    "armor": [],
+    "disposable": [
+        {
+            "name": "Health Sm",
+            "type": "disposable",
+            "code": "health-potion-01",
+            "description": "Small health potion",
+            "modification": [
+                {
+                    "recovery": {
+                        "health": 35
+                    }
+                },
+                {
+                    "chance": 50,
+                    "duration": 5,
+                    "recovery": {
+                        "health": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 250
+            }
+        },
+        {
+            "name": "Poison",
+            "type": "disposable",
+            "code": "poison-01",
+            "description": "Regular Poison",
+            "modification": [
+                {
+                    "duration": 3,
+                    "damage": {
+                        "poison": 10
+                    }
+                }
+            ],
+            "price": {
+                "coins": 10
+            }
+        }
+    ],
+    "ammunition": [
+        {
+            "name": "Arrow",
+            "type": "ammunition",
+            "code": "arrow-01",
+            "description": "Base arrow",
+            "kind": "arrow",
+            "damage": [
+                {
+                    "stabbing": 10,
+                    "chance": 50
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3
+                }
+            ],
+            "price": {
+                "coins": 100
+            }
+        },
+        {
+            "name": "Fire",
+            "type": "ammunition",
+            "code": "fire-charge-01",
+            "description": "Sorcerer staff Fire Charge",
+            "kind": "magicCharge",
+            "damage": [
+                {
+                    "fire": 15,
+                    "chance": 50
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "fire": 5
+                }
+            ],
+            "price": {
+                "coins": 15
+            }
+        },
+        {
+            "name": "Cold",
+            "type": "ammunition",
+            "code": "cold-charge-01",
+            "description": "Sorcerer staff Cold Charge",
+            "kind": "magicCharge",
+            "damage": [
+                {
+                    "cold": 15,
+                    "chance": 50
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "cold": 5
+                }
+            ],
+            "price": {
+                "coins": 15
+            }
+        },
+        {
+            "name": "Lighting",
+            "type": "ammunition",
+            "code": "lighting-charge-01",
+            "description": "Sorcerer staff Lighting Charge",
+            "kind": "magicCharge",
+            "damage": [
+                {
+                    "lighting": 15,
+                    "chance": 50
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "lighting": 5
+                }
+            ],
+            "price": {
+                "coins": 15
+            }
+        }
+    ]
+}

@@ -1,10 +1,11 @@
 package shop
 
 import (
-	"jrpg-gang/controller/factory"
+	"jrpg-gang/controller/config"
 	"jrpg-gang/controller/users"
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
+	"jrpg-gang/util"
 	"sync"
 )
 
@@ -15,8 +16,19 @@ type Shop struct {
 
 func NewShop() *Shop {
 	s := &Shop{}
-	s.shop = engine.NewGameShop(factory.NewTestShopItems())
 	return s
+}
+
+func (s *Shop) LoadItems(path string, itemsConfig *config.GameItemsConfig) error {
+	items, err := util.ReadJsonFile(&domain.UnitInventory{}, path)
+	if err != nil {
+		return err
+	}
+	defer s.mu.Unlock()
+	s.mu.Lock()
+	itemsConfig.PopulateFromDescriptor(items)
+	s.shop = engine.NewGameShop(items)
+	return nil
 }
 
 func (s *Shop) GetStatus() engine.GameShop {

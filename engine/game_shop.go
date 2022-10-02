@@ -43,21 +43,21 @@ func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.Rnd
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
 		unit.Booty.Reduce(item.Price, 1)
-		unit.Inventory.Add(itemClone)
+		unit.Inventory.Add(&itemClone)
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
 	if itemRef := s.Items.FindMagic(action.ItemUid); itemRef != nil {
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
 		unit.Booty.Reduce(item.Price, 1)
-		unit.Inventory.Add(itemClone)
+		unit.Inventory.Add(&itemClone)
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
 	if itemRef := s.Items.FindArmor(action.ItemUid); itemRef != nil {
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
 		unit.Booty.Reduce(item.Price, 1)
-		unit.Inventory.Add(itemClone)
+		unit.Inventory.Add(&itemClone)
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
 	if itemRef := s.Items.FindDisposable(action.ItemUid); itemRef != nil {
@@ -65,7 +65,7 @@ func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.Rnd
 		itemClone.Uid = rndGen.NextUid()
 		itemClone.Quantity = action.Quantity
 		unit.Booty.Reduce(item.Price, action.Quantity)
-		unit.Inventory.Add(itemClone)
+		unit.Inventory.Add(&itemClone)
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
 	if itemRef := s.Items.FindAmmunition(action.ItemUid); itemRef != nil {
@@ -73,7 +73,7 @@ func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.Rnd
 		itemClone.Uid = rndGen.NextUid()
 		itemClone.Quantity = action.Quantity
 		unit.Booty.Reduce(item.Price, action.Quantity)
-		unit.Inventory.Add(itemClone)
+		unit.Inventory.Add(&itemClone)
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
 	return domain.NewActionResult().WithResult(domain.ResultNotFound)

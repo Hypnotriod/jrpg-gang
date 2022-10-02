@@ -1,10 +1,9 @@
 package config
 
 import (
-	"encoding/json"
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
-	"os"
+	"jrpg-gang/util"
 	"sync"
 )
 
@@ -20,28 +19,32 @@ func NewGameUnitsConfig() *GameUnitsConfig {
 	return c
 }
 
-func (c *GameUnitsConfig) Load(path string) error {
-	file, err := os.Open(path)
+func (c *GameUnitsConfig) GetByCode(code domain.UnitCode) *engine.GameUnit {
+	defer c.mu.RLock()
+	c.mu.RUnlock()
+	unit, ok := c.codeToUnit[code]
+	if !ok {
+		return nil
+	}
+	return unit.Clone()
+}
+
+func (c *GameUnitsConfig) LoadUnits(path string, itemsConfig *GameItemsConfig) error {
+	units, err := util.ReadJsonFile(&[]engine.GameUnit{}, path)
 	if err != nil {
 		return err
 	}
-	defer file.Close()
 	defer c.mu.Unlock()
 	c.mu.Lock()
-	units := &[]engine.GameUnit{}
-	decoder := json.NewDecoder(file)
-	err = decoder.Decode(units)
-	if err != nil {
-		return err
-	}
-	c.update(units)
+	c.update(units, itemsConfig)
 	return nil
 }
 
-func (c *GameUnitsConfig) update(units *[]engine.GameUnit) {
+func (c *GameUnitsConfig) update(units *[]engine.GameUnit, itemsConfig *GameItemsConfig) {
 	c.units = *units
 	c.codeToUnit = make(map[domain.UnitCode]*engine.GameUnit)
 	for i := range c.units {
+		itemsConfig.PopulateFromDescriptor(&c.units[i].Inventory)
 		c.codeToUnit[c.units[i].Code] = &c.units[i]
 	}
 }
