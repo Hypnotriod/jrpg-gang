@@ -40,6 +40,9 @@
         "inventory": {
             "descriptor": [
                 {
+                    "code": "fist-01"
+                },
+                {
                     "code": "sword-01",
                     "equipped": true
                 }
@@ -96,6 +99,9 @@
         },
         "inventory": {
             "descriptor": [
+                {
+                    "code": "fist-01"
+                },
                 {
                     "code": "bow-01",
                     "equipped": true
@@ -162,6 +168,9 @@
         },
         "inventory": {
             "descriptor": [
+                {
+                    "code": "fist-01"
+                },
                 {
                     "code": "sorcerer-staff-01",
                     "equipped": true
@@ -238,6 +247,9 @@
         "inventory": {
             "descriptor": [
                 {
+                    "code": "fist-01"
+                },
+                {
                     "code": "rusty-axe-01",
                     "equipped": true
                 },
@@ -294,6 +306,9 @@
         },
         "inventory": {
             "descriptor": [
+                {
+                    "code": "fist-01"
+                },
                 {
                     "code": "rusty-mace-01",
                     "equipped": true
