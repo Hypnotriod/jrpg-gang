@@ -7,6 +7,7 @@ FROM alpine
 WORKDIR /app
 COPY --from=builder /app/main .
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/private ./private
 
 EXPOSE 8080
 ENV PORT=8080
