@@ -130,7 +130,7 @@
             "code": "rusty-axe-01",
             "description": "Rusty Axe",
             "wearout": 35,
-            "durability": 40,
+            "durability": 100,
             "slot": "weapon",
             "slotsNumber": 1,
             "requirements": {
@@ -162,7 +162,7 @@
             "code": "rusty-mace-01",
             "description": "Rusty Mace",
             "wearout": 35,
-            "durability": 40,
+            "durability": 100,
             "slot": "weapon",
             "slotsNumber": 1,
             "requirements": {

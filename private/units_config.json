@@ -228,7 +228,12 @@
             }
         },
         "slots": {
-            "weapon": 1
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
         },
         "inventory": {
             "descriptor": [
@@ -280,7 +285,12 @@
             }
         },
         "slots": {
-            "weapon": 1
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
         },
         "inventory": {
             "descriptor": [
@@ -293,10 +303,6 @@
                     "equipped": true
                 }
             ]
-        },
-        "position": {
-            "x": 2,
-            "y": 0
         }
     }
 ]
