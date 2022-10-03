@@ -25,9 +25,9 @@
         },
         {
             "type": "weapon",
-            "name": "Bite",
+            "name": "Teeth",
             "code": "teeth-01",
-            "description": "Bite",
+            "description": "Bite with teeth",
             "slot": "weapon",
             "slotsNumber": 1,
             "requirements": {

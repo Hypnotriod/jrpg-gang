@@ -207,11 +207,11 @@
         "stats": {
             "progress": {
                 "level": 10,
-                "experience": 45550
+                "experience": 1000
             },
             "baseAttributes": {
-                "health": 100,
-                "stamina": 100
+                "health": 200,
+                "stamina": 200
             },
             "attributes": {
                 "strength": 15,
@@ -263,11 +263,10 @@
     {
         "name": "Nasty Goblin",
         "code": "goblin-01",
-        "faction": 1,
         "stats": {
             "progress": {
                 "level": 10,
-                "experience": 45550
+                "experience": 500
             },
             "baseAttributes": {
                 "health": 100,
@@ -315,6 +314,54 @@
                 },
                 {
                     "code": "rusty-helmet-01",
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
+        "name": "Green Slime",
+        "code": "slime-01",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 150
+            },
+            "baseAttributes": {
+                "health": 50,
+                "stamina": 50
+            },
+            "attributes": {
+                "strength": 20,
+                "physique": 5,
+                "agility": 5,
+                "endurance": 5,
+                "intelligence": 0,
+                "initiative": 10,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 0,
+                "cutting": 0,
+                "crushing": 0,
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 100,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "fear": 0,
+                "curse": 0
+            }
+        },
+        "slots": {
+            "body": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "teeth-01",
                     "equipped": true
                 }
             ]
