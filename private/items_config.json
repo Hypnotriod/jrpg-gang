@@ -2,10 +2,60 @@
     "weapon": [
         {
             "type": "weapon",
+            "name": "Hand Punch",
+            "code": "fist-01",
+            "description": "Hand Punch",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 1
+            },
+            "damage": [
+                {
+                    "chance": 50,
+                    "crushing": 1
+                }
+            ],
+            "useCost": {
+                "stamina": 10
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Bite",
+            "code": "teeth-01",
+            "description": "Bite",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 1
+            },
+            "damage": [
+                {
+                    "chance": 50,
+                    "cutting": 1
+                },
+                {
+                    "chance": 50,
+                    "bleeding": 1
+                }
+            ],
+            "useCost": {
+                "stamina": 10
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Base Sword",
             "code": "sword-01",
             "description": "Base one hand sword",
-            "durability": 700,
+            "durability": 300,
             "slot": "weapon",
             "slotsNumber": 1,
             "requirements": {
@@ -47,7 +97,7 @@
             "code": "bow-01",
             "description": "Base two hand bow",
             "ammunitionKind": "arrow",
-            "durability": 700,
+            "durability": 300,
             "slot": "weapon",
             "slotsNumber": 2,
             "requirements": {
@@ -71,7 +121,7 @@
             "name": "Dagger",
             "code": "dagger-01",
             "description": "Sneaky one hand dagger",
-            "durability": 700,
+            "durability": 300,
             "slot": "weapon",
             "slotsNumber": 1,
             "requirements": {
@@ -105,7 +155,7 @@
             "code": "sorcerer-staff-01",
             "description": "Base one hand Sorcerer Staff",
             "ammunitionKind": "magicCharge",
-            "durability": 700,
+            "durability": 300,
             "slot": "weapon",
             "slotsNumber": 1,
             "requirements": {
@@ -130,7 +180,7 @@
             "code": "rusty-axe-01",
             "description": "Rusty Axe",
             "wearout": 35,
-            "durability": 100,
+            "durability": 40,
             "slot": "weapon",
             "slotsNumber": 1,
             "requirements": {
@@ -162,7 +212,7 @@
             "code": "rusty-mace-01",
             "description": "Rusty Mace",
             "wearout": 35,
-            "durability": 100,
+            "durability": 40,
             "slot": "weapon",
             "slotsNumber": 1,
             "requirements": {

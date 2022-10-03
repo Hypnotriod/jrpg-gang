@@ -39,6 +39,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 func (u *Unit) applyDamage(damage Damage) Damage {
 	if damage.HasPhysicalEffect() {
 		u.Inventory.IncreaseArmorWearout(true)
+		u.Inventory.UpdateEquipmentByWeareout()
 	}
 	resistance := u.TotalModification().Resistance
 	resistance.Accumulate(u.Stats.Resistance)

@@ -46,6 +46,7 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 	instDmg, tmpImp := u.Attack(target, damage)
 	if len(instDmg) != 0 || len(tmpImp) != 0 {
 		weapon.IncreaseWearout()
+		u.Inventory.UpdateEquipmentByWeareout()
 	}
 	action.InstantDamage = append(action.InstantDamage, instDmg...)
 	action.TemporalDamage = append(action.TemporalDamage, tmpImp...)
