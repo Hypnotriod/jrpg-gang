@@ -72,7 +72,7 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domai
 		return result.WithResult(domain.ResultNotEmpty)
 	}
 	unit.Position = position
-	if b.FindUnitById(unit.Uid) == nil {
+	if b.FindUnit(unit.Uid) == nil {
 		b.Units = append(b.Units, unit)
 	}
 	return result.WithResult(domain.ResultAccomplished)
@@ -80,7 +80,7 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domai
 
 func (b *Battlefield) MoveUnit(uid uint, position domain.Position) *domain.ActionResult {
 	result := domain.NewActionResult()
-	unit := b.FindUnitById(uid)
+	unit := b.FindUnit(uid)
 	if unit == nil {
 		return result.WithResult(domain.ResultNotFound)
 	}
@@ -99,8 +99,8 @@ func (b *Battlefield) MoveUnit(uid uint, position domain.Position) *domain.Actio
 	return result.WithResult(domain.ResultAccomplished)
 }
 
-func (b *Battlefield) MoveToCorpsesById(uid uint) {
-	unit := b.FindUnitById(uid)
+func (b *Battlefield) MoveToCorpses(uid uint) {
+	unit := b.FindUnit(uid)
 	if unit == nil {
 		return
 	}
@@ -113,13 +113,9 @@ func (b *Battlefield) MoveToCorpsesById(uid uint) {
 	unit.IsDead = true
 	b.Units = survivedUnits
 	b.Corpses = append(b.Corpses, unit)
-	if unit.PlayerInfo != nil && unit.PlayerInfo.IsHost {
-		unit.PlayerInfo.IsHost = false
-		b.reassignHost()
-	}
 }
 
-func (b *Battlefield) FindUnitById(uid uint) *GameUnit {
+func (b *Battlefield) FindUnit(uid uint) *GameUnit {
 	return util.Findp(b.Units, func(u *GameUnit) bool {
 		return u.Uid == uid
 	})
@@ -165,26 +161,18 @@ func (b *Battlefield) UpdateCellsFactions() {
 }
 
 func (b *Battlefield) FilterSurvivors() []*GameUnit {
-	isHostDead := false
 	newCorpses := []*GameUnit{}
 	survivedUnits := []*GameUnit{}
 	for _, unit := range b.Units {
 		if unit.State.Health > 0 {
 			survivedUnits = append(survivedUnits, unit)
 		} else {
-			if unit.PlayerInfo != nil && unit.PlayerInfo.IsHost {
-				unit.PlayerInfo.IsHost = false
-				isHostDead = true
-			}
 			unit.IsDead = true
 			newCorpses = append(newCorpses, unit)
 			b.Corpses = append(b.Corpses, unit)
 		}
 	}
 	b.Units = survivedUnits
-	if isHostDead {
-		b.reassignHost()
-	}
 	return newCorpses
 }
 
@@ -257,7 +245,7 @@ func (b *Battlefield) tryToPlaceUnit(unit *GameUnit, position domain.Position) b
 		return false
 	}
 	unit.Position = position
-	if b.FindUnitById(unit.Uid) == nil {
+	if b.FindUnit(unit.Uid) == nil {
 		b.Units = append(b.Units, unit)
 	}
 	return true
@@ -278,14 +266,5 @@ func (b *Battlefield) placeUnitDefault(unit *GameUnit) {
 func (b *Battlefield) placeUnitsDefault(units []*GameUnit) {
 	for _, unit := range units {
 		b.placeUnitDefault(unit)
-	}
-}
-
-func (b *Battlefield) reassignHost() {
-	for _, u := range b.Units {
-		if u.PlayerInfo != nil {
-			u.PlayerInfo.IsHost = true
-			return
-		}
 	}
 }

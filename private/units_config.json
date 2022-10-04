@@ -11,8 +11,8 @@
                 "experience": 0
             },
             "baseAttributes": {
-                "health": 150,
-                "stamina": 150
+                "health": 125,
+                "stamina": 125
             },
             "attributes": {
                 "strength": 15,

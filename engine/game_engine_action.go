@@ -31,7 +31,7 @@ func (e *GameEngine) executePlaceAction(action domain.Action, userId UserId) *do
 	if e.state.phase != GamePhasePrepareUnit {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	unit := e.battlefield().FindUnitById(action.Uid)
+	unit := e.battlefield().FindUnit(action.Uid)
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
@@ -45,8 +45,8 @@ func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *doma
 	if !e.isActionPhase() {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	unit := e.battlefield().FindUnitById(action.Uid)
-	target := e.battlefield().FindUnitById(action.TargetUid)
+	unit := e.battlefield().FindUnit(action.Uid)
+	target := e.battlefield().FindUnit(action.TargetUid)
 	if unit == nil || target == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
@@ -76,7 +76,7 @@ func (e *GameEngine) executeEquipAction(action domain.Action, userId UserId) *do
 	if !e.isActionPhase() && e.state.phase != GamePhasePrepareUnit {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	unit := e.battlefield().FindUnitById(action.Uid)
+	unit := e.battlefield().FindUnit(action.Uid)
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
@@ -95,7 +95,7 @@ func (e *GameEngine) executeUnequipAction(action domain.Action, userId UserId) *
 	if !e.isActionPhase() && e.state.phase != GamePhasePrepareUnit {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	unit := e.battlefield().FindUnitById(action.Uid)
+	unit := e.battlefield().FindUnit(action.Uid)
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
@@ -114,7 +114,7 @@ func (e *GameEngine) executeMoveAction(action domain.Action, userId UserId) *dom
 	if e.state.phase != GamePhaseMakeMoveOrAction {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	unit := e.battlefield().FindUnitById(action.Uid)
+	unit := e.battlefield().FindUnit(action.Uid)
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
@@ -132,7 +132,7 @@ func (e *GameEngine) executeSkipAction(action domain.Action, userId UserId) *dom
 	if !e.isActionPhase() {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	unit := e.battlefield().FindUnitById(action.Uid)
+	unit := e.battlefield().FindUnit(action.Uid)
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
