@@ -52,13 +52,13 @@ func (i *UnitInventory) IncreaseArmorWearout(equipped bool) {
 func (i *UnitInventory) UpdateEquipmentByWeareout() {
 	for n := range i.Armor {
 		item := &i.Armor[n].Equipment
-		if item.Equipped || item.IsBroken() {
+		if item.Equipped && item.IsBroken() {
 			item.Equipped = false
 		}
 	}
 	for n := range i.Weapon {
 		item := &i.Weapon[n].Equipment
-		if item.Equipped || item.IsBroken() {
+		if item.Equipped && item.IsBroken() {
 			item.Equipped = false
 		}
 	}

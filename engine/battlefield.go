@@ -113,6 +113,10 @@ func (b *Battlefield) MoveToCorpsesById(uid uint) {
 	unit.IsDead = true
 	b.Units = survivedUnits
 	b.Corpses = append(b.Corpses, unit)
+	if unit.PlayerInfo != nil && unit.PlayerInfo.IsHost {
+		unit.PlayerInfo.IsHost = false
+		b.reassignHost()
+	}
 }
 
 func (b *Battlefield) FindUnitById(uid uint) *GameUnit {
@@ -161,18 +165,26 @@ func (b *Battlefield) UpdateCellsFactions() {
 }
 
 func (b *Battlefield) FilterSurvivors() []*GameUnit {
+	isHostDead := false
 	newCorpses := []*GameUnit{}
 	survivedUnits := []*GameUnit{}
 	for _, unit := range b.Units {
 		if unit.State.Health > 0 {
 			survivedUnits = append(survivedUnits, unit)
 		} else {
+			if unit.PlayerInfo != nil && unit.PlayerInfo.IsHost {
+				unit.PlayerInfo.IsHost = false
+				isHostDead = true
+			}
 			unit.IsDead = true
 			newCorpses = append(newCorpses, unit)
 			b.Corpses = append(b.Corpses, unit)
 		}
 	}
 	b.Units = survivedUnits
+	if isHostDead {
+		b.reassignHost()
+	}
 	return newCorpses
 }
 
@@ -266,5 +278,14 @@ func (b *Battlefield) placeUnitDefault(unit *GameUnit) {
 func (b *Battlefield) placeUnitsDefault(units []*GameUnit) {
 	for _, unit := range units {
 		b.placeUnitDefault(unit)
+	}
+}
+
+func (b *Battlefield) reassignHost() {
+	for _, u := range b.Units {
+		if u.PlayerInfo != nil {
+			u.PlayerInfo.IsHost = true
+			return
+		}
 	}
 }

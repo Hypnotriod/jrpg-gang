@@ -2,13 +2,12 @@
     "weapon": [
         {
             "type": "weapon",
-            "name": "Hand Punch",
+            "name": "Punch",
             "code": "fist-01",
             "description": "Hand Punch",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {
-            },
+            "requirements": {},
             "range": {
                 "maximumX": 1,
                 "maximumY": 1
@@ -16,7 +15,7 @@
             "damage": [
                 {
                     "chance": 50,
-                    "crushing": 1
+                    "crushing": 10
                 }
             ],
             "useCost": {
@@ -30,8 +29,7 @@
             "description": "Bite with teeth",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {
-            },
+            "requirements": {},
             "range": {
                 "maximumX": 1,
                 "maximumY": 1
@@ -39,15 +37,34 @@
             "damage": [
                 {
                     "chance": 50,
-                    "cutting": 1
+                    "cutting": 10
                 },
                 {
                     "chance": 50,
-                    "bleeding": 1
+                    "duration": 3,
+                    "bleeding": 5
                 }
             ],
             "useCost": {
                 "stamina": 10
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Sight",
+            "code": "sight-01",
+            "description": "Launch a projectile from eye",
+            "ammunitionKind": "magicCharge",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {},
+            "range": {
+                "maximumX": 1,
+                "maximumY": 1
+            },
+            "damage": [],
+            "useCost": {
+                "mana": 10
             }
         },
         {
@@ -153,11 +170,11 @@
             "type": "weapon",
             "name": "Staff",
             "code": "sorcerer-staff-01",
-            "description": "Base one hand Sorcerer Staff",
+            "description": "Base two hands Sorcerer Staff",
             "ammunitionKind": "magicCharge",
             "durability": 300,
             "slot": "weapon",
-            "slotsNumber": 1,
+            "slotsNumber": 2,
             "requirements": {
                 "intelligence": 15
             },
@@ -279,6 +296,52 @@
                     "duration": 5,
                     "recovery": {
                         "health": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 250
+            }
+        },
+        {
+            "name": "Stamina Sm",
+            "type": "disposable",
+            "code": "stamina-potion-01",
+            "description": "Small stamina potion",
+            "modification": [
+                {
+                    "recovery": {
+                        "stamina": 35
+                    }
+                },
+                {
+                    "chance": 50,
+                    "duration": 5,
+                    "recovery": {
+                        "stamina": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 250
+            }
+        },
+        {
+            "name": "Mana Sm",
+            "type": "disposable",
+            "code": "mana-potion-01",
+            "description": "Small mana potion",
+            "modification": [
+                {
+                    "recovery": {
+                        "mana": 35
+                    }
+                },
+                {
+                    "chance": 50,
+                    "duration": 5,
+                    "recovery": {
+                        "mana": 2
                     }
                 }
             ],

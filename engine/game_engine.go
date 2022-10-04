@@ -74,7 +74,7 @@ func (e *GameEngine) getActiveUnit() *GameUnit {
 func (e *GameEngine) GetUserIds() []UserId {
 	result := []UserId{}
 	for _, unit := range e.actors {
-		result = append(result, unit.UserId)
+		result = append(result, unit.GetUserId())
 	}
 	return result
 }
@@ -82,8 +82,8 @@ func (e *GameEngine) GetUserIds() []UserId {
 func (e *GameEngine) GetRestUserIds(userId UserId) []UserId {
 	result := []UserId{}
 	for _, unit := range e.actors {
-		if userId != unit.UserId {
-			result = append(result, unit.UserId)
+		if userId != unit.GetUserId() {
+			result = append(result, unit.GetUserId())
 		}
 	}
 	return result
@@ -91,7 +91,7 @@ func (e *GameEngine) GetRestUserIds(userId UserId) []UserId {
 
 func (e *GameEngine) FindActorByUserId(userId UserId) *GameUnit {
 	return util.Findp(e.actors, func(u *GameUnit) bool {
-		return u.UserId == userId
+		return u.GetUserId() == userId
 	})
 }
 
@@ -107,7 +107,7 @@ func (e *GameEngine) RemoveActor(userId UserId) bool {
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	restActors := []*GameUnit{}
 	for i := 0; i < len(e.actors); i++ {
-		if e.actors[i].UserId != userId {
+		if e.actors[i].GetUserId() != userId {
 			restActors = append(restActors, e.actors[i])
 		}
 	}

@@ -66,13 +66,22 @@ func (e *GameEvent) String() string {
 	)
 }
 
-func (e *GameEngine) NewGameEvent() *GameEvent {
+func (e *GameEngine) NewGameEventWithPlayerInfo() *GameEvent {
 	event := &GameEvent{}
 	event.Phase = e.state.phase
 	event.NextPhase = e.state.phase
 	event.State = e.state
 	event.Spot = e.scenario.CurrentSpot()
 	event.PlayersInfo = e.GetPlayersInfo()
+	return event
+}
+
+func (e *GameEngine) NewGameEvent() *GameEvent {
+	event := &GameEvent{}
+	event.Phase = e.state.phase
+	event.NextPhase = e.state.phase
+	event.State = e.state
+	event.Spot = e.scenario.CurrentSpot()
 	return event
 }
 
@@ -84,6 +93,5 @@ func (e *GameEngine) NewGameEventWithUnitAction(action *domain.Action) *GameEven
 	event.UnitActionResult.Action = *action
 	event.State = e.state
 	event.Spot = e.scenario.CurrentSpot()
-	event.PlayersInfo = e.GetPlayersInfo()
 	return event
 }

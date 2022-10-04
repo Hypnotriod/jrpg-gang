@@ -6,6 +6,130 @@
                 "code": "winter-cave-01",
                 "booty": [
                     {
+                        "coins": 1000
+                    },
+                    {
+                        "coins": 500
+                    }
+                ],
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "coins": 1000
+                    },
+                    {
+                        "coins": 500
+                    }
+                ],
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]},
+                            {"type": "space", "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 3
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
                         "coins": 2000
                     },
                     {
@@ -58,6 +182,14 @@
                                 "x": 2,
                                 "y": 0
                             }
+                        },
+                        {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
                         }
                     ]
                 }
@@ -66,6 +198,9 @@
         "path": [
             {
                 "0": 1
+            },
+            {
+                "1": 1
             }
         ]
     }

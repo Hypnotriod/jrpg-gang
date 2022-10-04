@@ -42,6 +42,7 @@ func (s *GameScenario) Initialize(rndGen *util.RndGen, actors []*GameUnit) {
 func (s *GameScenario) PrepareNextSpot(actors []*GameUnit) {
 	s.pickSpot()
 	s.placeActors(actors)
+	s.pathIndex++
 }
 
 func (s *GameScenario) Dispose() {
@@ -50,12 +51,7 @@ func (s *GameScenario) Dispose() {
 }
 
 func (s *GameScenario) IsLastSpot() bool {
-	return s.pathIndex == len(s.Path)-1
-}
-
-func (s *GameScenario) NextSpot() {
-	s.pathIndex++
-	s.pickSpot()
+	return s.pathIndex >= len(s.Path)
 }
 
 func (s *GameScenario) CurrentSpot() *Spot {

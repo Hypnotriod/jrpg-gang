@@ -16,6 +16,12 @@
             "code": "health-potion-01"
         },
         {
+            "code": "stamina-potion-01"
+        },
+        {
+            "code": "mana-potion-01"
+        },
+        {
             "code": "poison-01"
         }
     ]

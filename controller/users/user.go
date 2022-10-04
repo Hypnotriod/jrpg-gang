@@ -50,7 +50,6 @@ type User struct {
 	engine.PlayerInfo
 	RndGen *util.RndGen
 	Status UserStatus
-	Id     engine.UserId
 	Unit   *engine.GameUnit
 }
 

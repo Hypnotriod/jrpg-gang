@@ -19,6 +19,7 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	case GamePhaseBattleComplete:
 		e.processBattleComplete(result)
 	}
+	result.PlayersInfo = e.GetPlayersInfo()
 	result.NextPhase = e.state.phase
 	return result
 }
@@ -29,7 +30,8 @@ func (e *GameEngine) NextPhaseRequired() bool {
 		e.state.phase == GamePhaseMakeMoveOrActionAI ||
 		e.state.phase == GamePhaseMakeActionAI ||
 		e.state.phase == GamePhaseRetreatAction ||
-		e.state.phase == GamePhaseActionComplete
+		e.state.phase == GamePhaseActionComplete ||
+		e.state.phase == GamePhaseBattleComplete
 }
 
 func (e *GameEngine) prepareNextSpot(actors []*GameUnit) {

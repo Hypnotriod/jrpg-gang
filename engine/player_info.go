@@ -1,6 +1,7 @@
 package engine
 
 type PlayerInfo struct {
+	Id        UserId        `json:"-"`
 	Nickname  string        `json:"nickname"`
 	Class     GameUnitClass `json:"class"`
 	Level     uint          `json:"level"`
