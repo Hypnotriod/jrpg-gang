@@ -13,7 +13,6 @@ func TestUnitThreatmentWithDisposable(t *testing.T) {
 	fmt.Println(hero)
 	fmt.Println()
 	actionResult := hero.UseInventoryItemOnTarget(hero, 2000)
-	hero.Inventory.FilterDisposable()
 	fmt.Printf("instantRecovery: %v, temporalModification: %v\n", actionResult.InstantRecovery, actionResult.TemporalModification)
 	fmt.Println()
 	fmt.Println(hero)

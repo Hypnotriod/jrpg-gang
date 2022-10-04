@@ -40,6 +40,7 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 			return action.WithResult(ResultNotCompatible)
 		}
 		ammunition.Quantity--
+		u.Inventory.FilterAmmunition()
 		damage = ammunition.EnchanceDamageImpact(damage)
 	}
 	u.State.Reduce(weapon.UseCost)
@@ -82,6 +83,7 @@ func (u *Unit) useDisposableOnTarget(action *ActionResult, target *Unit, disposa
 		return action.WithResult(ResultNotAllowed)
 	}
 	disposable.Quantity--
+	u.Inventory.FilterDisposable()
 	if len(disposable.Damage) != 0 {
 		instDmg, tmpImp := u.Attack(target, disposable.Damage)
 		action.InstantDamage = append(action.InstantDamage, instDmg...)
