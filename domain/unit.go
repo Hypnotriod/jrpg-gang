@@ -64,6 +64,11 @@ func (u *Unit) Clone() *Unit {
 	return r
 }
 
+func (u *Unit) ClearImpact() {
+	u.Damage = []DamageImpact{}
+	u.Modification = []UnitModificationImpact{}
+}
+
 func (u *Unit) TotalAgility() float32 {
 	var agility float32 = u.Stats.Attributes.Agility
 	for _, ench := range u.Modification {

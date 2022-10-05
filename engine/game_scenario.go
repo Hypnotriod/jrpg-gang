@@ -41,6 +41,7 @@ func (s *GameScenario) Initialize(rndGen *util.RndGen, actors []*GameUnit) {
 
 func (s *GameScenario) PrepareNextSpot(actors []*GameUnit) {
 	s.pickSpot()
+	s.restoreActors(actors)
 	s.placeActors(actors)
 	s.pathIndex++
 }
@@ -95,6 +96,13 @@ func (s *GameScenario) prepareActors(actors []*GameUnit) {
 	for i := range actors {
 		s.prepareUnit(actors[i])
 		actors[i].PlayerInfo.UnitUid = actors[i].Uid
+	}
+}
+
+func (s *GameScenario) restoreActors(actors []*GameUnit) {
+	for i := range actors {
+		actors[i].ClearImpact()
+		actors[i].State.RestoreToHalf(actors[i].Stats.BaseAttributes)
 	}
 }
 

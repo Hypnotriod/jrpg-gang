@@ -34,3 +34,11 @@ func Abs[T Number](v T) T {
 	}
 	return v
 }
+
+func Round[T Float](v T) T {
+	n := int64(v)
+	if v > T(n)+0.5 {
+		return T(n + 1)
+	}
+	return T(n)
+}
