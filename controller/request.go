@@ -54,33 +54,27 @@ func parseRequest(r []byte) *Request {
 	if len(r) < 10 || !bytes.Equal(r[:9], []byte(`{"type":"`)) {
 		return nil
 	}
-	typeBytes := [32]byte{}
 	r = r[9:]
 	for i, c := range r {
-		if c == '"' {
-			r = r[i+1:]
-			typeStr = string(typeBytes[:i])
-			break
-		} else if !(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') || i == len(typeBytes) || i == len(r)-1 {
+		if i == len(r)-1 {
 			return nil
-		} else {
-			typeBytes[i] = c
+		} else if c == '"' {
+			typeStr = string(r[:i])
+			r = r[i+1:]
+			break
 		}
 	}
 	if len(r) < 8 || !bytes.Equal(r[:7], []byte(`,"id":"`)) {
 		return nil
 	}
 	r = r[7:]
-	idBytes := [32]byte{}
 	for i, c := range r {
-		if c == '"' {
-			r = r[i+1:]
-			idStr = string(idBytes[:i])
-			break
-		} else if !(c >= 'a' && c <= 'h' || c >= '0' && c <= '9') || i == len(idBytes) || i == len(r)-1 {
+		if i == len(r)-1 {
 			return nil
-		} else {
-			idBytes[i] = c
+		} else if c == '"' {
+			idStr = string(r[:i])
+			r = r[i+1:]
+			break
 		}
 	}
 	if len(r) < 10 || !bytes.Equal(r[:9], []byte(`,"data":{`)) {
