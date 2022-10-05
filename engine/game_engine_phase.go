@@ -68,6 +68,7 @@ func (e *GameEngine) processRoundComplete(event *GameEvent) {
 func (e *GameEngine) processBattleComplete(event *GameEvent) {
 	e.prepareNextSpot(e.battlefield().Units)
 	e.state.ChangePhase(GamePhasePrepareUnit)
+	event.Spot = e.scenario.CurrentSpot()
 }
 
 func (e *GameEngine) switchToNextUnit() {

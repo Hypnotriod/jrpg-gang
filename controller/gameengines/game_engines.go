@@ -123,15 +123,14 @@ func (e *GameEngines) LeaveGame(userId engine.UserId) (*engine.GameEvent, []engi
 	e.mu.Unlock()
 	defer wrapper.Unlock()
 	wrapper.Lock()
-	if u := wrapper.engine.FindActorByUserId(userId); u != nil {
+	if u := wrapper.engine.FindActorByUserId(userId); u != nil && !u.IsDead {
 		unit = u.Unit
 		share := wrapper.engine.TakeAShare()
 		unit.Booty.Accumulate(share)
 	}
 	wrapper.engine.RemoveActor(userId)
 	userIds := wrapper.engine.GetUserIds()
-	var state *engine.GameEvent
-	state = wrapper.engine.NewGameEventWithPlayerInfo()
+	state := wrapper.engine.NewGameEventWithPlayerInfo()
 	if len(userIds) == 0 {
 		wrapper.engine.Dispose()
 	}

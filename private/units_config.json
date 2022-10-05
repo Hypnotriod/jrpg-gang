@@ -1,5 +1,65 @@
 [
     {
+        "name": "Barbarian",
+        "code": "barbarian",
+        "booty": {
+            "coins": 5000
+        },
+        "stats": {
+            "progress": {
+                "level": 1,
+                "experience": 0
+            },
+            "baseAttributes": {
+                "health": 125,
+                "stamina": 125
+            },
+            "attributes": {
+                "strength": 20,
+                "physique": 15,
+                "agility": 5,
+                "endurance": 20,
+                "intelligence": 0,
+                "initiative": 0,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 5,
+                "fire": 5,
+                "cold": 5,
+                "lighting": 5,
+                "poison": 5,
+                "exhaustion": 5,
+                "manaDrain": 5,
+                "fear": 5,
+                "curse": 5
+            }
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "fist-01"
+                },
+                {
+                    "code": "axe-01",
+                    "equipped": true
+                }
+            ]
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "damage": [],
+        "modification": []
+    },
+    {
         "name": "Tank",
         "code": "tank",
         "booty": {
@@ -362,6 +422,58 @@
             "descriptor": [
                 {
                     "code": "teeth-01",
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
+        "name": "Death",
+        "code": "death-01",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 500
+            },
+            "baseAttributes": {
+                "health": 150,
+                "stamina": 150
+            },
+            "attributes": {
+                "strength": 15,
+                "physique": 15,
+                "agility": 15,
+                "endurance": 30,
+                "intelligence": 0,
+                "initiative": 15,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 5,
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 15,
+                "exhaustion": 10,
+                "manaDrain": 0,
+                "fear": 100,
+                "curse": 100
+            }
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "scythe-01",
                     "equipped": true
                 }
             ]

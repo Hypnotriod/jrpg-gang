@@ -102,7 +102,7 @@
                 }
             ],
             "useCost": {
-                "stamina": 30
+                "stamina": 20
             },
             "price": {
                 "coins": 3000
@@ -193,7 +193,7 @@
         },
         {
             "type": "weapon",
-            "name": "Axe",
+            "name": "Rusty Axe",
             "code": "rusty-axe-01",
             "description": "Rusty Axe",
             "wearout": 35,
@@ -220,6 +220,68 @@
                     "duration": 3,
                     "chance": 15,
                     "bleeding": 3
+                }
+            ]
+        },
+        {
+            "type": "weapon",
+            "name": "Axe",
+            "code": "axe-01",
+            "description": "Two Handed Axe",
+            "durability": 300,
+            "slot": "weapon",
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 20
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 1
+            },
+            "useCost": {
+                "stamina": 25
+            },
+            "damage": [
+                {
+                    "chance": 40,
+                    "cutting": 30,
+                    "crushing": 5
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 5
+                }
+            ]
+        },
+        {
+            "type": "weapon",
+            "name": "Scythe",
+            "code": "scythe-01",
+            "description": "Scythe",
+            "durability": 300,
+            "slot": "weapon",
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 10
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 1
+            },
+            "useCost": {
+                "stamina": 15
+            },
+            "damage": [
+                {
+                    "chance": 40,
+                    "cutting": 35,
+                    "stubbing": 5
+                },
+                {
+                    "duration": 3,
+                    "chance": 30,
+                    "bleeding": 10
                 }
             ]
         },
@@ -288,7 +350,7 @@
             "modification": [
                 {
                     "recovery": {
-                        "health": 35
+                        "health": 50
                     }
                 },
                 {
@@ -311,7 +373,7 @@
             "modification": [
                 {
                     "recovery": {
-                        "stamina": 35
+                        "stamina": 50
                     }
                 },
                 {
@@ -334,7 +396,7 @@
             "modification": [
                 {
                     "recovery": {
-                        "mana": 35
+                        "mana": 50
                     }
                 },
                 {
