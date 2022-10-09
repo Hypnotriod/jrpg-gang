@@ -18,10 +18,10 @@ func getenv(key string, defaultValue string) string {
 func config() session.HubConfig {
 	port := getenv("PORT", "3000")
 	rBuffSize := flag.Int("rBuffSize", 1024, "ws read buffer size")
-	wBuffSize := flag.Int("wBuffSize", 1024, "ws write buffer size")
+	wBuffSize := flag.Int("wBuffSize", 4096, "ws write buffer size")
 	broadcasterPoolSize := flag.Int("broadcasterPoolSize", 32, "broadcaster routines pool size")
 	broadcastQueueSize := flag.Int("broadcastQueueSize", 4096, "broadcast channel queue size")
-	maxMessageSize := flag.Int64("maxMessageSize", 4096, "connection max message size")
+	maxMessageSize := flag.Int64("maxMessageSize", 1024, "max message size sent by peer")
 	userOfflineTimeoutSec := flag.Int64("userOfflineTimeoutSec", 10, "user offline timeout in secnds")
 	flag.Parse()
 
