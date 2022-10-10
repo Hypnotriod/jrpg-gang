@@ -32,11 +32,12 @@ Golang project of turn based multiplayer RPG game server
 * `curse`      - affects curse attribute
 
 ## Math:
-* `Attack chance`: (`unit luck` - `unit curse`) - (`target luck` - `target curse`) | minimum `1`
-* `Critical attack chance`: (`unit agility` - `unit curse`) - (`target agility` - `target curse`) + `base chance` | minimum `1`
-* `Modification chance`: (`unit intelligence` - `unit curse`) + `base chance` | minimum `1`
-* `Stun Chance`: (`physical damage` - `target curse`) - (`unit physique` - `unit curse`) | minimum `1`
-* `Retreat Chance`: `unit fear` | minimum `0`
+* `Physical Damage` - **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **Lighting**
+* `Attack chance`: (**unit luck** - **unit curse**) - (**target luck** - **target curse**) | minimum `1`
+* `Critical attack chance`: (**unit agility** - **unit curse**) - (**target agility** - **target curse**) + **base chance** | minimum `1`
+* `Modification chance`: (**unit intelligence** - **unit curse**) + **base chance** | minimum `1`
+* `Stun Chance`: (**physical damage** - **target curse**) - (**unit physique** - **unit curse**) | minimum `1`
+* `Retreat Chance`: **unit fear** | minimum `0`
 
 ## Mechanics:
 * `Critical Chance` - Doubles the damage.
