@@ -32,7 +32,7 @@ Golang project of turn based multiplayer RPG game server
 * `curse`      - affects curse attribute
 
 ## Math:
-* `Physical Damage` - **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **Lighting**
+* `Physical Damage`: **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **Lighting**
 * `Attack chance`: (**unit luck** - **unit curse**) - (**target luck** - **target curse**) | minimum `1`
 * `Critical attack chance`: (**unit agility** - **unit curse**) - (**target agility** - **target curse**) + **base chance** | minimum `1`
 * `Modification chance`: (**unit intelligence** - **unit curse**) + **base chance** | minimum `1`
@@ -40,7 +40,7 @@ Golang project of turn based multiplayer RPG game server
 * `Retreat Chance`: **unit fear** | minimum `0`
 
 ## Mechanics:
-* `Critical Chance` - Doubles the damage.
+* `Critical Damage` - Doubles the damage.
 * `Stun` - When stunned, a unit loses its turn in the current round and appears at the end of turn queue in the next round. If a unit is hit while stunned, critical damage is dealt and the stun is reset.
 * `Fear` - If attribute is more than zero, before each unit turn the `Retreat` check is performed. Unit may miss its turn by moving to a corner of the battlefield.
 * `Equipment Wearout` - Each success action followed by damage increases the `Wearout` of unit weapon, as well as `Wearout` of target equipment. If `Wearout` of an item reaches its `Durability`, the item can no longer be used and becomes unequipped.
