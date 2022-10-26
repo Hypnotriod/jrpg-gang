@@ -86,22 +86,15 @@ func (e *GameEngine) aiMove(event *GameEvent, unit *GameUnit, position domain.Po
 
 func (e *GameEngine) aiTryToAttack(event *GameEvent, unit *GameUnit) bool {
 	targets := e.battlefield().FindReachableTargets(unit)
-	if len(targets) == 0 {
-		return false
-	}
-	index := e.rndGen.PickIndex(len(targets))
-	cnt := 0
 	for weaponUid, target := range targets {
-		if cnt == index {
-			e.aiAttackWithWeapon(event, unit, target, weaponUid)
+		if e.aiAttackWithWeapon(event, unit, target, weaponUid) {
 			return true
 		}
-		cnt++
 	}
-	return true
+	return false
 }
 
-func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target *GameUnit, weaponUid uint) {
+func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target *GameUnit, weaponUid uint) bool {
 	unit.Equip(weaponUid)
 	unitAction := NewGameUnitActionResult()
 	unitAction.Action = domain.Action{
@@ -111,8 +104,12 @@ func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target
 		ItemUid:   weaponUid,
 	}
 	result := unit.UseInventoryItemOnTarget(&target.Unit, weaponUid)
+	if result.Result != domain.ResultAccomplished {
+		return false
+	}
 	unitAction.Result = *result
 	event.UnitActionResult = unitAction
 	e.onUnitUseAction(target.Uid, result)
 	e.onUnitCompleteAction()
+	return true
 }
