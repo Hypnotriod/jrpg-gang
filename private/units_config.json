@@ -428,6 +428,115 @@
         }
     },
     {
+        "name": "Cacodemon Green",
+        "code": "cacodemon-01",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 500
+            },
+            "baseAttributes": {
+                "health": 100,
+                "stamina": 100,
+                "mana": 100
+            },
+            "attributes": {
+                "strength": 10,
+                "physique": 5,
+                "agility": 5,
+                "endurance": 5,
+                "intelligence": 0,
+                "initiative": 10,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 5,
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 100,
+                "exhaustion": 5,
+                "manaDrain": 5,
+                "fear": 100,
+                "curse": 100
+            }
+        },
+        "slots": {
+            "body": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "teeth-01"
+                },
+                {
+                    "code": "sight-01",
+                    "equipped": true
+                },
+                {
+                    "code": "fire-charge-01",
+                    "quantity": 5,
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
+        "name": "Rat",
+        "code": "rat-01",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 200
+            },
+            "baseAttributes": {
+                "health": 75,
+                "stamina": 75
+            },
+            "attributes": {
+                "strength": 10,
+                "physique": 5,
+                "agility": 5,
+                "endurance": 5,
+                "intelligence": 0,
+                "initiative": 10,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 5,
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 0,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "fear": 0,
+                "curse": 0
+            }
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "fist-01",
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
         "name": "Death",
         "code": "death-01",
         "stats": {
@@ -472,6 +581,9 @@
         },
         "inventory": {
             "descriptor": [
+                {
+                    "code": "fist-01"
+                },
                 {
                     "code": "scythe-01",
                     "equipped": true

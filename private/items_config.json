@@ -59,8 +59,9 @@
             "slotsNumber": 1,
             "requirements": {},
             "range": {
-                "maximumX": 1,
-                "maximumY": 1
+                "maximumX": 10,
+                "maximumY": 10,
+                "minimumX": 2
             },
             "damage": [],
             "useCost": {
@@ -127,7 +128,7 @@
             },
             "damage": [],
             "useCost": {
-                "stamina": 25
+                "stamina": 15
             },
             "price": {
                 "coins": 3000
@@ -208,7 +209,7 @@
                 "maximumY": 1
             },
             "useCost": {
-                "stamina": 10
+                "stamina": 25
             },
             "damage": [
                 {
@@ -270,7 +271,7 @@
                 "maximumY": 1
             },
             "useCost": {
-                "stamina": 15
+                "stamina": 25
             },
             "damage": [
                 {
@@ -302,7 +303,7 @@
                 "maximumY": 1
             },
             "useCost": {
-                "stamina": 10
+                "stamina": 25
             },
             "damage": [
                 {
