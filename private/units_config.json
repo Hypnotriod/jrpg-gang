@@ -120,6 +120,66 @@
         "modification": []
     },
     {
+        "name": "Spearsman",
+        "code": "spearsman",
+        "booty": {
+            "coins": 5000
+        },
+        "stats": {
+            "progress": {
+                "level": 1,
+                "experience": 0
+            },
+            "baseAttributes": {
+                "health": 100,
+                "stamina": 100
+            },
+            "attributes": {
+                "strength": 15,
+                "physique": 15,
+                "agility": 15,
+                "endurance": 15,
+                "intelligence": 5,
+                "initiative": 5,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 5,
+                "fire": 5,
+                "cold": 5,
+                "lighting": 5,
+                "poison": 5,
+                "exhaustion": 5,
+                "manaDrain": 5,
+                "fear": 5,
+                "curse": 5
+            }
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "fist-01"
+                },
+                {
+                    "code": "spear-01",
+                    "equipped": true
+                }
+            ]
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "damage": [],
+        "modification": []
+    },
+    {
         "name": "Rogue",
         "code": "rogue",
         "booty": {
@@ -561,6 +621,7 @@
                 "stabbing": 5,
                 "cutting": 5,
                 "crushing": 5,
+                "bleeding": 100,
                 "fire": 0,
                 "cold": 0,
                 "lighting": 0,
@@ -586,6 +647,62 @@
                 },
                 {
                     "code": "scythe-01",
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
+        "name": "Skeleton",
+        "code": "skeleton-01",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 500
+            },
+            "baseAttributes": {
+                "health": 75,
+                "stamina": 300
+            },
+            "attributes": {
+                "strength": 25,
+                "physique": 15,
+                "agility": 0,
+                "endurance": 15,
+                "intelligence": 0,
+                "initiative": 0,
+                "luck": 0
+            },
+            "resistance": {
+                "stabbing": 15,
+                "cutting": 15,
+                "crushing": 0,
+                "bleeding": 100,
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 0,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "fear": 100,
+                "curse": 0
+            }
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "fist-01"
+                },
+                {
+                    "code": "sword-01",
                     "equipped": true
                 }
             ]

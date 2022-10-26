@@ -95,6 +95,39 @@
                     "bleeding": 3
                 }
             ],
+            "useCost": {
+                "stamina": 20
+            },
+            "price": {
+                "coins": 3000
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Base Spear",
+            "code": "spear-01",
+            "description": "Base two hands spear",
+            "durability": 300,
+            "slot": "weapon",
+            "slotsNumber": 2,
+            "requirements": {
+                "physique": 15
+            },
+            "range": {
+                "maximumX": 2,
+                "maximumY": 0
+            },
+            "damage": [
+                {
+                    "chance": 50,
+                    "stabbing": 30
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3
+                }
+            ],
             "modification": [
                 {
                     "damage": {
