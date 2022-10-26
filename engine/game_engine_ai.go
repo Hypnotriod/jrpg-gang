@@ -95,17 +95,20 @@ func (e *GameEngine) aiTryToAttack(event *GameEvent, unit *GameUnit) bool {
 }
 
 func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target *GameUnit, weaponUid uint) bool {
-	unit.Equip(weaponUid)
+	result := unit.Equip(weaponUid)
+	if result.Result != domain.ResultAccomplished {
+		return false
+	}
+	result = unit.UseInventoryItemOnTarget(&target.Unit, weaponUid)
+	if result.Result != domain.ResultAccomplished {
+		return false
+	}
 	unitAction := NewGameUnitActionResult()
 	unitAction.Action = domain.Action{
 		Action:    domain.ActionUse,
 		Uid:       unit.Uid,
 		TargetUid: target.Uid,
 		ItemUid:   weaponUid,
-	}
-	result := unit.UseInventoryItemOnTarget(&target.Unit, weaponUid)
-	if result.Result != domain.ResultAccomplished {
-		return false
 	}
 	unitAction.Result = *result
 	event.UnitActionResult = unitAction
