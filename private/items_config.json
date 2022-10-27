@@ -454,12 +454,28 @@
                 {
                     "duration": 3,
                     "damage": {
-                        "poison": 10
+                        "poison": 3
                     }
                 }
             ],
             "price": {
                 "coins": 10
+            }
+        },
+        {
+            "name": "Bandage",
+            "type": "disposable",
+            "code": "bandage-01",
+            "description": "Regular Bandage",
+            "modification": [
+                {
+                    "recovery": {
+                        "bleeding": 50
+                    }
+                }
+            ],
+            "price": {
+                "coins": 250
             }
         }
     ],
