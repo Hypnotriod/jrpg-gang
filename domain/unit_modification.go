@@ -12,7 +12,7 @@ type UnitModification struct {
 
 func (m UnitModification) String() string {
 	return fmt.Sprintf(
-		"baseAttributes: {%v}, attributes: {%v}, resistance: {%v}, damage: {%v}, revovery: {%v}",
+		"baseAttributes: {%v}, attributes: {%v}, resistance: {%v}, damage: {%v}, recovery: {%v}",
 		m.BaseAttributes,
 		m.Attributes,
 		m.Resistance,
