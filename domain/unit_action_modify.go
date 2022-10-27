@@ -22,6 +22,7 @@ func (u *Unit) ApplyRecovery(recovery UnitRecovery) {
 	modification := u.TotalModification()
 	attributes := modification.BaseAttributes
 	attributes.Accumulate(u.Stats.BaseAttributes)
+	u.ReduceDamageImpact(recovery.Damage)
 	u.State.Accumulate(recovery.UnitState)
 	u.State.Saturate(attributes)
 	u.State.Normalize()

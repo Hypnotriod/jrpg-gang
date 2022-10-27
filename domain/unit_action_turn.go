@@ -34,6 +34,7 @@ func (u *Unit) ApplyRecoverylOnNextTurn() UnitRecovery {
 	baseAttributes.Normalize()
 	recovery.Stamina += attributes.Endurance
 	recovery.Normalize()
+	u.ReduceDamageImpact(recovery.Damage)
 	u.State.Accumulate(recovery.UnitState)
 	u.State.Saturate(baseAttributes)
 	u.State.Normalize()

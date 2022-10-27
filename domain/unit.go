@@ -150,6 +150,30 @@ func (u *Unit) TotalModification() *UnitModification {
 	return modification
 }
 
+func (u *Unit) ReduceDamageImpact(damage Damage) {
+	if len(u.Damage) == 0 || !damage.HasEffect() {
+		return
+	}
+	for i := range u.Damage {
+		d := u.Damage[i].Damage
+		u.Damage[i].Reduce(damage)
+		u.Damage[i].Normalize()
+		damage.Reduce(d)
+		damage.Normalize()
+	}
+	u.FilterDamageImpact()
+}
+
+func (u *Unit) FilterDamageImpact() {
+	filteredDamage := []DamageImpact{}
+	for i := range u.Damage {
+		if u.Damage[i].HasEffect() {
+			filteredDamage = append(filteredDamage, u.Damage[i])
+		}
+	}
+	u.Damage = filteredDamage
+}
+
 func (u *Unit) CheckRequirements(requirements UnitAttributes) bool {
 	attributes := u.TotalModification().Attributes
 	attributes.Accumulate(u.Stats.Attributes)

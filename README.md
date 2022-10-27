@@ -28,8 +28,8 @@ Golang project of turn based multiplayer RPG game server
 * `bleeding`   - affects health attribute
 * `exhaustion` - affects stamina attribute
 * `manaDrain`  - affects mana attribute
-* `fear`       - affects fear attribute
-* `curse`      - affects curse attribute
+* `morale`     - affects fear attribute
+* `fortune`    - affects curse attribute
 
 ## Math:
 * `Physical Damage`: **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **Lighting**

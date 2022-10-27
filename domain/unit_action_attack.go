@@ -25,7 +25,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 			instDmg := target.applyDamage(imp.Damage)
 			if !wasStunned && u.CheckRandomChance(target.CalculateStunChance(u, instDmg)) {
 				target.State.IsStunned = true
-				instDmg.IsStunned = true
+				instDmg.WithStun = true
 			}
 			instantDamage = append(instantDamage, instDmg)
 		}

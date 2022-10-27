@@ -44,7 +44,7 @@ func (r ActionResult) String() string {
 
 func (r *ActionResult) WithStun() bool {
 	return util.Any(r.InstantDamage, func(damage Damage) bool {
-		return damage.IsStunned
+		return damage.WithStun
 	})
 }
 
