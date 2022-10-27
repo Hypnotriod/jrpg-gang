@@ -79,7 +79,7 @@ func (u *Unit) useDisposableOnTarget(action *ActionResult, target *Unit, disposa
 	if disposable.Quantity == 0 {
 		return action.WithResult(ResultZeroQuantity)
 	}
-	if disposable.IsHarmful() {
+	if u.Uid != target.Uid && disposable.IsHarmful() {
 		return action.WithResult(ResultNotAllowed)
 	}
 	disposable.Quantity--
