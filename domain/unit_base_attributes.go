@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"fmt"
 	"jrpg-gang/util"
 )
 
@@ -9,15 +8,6 @@ type UnitBaseAttributes struct {
 	Health  float32 `json:"health"`  // unit health
 	Stamina float32 `json:"stamina"` // unit stamina
 	Mana    float32 `json:"mana"`    // unit mana
-}
-
-func (a UnitBaseAttributes) String() string {
-	return fmt.Sprintf(
-		"health: %g, stamina: %g, mana: %g",
-		a.Health,
-		a.Stamina,
-		a.Mana,
-	)
 }
 
 func (a *UnitBaseAttributes) Accumulate(attributes UnitBaseAttributes) {

@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"fmt"
 	"jrpg-gang/domain"
 	"jrpg-gang/util"
 	"sort"
@@ -35,15 +34,6 @@ func NewGameState() *GameState {
 	s.ActiveUnitsQueue = make([]uint, 0, 10)
 	s.InactiveUnits = make([]uint, 0, 10)
 	return s
-}
-
-func (s GameState) String() string {
-	return fmt.Sprintf(
-		"active units queue: [%v], inactive units: [%v], phase: %s",
-		util.AsCommaSeparatedSlice(s.ActiveUnitsQueue),
-		util.AsCommaSeparatedSlice(s.InactiveUnits),
-		s.phase,
-	)
 }
 
 func (s *GameState) MakeUnitsQueue(units []*GameUnit) {

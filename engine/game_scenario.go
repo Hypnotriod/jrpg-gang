@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"fmt"
 	"jrpg-gang/domain"
 	"jrpg-gang/util"
 )
@@ -14,13 +13,6 @@ type GameScenario struct {
 	rndGen    *util.RndGen
 	spot      *Spot
 	pathIndex int
-}
-
-func (s GameScenario) String() string {
-	return fmt.Sprintf(
-		"spots: %v",
-		s.Spots,
-	)
 }
 
 func (s *GameScenario) Clone() *GameScenario {

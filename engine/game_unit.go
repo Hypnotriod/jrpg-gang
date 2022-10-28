@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"fmt"
 	"jrpg-gang/domain"
 )
 
@@ -30,14 +29,6 @@ type GameUnit struct {
 	Faction    GameUnitFaction `json:"faction"`
 	PlayerInfo *PlayerInfo     `json:"playerInfo,omitempty"`
 	IsDead     bool            `json:"isDead,omitempty"`
-}
-
-func (u GameUnit) String() string {
-	return fmt.Sprintf(
-		"%v, faction: %d",
-		u.Unit,
-		u.Faction,
-	)
 }
 
 func (u *GameUnit) HasUserId() bool {

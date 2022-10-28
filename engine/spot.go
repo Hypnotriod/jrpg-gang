@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"fmt"
 	"jrpg-gang/domain"
 )
 
@@ -10,15 +9,6 @@ type Spot struct {
 	Code        string             `json:"code"`
 	Battlefield Battlefield        `json:"battlefield"`
 	Booty       []domain.UnitBooty `json:"booty"`
-}
-
-func (s Spot) String() string {
-	return fmt.Sprintf(
-		"%s, code: %s, battlefield: {%v}",
-		s.Name,
-		s.Code,
-		s.Battlefield,
-	)
 }
 
 func (s *Spot) Clone() *Spot {

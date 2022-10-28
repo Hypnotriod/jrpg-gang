@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"fmt"
 	"jrpg-gang/util"
 	"math"
 )
@@ -9,11 +8,6 @@ import (
 type UnitBooty struct {
 	Coins int `json:"coins"`
 	Ruby  int `json:"ruby,omitempty"`
-}
-
-func (b UnitBooty) String() string {
-	return fmt.Sprintf("coins: %d, ruby: %d",
-		b.Coins, b.Ruby)
 }
 
 func (b *UnitBooty) Accumulate(booty UnitBooty) {

@@ -1,9 +1,7 @@
 package domain
 
 import (
-	"fmt"
 	"jrpg-gang/util"
-	"strings"
 )
 
 type UnitAttributes struct {
@@ -14,32 +12,6 @@ type UnitAttributes struct {
 	Intelligence float32 `json:"intelligence"` // enhances (fire, cold, lighting, manaDrain, fear, curse) damage
 	Initiative   float32 `json:"initiative"`   // affects turn order
 	Luck         float32 `json:"luck"`         // affects critical chance
-}
-
-func (a UnitAttributes) String() string {
-	props := []string{}
-	if a.Strength != 0 {
-		props = append(props, fmt.Sprintf("strength: %g", a.Strength))
-	}
-	if a.Physique != 0 {
-		props = append(props, fmt.Sprintf("physique: %g", a.Physique))
-	}
-	if a.Agility != 0 {
-		props = append(props, fmt.Sprintf("agility: %g", a.Agility))
-	}
-	if a.Endurance != 0 {
-		props = append(props, fmt.Sprintf("endurance: %g", a.Endurance))
-	}
-	if a.Intelligence != 0 {
-		props = append(props, fmt.Sprintf("intelligence: %g", a.Intelligence))
-	}
-	if a.Initiative != 0 {
-		props = append(props, fmt.Sprintf("initiative: %g", a.Initiative))
-	}
-	if a.Luck != 0 {
-		props = append(props, fmt.Sprintf("luck: %g", a.Luck))
-	}
-	return strings.Join(props, ", ")
 }
 
 func (a *UnitAttributes) Accumulate(attributes UnitAttributes) {

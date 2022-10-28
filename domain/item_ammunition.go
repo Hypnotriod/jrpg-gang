@@ -1,29 +1,11 @@
 package domain
 
-import (
-	"fmt"
-	"jrpg-gang/util"
-)
-
 type Ammunition struct {
 	Item
 	Equipped bool           `json:"equipped,omitempty"`
 	Kind     string         `json:"kind"`
 	Quantity uint           `json:"quantity,omitempty"`
 	Damage   []DamageImpact `json:"damage,omitempty"`
-}
-
-func (a Ammunition) String() string {
-	return fmt.Sprintf(
-		"%s, description: %s, kind: %s, quantity: %d, equipped: %t, damage: [%s], uid: %d",
-		a.Name,
-		a.Description,
-		a.Kind,
-		a.Quantity,
-		a.Equipped,
-		util.AsCommaSeparatedObjectsSlice(a.Damage),
-		a.Uid,
-	)
 }
 
 func (a *Ammunition) EnchanceDamageImpact(damage []DamageImpact) []DamageImpact {

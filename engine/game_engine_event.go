@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"fmt"
 	"jrpg-gang/domain"
 )
 
@@ -9,14 +8,6 @@ type EndTurnResult struct {
 	Damage   map[uint]domain.Damage       `json:"damage"`
 	Recovery map[uint]domain.UnitRecovery `json:"recovery"`
 	Booty    domain.UnitBooty             `json:"booty"`
-}
-
-func (r *EndTurnResult) String() string {
-	return fmt.Sprintf(
-		"damage: {%v}, recovery: {%v}",
-		r.Damage,
-		r.Recovery,
-	)
 }
 
 func NewEndTurnResult() *EndTurnResult {
@@ -29,14 +20,6 @@ func NewEndTurnResult() *EndTurnResult {
 type GameUnitActionResult struct {
 	Action domain.Action       `json:"action"`
 	Result domain.ActionResult `json:"result"`
-}
-
-func (r *GameUnitActionResult) String() string {
-	return fmt.Sprintf(
-		"action: {%v}, result: {%v}",
-		r.Action,
-		r.Result,
-	)
 }
 
 func NewGameUnitActionResult() *GameUnitActionResult {
@@ -52,18 +35,6 @@ type GameEvent struct {
 	PlayersInfo      []PlayerInfo          `json:"players"`
 	UnitActionResult *GameUnitActionResult `json:"unitActionResult,omitempty"`
 	EndRoundResult   *EndTurnResult        `json:"endRoundResult,omitempty"`
-}
-
-func (e *GameEvent) String() string {
-	return fmt.Sprintf(
-		"phase: %s, next phase: %s, state: {%v}, spot: {%v}, unitActionResult: {%v}, endRoundResult: {%v}",
-		e.Phase,
-		e.NextPhase,
-		e.State,
-		e.Spot,
-		e.UnitActionResult,
-		e.EndRoundResult,
-	)
 }
 
 func (e *GameEngine) NewGameEventWithPlayerInfo() *GameEvent {

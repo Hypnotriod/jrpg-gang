@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"fmt"
 	"jrpg-gang/util"
 )
 
@@ -18,16 +17,6 @@ type UnitInventory struct {
 	Armor      []Armor                   `json:"armor,omitempty"`
 	Disposable []Disposable              `json:"disposable,omitempty"`
 	Ammunition []Ammunition              `json:"ammunition,omitempty"`
-}
-
-func (i UnitInventory) String() string {
-	return fmt.Sprintf(
-		"weapon: [%s], magic: [%s], armor: [%s], disposable: [%s], ammunition: [%s]",
-		util.AsCommaSeparatedObjectsSlice(i.Weapon),
-		util.AsCommaSeparatedObjectsSlice(i.Magic),
-		util.AsCommaSeparatedObjectsSlice(i.Armor),
-		util.AsCommaSeparatedObjectsSlice(i.Disposable),
-		util.AsCommaSeparatedObjectsSlice(i.Ammunition))
 }
 
 func (i *UnitInventory) Clone() *UnitInventory {

@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"fmt"
 	"jrpg-gang/domain"
 	"jrpg-gang/util"
 )
@@ -17,15 +16,6 @@ type Battlefield struct {
 	UnitDescriptor []BattlefieldUnitDescriptor `json:"unitDescriptor,omitempty"`
 	Units          []*GameUnit                 `json:"units"`
 	Corpses        []*GameUnit                 `json:"corpses"`
-}
-
-func (b Battlefield) String() string {
-	return fmt.Sprintf(
-		"matrix: %v, units: [%v], corpses: [%s]",
-		b.Matrix,
-		util.AsCommaSeparatedObjectsSlice(b.Units),
-		util.AsCommaSeparatedObjectsSlice(b.Corpses),
-	)
 }
 
 func (b *Battlefield) Clone() *Battlefield {

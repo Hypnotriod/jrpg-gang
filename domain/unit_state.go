@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"fmt"
 	"jrpg-gang/util"
 )
 
@@ -40,13 +39,4 @@ func (s *UnitState) Saturate(limit UnitBaseAttributes) {
 	s.UnitBaseAttributes.Saturate(limit)
 	s.Curse = util.Min(MAXIMUM_CHANCE, s.Curse)
 	s.Fear = util.Min(MAXIMUM_CHANCE, s.Fear)
-}
-
-func (s UnitState) String() string {
-	return fmt.Sprintf(
-		"%s, fear: %g, curse: %g",
-		s.UnitBaseAttributes.String(),
-		s.Fear,
-		s.Curse,
-	)
 }

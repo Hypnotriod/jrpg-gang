@@ -1,9 +1,6 @@
 package domain
 
 import (
-	"fmt"
-	"strings"
-
 	"jrpg-gang/util"
 )
 
@@ -144,53 +141,4 @@ func (d *Damage) Apply(state *UnitState) {
 	state.Health = util.Max(state.Health, 0)
 	state.Stamina = util.Max(state.Stamina, 0)
 	state.Mana = util.Max(state.Mana, 0)
-}
-
-func (d Damage) String() string {
-	props := []string{}
-
-	if d.Stabbing != 0 {
-		props = append(props, fmt.Sprintf("stabbing: %g", d.Stabbing))
-	}
-	if d.Cutting != 0 {
-		props = append(props, fmt.Sprintf("cutting: %g", d.Cutting))
-	}
-	if d.Crushing != 0 {
-		props = append(props, fmt.Sprintf("crushing: %g", d.Crushing))
-	}
-	if d.Fire != 0 {
-		props = append(props, fmt.Sprintf("fire: %g", d.Fire))
-	}
-	if d.Cold != 0 {
-		props = append(props, fmt.Sprintf("cold: %g", d.Cold))
-	}
-	if d.Lighting != 0 {
-		props = append(props, fmt.Sprintf("lighting: %g", d.Lighting))
-	}
-	if d.Poison != 0 {
-		props = append(props, fmt.Sprintf("poison: %g", d.Poison))
-	}
-	if d.Exhaustion != 0 {
-		props = append(props, fmt.Sprintf("exhaustion: %g", d.Exhaustion))
-	}
-	if d.ManaDrain != 0 {
-		props = append(props, fmt.Sprintf("mana drain: %g", d.ManaDrain))
-	}
-	if d.Bleeding != 0 {
-		props = append(props, fmt.Sprintf("bleeding: %g", d.Bleeding))
-	}
-	if d.Morale != 0 {
-		props = append(props, fmt.Sprintf("fear: %g", d.Morale))
-	}
-	if d.Fortune != 0 {
-		props = append(props, fmt.Sprintf("curse: %g", d.Fortune))
-	}
-	if d.IsCritical {
-		props = append(props, "critical!")
-	}
-	if d.WithStun {
-		props = append(props, "stunned!")
-	}
-
-	return strings.Join(props, ", ")
 }

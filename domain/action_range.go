@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"fmt"
 	"jrpg-gang/util"
 )
 
@@ -11,16 +10,6 @@ type ActionRange struct {
 	MinimumY int `json:"minimumY,omitempty"`
 	MaximumY int `json:"maximumY,omitempty"`
 	Radius   int `json:"radius,omitempty"`
-}
-
-func (r ActionRange) String() string {
-	return fmt.Sprintf("minimum: (%d:%d), maximum: (%d:%d), radius: %d",
-		r.MinimumX,
-		r.MinimumY,
-		r.MaximumX,
-		r.MaximumY,
-		r.Radius,
-	)
 }
 
 func (r *ActionRange) Has() bool {

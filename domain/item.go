@@ -1,7 +1,5 @@
 package domain
 
-import "fmt"
-
 type ItemType string
 
 const (
@@ -24,10 +22,4 @@ type Item struct {
 	Type        ItemType  `json:"type"`
 	Price       UnitBooty `json:"price,"`
 	Description string    `json:"description,omitempty"`
-}
-
-func (i Item) String() string {
-	return fmt.Sprintf(
-		"name: %s, code: %s, uid: %d, type: %s, description: %s",
-		i.Name, i.Code, i.Uid, i.Type, i.Description)
 }

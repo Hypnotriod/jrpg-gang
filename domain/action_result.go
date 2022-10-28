@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"fmt"
 	"jrpg-gang/util"
 )
 
@@ -31,15 +30,6 @@ type ActionResult struct {
 	InstantRecovery      []UnitRecovery           `json:"instantRecovery,omitempty"`
 	TemporalModification []UnitModificationImpact `json:"temporalModification,omitempty"`
 	Result               ActionResultType         `json:"result"`
-}
-
-func (r ActionResult) String() string {
-	return fmt.Sprintf("instant damage: [%s], temporal damage: [%s], instant recovery: [%s], temporal modification: [%s], result: %s",
-		util.AsCommaSeparatedObjectsSlice(r.InstantDamage),
-		util.AsCommaSeparatedObjectsSlice(r.TemporalDamage),
-		util.AsCommaSeparatedObjectsSlice(r.InstantRecovery),
-		util.AsCommaSeparatedObjectsSlice(r.TemporalModification),
-		r.Result)
 }
 
 func (r *ActionResult) WithStun() bool {

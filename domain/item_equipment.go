@@ -1,10 +1,5 @@
 package domain
 
-import (
-	"fmt"
-	"jrpg-gang/util"
-)
-
 type EquipmentSlot string
 
 const (
@@ -25,23 +20,6 @@ type Equipment struct {
 	Equipped     bool               `json:"equipped,omitempty"`
 	Requirements UnitAttributes     `json:"requirements"`
 	Modification []UnitModification `json:"modification"`
-}
-
-func (e Equipment) String() string {
-	return fmt.Sprintf(
-		"%s, type: %s, description: %s, slot: %s, slots: %d, equipped: %t, wearout: %g, durability: %g, requirements: {%v}, modification: [%s], uid: %d",
-		e.Name,
-		e.Type,
-		e.Description,
-		e.Slot,
-		e.SlotsNumber,
-		e.Equipped,
-		e.Wearout,
-		e.Durability,
-		e.Requirements,
-		util.AsCommaSeparatedObjectsSlice(e.Modification),
-		e.Uid,
-	)
 }
 
 func (e *Equipment) IncreaseWearout() {

@@ -1,24 +1,11 @@
 package domain
 
-import "fmt"
-
 type UnitModification struct {
 	BaseAttributes UnitBaseAttributes `json:"baseAttributes,omitempty"`
 	Attributes     UnitAttributes     `json:"attributes,omitempty"`
 	Resistance     UnitResistance     `json:"resistance,omitempty"`
 	Damage         Damage             `json:"damage,omitempty"`
 	Recovery       UnitRecovery       `json:"recovery,omitempty"`
-}
-
-func (m UnitModification) String() string {
-	return fmt.Sprintf(
-		"baseAttributes: {%v}, attributes: {%v}, resistance: {%v}, damage: {%v}, recovery: {%v}",
-		m.BaseAttributes,
-		m.Attributes,
-		m.Resistance,
-		m.Damage,
-		m.Recovery,
-	)
 }
 
 func (m *UnitModification) Accumulate(modification UnitModification) {

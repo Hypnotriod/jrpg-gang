@@ -1,7 +1,5 @@
 package engine
 
-import "fmt"
-
 type CellType string
 
 const (
@@ -13,14 +11,6 @@ type Cell struct {
 	Factions []GameUnitFaction `json:"factions"`
 	Type     CellType          `json:"type"`
 	Code     string            `json:"code,omitempty"`
-}
-
-func (c Cell) String() string {
-	return fmt.Sprintf(
-		"faction ids: %v, type: %s",
-		c.Factions,
-		c.Type,
-	)
 }
 
 func (c *Cell) Clone() *Cell {
