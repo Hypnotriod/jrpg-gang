@@ -160,13 +160,7 @@ func (u *Unit) CheckRequirements(requirements UnitAttributes) bool {
 	attributes := u.TotalModification().Attributes
 	attributes.Accumulate(u.Stats.Attributes)
 	attributes.Normalize()
-	return attributes.Strength >= requirements.Strength &&
-		attributes.Physique >= requirements.Physique &&
-		attributes.Agility >= requirements.Agility &&
-		attributes.Endurance >= requirements.Endurance &&
-		attributes.Intelligence >= requirements.Intelligence &&
-		attributes.Initiative >= requirements.Initiative &&
-		attributes.Luck >= requirements.Luck
+	return attributes.CheckRequirements(requirements)
 }
 
 func (u *Unit) CheckUseCost(useCost UnitBaseAttributes) bool {

@@ -33,3 +33,13 @@ func (a *UnitAttributes) Normalize() {
 	a.Initiative = util.Max(a.Initiative, 0)
 	a.Luck = util.Max(a.Luck, 0)
 }
+
+func (a *UnitAttributes) CheckRequirements(requirements UnitAttributes) bool {
+	return a.Strength >= requirements.Strength &&
+		a.Physique >= requirements.Physique &&
+		a.Agility >= requirements.Agility &&
+		a.Endurance >= requirements.Endurance &&
+		a.Intelligence >= requirements.Intelligence &&
+		a.Initiative >= requirements.Initiative &&
+		a.Luck >= requirements.Luck
+}
