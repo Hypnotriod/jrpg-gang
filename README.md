@@ -1,35 +1,63 @@
 # jrpg-gang
 Golang project of turn based multiplayer RPG game server
 
-## Unit base attributes:
-* `health`  - the hit points unit can take, till die
-* `stamina` - a weapon may require stamina points to perform action
-* `mana`    - a weapon or spell may require mana points to perform action
-* `curse`   - accumulative, reduces the chance to perform action
-* `fear`    - accumulative, increases the chance to retreat
+## BaseAttributes:
+* `health`  - the **hit points** unit can take, till die
+* `stamina` - a weapon may require **stamina points** to perform action
+* `mana`    - a weapon or spell may require **mana points** to perform action
 
-## Unit attributes:
-* `strength`     - enhances stabbing, cutting, crushing, exhaustion and bleeding damage
-* `physique`     - affects stun chance
-* `agility`      - affects attack chance
-* `endurance`    - stamina recovery
-* `intelligence` - enhances fire, cold, lighting, manaDrain, fear and curse damage
-* `initiative`   - affects turn order
-* `luck`         - affects critical chance
+## Attributes:
+* `strength`     - enhances **stabbing**, **cutting**, **crushing**, **exhaustion** and **bleeding** damage
+* `physique`     - affects **stun chance**
+* `agility`      - affects **attack chance**
+* `endurance`    - **stamina** recovery
+* `intelligence` - enhances **fire**, **cold**, **lighting**, **manaDrain**, **fear** and **curse** damage
+* `initiative`   - affects **turn order**
+* `luck`         - affects **critical chance**
 
-## Damage, Resistance, Modification:
-* `stabbing`   - affects health attribute
-* `cutting`    - affects health attribute
-* `crushing`   - affects health attribute
-* `fire`       - affects health attribute
-* `cold`       - affects health attribute
-* `lighting`   - affects health attribute
-* `poison`     - affects health attribute
-* `bleeding`   - affects health attribute
-* `exhaustion` - affects stamina attribute
-* `manaDrain`  - affects mana attribute
-* `morale`     - affects fear attribute
-* `fortune`    - affects curse attribute
+## State:
+* `health`  - current **hit points** unit have
+* `stamina` - current **stamina point** unit have
+* `mana`    - current **mana points** unit have
+* `curse`   - accumulative, reduces the **chance to perform action**
+* `fear`    - accumulative, increases the **chance to retreat**
+
+## Damage, Resistance:
+* `stabbing`   - affects **health** attribute
+* `cutting`    - affects **health** attribute
+* `crushing`   - affects **health** attribute
+* `fire`       - affects **health** attribute
+* `cold`       - affects **health** attribute
+* `lighting`   - affects **health** attribute
+* `poison`     - affects **health** attribute
+* `bleeding`   - affects **health** attribute
+* `exhaustion` - affects **stamina** attribute
+* `manaDrain`  - affects **mana** attribute
+* `morale`     - affects **fear** attribute
+* `fortune`    - affects **curse** attribute
+
+## Recovery:
+* **State**        - recovers state parameters
+* **Damage**       - reduces accumulated damage impact 
+
+## Modification:
+* **BaseAttributes** - modifies unit base attributes
+* **Attributes**     - modifies unit attributes
+* **Resistance**     - modifies unit resistance
+* **Damage**         - modifies the damage unit can apply
+* **Recovery**       - recovers unit state
+
+## Impact:
+* `duration`   - **duration** of effect, immediate if zero
+* `chance`     - base **chance**
+
+## DamageImpact:
+* **Impact**
+* **Damage**
+
+## ModificationImpact:
+* Impact
+* Modification
 
 ## Math:
 * `Physical Damage`: **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **Lighting**
