@@ -24,7 +24,7 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 	if !u.CheckUseCost(weapon.UseCost) {
 		return action.WithResult(ResultCantUse)
 	}
-	if !weapon.Range.Check(u.Position, target.Position) {
+	if !u.CanReach(target, weapon.Range) {
 		return action.WithResult(ResultNotReachable)
 	}
 	var damage []DamageImpact = weapon.Damage
@@ -58,7 +58,7 @@ func (u *Unit) useMagicOnTarget(action *ActionResult, target *Unit, magic *Magic
 	if !u.CheckRequirements(magic.Requirements) || !u.CheckUseCost(magic.UseCost) {
 		return action.WithResult(ResultCantUse)
 	}
-	if !magic.Range.Check(u.Position, target.Position) {
+	if !u.CanReach(target, magic.Range) {
 		return action.WithResult(ResultNotReachable)
 	}
 	u.State.Reduce(magic.UseCost)
@@ -79,8 +79,8 @@ func (u *Unit) useDisposableOnTarget(action *ActionResult, target *Unit, disposa
 	if disposable.Quantity == 0 {
 		return action.WithResult(ResultZeroQuantity)
 	}
-	if u.Uid != target.Uid && disposable.IsHarmful() {
-		return action.WithResult(ResultNotAllowed)
+	if !u.CanReach(target, disposable.Range) {
+		return action.WithResult(ResultNotReachable)
 	}
 	disposable.Quantity--
 	u.Inventory.FilterDisposable()

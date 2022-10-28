@@ -10,19 +10,25 @@ type ActionRange struct {
 	MaximumX int `json:"maximumX,omitempty"`
 	MinimumY int `json:"minimumY,omitempty"`
 	MaximumY int `json:"maximumY,omitempty"`
-	RadiusX  int `json:"radiusX,omitempty"`
-	RadiusY  int `json:"radiusY,omitempty"`
+	Radius   int `json:"radius,omitempty"`
 }
 
 func (r ActionRange) String() string {
-	return fmt.Sprintf("minimum: (%d:%d), maximum: (%d:%d), radius: (%d:%d)",
+	return fmt.Sprintf("minimum: (%d:%d), maximum: (%d:%d), radius: %d",
 		r.MinimumX,
 		r.MinimumY,
 		r.MaximumX,
 		r.MaximumY,
-		r.RadiusX,
-		r.RadiusY,
+		r.Radius,
 	)
+}
+
+func (r *ActionRange) Has() bool {
+	return r.MaximumX != 0 ||
+		r.MaximumY != 0 ||
+		r.Radius != 0 ||
+		r.MinimumX != 0 ||
+		r.MinimumY != 0
 }
 
 func (r *ActionRange) Check(p1 Position, p2 Position) bool {

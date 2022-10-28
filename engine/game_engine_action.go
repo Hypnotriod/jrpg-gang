@@ -53,15 +53,30 @@ func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *doma
 	if unit.IsDead || !e.state.IsCurrentActiveUnit(unit) || unit.GetUserId() != userId {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	itemType := unit.Inventory.GetItemType(action.ItemUid)
-	if itemType == domain.ItemTypeNone {
+	item := unit.Inventory.Find(action.ItemUid)
+	if item == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if unit.Faction == target.Faction &&
-		(itemType == domain.ItemTypeWeapon || itemType == domain.ItemTypeMagic) {
-		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
-	}
-	if unit.Faction != target.Faction && itemType == domain.ItemTypeDisposable {
+	switch i := item.(type) {
+	case *domain.Weapon:
+		if unit.Faction == target.Faction {
+			return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+		}
+	case *domain.Magic:
+		if unit.Faction == target.Faction && len(i.Damage) > 0 {
+			return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+		}
+		if unit.Faction != target.Faction && len(i.Modification) > 0 {
+			return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+		}
+	case *domain.Disposable:
+		if unit.Faction == target.Faction && len(i.Damage) > 0 {
+			return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+		}
+		if unit.Faction != target.Faction && len(i.Modification) > 0 {
+			return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+		}
+	default:
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	result := unit.UseInventoryItemOnTarget(&target.Unit, action.ItemUid)

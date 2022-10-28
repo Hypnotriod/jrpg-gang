@@ -206,8 +206,8 @@ func (u *Unit) SetRng(rng *rand.Rand) {
 	u.rng = rng
 }
 
-func (u *Unit) CanReachWithWeapon(target *Unit, weapon *Weapon) bool {
-	return weapon.Range.Check(u.Position, target.Position)
+func (u *Unit) CanReach(target *Unit, actionRange ActionRange) bool {
+	return !actionRange.Has() || actionRange.Check(u.Position, target.Position)
 }
 
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {

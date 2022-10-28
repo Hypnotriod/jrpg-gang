@@ -214,8 +214,8 @@
             },
             "damage": [],
             "range": {
-                "maximumX": 3,
-                "maximumY": 3
+                "maximumX": 10,
+                "maximumY": 10
             },
             "useCost": {
                 "mana": 15,

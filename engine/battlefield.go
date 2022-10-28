@@ -218,7 +218,7 @@ func (b *Battlefield) FindReachableTargets(unit *GameUnit) map[uint]*GameUnit {
 	for i := range unit.Inventory.Weapon {
 		weapon := &unit.Inventory.Weapon[i]
 		for _, target := range b.Units {
-			if target.Faction != unit.Faction && unit.CanReachWithWeapon(&target.Unit, weapon) {
+			if target.Faction != unit.Faction && unit.CanReach(&target.Unit, weapon.Range) {
 				result[weapon.Uid] = target
 			}
 		}
