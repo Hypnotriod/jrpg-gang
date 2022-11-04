@@ -23,16 +23,18 @@ func config() session.HubConfig {
 	broadcastQueueSize := flag.Int("broadcastQueueSize", 4096, "broadcast channel queue size")
 	maxMessageSize := flag.Int64("maxMessageSize", 1024, "max message size sent by peer")
 	userOfflineTimeoutSec := flag.Int64("userOfflineTimeoutSec", 10, "user offline timeout in secnds")
+	userWithoutIdTimeoutSec := flag.Int64("userWithoutIdTimeoutSec", 1, "user hasn't obtained id timeout in secnds")
 	flag.Parse()
 
 	return session.HubConfig{
-		Port:                  port,
-		ReadBufferSize:        *rBuffSize,
-		WriteBufferSize:       *wBuffSize,
-		BroadcasterPoolSize:   *broadcasterPoolSize,
-		BroadcastQueueSize:    *broadcastQueueSize,
-		MaxMessageSize:        *maxMessageSize,
-		UserOfflineTimeoutSec: *userOfflineTimeoutSec,
+		Port:                    port,
+		ReadBufferSize:          *rBuffSize,
+		WriteBufferSize:         *wBuffSize,
+		BroadcasterPoolSize:     *broadcasterPoolSize,
+		BroadcastQueueSize:      *broadcastQueueSize,
+		MaxMessageSize:          *maxMessageSize,
+		UserOfflineTimeoutSec:   *userOfflineTimeoutSec,
+		UserWithoutIdTimeoutSec: *userWithoutIdTimeoutSec,
 	}
 }
 

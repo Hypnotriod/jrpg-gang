@@ -12,13 +12,14 @@ import (
 )
 
 type HubConfig struct {
-	Port                  string `json:"port"`
-	ReadBufferSize        int    `json:"readBufferSize"`
-	WriteBufferSize       int    `json:"writeBufferSize"`
-	BroadcasterPoolSize   int    `json:"broadcasterPoolSize"`
-	BroadcastQueueSize    int    `json:"broadcastQueueSize"`
-	MaxMessageSize        int64  `json:"maxMessageSize"`
-	UserOfflineTimeoutSec int64  `json:"userOfflineTimeoutSec"`
+	Port                    string `json:"port"`
+	ReadBufferSize          int    `json:"readBufferSize"`
+	WriteBufferSize         int    `json:"writeBufferSize"`
+	BroadcasterPoolSize     int    `json:"broadcasterPoolSize"`
+	BroadcastQueueSize      int    `json:"broadcastQueueSize"`
+	MaxMessageSize          int64  `json:"maxMessageSize"`
+	UserOfflineTimeoutSec   int64  `json:"userOfflineTimeoutSec"`
+	UserWithoutIdTimeoutSec int64  `json:"userWithoutIdTimeoutSec"`
 }
 
 type Hub struct {
