@@ -99,6 +99,10 @@ func (h *Hub) unregisterClient(userId engine.UserId) {
 	delete(h.clients, userId)
 	h.leaveTimers[userId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
 		h.mu.Lock()
+		if _, ok := h.leaveTimers[userId]; !ok {
+			h.mu.Unlock()
+			return
+		}
 		delete(h.leaveTimers, userId)
 		h.mu.Unlock()
 		h.controller.Leave(userId)
