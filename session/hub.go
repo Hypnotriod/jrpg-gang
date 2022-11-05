@@ -80,8 +80,9 @@ func (h *Hub) registerClient(client *Client) {
 		oldClient.Kick()
 	}
 	h.clients[client.userId] = client
-	if timer, ok := h.leaveTimers[client.userId]; ok && timer.Stop() {
+	if timer, ok := h.leaveTimers[client.userId]; ok {
 		delete(h.leaveTimers, client.userId)
+		timer.Stop()
 		h.mu.Unlock()
 		h.controller.ConnectionStatusChanged(client.userId, false)
 		log.Info("Client back online: ", client.userId)
