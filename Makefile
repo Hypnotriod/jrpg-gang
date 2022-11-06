@@ -11,14 +11,14 @@ build:
 release:
 	go build -ldflags "-s -w" -o bin/${NAME} cmd/default/main.go
 
-image:
+image-build:
 	docker build . -t ${IMAGE}
 
 gcloud-setup:
 	gcloud auth login
 	gcloud auth configure-docker
 
-gcloud-image:
+gcloud-image-build:
 	docker build . -t gcr.io/${PROJECT}/${IMAGE}
 
 gcloud-image-push:
