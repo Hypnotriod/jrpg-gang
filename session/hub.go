@@ -29,7 +29,7 @@ type Hub struct {
 	upgrader      *websocket.Upgrader
 	controller    *controller.GameController
 	clients       map[engine.UserId]*Client
-	leaveTimers   map[engine.UserId]*time.Timer
+	offlineTimers map[engine.UserId]*time.Timer
 	broadcastPool chan broadcast
 }
 
@@ -38,7 +38,7 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 	hub.config = config
 	hub.controller = controller
 	hub.clients = make(map[engine.UserId]*Client)
-	hub.leaveTimers = make(map[engine.UserId]*time.Timer)
+	hub.offlineTimers = make(map[engine.UserId]*time.Timer)
 	hub.upgrader = &websocket.Upgrader{
 		CheckOrigin:     hub.checkOrigin,
 		ReadBufferSize:  config.ReadBufferSize,
@@ -80,8 +80,8 @@ func (h *Hub) registerClient(client *Client) {
 		oldClient.Kick()
 	}
 	h.clients[client.userId] = client
-	if timer, ok := h.leaveTimers[client.userId]; ok {
-		delete(h.leaveTimers, client.userId)
+	if timer, ok := h.offlineTimers[client.userId]; ok {
+		delete(h.offlineTimers, client.userId)
 		timer.Stop()
 		h.mu.Unlock()
 		h.controller.ConnectionStatusChanged(client.userId, false)
@@ -99,20 +99,24 @@ func (h *Hub) unregisterClient(userId engine.UserId) {
 	}
 	h.mu.Lock()
 	delete(h.clients, userId)
-	h.leaveTimers[userId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
+	h.setupUserOfflineTimeout(userId)
+	h.mu.Unlock()
+	h.controller.ConnectionStatusChanged(userId, true)
+	log.Info("Client went offline: ", userId)
+}
+
+func (h *Hub) setupUserOfflineTimeout(userId engine.UserId) {
+	h.offlineTimers[userId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
 		h.mu.Lock()
-		if _, ok := h.leaveTimers[userId]; !ok {
+		if _, ok := h.offlineTimers[userId]; !ok {
 			h.mu.Unlock()
 			return
 		}
-		delete(h.leaveTimers, userId)
+		delete(h.offlineTimers, userId)
 		h.mu.Unlock()
 		h.controller.Leave(userId)
 		log.Info("Unregister Client by timeout: ", userId)
 	})
-	h.mu.Unlock()
-	h.controller.ConnectionStatusChanged(userId, true)
-	log.Info("Client went offline: ", userId)
 }
 
 func (h *Hub) getClient(userId engine.UserId) *Client {
