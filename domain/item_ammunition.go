@@ -1,9 +1,15 @@
 package domain
 
+type AmmunitionKind string
+
+const (
+	NoAmmunition AmmunitionKind = ""
+)
+
 type Ammunition struct {
 	Item
 	Equipped bool           `json:"equipped,omitempty"`
-	Kind     string         `json:"kind"`
+	Kind     AmmunitionKind `json:"kind"`
 	Quantity uint           `json:"quantity,omitempty"`
 	Damage   []DamageImpact `json:"damage,omitempty"`
 }
