@@ -32,6 +32,10 @@ func NewClient(connection *websocket.Conn, hub *Hub) *Client {
 
 func (c *Client) WriteMessage(message string) {
 	c.mu.Lock()
+	if c.left || c.kicked {
+		c.mu.Unlock()
+		return
+	}
 	err := c.conn.WriteMessage(websocket.TextMessage, []byte(message))
 	c.mu.Unlock()
 	if err != nil && websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
