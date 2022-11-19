@@ -50,6 +50,15 @@ async function chooseItemType() {
         case 2:
             result = await makeWeapon();
             break;
+        case 3:
+            result = await makeMagic();
+            break;
+        case 4:
+            result = await makeDisposable();
+            break;
+        case 5:
+            result = await makeAmmunition();
+            break;
         default:
             return;
     }
@@ -74,10 +83,60 @@ async function makeWeapon() {
         range: await makeActionRange('range'),
         useCost: await makeUnitBaseAttributes('useCost'),
         ...await makeEquipment(),
+        damage: [],
     }
     while (await yesNo('damage')) {
-        result.damage = result.damage || [];
-        result.damage = await makeDamageImpact('damage');
+        result.damage.push(await makeDamageImpact('damage'));
+    }
+    return result;
+}
+
+async function makeMagic() {
+    stdout.write('magic:\r\n');
+    const result = {
+        ...await makeItem('magic'),
+        requirements: await makeUnitAttributes('requirements'),
+        range: await makeActionRange('range'),
+        useCost: await makeUnitBaseAttributes('useCost'),
+        damage: [],
+        modification: [],
+    }
+    while (await yesNo('damage')) {
+        result.damage.push(await makeDamageImpact('damage'));
+    }
+    while (await yesNo('modification')) {
+        result.modification.push(await makeUnitModificationImpact('modification'));
+    }
+    return result;
+}
+
+async function makeDisposable() {
+    stdout.write('disposable:\r\n');
+    const result = {
+        ...await makeItem('disposable'),
+        range: await makeActionRange('range'),
+        damage: [],
+        modification: [],
+    }
+    while (await yesNo('damage')) {
+        result.damage.push(await makeDamageImpact('damage'));
+    }
+    while (await yesNo('modification')) {
+        result.modification.push(await makeUnitModificationImpact('modification'));
+    }
+    return result;
+}
+
+async function makeAmmunition() {
+    stdout.write('ammunition:\r\n');
+    const result = {
+        ...await makeItem('ammunition'),
+        kind: await makeString('kind'),
+        range: await makeActionRange('range'),
+        damage: [],
+    }
+    while (await yesNo('damage')) {
+        result.damage.push(await makeDamageImpact('damage'));
     }
     return result;
 }
@@ -124,9 +183,9 @@ async function makeEquipment(header) {
         slotsNumber: await makeNumber('slotsNumber', 1),
         equipped: false,
         requirements: await makeUnitAttributes('requirements'),
+        modification: [],
     }
     while (await yesNo('modification')) {
-        result.modification = result.modification || [];
         result.modification.push(await makeUnitModification('modification'));
     }
     return result;
@@ -156,12 +215,29 @@ async function makeUnitBaseAttributes(header) {
     return result;
 }
 
-async function makeDamageImpact(header) {
+async function makeImpact(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
         duration: await makeNumber('duration'),
         chance: await makeNumber('chance'),
+    }
+    return result;
+}
+
+async function makeDamageImpact(header) {
+    header && stdout.write(`${header}:\r\n`);
+    const result = {
+        ...await makeImpact(),
         ...await makeDamage(),
+    }
+    return result;
+}
+
+async function makeUnitModificationImpact(header) {
+    header && stdout.write(`${header}:\r\n`);
+    const result = {
+        ...await makeImpact(),
+        ...await makeUnitModification(),
     }
     return result;
 }
