@@ -31,7 +31,7 @@ async function chooseItemType() {
     const i = Number.parseInt(r);
     switch (i) {
         case 1:
-            console.log(await makeArmor());
+            console.log(JSON.stringify(await makeArmor(), null, 2));
             break;
     }
 }
@@ -75,7 +75,7 @@ async function makeEquipment(header) {
         equipped: false,
         requirements: await makeUnitAttributes('requirements'),
     }
-    while (await rl.question('add modification: y/n?') === 'y') {
+    while (await rl.question('add modification: y/n? ') === 'y') {
         result.modification = result.modification || [];
         result.modification.push(await makeUnitModification('modification'));
     }
@@ -150,19 +150,19 @@ async function makeUnitRecovery(header) {
 
 async function makeUnitModification() {
     const result = {};
-    if (await rl.question('add baseAttributes: y/n?') === 'y') {
+    if (await rl.question('add baseAttributes: y/n? ') === 'y') {
         result.baseAttributes = await makeUnitBaseAttributes('baseAttributes');
     }
-    if (await rl.question('add attributes: y/n?') === 'y') {
+    if (await rl.question('add attributes: y/n? ') === 'y') {
         result.attributes = await makeUnitAttributes('attributes');
     }
-    if (await rl.question('add resistance: y/n?') === 'y') {
+    if (await rl.question('add resistance: y/n? ') === 'y') {
         result.resistance = await makeDamage('resistance');
     }
-    if (await rl.question('add damage: y/n?') === 'y') {
+    if (await rl.question('add damage: y/n? ') === 'y') {
         result.damage = await makeDamage('damage');
     }
-    if (await rl.question('add recovery: y/n?') === 'y') {
+    if (await rl.question('add recovery: y/n? ') === 'y') {
         result.recovery = await makeUnitRecovery('recovery');
     }
     return result;
