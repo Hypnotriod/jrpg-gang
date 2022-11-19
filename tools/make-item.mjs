@@ -13,19 +13,14 @@ async function yesNo(prompt) {
 }
 
 async function makeList(value, values) {
-    return await rl.question(`-> ${value}: [${values.join(', ')}]: `) || values[0];
+    return await rl.question(`-> ${value}: [${values.join(', ')}]: (default: ${values[0]}) `) || values[0];
 }
 
-async function makeString(value, defaultValue = '') {
+async function makeValue(value, defaultValue) {
     const result = defaultValue ?
         await rl.question(`-> ${value}: (default: ${defaultValue}) `) :
         await rl.question(`-> ${value}: `);
-    return result || defaultValue || undefined;
-}
-
-async function makeNumber(value, defaultValue = 0) {
-    const result = await rl.question(`-> ${value}: (default: 0) `);
-    return result || defaultValue || undefined;
+    return result || defaultValue;
 }
 
 async function run() {
@@ -39,7 +34,7 @@ async function run() {
 }
 
 function storeNewItem(item) {
-    const configPath = 'private/items_config.json';
+    const configPath = 'items_config.json';
     let itemsConfigStr = fs.readFileSync(configPath);
     const itemsConfig = JSON.parse(itemsConfigStr);
     switch (item.type) {
@@ -66,19 +61,14 @@ async function createItem() {
     switch (i) {
         case 1:
             return await makeArmor();
-            break;
         case 2:
             return await makeWeapon();
-            break;
         case 3:
             return await makeMagic();
-            break;
         case 4:
             return await makeDisposable();
-            break;
         case 5:
             return await makeAmmunition();
-            break;
         default:
             return null;
     }
@@ -97,7 +87,7 @@ async function makeWeapon() {
     stdout.write('weapon:\r\n');
     const result = {
         ...await makeItem('weapon'),
-        ammunitionKind: await makeString('ammunitionKind'),
+        ammunitionKind: await makeValue('ammunitionKind'),
         range: await makeActionRange('range'),
         useCost: await makeUnitBaseAttributes('useCost'),
         ...await makeEquipment(),
@@ -149,7 +139,7 @@ async function makeAmmunition() {
     stdout.write('ammunition:\r\n');
     const result = {
         ...await makeItem('ammunition'),
-        kind: await makeString('kind'),
+        kind: await makeValue('kind'),
         range: await makeActionRange('range'),
         damage: [],
     }
@@ -162,11 +152,11 @@ async function makeAmmunition() {
 async function makeActionRange(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        minimumX: await makeNumber('minimumX'),
-        maximumX: await makeNumber('maximumX'),
-        minimumY: await makeNumber('minimumY'),
-        maximumY: await makeNumber('maximumY'),
-        radius: await makeNumber('radius'),
+        minimumX: await makeValue('minimumX'),
+        maximumX: await makeValue('maximumX'),
+        minimumY: await makeValue('minimumY'),
+        maximumY: await makeValue('maximumY'),
+        radius: await makeValue('radius'),
     }
     return result;
 }
@@ -174,8 +164,8 @@ async function makeActionRange(header) {
 async function makeUnitBooty(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        coins: await makeNumber('coins'),
-        ruby: await makeNumber('ruby'),
+        coins: await makeValue('coins'),
+        ruby: await makeValue('ruby'),
     }
     return result;
 }
@@ -183,9 +173,9 @@ async function makeUnitBooty(header) {
 async function makeItem(type, header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        name: await makeString('name'),
-        description: await makeString('description'),
-        code: await makeString('code'),
+        name: await makeValue('name'),
+        description: await makeValue('description'),
+        code: await makeValue('code'),
         type: type,
         price: await makeUnitBooty('price'),
     }
@@ -195,9 +185,9 @@ async function makeItem(type, header) {
 async function makeEquipment(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        durability: await makeNumber('durability', 300),
+        durability: await makeValue('durability', 300),
         slot: await makeList('slot', ['weapon', 'head', 'neck', 'body', 'hand', 'leg']),
-        slotsNumber: await makeNumber('slotsNumber', 1),
+        slotsNumber: await makeValue('slotsNumber', 1),
         requirements: await makeUnitAttributes('requirements'),
         modification: [],
     }
@@ -210,13 +200,13 @@ async function makeEquipment(header) {
 async function makeUnitAttributes(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        strength: await makeNumber('strength'),
-        physique: await makeNumber('physique'),
-        agility: await makeNumber('agility'),
-        endurance: await makeNumber('endurance'),
-        intelligence: await makeNumber('intelligence'),
-        initiative: await makeNumber('initiative'),
-        luck: await makeNumber('luck'),
+        strength: await makeValue('strength'),
+        physique: await makeValue('physique'),
+        agility: await makeValue('agility'),
+        endurance: await makeValue('endurance'),
+        intelligence: await makeValue('intelligence'),
+        initiative: await makeValue('initiative'),
+        luck: await makeValue('luck'),
     }
     return result;
 }
@@ -224,9 +214,9 @@ async function makeUnitAttributes(header) {
 async function makeUnitBaseAttributes(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        health: await makeNumber('health'),
-        stamina: await makeNumber('stamina'),
-        mana: await makeNumber('mana'),
+        health: await makeValue('health'),
+        stamina: await makeValue('stamina'),
+        mana: await makeValue('mana'),
     }
     return result;
 }
@@ -234,8 +224,8 @@ async function makeUnitBaseAttributes(header) {
 async function makeImpact(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        duration: await makeNumber('duration'),
-        chance: await makeNumber('chance'),
+        duration: await makeValue('duration'),
+        chance: await makeValue('chance'),
     }
     return result;
 }
@@ -261,18 +251,18 @@ async function makeUnitModificationImpact(header) {
 async function makeDamage(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        stabbing: await makeNumber('stabbing'),
-        cutting: await makeNumber('cutting'),
-        crushing: await makeNumber('crushing'),
-        fire: await makeNumber('fire'),
-        cold: await makeNumber('cold'),
-        lighting: await makeNumber('lighting'),
-        poison: await makeNumber('poison'),
-        exhaustion: await makeNumber('exhaustion'),
-        manaDrain: await makeNumber('manaDrain'),
-        bleeding: await makeNumber('bleeding'),
-        morale: await makeNumber('morale'),
-        fortune: await makeNumber('fortune'),
+        stabbing: await makeValue('stabbing'),
+        cutting: await makeValue('cutting'),
+        crushing: await makeValue('crushing'),
+        fire: await makeValue('fire'),
+        cold: await makeValue('cold'),
+        lighting: await makeValue('lighting'),
+        poison: await makeValue('poison'),
+        exhaustion: await makeValue('exhaustion'),
+        manaDrain: await makeValue('manaDrain'),
+        bleeding: await makeValue('bleeding'),
+        morale: await makeValue('morale'),
+        fortune: await makeValue('fortune'),
     }
     return result;
 }
@@ -280,11 +270,11 @@ async function makeDamage(header) {
 async function makeUnitState(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        health: await makeNumber('health'),
-        stamina: await makeNumber('stamina'),
-        mana: await makeNumber('mana'),
-        fear: await makeNumber('fear'),
-        curse: await makeNumber('curse'),
+        health: await makeValue('health'),
+        stamina: await makeValue('stamina'),
+        mana: await makeValue('mana'),
+        fear: await makeValue('fear'),
+        curse: await makeValue('curse'),
     }
     return result;
 }
