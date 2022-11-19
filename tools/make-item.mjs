@@ -1,4 +1,5 @@
 import * as readline from 'node:readline/promises';
+import * as fs from 'node:fs';
 import { stdin, stdout } from 'node:process';
 
 const rl = readline.createInterface(stdin, stdout);
@@ -12,29 +13,48 @@ async function yesNo(prompt) {
 }
 
 async function makeList(value, values) {
-    return rl.question(`-> ${value}: [${values.join(', ')}]: `);
+    return await rl.question(`-> ${value}: [${values.join(', ')}]: `) || values[0];
 }
 
 async function makeString(value, defaultValue = '') {
     const result = defaultValue ?
         await rl.question(`-> ${value}: (default: ${defaultValue}) `) :
         await rl.question(`-> ${value}: `);
-    return result || defaultValue;
+    return result || defaultValue || undefined;
 }
 
 async function makeNumber(value, defaultValue = 0) {
-    const result = await rl.question(`-> ${value}: (default: ${defaultValue}) `);
-    return result || defaultValue;
+    const result = await rl.question(`-> ${value}: (default: 0) `);
+    return result || defaultValue || undefined;
 }
 
 async function run() {
     while (true) {
-        await chooseItemType();
+        const item = await createItem();
+        if (!item) { continue; }
+        const resultJson = JSON.stringify(item, null, 2);
+        stdout.write(`\r\n************* ${item.name} *************\r\n\r\n${resultJson}\r\n\r\n`);
+        storeNewItem(item);
     }
 }
 
-async function chooseItemType() {
-    let result;
+function storeNewItem(item) {
+    const configPath = 'private/items_config.json';
+    let itemsConfigStr = fs.readFileSync(configPath);
+    const itemsConfig = JSON.parse(itemsConfigStr);
+    switch (item.type) {
+        case 'armor': itemsConfig.armor.push(item); break;
+        case 'weapon': itemsConfig.weapon.push(item); break;
+        case 'magic': itemsConfig.magic.push(item); break;
+        case 'disposable': itemsConfig.disposable.push(item); break;
+        case 'ammunition': itemsConfig.ammunition.push(item); break;
+        default: return;
+    }
+    itemsConfigStr = JSON.stringify(itemsConfig, null, 4);
+    fs.writeFileSync(configPath, itemsConfigStr);
+}
+
+async function createItem() {
     const r = await rl.question(
         `Choose type:
         1 - armor
@@ -45,25 +65,23 @@ async function chooseItemType() {
     const i = Number.parseInt(r);
     switch (i) {
         case 1:
-            result = await makeArmor();
+            return await makeArmor();
             break;
         case 2:
-            result = await makeWeapon();
+            return await makeWeapon();
             break;
         case 3:
-            result = await makeMagic();
+            return await makeMagic();
             break;
         case 4:
-            result = await makeDisposable();
+            return await makeDisposable();
             break;
         case 5:
-            result = await makeAmmunition();
+            return await makeAmmunition();
             break;
         default:
-            return;
+            return null;
     }
-    const resultJson = JSON.stringify(result, null, 2);
-    stdout.write(`\r\n************* ${result.name} *************\r\n\r\n${resultJson}\r\n\r\n`);
 }
 
 async function makeArmor() {
@@ -177,11 +195,9 @@ async function makeItem(type, header) {
 async function makeEquipment(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        wearout: 0,
         durability: await makeNumber('durability', 300),
         slot: await makeList('slot', ['weapon', 'head', 'neck', 'body', 'hand', 'leg']),
         slotsNumber: await makeNumber('slotsNumber', 1),
-        equipped: false,
         requirements: await makeUnitAttributes('requirements'),
         modification: [],
     }
