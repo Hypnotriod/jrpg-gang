@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"regexp"
 	"testing"
 )
@@ -36,7 +35,6 @@ func TestParseRequestManual(t *testing.T) {
 
 func BenchmarkParseRequestManual(b *testing.B) {
 	requestRaw := []byte(requestStr)
-	fmt.Println(parseRequest(requestRaw))
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		parseRequest(requestRaw)
@@ -45,7 +43,6 @@ func BenchmarkParseRequestManual(b *testing.B) {
 
 func BenchmarkParseRequestRegexp(b *testing.B) {
 	typeIdRegexp := regexp.MustCompile(`({"type":"[a-zA-Z0-9]+)|((,"id":")[a-zA-Z0-9]+)`)
-	fmt.Println(parseRequestRegexp(requestStr, typeIdRegexp))
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		parseRequestRegexp(requestStr, typeIdRegexp)
@@ -54,7 +51,6 @@ func BenchmarkParseRequestRegexp(b *testing.B) {
 
 func BenchmarkParseRequestJson(b *testing.B) {
 	requestRaw := []byte(requestStr)
-	fmt.Println(parseRequestData(&Request{}, requestRaw))
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		parseRequestData(&Request{}, requestRaw)
