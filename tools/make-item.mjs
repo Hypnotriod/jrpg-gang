@@ -4,23 +4,37 @@ import { stdin, stdout } from 'node:process';
 const rl = readline.createInterface(stdin, stdout);
 stdin.isTTY && stdin.setRawMode(true);
 
+async function yesNo(prompt) {
+    const result = await rl.question(`* add ${prompt}: y/n? `) === 'y';
+    stdout.moveCursor(0, -1);
+    stdout.clearLine();
+    return result;
+}
+
 async function makeList(value, values) {
-    return rl.question(`${value}: ${values}: `);
+    return rl.question(`-> ${value}: [${values.join(', ')}]: `);
 }
 
 async function makeString(value, defaultValue = '') {
     const result = defaultValue ?
-        await rl.question(`${value}: (default: ${defaultValue}) `) :
-        await rl.question(`${value}: `);
+        await rl.question(`-> ${value}: (default: ${defaultValue}) `) :
+        await rl.question(`-> ${value}: `);
     return result || defaultValue;
 }
 
 async function makeNumber(value, defaultValue = 0) {
-    const result = await rl.question(`${value}: number: (default: ${defaultValue}) `);
+    const result = await rl.question(`-> ${value}: (default: ${defaultValue}) `);
     return result || defaultValue;
 }
 
+async function run() {
+    while (true) {
+        await chooseItemType();
+    }
+}
+
 async function chooseItemType() {
+    let result;
     const r = await rl.question(
         `Choose type:
         1 - armor
@@ -31,15 +45,51 @@ async function chooseItemType() {
     const i = Number.parseInt(r);
     switch (i) {
         case 1:
-            console.log(JSON.stringify(await makeArmor(), null, 2));
+            result = await makeArmor();
             break;
+        case 2:
+            result = await makeWeapon();
+            break;
+        default:
+            return;
     }
+    const resultJson = JSON.stringify(result, null, 2);
+    stdout.write(`\r\n************* ${result.name} *************\r\n\r\n${resultJson}\r\n\r\n`);
 }
 
 async function makeArmor() {
+    stdout.write('armor:\r\n');
     const result = {
         ...await makeItem('armor'),
         ...await makeEquipment(),
+    }
+    return result;
+}
+
+async function makeWeapon() {
+    stdout.write('weapon:\r\n');
+    const result = {
+        ...await makeItem('weapon'),
+        ammunitionKind: await makeString('ammunitionKind'),
+        range: await makeActionRange('range'),
+        useCost: await makeUnitBaseAttributes('useCost'),
+        ...await makeEquipment(),
+    }
+    while (await yesNo('damage')) {
+        result.damage = result.damage || [];
+        result.damage = await makeDamageImpact('damage');
+    }
+    return result;
+}
+
+async function makeActionRange(header) {
+    header && stdout.write(`${header}:\r\n`);
+    const result = {
+        minimumX: await makeNumber('minimumX'),
+        maximumX: await makeNumber('maximumX'),
+        minimumY: await makeNumber('minimumY'),
+        maximumY: await makeNumber('maximumY'),
+        radius: await makeNumber('radius'),
     }
     return result;
 }
@@ -75,7 +125,7 @@ async function makeEquipment(header) {
         equipped: false,
         requirements: await makeUnitAttributes('requirements'),
     }
-    while (await rl.question('add modification: y/n? ') === 'y') {
+    while (await yesNo('modification')) {
         result.modification = result.modification || [];
         result.modification.push(await makeUnitModification('modification'));
     }
@@ -106,6 +156,16 @@ async function makeUnitBaseAttributes(header) {
     return result;
 }
 
+async function makeDamageImpact(header) {
+    header && stdout.write(`${header}:\r\n`);
+    const result = {
+        duration: await makeNumber('duration'),
+        chance: await makeNumber('chance'),
+        ...await makeDamage(),
+    }
+    return result;
+}
+
 async function makeDamage(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
@@ -121,8 +181,6 @@ async function makeDamage(header) {
         bleeding: await makeNumber('bleeding'),
         morale: await makeNumber('morale'),
         fortune: await makeNumber('fortune'),
-        isCritical: await makeNumber('isCritical'),
-        withStun: await makeNumber('withStun'),
     }
     return result;
 }
@@ -148,24 +206,25 @@ async function makeUnitRecovery(header) {
     return result;
 }
 
-async function makeUnitModification() {
+async function makeUnitModification(header) {
+    header && stdout.write(`${header}:\r\n`);
     const result = {};
-    if (await rl.question('add baseAttributes: y/n? ') === 'y') {
+    if (await yesNo('baseAttributes')) {
         result.baseAttributes = await makeUnitBaseAttributes('baseAttributes');
     }
-    if (await rl.question('add attributes: y/n? ') === 'y') {
+    if (await yesNo('attributes')) {
         result.attributes = await makeUnitAttributes('attributes');
     }
-    if (await rl.question('add resistance: y/n? ') === 'y') {
+    if (await yesNo('resistance')) {
         result.resistance = await makeDamage('resistance');
     }
-    if (await rl.question('add damage: y/n? ') === 'y') {
+    if (await yesNo('damage')) {
         result.damage = await makeDamage('damage');
     }
-    if (await rl.question('add recovery: y/n? ') === 'y') {
+    if (await yesNo('recovery')) {
         result.recovery = await makeUnitRecovery('recovery');
     }
     return result;
 }
 
-chooseItemType();
+run();
