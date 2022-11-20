@@ -33,3 +33,5 @@ gcloud-deploy:
 gcloud-regions:
 	gcloud compute regions list
 
+item:
+	cd ./private/ && node ../tools/make-item-or-unit.mjs
