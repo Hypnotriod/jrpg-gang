@@ -13,14 +13,28 @@ async function yesNo(prompt) {
 }
 
 async function makeList(value, values) {
-    return await rl.question(`-> ${value}: [${values.join(', ')}]: (default: ${values[0]}) `) || values[0];
+    return await rl.question(`-> ${value}: [${values.join(', ')}] (default: ${values[0]}): `) || values[0];
 }
 
-async function makeValue(value, defaultValue) {
+async function makeString(value, defaultValue) {
     const result = defaultValue ?
-        await rl.question(`-> ${value}: (default: ${defaultValue}) `) :
+        await rl.question(`-> ${value} (default: ${defaultValue}): `) :
         await rl.question(`-> ${value}: `);
     return result || defaultValue;
+}
+
+async function makeNumber(value, defaultValue) {
+    const result = defaultValue ?
+        await rl.question(`-> ${value} (default: ${defaultValue}): `) :
+        await rl.question(`-> ${value}: `);
+    return Number(result || defaultValue) || undefined;
+}
+
+async function makeBool(value, defaultValue) {
+    const result = defaultValue ?
+        await rl.question(`-> ${value} y/n (default: ${defaultValue}): `) :
+        await rl.question(`-> ${value} y/n: `);
+    return (result || defaultValue) === 'y' || undefined;
 }
 
 async function run() {
@@ -29,24 +43,33 @@ async function run() {
         if (!item) { continue; }
         const resultJson = JSON.stringify(item, null, 2);
         stdout.write(`\r\n************* ${item.name} *************\r\n\r\n${resultJson}\r\n\r\n`);
-        storeNewItem(item);
+        item.stats ? storeNewUnit(item) : storeNewItem(item);
     }
+}
+
+function storeNewUnit(unit) {
+    const configPath = 'units_config.json';
+    let configStr = fs.readFileSync(configPath);
+    const config = JSON.parse(configStr);
+    config.push(unit);
+    configStr = JSON.stringify(config, null, 4);
+    fs.writeFileSync(configPath, configStr);
 }
 
 function storeNewItem(item) {
     const configPath = 'items_config.json';
-    let itemsConfigStr = fs.readFileSync(configPath);
-    const itemsConfig = JSON.parse(itemsConfigStr);
+    let configStr = fs.readFileSync(configPath);
+    const config = JSON.parse(configStr);
     switch (item.type) {
-        case 'armor': itemsConfig.armor.push(item); break;
-        case 'weapon': itemsConfig.weapon.push(item); break;
-        case 'magic': itemsConfig.magic.push(item); break;
-        case 'disposable': itemsConfig.disposable.push(item); break;
-        case 'ammunition': itemsConfig.ammunition.push(item); break;
+        case 'armor': config.armor.push(item); break;
+        case 'weapon': config.weapon.push(item); break;
+        case 'magic': config.magic.push(item); break;
+        case 'disposable': config.disposable.push(item); break;
+        case 'ammunition': config.ammunition.push(item); break;
         default: return;
     }
-    itemsConfigStr = JSON.stringify(itemsConfig, null, 4);
-    fs.writeFileSync(configPath, itemsConfigStr);
+    configStr = JSON.stringify(config, null, 4);
+    fs.writeFileSync(configPath, configStr);
 }
 
 async function createItem() {
@@ -56,7 +79,8 @@ async function createItem() {
         2 - weapon
         3 - magic
         4 - disposable
-        5 - ammunition\r\n`);
+        5 - ammunition
+        6 - unit\r\n`);
     const i = Number.parseInt(r);
     switch (i) {
         case 1:
@@ -69,9 +93,24 @@ async function createItem() {
             return await makeDisposable();
         case 5:
             return await makeAmmunition();
+        case 6:
+            return await makeUnit();
         default:
             return null;
     }
+}
+
+async function makeUnit() {
+    stdout.write('unit:\r\n');
+    const result = {
+        name: await makeString('name'),
+        code: await makeString('code'),
+        booty: await makeUnitBooty('booty'),
+        stats: await makeUnitStats('stats'),
+        inventory: await makeInventory('inventory'),
+        slots: await makeSlots('slots'),
+    }
+    return result;
 }
 
 async function makeArmor() {
@@ -87,7 +126,7 @@ async function makeWeapon() {
     stdout.write('weapon:\r\n');
     const result = {
         ...await makeItem('weapon'),
-        ammunitionKind: await makeValue('ammunitionKind'),
+        ammunitionKind: await makeString('ammunitionKind'),
         range: await makeActionRange('range'),
         useCost: await makeUnitBaseAttributes('useCost'),
         ...await makeEquipment(),
@@ -139,7 +178,7 @@ async function makeAmmunition() {
     stdout.write('ammunition:\r\n');
     const result = {
         ...await makeItem('ammunition'),
-        kind: await makeValue('kind'),
+        kind: await makeString('kind'),
         range: await makeActionRange('range'),
         damage: [],
     }
@@ -149,14 +188,68 @@ async function makeAmmunition() {
     return result;
 }
 
+async function makeUnitStats(header) {
+    header && stdout.write(`${header}:\r\n`);
+    const result = {
+        progress: await makeUnitProgress('progress'),
+        baseAttributes: await makeUnitBaseAttributes('baseAttributes'),
+        attributes: await makeUnitAttributes('attributes'),
+        resistance: await makeDamage('resistance'),
+    }
+    return result;
+}
+
+async function makeUnitProgress(header) {
+    header && stdout.write(`${header}:\r\n`);
+    const result = {
+        level: await makeNumber('level', 1),
+        experience: await makeNumber('experience'),
+    }
+    return result;
+}
+
+async function makeInventory(header) {
+    header && stdout.write(`${header}:\r\n`);
+    const result = {
+        descriptor: [],
+    }
+    while (await yesNo('item')) {
+        result.descriptor.push(await makeItemDescriptor('item'));
+    }
+    return result;
+}
+
+async function makeItemDescriptor(header) {
+    header && stdout.write(`${header}:\r\n`);
+    const result = {
+        code: await makeString('code'),
+        quantity: await makeNumber('quantity'),
+        equipped: await makeBool('equipped'),
+    }
+    return result;
+}
+
+async function makeSlots(header) {
+    header && stdout.write(`${header}:\r\n`);
+    const result = {
+        head: await makeNumber('head'),
+        neck: await makeNumber('neck'),
+        body: await makeNumber('body'),
+        hand: await makeNumber('hand'),
+        leg: await makeNumber('leg'),
+        weapon: await makeNumber('weapon'),
+    }
+    return result;
+}
+
 async function makeActionRange(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        minimumX: await makeValue('minimumX'),
-        maximumX: await makeValue('maximumX'),
-        minimumY: await makeValue('minimumY'),
-        maximumY: await makeValue('maximumY'),
-        radius: await makeValue('radius'),
+        minimumX: await makeNumber('minimumX'),
+        maximumX: await makeNumber('maximumX'),
+        minimumY: await makeNumber('minimumY'),
+        maximumY: await makeNumber('maximumY'),
+        radius: await makeNumber('radius'),
     }
     return result;
 }
@@ -164,8 +257,8 @@ async function makeActionRange(header) {
 async function makeUnitBooty(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        coins: await makeValue('coins'),
-        ruby: await makeValue('ruby'),
+        coins: await makeNumber('coins'),
+        ruby: await makeNumber('ruby'),
     }
     return result;
 }
@@ -173,9 +266,9 @@ async function makeUnitBooty(header) {
 async function makeItem(type, header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        name: await makeValue('name'),
-        description: await makeValue('description'),
-        code: await makeValue('code'),
+        name: await makeString('name'),
+        description: await makeString('description'),
+        code: await makeString('code'),
         type: type,
         price: await makeUnitBooty('price'),
     }
@@ -185,9 +278,9 @@ async function makeItem(type, header) {
 async function makeEquipment(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        durability: await makeValue('durability', 300),
+        durability: await makeNumber('durability', 300),
         slot: await makeList('slot', ['weapon', 'head', 'neck', 'body', 'hand', 'leg']),
-        slotsNumber: await makeValue('slotsNumber', 1),
+        slotsNumber: await makeNumber('slotsNumber', 1),
         requirements: await makeUnitAttributes('requirements'),
         modification: [],
     }
@@ -200,13 +293,13 @@ async function makeEquipment(header) {
 async function makeUnitAttributes(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        strength: await makeValue('strength'),
-        physique: await makeValue('physique'),
-        agility: await makeValue('agility'),
-        endurance: await makeValue('endurance'),
-        intelligence: await makeValue('intelligence'),
-        initiative: await makeValue('initiative'),
-        luck: await makeValue('luck'),
+        strength: await makeNumber('strength'),
+        physique: await makeNumber('physique'),
+        agility: await makeNumber('agility'),
+        endurance: await makeNumber('endurance'),
+        intelligence: await makeNumber('intelligence'),
+        initiative: await makeNumber('initiative'),
+        luck: await makeNumber('luck'),
     }
     return result;
 }
@@ -214,9 +307,9 @@ async function makeUnitAttributes(header) {
 async function makeUnitBaseAttributes(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        health: await makeValue('health'),
-        stamina: await makeValue('stamina'),
-        mana: await makeValue('mana'),
+        health: await makeNumber('health'),
+        stamina: await makeNumber('stamina'),
+        mana: await makeNumber('mana'),
     }
     return result;
 }
@@ -224,8 +317,8 @@ async function makeUnitBaseAttributes(header) {
 async function makeImpact(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        duration: await makeValue('duration'),
-        chance: await makeValue('chance'),
+        duration: await makeNumber('duration'),
+        chance: await makeNumber('chance'),
     }
     return result;
 }
@@ -251,18 +344,18 @@ async function makeUnitModificationImpact(header) {
 async function makeDamage(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        stabbing: await makeValue('stabbing'),
-        cutting: await makeValue('cutting'),
-        crushing: await makeValue('crushing'),
-        fire: await makeValue('fire'),
-        cold: await makeValue('cold'),
-        lighting: await makeValue('lighting'),
-        poison: await makeValue('poison'),
-        exhaustion: await makeValue('exhaustion'),
-        manaDrain: await makeValue('manaDrain'),
-        bleeding: await makeValue('bleeding'),
-        morale: await makeValue('morale'),
-        fortune: await makeValue('fortune'),
+        stabbing: await makeNumber('stabbing'),
+        cutting: await makeNumber('cutting'),
+        crushing: await makeNumber('crushing'),
+        fire: await makeNumber('fire'),
+        cold: await makeNumber('cold'),
+        lighting: await makeNumber('lighting'),
+        poison: await makeNumber('poison'),
+        exhaustion: await makeNumber('exhaustion'),
+        manaDrain: await makeNumber('manaDrain'),
+        bleeding: await makeNumber('bleeding'),
+        morale: await makeNumber('morale'),
+        fortune: await makeNumber('fortune'),
     }
     return result;
 }
@@ -270,11 +363,11 @@ async function makeDamage(header) {
 async function makeUnitState(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        health: await makeValue('health'),
-        stamina: await makeValue('stamina'),
-        mana: await makeValue('mana'),
-        fear: await makeValue('fear'),
-        curse: await makeValue('curse'),
+        health: await makeNumber('health'),
+        stamina: await makeNumber('stamina'),
+        mana: await makeNumber('mana'),
+        fear: await makeNumber('fear'),
+        curse: await makeNumber('curse'),
     }
     return result;
 }
