@@ -450,12 +450,10 @@
             "type": "disposable",
             "code": "poison-01",
             "description": "Regular Poison",
-            "modification": [
+            "damage": [
                 {
                     "duration": 3,
-                    "damage": {
-                        "poison": 3
-                    }
+                    "poison": 3
                 }
             ],
             "price": {
