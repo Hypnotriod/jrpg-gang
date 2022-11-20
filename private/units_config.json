@@ -56,9 +56,7 @@
             "hand": 2,
             "leg": 2,
             "weapon": 2
-        },
-        "damage": [],
-        "modification": []
+        }
     },
     {
         "name": "Tank",
@@ -117,9 +115,7 @@
             "hand": 2,
             "leg": 2,
             "weapon": 2
-        },
-        "damage": [],
-        "modification": []
+        }
     },
     {
         "name": "Spearsman",
@@ -178,9 +174,7 @@
             "hand": 2,
             "leg": 2,
             "weapon": 2
-        },
-        "damage": [],
-        "modification": []
+        }
     },
     {
         "name": "Rogue",
@@ -247,9 +241,7 @@
             "hand": 2,
             "leg": 2,
             "weapon": 2
-        },
-        "damage": [],
-        "modification": []
+        }
     },
     {
         "name": "Mage",
@@ -322,9 +314,7 @@
             "hand": 2,
             "leg": 2,
             "weapon": 2
-        },
-        "damage": [],
-        "modification": []
+        }
     },
     {
         "name": "North Troll",
