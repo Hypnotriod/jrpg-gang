@@ -10,7 +10,6 @@ type GameEngine struct {
 	state    *GameState
 	actors   []*GameUnit
 	scenario *GameScenario
-	hostId   UserId
 }
 
 func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
@@ -20,9 +19,9 @@ func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
 	e.scenario = scenario
 	e.actors = actors
 	e.scenario.Initialize(e.rndGen, actors)
+	e.resetActorsReady()
 	e.prepareActors(actors)
 	e.prepareNextSpot(actors)
-	e.updateHostId()
 	return e
 }
 
@@ -30,6 +29,35 @@ func (e *GameEngine) prepareActors(actors []*GameUnit) {
 	for _, actor := range actors {
 		actor.Booty = domain.UnitBooty{}
 	}
+}
+
+func (e *GameEngine) resetActorsReady() {
+	for _, actor := range e.actors {
+		actor.PlayerInfo.IsReady = false
+	}
+}
+
+func (e *GameEngine) UpdateActorReady(userId UserId, value bool) bool {
+	unit := util.Findp(e.actors, func(actor *GameUnit) bool {
+		return actor.PlayerInfo.Id == userId
+	})
+	if unit != nil {
+		unit.PlayerInfo.IsReady = value
+		return true
+	}
+	return false
+}
+
+func (e *GameEngine) AllActorsReady() bool {
+	return util.Every(e.actors, func(actor *GameUnit) bool {
+		return actor.PlayerInfo.IsReady
+	})
+}
+
+func (e *GameEngine) AllActorsDead() bool {
+	return util.Every(e.actors, func(actor *GameUnit) bool {
+		return actor.IsDead
+	})
 }
 
 func (e *GameEngine) Dispose() {
@@ -42,10 +70,6 @@ func (e *GameEngine) Dispose() {
 
 func (e *GameEngine) GetPhase() GamePhase {
 	return e.state.phase
-}
-
-func (e *GameEngine) GetHostId() UserId {
-	return e.hostId
 }
 
 func (e *GameEngine) GetPlayersInfo() []PlayerInfo {
@@ -88,8 +112,8 @@ func (e *GameEngine) RemoveActor(userId UserId) bool {
 	if e.state.IsCurrentActiveUnit(actor) && e.isActionPhase() {
 		e.onUnitCompleteAction()
 	}
+	actor.PlayerInfo.IsReady = false
 	e.battlefield().MoveToCorpses(actor.Uid)
-	e.updateHostId()
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	restActors := []*GameUnit{}
 	for i := 0; i < len(e.actors); i++ {
@@ -116,30 +140,6 @@ func (e *GameEngine) UpdateUserConnectionStatus(userId UserId, isOffline bool) b
 	}
 	actor.PlayerInfo.IsOffline = isOffline
 	return true
-}
-
-func (e *GameEngine) updateHostId() {
-	for _, u := range e.actors {
-		if u.PlayerInfo.IsHost {
-			if u.IsDead {
-				u.PlayerInfo.IsHost = false
-				e.reassignHostId()
-			} else {
-				e.hostId = u.PlayerInfo.Id
-			}
-			return
-		}
-	}
-}
-
-func (e *GameEngine) reassignHostId() {
-	for _, u := range e.actors {
-		if !u.IsDead {
-			u.PlayerInfo.IsHost = true
-			e.hostId = u.PlayerInfo.Id
-			return
-		}
-	}
 }
 
 func (e *GameEngine) battlefield() *Battlefield {

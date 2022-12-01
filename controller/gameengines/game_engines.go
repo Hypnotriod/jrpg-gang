@@ -64,6 +64,30 @@ func (e *GameEngines) ExecuteUserAction(action domain.Action, userId engine.User
 	return result, broadcastUserIds, true
 }
 
+func (e *GameEngines) ReadyForNextPhase(userId engine.UserId, isReady bool) (*engine.GameEvent, []engine.UserId, bool) {
+	e.mu.RLock()
+	wrapper, ok := e.userIdToEngine[userId]
+	e.mu.RUnlock()
+	if !ok {
+		return nil, nil, false
+	}
+	defer wrapper.Unlock()
+	wrapper.Lock()
+	if !wrapper.engine.NextPhaseRequired() || wrapper.engine.AllActorsDead() {
+		return nil, nil, false
+	}
+	wrapper.engine.UpdateActorReady(userId, isReady)
+	if wrapper.engine.AllActorsReady() {
+		result := wrapper.engine.NextPhase()
+		broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
+		return result, broadcastUserIds, true
+	} else {
+		result := wrapper.engine.NewGameEventWithPlayersInfo()
+		broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
+		return result, broadcastUserIds, true
+	}
+}
+
 func (e *GameEngines) NextPhase(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
 	e.mu.RLock()
 	wrapper, ok := e.userIdToEngine[userId]
@@ -73,7 +97,7 @@ func (e *GameEngines) NextPhase(userId engine.UserId) (*engine.GameEvent, []engi
 	}
 	defer wrapper.Unlock()
 	wrapper.Lock()
-	if wrapper.engine.GetHostId() != userId || !wrapper.engine.NextPhaseRequired() {
+	if !wrapper.engine.NextPhaseRequired() {
 		return nil, nil, false
 	}
 	result := wrapper.engine.NextPhase()
@@ -90,7 +114,7 @@ func (e *GameEngines) GameState(userId engine.UserId) (*engine.GameEvent, []engi
 	}
 	defer wrapper.RUnlock()
 	wrapper.RLock()
-	result := wrapper.engine.NewGameEventWithPlayerInfo()
+	result := wrapper.engine.NewGameEventWithPlayersInfo()
 	broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
 	return result, broadcastUserIds, true
 }
@@ -132,7 +156,7 @@ func (e *GameEngines) LeaveGame(userId engine.UserId) (*engine.GameEvent, []engi
 	}
 	wrapper.engine.RemoveActor(userId)
 	userIds := wrapper.engine.GetUserIds()
-	state := wrapper.engine.NewGameEventWithPlayerInfo()
+	state := wrapper.engine.NewGameEventWithPlayersInfo()
 	if len(userIds) == 0 {
 		wrapper.engine.Dispose()
 	}
@@ -156,7 +180,7 @@ func (e *GameEngines) RemoveUser(userId engine.UserId) (*engine.GameEvent, []eng
 		wrapper.engine.Dispose()
 		return nil, nil, false
 	}
-	state := wrapper.engine.NewGameEventWithPlayerInfo()
+	state := wrapper.engine.NewGameEventWithPlayersInfo()
 	return state, userIds, true
 }
 
@@ -171,6 +195,6 @@ func (e *GameEngines) ConnectionStatusChanged(userId engine.UserId, isOffline bo
 	wrapper.Lock()
 	wrapper.engine.UpdateUserConnectionStatus(userId, isOffline)
 	broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
-	state := wrapper.engine.NewGameEventWithPlayerInfo()
+	state := wrapper.engine.NewGameEventWithPlayersInfo()
 	return state, broadcastUserIds, true
 }

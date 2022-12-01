@@ -19,6 +19,7 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	case GamePhaseBattleComplete:
 		e.processBattleComplete(result)
 	}
+	e.resetActorsReady()
 	result.PlayersInfo = e.GetPlayersInfo()
 	result.NextPhase = e.state.phase
 	return result
@@ -91,7 +92,6 @@ func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
 		unit.ReduceModificationOnNextTurn()
 	}
 	corpses := e.battlefield().FilterSurvivors()
-	e.updateHostId()
 	e.applyExperience(corpses)
 	event.EndRoundResult = result
 	isLastRound = e.battlefield().FactionsCount() <= 1
@@ -118,7 +118,6 @@ func (e *GameEngine) onUnitUseAction(targetUid uint, actionResult *domain.Action
 
 func (e *GameEngine) onUnitCompleteAction() {
 	corpses := e.battlefield().FilterSurvivors()
-	e.updateHostId()
 	e.applyExperience(corpses)
 	e.battlefield().UpdateCellsFactions()
 	e.state.ShiftUnitsQueue()

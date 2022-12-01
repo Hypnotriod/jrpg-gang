@@ -7,7 +7,7 @@ type PlayerInfo struct {
 	Level     uint          `json:"level"`
 	UnitUid   uint          `json:"unitUid,omitempty"`
 	IsOffline bool          `json:"isOffline,omitempty"`
-	IsHost    bool          `json:"isHost,omitempty"`
+	IsReady   bool          `json:"isReady,omitempty"`
 }
 
 func (p PlayerInfo) Clone() *PlayerInfo {

@@ -44,7 +44,6 @@ func (r *GameRoom) GetActors() []*engine.GameUnit {
 	result := []*engine.GameUnit{}
 	hostUnit := r.host.Unit.Clone()
 	hostUnit.PlayerInfo = r.host.PlayerInfo.Clone()
-	hostUnit.PlayerInfo.IsHost = true
 	result = append(result, hostUnit)
 	for i := range r.joinedUsers {
 		u := r.joinedUsers[i]

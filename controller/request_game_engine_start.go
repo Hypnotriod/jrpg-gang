@@ -16,7 +16,7 @@ func (c *GameController) handleStartGameRequest(userId engine.UserId, request *R
 	}
 	actors := room.GetActors()
 	engine := engine.NewGameEngine(scenario, actors)
-	state := engine.NewGameEventWithPlayerInfo()
+	state := engine.NewGameEventWithPlayersInfo()
 	userIds := engine.GetUserIds()
 	for _, userId := range userIds {
 		c.users.ChangeUserStatus(userId, users.UserStatusInGame)

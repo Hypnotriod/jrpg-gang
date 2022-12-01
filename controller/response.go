@@ -26,6 +26,7 @@ const (
 	DataKeyGameState    ResponseDataKey = "gameState"
 	DataKeyUserId       ResponseDataKey = "userId"
 	DataKeyPlayerInfo   ResponseDataKey = "playerInfo"
+	DataKeyPlayersInfo  ResponseDataKey = "playersInfo"
 	DataKeyStatus       ResponseDataKey = "status"
 	DataKeyUnit         ResponseDataKey = "unit"
 	DataKeyRoom         ResponseDataKey = "room"
