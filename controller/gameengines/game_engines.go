@@ -102,7 +102,7 @@ func (e *GameEngines) NextPhase(userId engine.UserId) (*engine.GameEvent, []engi
 		wrapper.Unlock()
 	}
 	wrapper.Lock()
-	if !wrapper.engine.NextPhaseRequired() {
+	if !wrapper.engine.NextPhaseRequired() || wrapper.engine.AllActorsDead() {
 		return nil, nil, unlock, false
 	}
 	result := wrapper.engine.NextPhase()
