@@ -16,13 +16,6 @@ func (c *GameController) broadcastGameAction(userIds []engine.UserId, result *en
 	c.broadcaster.BroadcastGameMessageSync(userIds, response.WithStatus(ResponseStatusOk))
 }
 
-func (c *GameController) broadcastGameState(userIds []engine.UserId, state *engine.GameEvent) {
-	response := NewResponse()
-	response.Type = RequestGameState
-	response.Data[DataKeyGameState] = state
-	c.broadcaster.BroadcastGameMessageSync(userIds, response.WithStatus(ResponseStatusOk))
-}
-
 func (c *GameController) broadcastUsersStatus(userIds []engine.UserId) {
 	for _, userId := range userIds {
 		user, ok := c.users.Get(userId)

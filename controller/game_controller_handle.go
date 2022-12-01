@@ -12,7 +12,7 @@ func (c *GameController) ConnectionStatusChanged(userId engine.UserId, isOffline
 	}
 	state, broadcastUserIds, unlock, ok := c.engines.ConnectionStatusChanged(userId, isOffline)
 	if ok {
-		c.broadcastGameState(broadcastUserIds, state)
+		c.broadcastGameAction(broadcastUserIds, state)
 	}
 	if unlock != nil {
 		unlock()
@@ -28,7 +28,7 @@ func (c *GameController) Leave(userId engine.UserId) {
 	}
 	state, broadcastUserIds, unlock, ok := c.engines.RemoveUser(userId)
 	if ok {
-		c.broadcastGameState(broadcastUserIds, state)
+		c.broadcastGameAction(broadcastUserIds, state)
 	}
 	if unlock != nil {
 		unlock()

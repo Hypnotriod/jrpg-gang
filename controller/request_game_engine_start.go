@@ -21,7 +21,7 @@ func (c *GameController) handleStartGameRequest(userId engine.UserId, request *R
 	for _, userId := range userIds {
 		c.users.ChangeUserStatus(userId, users.UserStatusInGame)
 	}
-	c.broadcastGameState(userIds, state)
+	c.broadcastGameAction(userIds, state)
 	c.broadcastRoomStatus(room.Uid)
 	c.broadcastUsersStatus(userIds)
 	c.engines.Add(engine)
