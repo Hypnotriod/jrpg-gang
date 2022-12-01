@@ -13,7 +13,10 @@ func (c *GameController) handleGameNextPhaseRequest(userId engine.UserId, reques
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)
 	}
-	result, broadcastUserIds, ok := c.engines.ReadyForNextPhase(userId, data.IsReady)
+	result, broadcastUserIds, unlock, ok := c.engines.ReadyForNextPhase(userId, data.IsReady)
+	if unlock != nil {
+		defer unlock()
+	}
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}

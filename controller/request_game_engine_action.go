@@ -14,7 +14,10 @@ func (c *GameController) handleGameActionRequest(userId engine.UserId, request *
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)
 	}
-	result, broadcastUserIds, ok := c.engines.ExecuteUserAction(data.Action, userId)
+	result, broadcastUserIds, unlock, ok := c.engines.ExecuteUserAction(data.Action, userId)
+	if unlock != nil {
+		defer unlock()
+	}
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}

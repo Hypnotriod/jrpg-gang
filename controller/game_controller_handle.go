@@ -10,8 +10,12 @@ func (c *GameController) ConnectionStatusChanged(userId engine.UserId, isOffline
 	if roomUid, ok := c.rooms.ConnectionStatusChanged(userId, isOffline); ok {
 		c.broadcastRoomStatus(roomUid)
 	}
-	if state, broadcastUserIds, ok := c.engines.ConnectionStatusChanged(userId, isOffline); ok {
+	state, broadcastUserIds, unlock, ok := c.engines.ConnectionStatusChanged(userId, isOffline)
+	if ok {
 		c.broadcastGameState(broadcastUserIds, state)
+	}
+	if unlock != nil {
+		unlock()
 	}
 }
 
@@ -22,8 +26,12 @@ func (c *GameController) Leave(userId engine.UserId) {
 	} else if roomUid, ok := c.rooms.RemoveUser(userId); ok {
 		c.broadcastRoomStatus(roomUid)
 	}
-	if state, broadcastUserIds, ok := c.engines.RemoveUser(userId); ok {
+	state, broadcastUserIds, unlock, ok := c.engines.RemoveUser(userId)
+	if ok {
 		c.broadcastGameState(broadcastUserIds, state)
+	}
+	if unlock != nil {
+		unlock()
 	}
 }
 
