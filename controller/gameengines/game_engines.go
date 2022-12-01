@@ -81,11 +81,10 @@ func (e *GameEngines) ReadyForNextPhase(userId engine.UserId, isReady bool) (*en
 		result := wrapper.engine.NextPhase()
 		broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
 		return result, broadcastUserIds, true
-	} else {
-		result := wrapper.engine.NewGameEventWithPlayersInfo()
-		broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
-		return result, broadcastUserIds, true
 	}
+	result := wrapper.engine.NewGameEventWithPlayersInfo()
+	broadcastUserIds := wrapper.engine.GetRestUserIds(userId)
+	return result, broadcastUserIds, true
 }
 
 func (e *GameEngines) NextPhase(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
