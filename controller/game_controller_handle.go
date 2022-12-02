@@ -10,12 +10,13 @@ func (c *GameController) ConnectionStatusChanged(userId engine.UserId, isOffline
 	if roomUid, ok := c.rooms.ConnectionStatusChanged(userId, isOffline); ok {
 		c.broadcastRoomStatus(roomUid)
 	}
-	state, broadcastUserIds, unlock, ok := c.engines.ConnectionStatusChanged(userId, isOffline)
-	if ok {
-		c.broadcastGameAction(broadcastUserIds, state)
-	}
-	if unlock != nil {
-		unlock()
+	if wrapper, ok := c.engines.Find(userId); ok {
+		defer wrapper.Unlock()
+		wrapper.Lock()
+		state, broadcastUserIds, ok := wrapper.ConnectionStatusChanged(userId, isOffline)
+		if ok {
+			c.broadcastGameAction(broadcastUserIds, state)
+		}
 	}
 }
 
@@ -26,12 +27,13 @@ func (c *GameController) Leave(userId engine.UserId) {
 	} else if roomUid, ok := c.rooms.RemoveUser(userId); ok {
 		c.broadcastRoomStatus(roomUid)
 	}
-	state, broadcastUserIds, unlock, ok := c.engines.RemoveUser(userId)
-	if ok {
-		c.broadcastGameAction(broadcastUserIds, state)
-	}
-	if unlock != nil {
-		unlock()
+	if wrapper, ok := c.engines.Unregister(userId); ok {
+		defer wrapper.Unlock()
+		wrapper.Lock()
+		state, broadcastUserIds, ok := wrapper.RemoveUser(userId)
+		if ok {
+			c.broadcastGameAction(broadcastUserIds, state)
+		}
 	}
 }
 

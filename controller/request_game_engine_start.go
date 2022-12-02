@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/controller/gameengines"
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 )
@@ -24,6 +25,6 @@ func (c *GameController) handleStartGameRequest(userId engine.UserId, request *R
 	c.broadcastGameAction(userIds, state)
 	c.broadcastRoomStatus(room.Uid)
 	c.broadcastUsersStatus(userIds)
-	c.engines.Add(engine)
+	c.engines.Register(gameengines.NewGameEngineWrapper(engine))
 	return response.WithStatus(ResponseStatusOk)
 }

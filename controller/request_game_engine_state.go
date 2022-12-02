@@ -3,10 +3,13 @@ package controller
 import "jrpg-gang/engine"
 
 func (c *GameController) handleGameStateRequest(userId engine.UserId, request *Request, response *Response) string {
-	result, _, unlock, ok := c.engines.GameState(userId)
-	if unlock != nil {
-		defer unlock()
+	wrapper, ok := c.engines.Find(userId)
+	if !ok {
+		return response.WithStatus(ResponseStatusNotFound)
 	}
+	defer wrapper.RUnlock()
+	wrapper.RLock()
+	result, _, ok := wrapper.ReadGameState(userId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
