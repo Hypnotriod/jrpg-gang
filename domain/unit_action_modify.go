@@ -7,6 +7,7 @@ func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]Un
 		if ench.Chance != 0 && !u.CheckRandomChance(u.CalculateModificationChance(ench)) {
 			break
 		}
+		ench.Chance = 0
 		if ench.Duration != 0 {
 			target.Modification = append(target.Modification, ench)
 			temporalModification = append(temporalModification, ench)
