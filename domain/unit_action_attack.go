@@ -17,9 +17,9 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 			imp.Damage.Multiply(CRITICAL_DAMAGE_FACTOR)
 			imp.Damage.IsCritical = true
 		}
+		imp.Chance = 0
 		if imp.Duration != 0 {
 			tmpImp := target.accumulateDamageImpact(imp)
-			tmpImp.Chance = 0
 			temporalDamage = append(temporalDamage, tmpImp)
 		} else {
 			instDmg := target.applyDamage(imp.Damage)
