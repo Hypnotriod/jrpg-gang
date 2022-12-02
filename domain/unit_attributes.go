@@ -7,9 +7,9 @@ import (
 type UnitAttributes struct {
 	Strength     float32 `json:"strength"`     // enhances (stabbing, cutting, crushing, exhaustion, bleeding) damage
 	Physique     float32 `json:"physique"`     // affects stun chance
-	Agility      float32 `json:"agility"`      // affects attack chance
+	Agility      float32 `json:"agility"`      // affects attack chance, dodge chance
 	Endurance    float32 `json:"endurance"`    // stamina recovery
-	Intelligence float32 `json:"intelligence"` // enhances (fire, cold, lighting, manaDrain, fear, curse) damage
+	Intelligence float32 `json:"intelligence"` // enhances (fire, cold, lighting, manaDrain, fear, curse) damage, adds 1% to all modification points
 	Initiative   float32 `json:"initiative"`   // affects turn order
 	Luck         float32 `json:"luck"`         // affects critical chance
 }
@@ -32,6 +32,16 @@ func (a *UnitAttributes) Normalize() {
 	a.Intelligence = util.Max(a.Intelligence, 0)
 	a.Initiative = util.Max(a.Initiative, 0)
 	a.Luck = util.Max(a.Luck, 0)
+}
+
+func (a *UnitAttributes) Multiply(factor float32) {
+	a.Strength = util.MultiplyWithRounding(a.Strength, factor)
+	a.Physique = util.MultiplyWithRounding(a.Physique, factor)
+	a.Agility = util.MultiplyWithRounding(a.Agility, factor)
+	a.Endurance = util.MultiplyWithRounding(a.Endurance, factor)
+	a.Intelligence = util.MultiplyWithRounding(a.Intelligence, factor)
+	a.Initiative = util.MultiplyWithRounding(a.Initiative, factor)
+	a.Luck = util.MultiplyWithRounding(a.Luck, factor)
 }
 
 func (a *UnitAttributes) CheckRequirements(requirements UnitAttributes) bool {

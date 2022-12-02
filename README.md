@@ -9,9 +9,9 @@ Golang project of turn based multiplayer RPG game server
 ## Attributes:
 * `strength`     - enhances **stabbing**, **cutting**, **crushing**, **exhaustion** and **bleeding** damage
 * `physique`     - affects **stun chance**
-* `agility`      - affects **attack chance**
+* `agility`      - affects **attack chance**, **dodge chance**
 * `endurance`    - **stamina** recovery
-* `intelligence` - enhances **fire**, **cold**, **lighting**, **manaDrain**, **fear** and **curse** damage
+* `intelligence` - enhances **fire**, **cold**, **lighting**, **manaDrain**, **fear** and **curse** damage, adds 1% to all **modification** points
 * `initiative`   - affects **turn order**
 * `luck`         - affects **critical chance**
 

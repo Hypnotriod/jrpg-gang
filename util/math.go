@@ -7,11 +7,8 @@ func AccumulateIfNotZeros[T Number](a, b T) T {
 	return a
 }
 
-func MultiplyIfNotZeros[T Number](a, b T) T {
-	if a != 0 && b != 0 {
-		return a * b
-	}
-	return a
+func MultiplyWithRounding[T Float](a, b T) T {
+	return T(uint64((a * b) + 0.5))
 }
 
 func Max[T Number](a, b T) T {

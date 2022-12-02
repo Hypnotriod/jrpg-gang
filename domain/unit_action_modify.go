@@ -3,10 +3,12 @@ package domain
 func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]UnitRecovery, []UnitModificationImpact) {
 	instantRecovery := []UnitRecovery{}
 	temporalModification := []UnitModificationImpact{}
+	intelligence := u.TotalIntelligence()
 	for _, ench := range modification {
 		if ench.Chance != 0 && !u.CheckRandomChance(u.CalculateModificationChance(ench)) {
 			break
 		}
+		ench.Multiply(1 + intelligence*INTELLIGENCE_MODIFICATION_FACTOR)
 		ench.Chance = 0
 		if ench.Duration != 0 {
 			target.Modification = append(target.Modification, ench)

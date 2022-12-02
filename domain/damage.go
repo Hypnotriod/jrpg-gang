@@ -102,18 +102,18 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 }
 
 func (d *Damage) Multiply(factor float32) {
-	d.Stabbing = util.MultiplyIfNotZeros(d.Stabbing, factor)
-	d.Cutting = util.MultiplyIfNotZeros(d.Cutting, factor)
-	d.Crushing = util.MultiplyIfNotZeros(d.Crushing, factor)
-	d.Fire = util.MultiplyIfNotZeros(d.Fire, factor)
-	d.Cold = util.MultiplyIfNotZeros(d.Cold, factor)
-	d.Lighting = util.MultiplyIfNotZeros(d.Lighting, factor)
-	d.Poison = util.MultiplyIfNotZeros(d.Poison, factor)
-	d.Exhaustion = util.MultiplyIfNotZeros(d.Exhaustion, factor)
-	d.ManaDrain = util.MultiplyIfNotZeros(d.ManaDrain, factor)
-	d.Bleeding = util.MultiplyIfNotZeros(d.Bleeding, factor)
-	d.Morale = util.MultiplyIfNotZeros(d.Morale, factor)
-	d.Fortune = util.MultiplyIfNotZeros(d.Fortune, factor)
+	d.Stabbing = util.MultiplyWithRounding(d.Stabbing, factor)
+	d.Cutting = util.MultiplyWithRounding(d.Cutting, factor)
+	d.Crushing = util.MultiplyWithRounding(d.Crushing, factor)
+	d.Fire = util.MultiplyWithRounding(d.Fire, factor)
+	d.Cold = util.MultiplyWithRounding(d.Cold, factor)
+	d.Lighting = util.MultiplyWithRounding(d.Lighting, factor)
+	d.Poison = util.MultiplyWithRounding(d.Poison, factor)
+	d.Exhaustion = util.MultiplyWithRounding(d.Exhaustion, factor)
+	d.ManaDrain = util.MultiplyWithRounding(d.ManaDrain, factor)
+	d.Bleeding = util.MultiplyWithRounding(d.Bleeding, factor)
+	d.Morale = util.MultiplyWithRounding(d.Morale, factor)
+	d.Fortune = util.MultiplyWithRounding(d.Fortune, factor)
 }
 
 func (d *Damage) Normalize() {

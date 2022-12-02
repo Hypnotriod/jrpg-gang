@@ -15,3 +15,11 @@ func (m *UnitModification) Accumulate(modification UnitModification) {
 	m.Damage.Accumulate(modification.Damage)
 	m.Recovery.Accumulate(modification.Recovery)
 }
+
+func (m *UnitModification) Multiply(factor float32) {
+	m.BaseAttributes.Multiply(factor)
+	m.Attributes.Multiply(factor)
+	m.Resistance.Multiply(factor)
+	m.Damage.Multiply(factor)
+	m.Recovery.Multiply(factor)
+}
