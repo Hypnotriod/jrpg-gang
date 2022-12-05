@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"jrpg-gang/domain"
 	"jrpg-gang/util"
 )
 
@@ -74,13 +73,6 @@ func (s *GameScenario) prepareUnit(unit *GameUnit) {
 	if unit.State.IsEmpty() {
 		unit.State.UnitBaseAttributes = unit.Stats.BaseAttributes
 	}
-	if unit.Damage == nil {
-		unit.Damage = []domain.DamageImpact{}
-	}
-	if unit.Modification == nil {
-		unit.Modification = []domain.UnitModificationImpact{}
-	}
-	unit.Inventory.Prepare()
 	unit.Inventory.PopulateUids(s.rndGen)
 }
 

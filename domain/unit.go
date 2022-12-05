@@ -20,8 +20,8 @@ type Unit struct {
 	Booty        UnitBooty                `json:"booty"`
 	State        UnitState                `json:"state"`
 	Stats        UnitStats                `json:"stats"`
-	Damage       []DamageImpact           `json:"damage"`
-	Modification []UnitModificationImpact `json:"modification"`
+	Damage       []DamageImpact           `json:"damage,omitempty"`
+	Modification []UnitModificationImpact `json:"modification,omitempty"`
 	Inventory    UnitInventory            `json:"inventory"`
 	Slots        UnitSlots                `json:"slots"`
 	Position     Position                 `json:"position"`

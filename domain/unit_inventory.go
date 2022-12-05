@@ -395,24 +395,6 @@ func (i *UnitInventory) GetItemType(uid uint) ItemType {
 	return ItemTypeNone
 }
 
-func (i *UnitInventory) Prepare() {
-	if i.Ammunition == nil {
-		i.Ammunition = []Ammunition{}
-	}
-	if i.Armor == nil {
-		i.Armor = []Armor{}
-	}
-	if i.Disposable == nil {
-		i.Disposable = []Disposable{}
-	}
-	if i.Magic == nil {
-		i.Magic = []Magic{}
-	}
-	if i.Weapon == nil {
-		i.Weapon = []Weapon{}
-	}
-}
-
 func (i *UnitInventory) PopulateUids(rndGen *util.RndGen) {
 	for j := range i.Ammunition {
 		i.Ammunition[j].Uid = rndGen.NextUid()
