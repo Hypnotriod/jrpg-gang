@@ -24,6 +24,7 @@ func (e *GameEngines) Register(wrapper *GameEngineWrapper) {
 	for _, userId := range wrapper.engine.GetUserIds() {
 		e.userIdToEngine[userId] = wrapper
 	}
+	wrapper.setNextPhaseTimer()
 	e.mu.Unlock()
 }
 

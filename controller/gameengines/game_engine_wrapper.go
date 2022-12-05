@@ -4,17 +4,30 @@ import (
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"sync"
+	"time"
 )
 
 type GameEngineWrapper struct {
 	sync.RWMutex
-	engine *engine.GameEngine
+	nextPhaseTimer      *time.Timer
+	nextPhaseTimerId    int
+	broadcastGameAction func(userIds []engine.UserId, result *engine.GameEvent)
+	engine              *engine.GameEngine
 }
 
-func NewGameEngineWrapper(engine *engine.GameEngine) *GameEngineWrapper {
+func NewGameEngineWrapper(
+	engine *engine.GameEngine,
+	broadcastGameAction func(userIds []engine.UserId, result *engine.GameEvent)) *GameEngineWrapper {
 	w := &GameEngineWrapper{}
 	w.engine = engine
+	w.broadcastGameAction = broadcastGameAction
 	return w
+}
+
+func (w *GameEngineWrapper) Dispose() {
+	w.engine.Dispose()
+	w.stopNextPhaseTimer()
+	w.broadcastGameAction = nil
 }
 
 func (w *GameEngineWrapper) ReadGameState(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
@@ -36,6 +49,9 @@ func (w *GameEngineWrapper) ExecuteUserAction(action domain.Action, userId engin
 	broadcastUserIds := []engine.UserId{}
 	if event.UnitActionResult.Result.Result == domain.ResultAccomplished {
 		broadcastUserIds = w.engine.GetRestUserIds(userId)
+		if event.Phase != event.NextPhase {
+			w.setNextPhaseTimer()
+		}
 	}
 	return event, broadcastUserIds, true
 }
@@ -46,6 +62,7 @@ func (w *GameEngineWrapper) ReadyForNextPhase(userId engine.UserId, isReady bool
 	}
 	w.engine.UpdateActorReady(userId, isReady)
 	if w.engine.AllActorsReady() {
+		w.setNextPhaseTimer()
 		event := w.engine.NextPhase()
 		broadcastUserIds := w.engine.GetRestUserIds(userId)
 		return event, broadcastUserIds, true
@@ -55,12 +72,13 @@ func (w *GameEngineWrapper) ReadyForNextPhase(userId engine.UserId, isReady bool
 	return event, broadcastUserIds, true
 }
 
-func (w *GameEngineWrapper) NextPhase(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
-	if !w.engine.NextPhaseRequired() || w.engine.AllActorsDead() {
+func (w *GameEngineWrapper) NextPhase() (*engine.GameEvent, []engine.UserId, bool) {
+	if w.engine.AllActorsDead() {
 		return nil, nil, false
 	}
+	w.setNextPhaseTimer()
 	event := w.engine.NextPhase()
-	broadcastUserIds := w.engine.GetRestUserIds(userId)
+	broadcastUserIds := w.engine.GetUserIds()
 	return event, broadcastUserIds, true
 }
 
@@ -82,6 +100,7 @@ func (w *GameEngineWrapper) LeaveGame(userId engine.UserId) (*engine.GameEvent, 
 	}
 	w.engine.RemoveActor(userId)
 	if w.engine.NextPhaseRequired() && w.engine.AllActorsReady() && !w.engine.AllActorsDead() {
+		w.setNextPhaseTimer()
 		event := w.engine.NextPhase()
 		broadcastUserIds := w.engine.GetRestUserIds(userId)
 		return event, broadcastUserIds, unit, true
@@ -89,7 +108,7 @@ func (w *GameEngineWrapper) LeaveGame(userId engine.UserId) (*engine.GameEvent, 
 	userIds := w.engine.GetUserIds()
 	event := w.engine.NewGameEventWithPlayersInfo()
 	if len(userIds) == 0 {
-		w.engine.Dispose()
+		w.Dispose()
 	}
 	return event, userIds, unit, true
 }
@@ -98,10 +117,11 @@ func (w *GameEngineWrapper) RemoveUser(userId engine.UserId) (*engine.GameEvent,
 	w.engine.RemoveActor(userId)
 	userIds := w.engine.GetUserIds()
 	if len(userIds) == 0 {
-		w.engine.Dispose()
+		w.Dispose()
 		return nil, nil, false
 	}
 	if w.engine.NextPhaseRequired() && w.engine.AllActorsReady() && !w.engine.AllActorsDead() {
+		w.setNextPhaseTimer()
 		event := w.engine.NextPhase()
 		broadcastUserIds := w.engine.GetRestUserIds(userId)
 		return event, broadcastUserIds, true

@@ -12,6 +12,8 @@ func (e *GameEngine) NextPhase() *GameEvent {
 		e.processStartRound()
 	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
 		e.processAI(result)
+	case GamePhaseMakeMoveOrAction, GamePhaseMakeAction:
+		e.onUnitCompleteAction()
 	case GamePhaseRetreatAction:
 		e.processRetreatActionAI(result)
 	case GamePhaseActionComplete:
