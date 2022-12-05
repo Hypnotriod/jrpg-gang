@@ -34,7 +34,7 @@ func (a *UnitBaseAttributes) Normalize() {
 	a.Stamina = util.Max(a.Stamina, MINIMUM_BASE_ATTRIBUTE_STAMINA)
 }
 
-func (a *UnitBaseAttributes) Multiply(factor float32) {
+func (a *UnitBaseAttributes) MultiplyAll(factor float32) {
 	a.Health += util.MultiplyWithRounding(a.Health, factor)
 	a.Mana += util.MultiplyWithRounding(a.Mana, factor)
 	a.Stamina += util.MultiplyWithRounding(a.Stamina, factor)

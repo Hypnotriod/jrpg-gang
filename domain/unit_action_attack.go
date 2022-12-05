@@ -14,7 +14,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 		imp.Enchance(totalModification.Attributes, totalModification.Damage)
 		imp.Normalize()
 		if wasStunned || u.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
-			imp.Damage.Multiply(CRITICAL_DAMAGE_FACTOR)
+			imp.Damage.MultiplyAll(CRITICAL_DAMAGE_FACTOR)
 			imp.Damage.IsCritical = true
 		}
 		imp.Chance = 0

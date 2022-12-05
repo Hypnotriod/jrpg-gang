@@ -101,7 +101,7 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Fortune = util.AccumulateIfNotZeros(d.Fortune, damage.Fortune)
 }
 
-func (d *Damage) Multiply(factor float32) {
+func (d *Damage) MultiplyAll(factor float32) {
 	d.Stabbing = util.MultiplyWithRounding(d.Stabbing, factor)
 	d.Cutting = util.MultiplyWithRounding(d.Cutting, factor)
 	d.Crushing = util.MultiplyWithRounding(d.Crushing, factor)

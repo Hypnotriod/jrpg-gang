@@ -34,7 +34,7 @@ func (a *UnitAttributes) Normalize() {
 	a.Luck = util.Max(a.Luck, 0)
 }
 
-func (a *UnitAttributes) Multiply(factor float32) {
+func (a *UnitAttributes) MultiplyAll(factor float32) {
 	a.Strength = util.MultiplyWithRounding(a.Strength, factor)
 	a.Physique = util.MultiplyWithRounding(a.Physique, factor)
 	a.Agility = util.MultiplyWithRounding(a.Agility, factor)

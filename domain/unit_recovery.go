@@ -16,8 +16,8 @@ func (s *UnitRecovery) Normalize() {
 	s.Curse = util.Max(s.Curse, 0)
 }
 
-func (s *UnitRecovery) Multiply(factor float32) {
-	s.Damage.Multiply(factor)
+func (s *UnitRecovery) MultiplyAll(factor float32) {
+	s.Damage.MultiplyAll(factor)
 	s.Health = util.MultiplyWithRounding(s.Health, factor)
 	s.Stamina = util.MultiplyWithRounding(s.Stamina, factor)
 	s.Mana = util.MultiplyWithRounding(s.Mana, factor)
