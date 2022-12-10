@@ -6,9 +6,18 @@ import (
 
 type GameScenarioId string
 
+type GamePath struct {
+	W         int `json:"weight"`
+	SpotIndex int `json:"spotIndex"`
+}
+
+func (p GamePath) Weight() int {
+	return p.W
+}
+
 type GameScenario struct {
-	Spots     []Spot        `json:"spots"`
-	Path      []map[int]int `json:"path"`
+	Spots     []Spot       `json:"spots"`
+	Path      [][]GamePath `json:"path"`
 	rndGen    *util.RndGen
 	spot      *Spot
 	pathIndex int
@@ -56,8 +65,8 @@ func (s *GameScenario) CurrentBattlefield() *Battlefield {
 
 func (s *GameScenario) pickSpot() {
 	spots := s.Path[s.pathIndex]
-	index := s.rndGen.PickIntByWeight(spots)
-	s.spot = &s.Spots[index]
+	spot := util.RandomPick(s.rndGen, spots)
+	s.spot = &s.Spots[spot.SpotIndex]
 }
 
 func (s *GameScenario) prepareUnits() {

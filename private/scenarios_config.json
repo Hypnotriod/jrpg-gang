@@ -6,10 +6,12 @@
                 "code": "winter-cave-01",
                 "booty": [
                     {
+                        "weight": 1,
                         "coins": 1000
                     },
                     {
-                        "coins": 500
+                        "weight": 2,
+                        "coins": 750
                     }
                 ],
                 "battlefield": {
@@ -84,13 +86,16 @@
                 "code": "winter-cave-01",
                 "booty": [
                     {
+                        "weight": 2,
+                        "coins": 1500
+                    },
+                    {
+                        "weight": 1,
                         "coins": 2000
                     },
                     {
-                        "coins": 3000
-                    },
-                    {
-                        "coins": 2000,
+                        "weight": 1,
+                        "coins": 2500,
                         "ruby": 10
                     }
                 ],
@@ -174,14 +179,17 @@
                 "code": "winter-cave-01",
                 "booty": [
                     {
+                        "weight": 2,
                         "coins": 2000
                     },
                     {
-                        "coins": 3000
+                        "weight": 1,
+                        "coins": 2500
                     },
                     {
-                        "coins": 2000,
-                        "ruby": 10
+                        "weight": 1,
+                        "coins": 3500,
+                        "ruby": 15
                     }
                 ],
                 "battlefield": {
@@ -248,14 +256,17 @@
                 "code": "winter-cave-01",
                 "booty": [
                     {
+                        "weight": 2,
                         "coins": 2000
                     },
                     {
-                        "coins": 3000
+                        "weight": 1,
+                        "coins": 2500
                     },
                     {
-                        "coins": 2000,
-                        "ruby": 10
+                        "weight": 1,
+                        "coins": 3500,
+                        "ruby": 15
                     }
                 ],
                 "battlefield": {
@@ -322,10 +333,17 @@
                 "code": "winter-cave-01",
                 "booty": [
                     {
-                        "coins": 1000
+                        "weight": 2,
+                        "coins": 2000
                     },
                     {
-                        "coins": 500
+                        "weight": 1,
+                        "coins": 2500
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 3500,
+                        "ruby": 15
                     }
                 ],
                 "battlefield": {
@@ -384,14 +402,17 @@
                 "code": "winter-cave-01",
                 "booty": [
                     {
+                        "weight": 2,
                         "coins": 2000
                     },
                     {
-                        "coins": 3000
+                        "weight": 1,
+                        "coins": 2500
                     },
                     {
-                        "coins": 2000,
-                        "ruby": 10
+                        "weight": 1,
+                        "coins": 3500,
+                        "ruby": 15
                     }
                 ],
                 "battlefield": {
@@ -463,24 +484,42 @@
             }
         ],
         "path": [
-            {
-                "0": 1
-            },
-            {
-                "1": 1
-            },
-            {
-                "2": 1
-            },
-            {
-                "3": 1
-            },
-            {
-                "4": 1
-            },
-            {
-                "5": 1
-            }
+            [
+                {
+                    "weight": 1,
+                    "spotIndex": 0
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotIndex": 1
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotIndex": 2
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotIndex": 3
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotIndex": 4
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotIndex": 5
+                }
+            ]
         ]
     }
 }

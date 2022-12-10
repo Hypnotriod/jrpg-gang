@@ -8,6 +8,11 @@ import (
 type UnitBooty struct {
 	Coins int `json:"coins"`
 	Ruby  int `json:"ruby,omitempty"`
+	W     int `json:"weight,omitempty"`
+}
+
+func (b UnitBooty) Weight() int {
+	return b.W
 }
 
 func (b *UnitBooty) Accumulate(booty UnitBooty) {

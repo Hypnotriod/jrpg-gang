@@ -49,19 +49,3 @@ func (g *RndGen) PickInt(values []int) int {
 	index := g.rng.Int() % len(values)
 	return values[index]
 }
-
-func (g *RndGen) PickIntByWeight(valueWight map[int]int) int {
-	var sum int = 0
-	for _, w := range valueWight {
-		sum += w
-	}
-	limit := g.rng.Int() % sum
-	sum = 0
-	for v, w := range valueWight {
-		sum += w
-		if limit < sum {
-			return v
-		}
-	}
-	return valueWight[0]
-}

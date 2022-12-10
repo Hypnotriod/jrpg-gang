@@ -128,8 +128,8 @@ func (e *GameEngine) onUnitCompleteAction() {
 }
 
 func (e *GameEngine) accumulateBooty(event *GameEvent) {
-	index := e.rndGen.PickIndex(len(e.scenario.CurrentSpot().Booty))
-	booty := e.scenario.CurrentSpot().Booty[index]
+	booty := util.RandomPick(e.rndGen, e.scenario.CurrentSpot().Booty)
+	booty.W = 0
 	e.state.Booty.Accumulate(booty)
 	event.EndRoundResult.Booty = booty
 }
