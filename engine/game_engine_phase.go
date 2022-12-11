@@ -118,6 +118,13 @@ func (e *GameEngine) onUnitUseAction(targetUid uint, actionResult *domain.Action
 	}
 }
 
+func (e *GameEngine) clarifyUseActionTargetuid(unitUit uint, targetUid uint, actionResult *domain.ActionResult) uint {
+	if actionResult != nil && actionResult.IsCriticalMiss() {
+		return unitUit
+	}
+	return targetUid
+}
+
 func (e *GameEngine) onUnitCompleteAction() {
 	corpses := e.battlefield().FilterSurvivors()
 	e.applyExperience(corpses)

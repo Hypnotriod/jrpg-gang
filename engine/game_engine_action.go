@@ -80,6 +80,7 @@ func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *doma
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	result := unit.UseInventoryItemOnTarget(&target.Unit, action.ItemUid)
+	action.TargetUid = e.clarifyUseActionTargetuid(unit.Uid, target.Uid, result)
 	if result.Result == domain.ResultAccomplished {
 		e.onUnitUseAction(action.TargetUid, result)
 		e.onUnitCompleteAction()

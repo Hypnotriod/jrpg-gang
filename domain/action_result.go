@@ -38,6 +38,14 @@ func (r *ActionResult) WithStun() bool {
 	})
 }
 
+func (r *ActionResult) IsCriticalMiss() bool {
+	return util.Any(r.InstantDamage, func(damage Damage) bool {
+		return damage.IsCriticalMiss
+	}) || util.Any(r.TemporalDamage, func(damage DamageImpact) bool {
+		return damage.IsCriticalMiss
+	})
+}
+
 func NewActionResult() *ActionResult {
 	action := &ActionResult{}
 	return action

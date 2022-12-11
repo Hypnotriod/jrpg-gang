@@ -107,12 +107,12 @@ func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target
 	unitAction.Action = domain.Action{
 		Action:    domain.ActionUse,
 		Uid:       unit.Uid,
-		TargetUid: target.Uid,
+		TargetUid: e.clarifyUseActionTargetuid(unit.Uid, target.Uid, result),
 		ItemUid:   weaponUid,
 	}
 	unitAction.Result = *result
 	event.UnitActionResult = unitAction
-	e.onUnitUseAction(target.Uid, result)
+	e.onUnitUseAction(unitAction.Action.TargetUid, result)
 	e.onUnitCompleteAction()
 	return true
 }
