@@ -187,26 +187,26 @@ func (u *Unit) CanReach(target *Unit, actionRange ActionRange) bool {
 }
 
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
-	chance := (u.TotalLuck() - u.State.Curse) - (target.TotalLuck() - target.State.Curse)
+	chance := (u.TotalLuck() - u.State.Stress) - (target.TotalLuck() - target.State.Stress)
 	return util.Max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateAttackChance(target *Unit, damage DamageImpact) float32 {
-	chance := (u.TotalAgility() - u.State.Curse) - (target.TotalAgility() - target.State.Curse) + damage.Chance
+	chance := (u.TotalAgility() - u.State.Stress) - (target.TotalAgility() - target.State.Stress) + damage.Chance
 	return util.Max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateModificationChance(modification UnitModificationImpact) float32 {
-	chance := (u.TotalIntelligence() - u.State.Curse) + modification.Chance
+	chance := (u.TotalIntelligence() - u.State.Stress) + modification.Chance
 	return util.Max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateStunChance(target *Unit, damage Damage) float32 {
-	chance := (damage.PhysicalDamage() - target.State.Curse) - (u.TotalPhysique() - u.State.Curse)
+	chance := (damage.PhysicalDamage() - target.State.Stress) - (u.TotalPhysique() - u.State.Stress)
 	return util.Max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateRetreatChance() float32 {
-	chance := u.State.Fear
+	chance := u.State.Stress
 	return util.Max(chance, 0)
 }

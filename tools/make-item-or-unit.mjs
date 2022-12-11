@@ -354,8 +354,9 @@ async function makeDamage(header) {
         exhaustion: await makeNumber('exhaustion'),
         manaDrain: await makeNumber('manaDrain'),
         bleeding: await makeNumber('bleeding'),
-        morale: await makeNumber('morale'),
-        fortune: await makeNumber('fortune'),
+        fear: await makeNumber('fear'),
+        curse: await makeNumber('curse'),
+        madness: await makeNumber('madness'),
     }
     return result;
 }
@@ -366,8 +367,7 @@ async function makeUnitState(header) {
         health: await makeNumber('health'),
         stamina: await makeNumber('stamina'),
         mana: await makeNumber('mana'),
-        fear: await makeNumber('fear'),
-        curse: await makeNumber('curse'),
+        stress: await makeNumber('stress'),
     }
     return result;
 }

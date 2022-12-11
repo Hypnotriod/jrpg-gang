@@ -15,8 +15,9 @@ type Damage struct {
 	Exhaustion float32 `json:"exhaustion,omitempty"` // affects stamina
 	ManaDrain  float32 `json:"manaDrain,omitempty"`  // affects mana
 	Bleeding   float32 `json:"bleeding,omitempty"`   // affects health
-	Morale     float32 `json:"morale,omitempty"`     // affects fear
-	Fortune    float32 `json:"fortune,omitempty"`    // affects curse
+	Fear       float32 `json:"fear,omitempty"`       // affects stress
+	Curse      float32 `json:"curse,omitempty"`      // affects stress
+	Madness    float32 `json:"madness,omitempty"`    // affects stress
 	IsCritical bool    `json:"isCritical,omitempty"` // critical damage flag
 	WithStun   bool    `json:"withStun,omitempty"`   // stun flag
 }
@@ -32,8 +33,9 @@ func (d *Damage) Accumulate(damage Damage) {
 	d.Exhaustion += damage.Exhaustion
 	d.ManaDrain += damage.ManaDrain
 	d.Bleeding += damage.Bleeding
-	d.Morale += damage.Morale
-	d.Fortune += damage.Fortune
+	d.Fear += damage.Fear
+	d.Curse += damage.Curse
+	d.Madness += damage.Madness
 }
 
 func (d *Damage) Reduce(damage Damage) {
@@ -47,8 +49,9 @@ func (d *Damage) Reduce(damage Damage) {
 	d.Exhaustion -= damage.Exhaustion
 	d.ManaDrain -= damage.ManaDrain
 	d.Bleeding -= damage.Bleeding
-	d.Morale -= damage.Morale
-	d.Fortune -= damage.Fortune
+	d.Fear -= damage.Fear
+	d.Curse -= damage.Curse
+	d.Madness -= damage.Madness
 }
 
 func (d *Damage) PhysicalDamage() float32 {
@@ -70,8 +73,9 @@ func (d *Damage) HasEffect() bool {
 		d.Exhaustion != 0 ||
 		d.ManaDrain != 0 ||
 		d.Bleeding != 0 ||
-		d.Morale != 0 ||
-		d.Fortune != 0
+		d.Fear != 0 ||
+		d.Curse != 0 ||
+		d.Madness != 0
 }
 
 func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
@@ -84,8 +88,9 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Exhaustion = util.AccumulateIfNotZeros(d.Exhaustion, attributes.Strength)
 	d.ManaDrain = util.AccumulateIfNotZeros(d.ManaDrain, attributes.Intelligence)
 	d.Bleeding = util.AccumulateIfNotZeros(d.Bleeding, attributes.Strength)
-	d.Morale = util.AccumulateIfNotZeros(d.Morale, attributes.Intelligence)
-	d.Fortune = util.AccumulateIfNotZeros(d.Fortune, attributes.Intelligence)
+	d.Fear = util.AccumulateIfNotZeros(d.Fear, attributes.Intelligence)
+	d.Curse = util.AccumulateIfNotZeros(d.Curse, attributes.Intelligence)
+	d.Madness = util.AccumulateIfNotZeros(d.Madness, attributes.Intelligence)
 
 	d.Stabbing = util.AccumulateIfNotZeros(d.Stabbing, damage.Stabbing)
 	d.Cutting = util.AccumulateIfNotZeros(d.Cutting, damage.Cutting)
@@ -97,8 +102,9 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Exhaustion = util.AccumulateIfNotZeros(d.Exhaustion, damage.Exhaustion)
 	d.ManaDrain = util.AccumulateIfNotZeros(d.ManaDrain, damage.ManaDrain)
 	d.Bleeding = util.AccumulateIfNotZeros(d.Bleeding, damage.Bleeding)
-	d.Morale = util.AccumulateIfNotZeros(d.Morale, damage.Morale)
-	d.Fortune = util.AccumulateIfNotZeros(d.Fortune, damage.Fortune)
+	d.Fear = util.AccumulateIfNotZeros(d.Fear, damage.Fear)
+	d.Curse = util.AccumulateIfNotZeros(d.Curse, damage.Curse)
+	d.Madness = util.AccumulateIfNotZeros(d.Madness, damage.Madness)
 }
 
 func (d *Damage) MultiplyAll(factor float32) {
@@ -112,8 +118,9 @@ func (d *Damage) MultiplyAll(factor float32) {
 	d.Exhaustion = util.MultiplyWithRounding(d.Exhaustion, factor)
 	d.ManaDrain = util.MultiplyWithRounding(d.ManaDrain, factor)
 	d.Bleeding = util.MultiplyWithRounding(d.Bleeding, factor)
-	d.Morale = util.MultiplyWithRounding(d.Morale, factor)
-	d.Fortune = util.MultiplyWithRounding(d.Fortune, factor)
+	d.Fear = util.MultiplyWithRounding(d.Fear, factor)
+	d.Curse = util.MultiplyWithRounding(d.Curse, factor)
+	d.Madness = util.MultiplyWithRounding(d.Madness, factor)
 }
 
 func (d *Damage) Normalize() {
@@ -127,16 +134,16 @@ func (d *Damage) Normalize() {
 	d.Exhaustion = util.Max(d.Exhaustion, 0)
 	d.ManaDrain = util.Max(d.ManaDrain, 0)
 	d.Bleeding = util.Max(d.Bleeding, 0)
-	d.Morale = util.Max(d.Morale, 0)
-	d.Fortune = util.Max(d.Fortune, 0)
+	d.Fear = util.Max(d.Fear, 0)
+	d.Curse = util.Max(d.Curse, 0)
+	d.Madness = util.Max(d.Madness, 0)
 }
 
 func (d *Damage) Apply(state *UnitState) {
 	state.Health -= d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lighting + d.Poison + d.Bleeding
 	state.Stamina -= d.Exhaustion
 	state.Mana -= d.ManaDrain
-	state.Curse += d.Fortune
-	state.Fear += d.Morale
+	state.Stress += d.Fear + d.Curse + d.Madness
 
 	state.Health = util.Max(state.Health, 0)
 	state.Stamina = util.Max(state.Stamina, 0)
