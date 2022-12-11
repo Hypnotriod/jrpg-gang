@@ -5,6 +5,11 @@ import (
 	"jrpg-gang/util"
 )
 
+type ReachableTarget struct {
+	Target    *GameUnit
+	WeaponUid uint
+}
+
 type BattlefieldUnitDescriptor struct {
 	Code     domain.UnitCode `json:"code"`
 	Faction  GameUnitFaction `json:"faction"`
@@ -203,13 +208,16 @@ func (b *Battlefield) GetUnitsByFaction(faction GameUnitFaction) []*GameUnit {
 	})
 }
 
-func (b *Battlefield) FindReachableTargets(unit *GameUnit) map[uint]*GameUnit {
-	result := map[uint]*GameUnit{}
+func (b *Battlefield) FindReachableTargets(unit *GameUnit) []ReachableTarget {
+	result := []ReachableTarget{}
 	for i := range unit.Inventory.Weapon {
 		weapon := &unit.Inventory.Weapon[i]
 		for _, target := range b.Units {
 			if target.Faction != unit.Faction && unit.CanReach(&target.Unit, weapon.Range) {
-				result[weapon.Uid] = target
+				result = append(result, ReachableTarget{
+					Target:    target,
+					WeaponUid: weapon.Uid,
+				})
 			}
 		}
 	}

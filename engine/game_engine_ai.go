@@ -2,6 +2,7 @@ package engine
 
 import (
 	"jrpg-gang/domain"
+	"jrpg-gang/util"
 	"math/rand"
 )
 
@@ -86,8 +87,9 @@ func (e *GameEngine) aiMove(event *GameEvent, unit *GameUnit, position domain.Po
 
 func (e *GameEngine) aiTryToAttack(event *GameEvent, unit *GameUnit) bool {
 	targets := e.battlefield().FindReachableTargets(unit)
-	for weaponUid, target := range targets {
-		if e.aiAttackWithWeapon(event, unit, target, weaponUid) {
+	targets = util.Shuffle(e.rndGen, targets)
+	for _, t := range targets {
+		if e.aiAttackWithWeapon(event, unit, t.Target, t.WeaponUid) {
 			return true
 		}
 	}

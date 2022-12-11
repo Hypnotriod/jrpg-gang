@@ -18,6 +18,18 @@ func IndexOf[T Ordered](values []T, value T) int {
 	return -1
 }
 
+func Shuffle[T any](gen *RndGen, values []T) []T {
+	result := values
+	times := len(values)
+	for times > 0 {
+		n1 := gen.rng.Int() % len(values)
+		n2 := gen.rng.Int() % len(values)
+		result[n1], result[n2] = result[n2], result[n1]
+		times--
+	}
+	return result
+}
+
 func Find[T any](values []T, predicate func(value T) bool) *T {
 	for i := range values {
 		if predicate(values[i]) {
