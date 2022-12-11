@@ -51,7 +51,7 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 
 func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
 	position := domain.Position{}
-	yShift := []int{0, -1, 1}
+	yShift := []int{0, -1, 1, -2, 2}
 	for _, target := range e.battlefield().Units {
 		if target.Faction == unit.Faction {
 			continue

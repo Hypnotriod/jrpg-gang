@@ -10,7 +10,7 @@
             "requirements": {},
             "range": {
                 "maximumX": 1,
-                "maximumY": 1
+                "maximumY": 2
             },
             "damage": [
                 {
@@ -32,7 +32,7 @@
             "requirements": {},
             "range": {
                 "maximumX": 1,
-                "maximumY": 1
+                "maximumY": 2
             },
             "damage": [
                 {
@@ -59,8 +59,8 @@
             "slotsNumber": 1,
             "requirements": {},
             "range": {
-                "maximumX": 10,
-                "maximumY": 10,
+                "maximumX": 5,
+                "maximumY": 5,
                 "minimumX": 2
             },
             "damage": [],
@@ -81,7 +81,7 @@
             },
             "range": {
                 "maximumX": 1,
-                "maximumY": 1
+                "maximumY": 2
             },
             "damage": [
                 {
@@ -155,8 +155,8 @@
                 "physique": 10
             },
             "range": {
-                "maximumX": 10,
-                "maximumY": 10,
+                "maximumX": 5,
+                "maximumY": 5,
                 "minimumX": 2
             },
             "damage": [],
@@ -180,7 +180,7 @@
             },
             "range": {
                 "maximumX": 1,
-                "maximumY": 1
+                "maximumY": 2
             },
             "damage": [
                 {
@@ -214,8 +214,8 @@
             },
             "damage": [],
             "range": {
-                "maximumX": 10,
-                "maximumY": 10
+                "maximumX": 5,
+                "maximumY": 5
             },
             "useCost": {
                 "mana": 15,
@@ -239,7 +239,7 @@
             },
             "range": {
                 "maximumX": 1,
-                "maximumY": 1
+                "maximumY": 2
             },
             "useCost": {
                 "stamina": 25
@@ -270,7 +270,7 @@
             },
             "range": {
                 "maximumX": 1,
-                "maximumY": 1
+                "maximumY": 2
             },
             "useCost": {
                 "stamina": 25
@@ -301,7 +301,7 @@
             },
             "range": {
                 "maximumX": 1,
-                "maximumY": 1
+                "maximumY": 2
             },
             "useCost": {
                 "stamina": 25
@@ -333,7 +333,7 @@
             },
             "range": {
                 "maximumX": 1,
-                "maximumY": 1
+                "maximumY": 2
             },
             "useCost": {
                 "stamina": 25
