@@ -1,15 +1,15 @@
 package engine
 
-type CellType string
+type CellType int
 
 const (
-	CellTypeSpace    = "space"
-	CellTypeObstacle = "obstacle"
+	CellTypeSpace    CellType = 0
+	CellTypeObstacle CellType = 1
 )
 
 type Cell struct {
 	Factions []GameUnitFaction `json:"factions"`
-	Type     CellType          `json:"type"`
+	Type     CellType          `json:"type,omitempty"`
 	Code     string            `json:"code,omitempty"`
 }
 
