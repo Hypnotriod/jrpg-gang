@@ -7,15 +7,22 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 	totalModification := u.TotalModification()
 	totalModification.Attributes.Accumulate(u.Stats.Attributes)
 	totalModification.Attributes.Normalize()
-	for _, imp := range damage {
+	for n, imp := range damage {
 		if !u.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
-			break
+			if n != 0 || !u.CheckRandomChance(u.CalculateCriticalMissChance()) {
+				break
+			}
+			imp.Damage.IsCriticalMiss = true
+			target = u
+			wasStunned = target.State.IsStunned
+		}
+		if n == 0 && (wasStunned || imp.Damage.IsCriticalMiss || u.CheckRandomChance(u.CalculateCritilalAttackChance(target))) {
+			imp.Damage.IsCritical = true
 		}
 		imp.Enchance(totalModification.Attributes, totalModification.Damage)
 		imp.Normalize()
-		if wasStunned || u.CheckRandomChance(u.CalculateCritilalAttackChance(target)) {
+		if imp.Damage.IsCritical {
 			imp.Damage.MultiplyAll(CRITICAL_DAMAGE_FACTOR)
-			imp.Damage.IsCritical = true
 		}
 		imp.Chance = 0
 		if imp.Duration != 0 {

@@ -210,3 +210,8 @@ func (u *Unit) CalculateRetreatChance() float32 {
 	chance := u.State.Stress
 	return util.Max(chance, 0)
 }
+
+func (u *Unit) CalculateCriticalMissChance() float32 {
+	chance := u.State.Stress
+	return util.Max(chance, 0)
+}
