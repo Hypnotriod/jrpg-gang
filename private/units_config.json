@@ -34,8 +34,9 @@
                 "exhaustion": 5,
                 "manaDrain": 5,
                 "bleeding": 5,
-                "morale": 5,
-                "fortune": 5
+                "fear": 5,
+                "curse": 5,
+                "madness": 5
             }
         },
         "inventory": {
@@ -93,8 +94,9 @@
                 "exhaustion": 5,
                 "manaDrain": 5,
                 "bleeding": 5,
-                "morale": 5,
-                "fortune": 5
+                "fear": 5,
+                "curse": 5,
+                "madness": 5
             }
         },
         "inventory": {
@@ -152,8 +154,9 @@
                 "exhaustion": 5,
                 "manaDrain": 5,
                 "bleeding": 5,
-                "morale": 5,
-                "fortune": 5
+                "fear": 5,
+                "curse": 5,
+                "madness": 5
             }
         },
         "inventory": {
@@ -211,8 +214,9 @@
                 "exhaustion": 5,
                 "manaDrain": 5,
                 "bleeding": 5,
-                "morale": 5,
-                "fortune": 5
+                "fear": 5,
+                "curse": 5,
+                "madness": 5
             }
         },
         "inventory": {
@@ -279,8 +283,9 @@
                 "exhaustion": 5,
                 "manaDrain": 5,
                 "bleeding": 5,
-                "morale": 5,
-                "fortune": 5
+                "fear": 5,
+                "curse": 5,
+                "madness": 5
             }
         },
         "inventory": {
@@ -348,8 +353,9 @@
                 "exhaustion": 10,
                 "manaDrain": 0,
                 "bleeding": 0,
-                "morale": 0,
-                "fortune": 0
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
             }
         },
         "slots": {
@@ -408,8 +414,9 @@
                 "exhaustion": 0,
                 "manaDrain": 0,
                 "bleeding": 0,
-                "morale": 0,
-                "fortune": 0
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
             }
         },
         "slots": {
@@ -468,8 +475,9 @@
                 "exhaustion": 0,
                 "manaDrain": 0,
                 "bleeding": 0,
-                "morale": 0,
-                "fortune": 0
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
             }
         },
         "slots": {
@@ -518,8 +526,9 @@
                 "exhaustion": 5,
                 "manaDrain": 5,
                 "bleeding": 5,
-                "morale": 100,
-                "fortune": 100
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
             }
         },
         "slots": {
@@ -575,8 +584,9 @@
                 "exhaustion": 0,
                 "manaDrain": 0,
                 "bleeding": 0,
-                "morale": 0,
-                "fortune": 0
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
             }
         },
         "slots": {
@@ -628,8 +638,9 @@
                 "exhaustion": 10,
                 "manaDrain": 0,
                 "bleeding": 100,
-                "morale": 100,
-                "fortune": 100
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
             }
         },
         "slots": {
@@ -684,8 +695,9 @@
                 "exhaustion": 0,
                 "manaDrain": 0,
                 "bleeding": 100,
-                "morale": 100,
-                "fortune": 0
+                "fear": 100,
+                "curse": 0,
+                "madness": 100
             }
         },
         "slots": {
