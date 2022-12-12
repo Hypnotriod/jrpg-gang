@@ -16,15 +16,15 @@ func (c *GameController) handleStartGameRequest(userId engine.UserId, request *R
 		return response.WithStatus(ResponseStatusNotFound)
 	}
 	actors := room.GetActors()
-	engine := engine.NewGameEngine(scenario, actors)
-	state := engine.NewGameEventWithPlayersInfo()
-	userIds := engine.GetUserIds()
+	wrapper := gameengines.NewGameEngineWrapper(engine.NewGameEngine(scenario, actors), c.broadcastGameAction)
+	defer wrapper.Unlock()
+	wrapper.Lock()
+	state, userIds := c.engines.Register(wrapper)
 	for _, userId := range userIds {
 		c.users.ChangeUserStatus(userId, users.UserStatusInGame)
 	}
 	c.broadcastGameAction(userIds, state)
 	c.broadcastRoomStatus(room.Uid)
 	c.broadcastUsersStatus(userIds)
-	c.engines.Register(gameengines.NewGameEngineWrapper(engine, c.broadcastGameAction))
 	return response.WithStatus(ResponseStatusOk)
 }

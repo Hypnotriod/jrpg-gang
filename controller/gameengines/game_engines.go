@@ -19,13 +19,17 @@ func NewGameEngines() *GameEngines {
 	return e
 }
 
-func (e *GameEngines) Register(wrapper *GameEngineWrapper) {
+func (e *GameEngines) Register(wrapper *GameEngineWrapper) (*engine.GameEvent, []engine.UserId) {
+	defer e.mu.Unlock()
 	e.mu.Lock()
 	for _, userId := range wrapper.engine.GetUserIds() {
 		e.userIdToEngine[userId] = wrapper
 	}
 	wrapper.setNextPhaseTimer()
-	e.mu.Unlock()
+	timeout := wrapper.nextPhaseTimer.SecondsLeft()
+	userIds := wrapper.engine.GetUserIds()
+	state := wrapper.engine.NewGameEventWithPlayersInfo()
+	return state.WithPhaseTimeout(timeout), userIds
 }
 
 func (e *GameEngines) Find(userId engine.UserId) (*GameEngineWrapper, bool) {
