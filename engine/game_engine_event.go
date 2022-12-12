@@ -30,11 +30,17 @@ func NewGameUnitActionResult() *GameUnitActionResult {
 type GameEvent struct {
 	Phase            GamePhase             `json:"phase"`
 	NextPhase        GamePhase             `json:"nextPhase"`
+	PhaseTimeout     float32               `json:"phaseTimeout,omitempty"`
 	State            *GameState            `json:"state"`
 	Spot             *Spot                 `json:"spot"`
 	PlayersInfo      []PlayerInfo          `json:"players"`
 	UnitActionResult *GameUnitActionResult `json:"unitActionResult,omitempty"`
 	EndRoundResult   *EndTurnResult        `json:"endRoundResult,omitempty"`
+}
+
+func (e *GameEvent) WithPhaseTimeout(timeout float32) *GameEvent {
+	e.PhaseTimeout = timeout
+	return e
 }
 
 func (e *GameEngine) NewGameEvent() *GameEvent {

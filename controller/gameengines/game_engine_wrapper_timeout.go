@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-const NEXT_PHASE_TIMEOUT_SHORT_SEC int = 5
+const NEXT_PHASE_TIMEOUT_SHORT_SEC int = 7
 const NEXT_PHASE_TIMEOUT_MEDIUM_SEC int = 32
 const NEXT_PHASE_TIMEOUT_LONG_SEC int = 62
 
@@ -36,11 +36,11 @@ func (w *GameEngineWrapper) setNextPhaseTimer() {
 	if !ok {
 		return
 	}
-	timerId := w.nextPhaseTimerId
-	w.nextPhaseTimer = time.AfterFunc(time.Duration(timeout)*time.Second, func() {
+	timerId := w.nextPhaseTimer.Id()
+	w.nextPhaseTimer.AfterFunc(time.Duration(timeout)*time.Second, func() {
 		defer w.Unlock()
 		w.Lock()
-		if timerId != w.nextPhaseTimerId {
+		if timerId != w.nextPhaseTimer.Id() {
 			return
 		}
 		if result, broadcastUserIds, ok := w.NextPhase(); ok {
@@ -50,9 +50,5 @@ func (w *GameEngineWrapper) setNextPhaseTimer() {
 }
 
 func (w *GameEngineWrapper) stopNextPhaseTimer() {
-	if w.nextPhaseTimer != nil {
-		w.nextPhaseTimer.Stop()
-		w.nextPhaseTimer = nil
-	}
-	w.nextPhaseTimerId++
+	w.nextPhaseTimer.Stop()
 }

@@ -4,13 +4,11 @@ import (
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"sync"
-	"time"
 )
 
 type GameEngineWrapper struct {
 	sync.RWMutex
-	nextPhaseTimer      *time.Timer
-	nextPhaseTimerId    uint32
+	nextPhaseTimer      engine.GameEngineTimer
 	broadcastGameAction func(userIds []engine.UserId, result *engine.GameEvent)
 	engine              *engine.GameEngine
 }
@@ -33,7 +31,7 @@ func (w *GameEngineWrapper) Dispose() {
 func (w *GameEngineWrapper) ReadGameState(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
 	event := w.engine.NewGameEventWithPlayersInfo()
 	broadcastUserIds := w.engine.GetRestUserIds(userId)
-	return event, broadcastUserIds, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
 }
 
 func (w *GameEngineWrapper) ReadPlayerInfo(userId engine.UserId) (engine.PlayerInfo, bool) {
@@ -53,7 +51,7 @@ func (w *GameEngineWrapper) ExecuteUserAction(action domain.Action, userId engin
 	if event.UnitActionResult.Result.Result == domain.ResultAccomplished {
 		broadcastUserIds = w.engine.GetRestUserIds(userId)
 	}
-	return event, broadcastUserIds, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
 }
 
 func (w *GameEngineWrapper) ReadyForNextPhase(userId engine.UserId, isReady bool) (*engine.GameEvent, []engine.UserId, bool) {
@@ -65,11 +63,11 @@ func (w *GameEngineWrapper) ReadyForNextPhase(userId engine.UserId, isReady bool
 		event := w.engine.NextPhase()
 		w.setNextPhaseTimer()
 		broadcastUserIds := w.engine.GetRestUserIds(userId)
-		return event, broadcastUserIds, true
+		return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
 	}
 	event := w.engine.NewGameEventWithPlayersInfo()
 	broadcastUserIds := w.engine.GetRestUserIds(userId)
-	return event, broadcastUserIds, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
 }
 
 func (w *GameEngineWrapper) NextPhase() (*engine.GameEvent, []engine.UserId, bool) {
@@ -79,14 +77,14 @@ func (w *GameEngineWrapper) NextPhase() (*engine.GameEvent, []engine.UserId, boo
 	event := w.engine.NextPhase()
 	w.setNextPhaseTimer()
 	broadcastUserIds := w.engine.GetUserIds()
-	return event, broadcastUserIds, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
 }
 
 func (w *GameEngineWrapper) ConnectionStatusChanged(userId engine.UserId, isOffline bool) (*engine.GameEvent, []engine.UserId, bool) {
 	w.engine.UpdateUserConnectionStatus(userId, isOffline)
 	broadcastUserIds := w.engine.GetRestUserIds(userId)
 	event := w.engine.NewGameEventWithPlayersInfo()
-	return event, broadcastUserIds, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
 }
 
 func (w *GameEngineWrapper) LeaveGame(userId engine.UserId) (*engine.GameEvent, []engine.UserId, domain.Unit, bool) {
@@ -103,14 +101,14 @@ func (w *GameEngineWrapper) LeaveGame(userId engine.UserId) (*engine.GameEvent, 
 		event := w.engine.NextPhase()
 		w.setNextPhaseTimer()
 		broadcastUserIds := w.engine.GetRestUserIds(userId)
-		return event, broadcastUserIds, unit, true
+		return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, unit, true
 	}
 	userIds := w.engine.GetUserIds()
 	event := w.engine.NewGameEventWithPlayersInfo()
 	if len(userIds) == 0 {
 		w.Dispose()
 	}
-	return event, userIds, unit, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), userIds, unit, true
 }
 
 func (w *GameEngineWrapper) RemoveUser(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
@@ -124,8 +122,8 @@ func (w *GameEngineWrapper) RemoveUser(userId engine.UserId) (*engine.GameEvent,
 		event := w.engine.NextPhase()
 		w.setNextPhaseTimer()
 		broadcastUserIds := w.engine.GetRestUserIds(userId)
-		return event, broadcastUserIds, true
+		return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
 	}
 	event := w.engine.NewGameEventWithPlayersInfo()
-	return event, userIds, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), userIds, true
 }
