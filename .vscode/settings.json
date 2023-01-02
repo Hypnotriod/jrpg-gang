@@ -1,3 +1,15 @@
 {
-    "editor.links": false
+    "editor.links": false,
+    "terminal.integrated.profiles.windows": {
+        "CYGWIN": {
+            "path": [
+                "${env:CYGWIN}/bin/bash.exe"
+            ],
+            "args": [
+                "-i"
+            ],
+            "icon": "terminal-cmd",
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "CYGWIN",
 }
