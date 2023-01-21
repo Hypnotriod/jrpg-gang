@@ -46,16 +46,16 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 }
 
 func (u *Unit) applyDamage(damage Damage) Damage {
-	if damage.HasPhysicalEffect() {
-		u.Inventory.IncreaseArmorWearout(true)
-		u.Inventory.UpdateEquipmentByWeareout()
-	}
 	modResistance := u.TotalUnitModification().Resistance
 	modResistance.Normalize()
 	damage.Reduce(modResistance.Damage)
 	damage.Normalize()
+	if damage.HasPhysicalEffect() {
+		u.Inventory.IncreaseArmorWearout(true)
+		u.Inventory.UpdateEquipmentByWeareout()
+	}
 	resistance := u.TotalEquipmentModification().Resistance
-	resistance.Accumulate(u.Stats.Resistance)
+	resistance.Accumulate(u.Stats.TotalResistance())
 	resistance.Normalize()
 	exhaustion := resistance.PhysicalAbsorption(damage) - modResistance.StaminaDrain
 	damage.StaminaDrain += util.Max(exhaustion, 0)
@@ -69,7 +69,7 @@ func (u *Unit) applyDamage(damage Damage) Damage {
 
 func (u *Unit) accumulateDamageImpact(damage DamageImpact) DamageImpact {
 	resistance := u.TotalModification().Resistance
-	resistance.Accumulate(u.Stats.Resistance)
+	resistance.Accumulate(u.Stats.TotalResistance())
 	resistance.Normalize()
 	damage.Reduce(resistance.Damage)
 	damage.Normalize()

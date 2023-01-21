@@ -10,6 +10,16 @@ func (r *UnitResistance) Accumulate(resistance UnitResistance) {
 	r.Damage.Accumulate(resistance.Damage)
 }
 
+func (r *UnitResistance) IncreasePhysical(value float32) {
+	value = util.Round(value)
+	r.Stabbing += value
+	r.Cutting += value
+	r.Crushing += value
+	r.Fire += value
+	r.Cold += value
+	r.Lighting += value
+}
+
 func (r *UnitResistance) PhysicalAbsorption(damage Damage) float32 {
 	return util.Min(r.Stabbing, damage.Stabbing) +
 		util.Min(r.Cutting, damage.Cutting) +
