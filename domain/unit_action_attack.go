@@ -1,5 +1,7 @@
 package domain
 
+import "jrpg-gang/util"
+
 func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageImpact) {
 	wasStunned := target.State.IsStunned
 	instantDamage := []Damage{}
@@ -48,9 +50,15 @@ func (u *Unit) applyDamage(damage Damage) Damage {
 		u.Inventory.IncreaseArmorWearout(true)
 		u.Inventory.UpdateEquipmentByWeareout()
 	}
-	resistance := u.TotalModification().Resistance
+	modResistance := u.TotalUnitModification().Resistance
+	modResistance.Normalize()
+	damage.Reduce(modResistance.Damage)
+	damage.Normalize()
+	resistance := u.TotalEquipmentModification().Resistance
 	resistance.Accumulate(u.Stats.Resistance)
 	resistance.Normalize()
+	exhaustion := resistance.PhysicalAbsorption(damage) - modResistance.StaminaDrain
+	damage.StaminaDrain += util.Max(exhaustion, 0)
 	damage.Reduce(resistance.Damage)
 	damage.Normalize()
 	if damage.HasEffect() {

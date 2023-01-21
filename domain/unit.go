@@ -119,16 +119,27 @@ func (u *Unit) TotalInitiative() float32 {
 	return util.Max(initiative, 0)
 }
 
-func (u *Unit) TotalModification() *UnitModification {
+func (u *Unit) TotalUnitModification() *UnitModification {
 	var modification *UnitModification = &UnitModification{}
 	for _, ench := range u.Modification {
 		modification.Accumulate(ench.UnitModification)
 	}
+	return modification
+}
+
+func (u *Unit) TotalEquipmentModification() *UnitModification {
+	var modification *UnitModification = &UnitModification{}
 	for _, item := range u.Inventory.GetEquipment(true) {
 		for _, ench := range item.Modification {
 			modification.Accumulate(ench)
 		}
 	}
+	return modification
+}
+
+func (u *Unit) TotalModification() *UnitModification {
+	modification := u.TotalUnitModification()
+	modification.Accumulate(*u.TotalEquipmentModification())
 	return modification
 }
 
