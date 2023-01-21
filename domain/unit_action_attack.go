@@ -31,7 +31,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 			tmpImp := target.accumulateDamageImpact(imp)
 			temporalDamage = append(temporalDamage, tmpImp)
 		} else {
-			instDmg := target.applyDamage(imp.Damage)
+			instDmg := target.applyInstantDamage(imp.Damage)
 			if !wasStunned && u.CheckRandomChance(target.CalculateStunChance(u, instDmg)) {
 				target.State.IsStunned = true
 				instDmg.WithStun = true
@@ -45,7 +45,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 	return instantDamage, temporalDamage
 }
 
-func (u *Unit) applyDamage(damage Damage) Damage {
+func (u *Unit) applyInstantDamage(damage Damage) Damage {
 	modResistance := u.TotalUnitModification().Resistance
 	modResistance.Normalize()
 	damage.Reduce(modResistance.Damage)
