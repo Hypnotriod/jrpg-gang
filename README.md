@@ -7,11 +7,11 @@ Golang project of turn based multiplayer RPG game server
 * `mana`    - a weapon or spell may require **mana points** to perform action
 
 ## Attributes:
-* `strength`     - enhances **stabbing**, **cutting**, **crushing**, **exhaustion** and **bleeding** damage
+* `strength`     - enhances **stabbing**, **cutting**, **crushing** and **bleeding** damage
 * `physique`     - affects **stun chance**
 * `agility`      - affects **attack chance**, **dodge chance**
 * `endurance`    - **stamina** recovery
-* `intelligence` - enhances **fire**, **cold**, **lighting**, **manaDrain**, **fear**, **curse** and **madness** damage, adds 1% to all **modification** points
+* `intelligence` - enhances **fire**, **cold**, **lighting**, **staminaDrain**, **manaDrain**, **fear**, **curse** and **madness** damage, adds 1% to all **modification** points
 * `initiative`   - affects **turn order**
 * `luck`         - affects **critical chance**
 
@@ -22,19 +22,19 @@ Golang project of turn based multiplayer RPG game server
 * `stress`  - accumulative, reduces the **chance to perform action**, increases the **chance to retreat** and the **critical miss chance**
 
 ## Damage, Resistance:
-* `stabbing`   - affects **health** attribute
-* `cutting`    - affects **health** attribute
-* `crushing`   - affects **health** attribute
-* `fire`       - affects **health** attribute
-* `cold`       - affects **health** attribute
-* `lighting`   - affects **health** attribute
-* `poison`     - affects **health** attribute
-* `bleeding`   - affects **health** attribute
-* `exhaustion` - affects **stamina** attribute
-* `manaDrain`  - affects **mana** attribute
-* `fear`       - affects **stress** attribute
-* `curse`      - affects **stress** attribute
-* `madness`    - affects **stress** attribute
+* `stabbing`     - affects **health** attribute
+* `cutting`      - affects **health** attribute
+* `crushing`     - affects **health** attribute
+* `fire`         - affects **health** attribute
+* `cold`         - affects **health** attribute
+* `lighting`     - affects **health** attribute
+* `poison`       - affects **health** attribute
+* `bleeding`     - affects **health** attribute
+* `staminaDrain` - affects **stamina** attribute
+* `manaDrain`    - affects **mana** attribute
+* `fear`         - affects **stress** attribute
+* `curse`        - affects **stress** attribute
+* `madness`      - affects **stress** attribute
 
 ## Recovery:
 * **State**        - recovers state parameters

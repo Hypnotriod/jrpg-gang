@@ -12,7 +12,7 @@ type Damage struct {
 	Cold           float32 `json:"cold,omitempty"`           // affects health
 	Lighting       float32 `json:"lighting,omitempty"`       // affects health
 	Poison         float32 `json:"poison,omitempty"`         // affects health
-	Exhaustion     float32 `json:"exhaustion,omitempty"`     // affects stamina
+	StaminaDrain   float32 `json:"staminaDrain,omitempty"`   // affects stamina
 	ManaDrain      float32 `json:"manaDrain,omitempty"`      // affects mana
 	Bleeding       float32 `json:"bleeding,omitempty"`       // affects health
 	Fear           float32 `json:"fear,omitempty"`           // affects stress
@@ -31,7 +31,7 @@ func (d *Damage) Accumulate(damage Damage) {
 	d.Cold += damage.Cold
 	d.Lighting += damage.Lighting
 	d.Poison += damage.Poison
-	d.Exhaustion += damage.Exhaustion
+	d.StaminaDrain += damage.StaminaDrain
 	d.ManaDrain += damage.ManaDrain
 	d.Bleeding += damage.Bleeding
 	d.Fear += damage.Fear
@@ -47,7 +47,7 @@ func (d *Damage) Reduce(damage Damage) {
 	d.Cold -= damage.Cold
 	d.Lighting -= damage.Lighting
 	d.Poison -= damage.Poison
-	d.Exhaustion -= damage.Exhaustion
+	d.StaminaDrain -= damage.StaminaDrain
 	d.ManaDrain -= damage.ManaDrain
 	d.Bleeding -= damage.Bleeding
 	d.Fear -= damage.Fear
@@ -71,7 +71,7 @@ func (d *Damage) HasPhysicalEffect() bool {
 func (d *Damage) HasEffect() bool {
 	return d.HasPhysicalEffect() ||
 		d.Poison != 0 ||
-		d.Exhaustion != 0 ||
+		d.StaminaDrain != 0 ||
 		d.ManaDrain != 0 ||
 		d.Bleeding != 0 ||
 		d.Fear != 0 ||
@@ -86,7 +86,7 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Fire = util.AccumulateIfNotZeros(d.Fire, attributes.Intelligence)
 	d.Cold = util.AccumulateIfNotZeros(d.Cold, attributes.Intelligence)
 	d.Lighting = util.AccumulateIfNotZeros(d.Lighting, attributes.Intelligence)
-	d.Exhaustion = util.AccumulateIfNotZeros(d.Exhaustion, attributes.Strength)
+	d.StaminaDrain = util.AccumulateIfNotZeros(d.StaminaDrain, attributes.Intelligence)
 	d.ManaDrain = util.AccumulateIfNotZeros(d.ManaDrain, attributes.Intelligence)
 	d.Bleeding = util.AccumulateIfNotZeros(d.Bleeding, attributes.Strength)
 	d.Fear = util.AccumulateIfNotZeros(d.Fear, attributes.Intelligence)
@@ -100,7 +100,7 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Cold = util.AccumulateIfNotZeros(d.Cold, damage.Cold)
 	d.Lighting = util.AccumulateIfNotZeros(d.Lighting, damage.Lighting)
 	d.Poison = util.AccumulateIfNotZeros(d.Poison, damage.Poison)
-	d.Exhaustion = util.AccumulateIfNotZeros(d.Exhaustion, damage.Exhaustion)
+	d.StaminaDrain = util.AccumulateIfNotZeros(d.StaminaDrain, damage.StaminaDrain)
 	d.ManaDrain = util.AccumulateIfNotZeros(d.ManaDrain, damage.ManaDrain)
 	d.Bleeding = util.AccumulateIfNotZeros(d.Bleeding, damage.Bleeding)
 	d.Fear = util.AccumulateIfNotZeros(d.Fear, damage.Fear)
@@ -116,7 +116,7 @@ func (d *Damage) MultiplyAll(factor float32) {
 	d.Cold = util.MultiplyWithRounding(d.Cold, factor)
 	d.Lighting = util.MultiplyWithRounding(d.Lighting, factor)
 	d.Poison = util.MultiplyWithRounding(d.Poison, factor)
-	d.Exhaustion = util.MultiplyWithRounding(d.Exhaustion, factor)
+	d.StaminaDrain = util.MultiplyWithRounding(d.StaminaDrain, factor)
 	d.ManaDrain = util.MultiplyWithRounding(d.ManaDrain, factor)
 	d.Bleeding = util.MultiplyWithRounding(d.Bleeding, factor)
 	d.Fear = util.MultiplyWithRounding(d.Fear, factor)
@@ -132,7 +132,7 @@ func (d *Damage) Normalize() {
 	d.Cold = util.Max(d.Cold, 0)
 	d.Lighting = util.Max(d.Lighting, 0)
 	d.Poison = util.Max(d.Poison, 0)
-	d.Exhaustion = util.Max(d.Exhaustion, 0)
+	d.StaminaDrain = util.Max(d.StaminaDrain, 0)
 	d.ManaDrain = util.Max(d.ManaDrain, 0)
 	d.Bleeding = util.Max(d.Bleeding, 0)
 	d.Fear = util.Max(d.Fear, 0)
@@ -142,7 +142,7 @@ func (d *Damage) Normalize() {
 
 func (d *Damage) Apply(state *UnitState) {
 	state.Health -= d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lighting + d.Poison + d.Bleeding
-	state.Stamina -= d.Exhaustion
+	state.Stamina -= d.StaminaDrain
 	state.Mana -= d.ManaDrain
 	state.Stress += d.Fear + d.Curse + d.Madness
 

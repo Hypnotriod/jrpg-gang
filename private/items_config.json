@@ -369,7 +369,7 @@
             "modification": [
                 {
                     "resistance": {
-                        "exhaustion": 20
+                        "staminaDrain": 20
                     }
                 }
             ]
