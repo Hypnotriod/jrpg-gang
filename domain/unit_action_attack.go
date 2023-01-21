@@ -57,8 +57,8 @@ func (u *Unit) applyDamage(damage Damage) Damage {
 	resistance := u.TotalEquipmentModification().Resistance
 	resistance.Accumulate(u.Stats.TotalResistance())
 	resistance.Normalize()
-	exhaustion := resistance.PhysicalAbsorption(damage) - modResistance.StaminaDrain
-	damage.StaminaDrain += util.Max(exhaustion, 0)
+	exhaustion := resistance.PhysicalAbsorption(damage) - modResistance.Exhaustion
+	damage.Exhaustion += util.Max(exhaustion, 0)
 	damage.Reduce(resistance.Damage)
 	damage.Normalize()
 	if damage.HasEffect() {

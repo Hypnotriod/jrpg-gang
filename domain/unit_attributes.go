@@ -9,7 +9,7 @@ type UnitAttributes struct {
 	Physique     float32 `json:"physique"`     // affects stun chance
 	Agility      float32 `json:"agility"`      // affects attack chance, dodge chance
 	Endurance    float32 `json:"endurance"`    // stamina recovery
-	Intelligence float32 `json:"intelligence"` // enhances (fire, cold, lighting, staminaDrain, manaDrain, fear, curse) damage, adds 1% to all modification points
+	Intelligence float32 `json:"intelligence"` // enhances (fire, cold, lighting, exhaustion, manaDrain, fear, curse) damage, adds 1% to all modification points
 	Initiative   float32 `json:"initiative"`   // affects turn order
 	Luck         float32 `json:"luck"`         // affects critical chance
 }

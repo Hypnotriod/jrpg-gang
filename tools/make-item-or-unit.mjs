@@ -351,7 +351,7 @@ async function makeDamage(header) {
         cold: await makeNumber('cold'),
         lighting: await makeNumber('lighting'),
         poison: await makeNumber('poison'),
-        staminaDrain: await makeNumber('staminaDrain'),
+        exhaustion: await makeNumber('exhaustion'),
         manaDrain: await makeNumber('manaDrain'),
         bleeding: await makeNumber('bleeding'),
         fear: await makeNumber('fear'),

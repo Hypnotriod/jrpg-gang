@@ -11,7 +11,7 @@ Golang project of turn based multiplayer RPG game server
 * `physique`     - affects **stun chance**, adds 10% to all **physical resistance** points
 * `agility`      - affects **attack / dodge chance**
 * `endurance`    - **stamina** recovery
-* `intelligence` - enhances **fire**, **cold**, **lighting**, **staminaDrain**, **manaDrain**, **fear**, **curse** and **madness** damage, multiplies by 1% all **modification** points
+* `intelligence` - enhances **fire**, **cold**, **lighting**, **exhaustion**, **manaDrain**, **fear**, **curse** and **madness** damage, multiplies by 1% all **modification** points
 * `initiative`   - affects **turn order**
 * `luck`         - affects **critical chance**
 
@@ -22,19 +22,19 @@ Golang project of turn based multiplayer RPG game server
 * `stress`  - accumulative, reduces the **chance to perform action**, increases the **chance to retreat** and the **critical miss chance**
 
 ## Damage, Resistance:
-* `stabbing`     - affects **health** attribute
-* `cutting`      - affects **health** attribute
-* `crushing`     - affects **health** attribute
-* `fire`         - affects **health** attribute
-* `cold`         - affects **health** attribute
-* `lighting`     - affects **health** attribute
-* `poison`       - affects **health** attribute
-* `bleeding`     - affects **health** attribute
-* `staminaDrain` - affects **stamina** attribute
-* `manaDrain`    - affects **mana** attribute
-* `fear`         - affects **stress** attribute
-* `curse`        - affects **stress** attribute
-* `madness`      - affects **stress** attribute
+* `stabbing`   - affects **health** attribute
+* `cutting`    - affects **health** attribute
+* `crushing`   - affects **health** attribute
+* `fire`       - affects **health** attribute
+* `cold`       - affects **health** attribute
+* `lighting`   - affects **health** attribute
+* `poison`     - affects **health** attribute
+* `bleeding`   - affects **health** attribute
+* `exhaustion` - affects **stamina** attribute
+* `manaDrain`  - affects **mana** attribute
+* `fear`       - affects **stress** attribute
+* `curse`      - affects **stress** attribute
+* `madness`    - affects **stress** attribute
 
 ## Recovery:
 * **State**        - recovers state parameters
@@ -71,7 +71,7 @@ Golang project of turn based multiplayer RPG game server
 ## Mechanics:
 * `Critical Damage` - Doubles the damage.
 * `Critical Miss` - If a unit's attack misses and the unit's `Stress` attribute is more than zero then `Critical Miss` check is performed. A unit can damage itself with double damage.
-* `Exhaustion` - Any `Instant Physical Damage` absorbed by unit's equipment and unit's resistance accumulates to the `staminaDrain` damage. But cannot be enhanced with opponent's **intelligence** attribute.
+* `Exhaustion` - Any `Instant Physical Damage` absorbed by unit's equipment and unit's resistance accumulates to the `exhaustion` damage. But cannot be enhanced with opponent's **intelligence** attribute.
 * `Stun` - Any `Instant Physical Damage` can cause stun. When stunned, a unit loses its turn in the current round and appears at the end of turn queue in the next round. If a unit is hit while stunned, critical damage is dealt and the stun is reset.
 * `Retreat` - If `Stress` attribute is more than zero, before each unit turn the `Retreat` check is performed. A unit can miss its turn by moving to a corner of the battlefield.
 * `Equipment Wearout` - Each success action followed by damage increases the `Wearout` of unit weapon, as well as `Wearout` of target equipment. If `Wearout` of an item reaches its `Durability`, the item can no longer be used and becomes unequipped.
