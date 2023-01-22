@@ -6,12 +6,12 @@
                 "code": "winter-cave-01",
                 "booty": [
                     {
-                        "weight": 1,
-                        "coins": 400
+                        "weight": 2,
+                        "coins": 100
                     },
                     {
-                        "weight": 2,
-                        "coins": 300
+                        "weight": 1,
+                        "coins": 150
                     }
                 ],
                 "battlefield": {
@@ -87,15 +87,15 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 300
+                        "coins": 150
                     },
                     {
                         "weight": 1,
-                        "coins": 400
+                        "coins": 200
                     },
                     {
                         "weight": 1,
-                        "coins": 450,
+                        "coins": 250,
                         "ruby": 10
                     }
                 ],
@@ -180,15 +180,15 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 300
+                        "coins": 200
                     },
                     {
                         "weight": 1,
-                        "coins": 400
+                        "coins": 250
                     },
                     {
                         "weight": 1,
-                        "coins": 450,
+                        "coins": 300,
                         "ruby": 10
                     }
                 ],
@@ -257,15 +257,15 @@
                 "booty": [
                     {
                         "weight": 2,
+                        "coins": 250
+                    },
+                    {
+                        "weight": 1,
                         "coins": 300
                     },
                     {
                         "weight": 1,
-                        "coins": 400
-                    },
-                    {
-                        "weight": 1,
-                        "coins": 450,
+                        "coins": 350,
                         "ruby": 10
                     }
                 ],
@@ -403,15 +403,15 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 300
+                        "coins": 350
                     },
                     {
                         "weight": 1,
-                        "coins": 400
+                        "coins": 450
                     },
                     {
                         "weight": 1,
-                        "coins": 450,
+                        "coins": 500,
                         "ruby": 10
                     }
                 ],
