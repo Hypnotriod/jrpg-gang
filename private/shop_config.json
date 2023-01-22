@@ -26,6 +26,18 @@
         },
         {
             "code": "poison-01"
+        },
+        {
+            "code": "rag-armor-01"
+        },
+        {
+            "code": "rusty-shield-01"
+        },
+        {
+            "code": "rusty-helmet-01"
+        },
+        {
+            "code": "rusty-boots-01"
         }
     ]
 }

@@ -227,41 +227,6 @@
         },
         {
             "type": "weapon",
-            "name": "Rusty Axe",
-            "code": "rusty-axe-01",
-            "description": "Rusty Axe",
-            "wearout": 35,
-            "durability": 40,
-            "slot": "weapon",
-            "slotsNumber": 1,
-            "requirements": {
-                "strength": 5
-            },
-            "range": {
-                "maximumX": 1,
-                "maximumY": 2
-            },
-            "useCost": {
-                "stamina": 25
-            },
-            "damage": [
-                {
-                    "chance": 40,
-                    "cutting": 30,
-                    "crushing": 5
-                },
-                {
-                    "duration": 3,
-                    "chance": 15,
-                    "bleeding": 3
-                }
-            ],
-            "price": {
-                "coins": 50
-            }
-        },
-        {
-            "type": "weapon",
             "name": "Axe",
             "code": "axe-01",
             "description": "Two Handed Axe",
@@ -362,6 +327,41 @@
             "price": {
                 "coins": 120
             }
+        },
+        {
+            "type": "weapon",
+            "name": "Rusty Axe",
+            "code": "rusty-axe-01",
+            "description": "Rusty Axe",
+            "wearout": 35,
+            "durability": 40,
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 5
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "useCost": {
+                "stamina": 25
+            },
+            "damage": [
+                {
+                    "chance": 40,
+                    "cutting": 30,
+                    "crushing": 5
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3
+                }
+            ],
+            "price": {
+                "coins": 50
+            }
         }
     ],
     "magic": [],
@@ -371,7 +371,6 @@
             "name": "Rusty Helmet",
             "code": "rusty-helmet-01",
             "description": "Rusty helmet",
-            "wearout": 35,
             "durability": 40,
             "slot": "head",
             "slotsNumber": 1,
@@ -381,13 +380,87 @@
             "modification": [
                 {
                     "resistance": {
-                        "exhaustion": 20
+                        "stabbing": 2,
+                        "cutting": 1,
+                        "crushing": 2
                     }
                 }
             ],
             "price": {
                 "coins": 45
             }
+        },
+        {
+            "type": "armor",
+            "name": "Rusty Boots",
+            "code": "rusty-boots-01",
+            "price": {
+                "coins": 30
+            },
+            "durability": 40,
+            "slot": "leg",
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 2,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 1,
+                        "cutting": 2,
+                        "crushing": 1
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Rusty Shield",
+            "code": "rusty-shield-01",
+            "price": {
+                "coins": 45
+            },
+            "durability": 40,
+            "slot": "hand",
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 5,
+                "physique": 5
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 2,
+                        "cutting": 2,
+                        "crushing": 2
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Rag",
+            "code": "rag-armor-01",
+            "price": {
+                "coins": 30
+            },
+            "durability": 40,
+            "slot": "body",
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 1,
+                "physique": 1
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 1,
+                        "cutting": 1,
+                        "crushing": 1
+                    }
+                }
+            ]
         }
     ],
     "disposable": [
