@@ -91,7 +91,7 @@
                 "poison": 0,
                 "exhaustion": 3,
                 "manaDrain": 0,
-                "bleeding": 2,
+                "bleeding": 3,
                 "fear": 5,
                 "curse": 2,
                 "madness": 2
@@ -150,7 +150,7 @@
                 "poison": 0,
                 "exhaustion": 3,
                 "manaDrain": 0,
-                "bleeding": 2,
+                "bleeding": 5,
                 "fear": 3,
                 "curse": 0,
                 "madness": 0
@@ -392,10 +392,10 @@
             "attributes": {
                 "strength": 10,
                 "physique": 5,
-                "agility": 15,
-                "endurance": 30,
+                "agility": 12,
+                "endurance": 15,
                 "intelligence": 0,
-                "initiative": 15,
+                "initiative": 5,
                 "luck": 5
             },
             "resistance": {
@@ -451,12 +451,12 @@
                 "stamina": 50
             },
             "attributes": {
-                "strength": 10,
+                "strength": 5,
                 "physique": 5,
                 "agility": 5,
                 "endurance": 5,
                 "intelligence": 0,
-                "initiative": 10,
+                "initiative": 3,
                 "luck": 5
             },
             "resistance": {
@@ -560,12 +560,12 @@
                 "stamina": 75
             },
             "attributes": {
-                "strength": 10,
+                "strength": 8,
                 "physique": 5,
                 "agility": 5,
                 "endurance": 5,
                 "intelligence": 0,
-                "initiative": 10,
+                "initiative": 5,
                 "luck": 5
             },
             "resistance": {
@@ -671,7 +671,7 @@
                 "stamina": 300
             },
             "attributes": {
-                "strength": 25,
+                "strength": 15,
                 "physique": 15,
                 "agility": 0,
                 "endurance": 15,
