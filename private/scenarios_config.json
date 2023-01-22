@@ -7,11 +7,11 @@
                 "booty": [
                     {
                         "weight": 1,
-                        "coins": 1000
+                        "coins": 400
                     },
                     {
                         "weight": 2,
-                        "coins": 750
+                        "coins": 300
                     }
                 ],
                 "battlefield": {
@@ -87,15 +87,15 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 1500
+                        "coins": 300
                     },
                     {
                         "weight": 1,
-                        "coins": 2000
+                        "coins": 400
                     },
                     {
                         "weight": 1,
-                        "coins": 2500,
+                        "coins": 450,
                         "ruby": 10
                     }
                 ],
@@ -180,16 +180,16 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 2000
+                        "coins": 300
                     },
                     {
                         "weight": 1,
-                        "coins": 2500
+                        "coins": 400
                     },
                     {
                         "weight": 1,
-                        "coins": 3500,
-                        "ruby": 15
+                        "coins": 450,
+                        "ruby": 10
                     }
                 ],
                 "battlefield": {
@@ -257,16 +257,16 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 2000
+                        "coins": 300
                     },
                     {
                         "weight": 1,
-                        "coins": 2500
+                        "coins": 400
                     },
                     {
                         "weight": 1,
-                        "coins": 3500,
-                        "ruby": 15
+                        "coins": 450,
+                        "ruby": 10
                     }
                 ],
                 "battlefield": {
@@ -334,16 +334,16 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 2000
+                        "coins": 300
                     },
                     {
                         "weight": 1,
-                        "coins": 2500
+                        "coins": 400
                     },
                     {
                         "weight": 1,
-                        "coins": 3500,
-                        "ruby": 15
+                        "coins": 450,
+                        "ruby": 10
                     }
                 ],
                 "battlefield": {
@@ -403,16 +403,16 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 2000
+                        "coins": 300
                     },
                     {
                         "weight": 1,
-                        "coins": 2500
+                        "coins": 400
                     },
                     {
                         "weight": 1,
-                        "coins": 3500,
-                        "ruby": 15
+                        "coins": 450,
+                        "ruby": 10
                     }
                 ],
                 "battlefield": {

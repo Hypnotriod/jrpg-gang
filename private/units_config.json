@@ -3,7 +3,7 @@
         "name": "Barbarian",
         "code": "barbarian",
         "booty": {
-            "coins": 100
+            "coins": 300
         },
         "stats": {
             "progress": {
@@ -62,7 +62,7 @@
         "name": "Tank",
         "code": "tank",
         "booty": {
-            "coins": 100
+            "coins": 300
         },
         "stats": {
             "progress": {
@@ -121,7 +121,7 @@
         "name": "Spearsman",
         "code": "spearsman",
         "booty": {
-            "coins": 100
+            "coins": 300
         },
         "stats": {
             "progress": {
@@ -180,7 +180,7 @@
         "name": "Rogue",
         "code": "rogue",
         "booty": {
-            "coins": 100
+            "coins": 300
         },
         "stats": {
             "progress": {
@@ -247,7 +247,7 @@
         "name": "Mage",
         "code": "mage",
         "booty": {
-            "coins": 100
+            "coins": 300
         },
         "stats": {
             "progress": {

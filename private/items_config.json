@@ -99,7 +99,7 @@
                 "stamina": 20
             },
             "price": {
-                "coins": 3000
+                "coins": 300
             }
         },
         {
@@ -139,7 +139,7 @@
                 "stamina": 20
             },
             "price": {
-                "coins": 3000
+                "coins": 250
             }
         },
         {
@@ -164,7 +164,7 @@
                 "stamina": 15
             },
             "price": {
-                "coins": 3000
+                "coins": 250
             }
         },
         {
@@ -197,7 +197,7 @@
                 "stamina": 15
             },
             "price": {
-                "coins": 2500
+                "coins": 150
             }
         },
         {
@@ -222,7 +222,7 @@
                 "stamina": 5
             },
             "price": {
-                "coins": 3000
+                "coins": 500
             }
         },
         {
@@ -255,7 +255,10 @@
                     "chance": 15,
                     "bleeding": 3
                 }
-            ]
+            ],
+            "price": {
+                "coins": 50
+            }
         },
         {
             "type": "weapon",
@@ -286,7 +289,10 @@
                     "chance": 15,
                     "bleeding": 5
                 }
-            ]
+            ],
+            "price": {
+                "coins": 300
+            }
         },
         {
             "type": "weapon",
@@ -317,7 +323,10 @@
                     "chance": 30,
                     "bleeding": 10
                 }
-            ]
+            ],
+            "price": {
+                "coins": 500
+            }
         },
         {
             "type": "weapon",
@@ -349,7 +358,10 @@
                     "chance": 15,
                     "bleeding": 3
                 }
-            ]
+            ],
+            "price": {
+                "coins": 120
+            }
         }
     ],
     "magic": [],
@@ -372,7 +384,10 @@
                         "exhaustion": 20
                     }
                 }
-            ]
+            ],
+            "price": {
+                "coins": 45
+            }
         }
     ],
     "disposable": [
@@ -396,7 +411,7 @@
                 }
             ],
             "price": {
-                "coins": 250
+                "coins": 25
             }
         },
         {
@@ -419,7 +434,7 @@
                 }
             ],
             "price": {
-                "coins": 250
+                "coins": 15
             }
         },
         {
@@ -442,7 +457,7 @@
                 }
             ],
             "price": {
-                "coins": 250
+                "coins": 25
             }
         },
         {
@@ -473,7 +488,7 @@
                 }
             ],
             "price": {
-                "coins": 250
+                "coins": 10
             }
         }
     ],
@@ -496,7 +511,7 @@
                 }
             ],
             "price": {
-                "coins": 25
+                "coins": 2
             }
         },
         {
@@ -517,7 +532,7 @@
                 }
             ],
             "price": {
-                "coins": 15
+                "coins": 3
             }
         },
         {
@@ -538,7 +553,7 @@
                 }
             ],
             "price": {
-                "coins": 15
+                "coins": 3
             }
         },
         {
@@ -559,7 +574,7 @@
                 }
             ],
             "price": {
-                "coins": 15
+                "coins": 3
             }
         }
     ]
