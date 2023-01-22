@@ -3,22 +3,21 @@
         "name": "Barbarian",
         "code": "barbarian",
         "booty": {
-            "coins": 5000
+            "coins": 100
         },
         "stats": {
             "progress": {
-                "level": 1,
-                "experience": 0
+                "level": 1
             },
             "baseAttributes": {
-                "health": 125,
-                "stamina": 125
+                "health": 80,
+                "stamina": 80
             },
             "attributes": {
-                "strength": 20,
-                "physique": 15,
-                "agility": 5,
-                "endurance": 20,
+                "strength": 10,
+                "physique": 8,
+                "agility": 2,
+                "endurance": 10,
                 "intelligence": 0,
                 "initiative": 0,
                 "luck": 5
@@ -27,16 +26,16 @@
                 "stabbing": 5,
                 "cutting": 5,
                 "crushing": 5,
-                "fire": 5,
-                "cold": 5,
-                "lighting": 5,
-                "poison": 5,
+                "fire": 0,
+                "cold": 8,
+                "lighting": 0,
+                "poison": 0,
                 "exhaustion": 5,
-                "manaDrain": 5,
-                "bleeding": 5,
+                "manaDrain": 0,
+                "bleeding": 0,
                 "fear": 5,
-                "curse": 5,
-                "madness": 5
+                "curse": 0,
+                "madness": 0
             }
         },
         "inventory": {
@@ -63,40 +62,39 @@
         "name": "Tank",
         "code": "tank",
         "booty": {
-            "coins": 5000
+            "coins": 100
         },
         "stats": {
             "progress": {
-                "level": 1,
-                "experience": 0
+                "level": 1
             },
             "baseAttributes": {
-                "health": 125,
-                "stamina": 125
+                "health": 75,
+                "stamina": 75
             },
             "attributes": {
-                "strength": 15,
-                "physique": 15,
-                "agility": 15,
-                "endurance": 15,
-                "intelligence": 5,
-                "initiative": 5,
+                "strength": 8,
+                "physique": 8,
+                "agility": 3,
+                "endurance": 7,
+                "intelligence": 2,
+                "initiative": 2,
                 "luck": 5
             },
             "resistance": {
                 "stabbing": 5,
                 "cutting": 5,
                 "crushing": 5,
-                "fire": 5,
-                "cold": 5,
-                "lighting": 5,
-                "poison": 5,
-                "exhaustion": 5,
-                "manaDrain": 5,
-                "bleeding": 5,
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 0,
+                "exhaustion": 3,
+                "manaDrain": 0,
+                "bleeding": 2,
                 "fear": 5,
-                "curse": 5,
-                "madness": 5
+                "curse": 2,
+                "madness": 2
             }
         },
         "inventory": {
@@ -123,40 +121,39 @@
         "name": "Spearsman",
         "code": "spearsman",
         "booty": {
-            "coins": 5000
+            "coins": 100
         },
         "stats": {
             "progress": {
-                "level": 1,
-                "experience": 0
+                "level": 1
             },
             "baseAttributes": {
-                "health": 100,
-                "stamina": 100
+                "health": 60,
+                "stamina": 60
             },
             "attributes": {
-                "strength": 15,
-                "physique": 15,
-                "agility": 15,
-                "endurance": 15,
-                "intelligence": 5,
-                "initiative": 5,
+                "strength": 7,
+                "physique": 7,
+                "agility": 7,
+                "endurance": 4,
+                "intelligence": 2,
+                "initiative": 2,
                 "luck": 5
             },
             "resistance": {
                 "stabbing": 5,
                 "cutting": 5,
                 "crushing": 5,
-                "fire": 5,
-                "cold": 5,
-                "lighting": 5,
-                "poison": 5,
-                "exhaustion": 5,
-                "manaDrain": 5,
-                "bleeding": 5,
-                "fear": 5,
-                "curse": 5,
-                "madness": 5
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 0,
+                "exhaustion": 3,
+                "manaDrain": 0,
+                "bleeding": 2,
+                "fear": 3,
+                "curse": 0,
+                "madness": 0
             }
         },
         "inventory": {
@@ -183,40 +180,39 @@
         "name": "Rogue",
         "code": "rogue",
         "booty": {
-            "coins": 5000
+            "coins": 100
         },
         "stats": {
             "progress": {
-                "level": 1,
-                "experience": 0
+                "level": 1
             },
             "baseAttributes": {
-                "health": 100,
-                "stamina": 100
+                "health": 50,
+                "stamina": 50
             },
             "attributes": {
-                "strength": 10,
-                "physique": 10,
-                "agility": 20,
-                "endurance": 5,
-                "intelligence": 10,
-                "initiative": 20,
-                "luck": 15
+                "strength": 5,
+                "physique": 5,
+                "agility": 8,
+                "endurance": 3,
+                "intelligence": 2,
+                "initiative": 7,
+                "luck": 5
             },
             "resistance": {
                 "stabbing": 5,
                 "cutting": 5,
                 "crushing": 5,
-                "fire": 5,
-                "cold": 5,
-                "lighting": 5,
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
                 "poison": 5,
-                "exhaustion": 5,
-                "manaDrain": 5,
+                "exhaustion": 0,
+                "manaDrain": 0,
                 "bleeding": 5,
-                "fear": 5,
-                "curse": 5,
-                "madness": 5
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
             }
         },
         "inventory": {
@@ -251,39 +247,38 @@
         "name": "Mage",
         "code": "mage",
         "booty": {
-            "coins": 5000
+            "coins": 100
         },
         "stats": {
             "progress": {
-                "level": 1,
-                "experience": 0
+                "level": 1
             },
             "baseAttributes": {
-                "health": 100,
-                "stamina": 100,
-                "mana": 100
+                "health": 50,
+                "stamina": 50,
+                "mana": 75
             },
             "attributes": {
-                "strength": 5,
-                "physique": 5,
-                "agility": 10,
-                "endurance": 5,
-                "intelligence": 25,
-                "initiative": 0,
-                "luck": 5
+                "strength": 2,
+                "physique": 2,
+                "agility": 2,
+                "endurance": 3,
+                "intelligence": 10,
+                "initiative": 8,
+                "luck": 8
             },
             "resistance": {
-                "stabbing": 5,
-                "cutting": 5,
-                "crushing": 5,
+                "stabbing": 0,
+                "cutting": 0,
+                "crushing": 0,
                 "fire": 5,
                 "cold": 5,
                 "lighting": 5,
-                "poison": 5,
-                "exhaustion": 5,
+                "poison": 0,
+                "exhaustion": 0,
                 "manaDrain": 5,
-                "bleeding": 5,
-                "fear": 5,
+                "bleeding": 0,
+                "fear": 0,
                 "curse": 5,
                 "madness": 5
             }
