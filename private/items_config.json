@@ -218,7 +218,7 @@
                 "maximumY": 5
             },
             "useCost": {
-                "mana": 15,
+                "mana": 5,
                 "stamina": 2
             },
             "price": {
@@ -364,7 +364,36 @@
             }
         }
     ],
-    "magic": [],
+    "magic": [
+        {
+            "type": "magic",
+            "name": "Treatment",
+            "description": "Health Treatment",
+            "code": "magic-health-01",
+            "price": {
+                "coins": 5000,
+                "ruby": 100
+            },
+            "requirements": {
+                "intelligence": 8
+            },
+            "range": {
+                "maximumX": 10,
+                "maximumY": 10
+            },
+            "useCost": {
+                "mana": 25
+            },
+            "damage": [],
+            "modification": [
+                {
+                    "recovery": {
+                        "health": 25
+                    }
+                }
+            ]
+        }
+    ],
     "armor": [
         {
             "type": "armor",
