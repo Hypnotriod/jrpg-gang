@@ -28,6 +28,9 @@
             "code": "poison-01"
         },
         {
+            "code": "bomb-01"
+        },
+        {
             "code": "rag-armor-01"
         },
         {
@@ -38,6 +41,24 @@
         },
         {
             "code": "rusty-boots-01"
+        },
+        {
+            "code": "armor-01"
+        },
+        {
+            "code": "shield-01"
+        },
+        {
+            "code": "helmet-01"
+        },
+        {
+            "code": "boots-01"
+        },
+        {
+            "code": "sorcerer-hat-01"
+        },
+        {
+            "code": "sorcerer-cloak-01"
         }
     ]
 }

@@ -40,9 +40,9 @@
                     "cutting": 10
                 },
                 {
-                    "chance": 50,
+                    "chance": 15,
                     "duration": 3,
-                    "bleeding": 5
+                    "bleeding": 2
                 }
             ],
             "useCost": {
@@ -70,7 +70,7 @@
         },
         {
             "type": "weapon",
-            "name": "Base Sword",
+            "name": "Short Sword",
             "code": "sword-01",
             "description": "Base one hand sword",
             "durability": 300,
@@ -104,9 +104,9 @@
         },
         {
             "type": "weapon",
-            "name": "Base Spear",
+            "name": "Spear",
             "code": "spear-01",
-            "description": "Base two hands spear",
+            "description": "Base two handed spear",
             "durability": 300,
             "slot": "weapon",
             "slotsNumber": 2,
@@ -204,7 +204,7 @@
             "type": "weapon",
             "name": "Staff",
             "code": "sorcerer-staff-01",
-            "description": "Base two hands Sorcerer Staff",
+            "description": "Base two handed Sorcerer Staff",
             "ammunitionKind": "magicCharge",
             "durability": 300,
             "slot": "weapon",
@@ -229,7 +229,7 @@
             "type": "weapon",
             "name": "Axe",
             "code": "axe-01",
-            "description": "Two Handed Axe",
+            "description": "Base two handed Axe",
             "durability": 300,
             "slot": "weapon",
             "slotsNumber": 2,
@@ -375,7 +375,7 @@
             "slot": "head",
             "slotsNumber": 1,
             "requirements": {
-                "strength": 5
+                "strength": 2
             },
             "modification": [
                 {
@@ -402,7 +402,7 @@
             "slotsNumber": 2,
             "requirements": {
                 "strength": 2,
-                "physique": 3
+                "physique": 2
             },
             "modification": [
                 {
@@ -425,8 +425,8 @@
             "slot": "weapon",
             "slotsNumber": 1,
             "requirements": {
-                "strength": 5,
-                "physique": 5
+                "strength": 3,
+                "physique": 3
             },
             "modification": [
                 {
@@ -458,6 +458,177 @@
                         "stabbing": 1,
                         "cutting": 1,
                         "crushing": 1
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Helmet",
+            "code": "helmet-01",
+            "description": "Base Helmet",
+            "durability": 300,
+            "slot": "head",
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 3,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 3,
+                        "cutting": 3,
+                        "crushing": 3,
+                        "bleeding": 3
+                    }
+                }
+            ],
+            "price": {
+                "coins": 450
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Boots",
+            "code": "boots-01",
+            "description": "Base Boots",
+            "durability": 300,
+            "slot": "leg",
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 3,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 3,
+                        "cutting": 3,
+                        "crushing": 3,
+                        "bleeding": 3
+                    }
+                }
+            ],
+            "price": {
+                "coins": 300
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Shield",
+            "code": "shield-01",
+            "description": "Base Shield",
+            "durability": 300,
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 5,
+                "physique": 5
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 4,
+                        "cutting": 4,
+                        "crushing": 4
+                    }
+                }
+            ],
+            "price": {
+                "coins": 700
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Armor",
+            "code": "armor-01",
+            "description": "Base Leather Armor",
+            "durability": 300,
+            "slot": "body",
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 5,
+                "physique": 5
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 7,
+                        "cutting": 7,
+                        "crushing": 7,
+                        "bleeding": 5
+                    }
+                }
+            ],
+            "price": {
+                "coins": 1500
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Hat",
+            "description": "Base Sorcerer Hat",
+            "code": "sorcerer-hat-01",
+            "price": {
+                "coins": 450,
+                "ruby": 2
+            },
+            "durability": 300,
+            "slot": "head",
+            "slotsNumber": 1,
+            "requirements": {
+                "intelligence": 8
+            },
+            "modification": [
+                {
+                    "baseAttributes": {
+                        "mana": 10
+                    },
+                    "resistance": {
+                        "fire": 3,
+                        "cold": 3,
+                        "lighting": 3,
+                        "poison": 3,
+                        "exhaustion": 3,
+                        "manaDrain": 3
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Cloak",
+            "description": "Base Sorcerer Cloak",
+            "code": "sorcerer-cloak-01",
+            "price": {
+                "coins": 1200,
+                "ruby": 5
+            },
+            "durability": 300,
+            "slot": "body",
+            "slotsNumber": 1,
+            "requirements": {
+                "intelligence": 8
+            },
+            "modification": [
+                {
+                    "baseAttributes": {
+                        "mana": 20
+                    },
+                    "resistance": {
+                        "fire": 7,
+                        "cold": 7,
+                        "lighting": 7,
+                        "poison": 7,
+                        "exhaustion": 7,
+                        "manaDrain": 7,
+                        "bleeding": 5
+                    },
+                    "recovery": {
+                        "health": 5,
+                        "mana": 10,
+                        "bleeding": 3
                     }
                 }
             ]
@@ -537,7 +708,7 @@
             "name": "Poison",
             "type": "disposable",
             "code": "poison-01",
-            "description": "Regular Poison",
+            "description": "You can poison someone with this Poison",
             "damage": [
                 {
                     "duration": 3,
@@ -563,6 +734,30 @@
             "price": {
                 "coins": 10
             }
+        },
+        {
+            "type": "disposable",
+            "name": "Bomb",
+            "description": "Throw this towards your enemy",
+            "code": "bomb-01",
+            "price": {
+                "coins": 50
+            },
+            "range": {
+                "maximumX": 10,
+                "maximumY": 10
+            },
+            "damage": [
+                {
+                    "fire": 50
+                },
+                {
+                    "duration": 3,
+                    "chance": 10,
+                    "fire": 10
+                }
+            ],
+            "modification": []
         }
     ],
     "ammunition": [

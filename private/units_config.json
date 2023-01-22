@@ -32,7 +32,7 @@
                 "poison": 0,
                 "exhaustion": 5,
                 "manaDrain": 0,
-                "bleeding": 0,
+                "bleeding": 2,
                 "fear": 5,
                 "curse": 0,
                 "madness": 0
@@ -451,7 +451,7 @@
                 "stamina": 50
             },
             "attributes": {
-                "strength": 5,
+                "strength": 8,
                 "physique": 5,
                 "agility": 5,
                 "endurance": 5,
@@ -560,7 +560,7 @@
                 "stamina": 75
             },
             "attributes": {
-                "strength": 8,
+                "strength": 12,
                 "physique": 5,
                 "agility": 5,
                 "endurance": 5,
