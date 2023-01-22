@@ -1,5 +1,7 @@
 package domain
 
+import "jrpg-gang/util"
+
 type UnitStats struct {
 	Progress       UnitProgress       `json:"progress"`
 	BaseAttributes UnitBaseAttributes `json:"baseAttributes"`
@@ -9,6 +11,7 @@ type UnitStats struct {
 
 func (s *UnitStats) TotalResistance() UnitResistance {
 	resistance := s.Resistance
-	resistance.IncreasePhysical(s.Attributes.Physique * RESISTANCE_MODIFICATION_FACTOR)
+	physiqueBased := util.Floor(s.Attributes.Physique * RESISTANCE_MODIFICATION_FACTOR)
+	resistance.AccumulatePhysical(physiqueBased)
 	return resistance
 }

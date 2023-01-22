@@ -10,8 +10,7 @@ func (r *UnitResistance) Accumulate(resistance UnitResistance) {
 	r.Damage.Accumulate(resistance.Damage)
 }
 
-func (r *UnitResistance) IncreasePhysical(value float32) {
-	value = util.Round(value)
+func (r *UnitResistance) AccumulatePhysical(value float32) {
 	r.Stabbing += value
 	r.Cutting += value
 	r.Crushing += value

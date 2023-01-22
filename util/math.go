@@ -34,8 +34,36 @@ func Abs[T Number](v T) T {
 
 func Round[T Float](v T) T {
 	n := int64(v)
+	if n < 0 {
+		if v < T(n)-0.5 {
+			return T(n - 1)
+		}
+		return T(n)
+	}
 	if v > T(n)+0.5 {
 		return T(n + 1)
 	}
 	return T(n)
+}
+
+func Floor[T Float](v T) T {
+	n := int64(v)
+	if T(n) == v {
+		return v
+	}
+	if n < 0 {
+		return T(n - 1)
+	}
+	return T(n)
+}
+
+func Ceil[T Float](v T) T {
+	n := int64(v)
+	if T(n) == v {
+		return v
+	}
+	if n < 0 {
+		return T(n)
+	}
+	return T(n + 1)
 }
