@@ -798,7 +798,7 @@
             "kind": "arrow",
             "damage": [
                 {
-                    "stabbing": 10,
+                    "stabbing": 25,
                     "chance": 50
                 },
                 {
