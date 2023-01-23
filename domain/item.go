@@ -16,10 +16,12 @@ type ItemCode string
 const ItemCodeEmpty ItemCode = ""
 
 type Item struct {
-	Uid         uint      `json:"uid,omitempty"`
-	Code        ItemCode  `json:"code"`
-	Name        string    `json:"name"`
-	Type        ItemType  `json:"type"`
-	Price       UnitBooty `json:"price,"`
-	Description string    `json:"description,omitempty"`
+	Uid             uint      `json:"uid,omitempty"`
+	Code            ItemCode  `json:"code"`
+	Name            string    `json:"name"`
+	Type            ItemType  `json:"type"`
+	CanBeThrownAway bool      `json:"canBeThrownAway,omitempty"`
+	CanBeSold       bool      `json:"canBeSold,omitempty"`
+	Price           UnitBooty `json:"price,omitempty"`
+	Description     string    `json:"description,omitempty"`
 }

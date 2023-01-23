@@ -3,13 +3,15 @@ package domain
 type AtionType string
 
 const (
-	ActionUse     AtionType = "use"
-	ActionEquip   AtionType = "equip"
-	ActionUnequip AtionType = "unequip"
-	ActionPlace   AtionType = "place"
-	ActionMove    AtionType = "move"
-	ActionBuy     AtionType = "buy"
-	ActionSkip    AtionType = "skip"
+	ActionUse       AtionType = "use"
+	ActionEquip     AtionType = "equip"
+	ActionUnequip   AtionType = "unequip"
+	ActionPlace     AtionType = "place"
+	ActionMove      AtionType = "move"
+	ActionBuy       AtionType = "buy"
+	ActionSell      AtionType = "sell"
+	ActionThrowAway AtionType = "throwAway"
+	ActionSkip      AtionType = "skip"
 )
 
 type Action struct {

@@ -270,6 +270,8 @@ async function makeItem(type, header) {
         name: await makeString('name'),
         description: await makeString('description'),
         code: await makeString('code'),
+        canBeThrownAway: await makeBool('canBeThrownAway'),
+        canBeSold: await makeBool('canBeSold'),
         price: await makeUnitBooty('price'),
     }
     return result;
