@@ -184,7 +184,7 @@
             },
             "damage": [
                 {
-                    "chance": 40,
+                    "chance": 60,
                     "cutting": 15
                 },
                 {
@@ -246,8 +246,8 @@
             "damage": [
                 {
                     "chance": 40,
-                    "cutting": 30,
-                    "crushing": 5
+                    "cutting": 35,
+                    "crushing": 10
                 },
                 {
                     "duration": 3,
@@ -819,7 +819,7 @@
             "kind": "magicCharge",
             "damage": [
                 {
-                    "fire": 15,
+                    "fire": 25,
                     "chance": 50
                 },
                 {
@@ -840,7 +840,7 @@
             "kind": "magicCharge",
             "damage": [
                 {
-                    "cold": 15,
+                    "cold": 25,
                     "chance": 50
                 },
                 {
@@ -861,7 +861,7 @@
             "kind": "magicCharge",
             "damage": [
                 {
-                    "lighting": 15,
+                    "lighting": 25,
                     "chance": 50
                 },
                 {
