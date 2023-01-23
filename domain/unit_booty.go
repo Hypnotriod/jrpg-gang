@@ -2,7 +2,6 @@ package domain
 
 import (
 	"jrpg-gang/util"
-	"math"
 )
 
 type UnitBooty struct {
@@ -25,10 +24,15 @@ func (b *UnitBooty) Reduce(booty UnitBooty, quantity uint) {
 	b.Ruby -= booty.Ruby * int(quantity)
 }
 
+func (b *UnitBooty) MultiplyAll(factor float32) {
+	b.Coins = int(util.MultiplyWithRounding(float32(b.Coins), factor))
+	b.Ruby = int(util.MultiplyWithRounding(float32(b.Ruby), factor))
+}
+
 func (b *UnitBooty) TakeAShare(participants int) UnitBooty {
 	share := UnitBooty{
-		Coins: int(math.Ceil(float64(b.Coins) / float64(participants))),
-		Ruby:  int(math.Ceil(float64(b.Ruby) / float64(participants))),
+		Coins: int(util.Ceil(float32(b.Coins) / float32(participants))),
+		Ruby:  int(util.Ceil(float32(b.Ruby) / float32(participants))),
 	}
 	b.Reduce(share, 1)
 	return share

@@ -206,6 +206,48 @@ func (i *UnitInventory) FindItem(uid uint) *Item {
 	return nil
 }
 
+func (i *UnitInventory) RemoveWeapon(uid uint) bool {
+	result := false
+	var filtered []Weapon
+	for _, w := range i.Weapon {
+		if w.Uid != uid {
+			filtered = append(filtered, w)
+		} else {
+			result = true
+		}
+	}
+	i.Weapon = filtered
+	return result
+}
+
+func (i *UnitInventory) RemoveMagic(uid uint) bool {
+	result := false
+	var filtered []Magic
+	for _, m := range i.Magic {
+		if m.Uid != uid {
+			filtered = append(filtered, m)
+		} else {
+			result = true
+		}
+	}
+	i.Magic = filtered
+	return result
+}
+
+func (i *UnitInventory) RemoveArmor(uid uint) bool {
+	result := false
+	var filtered []Armor
+	for _, a := range i.Armor {
+		if a.Uid != uid {
+			filtered = append(filtered, a)
+		} else {
+			result = true
+		}
+	}
+	i.Armor = filtered
+	return result
+}
+
 func (i *UnitInventory) FindEquipment(uid uint) *Equipment {
 	equipment := i.GetEquipment(false)
 	for n := range equipment {

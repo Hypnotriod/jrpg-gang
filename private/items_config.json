@@ -75,6 +75,7 @@
             "description": "Base one hand sword",
             "durability": 300,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "physique": 5
@@ -109,6 +110,7 @@
             "description": "Base two handed spear",
             "durability": 300,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 2,
             "requirements": {
                 "physique": 5
@@ -150,6 +152,7 @@
             "ammunitionKind": "arrow",
             "durability": 300,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 2,
             "requirements": {
                 "physique": 5
@@ -174,6 +177,7 @@
             "description": "Sneaky one hand dagger",
             "durability": 300,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "physique": 2
@@ -208,6 +212,7 @@
             "ammunitionKind": "magicCharge",
             "durability": 300,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 2,
             "requirements": {
                 "intelligence": 8
@@ -232,6 +237,7 @@
             "description": "Base two handed Axe",
             "durability": 300,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 2,
             "requirements": {
                 "strength": 8
@@ -266,6 +272,7 @@
             "description": "Scythe",
             "durability": 300,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 2,
             "requirements": {
                 "strength": 10
@@ -301,6 +308,7 @@
             "wearout": 35,
             "durability": 40,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 5
@@ -336,6 +344,7 @@
             "wearout": 35,
             "durability": 40,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 5
@@ -402,6 +411,7 @@
             "description": "Rusty helmet",
             "durability": 40,
             "slot": "head",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 2
@@ -428,6 +438,7 @@
             },
             "durability": 40,
             "slot": "leg",
+            "canBeSold": true,
             "slotsNumber": 2,
             "requirements": {
                 "strength": 2,
@@ -452,6 +463,7 @@
             },
             "durability": 40,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 3,
@@ -476,6 +488,7 @@
             },
             "durability": 40,
             "slot": "body",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 1,
@@ -498,6 +511,7 @@
             "description": "Base Helmet",
             "durability": 300,
             "slot": "head",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 3,
@@ -524,6 +538,7 @@
             "description": "Base Boots",
             "durability": 300,
             "slot": "leg",
+            "canBeSold": true,
             "slotsNumber": 2,
             "requirements": {
                 "strength": 3,
@@ -550,6 +565,7 @@
             "description": "Base Shield",
             "durability": 300,
             "slot": "weapon",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 5,
@@ -575,6 +591,7 @@
             "description": "Base Leather Armor",
             "durability": 300,
             "slot": "body",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 5,
@@ -605,6 +622,7 @@
             },
             "durability": 300,
             "slot": "head",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "intelligence": 8
@@ -636,6 +654,7 @@
             },
             "durability": 300,
             "slot": "body",
+            "canBeSold": true,
             "slotsNumber": 1,
             "requirements": {
                 "intelligence": 8
@@ -669,6 +688,7 @@
             "type": "disposable",
             "code": "health-potion-01",
             "description": "Small health potion",
+            "canBeSold": true,
             "modification": [
                 {
                     "recovery": {
@@ -692,6 +712,7 @@
             "type": "disposable",
             "code": "stamina-potion-01",
             "description": "Small stamina potion",
+            "canBeSold": true,
             "modification": [
                 {
                     "recovery": {
@@ -715,6 +736,7 @@
             "type": "disposable",
             "code": "mana-potion-01",
             "description": "Small mana potion",
+            "canBeSold": true,
             "modification": [
                 {
                     "recovery": {
@@ -738,6 +760,7 @@
             "type": "disposable",
             "code": "poison-01",
             "description": "You can poison someone with this Poison",
+            "canBeSold": true,
             "damage": [
                 {
                     "duration": 3,
@@ -753,6 +776,7 @@
             "type": "disposable",
             "code": "bandage-01",
             "description": "Regular Bandage",
+            "canBeSold": true,
             "modification": [
                 {
                     "recovery": {
@@ -767,8 +791,9 @@
         {
             "type": "disposable",
             "name": "Bomb",
-            "description": "Throw this towards your enemy",
             "code": "bomb-01",
+            "description": "Throw this towards your enemy",
+            "canBeSold": true,
             "price": {
                 "coins": 50
             },
@@ -796,6 +821,7 @@
             "code": "arrow-01",
             "description": "Base arrow",
             "kind": "arrow",
+            "canBeSold": true,
             "damage": [
                 {
                     "stabbing": 25,
@@ -817,6 +843,7 @@
             "code": "fire-charge-01",
             "description": "Sorcerer staff Fire Charge",
             "kind": "magicCharge",
+            "canBeSold": true,
             "damage": [
                 {
                     "fire": 25,
@@ -838,6 +865,7 @@
             "code": "cold-charge-01",
             "description": "Sorcerer staff Cold Charge",
             "kind": "magicCharge",
+            "canBeSold": true,
             "damage": [
                 {
                     "cold": 25,
@@ -859,6 +887,7 @@
             "code": "lighting-charge-01",
             "description": "Sorcerer staff Lighting Charge",
             "kind": "magicCharge",
+            "canBeSold": true,
             "damage": [
                 {
                     "lighting": 25,
