@@ -17,6 +17,8 @@ func getenv(key string, defaultValue string) string {
 
 func config() session.HubConfig {
 	port := getenv("PORT", "3000")
+	key := flag.String("key", "", "path to TLS key.pem")
+	cert := flag.String("cert", "", "path to TLS cert.pem")
 	rBuffSize := flag.Int("rBuffSize", 1024, "ws read buffer size")
 	wBuffSize := flag.Int("wBuffSize", 4096, "ws write buffer size")
 	broadcasterPoolSize := flag.Int("broadcasterPoolSize", 32, "broadcaster routines pool size")
@@ -28,6 +30,8 @@ func config() session.HubConfig {
 
 	return session.HubConfig{
 		Port:                    port,
+		TlsKey:                  *key,
+		TlsCert:                 *cert,
 		ReadBufferSize:          *rBuffSize,
 		WriteBufferSize:         *wBuffSize,
 		BroadcasterPoolSize:     *broadcasterPoolSize,

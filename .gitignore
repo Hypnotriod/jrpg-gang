@@ -1,5 +1,8 @@
 *.exe
 *.vsix
 *.code-workspace
+*.pem
+public/*
+!public/.gitkeep
 bin
 __debug_bin

@@ -13,6 +13,8 @@ import (
 
 type HubConfig struct {
 	Port                    string `json:"port"`
+	TlsKey                  string `json:"tlsKey"`
+	TlsCert                 string `json:"tlsCert"`
 	ReadBufferSize          int    `json:"readBufferSize"`
 	WriteBufferSize         int    `json:"writeBufferSize"`
 	BroadcasterPoolSize     int    `json:"broadcasterPoolSize"`
@@ -56,6 +58,9 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 func (h *Hub) Start() error {
 	for n := h.config.BroadcasterPoolSize; n > 0; n-- {
 		go h.broadcastGameMessageRoutine(h.broadcastPool)
+	}
+	if len(h.config.TlsKey) > 0 && len(h.config.TlsCert) > 0 {
+		return h.server.ListenAndServeTLS(h.config.TlsCert, h.config.TlsKey)
 	}
 	return h.server.ListenAndServe()
 }
