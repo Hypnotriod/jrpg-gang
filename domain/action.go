@@ -25,6 +25,9 @@ const (
 	AtionPropertyIntelligence ActionProperty = "intelligence"
 	AtionPropertyInitiative   ActionProperty = "initiative"
 	AtionPropertyLuck         ActionProperty = "luck"
+	AtionPropertyHealth       ActionProperty = "health"
+	AtionPropertyStamina      ActionProperty = "stamina"
+	AtionPropertyMana         ActionProperty = "mana"
 )
 
 type Action struct {
