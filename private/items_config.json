@@ -76,6 +76,7 @@
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "physique": 5
@@ -111,6 +112,7 @@
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
                 "physique": 5
@@ -153,6 +155,7 @@
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
                 "physique": 5
@@ -178,6 +181,7 @@
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "physique": 2
@@ -213,6 +217,7 @@
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
                 "intelligence": 8
@@ -238,6 +243,7 @@
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
                 "strength": 8
@@ -273,6 +279,7 @@
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
                 "strength": 10
@@ -309,6 +316,7 @@
             "durability": 40,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 5
@@ -345,6 +353,7 @@
             "durability": 40,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 5
@@ -412,6 +421,7 @@
             "durability": 40,
             "slot": "head",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 2
@@ -439,6 +449,7 @@
             "durability": 40,
             "slot": "leg",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
                 "strength": 2,
@@ -464,6 +475,7 @@
             "durability": 40,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 3,
@@ -489,6 +501,7 @@
             "durability": 40,
             "slot": "body",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 1,
@@ -512,6 +525,7 @@
             "durability": 300,
             "slot": "head",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 3,
@@ -539,6 +553,7 @@
             "durability": 300,
             "slot": "leg",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
                 "strength": 3,
@@ -566,6 +581,7 @@
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 5,
@@ -592,6 +608,7 @@
             "durability": 300,
             "slot": "body",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "strength": 5,
@@ -623,6 +640,7 @@
             "durability": 300,
             "slot": "head",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "intelligence": 8
@@ -655,6 +673,7 @@
             "durability": 300,
             "slot": "body",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
                 "intelligence": 8
@@ -689,6 +708,7 @@
             "code": "health-potion-01",
             "description": "Small health potion",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "modification": [
                 {
                     "recovery": {
@@ -713,6 +733,7 @@
             "code": "stamina-potion-01",
             "description": "Small stamina potion",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "modification": [
                 {
                     "recovery": {
@@ -737,6 +758,7 @@
             "code": "mana-potion-01",
             "description": "Small mana potion",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "modification": [
                 {
                     "recovery": {
@@ -761,6 +783,7 @@
             "code": "poison-01",
             "description": "You can poison someone with this Poison",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "damage": [
                 {
                     "duration": 3,
@@ -777,6 +800,7 @@
             "code": "bandage-01",
             "description": "Regular Bandage",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "modification": [
                 {
                     "recovery": {
@@ -794,6 +818,7 @@
             "code": "bomb-01",
             "description": "Throw this towards your enemy",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "price": {
                 "coins": 50
             },
@@ -822,6 +847,7 @@
             "description": "Base arrow",
             "kind": "arrow",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "damage": [
                 {
                     "stabbing": 25,
@@ -844,6 +870,7 @@
             "description": "Sorcerer staff Fire Charge",
             "kind": "magicCharge",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "damage": [
                 {
                     "fire": 25,
@@ -866,6 +893,7 @@
             "description": "Sorcerer staff Cold Charge",
             "kind": "magicCharge",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "damage": [
                 {
                     "cold": 25,
@@ -888,6 +916,7 @@
             "description": "Sorcerer staff Lighting Charge",
             "kind": "magicCharge",
             "canBeSold": true,
+            "canBeThrownAway": true,
             "damage": [
                 {
                     "lighting": 25,
