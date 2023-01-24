@@ -71,7 +71,7 @@ Golang project of turn based multiplayer RPG game server
 ## Mechanics:
 * `Critical Damage` - Doubles the damage.
 * `Critical Miss` - If a unit's attack misses and the unit's `Stress` attribute is more than zero then `Critical Miss` check is performed. A unit can damage itself with double damage.
-* `Exhaustion` - Any `Instant Physical Damage` absorbed by unit's equipment and unit's resistance accumulates to the `exhaustion` damage. But **cannot** be enhanced with opponent's **intelligence** attribute.
-* `Stun` - Any `Instant Physical Damage` can cause stun. When stunned, a unit loses its turn in the current round and appears at the end of turn queue in the next round. If a unit is hit while stunned, critical damage is dealt and the stun is reset.
+* `Exhaustion` - Any `Instant Physical Damage` absorbed by unit's equipment and unit's resistance accumulates to the `exhaustion` damage. But **cannot** be enhanced with opponent's **intelligence** attribute. If a unit is hit while **totally exhausted** (exhaustion is zero), **critical damage** is dealt.
+* `Stun` - Any `Instant Physical Damage` can cause stun. When stunned, a unit loses its turn in the current round and appears at the end of turn queue in the next round. If a unit is hit while stunned, **critical damage** is dealt and the **stun** is reset.
 * `Retreat` - If `Stress` attribute is more than zero, before each unit turn the `Retreat` check is performed. A unit can miss its turn by moving to a corner of the battlefield.
 * `Equipment Wearout` - Each success action followed by damage increases the `Wearout` of unit weapon, as well as `Wearout` of target equipment. If `Wearout` of an item reaches its `Durability`, the item can no longer be used and becomes unequipped.

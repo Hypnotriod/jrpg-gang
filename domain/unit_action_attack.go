@@ -18,7 +18,10 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 			target = u
 			wasStunned = target.State.IsStunned
 		}
-		if n == 0 && (wasStunned || imp.Damage.IsCriticalMiss || u.CheckRandomChance(u.CalculateCritilalAttackChance(target))) {
+		if n == 0 && (wasStunned ||
+			imp.Damage.IsCriticalMiss ||
+			target.State.Stamina <= 0 ||
+			u.CheckRandomChance(u.CalculateCritilalAttackChance(target))) {
 			imp.Damage.IsCritical = true
 		}
 		imp.Enchance(totalModification.Attributes, totalModification.Damage)
