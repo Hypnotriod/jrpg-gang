@@ -15,11 +15,24 @@ const (
 	ActionLevelUp   AtionType = "levelUp"
 )
 
+type ActionProperty string
+
+const (
+	AtionPropertyStrength     ActionProperty = "strength"
+	AtionPropertyPhysique     ActionProperty = "physique"
+	AtionPropertyAgility      ActionProperty = "agility"
+	AtionPropertyEndurance    ActionProperty = "endurance"
+	AtionPropertyIntelligence ActionProperty = "intelligence"
+	AtionPropertyInitiative   ActionProperty = "initiative"
+	AtionPropertyLuck         ActionProperty = "luck"
+)
+
 type Action struct {
-	Action    AtionType `json:"action"`
-	Uid       uint      `json:"uid,omitempty"`
-	TargetUid uint      `json:"targetUid,omitempty"`
-	ItemUid   uint      `json:"itemUid,omitempty"`
-	Quantity  uint      `json:"quantity,omitempty"`
-	Position  *Position `json:"position,omitempty"`
+	Action    AtionType      `json:"action"`
+	Uid       uint           `json:"uid,omitempty"`
+	TargetUid uint           `json:"targetUid,omitempty"`
+	ItemUid   uint           `json:"itemUid,omitempty"`
+	Quantity  uint           `json:"quantity,omitempty"`
+	Property  ActionProperty `json:"property,omitempty"`
+	Position  *Position      `json:"position,omitempty"`
 }
