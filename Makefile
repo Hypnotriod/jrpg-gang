@@ -37,4 +37,4 @@ item:
 	cd ./private/ && node ../tools/make-item-or-unit.mjs
 
 certificate:
-	cd ./private/ && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem

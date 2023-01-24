@@ -20,8 +20,8 @@
             "program": "${workspaceFolder}/cmd/default",
             "cwd": "${workspaceFolder}",
             "args": [
-                "-cert=private/cert.pem",
-                "-key=private/key.pem"
+                "-cert=cert.pem",
+                "-key=key.pem"
             ],
             "env": {
                 "PORT": "3000"
