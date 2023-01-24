@@ -50,6 +50,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 
 func (u *Unit) applyInstantDamage(damage Damage) Damage {
 	modResistance := u.TotalUnitModification().Resistance
+	modResistance.Accumulate(u.Stats.TotalResistance())
 	modResistance.Normalize()
 	damage.Reduce(modResistance.Damage)
 	damage.Normalize()
@@ -58,7 +59,6 @@ func (u *Unit) applyInstantDamage(damage Damage) Damage {
 		u.Inventory.UpdateEquipmentByWeareout()
 	}
 	resistance := u.TotalEquipmentModification().Resistance
-	resistance.Accumulate(u.Stats.TotalResistance())
 	resistance.Normalize()
 	exhaustion := resistance.PhysicalAbsorption(damage) - modResistance.Exhaustion
 	damage.Exhaustion += util.Max(exhaustion, 0)
