@@ -29,6 +29,7 @@ type ActionResult struct {
 	TemporalDamage       []DamageImpact           `json:"temporalDamage,omitempty"`
 	InstantRecovery      []UnitRecovery           `json:"instantRecovery,omitempty"`
 	TemporalModification []UnitModificationImpact `json:"temporalModification,omitempty"`
+	Booty                *UnitBooty               `json:"booty,omitempty"`
 	Result               ActionResultType         `json:"result"`
 }
 

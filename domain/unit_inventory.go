@@ -206,45 +206,81 @@ func (i *UnitInventory) FindItem(uid uint) *Item {
 	return nil
 }
 
-func (i *UnitInventory) RemoveWeapon(uid uint) bool {
-	result := false
+func (i *UnitInventory) RemoveWeapon(uid uint) *Weapon {
+	var result *Weapon
 	var filtered []Weapon
-	for _, w := range i.Weapon {
-		if w.Uid != uid {
-			filtered = append(filtered, w)
+	for n := range i.Weapon {
+		if i.Weapon[n].Uid != uid {
+			filtered = append(filtered, i.Weapon[n])
 		} else {
-			result = true
+			result = &i.Weapon[n]
 		}
 	}
 	i.Weapon = filtered
 	return result
 }
 
-func (i *UnitInventory) RemoveMagic(uid uint) bool {
-	result := false
+func (i *UnitInventory) RemoveMagic(uid uint) *Magic {
+	var result *Magic
 	var filtered []Magic
-	for _, m := range i.Magic {
-		if m.Uid != uid {
-			filtered = append(filtered, m)
+	for n := range i.Magic {
+		if i.Magic[n].Uid != uid {
+			filtered = append(filtered, i.Magic[n])
 		} else {
-			result = true
+			result = &i.Magic[n]
 		}
 	}
 	i.Magic = filtered
 	return result
 }
 
-func (i *UnitInventory) RemoveArmor(uid uint) bool {
-	result := false
+func (i *UnitInventory) RemoveArmor(uid uint) *Armor {
+	var result *Armor
 	var filtered []Armor
-	for _, a := range i.Armor {
-		if a.Uid != uid {
-			filtered = append(filtered, a)
+	for n := range i.Armor {
+		if i.Armor[n].Uid != uid {
+			filtered = append(filtered, i.Armor[n])
 		} else {
-			result = true
+			result = &i.Armor[n]
 		}
 	}
 	i.Armor = filtered
+	return result
+}
+
+func (i *UnitInventory) RemoveDisposable(uid uint, quantity uint) *Disposable {
+	var result *Disposable
+	var filtered []Disposable
+	for n := range i.Disposable {
+		if i.Disposable[n].Uid != uid || i.Disposable[n].Quantity < quantity {
+			filtered = append(filtered, i.Disposable[n])
+			continue
+		}
+		i.Disposable[n].Quantity -= quantity
+		result = &i.Disposable[n]
+		if i.Disposable[n].Quantity != 0 {
+			filtered = append(filtered, i.Disposable[n])
+		}
+	}
+	i.Disposable = filtered
+	return result
+}
+
+func (i *UnitInventory) RemoveAmmunition(uid uint, quantity uint) *Ammunition {
+	var result *Ammunition
+	var filtered []Ammunition
+	for n := range i.Ammunition {
+		if i.Ammunition[n].Uid != uid || i.Ammunition[n].Quantity < quantity {
+			filtered = append(filtered, i.Ammunition[n])
+			continue
+		}
+		i.Ammunition[n].Quantity -= quantity
+		result = &i.Ammunition[n]
+		if i.Ammunition[n].Quantity != 0 {
+			filtered = append(filtered, i.Ammunition[n])
+		}
+	}
+	i.Ammunition = filtered
 	return result
 }
 

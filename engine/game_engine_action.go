@@ -14,6 +14,8 @@ func (e *GameEngine) ExecuteUserAction(action domain.Action, userId UserId) *Gam
 		actionResult = e.executeEquipAction(action, userId)
 	case domain.ActionUnequip:
 		actionResult = e.executeUnequipAction(action, userId)
+	case domain.ActionThrowAway:
+		actionResult = e.executeThrowAwayAction(action, userId)
 	case domain.ActionMove:
 		actionResult = e.executeMoveAction(action, userId)
 	case domain.ActionSkip:
@@ -120,6 +122,28 @@ func (e *GameEngine) executeUnequipAction(action domain.Action, userId UserId) *
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	result := unit.Unequip(action.ItemUid)
+	if e.state.phase == GamePhasePrepareUnit {
+		e.state.UpdateUnitsQueue(e.battlefield().Units)
+	}
+	return result
+}
+
+func (e *GameEngine) executeThrowAwayAction(action domain.Action, userId UserId) *domain.ActionResult {
+	if !e.isActionPhase() && e.state.phase != GamePhasePrepareUnit {
+		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+	}
+	unit := e.battlefield().FindUnit(action.Uid)
+	if unit == nil {
+		return domain.NewActionResult().WithResult(domain.ResultNotFound)
+	}
+	if unit.IsDead || unit.GetUserId() != userId ||
+		e.state.phase != GamePhasePrepareUnit && !e.state.IsCurrentActiveUnit(unit) {
+		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+	}
+	if action.Quantity == 0 {
+		action.Quantity = 1
+	}
+	result := unit.ThrowAway(action.ItemUid, action.Quantity)
 	if e.state.phase == GamePhasePrepareUnit {
 		e.state.UpdateUnitsQueue(e.battlefield().Units)
 	}

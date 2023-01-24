@@ -135,7 +135,7 @@
                 "strength": 7,
                 "physique": 7,
                 "agility": 7,
-                "endurance": 4,
+                "endurance": 5,
                 "intelligence": 2,
                 "initiative": 2,
                 "luck": 5
@@ -194,7 +194,7 @@
                 "strength": 5,
                 "physique": 5,
                 "agility": 8,
-                "endurance": 3,
+                "endurance": 5,
                 "intelligence": 2,
                 "initiative": 7,
                 "luck": 5

@@ -100,7 +100,7 @@
                 "stamina": 10
             },
             "price": {
-                "coins": 300
+                "coins": 3000
             }
         },
         {
@@ -141,7 +141,7 @@
                 "stamina": 10
             },
             "price": {
-                "coins": 250
+                "coins": 2500
             }
         },
         {
@@ -167,7 +167,7 @@
                 "stamina": 10
             },
             "price": {
-                "coins": 250
+                "coins": 2500
             }
         },
         {
@@ -201,7 +201,7 @@
                 "stamina": 5
             },
             "price": {
-                "coins": 150
+                "coins": 1500
             }
         },
         {
@@ -227,7 +227,7 @@
                 "stamina": 2
             },
             "price": {
-                "coins": 500
+                "coins": 5000
             }
         },
         {
@@ -262,7 +262,7 @@
                 }
             ],
             "price": {
-                "coins": 300
+                "coins": 3000
             }
         },
         {
@@ -297,12 +297,12 @@
                 }
             ],
             "price": {
-                "coins": 500
+                "coins": 5000
             }
         },
         {
             "type": "weapon",
-            "name": "Mace",
+            "name": "Rusty Mace",
             "code": "rusty-mace-01",
             "description": "Rusty Mace",
             "wearout": 35,
@@ -369,7 +369,7 @@
                 }
             ],
             "price": {
-                "coins": 50
+                "coins": 100
             }
         }
     ],

@@ -59,6 +59,33 @@
         },
         {
             "code": "sorcerer-cloak-01"
+        },
+        {
+            "code": "rusty-axe-01"
+        },
+        {
+            "code": "rusty-mace-01"
+        },
+        {
+            "code": "sword-01"
+        },
+        {
+            "code": "spear-01"
+        },
+        {
+            "code": "bow-01"
+        },
+        {
+            "code": "dagger-01"
+        },
+        {
+            "code": "sorcerer-staff-01"
+        },
+        {
+            "code": "axe-01"
+        },
+        {
+            "code": "scythe-01"
         }
     ]
 }
