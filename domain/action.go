@@ -12,6 +12,7 @@ const (
 	ActionSell      AtionType = "sell"
 	ActionThrowAway AtionType = "throwAway"
 	ActionSkip      AtionType = "skip"
+	ActionLevelUp   AtionType = "levelUp"
 )
 
 type Action struct {

@@ -37,6 +37,7 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 	if unit == nil {
 		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMalformed)
 	}
+	unit.PrepareForUser()
 	user := users.NewUser(data.Nickname, data.Class, unit)
 	c.users.AddUser(user)
 	response.fillUserStatus(user)

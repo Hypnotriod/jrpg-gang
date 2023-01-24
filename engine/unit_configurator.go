@@ -16,6 +16,8 @@ func (c *UnitConfigurator) ExecuteAction(action domain.Action, unit *domain.Unit
 		return unit.Equip(action.ItemUid)
 	case domain.ActionUnequip:
 		return unit.Unequip(action.ItemUid)
+	case domain.ActionLevelUp:
+		return unit.LevelUp()
 	}
 	return domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 }
