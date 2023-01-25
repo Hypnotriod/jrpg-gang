@@ -13,6 +13,7 @@ const (
 	ActionThrowAway AtionType = "throwAway"
 	ActionSkip      AtionType = "skip"
 	ActionLevelUp   AtionType = "levelUp"
+	ActionSkillUp   AtionType = "skillUp"
 )
 
 type ActionProperty string

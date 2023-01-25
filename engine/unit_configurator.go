@@ -16,8 +16,12 @@ func (c *UnitConfigurator) ExecuteAction(action domain.Action, unit *domain.Unit
 		return unit.Equip(action.ItemUid)
 	case domain.ActionUnequip:
 		return unit.Unequip(action.ItemUid)
+	case domain.ActionThrowAway:
+		//todo
 	case domain.ActionLevelUp:
 		return unit.LevelUp()
+	case domain.ActionSkillUp:
+		return unit.SkillUp(action.Property)
 	}
 	return domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 }
