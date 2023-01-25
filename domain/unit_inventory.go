@@ -284,6 +284,18 @@ func (i *UnitInventory) RemoveAmmunition(uid uint, quantity uint) *Ammunition {
 	return result
 }
 
+func (i *UnitInventory) RemoveEquipment(uid uint) *Equipment {
+	armor := i.RemoveArmor(uid)
+	if armor != nil {
+		return &armor.Equipment
+	}
+	weapon := i.RemoveWeapon(uid)
+	if weapon != nil {
+		return &weapon.Equipment
+	}
+	return nil
+}
+
 func (i *UnitInventory) FindEquipment(uid uint) *Equipment {
 	equipment := i.GetEquipment(false)
 	for n := range equipment {

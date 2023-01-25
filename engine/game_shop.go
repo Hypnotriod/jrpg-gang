@@ -99,12 +99,18 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 		return result.WithResult(domain.ResultNotEnoughResources)
 	} else if action.Quantity != 1 {
 		return result.WithResult(domain.ResultNotAllowed)
-	} else if item.Type == domain.ItemTypeArmor && unit.Inventory.RemoveArmor(action.ItemUid) == nil {
-		return result.WithResult(domain.ResultNotEnoughResources)
-	} else if item.Type == domain.ItemTypeWeapon && unit.Inventory.RemoveWeapon(action.ItemUid) == nil {
-		return result.WithResult(domain.ResultNotEnoughResources)
 	} else if item.Type == domain.ItemTypeMagic && unit.Inventory.RemoveMagic(action.ItemUid) == nil {
 		return result.WithResult(domain.ResultNotEnoughResources)
+	} else {
+		equipment := unit.Inventory.RemoveEquipment(action.ItemUid)
+		if equipment == nil {
+			return result.WithResult(domain.ResultNotEnoughResources)
+		}
+		if equipment.Durability <= 0 {
+			wearoutFactor = 0
+		} else {
+			wearoutFactor = 1 - equipment.Wearout/equipment.Durability
+		}
 	}
 	price := item.Price
 	price.MultiplyAll(SELL_ITEM_PRICE_FACTOR * float32(action.Quantity) * wearoutFactor)
