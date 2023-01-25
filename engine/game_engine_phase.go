@@ -87,7 +87,7 @@ func (e *GameEngine) switchToNextUnit() {
 }
 
 func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
-	result := NewEndTurnResult()
+	result := NewEndRoundResult()
 	for _, unit := range e.battlefield().Units {
 		result.Recovery[unit.Uid] = unit.ApplyRecoverylOnNextTurn()
 		result.Damage[unit.Uid] = unit.ApplyDamageOnNextTurn()

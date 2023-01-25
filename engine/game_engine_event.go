@@ -4,14 +4,14 @@ import (
 	"jrpg-gang/domain"
 )
 
-type EndTurnResult struct {
+type EndRoundResult struct {
 	Damage   map[uint]domain.Damage       `json:"damage"`
 	Recovery map[uint]domain.UnitRecovery `json:"recovery"`
 	Booty    domain.UnitBooty             `json:"booty"`
 }
 
-func NewEndTurnResult() *EndTurnResult {
-	result := &EndTurnResult{}
+func NewEndRoundResult() *EndRoundResult {
+	result := &EndRoundResult{}
 	result.Damage = map[uint]domain.Damage{}
 	result.Recovery = map[uint]domain.UnitRecovery{}
 	return result
@@ -35,7 +35,7 @@ type GameEvent struct {
 	Spot             *Spot                 `json:"spot"`
 	PlayersInfo      []PlayerInfo          `json:"players"`
 	UnitActionResult *GameUnitActionResult `json:"unitActionResult,omitempty"`
-	EndRoundResult   *EndTurnResult        `json:"endRoundResult,omitempty"`
+	EndRoundResult   *EndRoundResult       `json:"endRoundResult,omitempty"`
 }
 
 func (e *GameEvent) WithPhaseTimeout(timeout float32) *GameEvent {
