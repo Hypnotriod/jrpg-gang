@@ -325,7 +325,7 @@
         "stats": {
             "progress": {
                 "level": 10,
-                "experience": 1000
+                "experience": 150
             },
             "baseAttributes": {
                 "health": 200,
@@ -386,7 +386,7 @@
         "stats": {
             "progress": {
                 "level": 10,
-                "experience": 500
+                "experience": 70
             },
             "baseAttributes": {
                 "health": 100,
@@ -447,7 +447,7 @@
         "stats": {
             "progress": {
                 "level": 2,
-                "experience": 150
+                "experience": 30
             },
             "baseAttributes": {
                 "health": 50,
@@ -497,7 +497,7 @@
         "stats": {
             "progress": {
                 "level": 2,
-                "experience": 500
+                "experience": 100
             },
             "baseAttributes": {
                 "health": 100,
@@ -556,7 +556,7 @@
         "stats": {
             "progress": {
                 "level": 2,
-                "experience": 200
+                "experience": 40
             },
             "baseAttributes": {
                 "health": 75,
@@ -610,7 +610,7 @@
         "stats": {
             "progress": {
                 "level": 2,
-                "experience": 500
+                "experience": 100
             },
             "baseAttributes": {
                 "health": 150,
@@ -667,7 +667,7 @@
         "stats": {
             "progress": {
                 "level": 2,
-                "experience": 500
+                "experience": 80
             },
             "baseAttributes": {
                 "health": 75,
