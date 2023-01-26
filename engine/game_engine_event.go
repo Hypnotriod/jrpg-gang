@@ -5,15 +5,17 @@ import (
 )
 
 type EndRoundResult struct {
-	Damage   map[uint]domain.Damage       `json:"damage"`
-	Recovery map[uint]domain.UnitRecovery `json:"recovery"`
-	Booty    domain.UnitBooty             `json:"booty"`
+	Damage     map[uint]domain.Damage       `json:"damage,omitempty"`
+	Recovery   map[uint]domain.UnitRecovery `json:"recovery,omitempty"`
+	Experience map[uint]uint                `json:"experience,omitempty"`
+	Booty      *domain.UnitBooty            `json:"booty,omitempty"`
 }
 
 func NewEndRoundResult() *EndRoundResult {
 	result := &EndRoundResult{}
 	result.Damage = map[uint]domain.Damage{}
 	result.Recovery = map[uint]domain.UnitRecovery{}
+	result.Experience = map[uint]uint{}
 	return result
 }
 

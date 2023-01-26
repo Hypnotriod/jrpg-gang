@@ -7,24 +7,32 @@ type UnitRecovery struct {
 	Damage
 }
 
-func (s *UnitRecovery) Normalize() {
-	s.Damage.Normalize()
-	s.Health = util.Max(s.Health, 0)
-	s.Stamina = util.Max(s.Stamina, 0)
-	s.Mana = util.Max(s.Mana, 0)
-	s.Stress = util.Max(s.Stress, 0)
+func (r *UnitRecovery) Normalize() {
+	r.Damage.Normalize()
+	r.Health = util.Max(r.Health, 0)
+	r.Stamina = util.Max(r.Stamina, 0)
+	r.Mana = util.Max(r.Mana, 0)
+	r.Stress = util.Max(r.Stress, 0)
 }
 
-func (s *UnitRecovery) MultiplyAll(factor float32) {
-	s.Damage.MultiplyAll(factor)
-	s.Health = util.MultiplyWithRounding(s.Health, factor)
-	s.Stamina = util.MultiplyWithRounding(s.Stamina, factor)
-	s.Mana = util.MultiplyWithRounding(s.Mana, factor)
-	s.Stress = util.MultiplyWithRounding(s.Stress, factor)
+func (r *UnitRecovery) MultiplyAll(factor float32) {
+	r.Damage.MultiplyAll(factor)
+	r.Health = util.MultiplyWithRounding(r.Health, factor)
+	r.Stamina = util.MultiplyWithRounding(r.Stamina, factor)
+	r.Mana = util.MultiplyWithRounding(r.Mana, factor)
+	r.Stress = util.MultiplyWithRounding(r.Stress, factor)
 }
 
-func (s *UnitRecovery) Accumulate(state UnitRecovery) {
-	s.Damage.Accumulate(state.Damage)
-	s.UnitBaseAttributes.Accumulate(state.UnitBaseAttributes)
-	s.Stress += state.Stress
+func (r *UnitRecovery) Accumulate(state UnitRecovery) {
+	r.Damage.Accumulate(state.Damage)
+	r.UnitBaseAttributes.Accumulate(state.UnitBaseAttributes)
+	r.Stress += state.Stress
+}
+
+func (r *UnitRecovery) HasEffect() bool {
+	return r.Damage.HasEffect() ||
+		r.Health != 0 ||
+		r.Stamina != 0 ||
+		r.Mana != 0 ||
+		r.Stress != 0
 }

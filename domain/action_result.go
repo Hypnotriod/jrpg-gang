@@ -29,6 +29,7 @@ type ActionResult struct {
 	TemporalDamage       []DamageImpact           `json:"temporalDamage,omitempty"`
 	InstantRecovery      []UnitRecovery           `json:"instantRecovery,omitempty"`
 	TemporalModification []UnitModificationImpact `json:"temporalModification,omitempty"`
+	Experience           map[uint]uint            `json:"experience,omitempty"`
 	Booty                *UnitBooty               `json:"booty,omitempty"`
 	Result               ActionResultType         `json:"result"`
 }
@@ -49,6 +50,7 @@ func (r *ActionResult) IsCriticalMiss() bool {
 
 func NewActionResult() *ActionResult {
 	action := &ActionResult{}
+	action.Experience = map[uint]uint{}
 	return action
 }
 

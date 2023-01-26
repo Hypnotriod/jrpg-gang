@@ -14,7 +14,7 @@ func (e *GameEngine) processAI(event *GameEvent) {
 	if e.state.phase == GamePhaseMakeMoveOrActionAI && e.aiTryToMove(event, unit) {
 		return
 	}
-	e.onUnitCompleteAction()
+	e.onUnitCompleteAction(nil)
 }
 
 func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
@@ -47,7 +47,7 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 			}
 		}
 	}
-	e.onUnitCompleteAction()
+	e.onUnitCompleteAction(nil)
 }
 
 func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
@@ -115,6 +115,6 @@ func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target
 	unitAction.Result = *result
 	event.UnitActionResult = unitAction
 	e.onUnitUseAction(unitAction.Action.TargetUid, result)
-	e.onUnitCompleteAction()
+	e.onUnitCompleteAction(nil)
 	return true
 }

@@ -13,7 +13,7 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
 		e.processAI(result)
 	case GamePhaseMakeMoveOrAction, GamePhaseMakeAction:
-		e.onUnitCompleteAction()
+		e.onUnitCompleteAction(nil)
 	case GamePhaseRetreatAction:
 		e.processRetreatActionAI(result)
 	case GamePhaseActionComplete:
@@ -89,12 +89,18 @@ func (e *GameEngine) switchToNextUnit() {
 func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
 	result := NewEndRoundResult()
 	for _, unit := range e.battlefield().Units {
-		result.Recovery[unit.Uid] = unit.ApplyRecoverylOnNextTurn()
-		result.Damage[unit.Uid] = unit.ApplyDamageOnNextTurn()
+		recovery := unit.ApplyRecoverylOnNextTurn()
+		if recovery.HasEffect() {
+			result.Recovery[unit.Uid] = recovery
+		}
+		damage := unit.ApplyDamageOnNextTurn()
+		if damage.HasEffect() {
+			result.Damage[unit.Uid] = damage
+		}
 		unit.ReduceModificationOnNextTurn()
 	}
 	corpses := e.battlefield().FilterSurvivors()
-	e.applyExperience(corpses)
+	e.applyExperience(corpses, &result.Experience)
 	event.EndRoundResult = result
 	isLastRound = e.battlefield().FactionsCount() <= 1
 	if isLastRound && e.battlefield().FactionUnitsCount(GameUnitFactionLeft) != 0 {
@@ -125,9 +131,9 @@ func (e *GameEngine) clarifyUseActionTargetuid(unitUit uint, targetUid uint, act
 	return targetUid
 }
 
-func (e *GameEngine) onUnitCompleteAction() {
+func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint) {
 	corpses := e.battlefield().FilterSurvivors()
-	e.applyExperience(corpses)
+	e.applyExperience(corpses, expDistribution)
 	e.battlefield().UpdateCellsFactions()
 	e.state.ShiftUnitsQueue()
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
@@ -138,10 +144,10 @@ func (e *GameEngine) accumulateBooty(event *GameEvent) {
 	booty := util.RandomPick(e.rndGen, e.scenario.CurrentSpot().Booty)
 	booty.W = 0
 	e.state.Booty.Accumulate(booty)
-	event.EndRoundResult.Booty = booty
+	event.EndRoundResult.Booty = &booty
 }
 
-func (e *GameEngine) applyExperience(corpses []*GameUnit) {
+func (e *GameEngine) applyExperience(corpses []*GameUnit, expDistribution *map[uint]uint) {
 	if len(corpses) == 0 {
 		return
 	}
@@ -159,8 +165,14 @@ func (e *GameEngine) applyExperience(corpses []*GameUnit) {
 	totalExperience -= unitExperience * uint(len(leftUnits))
 	for _, unit := range leftUnits {
 		unit.Stats.Progress.Experience += unitExperience
+		if expDistribution != nil {
+			(*expDistribution)[unit.Uid] = unitExperience
+		}
 		if totalExperience > 0 {
 			unit.Stats.Progress.Experience += 1
+			if expDistribution != nil {
+				(*expDistribution)[unit.Uid]++
+			}
 			totalExperience--
 		}
 	}

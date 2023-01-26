@@ -85,7 +85,7 @@ func (e *GameEngine) executeUseAction(action domain.Action, userId UserId) *doma
 	action.TargetUid = e.clarifyUseActionTargetuid(unit.Uid, target.Uid, result)
 	if result.Result == domain.ResultAccomplished {
 		e.onUnitUseAction(action.TargetUid, result)
-		e.onUnitCompleteAction()
+		e.onUnitCompleteAction(&result.Experience)
 	}
 	return result
 }
@@ -179,8 +179,9 @@ func (e *GameEngine) executeSkipAction(action domain.Action, userId UserId) *dom
 	if unit.IsDead || unit.GetUserId() != userId || !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	e.onUnitCompleteAction()
-	return domain.NewActionResult().WithResult(domain.ResultAccomplished)
+	result := domain.NewActionResult()
+	e.onUnitCompleteAction(&result.Experience)
+	return result.WithResult(domain.ResultAccomplished)
 }
 
 func (e *GameEngine) isActionPhase() bool {

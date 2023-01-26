@@ -110,7 +110,7 @@ func (e *GameEngine) RemoveActor(userId UserId) bool {
 		return false
 	}
 	if e.state.IsCurrentActiveUnit(actor) && e.isActionPhase() {
-		e.onUnitCompleteAction()
+		e.onUnitCompleteAction(nil)
 	}
 	actor.PlayerInfo.IsReady = false
 	e.battlefield().MoveToCorpses(actor.Uid)
