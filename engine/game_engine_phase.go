@@ -105,6 +105,7 @@ func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
 	isLastRound = e.battlefield().FactionsCount() <= 1
 	if isLastRound && e.battlefield().FactionUnitsCount(GameUnitFactionLeft) != 0 {
 		e.accumulateBooty(event)
+		e.applySpotExperience(event)
 	}
 	return
 }
@@ -145,6 +146,15 @@ func (e *GameEngine) accumulateBooty(event *GameEvent) {
 	booty.W = 0
 	e.state.Booty.Accumulate(booty)
 	event.EndRoundResult.Booty = &booty
+}
+
+func (e *GameEngine) applySpotExperience(event *GameEvent) {
+	experience := e.scenario.CurrentSpot().Experience
+	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
+	for _, unit := range leftUnits {
+		unit.Stats.Progress.Experience += experience
+		event.EndRoundResult.Experience[unit.Uid] += experience
+	}
 }
 
 func (e *GameEngine) applyExperience(corpses []*GameUnit, expDistribution *map[uint]uint) {

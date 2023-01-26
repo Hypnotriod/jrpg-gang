@@ -14,6 +14,7 @@
                         "coins": 150
                     }
                 ],
+                "experience": 100,
                 "battlefield": {
                     "matrix": [
                         [
@@ -99,6 +100,7 @@
                         "ruby": 10
                     }
                 ],
+                "experience": 150,
                 "battlefield": {
                     "matrix": [
                         [
@@ -192,6 +194,7 @@
                         "ruby": 10
                     }
                 ],
+                "experience": 200,
                 "battlefield": {
                     "matrix": [
                         [
@@ -269,6 +272,7 @@
                         "ruby": 10
                     }
                 ],
+                "experience": 250,
                 "battlefield": {
                     "matrix": [
                         [
@@ -346,6 +350,7 @@
                         "ruby": 10
                     }
                 ],
+                "experience": 250,
                 "battlefield": {
                     "matrix": [
                         [
@@ -415,6 +420,7 @@
                         "ruby": 10
                     }
                 ],
+                "experience": 250,
                 "battlefield": {
                     "matrix": [
                         [

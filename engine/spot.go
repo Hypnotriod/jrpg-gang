@@ -9,6 +9,7 @@ type Spot struct {
 	Code        string             `json:"code"`
 	Battlefield Battlefield        `json:"battlefield"`
 	Booty       []domain.UnitBooty `json:"booty"`
+	Experience  uint               `json:"experience"`
 }
 
 func (s *Spot) Clone() *Spot {
@@ -16,6 +17,7 @@ func (s *Spot) Clone() *Spot {
 	r.Name = s.Name
 	r.Code = s.Code
 	r.Battlefield = *s.Battlefield.Clone()
+	r.Experience = s.Experience
 	r.Booty = s.Booty
 	return r
 }
