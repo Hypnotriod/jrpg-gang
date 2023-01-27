@@ -400,13 +400,41 @@
                 "maximumY": 10
             },
             "useCost": {
-                "mana": 25
+                "mana": 15
             },
             "damage": [],
             "modification": [
                 {
                     "recovery": {
                         "health": 25
+                    }
+                }
+            ]
+        },
+        {
+            "type": "magic",
+            "name": "Stamina",
+            "description": "Stamina Recovery",
+            "code": "magic-stamina-01",
+            "price": {
+                "coins": 5000,
+                "ruby": 100
+            },
+            "requirements": {
+                "intelligence": 8
+            },
+            "range": {
+                "maximumX": 10,
+                "maximumY": 10
+            },
+            "useCost": {
+                "mana": 10
+            },
+            "damage": [],
+            "modification": [
+                {
+                    "recovery": {
+                        "stamina": 25
                     }
                 }
             ]

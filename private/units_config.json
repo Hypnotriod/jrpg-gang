@@ -307,6 +307,9 @@
                 },
                 {
                     "code": "magic-health-01"
+                },
+                {
+                    "code": "magic-stamina-01"
                 }
             ]
         },
