@@ -189,5 +189,5 @@ func (e *GameEngine) isActionPhase() bool {
 }
 
 func (e *GameEngine) canTakeAShare() bool {
-	return e.state.phase == GamePhaseBattleComplete || e.state.phase == GamePhaseDungeonComplete
+	return e.state.phase == GamePhaseSpotComplete || e.state.phase == GamePhaseScenarioComplete
 }

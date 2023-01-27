@@ -17,8 +17,8 @@ const (
 	GamePhaseMakeAction         GamePhase = "makeAction"
 	GamePhaseRetreatAction      GamePhase = "retreatAction"
 	GamePhaseActionComplete     GamePhase = "actionComplete"
-	GamePhaseBattleComplete     GamePhase = "battleComplete"
-	GamePhaseDungeonComplete    GamePhase = "dungeonComplete"
+	GamePhaseSpotComplete       GamePhase = "spotComplete"
+	GamePhaseScenarioComplete   GamePhase = "scenarioComplete"
 )
 
 type GameState struct {

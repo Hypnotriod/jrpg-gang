@@ -12,7 +12,7 @@ const NEXT_PHASE_TIMEOUT_LONG_SEC int = 62
 func (w *GameEngineWrapper) getNextPhaseTimeout() (int, bool) {
 	switch w.engine.GetPhase() {
 	case engine.GamePhasePrepareUnit,
-		engine.GamePhaseBattleComplete:
+		engine.GamePhaseSpotComplete:
 		return NEXT_PHASE_TIMEOUT_LONG_SEC, true
 	case engine.GamePhaseMakeMoveOrAction,
 		engine.GamePhaseMakeAction:

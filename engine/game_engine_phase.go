@@ -18,7 +18,7 @@ func (e *GameEngine) NextPhase() *GameEvent {
 		e.processRetreatActionAI(result)
 	case GamePhaseActionComplete:
 		e.processActionComplete(result)
-	case GamePhaseBattleComplete:
+	case GamePhaseSpotComplete:
 		e.processBattleComplete(result)
 	}
 	e.resetActorsReady()
@@ -34,7 +34,7 @@ func (e *GameEngine) NextPhaseRequired() bool {
 		e.state.phase == GamePhaseMakeActionAI ||
 		e.state.phase == GamePhaseRetreatAction ||
 		e.state.phase == GamePhaseActionComplete ||
-		e.state.phase == GamePhaseBattleComplete
+		e.state.phase == GamePhaseSpotComplete
 }
 
 func (e *GameEngine) prepareNextSpot(actors []*GameUnit) {
@@ -59,9 +59,9 @@ func (e *GameEngine) processActionComplete(event *GameEvent) {
 func (e *GameEngine) processRoundComplete(event *GameEvent) {
 	if e.endRound(event) {
 		if e.scenario.IsLastSpot() {
-			e.state.ChangePhase(GamePhaseDungeonComplete)
+			e.state.ChangePhase(GamePhaseScenarioComplete)
 		} else {
-			e.state.ChangePhase(GamePhaseBattleComplete)
+			e.state.ChangePhase(GamePhaseSpotComplete)
 		}
 	} else {
 		e.state.ChangePhase(GamePhaseReadyForStartRound)
