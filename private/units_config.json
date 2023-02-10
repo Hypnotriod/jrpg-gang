@@ -495,6 +495,56 @@
         }
     },
     {
+        "name": "Slow Green Slime",
+        "code": "slime-01",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 35
+            },
+            "baseAttributes": {
+                "health": 60,
+                "stamina": 40
+            },
+            "attributes": {
+                "strength": 9,
+                "physique": 5,
+                "agility": 3,
+                "endurance": 5,
+                "intelligence": 0,
+                "initiative": 1,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 0,
+                "cutting": 0,
+                "crushing": 0,
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 100,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "bleeding": 0,
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
+            }
+        },
+        "slots": {
+            "body": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "teeth-01",
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
         "name": "Cacodemon Green",
         "code": "cacodemon-01",
         "stats": {
@@ -602,6 +652,56 @@
             "descriptor": [
                 {
                     "code": "fist-01",
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
+        "name": "Ghost",
+        "code": "ghost-01",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 45
+            },
+            "baseAttributes": {
+                "health": 50,
+                "stamina": 75
+            },
+            "attributes": {
+                "strength": 12,
+                "physique": 5,
+                "agility": 10,
+                "endurance": 5,
+                "intelligence": 0,
+                "initiative": 5,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 0,
+                "cutting": 0,
+                "crushing": 100,
+                "fire": 100,
+                "cold": 100,
+                "lighting": 0,
+                "poison": 100,
+                "exhaustion": 100,
+                "manaDrain": 0,
+                "bleeding": 100,
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
+            }
+        },
+        "slots": {
+            "body": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "teeth-01",
                     "equipped": true
                 }
             ]
@@ -716,6 +816,69 @@
                 },
                 {
                     "code": "sword-01",
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
+        "name": "Dragon",
+        "code": "dragon-01",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 80
+            },
+            "baseAttributes": {
+                "health": 500,
+                "stamina": 200,
+                "mana": 200
+            },
+            "attributes": {
+                "strength": 35,
+                "physique": 25,
+                "agility": 10,
+                "endurance": 25,
+                "intelligence": 25,
+                "initiative": 10,
+                "luck": 10
+            },
+            "resistance": {
+                "stabbing": 25,
+                "cutting": 25,
+                "crushing": 25,
+                "fire": 25,
+                "cold": 25,
+                "lighting": 25,
+                "poison": 0,
+                "exhaustion": 15,
+                "manaDrain": 25,
+                "bleeding": 15,
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
+            }
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "wing": 2,
+            "leg": 2,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "teeth-01"
+                },
+                {
+                    "code": "throat-01",
+                    "equipped": true
+                },
+                {
+                    "code": "fire-charge-02",
+                    "quantity": 50,
                     "equipped": true
                 }
             ]

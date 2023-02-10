@@ -70,6 +70,25 @@
         },
         {
             "type": "weapon",
+            "name": "Throat",
+            "code": "throat-01",
+            "description": "Launch a projectile from throat",
+            "ammunitionKind": "magicCharge",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {},
+            "range": {
+                "maximumX": 5,
+                "maximumY": 5,
+                "minimumX": 2
+            },
+            "damage": [],
+            "useCost": {
+                "mana": 10
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Short Sword",
             "code": "sword-01",
             "description": "Base one hand sword",
@@ -295,7 +314,8 @@
                 {
                     "chance": 40,
                     "cutting": 35,
-                    "stubbing": 5
+                    "stubbing": 5,
+                    "fear": 5
                 },
                 {
                     "duration": 3,
@@ -909,6 +929,29 @@
                     "duration": 3,
                     "chance": 15,
                     "fire": 5
+                }
+            ],
+            "price": {
+                "coins": 3
+            }
+        },
+        {
+            "name": "Fire",
+            "type": "ammunition",
+            "code": "fire-charge-02",
+            "description": "Dragon Fire Charge",
+            "kind": "magicCharge",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "damage": [
+                {
+                    "fire": 50,
+                    "chance": 60
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "fire": 15
                 }
             ],
             "price": {
