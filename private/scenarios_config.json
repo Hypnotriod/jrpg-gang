@@ -88,11 +88,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 100
+                        "coins": 125
                     },
                     {
                         "weight": 1,
-                        "coins": 150
+                        "coins": 175
                     }
                 ],
                 "experience": 100,
@@ -169,11 +169,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 100
+                        "coins": 125
                     },
                     {
                         "weight": 1,
-                        "coins": 150
+                        "coins": 175
                     }
                 ],
                 "experience": 100,
@@ -250,11 +250,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 100
+                        "coins": 125
                     },
                     {
                         "weight": 1,
-                        "coins": 150
+                        "coins": 175
                     }
                 ],
                 "experience": 100,
@@ -667,7 +667,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodemon-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -1035,7 +1035,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodemon-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -1043,7 +1043,101 @@
                             }
                         },
                         {
+                            "code": "cacodemon-03",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 250
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 300
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 350,
+                        "ruby": 10
+                    }
+                ],
+                "experience": 250,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 1, "code": "tile-rock-01", "factions": []},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "skeleton-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "skeleton-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "skeleton-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
                             "code": "cacodemon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "cacodemon-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "cacodemon-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -1507,32 +1601,36 @@
                 {
                     "weight": 1,
                     "spotIndex": 11
-                }
-            ],
-            [
+                },
                 {
                     "weight": 1,
                     "spotIndex": 12
-                },
+                }
+            ],
+            [
                 {
                     "weight": 1,
                     "spotIndex": 13
-                }
-            ],
-            [
-                {
-                    "weight": 1,
-                    "spotIndex": 14
                 },
                 {
                     "weight": 1,
-                    "spotIndex": 15
+                    "spotIndex": 14
                 }
             ],
             [
                 {
                     "weight": 1,
+                    "spotIndex": 15
+                },
+                {
+                    "weight": 1,
                     "spotIndex": 16
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotIndex": 17
                 }
             ]
         ]

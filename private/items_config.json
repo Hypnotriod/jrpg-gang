@@ -913,7 +913,30 @@
             }
         },
         {
-            "name": "Fire",
+            "name": "Poison Charge",
+            "type": "ammunition",
+            "code": "poison-charge-01",
+            "description": "Sorcerer staff Fire Charge",
+            "kind": "magicCharge",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "damage": [
+                {
+                    "poison": 25,
+                    "chance": 50
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "poison": 5
+                }
+            ],
+            "price": {
+                "coins": 5
+            }
+        },
+        {
+            "name": "Fire Charge",
             "type": "ammunition",
             "code": "fire-charge-01",
             "description": "Sorcerer staff Fire Charge",
@@ -936,7 +959,7 @@
             }
         },
         {
-            "name": "Fire",
+            "name": "Fire Charge",
             "type": "ammunition",
             "code": "fire-charge-02",
             "description": "Dragon Fire Charge",
@@ -959,7 +982,7 @@
             }
         },
         {
-            "name": "Cold",
+            "name": "Cold Charge",
             "type": "ammunition",
             "code": "cold-charge-01",
             "description": "Sorcerer staff Cold Charge",
@@ -982,7 +1005,7 @@
             }
         },
         {
-            "name": "Lighting",
+            "name": "Lighting Chrg",
             "type": "ammunition",
             "code": "lighting-charge-01",
             "description": "Sorcerer staff Lighting Charge",

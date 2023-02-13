@@ -646,6 +646,124 @@
                     "equipped": true
                 },
                 {
+                    "code": "poison-charge-01",
+                    "quantity": 5,
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
+        "name": "Cacodemon Blue",
+        "code": "cacodemon-02",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 120
+            },
+            "baseAttributes": {
+                "health": 120,
+                "stamina": 100,
+                "mana": 100
+            },
+            "attributes": {
+                "strength": 8,
+                "physique": 5,
+                "agility": 3,
+                "endurance": 6,
+                "intelligence": 18,
+                "initiative": 5,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 5,
+                "fire": 0,
+                "cold": 100,
+                "lighting": 0,
+                "poison": 0,
+                "exhaustion": 5,
+                "manaDrain": 5,
+                "bleeding": 5,
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
+            }
+        },
+        "slots": {
+            "body": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "teeth-01"
+                },
+                {
+                    "code": "sight-01",
+                    "equipped": true
+                },
+                {
+                    "code": "cold-charge-01",
+                    "quantity": 5,
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
+        "name": "Cacodemon Yellow",
+        "code": "cacodemon-03",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 120
+            },
+            "baseAttributes": {
+                "health": 90,
+                "stamina": 100,
+                "mana": 100
+            },
+            "attributes": {
+                "strength": 10,
+                "physique": 5,
+                "agility": 3,
+                "endurance": 6,
+                "intelligence": 15,
+                "initiative": 5,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 5,
+                "fire": 100,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 0,
+                "exhaustion": 5,
+                "manaDrain": 5,
+                "bleeding": 5,
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
+            }
+        },
+        "slots": {
+            "body": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "teeth-01"
+                },
+                {
+                    "code": "sight-01",
+                    "equipped": true
+                },
+                {
                     "code": "fire-charge-01",
                     "quantity": 5,
                     "equipped": true
