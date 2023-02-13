@@ -218,7 +218,7 @@
                             }
                         },
                         {
-                            "code": "slime-02",
+                            "code": "bat-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -234,7 +234,96 @@
                             }
                         },
                         {
-                            "code": "slime-02",
+                            "code": "bat-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 100
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 150
+                    }
+                ],
+                "experience": 100,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 1, "code": "tile-grass-01", "factions": []},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "bat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "bat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "bat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "slime-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -1376,70 +1465,74 @@
                 {
                     "weight": 1,
                     "spotIndex": 2
-                }
-            ],
-            [
+                },
                 {
                     "weight": 1,
                     "spotIndex": 3
-                },
-                {
-                    "weight": 1,
-                    "spotIndex": 4
                 }
             ],
             [
                 {
-                    "weight": 2,
-                    "spotIndex": 5
+                    "weight": 1,
+                    "spotIndex": 4
                 },
+                {
+                    "weight": 1,
+                    "spotIndex": 5
+                }
+            ],
+            [
                 {
                     "weight": 2,
                     "spotIndex": 6
                 },
                 {
-                    "weight": 1,
+                    "weight": 2,
                     "spotIndex": 7
+                },
+                {
+                    "weight": 1,
+                    "spotIndex": 8
                 }
             ],
             [
-                {
-                    "weight": 2,
-                    "spotIndex": 8
-                },
                 {
                     "weight": 2,
                     "spotIndex": 9
                 },
                 {
-                    "weight": 1,
+                    "weight": 2,
                     "spotIndex": 10
-                }
-            ],
-            [
+                },
                 {
                     "weight": 1,
                     "spotIndex": 11
-                },
+                }
+            ],
+            [
                 {
                     "weight": 1,
                     "spotIndex": 12
-                }
-            ],
-            [
-                {
-                    "weight": 1,
-                    "spotIndex": 13
                 },
                 {
                     "weight": 1,
-                    "spotIndex": 14
+                    "spotIndex": 13
                 }
             ],
             [
                 {
                     "weight": 1,
+                    "spotIndex": 14
+                },
+                {
+                    "weight": 1,
                     "spotIndex": 15
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotIndex": 16
                 }
             ]
         ]
