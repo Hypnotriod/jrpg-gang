@@ -913,7 +913,7 @@
             }
         },
         {
-            "name": "Poison Charge",
+            "name": "Poison Chrg",
             "type": "ammunition",
             "code": "poison-charge-01",
             "description": "Sorcerer staff Fire Charge",

@@ -546,7 +546,7 @@
     },
     {
         "name": "Slow Green Slime",
-        "code": "slime-01",
+        "code": "slime-02",
         "stats": {
             "progress": {
                 "level": 2,
