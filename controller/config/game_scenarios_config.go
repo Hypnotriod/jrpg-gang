@@ -48,15 +48,15 @@ func (c *GameScenariosConfig) LoadScenarios(path string, unitsConfig *GameUnitsC
 
 func (c *GameScenariosConfig) prepare(scenarios *map[engine.GameScenarioId]*engine.GameScenario, unitsConfig *GameUnitsConfig) {
 	c.scenarios = *scenarios
-	for _, v := range c.scenarios {
-		for n := range v.Spots {
-			for _, desc := range v.Spots[n].Battlefield.UnitDescriptor {
+	for _, scenario := range c.scenarios {
+		for _, spot := range scenario.Spots {
+			for _, desc := range spot.Battlefield.UnitDescriptor {
 				unit := unitsConfig.GetByCode(desc.Code)
 				unit.Position = desc.Position
 				unit.Faction = desc.Faction
-				v.Spots[n].Battlefield.Units = append(v.Spots[n].Battlefield.Units, unit)
+				spot.Battlefield.Units = append(spot.Battlefield.Units, unit)
 			}
-			v.Spots[n].Battlefield.UnitDescriptor = nil
+			spot.Battlefield.UnitDescriptor = nil
 		}
 	}
 }
