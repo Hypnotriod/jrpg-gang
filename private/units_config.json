@@ -327,7 +327,7 @@
         "code": "troll-01",
         "stats": {
             "progress": {
-                "level": 10,
+                "level": 5,
                 "experience": 150
             },
             "baseAttributes": {
@@ -388,7 +388,7 @@
         "code": "goblin-01",
         "stats": {
             "progress": {
-                "level": 10,
+                "level": 4,
                 "experience": 70
             },
             "baseAttributes": {
@@ -449,7 +449,7 @@
         "code": "bat-01",
         "stats": {
             "progress": {
-                "level": 2,
+                "level": 1,
                 "experience": 25
             },
             "baseAttributes": {
@@ -499,7 +499,7 @@
         "code": "slime-01",
         "stats": {
             "progress": {
-                "level": 2,
+                "level": 1,
                 "experience": 30
             },
             "baseAttributes": {
@@ -599,7 +599,7 @@
         "code": "cacodemon-01",
         "stats": {
             "progress": {
-                "level": 2,
+                "level": 4,
                 "experience": 100
             },
             "baseAttributes": {
@@ -658,7 +658,7 @@
         "code": "cacodemon-02",
         "stats": {
             "progress": {
-                "level": 2,
+                "level": 4,
                 "experience": 120
             },
             "baseAttributes": {
@@ -717,7 +717,7 @@
         "code": "cacodemon-03",
         "stats": {
             "progress": {
-                "level": 2,
+                "level": 4,
                 "experience": 120
             },
             "baseAttributes": {
@@ -766,6 +766,56 @@
                 {
                     "code": "fire-charge-01",
                     "quantity": 5,
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
+        "name": "Fire Scull",
+        "code": "scull-01",
+        "stats": {
+            "progress": {
+                "level": 4,
+                "experience": 120
+            },
+            "baseAttributes": {
+                "health": 60,
+                "stamina": 100
+            },
+            "attributes": {
+                "strength": 12,
+                "physique": 5,
+                "agility": 3,
+                "endurance": 6,
+                "intelligence": 15,
+                "initiative": 5,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 5,
+                "fire": 100,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 0,
+                "exhaustion": 5,
+                "manaDrain": 5,
+                "bleeding": 5,
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
+            }
+        },
+        "slots": {
+            "body": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "fire-punch-01",
                     "equipped": true
                 }
             ]
@@ -880,7 +930,7 @@
         "code": "death-01",
         "stats": {
             "progress": {
-                "level": 2,
+                "level": 5,
                 "experience": 100
             },
             "baseAttributes": {
@@ -933,11 +983,65 @@
         }
     },
     {
+        "name": "Zombie",
+        "code": "zombie-01",
+        "stats": {
+            "progress": {
+                "level": 3,
+                "experience": 80
+            },
+            "baseAttributes": {
+                "health": 125,
+                "stamina": 300
+            },
+            "attributes": {
+                "strength": 15,
+                "physique": 3,
+                "agility": 0,
+                "endurance": 20,
+                "intelligence": 0,
+                "initiative": 0,
+                "luck": 0
+            },
+            "resistance": {
+                "stabbing": 0,
+                "cutting": 0,
+                "crushing": 0,
+                "fire": 0,
+                "cold": 0,
+                "lighting": 0,
+                "poison": 0,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "bleeding": 100,
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
+            }
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "teeth-01",
+                    "equipped": true
+                }
+            ]
+        }
+    },
+    {
         "name": "Skeleton",
         "code": "skeleton-01",
         "stats": {
             "progress": {
-                "level": 2,
+                "level": 4,
                 "experience": 80
             },
             "baseAttributes": {
@@ -994,7 +1098,7 @@
         "code": "dragon-01",
         "stats": {
             "progress": {
-                "level": 2,
+                "level": 10,
                 "experience": 80
             },
             "baseAttributes": {

@@ -51,6 +51,34 @@
         },
         {
             "type": "weapon",
+            "name": "Fire Puch",
+            "code": "fire-punch-01",
+            "description": "Punch with fire",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {},
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 50,
+                    "crushing": 10,
+                    "fire": 15
+                },
+                {
+                    "chance": 15,
+                    "duration": 3,
+                    "fire": 2
+                }
+            ],
+            "useCost": {
+                "stamina": 10
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Sight",
             "code": "sight-01",
             "description": "Launch a projectile from eye",
