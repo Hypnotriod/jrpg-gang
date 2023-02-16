@@ -15,8 +15,10 @@ type Ammunition struct {
 }
 
 func (a *Ammunition) EnchanceDamageImpact(damage []DamageImpact) []DamageImpact {
+	instantDamageEnchanced := false
 	instantDamage := DamageImpact{}
 	temporalDamage := []DamageImpact{}
+	result := []DamageImpact{}
 	for _, imp := range a.Damage {
 		if imp.Duration == 0 {
 			instantDamage.Accumulate(imp.Damage)
@@ -27,12 +29,15 @@ func (a *Ammunition) EnchanceDamageImpact(damage []DamageImpact) []DamageImpact 
 	}
 	for _, imp := range damage {
 		if imp.Duration == 0 {
-			instantDamage.Damage.Accumulate(imp.Damage)
-			instantDamage.Chance += imp.Chance
-		} else {
-			temporalDamage = append(temporalDamage, imp)
+			imp.Damage.Accumulate(instantDamage.Damage)
+			imp.EnchanceChance(instantDamage.Chance)
+			instantDamageEnchanced = true
 		}
+		result = append(result, imp)
 	}
-	result := []DamageImpact{instantDamage}
-	return append(result, temporalDamage...)
+	result = append(result, temporalDamage...)
+	if !instantDamageEnchanced && instantDamage.HasEffect() {
+		return append([]DamageImpact{instantDamage}, result...)
+	}
+	return result
 }

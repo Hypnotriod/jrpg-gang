@@ -10,7 +10,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 	totalModification.Attributes.Accumulate(u.Stats.Attributes)
 	totalModification.Attributes.Normalize()
 	for n, imp := range damage {
-		if !u.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
+		if imp.Chance != 0 && !u.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
 			if n != 0 || !u.CheckRandomChance(u.CalculateCriticalMissChance()) {
 				break
 			}
