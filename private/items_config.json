@@ -91,7 +91,11 @@
                 "maximumY": 5,
                 "minimumX": 2
             },
-            "damage": [],
+            "damage": [
+                {
+                    "chance": 50
+                }
+            ],
             "useCost": {
                 "mana": 10
             }
@@ -110,7 +114,11 @@
                 "maximumY": 5,
                 "minimumX": 2
             },
-            "damage": [],
+            "damage": [
+                {
+                    "chance": 60
+                }
+            ],
             "useCost": {
                 "mana": 10
             }
@@ -212,7 +220,11 @@
                 "maximumY": 5,
                 "minimumX": 2
             },
-            "damage": [],
+            "damage": [
+                {
+                    "chance": 50
+                }
+            ],
             "useCost": {
                 "stamina": 10
             },
@@ -269,7 +281,11 @@
             "requirements": {
                 "intelligence": 8
             },
-            "damage": [],
+            "damage": [
+                {
+                    "chance": 50
+                }
+            ],
             "range": {
                 "maximumX": 5,
                 "maximumY": 5
@@ -927,8 +943,7 @@
             "canBeThrownAway": true,
             "damage": [
                 {
-                    "stabbing": 25,
-                    "chance": 50
+                    "stabbing": 25
                 },
                 {
                     "duration": 3,
@@ -950,8 +965,7 @@
             "canBeThrownAway": true,
             "damage": [
                 {
-                    "poison": 25,
-                    "chance": 50
+                    "poison": 25
                 },
                 {
                     "duration": 3,
@@ -973,8 +987,7 @@
             "canBeThrownAway": true,
             "damage": [
                 {
-                    "fire": 25,
-                    "chance": 50
+                    "fire": 25
                 },
                 {
                     "duration": 3,
@@ -996,8 +1009,7 @@
             "canBeThrownAway": true,
             "damage": [
                 {
-                    "fire": 50,
-                    "chance": 60
+                    "fire": 50
                 },
                 {
                     "duration": 3,
@@ -1019,8 +1031,7 @@
             "canBeThrownAway": true,
             "damage": [
                 {
-                    "cold": 25,
-                    "chance": 50
+                    "cold": 25
                 },
                 {
                     "duration": 3,
@@ -1042,8 +1053,7 @@
             "canBeThrownAway": true,
             "damage": [
                 {
-                    "lighting": 25,
-                    "chance": 50
+                    "lighting": 25
                 },
                 {
                     "duration": 3,
