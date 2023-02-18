@@ -48,10 +48,12 @@ func authConfig() auth.AuthenticatorConfig {
 	googleClientSecret := os.Getenv("GOOGLE_CLIENT_SECRET")
 	googleRedirectUrl := getenv("HOST_URL", "http://localhost:3000") + "/google/oauth2/callback"
 	httpRequestTimeoutSec := flag.Int64("httpRequestTimeoutSec", 10, "HTTP request timeout in seconds")
+	stateCacheTimeoutMin := flag.Int64("stateCacheTimeoutMin", 10, "State cache timeout in minutes")
 	flag.Parse()
 
 	return auth.AuthenticatorConfig{
 		HttpRequestTimeoutSec: *httpRequestTimeoutSec,
+		StateCacheTimeoutMin:  *stateCacheTimeoutMin,
 		GoogleClientId:        googleClientId,
 		GoogleClientSecret:    googleClientSecret,
 		GoogleRedirectUrl:     googleRedirectUrl,

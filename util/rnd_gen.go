@@ -38,7 +38,7 @@ func (g *RndGen) MakeId32() string {
 }
 
 func (g *RndGen) makeId(size int) string {
-	data := make([]byte, size)
+	data := make([]byte, size/2)
 	for n := 0; n < len(data); n += 4 {
 		u := g.rng.Uint32()
 		data[n+0] = byte(u >> 24)

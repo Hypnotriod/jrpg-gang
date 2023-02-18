@@ -24,17 +24,20 @@ type GoogleOauth2UserInfo struct {
 }
 
 func (a *Authenticator) HandleGoogleAuth2(w http.ResponseWriter, r *http.Request) {
-	url := a.googleSso.AuthCodeURL(a.salt32)
+	state := a.rndGen.MakeId32()
+	a.stateCache.Set(state, true, time.Duration(a.config.StateCacheTimeoutMin)*time.Minute)
+	url := a.googleSso.AuthCodeURL(state)
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 }
 
 func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http.Request) {
 	state := r.FormValue("state")
-	if state != a.salt32 {
-		log.Info("Google Oauth: state doesn't match")
+	if item := a.stateCache.Get(state); item == nil || item.IsExpired() {
+		log.Info("Google Oauth: state is expired or doesn't exist")
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
 	}
+	a.stateCache.Delete(state)
 
 	token, err := a.googleAuth2AcquireToken(r)
 	if err != nil {
