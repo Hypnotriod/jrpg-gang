@@ -24,7 +24,7 @@ const (
 	DataKeyAction       ResponseDataKey = "action"
 	DataKeyActionResult ResponseDataKey = "actionResult"
 	DataKeyGameState    ResponseDataKey = "gameState"
-	DataKeyUserId       ResponseDataKey = "userId"
+	DataKeyPlayerId     ResponseDataKey = "playerId"
 	DataKeyPlayerInfo   ResponseDataKey = "playerInfo"
 	DataKeyPlayersInfo  ResponseDataKey = "playersInfo"
 	DataKeyStatus       ResponseDataKey = "status"
@@ -50,7 +50,7 @@ func NewResponse() *Response {
 
 func (r *Response) fillUserStatus(user *users.User) {
 	r.Data[DataKeyPlayerInfo] = user.PlayerInfo
-	r.Data[DataKeyUserId] = user.Id
+	r.Data[DataKeyPlayerId] = user.Id
 	r.Data[DataKeyUnit] = user.Unit
 	r.Data[DataKeyStatus] = user.Status.Display()
 }

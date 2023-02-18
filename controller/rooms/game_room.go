@@ -17,8 +17,8 @@ func (r *GameRoom) IsFull() bool {
 	return len(r.joinedUsers) >= int(r.Capacity)-1
 }
 
-func (r *GameRoom) GetUserIds() []engine.UserId {
-	result := []engine.UserId{}
+func (r *GameRoom) GetPlayerIds() []engine.PlayerId {
+	result := []engine.PlayerId{}
 	for _, u := range r.joinedUsers {
 		result = append(result, u.Id)
 	}
@@ -26,13 +26,13 @@ func (r *GameRoom) GetUserIds() []engine.UserId {
 	return result
 }
 
-func (r *GameRoom) UpdateUserConnectionStatus(userId engine.UserId, isOffline bool) bool {
-	if r.host.Id == userId {
+func (r *GameRoom) UpdateUserConnectionStatus(playerId engine.PlayerId, isOffline bool) bool {
+	if r.host.Id == playerId {
 		r.host.IsOffline = isOffline
 		return true
 	}
 	for i := range r.joinedUsers {
-		if r.joinedUsers[i].Id == userId {
+		if r.joinedUsers[i].Id == playerId {
 			r.joinedUsers[i].IsOffline = isOffline
 			return true
 		}

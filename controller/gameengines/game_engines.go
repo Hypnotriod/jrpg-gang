@@ -7,53 +7,53 @@ import (
 )
 
 type GameEngines struct {
-	mu             sync.RWMutex
-	rndGen         *util.RndGen
-	userIdToEngine map[engine.UserId]*GameEngineWrapper
+	mu               sync.RWMutex
+	rndGen           *util.RndGen
+	playerIdToEngine map[engine.PlayerId]*GameEngineWrapper
 }
 
 func NewGameEngines() *GameEngines {
 	e := &GameEngines{}
 	e.rndGen = util.NewRndGen()
-	e.userIdToEngine = make(map[engine.UserId]*GameEngineWrapper)
+	e.playerIdToEngine = make(map[engine.PlayerId]*GameEngineWrapper)
 	return e
 }
 
-func (e *GameEngines) Register(wrapper *GameEngineWrapper) (*engine.GameEvent, []engine.UserId) {
+func (e *GameEngines) Register(wrapper *GameEngineWrapper) (*engine.GameEvent, []engine.PlayerId) {
 	defer e.mu.Unlock()
 	e.mu.Lock()
-	for _, userId := range wrapper.engine.GetUserIds() {
-		e.userIdToEngine[userId] = wrapper
+	for _, playerId := range wrapper.engine.GetPlayerIds() {
+		e.playerIdToEngine[playerId] = wrapper
 	}
 	wrapper.setNextPhaseTimer()
 	timeout := wrapper.nextPhaseTimer.SecondsLeft()
-	userIds := wrapper.engine.GetUserIds()
+	playerIds := wrapper.engine.GetPlayerIds()
 	state := wrapper.engine.NewGameEventWithPlayersInfo()
-	return state.WithPhaseTimeout(timeout), userIds
+	return state.WithPhaseTimeout(timeout), playerIds
 }
 
-func (e *GameEngines) Find(userId engine.UserId) (*GameEngineWrapper, bool) {
+func (e *GameEngines) Find(playerId engine.PlayerId) (*GameEngineWrapper, bool) {
 	e.mu.RLock()
-	wrapper, ok := e.userIdToEngine[userId]
+	wrapper, ok := e.playerIdToEngine[playerId]
 	e.mu.RUnlock()
 	return wrapper, ok
 }
 
-func (e *GameEngines) Unregister(userId engine.UserId) (*GameEngineWrapper, bool) {
+func (e *GameEngines) Unregister(playerId engine.PlayerId) (*GameEngineWrapper, bool) {
 	e.mu.Lock()
-	wrapper, ok := e.userIdToEngine[userId]
+	wrapper, ok := e.playerIdToEngine[playerId]
 	if !ok {
 		e.mu.Unlock()
 		return wrapper, ok
 	}
-	delete(e.userIdToEngine, userId)
+	delete(e.playerIdToEngine, playerId)
 	e.mu.Unlock()
 	return wrapper, ok
 }
 
-func (e *GameEngines) IsUserInGame(userId engine.UserId) bool {
+func (e *GameEngines) IsUserInGame(playerId engine.PlayerId) bool {
 	defer e.mu.RUnlock()
 	e.mu.RLock()
-	_, ok := e.userIdToEngine[userId]
+	_, ok := e.playerIdToEngine[playerId]
 	return ok
 }

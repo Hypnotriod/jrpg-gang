@@ -5,15 +5,15 @@ import (
 	"jrpg-gang/engine"
 )
 
-func (c *GameController) handleLeaveGameRoomRequest(userId engine.UserId, request *Request, response *Response) string {
-	roomUid, ok := c.rooms.GetUidByUserId(userId)
+func (c *GameController) handleLeaveGameRoomRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+	roomUid, ok := c.rooms.GetUidByPlayerId(playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	if _, ok := c.rooms.RemoveUser(userId); !ok {
+	if _, ok := c.rooms.RemoveUser(playerId); !ok {
 		return response.WithStatus(ResponseStatusFailed)
 	}
-	c.users.ChangeUserStatus(userId, users.UserStatusInLobby)
+	c.users.ChangeUserStatus(playerId, users.UserStatusInLobby)
 	c.broadcastRoomStatus(roomUid)
 	return response.WithStatus(ResponseStatusOk)
 }

@@ -6,8 +6,8 @@ import (
 	"jrpg-gang/engine"
 )
 
-func (c *GameController) handleStartGameRequest(userId engine.UserId, request *Request, response *Response) string {
-	room, ok := c.rooms.PopByHostId(userId)
+func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+	room, ok := c.rooms.PopByHostId(playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
@@ -19,12 +19,12 @@ func (c *GameController) handleStartGameRequest(userId engine.UserId, request *R
 	wrapper := gameengines.NewGameEngineWrapper(engine.NewGameEngine(scenario, actors), c.broadcastGameAction)
 	defer wrapper.Unlock()
 	wrapper.Lock()
-	state, userIds := c.engines.Register(wrapper)
-	for _, userId := range userIds {
-		c.users.ChangeUserStatus(userId, users.UserStatusInGame)
+	state, playerIds := c.engines.Register(wrapper)
+	for _, playerId := range playerIds {
+		c.users.ChangeUserStatus(playerId, users.UserStatusInGame)
 	}
-	c.broadcastGameAction(userIds, state)
+	c.broadcastGameAction(playerIds, state)
 	c.broadcastRoomStatus(room.Uid)
-	c.broadcastUsersStatus(userIds)
+	c.broadcastUsersStatus(playerIds)
 	return response.WithStatus(ResponseStatusOk)
 }

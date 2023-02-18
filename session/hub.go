@@ -30,8 +30,8 @@ type Hub struct {
 	server        *http.Server
 	upgrader      *websocket.Upgrader
 	controller    *controller.GameController
-	clients       map[engine.UserId]*Client
-	offlineTimers map[engine.UserId]*time.Timer
+	clients       map[engine.PlayerId]*Client
+	offlineTimers map[engine.PlayerId]*time.Timer
 	broadcastPool chan broadcast
 }
 
@@ -39,8 +39,8 @@ func NewHub(config HubConfig, controller *controller.GameController) *Hub {
 	hub := &Hub{}
 	hub.config = config
 	hub.controller = controller
-	hub.clients = make(map[engine.UserId]*Client)
-	hub.offlineTimers = make(map[engine.UserId]*time.Timer)
+	hub.clients = make(map[engine.PlayerId]*Client)
+	hub.offlineTimers = make(map[engine.PlayerId]*time.Timer)
 	hub.upgrader = &websocket.Upgrader{
 		CheckOrigin:     hub.checkOrigin,
 		ReadBufferSize:  config.ReadBufferSize,
@@ -81,52 +81,52 @@ func (h *Hub) serveWsRequest(writer http.ResponseWriter, request *http.Request) 
 
 func (h *Hub) registerClient(client *Client) {
 	h.mu.Lock()
-	if oldClient, ok := h.clients[client.userId]; ok {
+	if oldClient, ok := h.clients[client.playerId]; ok {
 		oldClient.Kick()
 	}
-	h.clients[client.userId] = client
-	if timer, ok := h.offlineTimers[client.userId]; ok {
-		delete(h.offlineTimers, client.userId)
+	h.clients[client.playerId] = client
+	if timer, ok := h.offlineTimers[client.playerId]; ok {
+		delete(h.offlineTimers, client.playerId)
 		timer.Stop()
 		h.mu.Unlock()
-		h.controller.ConnectionStatusChanged(client.userId, false)
-		log.Info("Client back online: ", client.userId)
+		h.controller.ConnectionStatusChanged(client.playerId, false)
+		log.Info("Client back online: ", client.playerId)
 		return
 	}
 	h.mu.Unlock()
-	log.Info("Register Client: ", client.userId)
+	log.Info("Register Client: ", client.playerId)
 }
 
-func (h *Hub) unregisterClient(userId engine.UserId) {
-	if userId == engine.UserIdEmpty {
+func (h *Hub) unregisterClient(playerId engine.PlayerId) {
+	if playerId == engine.PlayerIdEmpty {
 		log.Info("Client left without joining")
 		return
 	}
 	h.mu.Lock()
-	delete(h.clients, userId)
-	h.setupUserOfflineTimeout(userId)
+	delete(h.clients, playerId)
+	h.setupUserOfflineTimeout(playerId)
 	h.mu.Unlock()
-	h.controller.ConnectionStatusChanged(userId, true)
-	log.Info("Client went offline: ", userId)
+	h.controller.ConnectionStatusChanged(playerId, true)
+	log.Info("Client went offline: ", playerId)
 }
 
-func (h *Hub) setupUserOfflineTimeout(userId engine.UserId) {
-	h.offlineTimers[userId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
+func (h *Hub) setupUserOfflineTimeout(playerId engine.PlayerId) {
+	h.offlineTimers[playerId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
 		h.mu.Lock()
-		if _, ok := h.offlineTimers[userId]; !ok {
+		if _, ok := h.offlineTimers[playerId]; !ok {
 			h.mu.Unlock()
 			return
 		}
-		delete(h.offlineTimers, userId)
+		delete(h.offlineTimers, playerId)
 		h.mu.Unlock()
-		h.controller.Leave(userId)
-		log.Info("Unregister Client by timeout: ", userId)
+		h.controller.Leave(playerId)
+		log.Info("Unregister Client by timeout: ", playerId)
 	})
 }
 
-func (h *Hub) getClient(userId engine.UserId) *Client {
+func (h *Hub) getClient(playerId engine.PlayerId) *Client {
 	h.mu.RLock()
-	client, ok := h.clients[userId]
+	client, ok := h.clients[playerId]
 	h.mu.RUnlock()
 	if !ok {
 		return nil

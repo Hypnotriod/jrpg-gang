@@ -2,8 +2,8 @@ package controller
 
 import "jrpg-gang/engine"
 
-func (c *GameController) handleUserStatusRequest(userId engine.UserId, request *Request, response *Response) string {
-	user, ok := c.users.Get(userId)
+func (c *GameController) handleUserStatusRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+	user, ok := c.users.Get(playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}

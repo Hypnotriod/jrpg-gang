@@ -9,13 +9,13 @@ import (
 type GameEngineWrapper struct {
 	sync.RWMutex
 	nextPhaseTimer      engine.GameEngineTimer
-	broadcastGameAction func(userIds []engine.UserId, result *engine.GameEvent)
+	broadcastGameAction func(playerIds []engine.PlayerId, result *engine.GameEvent)
 	engine              *engine.GameEngine
 }
 
 func NewGameEngineWrapper(
 	engine *engine.GameEngine,
-	broadcastGameAction func(userIds []engine.UserId, result *engine.GameEvent)) *GameEngineWrapper {
+	broadcastGameAction func(playerIds []engine.PlayerId, result *engine.GameEvent)) *GameEngineWrapper {
 	w := &GameEngineWrapper{}
 	w.engine = engine
 	w.broadcastGameAction = broadcastGameAction
@@ -28,102 +28,102 @@ func (w *GameEngineWrapper) Dispose() {
 	w.broadcastGameAction = nil
 }
 
-func (w *GameEngineWrapper) ReadGameState(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
+func (w *GameEngineWrapper) ReadGameState(playerId engine.PlayerId) (*engine.GameEvent, []engine.PlayerId, bool) {
 	event := w.engine.NewGameEventWithPlayersInfo()
-	broadcastUserIds := w.engine.GetRestUserIds(userId)
-	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
+	broadcastPlayerIds := w.engine.GetRestPlayerIds(playerId)
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastPlayerIds, true
 }
 
-func (w *GameEngineWrapper) ReadPlayerInfo(userId engine.UserId) (engine.PlayerInfo, bool) {
-	unit := w.engine.FindActorByUserId(userId)
+func (w *GameEngineWrapper) ReadPlayerInfo(playerId engine.PlayerId) (engine.PlayerInfo, bool) {
+	unit := w.engine.FindActorByPlayerId(playerId)
 	if unit == nil || unit.PlayerInfo == nil {
 		return engine.PlayerInfo{}, false
 	}
 	return *unit.PlayerInfo, true
 }
 
-func (w *GameEngineWrapper) ExecuteUserAction(action domain.Action, userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
-	event := w.engine.ExecuteUserAction(action, userId)
-	broadcastUserIds := []engine.UserId{}
+func (w *GameEngineWrapper) ExecuteUserAction(action domain.Action, playerId engine.PlayerId) (*engine.GameEvent, []engine.PlayerId, bool) {
+	event := w.engine.ExecuteUserAction(action, playerId)
+	broadcastPlayerIds := []engine.PlayerId{}
 	if event.Phase != event.NextPhase {
 		w.setNextPhaseTimer()
 	}
 	if event.UnitActionResult.Result.Result == domain.ResultAccomplished {
-		broadcastUserIds = w.engine.GetRestUserIds(userId)
+		broadcastPlayerIds = w.engine.GetRestPlayerIds(playerId)
 	}
-	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastPlayerIds, true
 }
 
-func (w *GameEngineWrapper) ReadyForNextPhase(userId engine.UserId, isReady bool) (*engine.GameEvent, []engine.UserId, bool) {
+func (w *GameEngineWrapper) ReadyForNextPhase(playerId engine.PlayerId, isReady bool) (*engine.GameEvent, []engine.PlayerId, bool) {
 	if !w.engine.NextPhaseRequired() || w.engine.AllActorsDead() {
 		return nil, nil, false
 	}
-	w.engine.UpdateActorReady(userId, isReady)
+	w.engine.UpdateActorReady(playerId, isReady)
 	if w.engine.AllActorsReady() {
 		event := w.engine.NextPhase()
 		w.setNextPhaseTimer()
-		broadcastUserIds := w.engine.GetRestUserIds(userId)
-		return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
+		broadcastPlayerIds := w.engine.GetRestPlayerIds(playerId)
+		return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastPlayerIds, true
 	}
 	event := w.engine.NewGameEventWithPlayersInfo()
-	broadcastUserIds := w.engine.GetRestUserIds(userId)
-	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
+	broadcastPlayerIds := w.engine.GetRestPlayerIds(playerId)
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastPlayerIds, true
 }
 
-func (w *GameEngineWrapper) NextPhase() (*engine.GameEvent, []engine.UserId, bool) {
+func (w *GameEngineWrapper) NextPhase() (*engine.GameEvent, []engine.PlayerId, bool) {
 	if w.engine.AllActorsDead() {
 		return nil, nil, false
 	}
 	event := w.engine.NextPhase()
 	w.setNextPhaseTimer()
-	broadcastUserIds := w.engine.GetUserIds()
-	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
+	broadcastPlayerIds := w.engine.GetPlayerIds()
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastPlayerIds, true
 }
 
-func (w *GameEngineWrapper) ConnectionStatusChanged(userId engine.UserId, isOffline bool) (*engine.GameEvent, []engine.UserId, bool) {
-	w.engine.UpdateUserConnectionStatus(userId, isOffline)
-	broadcastUserIds := w.engine.GetRestUserIds(userId)
+func (w *GameEngineWrapper) ConnectionStatusChanged(playerId engine.PlayerId, isOffline bool) (*engine.GameEvent, []engine.PlayerId, bool) {
+	w.engine.UpdateUserConnectionStatus(playerId, isOffline)
+	broadcastPlayerIds := w.engine.GetRestPlayerIds(playerId)
 	event := w.engine.NewGameEventWithPlayersInfo()
-	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastPlayerIds, true
 }
 
-func (w *GameEngineWrapper) LeaveGame(userId engine.UserId) (*engine.GameEvent, []engine.UserId, domain.Unit, bool) {
+func (w *GameEngineWrapper) LeaveGame(playerId engine.PlayerId) (*engine.GameEvent, []engine.PlayerId, domain.Unit, bool) {
 	var unit domain.Unit
-	if u := w.engine.FindActorByUserId(userId); u != nil {
+	if u := w.engine.FindActorByPlayerId(playerId); u != nil {
 		unit = u.Unit
 		if !u.IsDead {
 			share := w.engine.TakeAShare()
 			unit.Booty.Accumulate(share)
 		}
 	}
-	w.engine.RemoveActor(userId)
+	w.engine.RemoveActor(playerId)
 	if w.engine.NextPhaseRequired() && w.engine.AllActorsReady() && !w.engine.AllActorsDead() {
 		event := w.engine.NextPhase()
 		w.setNextPhaseTimer()
-		broadcastUserIds := w.engine.GetRestUserIds(userId)
-		return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, unit, true
+		broadcastPlayerIds := w.engine.GetRestPlayerIds(playerId)
+		return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastPlayerIds, unit, true
 	}
-	userIds := w.engine.GetUserIds()
+	playerIds := w.engine.GetPlayerIds()
 	event := w.engine.NewGameEventWithPlayersInfo()
-	if len(userIds) == 0 {
+	if len(playerIds) == 0 {
 		w.Dispose()
 	}
-	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), userIds, unit, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), playerIds, unit, true
 }
 
-func (w *GameEngineWrapper) RemoveUser(userId engine.UserId) (*engine.GameEvent, []engine.UserId, bool) {
-	w.engine.RemoveActor(userId)
-	userIds := w.engine.GetUserIds()
-	if len(userIds) == 0 {
+func (w *GameEngineWrapper) RemoveUser(playerId engine.PlayerId) (*engine.GameEvent, []engine.PlayerId, bool) {
+	w.engine.RemoveActor(playerId)
+	playerIds := w.engine.GetPlayerIds()
+	if len(playerIds) == 0 {
 		w.Dispose()
 		return nil, nil, false
 	}
 	if w.engine.NextPhaseRequired() && w.engine.AllActorsReady() && !w.engine.AllActorsDead() {
 		event := w.engine.NextPhase()
 		w.setNextPhaseTimer()
-		broadcastUserIds := w.engine.GetRestUserIds(userId)
-		return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastUserIds, true
+		broadcastPlayerIds := w.engine.GetRestPlayerIds(playerId)
+		return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastPlayerIds, true
 	}
 	event := w.engine.NewGameEventWithPlayersInfo()
-	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), userIds, true
+	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), playerIds, true
 }

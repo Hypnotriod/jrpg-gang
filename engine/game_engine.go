@@ -37,9 +37,9 @@ func (e *GameEngine) resetActorsReady() {
 	}
 }
 
-func (e *GameEngine) UpdateActorReady(userId UserId, value bool) bool {
+func (e *GameEngine) UpdateActorReady(playerId PlayerId, value bool) bool {
 	unit := util.Findp(e.actors, func(actor *GameUnit) bool {
-		return actor.PlayerInfo.Id == userId
+		return actor.PlayerInfo.Id == playerId
 	})
 	if unit != nil {
 		unit.PlayerInfo.IsReady = value
@@ -80,32 +80,32 @@ func (e *GameEngine) GetPlayersInfo() []PlayerInfo {
 	return result
 }
 
-func (e *GameEngine) GetUserIds() []UserId {
-	result := []UserId{}
+func (e *GameEngine) GetPlayerIds() []PlayerId {
+	result := []PlayerId{}
 	for _, unit := range e.actors {
-		result = append(result, unit.GetUserId())
+		result = append(result, unit.GetPlayerId())
 	}
 	return result
 }
 
-func (e *GameEngine) GetRestUserIds(userId UserId) []UserId {
-	result := []UserId{}
+func (e *GameEngine) GetRestPlayerIds(playerId PlayerId) []PlayerId {
+	result := []PlayerId{}
 	for _, unit := range e.actors {
-		if userId != unit.GetUserId() {
-			result = append(result, unit.GetUserId())
+		if playerId != unit.GetPlayerId() {
+			result = append(result, unit.GetPlayerId())
 		}
 	}
 	return result
 }
 
-func (e *GameEngine) FindActorByUserId(userId UserId) *GameUnit {
+func (e *GameEngine) FindActorByPlayerId(playerId PlayerId) *GameUnit {
 	return util.Findp(e.actors, func(u *GameUnit) bool {
-		return u.GetUserId() == userId
+		return u.GetPlayerId() == playerId
 	})
 }
 
-func (e *GameEngine) RemoveActor(userId UserId) bool {
-	actor := e.FindActorByUserId(userId)
+func (e *GameEngine) RemoveActor(playerId PlayerId) bool {
+	actor := e.FindActorByPlayerId(playerId)
 	if actor == nil {
 		return false
 	}
@@ -117,7 +117,7 @@ func (e *GameEngine) RemoveActor(userId UserId) bool {
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	restActors := []*GameUnit{}
 	for i := 0; i < len(e.actors); i++ {
-		if e.actors[i].GetUserId() != userId {
+		if e.actors[i].GetPlayerId() != playerId {
 			restActors = append(restActors, e.actors[i])
 		}
 	}
@@ -133,8 +133,8 @@ func (e *GameEngine) TakeAShare() domain.UnitBooty {
 	return e.state.Booty.TakeAShare(leftUnits)
 }
 
-func (e *GameEngine) UpdateUserConnectionStatus(userId UserId, isOffline bool) bool {
-	actor := e.FindActorByUserId(userId)
+func (e *GameEngine) UpdateUserConnectionStatus(playerId PlayerId, isOffline bool) bool {
+	actor := e.FindActorByPlayerId(playerId)
 	if actor == nil {
 		return false
 	}

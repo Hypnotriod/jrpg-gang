@@ -5,105 +5,105 @@ import (
 	"jrpg-gang/engine"
 )
 
-func (c *GameController) ConnectionStatusChanged(userId engine.UserId, isOffline bool) {
-	c.users.ConnectionStatusChanged(userId, isOffline)
-	if roomUid, ok := c.rooms.ConnectionStatusChanged(userId, isOffline); ok {
+func (c *GameController) ConnectionStatusChanged(playerId engine.PlayerId, isOffline bool) {
+	c.users.ConnectionStatusChanged(playerId, isOffline)
+	if roomUid, ok := c.rooms.ConnectionStatusChanged(playerId, isOffline); ok {
 		c.broadcastRoomStatus(roomUid)
 	}
-	if wrapper, ok := c.engines.Find(userId); ok {
+	if wrapper, ok := c.engines.Find(playerId); ok {
 		defer wrapper.Unlock()
 		wrapper.Lock()
-		state, broadcastUserIds, ok := wrapper.ConnectionStatusChanged(userId, isOffline)
+		state, broadcastPlayerIds, ok := wrapper.ConnectionStatusChanged(playerId, isOffline)
 		if ok {
-			c.broadcastGameAction(broadcastUserIds, state)
+			c.broadcastGameAction(broadcastPlayerIds, state)
 		}
 	}
 }
 
-func (c *GameController) Leave(userId engine.UserId) {
-	c.users.RemoveUser(userId)
-	if room, ok := c.rooms.PopByHostId(userId); ok {
+func (c *GameController) Leave(playerId engine.PlayerId) {
+	c.users.RemoveUser(playerId)
+	if room, ok := c.rooms.PopByHostId(playerId); ok {
 		c.broadcastRoomStatus(room.Uid)
-	} else if roomUid, ok := c.rooms.RemoveUser(userId); ok {
+	} else if roomUid, ok := c.rooms.RemoveUser(playerId); ok {
 		c.broadcastRoomStatus(roomUid)
 	}
-	if wrapper, ok := c.engines.Unregister(userId); ok {
+	if wrapper, ok := c.engines.Unregister(playerId); ok {
 		defer wrapper.Unlock()
 		wrapper.Lock()
-		state, broadcastUserIds, ok := wrapper.RemoveUser(userId)
+		state, broadcastPlayerIds, ok := wrapper.RemoveUser(playerId)
 		if ok {
-			c.broadcastGameAction(broadcastUserIds, state)
+			c.broadcastGameAction(broadcastPlayerIds, state)
 		}
 	}
 }
 
-func (c *GameController) HandleRequest(userId engine.UserId, requestRaw []byte) (engine.UserId, string) {
+func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []byte) (engine.PlayerId, string) {
 	response := NewResponse()
 	request := parseRequest(requestRaw)
 	if request == nil {
-		return engine.UserIdEmpty, response.WithStatus(ResponseStatusMalformed)
+		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusMalformed)
 	}
 	response.Type = request.Type
 	response.Id = request.Id
 	if request.Type == RequestJoin {
-		if userId != engine.UserIdEmpty {
-			return engine.UserIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
+		if playerId != engine.PlayerIdEmpty {
+			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
 		}
 		return c.handleJoinRequest(request, response)
 	}
-	return engine.UserIdEmpty, c.serveRequest(userId, request, response)
+	return engine.PlayerIdEmpty, c.serveRequest(playerId, request, response)
 }
 
-func (c *GameController) serveRequest(userId engine.UserId, request *Request, response *Response) string {
-	status := c.users.GetUserStatus(userId)
+func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+	status := c.users.GetUserStatus(playerId)
 	if status == users.UserStatusNotFound {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
 	case RequestGameAction:
-		return c.handleGameActionRequest(userId, request, response)
+		return c.handleGameActionRequest(playerId, request, response)
 	case RequestNextGamePhase:
-		return c.handleGameNextPhaseRequest(userId, request, response)
+		return c.handleGameNextPhaseRequest(playerId, request, response)
 	case RequestGameState:
-		return c.handleGameStateRequest(userId, request, response)
+		return c.handleGameStateRequest(playerId, request, response)
 	case RequestPlayerInfo:
-		return c.handlePlayerInfoRequest(userId, request, response)
+		return c.handlePlayerInfoRequest(playerId, request, response)
 	case RequestLeaveGame:
-		return c.handleGameLeaveRequest(userId, request, response)
+		return c.handleGameLeaveRequest(playerId, request, response)
 	}
 	if status.Test(users.UserStatusInGame) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
 	case RequestEnterLobby:
-		return c.handleEnterLobbyRequest(userId, request, response)
+		return c.handleEnterLobbyRequest(playerId, request, response)
 	case RequestExitLobby:
-		return c.handleExitLobbyRequest(userId, request, response)
+		return c.handleExitLobbyRequest(playerId, request, response)
 	case RequestShopStatus:
-		return c.handleShopStatusRequest(userId, request, response)
+		return c.handleShopStatusRequest(playerId, request, response)
 	case RequestCreateGameRoom:
-		return c.handleCreateGameRoomRequest(userId, request, response)
+		return c.handleCreateGameRoomRequest(playerId, request, response)
 	case RequestDestroyGameRoom:
-		return c.handleDestroyGameRoomRequest(userId, request, response)
+		return c.handleDestroyGameRoomRequest(playerId, request, response)
 	case RequestLobbyStatus:
-		return c.handleLobbyStatusRequest(userId, request, response)
+		return c.handleLobbyStatusRequest(playerId, request, response)
 	case RequestUserStatus:
-		return c.handleUserStatusRequest(userId, request, response)
+		return c.handleUserStatusRequest(playerId, request, response)
 	case RequestJoinGameRoom:
-		return c.handleJoinGameRoomRequest(userId, request, response)
+		return c.handleJoinGameRoomRequest(playerId, request, response)
 	case RequestLeaveGameRoom:
-		return c.handleLeaveGameRoomRequest(userId, request, response)
+		return c.handleLeaveGameRoomRequest(playerId, request, response)
 	case RequestStartGame:
-		return c.handleStartGameRequest(userId, request, response)
+		return c.handleStartGameRequest(playerId, request, response)
 	}
 	if status.Test(users.UserStatusInRoom) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
 	case RequestConfiguratorAction:
-		return c.handleConfiguratorActionRequest(userId, request, response)
+		return c.handleConfiguratorActionRequest(playerId, request, response)
 	case RequestShopAction:
-		return c.handleShopActionRequest(userId, request, response)
+		return c.handleShopActionRequest(playerId, request, response)
 	}
 
 	return response.WithStatus(ResponseStatusUnsupported)

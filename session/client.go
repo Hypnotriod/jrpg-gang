@@ -10,20 +10,20 @@ import (
 )
 
 type Client struct {
-	mu            sync.Mutex
-	conn          *websocket.Conn
-	hub           *Hub
-	userId        engine.UserId
-	noUserIdTimer *time.Timer
-	kicked        bool
-	left          bool
+	mu              sync.Mutex
+	conn            *websocket.Conn
+	hub             *Hub
+	playerId        engine.PlayerId
+	noPlayerIdTimer *time.Timer
+	kicked          bool
+	left            bool
 }
 
 func NewClient(connection *websocket.Conn, hub *Hub) *Client {
 	c := &Client{}
 	c.conn = connection
 	c.hub = hub
-	c.userId = engine.UserIdEmpty
+	c.playerId = engine.PlayerIdEmpty
 	c.kicked = false
 	c.left = false
 	c.conn.SetReadLimit(c.hub.config.MaxMessageSize)
@@ -39,7 +39,7 @@ func (c *Client) WriteMessage(message string) {
 	err := c.conn.WriteMessage(websocket.TextMessage, []byte(message))
 	c.mu.Unlock()
 	if err != nil && websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-		log.Error("Client (", c.userId, ") write message error:", err)
+		log.Error("Client (", c.playerId, ") write message error:", err)
 	}
 }
 
@@ -49,16 +49,16 @@ func (c *Client) Serve() {
 		mt, message, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-				log.Error("Client (", c.userId, ") read message error:", err)
+				log.Error("Client (", c.playerId, ") read message error:", err)
 			}
 			break
 		}
 		if mt != websocket.TextMessage {
 			break
 		}
-		userId, response := c.hub.controller.HandleRequest(c.userId, message)
-		if userId != engine.UserIdEmpty {
-			c.manageUserId(userId)
+		playerId, response := c.hub.controller.HandleRequest(c.playerId, message)
+		if playerId != engine.PlayerIdEmpty {
+			c.managePlayerId(playerId)
 		}
 		c.WriteMessage(response)
 	}
@@ -75,18 +75,18 @@ func (c *Client) Kick() {
 }
 
 func (c *Client) begin() {
-	c.noUserIdTimer = time.AfterFunc(time.Duration(c.hub.config.UserWithoutIdTimeoutSec)*time.Second, func() {
+	c.noPlayerIdTimer = time.AfterFunc(time.Duration(c.hub.config.UserWithoutIdTimeoutSec)*time.Second, func() {
 		c.Kick()
 		log.Info("Client didn't obtain the id and was kicked")
 	})
 }
 
-func (c *Client) manageUserId(userId engine.UserId) {
-	if c.noUserIdTimer.Stop() {
-		c.userId = userId
+func (c *Client) managePlayerId(playerId engine.PlayerId) {
+	if c.noPlayerIdTimer.Stop() {
+		c.playerId = playerId
 		c.hub.registerClient(c)
 	} else {
-		c.hub.controller.Leave(userId)
+		c.hub.controller.Leave(playerId)
 	}
 }
 
@@ -95,7 +95,7 @@ func (c *Client) complete() {
 	c.mu.Lock()
 	c.left = true
 	if !c.kicked {
-		c.hub.unregisterClient(c.userId)
+		c.hub.unregisterClient(c.playerId)
 		c.conn.Close()
 	}
 }

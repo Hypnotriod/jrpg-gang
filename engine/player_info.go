@@ -1,7 +1,13 @@
 package engine
 
+type PlayerId string
+
+const (
+	PlayerIdEmpty PlayerId = ""
+)
+
 type PlayerInfo struct {
-	Id        UserId        `json:"-"`
+	Id        PlayerId      `json:"-"`
 	Nickname  string        `json:"nickname"`
 	Class     GameUnitClass `json:"class"`
 	Level     uint          `json:"level"`

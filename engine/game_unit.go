@@ -4,12 +4,7 @@ import (
 	"jrpg-gang/domain"
 )
 
-type UserId string
 type GameUnitClass string
-
-const (
-	UserIdEmpty UserId = ""
-)
 
 const (
 	UnitClassTank  GameUnitClass = "tank"
@@ -31,15 +26,15 @@ type GameUnit struct {
 	IsDead     bool            `json:"isDead,omitempty"`
 }
 
-func (u *GameUnit) HasUserId() bool {
-	return u.PlayerInfo != nil && u.PlayerInfo.Id != UserIdEmpty
+func (u *GameUnit) HasPlayerId() bool {
+	return u.PlayerInfo != nil && u.PlayerInfo.Id != PlayerIdEmpty
 }
 
-func (u *GameUnit) GetUserId() UserId {
+func (u *GameUnit) GetPlayerId() PlayerId {
 	if u.PlayerInfo != nil {
 		return u.PlayerInfo.Id
 	}
-	return UserIdEmpty
+	return PlayerIdEmpty
 }
 
 func (u *GameUnit) Clone() *GameUnit {

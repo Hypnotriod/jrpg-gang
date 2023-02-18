@@ -9,12 +9,12 @@ type ConfiguratorActionRequestData struct {
 	domain.Action
 }
 
-func (c *GameController) handleConfiguratorActionRequest(userId engine.UserId, request *Request, response *Response) string {
+func (c *GameController) handleConfiguratorActionRequest(playerId engine.PlayerId, request *Request, response *Response) string {
 	data := parseRequestData(&ConfiguratorActionRequestData{}, request.Data)
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)
 	}
-	user, ok := c.users.Get(userId)
+	user, ok := c.users.Get(playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}

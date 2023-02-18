@@ -79,7 +79,7 @@ func (e *GameEngine) switchToNextUnit() {
 	unit.State.IsStunned = false
 	if unit.CheckRandomChance(unit.CalculateRetreatChance()) {
 		e.state.ChangePhase(GamePhaseRetreatAction)
-	} else if unit.HasUserId() {
+	} else if unit.HasPlayerId() {
 		e.state.ChangePhase(GamePhaseMakeMoveOrAction)
 	} else {
 		e.state.ChangePhase(GamePhaseMakeMoveOrActionAI)
@@ -112,7 +112,7 @@ func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
 
 func (e *GameEngine) onUnitMoveAction() {
 	unit := e.getActiveUnit()
-	if unit.HasUserId() {
+	if unit.HasPlayerId() {
 		e.state.ChangePhase(GamePhaseMakeAction)
 	} else {
 		e.state.ChangePhase(GamePhaseMakeActionAI)
