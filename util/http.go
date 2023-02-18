@@ -3,12 +3,9 @@ package util
 import (
 	"context"
 	"net/http"
-	"time"
 )
 
-func HttpGetWithTimeout(url string, timeout time.Duration) (*http.Response, error) {
-	cntx, cancel := context.WithTimeout(context.Background(), timeout)
-	defer cancel()
+func HttpGet(cntx context.Context, url string) (*http.Response, error) {
 	client := &http.Client{}
 	request, _ := http.NewRequestWithContext(
 		cntx,

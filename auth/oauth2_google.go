@@ -43,7 +43,7 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 		return
 	}
 
-	userInfo, err := a.googleAuth2AcquireUserInfo(token)
+	userInfo, err := a.googleAuth2AcquireUserInfo(r, token)
 	if err != nil {
 		log.Info("Google Oauth: couldn't acquire user info: ", err.Error())
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
@@ -55,16 +55,16 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 
 func (a *Authenticator) googleAuth2AcquireToken(r *http.Request) (*oauth2.Token, error) {
 	code := r.FormValue("code")
-	cntx, cancel := context.WithTimeout(context.Background(), time.Duration(a.config.HttpRequestTimeoutSec)*time.Second)
+	cntx, cancel := context.WithTimeout(r.Context(), time.Duration(a.config.HttpRequestTimeoutSec)*time.Second)
 	defer cancel()
 	return a.googleSso.Exchange(cntx, code)
 }
 
-func (a *Authenticator) googleAuth2AcquireUserInfo(token *oauth2.Token) (*GoogleOauth2UserInfo, error) {
-	response, err := util.HttpGetWithTimeout(
-		"https://www.googleapis.com/oauth2/v2/userinfo?access_token="+token.AccessToken,
-		time.Duration(a.config.HttpRequestTimeoutSec)*time.Second,
-	)
+func (a *Authenticator) googleAuth2AcquireUserInfo(r *http.Request, token *oauth2.Token) (*GoogleOauth2UserInfo, error) {
+	cntx, cancel := context.WithTimeout(r.Context(), time.Duration(a.config.HttpRequestTimeoutSec)*time.Second)
+	defer cancel()
+	url := "https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken
+	response, err := util.HttpGet(cntx, url)
 	if err != nil {
 		return nil, err
 	}
