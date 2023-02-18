@@ -61,13 +61,10 @@ func (a *Authenticator) googleAuth2AcquireToken(r *http.Request) (*oauth2.Token,
 }
 
 func (a *Authenticator) googleAuth2AcquireUserInfo(token *oauth2.Token) (*GoogleOauth2UserInfo, error) {
-	cntx, cancel := context.WithTimeout(context.Background(), time.Duration(a.config.HttpRequestTimeoutSec)*time.Second)
-	defer cancel()
-	response, err := http.NewRequestWithContext(
-		cntx,
-		http.MethodGet,
+	response, err := util.HttpGetWithTimeout(
 		"https://www.googleapis.com/oauth2/v2/userinfo?access_token="+token.AccessToken,
-		nil)
+		time.Duration(a.config.HttpRequestTimeoutSec)*time.Second,
+	)
 	if err != nil {
 		return nil, err
 	}

@@ -46,7 +46,7 @@ func hubConfig() session.HubConfig {
 func authConfig() auth.AuthenticatorConfig {
 	googleClientId := os.Getenv("GOOGLE_CLIENT_ID")
 	googleClientSecret := os.Getenv("GOOGLE_CLIENT_SECRET")
-	googleRedirectUrl := os.Getenv("HOST_URL") + "/google/oauth2/callback"
+	googleRedirectUrl := getenv("HOST_URL", "http://localhost:3000") + "/google/oauth2/callback"
 	httpRequestTimeoutSec := flag.Int64("httpRequestTimeoutSec", 5, "HTTP request timeout in seconds")
 	flag.Parse()
 
