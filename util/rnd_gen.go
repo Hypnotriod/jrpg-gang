@@ -29,8 +29,16 @@ func (g *RndGen) ResetUidGen() {
 	g.uidCounter = 0
 }
 
-func (g *RndGen) MakeId() string {
-	data := make([]byte, 16)
+func (g *RndGen) MakeId16() string {
+	return g.makeId(16)
+}
+
+func (g *RndGen) MakeId32() string {
+	return g.makeId(32)
+}
+
+func (g *RndGen) makeId(size int) string {
+	data := make([]byte, size)
 	for n := 0; n < len(data); n += 4 {
 		u := g.rng.Uint32()
 		data[n+0] = byte(u >> 24)
