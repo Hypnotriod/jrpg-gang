@@ -65,7 +65,7 @@ func (r *Repository[T]) UpdateOne(ctx context.Context, filter bson.M, fields bso
 	return result.MatchedCount
 }
 
-func (r *Repository[T]) FindOneById(ctx context.Context, id RepositoryObjectId, fields bson.D) *T {
+func (r *Repository[T]) FindOneById(ctx context.Context, id RepositoryObjectId) *T {
 	objectId, err := primitive.ObjectIDFromHex(string(id))
 	if err != nil {
 		log.Error("Mongodb: FindOneById: ", id, " in collection:", r.collection.Name(), " fail: ", err)
@@ -84,7 +84,7 @@ func (r *Repository[T]) FindOneById(ctx context.Context, id RepositoryObjectId, 
 	return result
 }
 
-func (r *Repository[T]) FindOne(ctx context.Context, filter bson.M, fields bson.D) *T {
+func (r *Repository[T]) FindOne(ctx context.Context, filter bson.M) *T {
 	result := &T{}
 	err := r.collection.FindOne(ctx, filter).Decode(result)
 	if err != nil {
