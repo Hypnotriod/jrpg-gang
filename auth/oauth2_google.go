@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/jellydator/ttlcache/v3"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
 )
@@ -25,7 +26,7 @@ type GoogleOauth2UserInfo struct {
 
 func (a *Authenticator) HandleGoogleAuth2(w http.ResponseWriter, r *http.Request) {
 	state := a.rndGen.MakeId32()
-	a.stateCache.Set(state, true, time.Duration(a.config.StateCacheTimeoutMin)*time.Minute)
+	a.stateCache.Set(state, true, ttlcache.DefaultTTL)
 	url := a.googleSso.AuthCodeURL(state)
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 }
