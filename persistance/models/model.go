@@ -16,7 +16,3 @@ func (m *Model) OnCreate() {
 	m.CreatedAt = time.Now()
 	m.UpdatedAt = time.Now()
 }
-
-func (m *Model) OnUpdate() {
-	m.UpdatedAt = time.Now()
-}

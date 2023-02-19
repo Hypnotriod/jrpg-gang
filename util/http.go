@@ -5,10 +5,10 @@ import (
 	"net/http"
 )
 
-func HttpGet(cntx context.Context, url string) (*http.Response, error) {
+func HttpGet(ctx context.Context, url string) (*http.Response, error) {
 	client := &http.Client{}
 	request, _ := http.NewRequestWithContext(
-		cntx,
+		ctx,
 		http.MethodGet,
 		url,
 		nil)

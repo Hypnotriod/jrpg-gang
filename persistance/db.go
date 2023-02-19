@@ -26,8 +26,12 @@ func NewDatabase(config DatabaseConfig) *Database {
 	return db
 }
 
+func (db *Database) requestContext() (context.Context, context.CancelFunc) {
+	return context.WithTimeout(context.Background(), time.Duration(db.config.RequestTimeoutSec)*time.Second)
+}
+
 func (db *Database) connect() {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(db.config.RequestTimeoutSec)*time.Second)
+	ctx, cancel := db.requestContext()
 	defer cancel()
 	clientOptions := options.Client().ApplyURI(db.config.Uri)
 	client, err := mongo.Connect(ctx, clientOptions)
