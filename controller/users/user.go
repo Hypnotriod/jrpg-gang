@@ -26,6 +26,13 @@ const (
 	UserStatusInGame    UserStatus = (1 << 4)
 )
 
+type User struct {
+	engine.PlayerInfo
+	RndGen *util.RndGen
+	Status UserStatus
+	Unit   *engine.GameUnit
+}
+
 func (s UserStatus) Display() UserDisplayStatus {
 	if s.Test(UserStatusJoined) {
 		return UserDisplayStatusJoined
@@ -44,13 +51,6 @@ func (s UserStatus) Display() UserDisplayStatus {
 
 func (s UserStatus) Test(status UserStatus) bool {
 	return s&status != 0
-}
-
-type User struct {
-	engine.PlayerInfo
-	RndGen *util.RndGen
-	Status UserStatus
-	Unit   *engine.GameUnit
 }
 
 func NewUser(nickname string,

@@ -60,13 +60,13 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 
 func (a *Authenticator) googleAuth2AcquireToken(r *http.Request) (*oauth2.Token, error) {
 	code := r.FormValue("code")
-	cntx, cancel := context.WithTimeout(r.Context(), time.Duration(a.config.HttpRequestTimeoutSec)*time.Second)
+	cntx, cancel := context.WithTimeout(r.Context(), time.Duration(a.config.RequestTimeoutSec)*time.Second)
 	defer cancel()
 	return a.googleSso.Exchange(cntx, code)
 }
 
 func (a *Authenticator) googleAuth2AcquireUserInfo(r *http.Request, token *oauth2.Token) (*GoogleOauth2UserInfo, error) {
-	cntx, cancel := context.WithTimeout(r.Context(), time.Duration(a.config.HttpRequestTimeoutSec)*time.Second)
+	cntx, cancel := context.WithTimeout(r.Context(), time.Duration(a.config.RequestTimeoutSec)*time.Second)
 	defer cancel()
 	url := "https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken
 	response, err := util.HttpGet(cntx, url)

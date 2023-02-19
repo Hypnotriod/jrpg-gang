@@ -46,16 +46,16 @@ func authConfig() auth.AuthenticatorConfig {
 		log.Fatal("Google credentials are not specified for the environment")
 	}
 	googleRedirectUrl := util.Getenv("HOSTNAME", "http://localhost:8080") + "/google/oauth2/callback"
-	httpRequestTimeoutSec := flag.Int64("httpRequestTimeoutSec", 10, "HTTP request timeout in seconds")
-	stateCacheTimeoutMin := flag.Int64("stateCacheTimeoutMin", 10, "State cache timeout in minutes")
+	authRequestTimeoutSec := flag.Int64("authRequestTimeoutSec", 10, "HTTP request timeout in seconds")
+	authStateCacheTimeoutMin := flag.Int64("authStateCacheTimeoutMin", 10, "State cache timeout in minutes")
 	flag.Parse()
 
 	return auth.AuthenticatorConfig{
-		HttpRequestTimeoutSec: *httpRequestTimeoutSec,
-		StateCacheTimeoutMin:  *stateCacheTimeoutMin,
-		GoogleClientId:        googleClientId,
-		GoogleClientSecret:    googleClientSecret,
-		GoogleRedirectUrl:     googleRedirectUrl,
+		RequestTimeoutSec:    *authRequestTimeoutSec,
+		StateCacheTimeoutMin: *authStateCacheTimeoutMin,
+		GoogleClientId:       googleClientId,
+		GoogleClientSecret:   googleClientSecret,
+		GoogleRedirectUrl:    googleRedirectUrl,
 	}
 }
 

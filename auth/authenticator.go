@@ -10,11 +10,11 @@ import (
 )
 
 type AuthenticatorConfig struct {
-	HttpRequestTimeoutSec int64  `json:"httpRequestTimeoutSec"`
-	StateCacheTimeoutMin  int64  `json:"stateCacheTimeoutSec"`
-	GoogleClientId        string `json:"googleClientId"`
-	GoogleClientSecret    string `json:"googleClientSecret"`
-	GoogleRedirectUrl     string `json:"googleRedirectUrl"`
+	RequestTimeoutSec    int64  `json:"requestTimeoutSec"`
+	StateCacheTimeoutMin int64  `json:"stateCacheTimeoutSec"`
+	GoogleClientId       string `json:"googleClientId"`
+	GoogleClientSecret   string `json:"googleClientSecret"`
+	GoogleRedirectUrl    string `json:"googleRedirectUrl"`
 }
 
 type Authenticator struct {
