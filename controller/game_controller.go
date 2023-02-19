@@ -7,6 +7,8 @@ import (
 	"jrpg-gang/controller/shop"
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type GameControllerBroadcaster interface {
@@ -43,15 +45,15 @@ func NewGameController() *GameController {
 
 func (c *GameController) prepare() {
 	if err := c.itemsConfig.Load(ITEMS_CONFIG_PATH); err != nil {
-		panic(err)
+		log.Fatal("Unable to load items configuration: ", err)
 	}
 	if err := c.shop.LoadItems(SHOP_CONFIG_PATH, c.itemsConfig); err != nil {
-		panic(err)
+		log.Fatal("Unable to load shop configuration: ", err)
 	}
 	if err := c.unitsConfig.LoadUnits(UNITS_CONFIG_PATH, c.itemsConfig); err != nil {
-		panic(err)
+		log.Fatal("Unable to load units configuration: ", err)
 	}
 	if err := c.scenarioConfig.LoadScenarios(SCENARIO_CONFIG_PATH, c.unitsConfig); err != nil {
-		panic(err)
+		log.Fatal("Unable to load scenarios configuration: ", err)
 	}
 }
