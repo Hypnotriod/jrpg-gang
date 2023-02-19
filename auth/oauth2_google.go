@@ -33,12 +33,13 @@ func (a *Authenticator) HandleGoogleAuth2(w http.ResponseWriter, r *http.Request
 
 func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http.Request) {
 	state := r.FormValue("state")
-	if item := a.stateCache.Get(state); item == nil || item.IsExpired() {
+	item := a.stateCache.Get(state)
+	a.stateCache.Delete(state)
+	if item == nil || item.IsExpired() {
 		log.Info("Google Oauth: state is expired or doesn't exist")
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
 	}
-	a.stateCache.Delete(state)
 
 	token, err := a.googleAuth2AcquireToken(r)
 	if err != nil {
