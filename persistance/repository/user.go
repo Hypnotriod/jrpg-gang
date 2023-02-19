@@ -18,6 +18,6 @@ func NewUserRepository(collection *mongo.Collection) *UserRepository {
 	return r
 }
 
-func (r *UserRepository) FindByEmail(ctx context.Context, email models.UserEmail) *models.UserModel {
+func (r *UserRepository) FindByEmail(ctx context.Context, email models.UserEmail) (*models.UserModel, bool) {
 	return r.FindOne(ctx, primitive.M{"email": email})
 }

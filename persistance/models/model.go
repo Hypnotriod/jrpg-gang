@@ -13,6 +13,7 @@ type Model struct {
 }
 
 func (m *Model) OnCreate() {
-	m.CreatedAt = time.Now()
-	m.UpdatedAt = time.Now()
+	t := time.Now()
+	m.CreatedAt = t
+	m.UpdatedAt = t
 }
