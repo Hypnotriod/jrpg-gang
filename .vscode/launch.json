@@ -9,7 +9,8 @@
             "program": "${workspaceFolder}/cmd/default",
             "cwd": "${workspaceFolder}",
             "env": {
-                "PORT": "3000"
+                "PORT": "3000",
+                "HOSTNAME": "http://localhost:3000"
             }
         },
         {
@@ -24,7 +25,8 @@
                 "-key=key.pem"
             ],
             "env": {
-                "PORT": "3000"
+                "PORT": "3000",
+                "HOSTNAME": "https://localhost:3000"
             }
         },
         {

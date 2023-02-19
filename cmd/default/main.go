@@ -5,19 +5,15 @@ import (
 	"jrpg-gang/auth"
 	"jrpg-gang/controller"
 	"jrpg-gang/session"
+	"jrpg-gang/util"
 	"net/http"
 	"os"
+
+	log "github.com/sirupsen/logrus"
 )
 
-func getenv(key string, defaultValue string) string {
-	if value, ok := os.LookupEnv(key); ok {
-		return value
-	}
-	return defaultValue
-}
-
 func hubConfig() session.HubConfig {
-	port := getenv("PORT", "3000")
+	port := util.Getenv("PORT", "8080")
 	key := flag.String("key", "", "path to TLS key.pem")
 	cert := flag.String("cert", "", "path to TLS cert.pem")
 	rBuffSize := flag.Int("rBuffSize", 1024, "ws read buffer size")
@@ -46,7 +42,10 @@ func hubConfig() session.HubConfig {
 func authConfig() auth.AuthenticatorConfig {
 	googleClientId := os.Getenv("GOOGLE_CLIENT_ID")
 	googleClientSecret := os.Getenv("GOOGLE_CLIENT_SECRET")
-	googleRedirectUrl := getenv("HOST_URL", "http://localhost:3000") + "/google/oauth2/callback"
+	if len(googleClientId) == 0 || len(googleClientSecret) == 0 {
+		log.Fatal("Google credentials are not specified for the environment")
+	}
+	googleRedirectUrl := util.Getenv("HOSTNAME", "http://localhost:8080") + "/google/oauth2/callback"
 	httpRequestTimeoutSec := flag.Int64("httpRequestTimeoutSec", 10, "HTTP request timeout in seconds")
 	stateCacheTimeoutMin := flag.Int64("stateCacheTimeoutMin", 10, "State cache timeout in minutes")
 	flag.Parse()
