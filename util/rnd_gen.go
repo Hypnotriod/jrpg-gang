@@ -29,15 +29,15 @@ func (g *RndGen) ResetUidGen() {
 	g.uidCounter = 0
 }
 
-func (g *RndGen) MakeId16() string {
-	return g.makeId(16)
+func (g *RndGen) MakeHex16() string {
+	return g.makeHex(16)
 }
 
-func (g *RndGen) MakeId32() string {
-	return g.makeId(32)
+func (g *RndGen) MakeHex32() string {
+	return g.makeHex(32)
 }
 
-func (g *RndGen) makeId(size int) string {
+func (g *RndGen) makeHex(size int) string {
 	data := make([]byte, size/2)
 	for n := 0; n < len(data); n += 4 {
 		u := g.rng.Uint32()

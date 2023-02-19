@@ -121,7 +121,7 @@ func (u *Users) AddUser(user *User) {
 	defer u.mu.Unlock()
 	u.mu.Lock()
 	for {
-		user.Id = engine.PlayerId(u.rndGen.MakeId32())
+		user.Id = engine.PlayerId(u.rndGen.MakeHex32())
 		if _, ok := u.users[user.Id]; !ok {
 			break
 		}
