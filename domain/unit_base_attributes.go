@@ -5,9 +5,9 @@ import (
 )
 
 type UnitBaseAttributes struct {
-	Health  float32 `json:"health"`  // unit health
-	Stamina float32 `json:"stamina"` // unit stamina
-	Mana    float32 `json:"mana"`    // unit mana
+	Health  float32 `json:"health" bson:"health"`   // unit health
+	Stamina float32 `json:"stamina" bson:"stamina"` // unit stamina
+	Mana    float32 `json:"mana" bson:"mana"`       // unit mana
 }
 
 func (a *UnitBaseAttributes) Accumulate(attributes UnitBaseAttributes) {

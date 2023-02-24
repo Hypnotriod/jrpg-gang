@@ -14,17 +14,17 @@ type UnitCode string
 
 type Unit struct {
 	rng          *rand.Rand
-	Uid          uint                     `json:"uid,omitempty"`
-	Name         string                   `json:"name"`
-	Code         UnitCode                 `json:"code,omitempty"`
-	Booty        UnitBooty                `json:"booty"`
-	State        UnitState                `json:"state"`
-	Stats        UnitStats                `json:"stats"`
-	Damage       []DamageImpact           `json:"damage,omitempty"`
-	Modification []UnitModificationImpact `json:"modification,omitempty"`
-	Inventory    UnitInventory            `json:"inventory"`
-	Slots        UnitSlots                `json:"slots"`
-	Position     Position                 `json:"position"`
+	Uid          uint                     `json:"uid,omitempty" bson:"-"`
+	Name         string                   `json:"name" bson:"name"`
+	Code         UnitCode                 `json:"code,omitempty" bson:"code,omitempty"`
+	Booty        UnitBooty                `json:"booty" bson:"booty"`
+	State        UnitState                `json:"state" bson:"-"`
+	Stats        UnitStats                `json:"stats" bson:"stats"`
+	Damage       []DamageImpact           `json:"damage,omitempty" bson:"-"`
+	Modification []UnitModificationImpact `json:"modification,omitempty" bson:"-"`
+	Inventory    UnitInventory            `json:"inventory" bson:"inventory"`
+	Slots        UnitSlots                `json:"slots" bson:"slots"`
+	Position     Position                 `json:"position" bson:"-"`
 }
 
 func (u *Unit) Clone() *Unit {

@@ -5,18 +5,18 @@ import (
 )
 
 type UnitInventoryDescriptor struct {
-	Code     ItemCode `json:"code"`
-	Quantity uint     `json:"quantity"`
-	Equipped bool     `json:"equipped,omitempty"`
+	Code     ItemCode `json:"code" bson:"code"`
+	Quantity uint     `json:"quantity,omitempty" bson:"quantity,omitempty"`
+	Equipped bool     `json:"equipped,omitempty" bson:"equipped,omitempty"`
 }
 
 type UnitInventory struct {
-	Descriptor []UnitInventoryDescriptor `json:"descriptor,omitempty"`
-	Weapon     []Weapon                  `json:"weapon,omitempty"`
-	Magic      []Magic                   `json:"magic,omitempty"`
-	Armor      []Armor                   `json:"armor,omitempty"`
-	Disposable []Disposable              `json:"disposable,omitempty"`
-	Ammunition []Ammunition              `json:"ammunition,omitempty"`
+	Descriptor []UnitInventoryDescriptor `json:"descriptor,omitempty" bson:"descriptor,omitempty"`
+	Weapon     []Weapon                  `json:"weapon,omitempty" bson:"-"`
+	Magic      []Magic                   `json:"magic,omitempty" bson:"-"`
+	Armor      []Armor                   `json:"armor,omitempty" bson:"-"`
+	Disposable []Disposable              `json:"disposable,omitempty" bson:"-"`
+	Ammunition []Ammunition              `json:"ammunition,omitempty" bson:"-"`
 }
 
 func (i *UnitInventory) Clone() *UnitInventory {
@@ -518,5 +518,38 @@ func (i *UnitInventory) PopulateCodeToItemMap(codeToItem *map[ItemCode]any) {
 	}
 	for j := range i.Weapon {
 		(*codeToItem)[i.Weapon[j].Code] = &i.Weapon[j]
+	}
+}
+
+func (i *UnitInventory) FillDescriptor() {
+	for _, item := range i.Ammunition {
+		i.Descriptor = append(i.Descriptor, UnitInventoryDescriptor{
+			Code:     item.Code,
+			Quantity: item.Quantity,
+			Equipped: item.Equipped,
+		})
+	}
+	for _, item := range i.Armor {
+		i.Descriptor = append(i.Descriptor, UnitInventoryDescriptor{
+			Code:     item.Code,
+			Equipped: item.Equipped,
+		})
+	}
+	for _, item := range i.Disposable {
+		i.Descriptor = append(i.Descriptor, UnitInventoryDescriptor{
+			Code:     item.Code,
+			Quantity: item.Quantity,
+		})
+	}
+	for _, item := range i.Magic {
+		i.Descriptor = append(i.Descriptor, UnitInventoryDescriptor{
+			Code: item.Code,
+		})
+	}
+	for _, item := range i.Weapon {
+		i.Descriptor = append(i.Descriptor, UnitInventoryDescriptor{
+			Code:     item.Code,
+			Equipped: item.Equipped,
+		})
 	}
 }

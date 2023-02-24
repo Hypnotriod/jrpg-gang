@@ -54,6 +54,12 @@ func (u *GameUnit) Clone() *GameUnit {
 	return r
 }
 
+func (u *GameUnit) ToPersist() *GameUnit {
+	r := u.Clone()
+	r.Inventory.FillDescriptor()
+	return r
+}
+
 func (u *GameUnit) PrepareForUser() {
 	u.Stats.Progress.ExperienceNext = u.NextLevelExp()
 }

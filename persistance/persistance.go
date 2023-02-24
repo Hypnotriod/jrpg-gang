@@ -54,6 +54,23 @@ func (p *Persistance) PopUserFromCache(token auth.AuthenticationToken) (*model.U
 	return item.Value(), true
 }
 
+func (p *Persistance) HasUserInCache(token auth.AuthenticationToken) bool {
+	p.mu.RLock()
+	item := p.usersCache.Get(token)
+	if item != nil && item.IsExpired() {
+		p.usersCache.Delete(item.Key())
+	}
+	p.mu.RUnlock()
+	return item != nil && !item.IsExpired()
+}
+
+func (p *Persistance) HasUserWithNickname(nickname string) bool {
+	ctx, cancel := p.db.requestContext()
+	defer cancel()
+	user, ok := p.db.UsersRepository.FindByNickname(ctx, nickname)
+	return user != nil && ok
+}
+
 func (p *Persistance) GetOrCreateUser(creadentials auth.UserCredentials) *model.UserModel {
 	ctx, cancel := p.db.requestContext()
 	defer cancel()
@@ -75,4 +92,11 @@ func (p *Persistance) GetOrCreateUser(creadentials auth.UserCredentials) *model.
 		return nil
 	}
 	return user
+}
+
+func (p *Persistance) UpdateUser(user model.UserModel) bool {
+	ctx, cancel := p.db.requestContext()
+	defer cancel()
+	updated, ok := p.db.UsersRepository.UpdateOneWithUnit(ctx, user)
+	return updated != 0 && ok
 }

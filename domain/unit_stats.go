@@ -3,10 +3,10 @@ package domain
 import "jrpg-gang/util"
 
 type UnitStats struct {
-	Progress       UnitProgress       `json:"progress"`
-	BaseAttributes UnitBaseAttributes `json:"baseAttributes"`
-	Attributes     UnitAttributes     `json:"attributes"`
-	Resistance     UnitResistance     `json:"resistance"`
+	Progress       UnitProgress       `json:"progress" bson:"progress"`
+	BaseAttributes UnitBaseAttributes `json:"baseAttributes" bson:"baseAttributes"`
+	Attributes     UnitAttributes     `json:"attributes" bson:"attributes"`
+	Resistance     UnitResistance     `json:"resistance" bson:"resistance"`
 }
 
 func (s *UnitStats) TotalResistance() UnitResistance {
