@@ -41,32 +41,29 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 		return
 	}
 
-	token, err := a.googleAuth2AcquireToken(r)
+	authToken, err := a.googleAuth2AcquireToken(r)
 	if err != nil {
 		log.Info("Google Oauth: couldn't acquire token: ", err.Error())
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
 	}
 
-	userInfo, err := a.googleAuth2AcquireUserInfo(r, token)
+	userInfo, err := a.googleAuth2AcquireUserInfo(r, authToken)
 	if err != nil {
 		log.Info("Google Oauth: couldn't acquire user info: ", err.Error())
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
 	}
 
-	credentials := UserCredentials{
-		Picture: userInfo.Picture,
-		Email:   userInfo.Email,
-	}
-	playerId, ok := a.handler.HandleUserAuthenticated(credentials)
+	credentials := UserCredentials{Email: userInfo.Email, Picture: userInfo.Picture}
+	playerToken, ok := a.handler.HandleUserAuthenticated(credentials)
 	if !ok {
 		log.Info("Google Oauth: authentication rejected for: ", credentials.Email)
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
 	}
 
-	fmt.Fprint(w, playerId)
+	fmt.Fprint(w, playerToken)
 }
 
 func (a *Authenticator) googleAuth2AcquireToken(r *http.Request) (*oauth2.Token, error) {

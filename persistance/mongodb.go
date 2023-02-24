@@ -46,6 +46,6 @@ func (db *MongoDB) connect() {
 
 func (db *MongoDB) initRepositories() {
 	db.UsersRepository = repository.NewUserRepository(
-		db.client.Database("jrpgGang").Collection("user"),
+		db.client.Database("jrpg_gang").Collection("user"),
 	)
 }

@@ -63,8 +63,6 @@ func NewUser(nickname string,
 	u.Level = unit.Stats.Progress.Level
 	u.Status = UserStatusNotJoined
 	u.Unit = unit
-	if u.Unit != nil {
-		u.Unit.Inventory.PopulateUids(u.RndGen)
-	}
+	u.Unit.Inventory.PopulateUids(u.RndGen)
 	return u
 }

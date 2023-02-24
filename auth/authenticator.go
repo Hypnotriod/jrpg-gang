@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"time"
 
@@ -23,10 +22,15 @@ type UserCredentials struct {
 	Email   string
 }
 
-type AuthenticationHandler interface {
-	HandleUserAuthenticated(credentials UserCredentials) (engine.PlayerId, bool)
-}
+type PlayerToken string
 
+const (
+	PlayerTokenEmpty PlayerToken = ""
+)
+
+type AuthenticationHandler interface {
+	HandleUserAuthenticated(credentials UserCredentials) (PlayerToken, bool)
+}
 type Authenticator struct {
 	rndGen     *util.RndGen
 	config     AuthenticatorConfig
