@@ -22,15 +22,22 @@ type UserCredentials struct {
 	Email   string
 }
 
-type PlayerToken string
+type AuthenticationToken string
 
 const (
-	PlayerTokenEmpty PlayerToken = ""
+	PlayerTokenEmpty AuthenticationToken = ""
 )
 
-type AuthenticationHandler interface {
-	HandleUserAuthenticated(credentials UserCredentials) (PlayerToken, bool)
+type AuthenticationStatus struct {
+	IsAuthenticated bool                `json:"isAuthenticated"`
+	Token           AuthenticationToken `json:"token,omitempty"`
+	IsNewPlayer     bool                `json:"isNewPlayer,omitempty"`
 }
+
+type AuthenticationHandler interface {
+	HandleUserAuthenticated(credentials UserCredentials) AuthenticationStatus
+}
+
 type Authenticator struct {
 	rndGen     *util.RndGen
 	config     AuthenticatorConfig

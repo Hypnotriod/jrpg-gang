@@ -6,7 +6,7 @@ import (
 )
 
 type UserModel struct {
-	Model
+	Model    `bson:"status"`
 	Email    string               `bson:"email"`
 	Class    engine.GameUnitClass `json:"class,omitempty"`
 	Nickname string               `bson:"nickname,omitempty"`

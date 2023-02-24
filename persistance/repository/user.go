@@ -19,5 +19,6 @@ func NewUserRepository(collection *mongo.Collection) *UserRepository {
 }
 
 func (r *UserRepository) FindByEmail(ctx context.Context, email string) (*model.UserModel, bool) {
-	return r.FindOne(ctx, primitive.M{"email": email})
+	filter := primitive.D{{Key: "email", Value: email}}
+	return r.FindOne(ctx, filter)
 }

@@ -6,16 +6,19 @@ import (
 	"jrpg-gang/engine"
 )
 
-func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredentials) (auth.PlayerToken, bool) {
+func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredentials) auth.AuthenticationStatus {
+	status := auth.AuthenticationStatus{}
 	if user, ok := c.users.GetByEmail(credentials.Email); ok {
 		c.Leave(user.Id)
 	}
 	userModel := c.persistance.GetOrCreateUser(credentials)
 	if userModel == nil {
-		return "", false
+		return status
 	}
-	token := c.persistance.AddUserToCache(userModel)
-	return token, true
+	status.Token = c.persistance.AddUserToCache(userModel)
+	status.IsNewPlayer = userModel.Unit == nil
+	status.IsAuthenticated = true
+	return status
 }
 
 func (c *GameController) ConnectionStatusChanged(playerId engine.PlayerId, isOffline bool) {

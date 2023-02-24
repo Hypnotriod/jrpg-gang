@@ -45,8 +45,8 @@ func (r *MongoDBRepository[T]) UpdateOneById(ctx context.Context, id MongoDBObje
 	}
 
 	fields = append(fields, bson.E{Key: "updated_at", Value: time.Now()})
-	filter := bson.M{"_id": objectId}
-	update := bson.M{"$set": fields}
+	filter := bson.D{{Key: "_id", Value: objectId}}
+	update := bson.D{{Key: "$set", Value: fields}}
 	result, err := r.collection.UpdateOne(ctx, filter, update)
 	if err != nil {
 		log.Error("Mongodb: UpdateOneById: ", id, " in collection:", r.collection.Name(), " fail: ", err)
@@ -54,9 +54,9 @@ func (r *MongoDBRepository[T]) UpdateOneById(ctx context.Context, id MongoDBObje
 	}
 	return result.MatchedCount, true
 }
-func (r *MongoDBRepository[T]) UpdateOne(ctx context.Context, filter bson.M, fields bson.D) (int64, bool) {
+func (r *MongoDBRepository[T]) UpdateOne(ctx context.Context, filter bson.D, fields bson.D) (int64, bool) {
 	fields = append(fields, bson.E{Key: "updated_at", Value: time.Now()})
-	update := bson.M{"$set": fields}
+	update := bson.D{{Key: "$set", Value: fields}}
 	result, err := r.collection.UpdateOne(ctx, filter, update)
 	if err != nil {
 		log.Error("Mongodb: UpdateOne: ", filter, " in collection:", r.collection.Name(), " fail: ", err)
@@ -73,7 +73,7 @@ func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id MongoDBObject
 	}
 
 	result := &T{}
-	filter := bson.M{"_id": objectId}
+	filter := bson.D{{Key: "_id", Value: objectId}}
 	err = r.collection.FindOne(ctx, filter).Decode(result)
 	if err != nil {
 		if err != mongo.ErrNoDocuments {
@@ -84,7 +84,7 @@ func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id MongoDBObject
 	return result, true
 }
 
-func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.M) (*T, bool) {
+func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.D) (*T, bool) {
 	result := &T{}
 	err := r.collection.FindOne(ctx, filter).Decode(result)
 	if err != nil {
@@ -94,7 +94,7 @@ func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.M) (*T, 
 		log.Error("Mongodb: FindOneById: ", filter, " in collection:", r.collection.Name(), " fail: ", err)
 		return nil, false
 	}
-	return result, false
+	return result, true
 }
 
 func (r *MongoDBRepository[T]) DeleteOneById(ctx context.Context, id MongoDBObjectId) (int64, bool) {
@@ -104,7 +104,7 @@ func (r *MongoDBRepository[T]) DeleteOneById(ctx context.Context, id MongoDBObje
 		return 0, false
 	}
 
-	filter := bson.M{"_id": objectId}
+	filter := bson.D{{Key: "_id", Value: objectId}}
 	result, err := r.collection.DeleteOne(ctx, filter)
 	if err != nil {
 		log.Error("Mongodb: DeleteOneById: ", id, " from collection:", r.collection.Name(), " fail: ", err)
