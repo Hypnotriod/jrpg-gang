@@ -41,12 +41,9 @@ func (p *Persistance) AddUserToCache(userModel *model.UserModel) auth.Authentica
 	return token
 }
 
-func (p *Persistance) PopUserFromCache(token auth.AuthenticationToken) (*model.UserModel, bool) {
+func (p *Persistance) GetUserFromCache(token auth.AuthenticationToken) (*model.UserModel, bool) {
 	p.mu.RLock()
 	item := p.usersCache.Get(token)
-	if item != nil {
-		p.usersCache.Delete(item.Key())
-	}
 	p.mu.RUnlock()
 	if item == nil || item.IsExpired() {
 		return nil, false
@@ -54,14 +51,10 @@ func (p *Persistance) PopUserFromCache(token auth.AuthenticationToken) (*model.U
 	return item.Value(), true
 }
 
-func (p *Persistance) HasUserInCache(token auth.AuthenticationToken) bool {
+func (p *Persistance) DeleteUserFromCache(token auth.AuthenticationToken) {
+	defer p.mu.RUnlock()
 	p.mu.RLock()
-	item := p.usersCache.Get(token)
-	if item != nil && item.IsExpired() {
-		p.usersCache.Delete(item.Key())
-	}
-	p.mu.RUnlock()
-	return item != nil && !item.IsExpired()
+	p.usersCache.Delete(token)
 }
 
 func (p *Persistance) HasUserWithNickname(nickname string) bool {

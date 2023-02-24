@@ -11,6 +11,7 @@
             "env": {
                 "PORT": "3000",
                 "HOST_URL": "http://localhost:3000",
+                "CLIENT_URL": "http://localhost:9000",
                 "MONGODB_URI": "mongodb://localhost:27017"
             }
         },
@@ -28,6 +29,7 @@
             "env": {
                 "PORT": "3000",
                 "HOST_URL": "https://localhost:3000",
+                "CLIENT_URL": "http://localhost:9000",
                 "MONGODB_URI": "mongodb://localhost:27017"
             }
         },

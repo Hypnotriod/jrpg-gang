@@ -54,11 +54,13 @@ func (s UserStatus) Test(status UserStatus) bool {
 }
 
 func NewUser(nickname string,
+	email string,
 	class engine.GameUnitClass,
 	unit *engine.GameUnit) *User {
 	u := &User{}
 	u.RndGen = util.NewRndGen()
 	u.Nickname = nickname
+	u.Email = email
 	u.Class = class
 	u.Level = unit.Stats.Progress.Level
 	u.Status = UserStatusNotJoined

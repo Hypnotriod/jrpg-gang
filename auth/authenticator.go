@@ -15,6 +15,7 @@ type AuthenticatorConfig struct {
 	GoogleClientId       string `json:"googleClientId"`
 	GoogleClientSecret   string `json:"googleClientSecret"`
 	GoogleRedirectUrl    string `json:"googleRedirectUrl"`
+	ClientRedirectUrl    string `json:"clientRedirectUrl"`
 }
 
 type UserCredentials struct {

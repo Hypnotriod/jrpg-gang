@@ -63,7 +63,7 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 		return
 	}
 
-	url := "/?token=" + string(status.Token) + "&isNewPlayer=" + strconv.FormatBool(status.IsNewPlayer)
+	url := a.config.ClientRedirectUrl + "/?token=" + string(status.Token) + "&isNewPlayer=" + strconv.FormatBool(status.IsNewPlayer)
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 }
 

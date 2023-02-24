@@ -30,22 +30,37 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 		response.fillUserStatus(&user)
 		return user.Id, response.WithStatus(ResponseStatusOk)
 	}
-	if !c.persistance.HasUserInCache(data.Token) {
+	userModel, ok := c.persistance.GetUserFromCache(data.Token)
+	if userModel == nil || !ok {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
 	}
-	if matched, _ := regexp.MatchString(USER_NICKNAME_REGEX, data.Nickname); !matched {
-		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
+	var unit *engine.GameUnit
+	var nickname string
+	var class engine.GameUnitClass
+	if userModel.Unit != nil {
+		unit = engine.NewGameUnit(userModel.Unit)
+		c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
+		nickname = userModel.Nickname
+		class = userModel.Class
+	} else {
+		if matched, _ := regexp.MatchString(USER_NICKNAME_REGEX, data.Nickname); !matched {
+			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
+		}
+		if ok := c.persistance.HasUserWithNickname(data.Nickname); ok {
+			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusAlreadyExists)
+		}
+		unit = c.unitsConfig.GetByCode(domain.UnitCode(data.Class))
+		nickname = data.Nickname
+		class = data.Class
 	}
-	if ok := c.persistance.HasUserWithNickname(data.Nickname); ok {
-		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusAlreadyExists)
-	}
-	unit := c.unitsConfig.GetByCode(domain.UnitCode(data.Class))
 	if unit == nil {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusMalformed)
 	}
 	unit.PrepareForUser()
-	user := users.NewUser(data.Nickname, data.Class, unit)
-	c.persistUser(user)
+	user := users.NewUser(nickname, userModel.Email, class, unit)
+	if userModel.Unit == nil {
+		c.persistUser(user)
+	}
 	c.users.AddUser(user)
 	response.fillUserStatus(user)
 	return user.Id, response.WithStatus(ResponseStatusOk)
