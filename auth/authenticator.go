@@ -17,14 +17,24 @@ type AuthenticatorConfig struct {
 	GoogleRedirectUrl    string `json:"googleRedirectUrl"`
 }
 
+type UserCredentials struct {
+	Picture string
+	Email   string
+}
+
+type AuthenticationHandler interface {
+	HandleUserAuthenticated(credentials UserCredentials) bool
+}
+
 type Authenticator struct {
 	rndGen     *util.RndGen
 	config     AuthenticatorConfig
 	googleSso  oauth2.Config
 	stateCache *ttlcache.Cache[string, bool]
+	handler    AuthenticationHandler
 }
 
-func NewAuthenticator(config AuthenticatorConfig) *Authenticator {
+func NewAuthenticator(config AuthenticatorConfig, handler AuthenticationHandler) *Authenticator {
 	auth := &Authenticator{}
 	auth.rndGen = util.NewRndGen()
 	auth.stateCache = ttlcache.New(
@@ -40,6 +50,7 @@ func NewAuthenticator(config AuthenticatorConfig) *Authenticator {
 			"https://www.googleapis.com/auth/userinfo.email",
 		},
 	}
+	auth.handler = handler
 	go auth.stateCache.Start()
 	return auth
 }

@@ -2,6 +2,7 @@ package persistance
 
 import (
 	"context"
+	"jrpg-gang/persistance/repository"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -9,28 +10,30 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-type DatabaseConfig struct {
+type MongoDBConfig struct {
 	Uri               string `json:"uri"`
 	RequestTimeoutSec int64  `json:"requestTimeoutSec"`
 }
 
-type Database struct {
-	config DatabaseConfig
-	client *mongo.Client
+type MongoDB struct {
+	UsersRepository *repository.UserRepository
+	config          MongoDBConfig
+	client          *mongo.Client
 }
 
-func NewDatabase(config DatabaseConfig) *Database {
-	db := &Database{}
+func NewMongoDB(config MongoDBConfig) *MongoDB {
+	db := &MongoDB{}
 	db.config = config
 	db.connect()
+	db.initRepositories()
 	return db
 }
 
-func (db *Database) requestContext() (context.Context, context.CancelFunc) {
+func (db *MongoDB) requestContext() (context.Context, context.CancelFunc) {
 	return context.WithTimeout(context.Background(), time.Duration(db.config.RequestTimeoutSec)*time.Second)
 }
 
-func (db *Database) connect() {
+func (db *MongoDB) connect() {
 	ctx, cancel := db.requestContext()
 	defer cancel()
 	clientOptions := options.Client().ApplyURI(db.config.Uri)
@@ -39,4 +42,10 @@ func (db *Database) connect() {
 		log.Fatal("Mongodb: can't establish connection: ", err)
 	}
 	db.client = client
+}
+
+func (db *MongoDB) initRepositories() {
+	db.UsersRepository = repository.NewUserRepository(
+		db.client.Database("jrpgGang").Collection("user"),
+	)
 }

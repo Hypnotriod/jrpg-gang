@@ -1,9 +1,14 @@
 package controller
 
 import (
+	"jrpg-gang/auth"
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 )
+
+func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredentials) bool {
+	return true
+}
 
 func (c *GameController) ConnectionStatusChanged(playerId engine.PlayerId, isOffline bool) {
 	c.users.ConnectionStatusChanged(playerId, isOffline)

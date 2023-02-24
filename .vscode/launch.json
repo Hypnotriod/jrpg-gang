@@ -10,7 +10,8 @@
             "cwd": "${workspaceFolder}",
             "env": {
                 "PORT": "3000",
-                "HOSTNAME": "http://localhost:3000"
+                "HOST_URL": "http://localhost:3000",
+                "MONGODB_URI": "mongodb://localhost:27017"
             }
         },
         {
@@ -26,7 +27,8 @@
             ],
             "env": {
                 "PORT": "3000",
-                "HOSTNAME": "https://localhost:3000"
+                "HOST_URL": "https://localhost:3000",
+                "MONGODB_URI": "mongodb://localhost:27017"
             }
         },
         {

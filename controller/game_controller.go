@@ -7,6 +7,7 @@ import (
 	"jrpg-gang/controller/shop"
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
+	"jrpg-gang/persistance"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -26,9 +27,10 @@ type GameController struct {
 	unitsConfig    *config.GameUnitsConfig
 	scenarioConfig *config.GameScenariosConfig
 	broadcaster    GameControllerBroadcaster
+	persistance    *persistance.Persistance
 }
 
-func NewGameController() *GameController {
+func NewGameController(persistance *persistance.Persistance) *GameController {
 	c := &GameController{}
 	c.users = users.NewUsers()
 	c.rooms = rooms.NewGameRooms()
@@ -39,11 +41,12 @@ func NewGameController() *GameController {
 	c.scenarioConfig = config.NewGameScenariosConfig()
 	c.configurator = engine.NewUnitConfigurator()
 	c.broadcaster = c
-	c.prepare()
+	c.persistance = persistance
+	c.init()
 	return c
 }
 
-func (c *GameController) prepare() {
+func (c *GameController) init() {
 	if err := c.itemsConfig.Load(ITEMS_CONFIG_PATH); err != nil {
 		log.Fatal("Unable to load items configuration: ", err)
 	}
