@@ -2,14 +2,14 @@ package repository
 
 import (
 	"context"
-	"jrpg-gang/persistance/models"
+	"jrpg-gang/persistance/model"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type UserRepository struct {
-	MongoDBRepository[models.UserModel]
+	MongoDBRepository[model.UserModel]
 }
 
 func NewUserRepository(collection *mongo.Collection) *UserRepository {
@@ -18,6 +18,6 @@ func NewUserRepository(collection *mongo.Collection) *UserRepository {
 	return r
 }
 
-func (r *UserRepository) FindByEmail(ctx context.Context, email models.UserEmail) (*models.UserModel, bool) {
+func (r *UserRepository) FindByEmail(ctx context.Context, email string) (*model.UserModel, bool) {
 	return r.FindOne(ctx, primitive.M{"email": email})
 }

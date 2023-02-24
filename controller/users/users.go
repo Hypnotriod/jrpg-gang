@@ -12,6 +12,7 @@ type Users struct {
 	rndGen           *util.RndGen
 	users            map[engine.PlayerId]*User
 	userNicknameToId map[string]engine.PlayerId
+	userEmailToId    map[string]engine.PlayerId
 }
 
 func NewUsers() *Users {
@@ -19,6 +20,7 @@ func NewUsers() *Users {
 	u.rndGen = util.NewRndGen()
 	u.users = make(map[engine.PlayerId]*User)
 	u.userNicknameToId = make(map[string]engine.PlayerId)
+	u.userEmailToId = make(map[string]engine.PlayerId)
 	return u
 }
 
@@ -62,6 +64,17 @@ func (u *Users) GetByNickname(nickname string) (User, bool) {
 	defer u.mu.RUnlock()
 	u.mu.RLock()
 	playerId, ok := u.userNicknameToId[nickname]
+	if !ok {
+		return User{}, false
+	}
+	user, ok := u.users[playerId]
+	return *user, ok
+}
+
+func (u *Users) GetByEmail(email string) (User, bool) {
+	defer u.mu.RUnlock()
+	u.mu.RLock()
+	playerId, ok := u.userEmailToId[email]
 	if !ok {
 		return User{}, false
 	}
@@ -129,6 +142,7 @@ func (u *Users) AddUser(user *User) {
 	user.Status = UserStatusJoined
 	u.users[user.Id] = user
 	u.userNicknameToId[user.Nickname] = user.Id
+	u.userEmailToId[user.Nickname] = user.Id
 }
 
 func (u *Users) RemoveUser(playerId engine.PlayerId) {
@@ -139,6 +153,7 @@ func (u *Users) RemoveUser(playerId engine.PlayerId) {
 		return
 	}
 	delete(u.userNicknameToId, user.Nickname)
+	delete(u.userEmailToId, user.Email)
 	delete(u.users, playerId)
 }
 

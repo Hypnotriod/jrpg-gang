@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"jrpg-gang/persistance/models"
+	"jrpg-gang/persistance/model"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -18,7 +18,7 @@ const (
 )
 
 type MongoDBRepositoryModel interface {
-	models.UserModel
+	model.UserModel
 }
 
 type MongoDBRepository[T MongoDBRepositoryModel] struct {

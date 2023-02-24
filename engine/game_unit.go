@@ -26,6 +26,12 @@ type GameUnit struct {
 	IsDead     bool            `json:"isDead,omitempty"`
 }
 
+func NewGameUnit(unit *domain.Unit) *GameUnit {
+	u := &GameUnit{}
+	u.Unit = *unit
+	return u
+}
+
 func (u *GameUnit) HasPlayerId() bool {
 	return u.PlayerInfo != nil && u.PlayerInfo.Id != PlayerIdEmpty
 }

@@ -59,13 +59,14 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 		Picture: userInfo.Picture,
 		Email:   userInfo.Email,
 	}
-	if !a.handler.HandleUserAuthenticated(credentials) {
+	playerId, ok := a.handler.HandleUserAuthenticated(credentials)
+	if !ok {
 		log.Info("Google Oauth: authentication rejected for: ", credentials.Email)
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
 	}
 
-	fmt.Fprint(w, util.ObjectToJson(userInfo))
+	fmt.Fprint(w, playerId)
 }
 
 func (a *Authenticator) googleAuth2AcquireToken(r *http.Request) (*oauth2.Token, error) {

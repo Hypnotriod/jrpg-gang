@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"time"
 
@@ -23,7 +24,7 @@ type UserCredentials struct {
 }
 
 type AuthenticationHandler interface {
-	HandleUserAuthenticated(credentials UserCredentials) bool
+	HandleUserAuthenticated(credentials UserCredentials) (engine.PlayerId, bool)
 }
 
 type Authenticator struct {
