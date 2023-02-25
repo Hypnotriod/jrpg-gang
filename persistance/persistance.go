@@ -75,7 +75,6 @@ func (p *Persistance) GetOrCreateUser(creadentials auth.UserCredentials) *model.
 		Email:   creadentials.Email,
 		Picture: creadentials.Picture,
 	}
-	userToPersist.OnCreate()
 	id, ok := p.db.UsersRepository.InsertOne(ctx, userToPersist)
 	if !ok {
 		return nil

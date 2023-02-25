@@ -3,7 +3,7 @@ package domain
 import "jrpg-gang/util"
 
 type UnitResistance struct {
-	Damage
+	Damage `bson:",inline"`
 }
 
 func (r *UnitResistance) Accumulate(resistance UnitResistance) {

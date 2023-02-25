@@ -18,6 +18,11 @@ func NewUserRepository(collection *mongo.Collection) *UserRepository {
 	return r
 }
 
+func (r *UserRepository) InsertOne(ctx context.Context, model model.UserModel) (MongoDBObjectId, bool) {
+	model.OnCreate()
+	return r.MongoDBRepository.InsertOne(ctx, model)
+}
+
 func (r *UserRepository) FindByEmail(ctx context.Context, email string) (*model.UserModel, bool) {
 	filter := primitive.D{{Key: "email", Value: email}}
 	return r.FindOne(ctx, filter)

@@ -4,7 +4,7 @@ import "jrpg-gang/util"
 
 type UnitStats struct {
 	Progress       UnitProgress       `json:"progress" bson:"progress"`
-	BaseAttributes UnitBaseAttributes `json:"baseAttributes" bson:"baseAttributes"`
+	BaseAttributes UnitBaseAttributes `json:"baseAttributes" bson:"base_attributes"`
 	Attributes     UnitAttributes     `json:"attributes" bson:"attributes"`
 	Resistance     UnitResistance     `json:"resistance" bson:"resistance"`
 }
