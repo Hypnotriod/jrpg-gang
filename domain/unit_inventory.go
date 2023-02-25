@@ -8,6 +8,7 @@ type UnitInventoryDescriptor struct {
 	Code     ItemCode `json:"code" bson:"code"`
 	Quantity uint     `json:"quantity,omitempty" bson:"quantity,omitempty"`
 	Equipped bool     `json:"equipped,omitempty" bson:"equipped,omitempty"`
+	Wearout  float32  `json:"wearout" bson:"wearout,omitempty"`
 }
 
 type UnitInventory struct {
@@ -533,6 +534,7 @@ func (i *UnitInventory) FillDescriptor() {
 		i.Descriptor = append(i.Descriptor, UnitInventoryDescriptor{
 			Code:     item.Code,
 			Equipped: item.Equipped,
+			Wearout:  item.Wearout,
 		})
 	}
 	for _, item := range i.Disposable {
@@ -550,6 +552,7 @@ func (i *UnitInventory) FillDescriptor() {
 		i.Descriptor = append(i.Descriptor, UnitInventoryDescriptor{
 			Code:     item.Code,
 			Equipped: item.Equipped,
+			Wearout:  item.Wearout,
 		})
 	}
 }

@@ -46,6 +46,7 @@ func (c *GameItemsConfig) PopulateFromDescriptor(inventory *domain.UnitInventory
 			case *domain.Weapon:
 				itemClone := *v
 				itemClone.Equipped = desc.Equipped
+				itemClone.Wearout = desc.Wearout
 				inventory.Add(&itemClone)
 			case *domain.Magic:
 				itemClone := *v
@@ -53,6 +54,7 @@ func (c *GameItemsConfig) PopulateFromDescriptor(inventory *domain.UnitInventory
 			case *domain.Armor:
 				itemClone := *v
 				itemClone.Equipped = desc.Equipped
+				itemClone.Wearout = desc.Wearout
 				inventory.Add(&itemClone)
 			case *domain.Disposable:
 				itemClone := *v
