@@ -145,16 +145,17 @@ func (u *Users) AddUser(user *User) {
 	u.userEmailToId[user.Nickname] = user.Id
 }
 
-func (u *Users) RemoveUser(playerId engine.PlayerId) {
+func (u *Users) RemoveUser(playerId engine.PlayerId) *User {
 	defer u.mu.Unlock()
 	u.mu.Lock()
 	user, ok := u.users[playerId]
 	if !ok {
-		return
+		return nil
 	}
 	delete(u.userNicknameToId, user.Nickname)
 	delete(u.userEmailToId, user.Email)
 	delete(u.users, playerId)
+	return user
 }
 
 func (u *Users) ChangeUserStatus(playerId engine.PlayerId, status UserStatus) {

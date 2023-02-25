@@ -37,7 +37,10 @@ func (c *GameController) ConnectionStatusChanged(playerId engine.PlayerId, isOff
 }
 
 func (c *GameController) Leave(playerId engine.PlayerId) {
-	c.users.RemoveUser(playerId)
+	user := c.users.RemoveUser(playerId)
+	if user != nil {
+		c.persistUser(user)
+	}
 	if room, ok := c.rooms.PopByHostId(playerId); ok {
 		c.broadcastRoomStatus(room.Uid)
 	} else if roomUid, ok := c.rooms.RemoveUser(playerId); ok {

@@ -5,7 +5,6 @@ import (
 	"jrpg-gang/controller/users"
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
-	"jrpg-gang/persistance/model"
 	"regexp"
 )
 
@@ -24,7 +23,7 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 	if data.PlayerId != engine.PlayerIdEmpty {
 		user, ok := c.users.Get(data.PlayerId)
 		if !ok {
-			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
+			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
 		}
 		user.IsOffline = false
 		response.fillUserStatus(&user)
@@ -32,7 +31,7 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 	}
 	userModel, ok := c.persistance.GetUserFromCache(data.Token)
 	if userModel == nil || !ok {
-		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
+		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
 	}
 	var unit *engine.GameUnit
 	var nickname string
@@ -44,7 +43,7 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 		class = userModel.Class
 	} else {
 		if matched, _ := regexp.MatchString(USER_NICKNAME_REGEX, data.Nickname); !matched {
-			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
+			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusMalformed)
 		}
 		if ok := c.persistance.HasUserWithNickname(data.Nickname); ok {
 			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusAlreadyExists)
@@ -56,7 +55,6 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 	if unit == nil {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusMalformed)
 	}
-	unit.PrepareForUser()
 	user := users.NewUser(nickname, userModel.Email, class, unit)
 	if userModel.Unit == nil {
 		c.persistUser(user)
@@ -64,15 +62,4 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 	c.users.AddUser(user)
 	response.fillUserStatus(user)
 	return user.Id, response.WithStatus(ResponseStatusOk)
-}
-
-func (c *GameController) persistUser(user *users.User) {
-	unit := user.Unit.ToPersist()
-	userModel := model.UserModel{
-		Email:    user.Email,
-		Nickname: user.Nickname,
-		Class:    user.Class,
-		Unit:     &unit.Unit,
-	}
-	c.persistance.UpdateUser(userModel)
 }
