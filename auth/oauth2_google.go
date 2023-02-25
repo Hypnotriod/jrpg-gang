@@ -37,21 +37,21 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 	a.stateCache.Delete(state)
 	if item == nil || item.IsExpired() {
 		log.Info("Google Oauth: state is expired or doesn't exist")
-		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		http.Redirect(w, r, a.config.RedirectUrl, http.StatusTemporaryRedirect)
 		return
 	}
 
 	token, err := a.googleAuth2AcquireToken(r)
 	if err != nil {
 		log.Info("Google Oauth: couldn't acquire token: ", err.Error())
-		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		http.Redirect(w, r, a.config.RedirectUrl, http.StatusTemporaryRedirect)
 		return
 	}
 
 	userInfo, err := a.googleAuth2AcquireUserInfo(r, token)
 	if err != nil {
 		log.Info("Google Oauth: couldn't acquire user info: ", err.Error())
-		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		http.Redirect(w, r, a.config.RedirectUrl, http.StatusTemporaryRedirect)
 		return
 	}
 
@@ -59,11 +59,11 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 	status := a.handler.HandleUserAuthenticated(credentials)
 	if !status.IsAuthenticated {
 		log.Info("Google Oauth: authentication rejected for: ", credentials.Email)
-		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		http.Redirect(w, r, a.config.RedirectUrl, http.StatusTemporaryRedirect)
 		return
 	}
 
-	url := a.config.ClientRedirectUrl + "/?token=" + string(status.Token) + "&isNewPlayer=" + strconv.FormatBool(status.IsNewPlayer)
+	url := a.config.RedirectUrl + "/?token=" + string(status.Token) + "&isNewPlayer=" + strconv.FormatBool(status.IsNewPlayer)
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 }
 

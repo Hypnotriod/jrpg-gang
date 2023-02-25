@@ -19,8 +19,8 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 	if len(googleClientId) == 0 || len(googleClientSecret) == 0 {
 		log.Fatal("Google credentials are not specified for the environment")
 	}
-	googleRedirectUrl := util.Getenv("HOST_URL", "http://localhost:8080") + "/google/oauth2/callback"
-	clientRedirectUrl := util.Getenv("CLIENT_URL", "http://localhost:8080")
+	googleAuthCallbackUrl := util.Getenv("HOST_URL", "http://localhost:8080") + "/google/oauth2/callback"
+	authRedirectUrl := util.Getenv("AUTH_REDIRECT_URL", "http://localhost:8080")
 	authRequestTimeoutSec := flag.Int64("authRequestTimeoutSec", 10, "HTTP request timeout in seconds")
 	authStateCacheTimeoutMin := flag.Int64("authStateCacheTimeoutMin", 10, "State cache timeout in minutes")
 
@@ -45,8 +45,8 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 		StateCacheTimeoutMin: *authStateCacheTimeoutMin,
 		GoogleClientId:       googleClientId,
 		GoogleClientSecret:   googleClientSecret,
-		GoogleRedirectUrl:    googleRedirectUrl,
-		ClientRedirectUrl:    clientRedirectUrl,
+		GoogleCallbackUrl:    googleAuthCallbackUrl,
+		RedirectUrl:          authRedirectUrl,
 	}
 
 	hubConfig = session.HubConfig{

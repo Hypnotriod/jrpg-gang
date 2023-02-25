@@ -14,8 +14,8 @@ type AuthenticatorConfig struct {
 	StateCacheTimeoutMin int64  `json:"stateCacheTimeoutSec"`
 	GoogleClientId       string `json:"googleClientId"`
 	GoogleClientSecret   string `json:"googleClientSecret"`
-	GoogleRedirectUrl    string `json:"googleRedirectUrl"`
-	ClientRedirectUrl    string `json:"clientRedirectUrl"`
+	GoogleCallbackUrl    string `json:"googleCallbackUrl"`
+	RedirectUrl          string `json:"redirectUrl"`
 }
 
 type UserCredentials struct {
@@ -57,7 +57,7 @@ func NewAuthenticator(config AuthenticatorConfig, handler AuthenticationHandler)
 	auth.googleSso = oauth2.Config{
 		ClientID:     config.GoogleClientId,
 		ClientSecret: config.GoogleClientSecret,
-		RedirectURL:  config.GoogleRedirectUrl,
+		RedirectURL:  config.GoogleCallbackUrl,
 		Endpoint:     google.Endpoint,
 		Scopes: []string{
 			"https://www.googleapis.com/auth/userinfo.email",
