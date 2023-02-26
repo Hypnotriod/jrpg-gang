@@ -7,8 +7,7 @@ const (
 )
 
 type PlayerInfo struct {
-	Id        PlayerId      `json:"-"`
-	Email     string        `json:"-"`
+	Id        PlayerId      `json:"playerId"`
 	Nickname  string        `json:"nickname"`
 	Class     GameUnitClass `json:"class"`
 	Level     uint          `json:"level"`

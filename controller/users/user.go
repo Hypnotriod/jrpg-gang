@@ -35,6 +35,7 @@ const (
 type User struct {
 	engine.PlayerInfo
 	RndGen    *util.RndGen
+	Email     string
 	SessionId UserSessionId
 	Status    UserStatus
 	Unit      *engine.GameUnit
