@@ -135,6 +135,16 @@ func (u *Users) UpdateWithUnitOnGameComplete(playerId engine.PlayerId, unit *dom
 	user.Unit.Inventory.PopulateUids(user.RndGen)
 }
 
+func (u *Users) UpdateOnLevelUp(playerId engine.PlayerId, unit *domain.Unit) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
+	user, ok := u.users[playerId]
+	if !ok {
+		return
+	}
+	user.Level = user.Unit.PlayerInfo.Level
+}
+
 func (u *Users) ResetUser(playerId engine.PlayerId) {
 	defer u.mu.Unlock()
 	u.mu.Lock()

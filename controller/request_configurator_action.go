@@ -22,6 +22,9 @@ func (c *GameController) handleConfiguratorActionRequest(playerId engine.PlayerI
 	if actionResult.Result == domain.ResultAccomplished {
 		response.Data[DataKeyUnit] = user.Unit
 	}
+	if user.Level != user.Unit.PlayerInfo.Level {
+		c.users.UpdateOnLevelUp(playerId, &user.Unit.Unit)
+	}
 	response.Data[DataKeyAction] = request.Data
 	response.Data[DataKeyActionResult] = actionResult
 	return response.WithStatus(ResponseStatusOk)
