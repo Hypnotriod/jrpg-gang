@@ -29,7 +29,6 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
 	}
 	return c.handleRejoinWithCredentialsRequest(request, response, data, userModel)
-
 }
 
 func (c *GameController) handleRejoinRequest(request *Request, response *Response, data *JoinRequestData) (engine.PlayerId, string) {
@@ -70,6 +69,7 @@ func (c *GameController) handleRejoinWithCredentialsRequest(request *Request, re
 		c.persistUser(user)
 	}
 	c.users.AddUser(user)
+	c.persistance.RemoveUserFromCache(data.Token)
 	response.fillUserStatus(user)
 	return user.Id, response.WithStatus(ResponseStatusOk)
 }

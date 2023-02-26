@@ -4,14 +4,12 @@ import (
 	"jrpg-gang/auth"
 	"jrpg-gang/persistance/model"
 	"jrpg-gang/util"
-	"sync"
 	"time"
 
 	"github.com/jellydator/ttlcache/v3"
 )
 
 type Persistance struct {
-	mu         sync.RWMutex
 	rndGen     *util.RndGen
 	db         *MongoDB
 	usersCache *ttlcache.Cache[auth.AuthenticationToken, *model.UserModel]
@@ -23,31 +21,26 @@ func NewPersistance(dbConfig MongoDBConfig) *Persistance {
 	p.usersCache = ttlcache.New(
 		ttlcache.WithTTL[auth.AuthenticationToken, *model.UserModel](time.Hour),
 	)
+	go p.usersCache.Start()
 	p.db = NewMongoDB(dbConfig)
 	return p
 }
 
 func (p *Persistance) AddUserToCache(userModel *model.UserModel) auth.AuthenticationToken {
-	defer p.mu.Unlock()
-	p.mu.Lock()
 	token := auth.AuthenticationToken(p.rndGen.MakeUUID())
 	p.usersCache.Set(token, userModel, ttlcache.DefaultTTL)
 	return token
 }
 
 func (p *Persistance) GetUserFromCache(token auth.AuthenticationToken) (*model.UserModel, bool) {
-	p.mu.RLock()
 	item := p.usersCache.Get(token)
-	p.mu.RUnlock()
 	if item == nil || item.IsExpired() {
 		return nil, false
 	}
 	return item.Value(), true
 }
 
-func (p *Persistance) DeleteUserFromCache(token auth.AuthenticationToken) {
-	defer p.mu.RUnlock()
-	p.mu.RLock()
+func (p *Persistance) RemoveUserFromCache(token auth.AuthenticationToken) {
 	p.usersCache.Delete(token)
 }
 
