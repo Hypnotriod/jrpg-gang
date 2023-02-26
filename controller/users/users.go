@@ -8,11 +8,12 @@ import (
 )
 
 type Users struct {
-	mu               sync.RWMutex
-	rndGen           *util.RndGen
-	users            map[engine.PlayerId]*User
-	userNicknameToId map[string]engine.PlayerId
-	userEmailToId    map[string]engine.PlayerId
+	mu                sync.RWMutex
+	rndGen            *util.RndGen
+	users             map[engine.PlayerId]*User
+	userNicknameToId  map[string]engine.PlayerId
+	userEmailToId     map[string]engine.PlayerId
+	userSessionIdToId map[UserSessionId]engine.PlayerId
 }
 
 func NewUsers() *Users {
@@ -21,6 +22,7 @@ func NewUsers() *Users {
 	u.users = make(map[engine.PlayerId]*User)
 	u.userNicknameToId = make(map[string]engine.PlayerId)
 	u.userEmailToId = make(map[string]engine.PlayerId)
+	u.userSessionIdToId = make(map[UserSessionId]engine.PlayerId)
 	return u
 }
 
@@ -82,6 +84,20 @@ func (u *Users) GetByEmail(email string) (User, bool) {
 	return *user, ok
 }
 
+func (u *Users) GetAndRefreshBySessionId(sessionId UserSessionId) (User, bool) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
+	playerId, ok := u.userSessionIdToId[sessionId]
+	if !ok {
+		return User{}, false
+	}
+	user, ok := u.users[playerId]
+	delete(u.userSessionIdToId, user.SessionId)
+	user.SessionId = UserSessionId(u.rndGen.MakeUUID())
+	u.userSessionIdToId[user.SessionId] = user.Id
+	return *user, ok
+}
+
 func (u *Users) GetIdsByStatus(status UserStatus, onlineOnly bool) []engine.PlayerId {
 	defer u.mu.RUnlock()
 	u.mu.RLock()
@@ -133,16 +149,13 @@ func (u *Users) ResetUser(playerId engine.PlayerId) {
 func (u *Users) AddUser(user *User) {
 	defer u.mu.Unlock()
 	u.mu.Lock()
-	for {
-		user.Id = engine.PlayerId(u.rndGen.MakeHex32())
-		if _, ok := u.users[user.Id]; !ok {
-			break
-		}
-	}
+	user.Id = engine.PlayerId(u.rndGen.MakeUUID())
+	user.SessionId = UserSessionId(u.rndGen.MakeUUID())
 	user.Status = UserStatusJoined
 	u.users[user.Id] = user
 	u.userNicknameToId[user.Nickname] = user.Id
 	u.userEmailToId[user.Email] = user.Id
+	u.userSessionIdToId[user.SessionId] = user.Id
 }
 
 func (u *Users) RemoveUser(playerId engine.PlayerId) *User {
@@ -154,6 +167,7 @@ func (u *Users) RemoveUser(playerId engine.PlayerId) *User {
 	}
 	delete(u.userNicknameToId, user.Nickname)
 	delete(u.userEmailToId, user.Email)
+	delete(u.userSessionIdToId, user.SessionId)
 	delete(u.users, playerId)
 	return user
 }

@@ -3,6 +3,7 @@ module jrpg-gang
 go 1.19
 
 require (
+	github.com/google/uuid v1.3.0
 	github.com/gorilla/websocket v1.5.0
 	github.com/jellydator/ttlcache/v3 v3.0.1
 	github.com/seehuhn/mt19937 v1.0.0

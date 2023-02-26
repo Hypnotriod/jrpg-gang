@@ -30,13 +30,7 @@ func NewPersistance(dbConfig MongoDBConfig) *Persistance {
 func (p *Persistance) AddUserToCache(userModel *model.UserModel) auth.AuthenticationToken {
 	defer p.mu.Unlock()
 	p.mu.Lock()
-	var token auth.AuthenticationToken
-	for {
-		token = auth.AuthenticationToken(p.rndGen.MakeHex32())
-		if item := p.usersCache.Get(token); item == nil {
-			break
-		}
-	}
+	token := auth.AuthenticationToken(p.rndGen.MakeUUID())
 	p.usersCache.Set(token, userModel, ttlcache.DefaultTTL)
 	return token
 }

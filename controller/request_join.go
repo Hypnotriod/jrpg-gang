@@ -10,10 +10,10 @@ import (
 )
 
 type JoinRequestData struct {
-	Token    auth.AuthenticationToken `json:"token,omitempty"`
-	Nickname string                   `json:"nickname,omitempty"`
-	Class    engine.GameUnitClass     `json:"class,omitempty"`
-	PlayerId engine.PlayerId          `json:"playerId,omitempty"`
+	Token     auth.AuthenticationToken `json:"token,omitempty"`
+	Nickname  string                   `json:"nickname,omitempty"`
+	Class     engine.GameUnitClass     `json:"class,omitempty"`
+	SessionId users.UserSessionId      `json:"sessionId,omitempty"`
 }
 
 func (c *GameController) handleJoinRequest(request *Request, response *Response) (engine.PlayerId, string) {
@@ -21,7 +21,7 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 	if data == nil {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusMalformed)
 	}
-	if data.PlayerId != engine.PlayerIdEmpty {
+	if data.SessionId != users.UserSessionIdEmpty {
 		return c.handleRejoinRequest(request, response, data)
 	}
 	userModel, ok := c.persistance.GetUserFromCache(data.Token)
@@ -33,7 +33,7 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 }
 
 func (c *GameController) handleRejoinRequest(request *Request, response *Response, data *JoinRequestData) (engine.PlayerId, string) {
-	user, ok := c.users.Get(data.PlayerId)
+	user, ok := c.users.GetAndRefreshBySessionId(data.SessionId)
 	if !ok {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
 	}

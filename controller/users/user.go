@@ -5,6 +5,12 @@ import (
 	"jrpg-gang/util"
 )
 
+type UserSessionId string
+
+const (
+	UserSessionIdEmpty UserSessionId = ""
+)
+
 type UserStatus int
 
 type UserDisplayStatus string
@@ -28,9 +34,10 @@ const (
 
 type User struct {
 	engine.PlayerInfo
-	RndGen *util.RndGen
-	Status UserStatus
-	Unit   *engine.GameUnit
+	RndGen    *util.RndGen
+	SessionId UserSessionId
+	Status    UserStatus
+	Unit      *engine.GameUnit
 }
 
 func (s UserStatus) Display() UserDisplayStatus {

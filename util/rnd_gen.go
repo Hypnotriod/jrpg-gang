@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/seehuhn/mt19937"
 )
 
@@ -18,6 +19,10 @@ func NewRndGen() *RndGen {
 	g.rng = rand.New(mt19937.New())
 	g.rng.Seed(time.Now().UnixNano())
 	return g
+}
+
+func (g *RndGen) MakeUUID() string {
+	return uuid.New().String()
 }
 
 func (g *RndGen) NextUid() uint {
