@@ -91,7 +91,7 @@ func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.D) (*T, 
 		if err == mongo.ErrNoDocuments {
 			return nil, true
 		}
-		log.Error("Mongodb: FindOneById: ", filter, " in collection:", r.collection.Name(), " fail: ", err)
+		log.Error("Mongodb: FindOne: ", filter, " in collection:", r.collection.Name(), " fail: ", err)
 		return nil, false
 	}
 	return result, true
