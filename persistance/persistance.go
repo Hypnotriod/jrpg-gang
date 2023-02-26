@@ -68,7 +68,10 @@ func (p *Persistance) GetOrCreateUser(creadentials auth.UserCredentials) *model.
 	ctx, cancel := p.db.requestContext()
 	defer cancel()
 	user, ok := p.db.UsersRepository.FindByEmail(ctx, creadentials.Email)
-	if user != nil && ok {
+	if !ok {
+		return nil
+	}
+	if user != nil {
 		return user
 	}
 	userToPersist := model.UserModel{
