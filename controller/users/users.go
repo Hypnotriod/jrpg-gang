@@ -142,7 +142,7 @@ func (u *Users) AddUser(user *User) {
 	user.Status = UserStatusJoined
 	u.users[user.Id] = user
 	u.userNicknameToId[user.Nickname] = user.Id
-	u.userEmailToId[user.Nickname] = user.Id
+	u.userEmailToId[user.Email] = user.Id
 }
 
 func (u *Users) RemoveUser(playerId engine.PlayerId) *User {
