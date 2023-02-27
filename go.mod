@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/gorilla/websocket v1.5.0
 	github.com/jellydator/ttlcache/v3 v3.0.1
-	github.com/rs/xid v1.4.0
+	github.com/lithammer/shortuuid/v4 v4.0.0
 	github.com/seehuhn/mt19937 v1.0.0
 	github.com/sirupsen/logrus v1.8.1
 	go.mongodb.org/mongo-driver v1.11.2
@@ -16,6 +16,7 @@ require (
 	cloud.google.com/go/compute/metadata v0.2.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
 	github.com/pkg/errors v0.9.1 // indirect

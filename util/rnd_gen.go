@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/rs/xid"
+	"github.com/lithammer/shortuuid/v4"
 	"github.com/seehuhn/mt19937"
 )
 
@@ -22,13 +22,13 @@ func NewRndGen() *RndGen {
 }
 
 func (g *RndGen) MakeUUID() string {
-	return xid.New().String()
+	return shortuuid.New()
 }
 
 func (g *RndGen) MakeUUIDWithUniquenessCheck(checkUnique func(value string) bool) string {
-	value := xid.New().String()
+	value := shortuuid.New()
 	for !checkUnique(value) {
-		value = xid.New().String()
+		value = shortuuid.New()
 	}
 	return value
 }
