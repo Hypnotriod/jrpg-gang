@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/google/uuid"
+	"github.com/rs/xid"
 	"github.com/seehuhn/mt19937"
 )
 
@@ -22,7 +22,15 @@ func NewRndGen() *RndGen {
 }
 
 func (g *RndGen) MakeUUID() string {
-	return uuid.New().String()
+	return xid.New().String()
+}
+
+func (g *RndGen) MakeUUIDWithUniquenessCheck(checkUnique func(value string) bool) string {
+	value := xid.New().String()
+	for !checkUnique(value) {
+		value = xid.New().String()
+	}
+	return value
 }
 
 func (g *RndGen) NextUid() uint {
