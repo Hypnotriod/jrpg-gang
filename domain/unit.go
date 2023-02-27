@@ -12,11 +12,18 @@ type UnitSlots map[EquipmentSlot]uint
 
 type UnitCode string
 
+type UnitClass string
+
+const (
+	UnitClassEmpty UnitClass = ""
+)
+
 type Unit struct {
 	rng          *rand.Rand
 	Uid          uint                     `json:"uid,omitempty" bson:"-"`
 	Name         string                   `json:"name" bson:"name"`
 	Code         UnitCode                 `json:"code,omitempty" bson:"code,omitempty"`
+	Class        UnitClass                `json:"class,omitempty" bson:"class,omitempty"`
 	Booty        UnitBooty                `json:"booty" bson:"booty"`
 	State        UnitState                `json:"state" bson:"-"`
 	Stats        UnitStats                `json:"stats" bson:"stats"`

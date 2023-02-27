@@ -12,7 +12,7 @@ import (
 type JoinRequestData struct {
 	Token     auth.AuthenticationToken `json:"token,omitempty"`
 	Nickname  string                   `json:"nickname,omitempty"`
-	Class     engine.GameUnitClass     `json:"class,omitempty"`
+	Class     domain.UnitClass         `json:"class,omitempty"`
 	SessionId users.UserSessionId      `json:"sessionId,omitempty"`
 }
 
@@ -44,7 +44,7 @@ func (c *GameController) handleRejoinRequest(request *Request, response *Respons
 func (c *GameController) handleRejoinWithCredentialsRequest(request *Request, response *Response, data *JoinRequestData, userModel *model.UserModel) (engine.PlayerId, string) {
 	var unit *engine.GameUnit
 	var nickname string
-	var class engine.GameUnitClass
+	var class domain.UnitClass
 	if userModel.Unit != nil {
 		unit = engine.NewGameUnit(userModel.Unit)
 		c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)

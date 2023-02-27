@@ -1,6 +1,7 @@
 package users
 
 import (
+	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"jrpg-gang/util"
 )
@@ -63,7 +64,7 @@ func (s UserStatus) Test(status UserStatus) bool {
 
 func NewUser(nickname string,
 	email string,
-	class engine.GameUnitClass,
+	class domain.UnitClass,
 	unit *engine.GameUnit) *User {
 	u := &User{}
 	u.RndGen = util.NewRndGen()

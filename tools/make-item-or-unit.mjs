@@ -105,6 +105,7 @@ async function makeUnit() {
     const result = {
         name: await makeString('name'),
         code: await makeString('code'),
+        code: await makeString('class'),
         booty: await makeUnitBooty('booty'),
         stats: await makeUnitStats('stats'),
         inventory: await makeInventory('inventory'),

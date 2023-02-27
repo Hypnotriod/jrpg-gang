@@ -2,6 +2,7 @@
     {
         "name": "Barbarian",
         "code": "barbarian",
+        "class": "barbarian",
         "booty": {
             "coins": 300
         },
@@ -61,6 +62,7 @@
     {
         "name": "Tank",
         "code": "tank",
+        "class": "tank",
         "booty": {
             "coins": 300
         },
@@ -120,6 +122,7 @@
     {
         "name": "Spearsman",
         "code": "spearsman",
+        "class": "spearsman",
         "booty": {
             "coins": 300
         },
@@ -179,6 +182,7 @@
     {
         "name": "Rogue",
         "code": "rogue",
+        "class": "rogue",
         "booty": {
             "coins": 300
         },
@@ -246,6 +250,7 @@
     {
         "name": "Mage",
         "code": "mage",
+        "class": "mage",
         "booty": {
             "coins": 300
         },
