@@ -133,6 +133,7 @@ func (u *Users) UpdateWithUnitOnGameComplete(playerId engine.PlayerId, unit *dom
 	user.Unit.Booty.Accumulate(unit.Booty)
 	user.Unit.Inventory = *unit.Inventory.Clone()
 	user.Unit.Inventory.PopulateUids(user.RndGen)
+	user.Unit.PlayerInfo = nil
 }
 
 func (u *Users) UpdateOnLevelUp(playerId engine.PlayerId, unit *domain.Unit) {
@@ -142,7 +143,7 @@ func (u *Users) UpdateOnLevelUp(playerId engine.PlayerId, unit *domain.Unit) {
 	if !ok {
 		return
 	}
-	user.Level = user.Unit.PlayerInfo.Level
+	user.Level = unit.Stats.Progress.Level
 }
 
 func (u *Users) ResetUser(playerId engine.PlayerId) {

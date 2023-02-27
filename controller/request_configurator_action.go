@@ -22,7 +22,7 @@ func (c *GameController) handleConfiguratorActionRequest(playerId engine.PlayerI
 	if actionResult.Result == domain.ResultAccomplished {
 		response.Data[DataKeyUnit] = user.Unit
 	}
-	if user.Level != user.Unit.PlayerInfo.Level {
+	if user.Level != user.Unit.Stats.Progress.Level {
 		c.users.UpdateOnLevelUp(playerId, &user.Unit.Unit)
 	}
 	response.Data[DataKeyAction] = request.Data
