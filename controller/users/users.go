@@ -93,7 +93,10 @@ func (u *Users) GetAndRefreshBySessionId(sessionId UserSessionId) (User, bool) {
 	}
 	user, ok := u.users[playerId]
 	delete(u.userSessionIdToId, user.SessionId)
-	user.SessionId = UserSessionId(u.rndGen.MakeUUID())
+	user.SessionId = UserSessionId(u.rndGen.MakeUUIDWithUniquenessCheck(func(value string) bool {
+		_, ok := u.userSessionIdToId[UserSessionId(value)]
+		return ok
+	}))
 	u.userSessionIdToId[user.SessionId] = user.Id
 	return *user, ok
 }
@@ -160,8 +163,14 @@ func (u *Users) ResetUser(playerId engine.PlayerId) {
 func (u *Users) AddUser(user *User) {
 	defer u.mu.Unlock()
 	u.mu.Lock()
-	user.Id = engine.PlayerId(u.rndGen.MakeUUID())
-	user.SessionId = UserSessionId(u.rndGen.MakeUUID())
+	user.Id = engine.PlayerId(u.rndGen.MakeUUIDWithUniquenessCheck(func(value string) bool {
+		_, ok := u.users[engine.PlayerId(value)]
+		return ok
+	}))
+	user.SessionId = UserSessionId(u.rndGen.MakeUUIDWithUniquenessCheck(func(value string) bool {
+		_, ok := u.userSessionIdToId[UserSessionId(value)]
+		return ok
+	}))
 	user.Status = UserStatusJoined
 	u.users[user.Id] = user
 	u.userNicknameToId[user.Nickname] = user.Id
