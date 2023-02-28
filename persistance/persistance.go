@@ -1,38 +1,52 @@
 package persistance
 
 import (
+	"context"
 	"jrpg-gang/auth"
 	"jrpg-gang/persistance/model"
 	"jrpg-gang/util"
+	"sync"
 	"time"
 
 	"github.com/jellydator/ttlcache/v3"
 )
 
 type Persistance struct {
-	rndGen     *util.RndGen
-	db         *MongoDB
-	usersCache *ttlcache.Cache[auth.AuthenticationToken, *model.UserModel]
+	mu               sync.RWMutex
+	rndGen           *util.RndGen
+	db               *MongoDB
+	userEmailToToken map[string]auth.AuthenticationToken
+	usersCache       *ttlcache.Cache[auth.AuthenticationToken, *model.UserModel]
 }
 
 func NewPersistance(dbConfig MongoDBConfig) *Persistance {
 	p := &Persistance{}
 	p.rndGen = util.NewRndGen()
+	p.userEmailToToken = make(map[string]auth.AuthenticationToken)
 	p.usersCache = ttlcache.New(
 		ttlcache.WithTTL[auth.AuthenticationToken, *model.UserModel](time.Hour),
 	)
+	p.usersCache.OnEviction(p.onUserCacheEviction)
 	go p.usersCache.Start()
 	p.db = NewMongoDB(dbConfig)
 	return p
 }
 
 func (p *Persistance) AddUserToCache(userModel *model.UserModel) auth.AuthenticationToken {
+	p.mu.Lock()
+	if oldToken, ok := p.userEmailToToken[userModel.Email]; ok {
+		p.usersCache.Delete(oldToken)
+	}
 	token := auth.AuthenticationToken(p.rndGen.MakeUUID())
+	p.userEmailToToken[userModel.Email] = token
 	p.usersCache.Set(token, userModel, ttlcache.DefaultTTL)
+	p.mu.Unlock()
 	return token
 }
 
 func (p *Persistance) GetUserFromCache(token auth.AuthenticationToken) (*model.UserModel, bool) {
+	defer p.mu.RUnlock()
+	p.mu.RLock()
 	item := p.usersCache.Get(token)
 	if item == nil || item.IsExpired() {
 		return nil, false
@@ -41,7 +55,23 @@ func (p *Persistance) GetUserFromCache(token auth.AuthenticationToken) (*model.U
 }
 
 func (p *Persistance) RemoveUserFromCache(token auth.AuthenticationToken) {
-	p.usersCache.Delete(token)
+	defer p.mu.Unlock()
+	p.mu.Lock()
+	item := p.usersCache.Get(token)
+	if item != nil && !item.IsExpired() {
+		email := item.Value().Email
+		delete(p.userEmailToToken, email)
+		p.usersCache.Delete(token)
+	}
+}
+
+func (p *Persistance) onUserCacheEviction(ctx context.Context, reson ttlcache.EvictionReason, item *ttlcache.Item[auth.AuthenticationToken, *model.UserModel]) {
+	if reson != ttlcache.EvictionReasonDeleted {
+		defer p.mu.Unlock()
+		p.mu.Lock()
+		email := item.Value().Email
+		delete(p.userEmailToToken, email)
+	}
 }
 
 func (p *Persistance) HasUserWithNickname(nickname string) bool {
