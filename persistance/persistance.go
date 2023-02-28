@@ -55,23 +55,14 @@ func (p *Persistance) GetUserFromCache(token auth.AuthenticationToken) (*model.U
 }
 
 func (p *Persistance) RemoveUserFromCache(token auth.AuthenticationToken) {
-	defer p.mu.Unlock()
-	p.mu.Lock()
-	item := p.usersCache.Get(token)
-	if item != nil && !item.IsExpired() {
-		email := item.Value().Email
-		delete(p.userEmailToToken, email)
-		p.usersCache.Delete(token)
-	}
+	p.usersCache.Delete(token)
 }
 
 func (p *Persistance) onUserCacheEviction(ctx context.Context, reson ttlcache.EvictionReason, item *ttlcache.Item[auth.AuthenticationToken, *model.UserModel]) {
-	if reson != ttlcache.EvictionReasonDeleted {
-		defer p.mu.Unlock()
-		p.mu.Lock()
-		email := item.Value().Email
-		delete(p.userEmailToToken, email)
-	}
+	defer p.mu.Unlock()
+	p.mu.Lock()
+	email := item.Value().Email
+	delete(p.userEmailToToken, email)
 }
 
 func (p *Persistance) HasUserWithNickname(nickname string) bool {
