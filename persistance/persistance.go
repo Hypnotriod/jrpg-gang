@@ -11,24 +11,31 @@ import (
 	"github.com/jellydator/ttlcache/v3"
 )
 
+type PersistanceConfig struct {
+	MongoDBConfig              MongoDBConfig `json:"mongoDBConfig,omitempty"`
+	PersistanceCacheTimeoutMin int64
+}
+
 type Persistance struct {
 	mu               sync.RWMutex
 	rndGen           *util.RndGen
+	config           PersistanceConfig
 	db               *MongoDB
 	userEmailToToken map[string]auth.AuthenticationToken
 	usersCache       *ttlcache.Cache[auth.AuthenticationToken, *model.UserModel]
 }
 
-func NewPersistance(dbConfig MongoDBConfig) *Persistance {
+func NewPersistance(config PersistanceConfig) *Persistance {
 	p := &Persistance{}
+	p.config = config
 	p.rndGen = util.NewRndGen()
 	p.userEmailToToken = make(map[string]auth.AuthenticationToken)
 	p.usersCache = ttlcache.New(
-		ttlcache.WithTTL[auth.AuthenticationToken, *model.UserModel](time.Hour),
+		ttlcache.WithTTL[auth.AuthenticationToken, *model.UserModel](time.Duration(config.PersistanceCacheTimeoutMin) * time.Minute),
 	)
 	p.usersCache.OnEviction(p.onUserCacheEviction)
 	go p.usersCache.Start()
-	p.db = NewMongoDB(dbConfig)
+	p.db = NewMongoDB(config.MongoDBConfig)
 	return p
 }
 

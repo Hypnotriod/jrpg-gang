@@ -13,7 +13,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig, dbConfig persistance.MongoDBConfig) {
+func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig, persistanceConfig persistance.PersistanceConfig) {
 	googleClientId := os.Getenv("GOOGLE_CLIENT_ID")
 	googleClientSecret := os.Getenv("GOOGLE_CLIENT_SECRET")
 	if len(googleClientId) == 0 || len(googleClientSecret) == 0 {
@@ -22,7 +22,7 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 	googleAuthCallbackUrl := util.Getenv("HOST_URL", "http://localhost:8080") + "/google/oauth2/callback"
 	authRedirectUrl := util.Getenv("AUTH_REDIRECT_URL", "http://localhost:8080")
 	authRequestTimeoutSec := flag.Int64("authRequestTimeoutSec", 10, "HTTP request timeout in seconds")
-	authStateCacheTimeoutMin := flag.Int64("authStateCacheTimeoutMin", 10, "State cache timeout in minutes")
+	authStateCacheTimeoutMin := flag.Int64("authStateCacheTimeoutMin", 30, "State cache timeout in minutes")
 
 	port := util.Getenv("PORT", "8080")
 	key := flag.String("key", "", "path to TLS key.pem")
@@ -35,6 +35,7 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 	userOfflineTimeoutSec := flag.Int64("userOfflineTimeoutSec", 10, "user offline timeout in seconds")
 	userWithoutIdTimeoutSec := flag.Int64("userWithoutIdTimeoutSec", 1, "user hasn't obtained id timeout in seconds")
 
+	persistanceCacheTimeoutMin := flag.Int64("persistanceCacheTimeoutMin", 30, "Persistance cache timeout in minutes")
 	mongodbUri := util.Getenv("MONGODB_URI", "mongodb://localhost:27017")
 	requestTimeoutSec := flag.Int64("dbRequestTimeoutSec", 10, "Database request timeout seconds")
 
@@ -62,9 +63,12 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 		UserWithoutIdTimeoutSec: *userWithoutIdTimeoutSec,
 	}
 
-	dbConfig = persistance.MongoDBConfig{
-		Uri:               mongodbUri,
-		RequestTimeoutSec: *requestTimeoutSec,
+	persistanceConfig = persistance.PersistanceConfig{
+		PersistanceCacheTimeoutMin: *persistanceCacheTimeoutMin,
+		MongoDBConfig: persistance.MongoDBConfig{
+			Uri:               mongodbUri,
+			RequestTimeoutSec: *requestTimeoutSec,
+		},
 	}
 
 	return
@@ -73,8 +77,8 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("./public")))
 
-	authConfig, hubConfig, dbConfig := configs()
-	persistance := persistance.NewPersistance(dbConfig)
+	authConfig, hubConfig, persistanceConfig := configs()
+	persistance := persistance.NewPersistance(persistanceConfig)
 	controller := controller.NewGameController(persistance)
 	auth := auth.NewAuthenticator(authConfig, controller)
 	http.HandleFunc("/google/oauth2", auth.HandleGoogleAuth2)
