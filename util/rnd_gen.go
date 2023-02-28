@@ -25,9 +25,9 @@ func (g *RndGen) MakeUUID() string {
 	return shortuuid.New()
 }
 
-func (g *RndGen) MakeUUIDWithUniquenessCheck(checkUnique func(value string) bool) string {
+func (g *RndGen) MakeUUIDWithUniquenessCheck(isUnique func(value string) bool) string {
 	value := shortuuid.New()
-	for !checkUnique(value) {
+	for !isUnique(value) {
 		value = shortuuid.New()
 	}
 	return value

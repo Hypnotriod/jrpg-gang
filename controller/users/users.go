@@ -95,7 +95,7 @@ func (u *Users) GetAndRefreshBySessionId(sessionId UserSessionId) (User, bool) {
 	delete(u.userSessionIdToId, user.SessionId)
 	user.SessionId = UserSessionId(u.rndGen.MakeUUIDWithUniquenessCheck(func(value string) bool {
 		_, ok := u.userSessionIdToId[UserSessionId(value)]
-		return ok
+		return !ok
 	}))
 	u.userSessionIdToId[user.SessionId] = user.Id
 	return *user, ok
@@ -165,11 +165,11 @@ func (u *Users) AddUser(user *User) {
 	u.mu.Lock()
 	user.Id = engine.PlayerId(u.rndGen.MakeUUIDWithUniquenessCheck(func(value string) bool {
 		_, ok := u.users[engine.PlayerId(value)]
-		return ok
+		return !ok
 	}))
 	user.SessionId = UserSessionId(u.rndGen.MakeUUIDWithUniquenessCheck(func(value string) bool {
 		_, ok := u.userSessionIdToId[UserSessionId(value)]
-		return ok
+		return !ok
 	}))
 	user.Status = UserStatusJoined
 	u.users[user.Id] = user
