@@ -6,6 +6,7 @@
             "coins": 25
         },
         "duration": 300,
-        "countdown": 3600
+        "countdown": 3600,
+        "requirements": {}
     }
 ]

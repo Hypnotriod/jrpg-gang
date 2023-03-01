@@ -57,6 +57,9 @@ func (e *Employment) ApplyForAJob(user *users.User, code engine.PlayerJobCode) (
 	if !ok {
 		return status.Clone(), false
 	}
+	if !user.Unit.CheckRequirements(config.Requirements) {
+		return status.Clone(), false
+	}
 	if _, ok := status.Countdown[config.Code]; ok {
 		return status.Clone(), false
 	}

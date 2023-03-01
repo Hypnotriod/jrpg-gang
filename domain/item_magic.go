@@ -2,7 +2,7 @@ package domain
 
 type Magic struct {
 	Item
-	Requirements UnitAttributes           `json:"requirements"`
+	Requirements UnitRequirements         `json:"requirements"`
 	Range        ActionRange              `json:"range"`
 	UseCost      UnitBaseAttributes       `json:"useCost"`
 	Damage       []DamageImpact           `json:"damage,omitempty"`

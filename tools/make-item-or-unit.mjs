@@ -143,7 +143,7 @@ async function makeMagic() {
     stdout.write('magic:\r\n');
     const result = {
         ...await makeItem('magic'),
-        requirements: await makeUnitAttributes('requirements'),
+        requirements: await makeUnitRequirements('requirements'),
         range: await makeActionRange('range'),
         useCost: await makeUnitBaseAttributes('useCost'),
         damage: [],
@@ -285,7 +285,7 @@ async function makeEquipment(header) {
         wearout: await makeNumber('wearout'),
         slot: await makeList('slot', ['weapon', 'head', 'neck', 'body', 'hand', 'leg']),
         slotsNumber: await makeNumber('slotsNumber', 1),
-        requirements: await makeUnitAttributes('requirements'),
+        requirements: await makeUnitRequirements('requirements'),
         modification: [],
     }
     while (await yesNo('modification')) {
@@ -304,6 +304,14 @@ async function makeUnitAttributes(header) {
         intelligence: await makeNumber('intelligence'),
         initiative: await makeNumber('initiative'),
         luck: await makeNumber('luck'),
+    }
+    return result;
+}
+
+async function makeUnitRequirements(header) {
+    const result = {
+        ...await makeUnitAttributes(header),
+        class: await makeString('class'),
     }
     return result;
 }

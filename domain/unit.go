@@ -174,11 +174,11 @@ func (u *Unit) FilterDamageImpact() {
 	u.Damage = filteredDamage
 }
 
-func (u *Unit) CheckRequirements(requirements UnitAttributes) bool {
+func (u *Unit) CheckRequirements(requirements UnitRequirements) bool {
 	attributes := u.TotalModification().Attributes
 	attributes.Accumulate(u.Stats.Attributes)
 	attributes.Normalize()
-	return attributes.CheckRequirements(requirements)
+	return requirements.Check(u.Class, attributes)
 }
 
 func (u *Unit) CheckUseCost(useCost UnitBaseAttributes) bool {

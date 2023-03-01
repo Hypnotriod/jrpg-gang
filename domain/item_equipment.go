@@ -18,7 +18,7 @@ type Equipment struct {
 	Slot         EquipmentSlot      `json:"slot"`
 	SlotsNumber  uint               `json:"slotsNumber"`
 	Equipped     bool               `json:"equipped,omitempty"`
-	Requirements UnitAttributes     `json:"requirements"`
+	Requirements UnitRequirements   `json:"requirements"`
 	Modification []UnitModification `json:"modification"`
 }
 

@@ -43,13 +43,3 @@ func (a *UnitAttributes) MultiplyAll(factor float32) {
 	a.Initiative = util.MultiplyWithRounding(a.Initiative, factor)
 	a.Luck = util.MultiplyWithRounding(a.Luck, factor)
 }
-
-func (a *UnitAttributes) CheckRequirements(requirements UnitAttributes) bool {
-	return a.Strength >= requirements.Strength &&
-		a.Physique >= requirements.Physique &&
-		a.Agility >= requirements.Agility &&
-		a.Endurance >= requirements.Endurance &&
-		a.Intelligence >= requirements.Intelligence &&
-		a.Initiative >= requirements.Initiative &&
-		a.Luck >= requirements.Luck
-}

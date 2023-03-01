@@ -12,11 +12,12 @@ const (
 )
 
 type PlayerJob struct {
-	Code        PlayerJobCode    `json:"code"`
-	Reward      domain.UnitBooty `json:"reward"`
-	Duration    float32          `json:"duration"`
-	Countdown   float32          `json:"countdown"`
-	Description string           `json:"description,omitempty"`
+	Code         PlayerJobCode           `json:"code"`
+	Reward       domain.UnitBooty        `json:"reward"`
+	Duration     float32                 `json:"duration"`
+	Countdown    float32                 `json:"countdown"`
+	Requirements domain.UnitRequirements `json:"requirements,omitempty"`
+	Description  string                  `json:"description,omitempty"`
 }
 
 type PlayerJobStatus struct {
