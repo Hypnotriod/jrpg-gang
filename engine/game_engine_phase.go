@@ -106,7 +106,7 @@ func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
 	if isLastRound && e.battlefield().FactionUnitsCount(GameUnitFactionLeft) != 0 {
 		e.accumulateBooty(event)
 		e.applySpotExperience(event)
-		e.restoreActorsState(e.battlefield().Units)
+		e.restoreActorsState()
 	}
 	return
 }
@@ -189,9 +189,10 @@ func (e *GameEngine) applyExperience(corpses []*GameUnit, expDistribution *map[u
 	}
 }
 
-func (e *GameEngine) restoreActorsState(actors []*GameUnit) {
-	for i := range actors {
-		actors[i].ClearImpact()
-		actors[i].State.RestoreToHalf(actors[i].Stats.BaseAttributes)
+func (e *GameEngine) restoreActorsState() {
+	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
+	for i := range leftUnits {
+		leftUnits[i].ClearImpact()
+		leftUnits[i].State.RestoreToHalf(leftUnits[i].Stats.BaseAttributes)
 	}
 }
