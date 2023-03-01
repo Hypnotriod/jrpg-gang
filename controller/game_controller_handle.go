@@ -15,7 +15,7 @@ func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredential
 	if userModel == nil {
 		return status
 	}
-	status.Token = c.persistance.AddUserToCache(userModel)
+	status.Token = c.persistance.AddUserToAuthCache(userModel)
 	status.IsNewPlayer = userModel.Unit == nil
 	status.IsAuthenticated = true
 	return status

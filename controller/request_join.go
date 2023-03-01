@@ -24,7 +24,7 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 	if data.SessionId != users.UserSessionIdEmpty {
 		return c.handleRejoinRequest(request, response, data)
 	}
-	userModel, ok := c.persistance.GetUserFromCache(data.Token)
+	userModel, ok := c.persistance.GetUserFromAuthCache(data.Token)
 	if userModel == nil || !ok {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
 	}
@@ -69,7 +69,7 @@ func (c *GameController) handleRejoinWithCredentialsRequest(request *Request, re
 		c.persistUser(user)
 	}
 	c.users.AddUser(user)
-	c.persistance.RemoveUserFromCache(data.Token)
+	c.persistance.RemoveUserFromAuthCache(data.Token)
 	response.fillUserStatus(user)
 	return user.Id, response.WithStatus(ResponseStatusOk)
 }
