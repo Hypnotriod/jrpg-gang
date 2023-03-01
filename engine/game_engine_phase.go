@@ -19,7 +19,7 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	case GamePhaseActionComplete:
 		e.processActionComplete(result)
 	case GamePhaseSpotComplete:
-		e.processBattleComplete(result)
+		e.processSpotComplete(result)
 	}
 	e.resetActorsReady()
 	result.PlayersInfo = e.GetPlayersInfo()
@@ -68,7 +68,7 @@ func (e *GameEngine) processRoundComplete(event *GameEvent) {
 	}
 }
 
-func (e *GameEngine) processBattleComplete(event *GameEvent) {
+func (e *GameEngine) processSpotComplete(event *GameEvent) {
 	e.prepareNextSpot(e.battlefield().Units)
 	e.state.ChangePhase(GamePhasePrepareUnit)
 	event.Spot = e.scenario.CurrentSpot()
@@ -106,6 +106,7 @@ func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
 	if isLastRound && e.battlefield().FactionUnitsCount(GameUnitFactionLeft) != 0 {
 		e.accumulateBooty(event)
 		e.applySpotExperience(event)
+		e.restoreActorsState(e.battlefield().Units)
 	}
 	return
 }
@@ -185,5 +186,12 @@ func (e *GameEngine) applyExperience(corpses []*GameUnit, expDistribution *map[u
 			}
 			totalExperience--
 		}
+	}
+}
+
+func (e *GameEngine) restoreActorsState(actors []*GameUnit) {
+	for i := range actors {
+		actors[i].ClearImpact()
+		actors[i].State.RestoreToHalf(actors[i].Stats.BaseAttributes)
 	}
 }
