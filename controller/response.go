@@ -33,6 +33,8 @@ const (
 	DataKeyRooms        ResponseDataKey = "rooms"
 	DataKeyShop         ResponseDataKey = "shop"
 	DataKeyUsersCount   ResponseDataKey = "usersCount"
+	DataKeyEmployment   ResponseDataKey = "employment"
+	DataKeyReward       ResponseDataKey = "reward"
 )
 
 type Response struct {

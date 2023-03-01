@@ -12,12 +12,12 @@ const (
 )
 
 type PlayerJob struct {
-	Code         PlayerJobCode           `json:"code"`
-	Reward       domain.UnitBooty        `json:"reward"`
-	Duration     float32                 `json:"duration"`
-	Countdown    float32                 `json:"countdown"`
-	Requirements domain.UnitRequirements `json:"requirements,omitempty"`
-	Description  string                  `json:"description,omitempty"`
+	Code         PlayerJobCode            `json:"code"`
+	Reward       domain.UnitBooty         `json:"reward"`
+	Duration     float32                  `json:"duration"`
+	Countdown    float32                  `json:"countdown"`
+	Requirements *domain.UnitRequirements `json:"requirements,omitempty"`
+	Description  string                   `json:"description,omitempty"`
 }
 
 type PlayerJobStatus struct {
@@ -60,4 +60,19 @@ func (s *PlayerJobStatus) Clone() *PlayerJobStatus {
 		status.Countdown[k] = v
 	}
 	return status
+}
+
+func (s *PlayerJobStatus) Apply(config PlayerJob) {
+	timeNow := time.Now()
+	s.IsInProgress = true
+	s.IsComplete = false
+	s.CompletionTime = timeNow.Add(time.Duration(config.Duration) * time.Second)
+	s.Countdown[config.Code] = s.CompletionTime.Add(time.Duration(config.Countdown) * time.Second)
+}
+
+func (s *PlayerJobStatus) Reset() {
+	s.IsInProgress = false
+	s.IsComplete = false
+	s.CompletionTime = time.Time{}
+	s.Code = JobCodeEmpty
 }

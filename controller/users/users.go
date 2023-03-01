@@ -139,6 +139,16 @@ func (u *Users) UpdateWithUnitOnGameComplete(playerId engine.PlayerId, unit *dom
 	user.Unit.PlayerInfo = nil
 }
 
+func (u *Users) AccumulateBooty(playerId engine.PlayerId, booty domain.UnitBooty) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
+	user, ok := u.users[playerId]
+	if !ok {
+		return
+	}
+	user.Unit.Booty.Accumulate(booty)
+}
+
 func (u *Users) UpdateOnLevelUp(playerId engine.PlayerId, unit *domain.Unit) {
 	defer u.mu.Unlock()
 	u.mu.Lock()

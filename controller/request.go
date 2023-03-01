@@ -38,7 +38,7 @@ type Request struct {
 type ParsebleRequestData interface {
 	*Request | *GameActionRequestData | *CreateGameRoomRequestData | *JoinRequestData |
 		*JoinGameRoomRequestData | *ShopActionRequestData | *ConfiguratorActionRequestData |
-		*GameNextPhaseRequestData
+		*GameNextPhaseRequestData | *ApplyForAJobRequestData
 }
 
 func parseRequestData[T ParsebleRequestData](data T, requestRaw []byte) T {
