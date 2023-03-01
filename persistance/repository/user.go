@@ -25,12 +25,12 @@ func (r *UserRepository) InsertOne(ctx context.Context, model model.UserModel) (
 
 func (r *UserRepository) FindByEmail(ctx context.Context, email string) (*model.UserModel, bool) {
 	filter := primitive.D{{Key: "email", Value: email}}
-	return r.FindOne(ctx, filter)
+	return r.FindOne(ctx, filter, &model.UserModel{})
 }
 
 func (r *UserRepository) FindByNickname(ctx context.Context, nickname string) (*model.UserModel, bool) {
 	filter := primitive.D{{Key: "nickname", Value: nickname}}
-	return r.FindOne(ctx, filter)
+	return r.FindOne(ctx, filter, &model.UserModel{})
 }
 
 func (r *UserRepository) UpdateOneWithUnit(ctx context.Context, user model.UserModel) (int64, bool) {

@@ -2,7 +2,9 @@ package controller
 
 import (
 	"jrpg-gang/controller/users"
+	"jrpg-gang/engine"
 	"jrpg-gang/persistance/model"
+	"time"
 )
 
 func (c *GameController) persistUser(user *users.User) bool {
@@ -14,4 +16,19 @@ func (c *GameController) persistUser(user *users.User) bool {
 		Unit:     &unit.Unit,
 	}
 	return c.persistance.UpdateUser(userModel)
+}
+
+func (c *GameController) persistJobStatus(email string, jobStatus engine.PlayerJobStatus) bool {
+	jobStatusModel := model.JobStatusModel{
+		Email:          email,
+		IsInProgress:   jobStatus.IsInProgress,
+		IsComplete:     jobStatus.IsComplete,
+		CompletionTime: jobStatus.CompletionTime,
+		Code:           jobStatus.Code,
+	}
+	jobStatusModel.Countdown = make(map[engine.PlayerJobCode]time.Time)
+	for k, v := range jobStatus.Countdown {
+		jobStatusModel.Countdown[k] = v
+	}
+	return c.persistance.UpdateJobStatus(jobStatusModel)
 }

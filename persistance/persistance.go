@@ -106,7 +106,7 @@ func (p *Persistance) GetOrCreateUser(creadentials auth.UserCredentials) *model.
 	if !ok {
 		return nil
 	}
-	user, ok = p.db.UsersRepository.FindOneById(ctx, id)
+	user, ok = p.db.UsersRepository.FindOneById(ctx, id, &model.UserModel{})
 	if !ok {
 		return nil
 	}
@@ -118,4 +118,18 @@ func (p *Persistance) UpdateUser(user model.UserModel) bool {
 	defer cancel()
 	updated, ok := p.db.UsersRepository.UpdateOneWithUnit(ctx, user)
 	return updated != 0 && ok
+}
+
+func (p *Persistance) UpdateJobStatus(jobStatus model.JobStatusModel) bool {
+	ctx, cancel := p.db.requestContext()
+	defer cancel()
+	matchedCount, ok := p.db.JobStatusRepository.UpdateOrInsertOne(ctx, jobStatus)
+	return matchedCount != 0 && ok
+}
+
+func (p *Persistance) GetJobStatus(email string) *model.JobStatusModel {
+	ctx, cancel := p.db.requestContext()
+	defer cancel()
+	jobStatus, _ := p.db.JobStatusRepository.FindByEmail(ctx, email)
+	return jobStatus
 }

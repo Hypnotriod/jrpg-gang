@@ -18,7 +18,7 @@ const (
 )
 
 type MongoDBRepositoryModel interface {
-	model.UserModel
+	model.UserModel | model.JobStatusModel
 }
 
 type MongoDBRepository[T MongoDBRepositoryModel] struct {
@@ -54,6 +54,7 @@ func (r *MongoDBRepository[T]) UpdateOneById(ctx context.Context, id MongoDBObje
 	}
 	return result.MatchedCount, true
 }
+
 func (r *MongoDBRepository[T]) UpdateOne(ctx context.Context, filter bson.D, fields bson.D) (int64, bool) {
 	fields = append(fields, bson.E{Key: "updated_at", Value: time.Now()})
 	update := bson.D{{Key: "$set", Value: fields}}
@@ -65,28 +66,26 @@ func (r *MongoDBRepository[T]) UpdateOne(ctx context.Context, filter bson.D, fie
 	return result.MatchedCount, true
 }
 
-func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id MongoDBObjectId) (*T, bool) {
+func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id MongoDBObjectId, accumulator *T) (*T, bool) {
 	objectId, err := primitive.ObjectIDFromHex(string(id))
 	if err != nil {
 		log.Error("Mongodb: FindOneById: ", id, " in collection:", r.collection.Name(), " fail: ", err)
 		return nil, false
 	}
 
-	result := &T{}
 	filter := bson.D{{Key: "_id", Value: objectId}}
-	err = r.collection.FindOne(ctx, filter).Decode(result)
+	err = r.collection.FindOne(ctx, filter).Decode(accumulator)
 	if err != nil {
 		if err != mongo.ErrNoDocuments {
 			log.Error("Mongodb: FindOneById: ", id, " in collection:", r.collection.Name(), " fail: ", err)
 		}
 		return nil, false
 	}
-	return result, true
+	return accumulator, true
 }
 
-func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.D) (*T, bool) {
-	result := &T{}
-	err := r.collection.FindOne(ctx, filter).Decode(result)
+func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.D, accumulator *T) (*T, bool) {
+	err := r.collection.FindOne(ctx, filter).Decode(accumulator)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
 			return nil, true
@@ -94,7 +93,7 @@ func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.D) (*T, 
 		log.Error("Mongodb: FindOne: ", filter, " in collection:", r.collection.Name(), " fail: ", err)
 		return nil, false
 	}
-	return result, true
+	return accumulator, true
 }
 
 func (r *MongoDBRepository[T]) DeleteOneById(ctx context.Context, id MongoDBObjectId) (int64, bool) {

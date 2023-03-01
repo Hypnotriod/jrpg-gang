@@ -16,9 +16,10 @@ type MongoDBConfig struct {
 }
 
 type MongoDB struct {
-	UsersRepository *repository.UserRepository
-	config          MongoDBConfig
-	client          *mongo.Client
+	UsersRepository     *repository.UserRepository
+	JobStatusRepository *repository.JobStatusRepository
+	config              MongoDBConfig
+	client              *mongo.Client
 }
 
 func NewMongoDB(config MongoDBConfig) *MongoDB {
@@ -47,5 +48,8 @@ func (db *MongoDB) connect() {
 func (db *MongoDB) initRepositories() {
 	db.UsersRepository = repository.NewUserRepository(
 		db.client.Database("jrpg_gang").Collection("user"),
+	)
+	db.JobStatusRepository = repository.NewJobStatusRepository(
+		db.client.Database("jrpg_gang").Collection("job_status"),
 	)
 }

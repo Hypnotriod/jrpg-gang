@@ -2,26 +2,27 @@ package employment
 
 import (
 	"jrpg-gang/controller/users"
+	"jrpg-gang/engine"
 	"sync"
 	"time"
 )
 
 type EmploymentConfig struct {
-	Jobs []Job `json:"jobs"`
+	Jobs []engine.PlayerJob `json:"jobs"`
 }
 
 type Employment struct {
 	mu           sync.RWMutex
 	config       EmploymentConfig
-	jobCodeToJob map[JobCode]*Job
-	jobsStatus   map[string]*JobStatus
+	jobCodeToJob map[engine.PlayerJobCode]*engine.PlayerJob
+	jobsStatus   map[string]*engine.PlayerJobStatus
 }
 
 func NewEmployment(config EmploymentConfig) *Employment {
 	e := &Employment{}
 	e.config = config
-	e.jobCodeToJob = make(map[JobCode]*Job)
-	e.jobsStatus = make(map[string]*JobStatus)
+	e.jobCodeToJob = make(map[engine.PlayerJobCode]*engine.PlayerJob)
+	e.jobsStatus = make(map[string]*engine.PlayerJobStatus)
 	e.prepare()
 	return e
 }
@@ -33,28 +34,27 @@ func (e *Employment) prepare() {
 	}
 }
 
-func (e *Employment) ApplyForAJob(user *users.User, code JobCode) bool {
+func (e *Employment) ApplyForAJob(user *users.User, code engine.PlayerJobCode) (*engine.PlayerJobStatus, bool) {
 	defer e.mu.Unlock()
 	e.mu.Lock()
 	status, ok := e.jobsStatus[user.Email]
 	if !ok {
-		status = NewJobStatus()
+		status = engine.NewPlayerJobStatus()
 		e.jobsStatus[user.Email] = status
-		return false
 	}
 	status.Update()
 	if status.IsInProgress || status.IsComplete {
-		return false
+		return status.Clone(), false
 	}
 	config, ok := e.jobCodeToJob[code]
 	if !ok {
-		return false
+		return status.Clone(), false
 	}
 	if _, ok := status.Countdown[config.Code]; ok {
-		return false
+		return status.Clone(), false
 	}
 	timeNow := time.Now()
 	status.CompletionTime = timeNow.Add(time.Duration(config.Duration) * time.Second)
 	status.Countdown[config.Code] = status.CompletionTime.Add(time.Duration(config.Countdown) * time.Second)
-	return true
+	return status.Clone(), true
 }
