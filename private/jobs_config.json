@@ -1,0 +1,11 @@
+[
+    {
+        "code": "test",
+        "description": "test",
+        "reward": {
+            "coins": 25
+        },
+        "duration": 300,
+        "countdown": 3600
+    }
+]

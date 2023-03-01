@@ -2,6 +2,7 @@ package controller
 
 import (
 	"jrpg-gang/controller/config"
+	"jrpg-gang/controller/employment"
 	"jrpg-gang/controller/gameengines"
 	"jrpg-gang/controller/rooms"
 	"jrpg-gang/controller/shop"
@@ -22,6 +23,7 @@ type GameController struct {
 	rooms          *rooms.GameRooms
 	engines        *gameengines.GameEngines
 	shop           *shop.Shop
+	employment     *employment.Employment
 	configurator   *engine.UnitConfigurator
 	itemsConfig    *config.GameItemsConfig
 	unitsConfig    *config.GameUnitsConfig
@@ -36,6 +38,7 @@ func NewGameController(persistance *persistance.Persistance) *GameController {
 	c.rooms = rooms.NewGameRooms()
 	c.engines = gameengines.NewGameEngines()
 	c.shop = shop.NewShop()
+	c.employment = employment.NewEmployment()
 	c.itemsConfig = config.NewGameItemsConfig()
 	c.unitsConfig = config.NewGameUnitsConfig()
 	c.scenarioConfig = config.NewGameScenariosConfig()
@@ -58,5 +61,8 @@ func (c *GameController) init() {
 	}
 	if err := c.scenarioConfig.LoadScenarios(SCENARIO_CONFIG_PATH, c.unitsConfig); err != nil {
 		log.Fatal("Unable to load scenarios configuration: ", err)
+	}
+	if err := c.employment.Load(JOBS_CONFIG_PATH); err != nil {
+		log.Fatal("Unable to load jobs configuration: ", err)
 	}
 }

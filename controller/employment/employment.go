@@ -3,33 +3,40 @@ package employment
 import (
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
+	"jrpg-gang/util"
 	"sync"
 	"time"
 )
 
-type EmploymentConfig struct {
-	Jobs []engine.PlayerJob `json:"jobs"`
-}
-
 type Employment struct {
 	mu           sync.RWMutex
-	config       EmploymentConfig
+	jobs         []engine.PlayerJob
 	jobCodeToJob map[engine.PlayerJobCode]*engine.PlayerJob
 	jobsStatus   map[string]*engine.PlayerJobStatus
 }
 
-func NewEmployment(config EmploymentConfig) *Employment {
+func NewEmployment() *Employment {
 	e := &Employment{}
-	e.config = config
 	e.jobCodeToJob = make(map[engine.PlayerJobCode]*engine.PlayerJob)
 	e.jobsStatus = make(map[string]*engine.PlayerJobStatus)
-	e.prepare()
 	return e
 }
 
-func (e *Employment) prepare() {
-	for i := range e.config.Jobs {
-		job := &e.config.Jobs[i]
+func (e *Employment) Load(path string) error {
+	jobs, err := util.ReadJsonFile(&[]engine.PlayerJob{}, path)
+	if err != nil {
+		return err
+	}
+	defer e.mu.Unlock()
+	e.mu.Lock()
+	e.prepare(jobs)
+	return nil
+}
+
+func (e *Employment) prepare(jobs *[]engine.PlayerJob) {
+	e.jobs = *jobs
+	for i := range e.jobs {
+		job := &e.jobs[i]
 		e.jobCodeToJob[job.Code] = job
 	}
 }
