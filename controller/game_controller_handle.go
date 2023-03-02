@@ -106,7 +106,6 @@ func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request
 		case RequestLeaveGame:
 			return c.handleGameLeaveRequest(playerId, request, response)
 		}
-	} else {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	if status.Test(users.UserStatusAtJob) {
@@ -116,7 +115,6 @@ func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request
 		case RequestCompleteJob:
 			return c.handleCompleteJobRequest(playerId, request, response)
 		}
-	} else {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
