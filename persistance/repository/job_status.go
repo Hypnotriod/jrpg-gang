@@ -29,6 +29,7 @@ func (r *JobStatusRepository) UpdateOrInsertOne(ctx context.Context, model model
 		{Key: "is_in_progress", Value: model.IsInProgress},
 		{Key: "is_complete", Value: model.IsComplete},
 		{Key: "completion_time", Value: model.CompletionTime},
+		{Key: "code", Value: model.Code},
 		{Key: "countdown", Value: model.Countdown},
 	}
 	matchedCount, ok := r.UpdateOne(ctx, filter, fields)

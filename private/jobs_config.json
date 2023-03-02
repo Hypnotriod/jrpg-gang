@@ -1,11 +1,23 @@
 [
     {
-        "code": "test",
-        "description": "test",
+        "code": "job-clean-01",
+        "name": "The floor cleaning",
+        "description": "Cleaning the floor in a local tavern",
         "reward": {
             "coins": 25
         },
         "duration": 300,
+        "countdown": 3600,
+        "requirements": {}
+    },
+    {
+        "code": "job-clean-02",
+        "name": "Clean the dishes",
+        "description": "Washing dishes in a local tavern",
+        "reward": {
+            "coins": 30
+        },
+        "duration": 360,
         "countdown": 3600,
         "requirements": {}
     }

@@ -12,6 +12,7 @@ const (
 )
 
 type PlayerJob struct {
+	Name         string                   `json:"name"`
 	Code         PlayerJobCode            `json:"code"`
 	Reward       domain.UnitBooty         `json:"reward"`
 	Duration     float32                  `json:"duration"`
@@ -67,6 +68,7 @@ func (s *PlayerJobStatus) Apply(config PlayerJob) {
 	s.IsInProgress = true
 	s.IsComplete = false
 	s.CompletionTime = timeNow.Add(time.Duration(config.Duration) * time.Second)
+	s.Code = config.Code
 	s.Countdown[config.Code] = s.CompletionTime.Add(time.Duration(config.Countdown) * time.Second)
 }
 

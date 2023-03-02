@@ -11,11 +11,11 @@ import (
 )
 
 type EmploymentStatus struct {
-	CurrentJobCode engine.PlayerJobCode `json:"currentJobCode,omitempty"`
-	IsInProgress   bool                 `json:"isInProgress,omitempty"`
-	IsComplete     bool                 `json:"isComplete,omitempty"`
-	TimeLeft       float32              `json:"timeLeft,omitempty"`
-	AvailableJobs  []engine.PlayerJob   `json:"availableJobs"`
+	CurrentJob    *engine.PlayerJob  `json:"currentJob,omitempty"`
+	IsInProgress  bool               `json:"isInProgress,omitempty"`
+	IsComplete    bool               `json:"isComplete,omitempty"`
+	TimeLeft      float32            `json:"timeLeft,omitempty"`
+	AvailableJobs []engine.PlayerJob `json:"availableJobs"`
 }
 
 type Employment struct {
@@ -84,12 +84,15 @@ func (e *Employment) GetStatus(user *users.User) EmploymentStatus {
 	timeNow := time.Now()
 	e.mu.Lock()
 	status := e.retrieveUserJobStatus(user.Email)
-	e.mu.Unlock()
 	result := EmploymentStatus{
-		IsInProgress:   status.IsInProgress,
-		IsComplete:     status.IsComplete,
-		CurrentJobCode: status.Code,
+		IsInProgress:  status.IsInProgress,
+		IsComplete:    status.IsComplete,
+		AvailableJobs: []engine.PlayerJob{},
 	}
+	if job, ok := e.jobCodeToJob[status.Code]; ok {
+		result.CurrentJob = job
+	}
+	e.mu.Unlock()
 	if status.IsInProgress {
 		result.TimeLeft = float32(status.CompletionTime.Sub(timeNow).Seconds())
 	}
