@@ -83,6 +83,16 @@ func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request
 	if status == users.UserStatusNotFound {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
+	switch request.Type {
+	case RequestJobsStatus:
+		return c.handleJobStatusRequest(playerId, request, response)
+	case RequestShopStatus:
+		return c.handleShopStatusRequest(playerId, request, response)
+	case RequestLobbyStatus:
+		return c.handleLobbyStatusRequest(playerId, request, response)
+	case RequestUserStatus:
+		return c.handleUserStatusRequest(playerId, request, response)
+	}
 	if status.Test(users.UserStatusInGame) {
 		switch request.Type {
 		case RequestGameAction:
@@ -101,8 +111,6 @@ func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request
 	}
 	if status.Test(users.UserStatusAtJob) {
 		switch request.Type {
-		case RequestJobsStatus:
-			return c.handleJobStatusRequest(playerId, request, response)
 		case RequestQuitJob:
 			return c.handleQuitJobRequest(playerId, request, response)
 		case RequestCompleteJob:
@@ -112,22 +120,14 @@ func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
-	case RequestJobsStatus:
-		return c.handleJobStatusRequest(playerId, request, response)
 	case RequestEnterLobby:
 		return c.handleEnterLobbyRequest(playerId, request, response)
 	case RequestExitLobby:
 		return c.handleExitLobbyRequest(playerId, request, response)
-	case RequestShopStatus:
-		return c.handleShopStatusRequest(playerId, request, response)
 	case RequestCreateGameRoom:
 		return c.handleCreateGameRoomRequest(playerId, request, response)
 	case RequestDestroyGameRoom:
 		return c.handleDestroyGameRoomRequest(playerId, request, response)
-	case RequestLobbyStatus:
-		return c.handleLobbyStatusRequest(playerId, request, response)
-	case RequestUserStatus:
-		return c.handleUserStatusRequest(playerId, request, response)
 	case RequestJoinGameRoom:
 		return c.handleJoinGameRoomRequest(playerId, request, response)
 	case RequestLeaveGameRoom:
