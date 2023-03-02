@@ -22,6 +22,7 @@ const (
 	UserDisplayStatusInLobby UserDisplayStatus = "inLobby"
 	UserDisplayStatusInRoom  UserDisplayStatus = "inRoom"
 	UserDisplayStatusInGame  UserDisplayStatus = "inGame"
+	UserDisplayStatusAtJob   UserDisplayStatus = "atJob"
 )
 
 const (
@@ -55,6 +56,9 @@ func (s UserStatus) Display() UserDisplayStatus {
 	}
 	if s.Test(UserStatusInRoom) {
 		return UserDisplayStatusInRoom
+	}
+	if s.Test(UserStatusAtJob) {
+		return UserDisplayStatusAtJob
 	}
 	return UserDisplayStatusEmpty
 }
