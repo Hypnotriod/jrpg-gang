@@ -1,6 +1,9 @@
 package controller
 
-import "jrpg-gang/engine"
+import (
+	"jrpg-gang/controller/users"
+	"jrpg-gang/engine"
+)
 
 func (c *GameController) handleQuitJobRequest(playerId engine.PlayerId, request *Request, response *Response) string {
 	user, ok := c.users.Get(playerId)
@@ -14,5 +17,6 @@ func (c *GameController) handleQuitJobRequest(playerId engine.PlayerId, request 
 	if jobStatus != nil {
 		c.persistJobStatus(user.Email, *jobStatus)
 	}
+	c.users.ChangeUserStatus(playerId, users.UserStatusJoined)
 	return response.WithStatus(ResponseStatusOk)
 }

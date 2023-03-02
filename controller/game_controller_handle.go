@@ -37,22 +37,27 @@ func (c *GameController) ConnectionStatusChanged(playerId engine.PlayerId, isOff
 }
 
 func (c *GameController) Leave(playerId engine.PlayerId) {
-	user := c.users.RemoveUser(playerId)
-	if user != nil {
-		c.persistUser(user)
-	}
 	if room, ok := c.rooms.PopByHostId(playerId); ok {
 		c.broadcastRoomStatus(room.Uid)
 	} else if roomUid, ok := c.rooms.RemoveUser(playerId); ok {
 		c.broadcastRoomStatus(roomUid)
 	}
 	if wrapper, ok := c.engines.Unregister(playerId); ok {
-		defer wrapper.Unlock()
 		wrapper.Lock()
-		state, broadcastPlayerIds, ok := wrapper.RemoveUser(playerId)
+		result, broadcastPlayerIds, unit, ok := wrapper.LeaveGame(playerId)
+		wrapper.Unlock()
 		if ok {
-			c.broadcastGameAction(broadcastPlayerIds, state)
+			c.users.ResetUser(playerId)
+			c.users.UpdateWithUnitOnGameComplete(playerId, &unit)
+			if len(broadcastPlayerIds) > 0 {
+				c.broadcastGameAction(broadcastPlayerIds, result)
+			}
 		}
+	}
+	user := c.users.RemoveUser(playerId)
+	if user != nil {
+		c.persistUser(user)
+		c.employment.ClearStatus(user)
 	}
 }
 
@@ -78,22 +83,37 @@ func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request
 	if status == users.UserStatusNotFound {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	switch request.Type {
-	case RequestGameAction:
-		return c.handleGameActionRequest(playerId, request, response)
-	case RequestNextGamePhase:
-		return c.handleGameNextPhaseRequest(playerId, request, response)
-	case RequestGameState:
-		return c.handleGameStateRequest(playerId, request, response)
-	case RequestPlayerInfo:
-		return c.handlePlayerInfoRequest(playerId, request, response)
-	case RequestLeaveGame:
-		return c.handleGameLeaveRequest(playerId, request, response)
-	}
 	if status.Test(users.UserStatusInGame) {
+		switch request.Type {
+		case RequestGameAction:
+			return c.handleGameActionRequest(playerId, request, response)
+		case RequestNextGamePhase:
+			return c.handleGameNextPhaseRequest(playerId, request, response)
+		case RequestGameState:
+			return c.handleGameStateRequest(playerId, request, response)
+		case RequestPlayerInfo:
+			return c.handlePlayerInfoRequest(playerId, request, response)
+		case RequestLeaveGame:
+			return c.handleGameLeaveRequest(playerId, request, response)
+		}
+	} else {
+		return response.WithStatus(ResponseStatusNotAllowed)
+	}
+	if status.Test(users.UserStatusAtJob) {
+		switch request.Type {
+		case RequestJobsStatus:
+			return c.handleJobStatusRequest(playerId, request, response)
+		case RequestQuitJob:
+			return c.handleQuitJobRequest(playerId, request, response)
+		case RequestCompleteJob:
+			return c.handleCompleteJobRequest(playerId, request, response)
+		}
+	} else {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
+	case RequestJobsStatus:
+		return c.handleJobStatusRequest(playerId, request, response)
 	case RequestEnterLobby:
 		return c.handleEnterLobbyRequest(playerId, request, response)
 	case RequestExitLobby:
@@ -119,6 +139,8 @@ func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
+	case RequestApplyForAJob:
+		return c.handleApplyForAJobRequest(playerId, request, response)
 	case RequestConfiguratorAction:
 		return c.handleConfiguratorActionRequest(playerId, request, response)
 	case RequestShopAction:

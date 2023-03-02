@@ -1,6 +1,9 @@
 package controller
 
-import "jrpg-gang/engine"
+import (
+	"jrpg-gang/controller/users"
+	"jrpg-gang/engine"
+)
 
 type ApplyForAJobRequestData struct {
 	Code engine.PlayerJobCode `json:"code"`
@@ -22,5 +25,6 @@ func (c *GameController) handleApplyForAJobRequest(playerId engine.PlayerId, req
 	if jobStatus != nil {
 		c.persistJobStatus(user.Email, *jobStatus)
 	}
+	c.users.ChangeUserStatus(playerId, users.UserStatusAtJob)
 	return response.WithStatus(ResponseStatusOk)
 }

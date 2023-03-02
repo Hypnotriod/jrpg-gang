@@ -27,6 +27,10 @@ const (
 	RequestNextGamePhase      RequestType = "nextGamePhase"
 	RequestGameState          RequestType = "gameState"
 	RequestPlayerInfo         RequestType = "playerInfo"
+	RequestApplyForAJob       RequestType = "applyForAJob"
+	RequestQuitJob            RequestType = "quitJob"
+	RequestCompleteJob        RequestType = "completeJob"
+	RequestJobsStatus         RequestType = "jobsStatus"
 )
 
 type Request struct {

@@ -31,6 +31,7 @@ const (
 	UserStatusInLobby   UserStatus = (1 << 2)
 	UserStatusInRoom    UserStatus = (1 << 3)
 	UserStatusInGame    UserStatus = (1 << 4)
+	UserStatusAtJob     UserStatus = (1 << 5)
 )
 
 type User struct {

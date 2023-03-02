@@ -4,6 +4,7 @@ import (
 	"jrpg-gang/controller/users"
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
+	"jrpg-gang/persistance/model"
 	"jrpg-gang/util"
 	"sync"
 	"time"
@@ -58,6 +59,25 @@ func (e *Employment) retrieveUserJobStatus(email string) *engine.PlayerJobStatus
 	}
 	status.Update()
 	return status
+}
+
+func (e *Employment) SetStatus(user *users.User, jobStatusModel model.JobStatusModel) {
+	status := &engine.PlayerJobStatus{
+		IsInProgress:   jobStatusModel.IsInProgress,
+		IsComplete:     jobStatusModel.IsComplete,
+		CompletionTime: jobStatusModel.CompletionTime,
+		Code:           jobStatusModel.Code,
+		Countdown:      jobStatusModel.Countdown,
+	}
+	defer e.mu.Unlock()
+	e.mu.Lock()
+	e.jobsStatus[user.Email] = status
+}
+
+func (e *Employment) ClearStatus(user *users.User) {
+	defer e.mu.Unlock()
+	e.mu.Lock()
+	delete(e.jobsStatus, user.Email)
 }
 
 func (e *Employment) GetStatus(user *users.User) EmploymentStatus {
