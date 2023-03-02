@@ -68,10 +68,13 @@ func (c *GameController) handleRejoinWithCredentialsRequest(request *Request, re
 	if userModel.Unit == nil {
 		c.persistUser(user)
 	}
-	if status := c.persistance.GetJobStatus(user.Email); status != nil {
-		c.employment.SetStatus(user, *status)
-	}
 	c.users.AddUser(user)
+	if jobStatus := c.persistance.GetJobStatus(user.Email); jobStatus != nil {
+		if jobStatus.IsInProgress || jobStatus.IsComplete {
+			c.users.ChangeUserStatus(user.Id, users.UserStatusAtJob)
+		}
+		c.employment.SetStatus(user, *jobStatus)
+	}
 	c.persistance.RemoveUserFromAuthCache(data.Token)
 	response.fillUserStatus(user)
 	return user.Id, response.WithStatus(ResponseStatusOk)
