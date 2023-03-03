@@ -8,7 +8,9 @@
         },
         "duration": 300,
         "countdown": 3600,
-        "requirements": {}
+        "requirements": {
+            "physique": 3
+        }
     },
     {
         "code": "job-clean-02",
@@ -19,6 +21,21 @@
         },
         "duration": 360,
         "countdown": 3600,
-        "requirements": {}
+        "requirements": {
+            "agility": 3
+        }
+    },
+    {
+        "code": "job-library-01",
+        "name": "Library work",
+        "description": "Helping a local scholar in his library",
+        "reward": {
+            "coins": 50
+        },
+        "duration": 600,
+        "countdown": 3600,
+        "requirements": {
+            "intelligence": 10
+        }
     }
 ]
