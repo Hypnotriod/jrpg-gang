@@ -62,6 +62,7 @@ Golang project of turn based multiplayer RPG game server
 ## Math:
 * `Physical Damage / Resistance`: **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **Lighting**
 * `Attack chance`: (**unit agility** - **unit stress**) - (**target agility** - **target stress**) + **base chance** | minimum `1`
+* `Attack chance` when `Stunned`: (**unit agility** - **unit stress**) + **target stress** + **base chance** | minimum `1`
 * `Critical attack chance`: (**unit luck** - **unit stress**) - (**target luck** - **target stress**) | minimum `1`
 * `Modification chance`: (**unit intelligence** - **unit stress**) + **base chance** | minimum `1`
 * `Stun Chance`: (**physical damage** - **target stress**) - (**unit physique** - **unit stress**) | minimum `1`

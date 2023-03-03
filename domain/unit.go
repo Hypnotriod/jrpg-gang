@@ -210,6 +210,10 @@ func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
 }
 
 func (u *Unit) CalculateAttackChance(target *Unit, damage DamageImpact) float32 {
+	if target.State.IsStunned {
+		chance := (u.TotalAgility() - u.State.Stress) + target.State.Stress + damage.Chance
+		return util.Max(chance, MINIMUM_CHANCE)
+	}
 	chance := (u.TotalAgility() - u.State.Stress) - (target.TotalAgility() - target.State.Stress) + damage.Chance
 	return util.Max(chance, MINIMUM_CHANCE)
 }
