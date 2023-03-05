@@ -10,6 +10,7 @@ const (
 	ActionMove      AtionType = "move"
 	ActionBuy       AtionType = "buy"
 	ActionSell      AtionType = "sell"
+	ActionRepair    AtionType = "repair"
 	ActionThrowAway AtionType = "throwAway"
 	ActionSkip      AtionType = "skip"
 	ActionLevelUp   AtionType = "levelUp"

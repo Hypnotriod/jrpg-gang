@@ -25,6 +25,8 @@ func (s *GameShop) ExecuteAction(action domain.Action, unit *domain.Unit, rndGen
 		return s.buy(action, unit, rndGen)
 	case domain.ActionSell:
 		return s.sell(action, unit, rndGen)
+	case domain.ActionRepair:
+		return s.repair(action, unit, rndGen)
 	}
 	return domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 }
@@ -116,5 +118,25 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 	price.MultiplyAll(SELL_ITEM_PRICE_FACTOR * float32(action.Quantity) * wearoutFactor)
 	unit.Booty.Accumulate(price)
 	result.Booty = &price
+	return result.WithResult(domain.ResultAccomplished)
+}
+
+func (s *GameShop) repair(action domain.Action, unit *domain.Unit, rndGen *util.RndGen) *domain.ActionResult {
+	result := domain.NewActionResult()
+	item := unit.Inventory.FindItem(action.ItemUid)
+	if item == nil {
+		return result.WithResult(domain.ResultNotFound)
+	}
+	equipment := unit.Inventory.FindEquipment(action.ItemUid)
+	if equipment == nil || equipment.Wearout == 0 || equipment.Durability == 0 {
+		return result.WithResult(domain.ResultNotAllowed)
+	}
+	price := equipment.Price
+	price.MultiplyAll(equipment.Wearout / equipment.Durability)
+	if !item.Price.Check(unit.Booty, 1) {
+		return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
+	}
+	unit.Booty.Reduce(price, 1)
+	equipment.Wearout = 0
 	return result.WithResult(domain.ResultAccomplished)
 }
