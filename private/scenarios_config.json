@@ -272,7 +272,7 @@
                         ],
                         [
                             {"type": 0, "code": "tile-grass-01", "factions": [1]},
-                            {"type": 1, "code": "tile-grass-01", "factions": []},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
                             {"type": 0, "code": "tile-grass-01", "factions": [1]}
                         ],
                         [
