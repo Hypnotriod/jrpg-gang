@@ -133,7 +133,7 @@ func (s *GameShop) repair(action domain.Action, unit *domain.Unit, rndGen *util.
 	}
 	price := equipment.Price
 	price.MultiplyAll(equipment.Wearout / equipment.Durability)
-	if !item.Price.Check(unit.Booty, 1) {
+	if !price.Check(unit.Booty, 1) {
 		return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
 	}
 	unit.Booty.Reduce(price, 1)
