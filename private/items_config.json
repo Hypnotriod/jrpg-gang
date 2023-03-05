@@ -377,7 +377,7 @@
             "code": "rusty-mace-01",
             "description": "Rusty Mace",
             "wearout": 35,
-            "durability": 40,
+            "durability": 50,
             "slot": "weapon",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -414,7 +414,7 @@
             "code": "rusty-axe-01",
             "description": "Rusty Axe",
             "wearout": 35,
-            "durability": 40,
+            "durability": 50,
             "slot": "weapon",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -510,7 +510,10 @@
             "name": "Rusty Helmet",
             "code": "rusty-helmet-01",
             "description": "Rusty helmet",
-            "durability": 40,
+            "price": {
+                "coins": 30
+            },
+            "durability": 50,
             "slot": "head",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -521,15 +524,11 @@
             "modification": [
                 {
                     "resistance": {
-                        "stabbing": 2,
-                        "cutting": 1,
-                        "crushing": 2
+                        "stabbing": 1,
+                        "crushing": 1
                     }
                 }
-            ],
-            "price": {
-                "coins": 45
-            }
+            ]
         },
         {
             "type": "armor",
@@ -538,7 +537,7 @@
             "price": {
                 "coins": 30
             },
-            "durability": 40,
+            "durability": 50,
             "slot": "leg",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -551,8 +550,7 @@
                 {
                     "resistance": {
                         "stabbing": 1,
-                        "cutting": 2,
-                        "crushing": 1
+                        "cutting": 1
                     }
                 }
             ]
@@ -562,9 +560,9 @@
             "name": "Rusty Shield",
             "code": "rusty-shield-01",
             "price": {
-                "coins": 45
+                "coins": 50
             },
-            "durability": 40,
+            "durability": 50,
             "slot": "weapon",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -576,9 +574,9 @@
             "modification": [
                 {
                     "resistance": {
-                        "stabbing": 2,
-                        "cutting": 2,
-                        "crushing": 2
+                        "stabbing": 1,
+                        "cutting": 1,
+                        "crushing": 1
                     }
                 }
             ]
@@ -588,9 +586,9 @@
             "name": "Rag",
             "code": "rag-armor-01",
             "price": {
-                "coins": 30
+                "coins": 50
             },
-            "durability": 40,
+            "durability": 50,
             "slot": "body",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -626,10 +624,10 @@
             "modification": [
                 {
                     "resistance": {
-                        "stabbing": 3,
-                        "cutting": 3,
-                        "crushing": 3,
-                        "bleeding": 3
+                        "stabbing": 2,
+                        "cutting": 2,
+                        "crushing": 2,
+                        "bleeding": 2
                     }
                 }
             ],
@@ -654,10 +652,9 @@
             "modification": [
                 {
                     "resistance": {
-                        "stabbing": 3,
-                        "cutting": 3,
-                        "crushing": 3,
-                        "bleeding": 3
+                        "stabbing": 2,
+                        "cutting": 2,
+                        "crushing": 2
                     }
                 }
             ],
@@ -682,9 +679,9 @@
             "modification": [
                 {
                     "resistance": {
-                        "stabbing": 4,
-                        "cutting": 4,
-                        "crushing": 4
+                        "stabbing": 3,
+                        "cutting": 3,
+                        "crushing": 3
                     }
                 }
             ],
@@ -709,10 +706,10 @@
             "modification": [
                 {
                     "resistance": {
-                        "stabbing": 7,
-                        "cutting": 7,
-                        "crushing": 7,
-                        "bleeding": 5
+                        "stabbing": 4,
+                        "cutting": 4,
+                        "crushing": 4,
+                        "bleeding": 2
                     }
                 }
             ],
@@ -743,12 +740,12 @@
                         "mana": 10
                     },
                     "resistance": {
-                        "fire": 3,
-                        "cold": 3,
-                        "lighting": 3,
-                        "poison": 3,
-                        "exhaustion": 3,
-                        "manaDrain": 3
+                        "fire": 2,
+                        "cold": 2,
+                        "lighting": 2,
+                        "poison": 2,
+                        "exhaustion": 2,
+                        "manaDrain": 2
                     }
                 }
             ]
@@ -776,13 +773,13 @@
                         "mana": 20
                     },
                     "resistance": {
-                        "fire": 7,
-                        "cold": 7,
-                        "lighting": 7,
-                        "poison": 7,
-                        "exhaustion": 7,
-                        "manaDrain": 7,
-                        "bleeding": 5
+                        "fire": 4,
+                        "cold": 4,
+                        "lighting": 4,
+                        "poison": 2,
+                        "exhaustion": 4,
+                        "manaDrain": 3,
+                        "bleeding": 2
                     },
                     "recovery": {
                         "health": 5,
@@ -841,7 +838,7 @@
                 }
             ],
             "price": {
-                "coins": 15
+                "coins": 25
             }
         },
         {
@@ -866,14 +863,14 @@
                 }
             ],
             "price": {
-                "coins": 25
+                "coins": 30
             }
         },
         {
             "name": "Poison",
             "type": "disposable",
             "code": "poison-01",
-            "description": "You can poison someone with this Poison",
+            "description": "You can poison someone with this",
             "canBeSold": true,
             "canBeThrownAway": true,
             "damage": [
@@ -883,7 +880,7 @@
                 }
             ],
             "price": {
-                "coins": 10
+                "coins": 20
             }
         },
         {
@@ -901,7 +898,7 @@
                 }
             ],
             "price": {
-                "coins": 10
+                "coins": 25
             }
         },
         {
