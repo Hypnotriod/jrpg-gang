@@ -5,8 +5,14 @@ import (
 	"jrpg-gang/util"
 )
 
+type GameShopStatus struct {
+	Items    *domain.UnitInventory     `json:"items"`
+	Purchase map[uint]domain.UnitBooty `json:"purchase"`
+	Repair   map[uint]domain.UnitBooty `json:"repair"`
+}
+
 type GameShop struct {
-	Items  *domain.UnitInventory `json:"items"`
+	Items  *domain.UnitInventory
 	rndGen *util.RndGen
 }
 
@@ -17,6 +23,47 @@ func NewGameShop(items *domain.UnitInventory) *GameShop {
 	s.Items.PopulateUids(s.rndGen)
 	s.Items.UnequipAmmunition()
 	return s
+}
+
+func (s *GameShop) GetStatus(unit *domain.Unit) *GameShopStatus {
+	r := &GameShopStatus{}
+	r.Items = s.Items.Clone()
+	r.Purchase = make(map[uint]domain.UnitBooty)
+	r.Repair = make(map[uint]domain.UnitBooty)
+	for i := range unit.Inventory.Magic {
+		if unit.Inventory.Magic[i].CanBeSold {
+			r.Purchase[unit.Inventory.Magic[i].Uid] = s.calculatePurchasePrice(&unit.Inventory.Magic[i].Item, 1, 1)
+		}
+	}
+	for i := range unit.Inventory.Disposable {
+		if unit.Inventory.Disposable[i].CanBeSold {
+			r.Purchase[unit.Inventory.Disposable[i].Uid] = s.calculatePurchasePrice(&unit.Inventory.Disposable[i].Item, 1, 1)
+		}
+	}
+	for i := range unit.Inventory.Ammunition {
+		if unit.Inventory.Ammunition[i].CanBeSold {
+			r.Purchase[unit.Inventory.Ammunition[i].Uid] = s.calculatePurchasePrice(&unit.Inventory.Ammunition[i].Item, 1, 1)
+		}
+	}
+	for i := range unit.Inventory.Armor {
+		if unit.Inventory.Armor[i].CanBeSold {
+			r.Purchase[unit.Inventory.Armor[i].Uid] = s.calculatePurchasePrice(
+				&unit.Inventory.Armor[i].Item, 1, s.calculateWearoutFactor(&unit.Inventory.Armor[i].Equipment))
+		}
+		if unit.Inventory.Armor[i].Durability != 0 {
+			r.Repair[unit.Inventory.Armor[i].Uid] = s.calculateRepairPrice(&unit.Inventory.Armor[i].Equipment)
+		}
+	}
+	for i := range unit.Inventory.Weapon {
+		if unit.Inventory.Weapon[i].CanBeSold {
+			r.Purchase[unit.Inventory.Weapon[i].Uid] = s.calculatePurchasePrice(
+				&unit.Inventory.Weapon[i].Item, 1, s.calculateWearoutFactor(&unit.Inventory.Weapon[i].Equipment))
+		}
+		if unit.Inventory.Weapon[i].Durability != 0 {
+			r.Repair[unit.Inventory.Weapon[i].Uid] = s.calculateRepairPrice(&unit.Inventory.Weapon[i].Equipment)
+		}
+	}
+	return r
 }
 
 func (s *GameShop) ExecuteAction(action domain.Action, unit *domain.Unit, rndGen *util.RndGen) *domain.ActionResult {
@@ -114,11 +161,23 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 			wearoutFactor = 1 - equipment.Wearout/equipment.Durability
 		}
 	}
-	price := item.Price
-	price.MultiplyAll(SELL_ITEM_PRICE_FACTOR * float32(action.Quantity) * wearoutFactor)
+	price := s.calculatePurchasePrice(item, action.Quantity, wearoutFactor)
 	unit.Booty.Accumulate(price)
 	result.Booty = &price
 	return result.WithResult(domain.ResultAccomplished)
+}
+
+func (s *GameShop) calculateWearoutFactor(equipment *domain.Equipment) float32 {
+	if equipment.Durability <= 0 {
+		return 0
+	}
+	return 1 - equipment.Wearout/equipment.Durability
+}
+
+func (s *GameShop) calculatePurchasePrice(item *domain.Item, quantity uint, wearoutFactor float32) domain.UnitBooty {
+	price := item.Price
+	price.MultiplyAll(PURCHASE_ITEM_PRICE_FACTOR * float32(quantity) * wearoutFactor)
+	return price
 }
 
 func (s *GameShop) repair(action domain.Action, unit *domain.Unit, rndGen *util.RndGen) *domain.ActionResult {
@@ -131,12 +190,17 @@ func (s *GameShop) repair(action domain.Action, unit *domain.Unit, rndGen *util.
 	if equipment == nil || equipment.Wearout == 0 || equipment.Durability == 0 {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
-	price := equipment.Price
-	price.MultiplyAll(equipment.Wearout / equipment.Durability)
+	price := s.calculateRepairPrice(equipment)
 	if !price.Check(unit.Booty, 1) {
 		return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
 	}
 	unit.Booty.Reduce(price, 1)
 	equipment.Wearout = 0
 	return result.WithResult(domain.ResultAccomplished)
+}
+
+func (s *GameShop) calculateRepairPrice(equipment *domain.Equipment) domain.UnitBooty {
+	price := equipment.Price
+	price.MultiplyAll(equipment.Wearout / equipment.Durability)
+	return price
 }

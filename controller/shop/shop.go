@@ -31,10 +31,10 @@ func (s *Shop) LoadItems(path string, itemsConfig *config.GameItemsConfig) error
 	return nil
 }
 
-func (s *Shop) GetStatus() engine.GameShop {
+func (s *Shop) GetStatus(unit *domain.Unit) *engine.GameShopStatus {
 	defer s.mu.RUnlock()
 	s.mu.RLock()
-	return *s.shop
+	return s.shop.GetStatus(unit)
 }
 
 func (s *Shop) ExecuteAction(action domain.Action, user *users.User) *domain.ActionResult {

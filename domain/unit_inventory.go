@@ -178,6 +178,26 @@ func (i *UnitInventory) Find(uid uint) any {
 	return nil
 }
 
+func (i *UnitInventory) GetItems() []*Item {
+	r := []*Item{}
+	for n := range i.Weapon {
+		r = append(r, &i.Weapon[n].Item)
+	}
+	for n := range i.Magic {
+		r = append(r, &i.Magic[n].Item)
+	}
+	for n := range i.Armor {
+		r = append(r, &i.Armor[n].Item)
+	}
+	for n := range i.Disposable {
+		r = append(r, &i.Disposable[n].Item)
+	}
+	for n := range i.Ammunition {
+		r = append(r, &i.Ammunition[n].Item)
+	}
+	return r
+}
+
 func (i *UnitInventory) FindItem(uid uint) *Item {
 	for n := range i.Weapon {
 		if i.Weapon[n].Uid == uid {
