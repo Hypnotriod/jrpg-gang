@@ -18,6 +18,8 @@ func (e *GameEngine) NextPhase() *GameEvent {
 		e.processRetreatActionAI(result)
 	case GamePhaseActionComplete:
 		e.processActionComplete(result)
+	case GamePhaseBeforeSpotComplete:
+		e.processBeforeSpotComplete(result)
 	case GamePhaseSpotComplete:
 		e.processSpotComplete(result)
 	}
@@ -34,6 +36,7 @@ func (e *GameEngine) NextPhaseRequired() bool {
 		e.state.phase == GamePhaseMakeActionAI ||
 		e.state.phase == GamePhaseRetreatAction ||
 		e.state.phase == GamePhaseActionComplete ||
+		e.state.phase == GamePhaseBeforeSpotComplete ||
 		e.state.phase == GamePhaseSpotComplete
 }
 
@@ -57,14 +60,25 @@ func (e *GameEngine) processActionComplete(event *GameEvent) {
 }
 
 func (e *GameEngine) processRoundComplete(event *GameEvent) {
-	if e.endRound(event) {
-		if e.scenario.IsLastSpot() {
-			e.state.ChangePhase(GamePhaseScenarioComplete)
-		} else {
-			e.state.ChangePhase(GamePhaseSpotComplete)
-		}
+	e.endRound(event)
+	if e.isLastRound() {
+		e.state.ChangePhase(GamePhaseBeforeSpotComplete)
 	} else {
 		e.state.ChangePhase(GamePhaseReadyForStartRound)
+	}
+}
+
+func (e *GameEngine) processBeforeSpotComplete(event *GameEvent) {
+	event.EndRoundResult = NewEndRoundResult()
+	if e.battlefield().FactionUnitsCount(GameUnitFactionLeft) != 0 {
+		e.accumulateBooty(event)
+		e.applySpotExperience(event)
+		e.restoreActorsState()
+	}
+	if e.scenario.IsLastSpot() {
+		e.state.ChangePhase(GamePhaseScenarioComplete)
+	} else {
+		e.state.ChangePhase(GamePhaseSpotComplete)
 	}
 }
 
@@ -86,7 +100,7 @@ func (e *GameEngine) switchToNextUnit() {
 	}
 }
 
-func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
+func (e *GameEngine) endRound(event *GameEvent) {
 	result := NewEndRoundResult()
 	for _, unit := range e.battlefield().Units {
 		recovery := unit.ApplyRecoverylOnNextTurn()
@@ -102,13 +116,10 @@ func (e *GameEngine) endRound(event *GameEvent) (isLastRound bool) {
 	corpses := e.battlefield().FilterSurvivors()
 	e.applyExperience(corpses, &result.Experience)
 	event.EndRoundResult = result
-	isLastRound = e.battlefield().FactionsCount() <= 1
-	if isLastRound && e.battlefield().FactionUnitsCount(GameUnitFactionLeft) != 0 {
-		e.accumulateBooty(event)
-		e.applySpotExperience(event)
-		e.restoreActorsState()
-	}
-	return
+}
+
+func (e *GameEngine) isLastRound() bool {
+	return e.battlefield().FactionsCount() <= 1
 }
 
 func (e *GameEngine) onUnitMoveAction() {

@@ -17,6 +17,7 @@ const (
 	GamePhaseMakeAction         GamePhase = "makeAction"
 	GamePhaseRetreatAction      GamePhase = "retreatAction"
 	GamePhaseActionComplete     GamePhase = "actionComplete"
+	GamePhaseBeforeSpotComplete GamePhase = "beforeSpotComplete"
 	GamePhaseSpotComplete       GamePhase = "spotComplete"
 	GamePhaseScenarioComplete   GamePhase = "scenarioComplete"
 )

@@ -21,7 +21,8 @@ func (w *GameEngineWrapper) getNextPhaseTimeout() (int, bool) {
 		engine.GamePhaseMakeMoveOrActionAI,
 		engine.GamePhaseMakeActionAI,
 		engine.GamePhaseRetreatAction,
-		engine.GamePhaseActionComplete:
+		engine.GamePhaseActionComplete,
+		engine.GamePhaseBeforeSpotComplete:
 		return NEXT_PHASE_TIMEOUT_SHORT_SEC, true
 	}
 	return 0, false
