@@ -192,7 +192,7 @@
         },
         {
             "type": "weapon",
-            "name": "Lighting Sword",
+            "name": "Light Sword",
             "code": "sword-magic-01",
             "description": "Lighting one-handed sword",
             "durability": 300,
@@ -738,7 +738,8 @@
             "description": "Stamina Recovery",
             "code": "magic-stamina-02",
             "price": {
-                "coins": 2000
+                "coins": 2000,
+                "ruby": 3
             },
             "requirements": {
                 "intelligence": 10
