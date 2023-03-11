@@ -47,6 +47,10 @@
                 {
                     "code": "axe-01",
                     "equipped": true
+                },
+                {
+                    "code": "rag-armor-01",
+                    "equipped": true
                 }
             ]
         },
@@ -106,6 +110,10 @@
                 },
                 {
                     "code": "sword-01",
+                    "equipped": true
+                },
+                {
+                    "code": "rag-armor-01",
                     "equipped": true
                 }
             ]
@@ -172,6 +180,10 @@
                     "code": "arrow-01",
                     "equipped": true,
                     "quantity": 30
+                },
+                {
+                    "code": "rag-armor-01",
+                    "equipped": true
                 }
             ]
         },
@@ -246,6 +258,16 @@
                 {
                     "code": "lighting-charge-01",
                     "quantity": 10
+                },
+                {
+                    "code": "magic-health-01"
+                },
+                {
+                    "code": "magic-stamina-01"
+                },
+                {
+                    "code": "rag-armor-01",
+                    "equipped": true
                 }
             ]
         },

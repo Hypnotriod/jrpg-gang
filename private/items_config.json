@@ -651,8 +651,8 @@
     "magic": [
         {
             "type": "magic",
-            "name": "Treatment",
-            "description": "Health Treatment",
+            "name": "Sm Treatment",
+            "description": "Small Health Treatment",
             "code": "magic-health-01",
             "price": {
                 "coins": 1200,
@@ -679,8 +679,36 @@
         },
         {
             "type": "magic",
-            "name": "Stamina",
-            "description": "Stamina Recovery",
+            "name": "Rg Treatment",
+            "description": "Regular Health Treatment",
+            "code": "magic-health-02",
+            "price": {
+                "coins": 2500,
+                "ruby": 5
+            },
+            "requirements": {
+                "intelligence": 12
+            },
+            "range": {
+                "maximumX": 10,
+                "maximumY": 10
+            },
+            "useCost": {
+                "mana": 30
+            },
+            "damage": [],
+            "modification": [
+                {
+                    "recovery": {
+                        "health": 50
+                    }
+                }
+            ]
+        },
+        {
+            "type": "magic",
+            "name": "Sm Stamina",
+            "description": "Small Stamina Recovery",
             "code": "magic-stamina-01",
             "price": {
                 "coins": 800
@@ -700,6 +728,33 @@
                 {
                     "recovery": {
                         "stamina": 25
+                    }
+                }
+            ]
+        },
+        {
+            "type": "magic",
+            "name": "Rg Stamina",
+            "description": "Stamina Recovery",
+            "code": "magic-stamina-02",
+            "price": {
+                "coins": 2000
+            },
+            "requirements": {
+                "intelligence": 10
+            },
+            "range": {
+                "maximumX": 10,
+                "maximumY": 10
+            },
+            "useCost": {
+                "mana": 20
+            },
+            "damage": [],
+            "modification": [
+                {
+                    "recovery": {
+                        "stamina": 50
                     }
                 }
             ]
