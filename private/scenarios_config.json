@@ -644,6 +644,81 @@
                         }
                     ]
                 }
+            },
+            "5-1": {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 200,
+                        "ruby": 4
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 300,
+                        "ruby": 8
+                    }
+                ],
+                "experience": 300,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "skeleton-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "skeleton-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "skeleton-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "death-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        }
+                    ]
+                }
             }
         },
         "path": [
@@ -691,6 +766,10 @@
                 {
                     "weight": 1,
                     "spotId": "5-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "5-1"
                 }
             ]
         ]
