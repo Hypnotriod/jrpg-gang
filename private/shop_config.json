@@ -70,25 +70,37 @@
             "code": "rusty-mace-01"
         },
         {
-            "code": "sword-01"
+            "code": "sword-02"
+        },
+        {
+            "code": "sword-magic-01"
         },
         {
             "code": "spear-01"
         },
         {
-            "code": "bow-01"
+            "code": "bow-02"
+        },
+        {
+            "code": "bow-magic-01"
         },
         {
             "code": "dagger-01"
         },
         {
-            "code": "sorcerer-staff-01"
+            "code": "sorcerer-staff-02"
         },
         {
-            "code": "axe-01"
+            "code": "axe-02"
         },
         {
             "code": "scythe-01"
+        },
+        {
+            "code": "magic-health-01"
+        },
+        {
+            "code": "magic-stamina-01"
         }
     ]
 }

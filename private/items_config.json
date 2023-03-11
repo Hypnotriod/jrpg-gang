@@ -127,10 +127,8 @@
             "type": "weapon",
             "name": "Short Sword",
             "code": "sword-01",
-            "description": "Base one hand sword",
-            "durability": 300,
+            "description": "Hero's one-handed sword",
             "slot": "weapon",
-            "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
@@ -143,6 +141,39 @@
             "damage": [
                 {
                     "chance": 50,
+                    "cutting": 20,
+                    "crushing": 3
+                },
+                {
+                    "duration": 3,
+                    "chance": 5,
+                    "bleeding": 3
+                }
+            ],
+            "useCost": {
+                "stamina": 10
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Short Sword",
+            "code": "sword-02",
+            "description": "Base one-handed sword",
+            "durability": 300,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "physique": 8
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 55,
                     "cutting": 30,
                     "crushing": 5
                 },
@@ -153,7 +184,7 @@
                 }
             ],
             "useCost": {
-                "stamina": 10
+                "stamina": 12
             },
             "price": {
                 "coins": 3000
@@ -161,9 +192,53 @@
         },
         {
             "type": "weapon",
+            "name": "Lighting Sword",
+            "code": "sword-magic-01",
+            "description": "Lighting one-handed sword",
+            "durability": 300,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "physique": 8,
+                "intelligence": 4
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 55,
+                    "cutting": 30,
+                    "crushing": 5,
+                    "lighting": 15
+                },
+                {
+                    "duration": 1,
+                    "lighting": 5
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3
+                }
+            ],
+            "useCost": {
+                "stamina": 12,
+                "mana": 3
+            },
+            "price": {
+                "coins": 5000,
+                "ruby": 10
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Spear",
             "code": "spear-01",
-            "description": "Base two handed spear",
+            "description": "Base two-handed spear",
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
@@ -178,13 +253,13 @@
             },
             "damage": [
                 {
-                    "chance": 50,
+                    "chance": 55,
                     "stabbing": 30
                 },
                 {
                     "duration": 3,
                     "chance": 15,
-                    "bleeding": 3
+                    "bleeding": 5
                 }
             ],
             "modification": [
@@ -205,11 +280,9 @@
             "type": "weapon",
             "name": "Bow",
             "code": "bow-01",
-            "description": "Base two hand bow",
+            "description": "Hero's two-handed bow",
             "ammunitionKind": "arrow",
-            "durability": 300,
             "slot": "weapon",
-            "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
@@ -227,6 +300,36 @@
             ],
             "useCost": {
                 "stamina": 10
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Bow",
+            "code": "bow-02",
+            "description": "Base two-handed bow",
+            "ammunitionKind": "arrow",
+            "durability": 300,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "physique": 5,
+                "agility": 5
+            },
+            "range": {
+                "maximumX": 5,
+                "maximumY": 5,
+                "minimumX": 2
+            },
+            "damage": [
+                {
+                    "chance": 55,
+                    "stabbing": 10
+                }
+            ],
+            "useCost": {
+                "stamina": 10
             },
             "price": {
                 "coins": 2500
@@ -234,16 +337,56 @@
         },
         {
             "type": "weapon",
+            "name": "Fire Bow",
+            "code": "bow-magic-01",
+            "description": "Fire two-handed bow",
+            "ammunitionKind": "arrow",
+            "durability": 300,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "physique": 5,
+                "agility": 8
+            },
+            "range": {
+                "maximumX": 5,
+                "maximumY": 5,
+                "minimumX": 2
+            },
+            "damage": [
+                {
+                    "chance": 55,
+                    "stabbing": 10,
+                    "fire": 10
+                },
+                {
+                    "duration": 1,
+                    "fire": 5
+                }
+            ],
+            "useCost": {
+                "stamina": 10
+            },
+            "price": {
+                "coins": 4000,
+                "ruby": 10
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Dagger",
             "code": "dagger-01",
-            "description": "Sneaky one hand dagger",
+            "description": "Sneaky two-handed dagger",
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
-                "physique": 2
+                "physique": 5,
+                "agility": 5
             },
             "range": {
                 "maximumX": 1,
@@ -251,7 +394,7 @@
             },
             "damage": [
                 {
-                    "chance": 60,
+                    "chance": 55,
                     "cutting": 15
                 },
                 {
@@ -264,18 +407,16 @@
                 "stamina": 5
             },
             "price": {
-                "coins": 1500
+                "coins": 1200
             }
         },
         {
             "type": "weapon",
             "name": "Staff",
             "code": "sorcerer-staff-01",
-            "description": "Base two handed Sorcerer Staff",
+            "description": "Hero's two-handed Sorcerer Staff",
             "ammunitionKind": "magicCharge",
-            "durability": 300,
             "slot": "weapon",
-            "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
@@ -283,7 +424,7 @@
             },
             "damage": [
                 {
-                    "chance": 50
+                    "chance": 45
                 }
             ],
             "range": {
@@ -293,23 +434,51 @@
             "useCost": {
                 "mana": 5,
                 "stamina": 2
-            },
-            "price": {
-                "coins": 5000
             }
         },
         {
             "type": "weapon",
-            "name": "Axe",
-            "code": "axe-01",
-            "description": "Base two handed Axe",
+            "name": "Scare Staff",
+            "code": "sorcerer-staff-02",
+            "description": "Base intimidating two-handed Sorcerer Staff",
+            "ammunitionKind": "magicCharge",
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
-                "strength": 8
+                "intelligence": 12
+            },
+            "damage": [
+                {
+                    "chance": 55,
+                    "fear": 5
+                }
+            ],
+            "range": {
+                "maximumX": 5,
+                "maximumY": 5
+            },
+            "useCost": {
+                "mana": 7,
+                "stamina": 3
+            },
+            "price": {
+                "coins": 5000,
+                "ruby": 10
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Axe",
+            "code": "axe-01",
+            "description": "Hero's two-handed Axe",
+            "slot": "weapon",
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 10
             },
             "range": {
                 "maximumX": 1,
@@ -321,6 +490,39 @@
             "damage": [
                 {
                     "chance": 40,
+                    "cutting": 25,
+                    "crushing": 5
+                },
+                {
+                    "duration": 3,
+                    "chance": 5,
+                    "bleeding": 5
+                }
+            ]
+        },
+        {
+            "type": "weapon",
+            "name": "Axe",
+            "code": "axe-02",
+            "description": "Base two-handed Axe",
+            "durability": 300,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 15
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "useCost": {
+                "stamina": 12
+            },
+            "damage": [
+                {
+                    "chance": 45,
                     "cutting": 35,
                     "crushing": 10
                 },
@@ -331,7 +533,7 @@
                 }
             ],
             "price": {
-                "coins": 3000
+                "coins": 3500
             }
         },
         {
@@ -427,7 +629,7 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 15
+                "stamina": 25
             },
             "damage": [
                 {
@@ -453,8 +655,8 @@
             "description": "Health Treatment",
             "code": "magic-health-01",
             "price": {
-                "coins": 5000,
-                "ruby": 100
+                "coins": 1200,
+                "ruby": 2
             },
             "requirements": {
                 "intelligence": 8
@@ -481,8 +683,7 @@
             "description": "Stamina Recovery",
             "code": "magic-stamina-01",
             "price": {
-                "coins": 5000,
-                "ruby": 100
+                "coins": 800
             },
             "requirements": {
                 "intelligence": 8

@@ -120,66 +120,6 @@
         }
     },
     {
-        "name": "Spearsman",
-        "code": "spearsman",
-        "class": "spearsman",
-        "booty": {
-            "coins": 300
-        },
-        "stats": {
-            "progress": {
-                "level": 1
-            },
-            "baseAttributes": {
-                "health": 60,
-                "stamina": 60
-            },
-            "attributes": {
-                "strength": 7,
-                "physique": 7,
-                "agility": 7,
-                "endurance": 5,
-                "intelligence": 2,
-                "initiative": 2,
-                "luck": 5
-            },
-            "resistance": {
-                "stabbing": 5,
-                "cutting": 5,
-                "crushing": 5,
-                "fire": 0,
-                "cold": 0,
-                "lighting": 0,
-                "poison": 0,
-                "exhaustion": 3,
-                "manaDrain": 0,
-                "bleeding": 5,
-                "fear": 3,
-                "curse": 0,
-                "madness": 0
-            }
-        },
-        "inventory": {
-            "descriptor": [
-                {
-                    "code": "fist-01"
-                },
-                {
-                    "code": "spear-01",
-                    "equipped": true
-                }
-            ]
-        },
-        "slots": {
-            "head": 1,
-            "neck": 1,
-            "body": 1,
-            "hand": 2,
-            "leg": 2,
-            "weapon": 2
-        }
-    },
-    {
         "name": "Rogue",
         "code": "rogue",
         "class": "rogue",
@@ -227,9 +167,6 @@
                 {
                     "code": "bow-01",
                     "equipped": true
-                },
-                {
-                    "code": "dagger-01"
                 },
                 {
                     "code": "arrow-01",
@@ -309,12 +246,6 @@
                 {
                     "code": "lighting-charge-01",
                     "quantity": 10
-                },
-                {
-                    "code": "magic-health-01"
-                },
-                {
-                    "code": "magic-stamina-01"
                 }
             ]
         },
