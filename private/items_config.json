@@ -1155,6 +1155,25 @@
             }
         },
         {
+            "name": "Agility Sm",
+            "type": "disposable",
+            "code": "agility-potion-01",
+            "description": "Small agility potion",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "modification": [
+                {
+                    "duration": 5,
+                    "attributes": {
+                        "agility": 5
+                    }
+                }
+            ],
+            "price": {
+                "coins": 35
+            }
+        },
+        {
             "name": "Poison",
             "type": "disposable",
             "code": "poison-01",
