@@ -1290,7 +1290,7 @@
         {
             "name": "Light Arrow",
             "type": "ammunition",
-            "code": "arrow-frost-01",
+            "code": "arrow-lighting-01",
             "description": "Lighting arrow",
             "kind": "arrow",
             "canBeSold": true,
