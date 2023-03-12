@@ -520,7 +520,7 @@
             },
             "damage": [
                 {
-                    "chance": 40,
+                    "chance": 45,
                     "cutting": 25,
                     "crushing": 5
                 },
@@ -553,7 +553,7 @@
             },
             "damage": [
                 {
-                    "chance": 45,
+                    "chance": 50,
                     "cutting": 35,
                     "crushing": 10
                 },
@@ -609,7 +609,6 @@
             "name": "Rusty Mace",
             "code": "rusty-mace-01",
             "description": "Rusty Mace",
-            "wearout": 35,
             "durability": 50,
             "slot": "weapon",
             "canBeSold": true,
@@ -638,7 +637,7 @@
                 }
             ],
             "price": {
-                "coins": 120
+                "coins": 250
             }
         },
         {
@@ -646,7 +645,6 @@
             "name": "Rusty Axe",
             "code": "rusty-axe-01",
             "description": "Rusty Axe",
-            "wearout": 35,
             "durability": 50,
             "slot": "weapon",
             "canBeSold": true,
@@ -660,12 +658,12 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 25
+                "stamina": 20
             },
             "damage": [
                 {
                     "chance": 40,
-                    "cutting": 30,
+                    "cutting": 25,
                     "crushing": 5
                 },
                 {
@@ -675,7 +673,7 @@
                 }
             ],
             "price": {
-                "coins": 100
+                "coins": 200
             }
         }
     ],
