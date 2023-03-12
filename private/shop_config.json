@@ -4,6 +4,15 @@
             "code": "arrow-01"
         },
         {
+            "code": "arrow-fire-01"
+        },
+        {
+            "code": "arrow-frost-01"
+        },
+        {
+            "code": "arrow-lighting-01"
+        },
+        {
             "code": "fire-charge-01"
         },
         {
@@ -25,7 +34,7 @@
             "code": "mana-potion-01"
         },
         {
-            "code": "bandage-01"
+            "code": "bandage-02"
         },
         {
             "code": "poison-01"

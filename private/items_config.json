@@ -408,7 +408,7 @@
         {
             "type": "weapon",
             "name": "Dagger",
-            "code": "dagger-01",
+            "code": "dagger-02",
             "description": "Sneaky one-handed dagger",
             "durability": 300,
             "slot": "weapon",
