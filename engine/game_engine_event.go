@@ -8,13 +8,23 @@ type EndRoundResult struct {
 	Damage     map[uint]domain.Damage       `json:"damage,omitempty"`
 	Recovery   map[uint]domain.UnitRecovery `json:"recovery,omitempty"`
 	Experience map[uint]uint                `json:"experience,omitempty"`
-	Booty      *domain.UnitBooty            `json:"booty,omitempty"`
 }
 
 func NewEndRoundResult() *EndRoundResult {
 	result := &EndRoundResult{}
 	result.Damage = map[uint]domain.Damage{}
 	result.Recovery = map[uint]domain.UnitRecovery{}
+	result.Experience = map[uint]uint{}
+	return result
+}
+
+type SpotCompleteResult struct {
+	Experience map[uint]uint    `json:"experience,omitempty"`
+	Booty      domain.UnitBooty `json:"booty"`
+}
+
+func NewSpotCompleteResult() *SpotCompleteResult {
+	result := &SpotCompleteResult{}
 	result.Experience = map[uint]uint{}
 	return result
 }
@@ -30,14 +40,15 @@ func NewGameUnitActionResult() *GameUnitActionResult {
 }
 
 type GameEvent struct {
-	Phase            GamePhase             `json:"phase"`
-	NextPhase        GamePhase             `json:"nextPhase"`
-	PhaseTimeout     float32               `json:"phaseTimeout,omitempty"`
-	State            *GameState            `json:"state"`
-	Spot             *Spot                 `json:"spot"`
-	PlayersInfo      []PlayerInfo          `json:"players"`
-	UnitActionResult *GameUnitActionResult `json:"unitActionResult,omitempty"`
-	EndRoundResult   *EndRoundResult       `json:"endRoundResult,omitempty"`
+	Phase              GamePhase             `json:"phase"`
+	NextPhase          GamePhase             `json:"nextPhase"`
+	PhaseTimeout       float32               `json:"phaseTimeout,omitempty"`
+	State              *GameState            `json:"state"`
+	Spot               *Spot                 `json:"spot"`
+	PlayersInfo        []PlayerInfo          `json:"players"`
+	UnitActionResult   *GameUnitActionResult `json:"unitActionResult,omitempty"`
+	EndRoundResult     *EndRoundResult       `json:"endRoundResult,omitempty"`
+	SpotCompleteResult *SpotCompleteResult   `json:"spotCompleteResult,omitempty"`
 }
 
 func (e *GameEvent) WithPhaseTimeout(timeout float32) *GameEvent {

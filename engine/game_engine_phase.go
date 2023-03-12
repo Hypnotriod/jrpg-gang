@@ -69,9 +69,9 @@ func (e *GameEngine) processRoundComplete(event *GameEvent) {
 }
 
 func (e *GameEngine) processBeforeSpotComplete(event *GameEvent) {
-	event.EndRoundResult = NewEndRoundResult()
+	event.SpotCompleteResult = NewSpotCompleteResult()
 	if e.battlefield().FactionUnitsCount(GameUnitFactionLeft) != 0 {
-		e.accumulateBooty(event)
+		e.accumulateSpotBooty(event)
 		e.applySpotExperience(event)
 		e.restoreActorsState()
 	}
@@ -153,11 +153,11 @@ func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint) {
 	e.state.ChangePhase(GamePhaseActionComplete)
 }
 
-func (e *GameEngine) accumulateBooty(event *GameEvent) {
+func (e *GameEngine) accumulateSpotBooty(event *GameEvent) {
 	booty := util.RandomPick(e.rndGen, e.scenario.CurrentSpot().Booty)
 	booty.W = 0
 	e.state.Booty.Accumulate(booty)
-	event.EndRoundResult.Booty = &booty
+	event.SpotCompleteResult.Booty = booty
 }
 
 func (e *GameEngine) applySpotExperience(event *GameEvent) {
@@ -165,7 +165,7 @@ func (e *GameEngine) applySpotExperience(event *GameEvent) {
 	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
 	for _, unit := range leftUnits {
 		unit.Stats.Progress.Experience += experience
-		event.EndRoundResult.Experience[unit.Uid] += experience
+		event.SpotCompleteResult.Experience[unit.Uid] += experience
 	}
 }
 
