@@ -177,6 +177,9 @@
                     "equipped": true
                 },
                 {
+                    "code": "dagger-01"
+                },
+                {
                     "code": "arrow-01",
                     "equipped": true,
                     "quantity": 30

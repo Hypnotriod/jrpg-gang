@@ -378,10 +378,8 @@
             "type": "weapon",
             "name": "Dagger",
             "code": "dagger-01",
-            "description": "Sneaky two-handed dagger",
-            "durability": 300,
+            "description": "Hero's one-handed dagger",
             "slot": "weapon",
-            "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
@@ -400,14 +398,47 @@
                 {
                     "duration": 3,
                     "chance": 10,
-                    "bleeding": 10
+                    "bleeding": 7
                 }
             ],
             "useCost": {
                 "stamina": 5
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Dagger",
+            "code": "dagger-01",
+            "description": "Sneaky one-handed dagger",
+            "durability": 300,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "physique": 5,
+                "agility": 7
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "cutting": 25
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 10
+                }
+            ],
+            "useCost": {
+                "stamina": 7
             },
             "price": {
-                "coins": 1200
+                "coins": 1500
             }
         },
         {
@@ -1133,11 +1164,11 @@
             "damage": [
                 {
                     "duration": 3,
-                    "poison": 3
+                    "poison": 15
                 }
             ],
             "price": {
-                "coins": 20
+                "coins": 25
             }
         },
         {
@@ -1174,8 +1205,7 @@
             },
             "damage": [
                 {
-                    "fire": 80,
-                    "chance": 60
+                    "fire": 60
                 },
                 {
                     "duration": 3,
