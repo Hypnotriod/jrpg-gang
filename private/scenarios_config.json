@@ -7,11 +7,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 25
+                        "coins": 50
                     },
                     {
                         "weight": 1,
-                        "coins": 50
+                        "coins": 75
                     }
                 ],
                 "experience": 35,
@@ -64,11 +64,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 25
+                        "coins": 50
                     },
                     {
                         "weight": 1,
-                        "coins": 50
+                        "coins": 75
                     }
                 ],
                 "experience": 40,
@@ -129,11 +129,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 50
+                        "coins": 75
                     },
                     {
                         "weight": 1,
-                        "coins": 75
+                        "coins": 100
                     }
                 ],
                 "experience": 50,
@@ -194,11 +194,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 50
+                        "coins": 75
                     },
                     {
                         "weight": 1,
-                        "coins": 75
+                        "coins": 100
                     }
                 ],
                 "experience": 50,
@@ -259,11 +259,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 75
+                        "coins": 100
                     },
                     {
                         "weight": 1,
-                        "coins": 100
+                        "coins": 150
                     }
                 ],
                 "experience": 70,
@@ -332,11 +332,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 75
+                        "coins": 125
                     },
                     {
                         "weight": 1,
-                        "coins": 100
+                        "coins": 150
                     }
                 ],
                 "experience": 80,
@@ -414,11 +414,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 100
+                        "coins": 150
                     },
                     {
                         "weight": 1,
-                        "coins": 150
+                        "coins": 200
                     }
                 ],
                 "experience": 100,
@@ -487,11 +487,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 100
+                        "coins": 150
                     },
                     {
                         "weight": 1,
-                        "coins": 150
+                        "coins": 200
                     }
                 ],
                 "experience": 125,
@@ -565,7 +565,7 @@
                     },
                     {
                         "weight": 1,
-                        "coins": 300,
+                        "coins": 250,
                         "ruby": 8
                     }
                 ],
@@ -579,7 +579,7 @@
                         ],
                         [
                             {"type": 0, "code": "tile-grass-01", "factions": [0]},
-                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 1, "code": "tile-rock-01", "factions": []},
                             {"type": 0, "code": "tile-grass-01", "factions": [0]}
                         ],
                         [
@@ -651,7 +651,7 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 200,
+                        "coins": 250,
                         "ruby": 4
                     },
                     {
@@ -670,7 +670,7 @@
                         ],
                         [
                             {"type": 0, "code": "tile-grass-01", "factions": [0]},
-                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 1, "code": "tile-rock-01", "factions": []},
                             {"type": 0, "code": "tile-grass-01", "factions": [0]}
                         ],
                         [

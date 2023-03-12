@@ -51,6 +51,14 @@
                 {
                     "code": "rag-armor-01",
                     "equipped": true
+                },
+                {
+                    "code": "health-potion-01",
+                    "quantity": 5
+                },
+                {
+                    "code": "stamina-potion-01",
+                    "quantity": 3
                 }
             ]
         },
@@ -115,6 +123,14 @@
                 {
                     "code": "rag-armor-01",
                     "equipped": true
+                },
+                {
+                    "code": "health-potion-01",
+                    "quantity": 5
+                },
+                {
+                    "code": "stamina-potion-01",
+                    "quantity": 5
                 }
             ]
         },
@@ -187,6 +203,14 @@
                 {
                     "code": "rag-armor-01",
                     "equipped": true
+                },
+                {
+                    "code": "health-potion-01",
+                    "quantity": 5
+                },
+                {
+                    "code": "stamina-potion-01",
+                    "quantity": 5
                 }
             ]
         },
@@ -271,6 +295,14 @@
                 {
                     "code": "rag-armor-01",
                     "equipped": true
+                },
+                {
+                    "code": "health-potion-01",
+                    "quantity": 3
+                },
+                {
+                    "code": "mana-potion-01",
+                    "quantity": 5
                 }
             ]
         },
