@@ -1240,6 +1240,78 @@
             }
         },
         {
+            "name": "Fire Arrow",
+            "type": "ammunition",
+            "code": "arrow-fire-01",
+            "description": "Fire arrow",
+            "kind": "arrow",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "damage": [
+                {
+                    "stabbing": 20,
+                    "fire": 15
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3,
+                    "fire": 3
+                }
+            ],
+            "price": {
+                "coins": 5
+            }
+        },
+        {
+            "name": "Frost Arrow",
+            "type": "ammunition",
+            "code": "arrow-frost-01",
+            "description": "Frost arrow",
+            "kind": "arrow",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "damage": [
+                {
+                    "stabbing": 20,
+                    "cold": 15
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3,
+                    "cold": 3
+                }
+            ],
+            "price": {
+                "coins": 2
+            }
+        },
+        {
+            "name": "Light Arrow",
+            "type": "ammunition",
+            "code": "arrow-frost-01",
+            "description": "Lighting arrow",
+            "kind": "arrow",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "damage": [
+                {
+                    "stabbing": 20,
+                    "lighting": 15
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3,
+                    "lighting": 3
+                }
+            ],
+            "price": {
+                "coins": 2
+            }
+        },
+        {
             "name": "Poison Chrg",
             "type": "ammunition",
             "code": "poison-charge-01",
