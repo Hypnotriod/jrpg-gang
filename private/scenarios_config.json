@@ -7,6 +7,104 @@
                 "booty": [
                     {
                         "weight": 2,
+                        "coins": 35
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 50
+                    }
+                ],
+                "experience": 35,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "bat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        }
+                    ]
+                }
+            },
+            "1-1": {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 40
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 50
+                    }
+                ],
+                "experience": 35,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        }
+                    ]
+                }
+            },
+            "2-0": {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "weight": 2,
                         "coins": 50
                     },
                     {
@@ -29,7 +127,113 @@
                         ],
                         [
                             {"type": 0, "code": "tile-grass-01", "factions": [1]},
-                            {"type": 1, "code": "tile-rock-01", "factions": []},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "bat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "2-1": {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 50
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 75
+                    }
+                ],
+                "experience": 35,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "slime-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        }
+                    ]
+                }
+            },
+            "3-0": {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 75
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 100
+                    }
+                ],
+                "experience": 35,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 1, "code": "tile-grass-01", "factions": []},
                             {"type": 0, "code": "tile-grass-01", "factions": [1]}
                         ],
                         [
@@ -54,11 +258,19 @@
                                 "x": 2,
                                 "y": 2
                             }
+                        },
+                        {
+                            "code": "bat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
                         }
                     ]
                 }
             },
-            "1-1": {
+            "3-1": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
                 "booty": [
@@ -123,17 +335,17 @@
                     ]
                 }
             },
-            "2-0": {
+            "4-0": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 75
+                        "coins": 100
                     },
                     {
                         "weight": 1,
-                        "coins": 100
+                        "coins": 125
                     }
                 ],
                 "experience": 50,
@@ -188,17 +400,17 @@
                     ]
                 }
             },
-            "2-1": {
+            "4-1": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 75
+                        "coins": 100
                     },
                     {
                         "weight": 1,
-                        "coins": 100
+                        "coins": 125
                     }
                 ],
                 "experience": 50,
@@ -249,11 +461,19 @@
                                 "x": 2,
                                 "y": 1
                             }
+                        },
+                        {
+                            "code": "bat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
                         }
                     ]
                 }
             },
-            "3-0": {
+            "5-0": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
                 "booty": [
@@ -308,11 +528,27 @@
                             }
                         },
                         {
-                            "code": "slime-02",
+                            "code": "slime-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
                                 "y": 1
+                            }
+                        },
+                        {
+                            "code": "bat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "bat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
                             }
                         },
                         {
@@ -326,7 +562,7 @@
                     ]
                 }
             },
-            "3-1": {
+            "5-1": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
                 "booty": [
@@ -395,8 +631,7 @@
                                 "x": 3,
                                 "y": 0
                             }
-                        }
-                        ,
+                        },
                         {
                             "code": "bat-01",
                             "faction": 1,
@@ -408,7 +643,7 @@
                     ]
                 }
             },
-            "4-0": {
+            "6-0": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
                 "booty": [
@@ -481,7 +716,7 @@
                     ]
                 }
             },
-            "4-1": {
+            "6-1": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
                 "booty": [
@@ -554,7 +789,7 @@
                     ]
                 }
             },
-            "5-0": {
+            "7-0": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
                 "booty": [
@@ -645,7 +880,7 @@
                     ]
                 }
             },
-            "5-1": {
+            "7-1": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
                 "booty": [
@@ -770,6 +1005,26 @@
                 {
                     "weight": 1,
                     "spotId": "5-1"
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotId": "6-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "6-1"
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotId": "7-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "7-1"
                 }
             ]
         ]
