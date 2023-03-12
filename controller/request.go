@@ -9,6 +9,7 @@ type RequestType string
 
 const (
 	RequestJoin               RequestType = "join"
+	RequestLeave              RequestType = "leave"
 	RequestEnterLobby         RequestType = "enterLobby"
 	RequestExitLobby          RequestType = "exitLobby"
 	RequestCreateGameRoom     RequestType = "createRoom"

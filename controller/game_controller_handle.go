@@ -84,6 +84,9 @@ func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	switch request.Type {
+	case RequestLeave:
+		c.Leave(playerId)
+		return response.WithStatus(ResponseStatusOk)
 	case RequestJobsStatus:
 		return c.handleJobStatusRequest(playerId, request, response)
 	case RequestShopStatus:
