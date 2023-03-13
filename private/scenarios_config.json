@@ -99,6 +99,55 @@
                     ]
                 }
             },
+            "1-2": {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 40
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 50
+                    }
+                ],
+                "experience": 35,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "slime-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        }
+                    ]
+                }
+            },
             "2-0": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
@@ -195,11 +244,68 @@
                     ],
                     "unitDescriptor": [
                         {
-                            "code": "slime-02",
+                            "code": "rat-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
                                 "y": 1
+                            }
+                        }
+                    ]
+                }
+            },
+            "2-2": {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 65
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 85
+                    }
+                ],
+                "experience": 35,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "rat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "bat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
                             }
                         }
                     ]
@@ -233,7 +339,7 @@
                         ],
                         [
                             {"type": 0, "code": "tile-grass-01", "factions": [1]},
-                            {"type": 1, "code": "tile-grass-01", "factions": []},
+                            {"type": 1, "code": "tile-rock-01", "factions": []},
                             {"type": 0, "code": "tile-grass-01", "factions": [1]}
                         ],
                         [
@@ -335,6 +441,79 @@
                     ]
                 }
             },
+            "3-2": {
+                "name": "Winter Cave",
+                "code": "winter-cave-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 50
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 75
+                    }
+                ],
+                "experience": 40,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 1, "code": "tile-rock-01", "factions": []},
+                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 1, "code": "tile-rock-01", "factions": []}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 1, "code": "tile-rock-01", "factions": []},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]},
+                            {"type": 0, "code": "tile-grass-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "slime-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "rat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "rat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        }
+                    ]
+                }
+            },
             "4-0": {
                 "name": "Winter Cave",
                 "code": "winter-cave-01",
@@ -423,7 +602,7 @@
                         ],
                         [
                             {"type": 0, "code": "tile-grass-01", "factions": [0]},
-                            {"type": 0, "code": "tile-grass-01", "factions": [0]},
+                            {"type": 1, "code": "tile-rock-01", "factions": []},
                             {"type": 0, "code": "tile-grass-01", "factions": [0]}
                         ],
                         [
@@ -528,7 +707,7 @@
                             }
                         },
                         {
-                            "code": "slime-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -549,14 +728,6 @@
                             "position": {
                                 "x": 3,
                                 "y": 2
-                            }
-                        },
-                        {
-                            "code": "slime-02",
-                            "faction": 1,
-                            "position": {
-                                "x": 3,
-                                "y": 1
                             }
                         }
                     ]
@@ -585,7 +756,7 @@
                         ],
                         [
                             {"type": 0, "code": "tile-grass-01", "factions": [0]},
-                            {"type": 1, "code": "tile-grass-01", "factions": []},
+                            {"type": 1, "code": "tile-rock-01", "factions": []},
                             {"type": 0, "code": "tile-grass-01", "factions": [0]}
                         ],
                         [
@@ -625,19 +796,11 @@
                             }
                         },
                         {
-                            "code": "bat-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
-                                "y": 0
-                            }
-                        },
-                        {
-                            "code": "bat-01",
-                            "faction": 1,
-                            "position": {
-                                "x": 3,
-                                "y": 2
+                                "y": 1
                             }
                         }
                     ]
@@ -690,7 +853,7 @@
                             }
                         },
                         {
-                            "code": "bat-01",
+                            "code": "ghost-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -698,7 +861,7 @@
                             }
                         },
                         {
-                            "code": "ghost-01",
+                            "code": "rat-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -706,7 +869,7 @@
                             }
                         },
                         {
-                            "code": "bat-01",
+                            "code": "rat-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -763,7 +926,7 @@
                             }
                         },
                         {
-                            "code": "bat-01",
+                            "code": "ghost-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -771,7 +934,7 @@
                             }
                         },
                         {
-                            "code": "ghost-01",
+                            "code": "skeleton-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -862,7 +1025,7 @@
                             }
                         },
                         {
-                            "code": "bat-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -870,7 +1033,7 @@
                             }
                         },
                         {
-                            "code": "bat-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -965,6 +1128,10 @@
                 {
                     "weight": 1,
                     "spotId": "1-1"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "1-2"
                 }
             ],
             [
@@ -975,6 +1142,10 @@
                 {
                     "weight": 1,
                     "spotId": "2-1"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "2-2"
                 }
             ],
             [
@@ -985,6 +1156,10 @@
                 {
                     "weight": 1,
                     "spotId": "3-1"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "3-2"
                 }
             ],
             [
