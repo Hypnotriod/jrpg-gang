@@ -369,7 +369,7 @@
                             "code": "bat-01",
                             "faction": 1,
                             "position": {
-                                "x": 2,
+                                "x": 3,
                                 "y": 1
                             }
                         }
@@ -508,7 +508,7 @@
                             "faction": 1,
                             "position": {
                                 "x": 3,
-                                "y": 1
+                                "y": 2
                             }
                         }
                     ]
@@ -573,6 +573,14 @@
                             "faction": 1,
                             "position": {
                                 "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "rat-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
                                 "y": 1
                             }
                         }
