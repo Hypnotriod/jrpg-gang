@@ -435,7 +435,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 7
+            },
+            {
+                "weight": 1,
+                "coins": 10
+            }
+        ]
     },
     {
         "name": "Bat",
@@ -485,7 +498,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 2
+            },
+            {
+                "weight": 1,
+                "coins": 3
+            }
+        ]
     },
     {
         "name": "Green Slime",
@@ -535,7 +561,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 2
+            },
+            {
+                "weight": 1,
+                "coins": 3
+            }
+        ]
     },
     {
         "name": "Slow Green Slime",
@@ -585,7 +624,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 3
+            },
+            {
+                "weight": 1,
+                "coins": 4
+            }
+        ]
     },
     {
         "name": "Cacodemon Green",
@@ -644,7 +696,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 7
+            },
+            {
+                "weight": 1,
+                "coins": 10
+            }
+        ]
     },
     {
         "name": "Cacodemon Blue",
@@ -703,7 +768,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 7
+            },
+            {
+                "weight": 1,
+                "coins": 12
+            }
+        ]
     },
     {
         "name": "Cacodemon Yellow",
@@ -762,7 +840,21 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1,
+                "coins": 5
+            },
+            {
+                "weight": 1,
+                "coins": 8
+            },
+            {
+                "weight": 1,
+                "coins": 14
+            }
+        ]
     },
     {
         "name": "Fire Scull",
@@ -812,7 +904,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 15
+            },
+            {
+                "weight": 1,
+                "coins": 20
+            }
+        ]
     },
     {
         "name": "Rat",
@@ -866,7 +971,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 5
+            },
+            {
+                "weight": 1,
+                "coins": 7
+            }
+        ]
     },
     {
         "name": "Ghost",
@@ -916,7 +1034,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 4
+            },
+            {
+                "weight": 1,
+                "coins": 6
+            }
+        ]
     },
     {
         "name": "Death",
@@ -973,7 +1104,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 20
+            },
+            {
+                "weight": 1,
+                "coins": 30
+            }
+        ]
     },
     {
         "name": "Zombie",
@@ -1027,7 +1171,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 15
+            },
+            {
+                "weight": 1,
+                "coins": 20
+            }
+        ]
     },
     {
         "name": "Skeleton",
@@ -1084,7 +1241,20 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 20
+            },
+            {
+                "weight": 1,
+                "coins": 25
+            }
+        ]
     },
     {
         "name": "Dragon",
@@ -1147,6 +1317,21 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1,
+                "coins": 75
+            },
+            {
+                "weight": 1,
+                "coins": 100
+            },
+            {
+                "weight": 1,
+                "coins": 125,
+                "ruby": 5
+            }
+        ]
     }
 ]
