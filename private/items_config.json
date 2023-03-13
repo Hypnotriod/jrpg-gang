@@ -14,7 +14,7 @@
             },
             "damage": [
                 {
-                    "chance": 50,
+                    "chance": 60,
                     "crushing": 10
                 }
             ],
@@ -36,7 +36,7 @@
             },
             "damage": [
                 {
-                    "chance": 50,
+                    "chance": 60,
                     "cutting": 10
                 },
                 {
@@ -63,7 +63,7 @@
             },
             "damage": [
                 {
-                    "chance": 50,
+                    "chance": 60,
                     "crushing": 10,
                     "fire": 15
                 },
@@ -93,7 +93,7 @@
             },
             "damage": [
                 {
-                    "chance": 50
+                    "chance": 60
                 }
             ],
             "useCost": {
@@ -116,7 +116,7 @@
             },
             "damage": [
                 {
-                    "chance": 60
+                    "chance": 70
                 }
             ],
             "useCost": {
@@ -140,7 +140,7 @@
             },
             "damage": [
                 {
-                    "chance": 50,
+                    "chance": 60,
                     "cutting": 20,
                     "crushing": 3
                 },
@@ -173,7 +173,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 70,
                     "cutting": 30,
                     "crushing": 5
                 },
@@ -187,7 +187,7 @@
                 "stamina": 12
             },
             "price": {
-                "coins": 3000
+                "coins": 2000
             }
         },
         {
@@ -210,7 +210,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 70,
                     "cutting": 30,
                     "crushing": 5,
                     "lighting": 15
@@ -230,7 +230,7 @@
                 "mana": 3
             },
             "price": {
-                "coins": 5000,
+                "coins": 3000,
                 "ruby": 10
             }
         },
@@ -253,7 +253,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 70,
                     "stabbing": 30
                 },
                 {
@@ -273,7 +273,7 @@
                 "stamina": 10
             },
             "price": {
-                "coins": 2500
+                "coins": 1500
             }
         },
         {
@@ -295,7 +295,7 @@
             },
             "damage": [
                 {
-                    "chance": 50
+                    "chance": 60
                 }
             ],
             "useCost": {
@@ -324,7 +324,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 70,
                     "stabbing": 10
                 }
             ],
@@ -332,7 +332,7 @@
                 "stamina": 10
             },
             "price": {
-                "coins": 2500
+                "coins": 1500
             }
         },
         {
@@ -357,7 +357,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 70,
                     "stabbing": 10,
                     "fire": 10
                 },
@@ -370,7 +370,7 @@
                 "stamina": 10
             },
             "price": {
-                "coins": 4000,
+                "coins": 2000,
                 "ruby": 10
             }
         },
@@ -392,7 +392,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 60,
                     "cutting": 15
                 },
                 {
@@ -425,7 +425,7 @@
             },
             "damage": [
                 {
-                    "chance": 60,
+                    "chance": 70,
                     "cutting": 25
                 },
                 {
@@ -438,7 +438,7 @@
                 "stamina": 7
             },
             "price": {
-                "coins": 1500
+                "coins": 1000
             }
         },
         {
@@ -455,7 +455,7 @@
             },
             "damage": [
                 {
-                    "chance": 45
+                    "chance": 60
                 }
             ],
             "range": {
@@ -483,7 +483,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 70,
                     "fear": 5
                 }
             ],
@@ -496,7 +496,7 @@
                 "stamina": 3
             },
             "price": {
-                "coins": 5000,
+                "coins": 3000,
                 "ruby": 10
             }
         },
@@ -520,7 +520,7 @@
             },
             "damage": [
                 {
-                    "chance": 45,
+                    "chance": 55,
                     "cutting": 25,
                     "crushing": 5
                 },
@@ -553,7 +553,7 @@
             },
             "damage": [
                 {
-                    "chance": 50,
+                    "chance": 65,
                     "cutting": 35,
                     "crushing": 10
                 },
@@ -564,7 +564,7 @@
                 }
             ],
             "price": {
-                "coins": 3500
+                "coins": 2000
             }
         },
         {
@@ -589,7 +589,7 @@
             },
             "damage": [
                 {
-                    "chance": 40,
+                    "chance": 55,
                     "cutting": 35,
                     "stubbing": 5,
                     "fear": 5
@@ -601,7 +601,7 @@
                 }
             ],
             "price": {
-                "coins": 5000
+                "coins": 3000
             }
         },
         {
@@ -626,7 +626,7 @@
             },
             "damage": [
                 {
-                    "chance": 40,
+                    "chance": 50,
                     "cutting": 5,
                     "crushing": 30
                 },
@@ -662,7 +662,7 @@
             },
             "damage": [
                 {
-                    "chance": 40,
+                    "chance": 50,
                     "cutting": 25,
                     "crushing": 5
                 },
@@ -712,7 +712,7 @@
             "description": "Regular Health Treatment",
             "code": "magic-health-02",
             "price": {
-                "coins": 2500,
+                "coins": 2000,
                 "ruby": 5
             },
             "requirements": {
@@ -767,7 +767,7 @@
             "description": "Stamina Recovery",
             "code": "magic-stamina-02",
             "price": {
-                "coins": 2000,
+                "coins": 1500,
                 "ruby": 3
             },
             "requirements": {
@@ -898,7 +898,7 @@
             "name": "Helmet",
             "code": "helmet-01",
             "description": "Base Helmet",
-            "durability": 300,
+            "durability": 500,
             "slot": "head",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -926,7 +926,7 @@
             "name": "Boots",
             "code": "boots-01",
             "description": "Base Boots",
-            "durability": 300,
+            "durability": 500,
             "slot": "leg",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -953,7 +953,7 @@
             "name": "Shield",
             "code": "shield-01",
             "description": "Base Shield",
-            "durability": 300,
+            "durability": 500,
             "slot": "weapon",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -980,7 +980,7 @@
             "name": "Armor",
             "code": "armor-01",
             "description": "Base Leather Armor",
-            "durability": 300,
+            "durability": 500,
             "slot": "body",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -1012,7 +1012,7 @@
                 "coins": 450,
                 "ruby": 2
             },
-            "durability": 300,
+            "durability": 500,
             "slot": "head",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -1045,7 +1045,7 @@
                 "coins": 1200,
                 "ruby": 5
             },
-            "durability": 300,
+            "durability": 500,
             "slot": "body",
             "canBeSold": true,
             "canBeThrownAway": true,
