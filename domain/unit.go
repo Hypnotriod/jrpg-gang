@@ -192,8 +192,8 @@ func (u *Unit) CheckRandomChance(percents float32) bool {
 		u.rng = rand.New(mt19937.New())
 		u.rng.Seed(time.Now().UnixNano())
 	}
-	rnd := u.rng.Float32() * MAXIMUM_CHANCE
-	return percents > rnd
+	rnd := u.rng.Int() % int(MAXIMUM_CHANCE)
+	return float32(rnd) < percents
 }
 
 func (u *Unit) SetRng(rng *rand.Rand) {
