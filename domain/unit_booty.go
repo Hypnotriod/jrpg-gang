@@ -14,6 +14,10 @@ func (b UnitBooty) Weight() int {
 	return b.W
 }
 
+func (b *UnitBooty) IsEmpty() bool {
+	return b.Coins == 0 && b.Ruby == 0
+}
+
 func (b *UnitBooty) Accumulate(booty UnitBooty) {
 	b.Coins += booty.Coins
 	b.Ruby += booty.Ruby

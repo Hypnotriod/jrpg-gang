@@ -85,7 +85,7 @@ func (e *GameEngine) executeUseAction(action domain.Action, playerId PlayerId) *
 	action.TargetUid = e.clarifyUseActionTargetuid(unit.Uid, target.Uid, result)
 	if result.Result == domain.ResultAccomplished {
 		e.onUnitUseAction(action.TargetUid, result)
-		e.onUnitCompleteAction(&result.Experience)
+		e.onUnitCompleteAction(&result.Experience, &result.Drop)
 	}
 	return result
 }
@@ -180,7 +180,7 @@ func (e *GameEngine) executeSkipAction(action domain.Action, playerId PlayerId) 
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	result := domain.NewActionResult()
-	e.onUnitCompleteAction(&result.Experience)
+	e.onUnitCompleteAction(&result.Experience, &result.Drop)
 	return result.WithResult(domain.ResultAccomplished)
 }
 

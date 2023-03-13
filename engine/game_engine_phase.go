@@ -13,7 +13,7 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
 		e.processAI(result)
 	case GamePhaseMakeMoveOrAction, GamePhaseMakeAction:
-		e.onUnitCompleteAction(nil)
+		e.onUnitCompleteAction(nil, nil)
 	case GamePhaseRetreatAction:
 		e.processRetreatActionAI(result)
 	case GamePhaseActionComplete:
@@ -114,6 +114,7 @@ func (e *GameEngine) endRound(event *GameEvent) {
 		unit.ReduceModificationOnNextTurn()
 	}
 	corpses := e.battlefield().FilterSurvivors()
+	e.accumulateDrop(corpses, &result.Drop)
 	e.applyExperience(corpses, &result.Experience)
 	event.EndRoundResult = result
 }
@@ -144,8 +145,9 @@ func (e *GameEngine) clarifyUseActionTargetuid(unitUit uint, targetUid uint, act
 	return targetUid
 }
 
-func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint) {
+func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint, dropDistribution *map[uint]domain.UnitBooty) {
 	corpses := e.battlefield().FilterSurvivors()
+	e.accumulateDrop(corpses, dropDistribution)
 	e.applyExperience(corpses, expDistribution)
 	e.battlefield().UpdateCellsFactions()
 	e.state.ShiftUnitsQueue()
@@ -166,6 +168,23 @@ func (e *GameEngine) applySpotExperience(event *GameEvent) {
 	for _, unit := range leftUnits {
 		unit.Stats.Progress.Experience += experience
 		event.SpotCompleteResult.Experience[unit.Uid] += experience
+	}
+}
+
+func (e *GameEngine) accumulateDrop(corpses []*GameUnit, dropDistribution *map[uint]domain.UnitBooty) {
+	for n := range corpses {
+		if len(corpses[n].Drop) == 0 {
+			continue
+		}
+		drop := util.RandomPick(e.rndGen, corpses[n].Drop)
+		if drop.IsEmpty() {
+			continue
+		}
+		if dropDistribution != nil {
+			drop.W = 0
+			(*dropDistribution)[corpses[n].Uid] = drop
+		}
+		e.state.Booty.Accumulate(drop)
 	}
 }
 

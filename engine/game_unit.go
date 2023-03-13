@@ -13,9 +13,10 @@ const (
 
 type GameUnit struct {
 	domain.Unit
-	Faction    GameUnitFaction `json:"faction"`
-	PlayerInfo *PlayerInfo     `json:"playerInfo,omitempty"`
-	IsDead     bool            `json:"isDead,omitempty"`
+	Faction    GameUnitFaction    `json:"faction"`
+	PlayerInfo *PlayerInfo        `json:"playerInfo,omitempty"`
+	Drop       []domain.UnitBooty `json:"drop,omitempty"`
+	IsDead     bool               `json:"isDead,omitempty"`
 }
 
 func NewGameUnit(unit *domain.Unit) *GameUnit {
@@ -39,6 +40,8 @@ func (u *GameUnit) Clone() *GameUnit {
 	r := &GameUnit{}
 	r.Faction = u.Faction
 	r.IsDead = u.IsDead
+	r.Drop = []domain.UnitBooty{}
+	r.Drop = append(r.Drop, u.Drop...)
 	r.Unit = *u.Unit.Clone()
 	if u.PlayerInfo != nil {
 		r.PlayerInfo = u.PlayerInfo.Clone()
