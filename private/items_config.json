@@ -70,11 +70,39 @@
                 {
                     "chance": 15,
                     "duration": 3,
-                    "fire": 2
+                    "fire": 3
                 }
             ],
             "useCost": {
                 "stamina": 10
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Plasma Touch",
+            "code": "plasma-touch-01",
+            "description": "Hit by lighting",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {},
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "lighting": 20
+                },
+                {
+                    "chance": 15,
+                    "duration": 3,
+                    "lighting": 3
+                }
+            ],
+            "useCost": {
+                "mana": 10,
+                "stamina": 3
             }
         },
         {
@@ -460,6 +488,7 @@
             ],
             "range": {
                 "maximumX": 5,
+                "minimumX": 2,
                 "maximumY": 5
             },
             "useCost": {
@@ -489,6 +518,7 @@
             ],
             "range": {
                 "maximumX": 5,
+                "minimumX": 2,
                 "maximumY": 5
             },
             "useCost": {
