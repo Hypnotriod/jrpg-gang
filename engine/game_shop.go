@@ -201,6 +201,6 @@ func (s *GameShop) repair(action domain.Action, unit *domain.Unit, rndGen *util.
 
 func (s *GameShop) calculateRepairPrice(equipment *domain.Equipment) domain.UnitBooty {
 	price := equipment.Price
-	price.MultiplyAll(equipment.Wearout / equipment.Durability)
+	price.MultiplyAll(REPAIR_ITEM_PRICE_FACTOR * equipment.Wearout / equipment.Durability)
 	return price
 }
