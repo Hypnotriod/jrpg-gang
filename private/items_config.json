@@ -14,7 +14,7 @@
             },
             "damage": [
                 {
-                    "chance": 60,
+                    "chance": 65,
                     "crushing": 10
                 }
             ],
@@ -91,7 +91,7 @@
             },
             "damage": [
                 {
-                    "chance": 60,
+                    "chance": 65,
                     "lighting": 20
                 },
                 {
@@ -168,7 +168,7 @@
             },
             "damage": [
                 {
-                    "chance": 60,
+                    "chance": 65,
                     "cutting": 20,
                     "crushing": 3
                 },
@@ -201,7 +201,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "cutting": 30,
                     "crushing": 5
                 },
@@ -238,7 +238,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "cutting": 30,
                     "crushing": 5,
                     "lighting": 15
@@ -281,7 +281,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "stabbing": 30
                 },
                 {
@@ -323,7 +323,7 @@
             },
             "damage": [
                 {
-                    "chance": 60
+                    "chance": 65
                 }
             ],
             "useCost": {
@@ -352,7 +352,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "stabbing": 10
                 }
             ],
@@ -385,7 +385,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "stabbing": 10,
                     "fire": 10
                 },
@@ -420,7 +420,7 @@
             },
             "damage": [
                 {
-                    "chance": 60,
+                    "chance": 65,
                     "cutting": 15
                 },
                 {
@@ -453,7 +453,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "cutting": 25
                 },
                 {
@@ -483,7 +483,7 @@
             },
             "damage": [
                 {
-                    "chance": 60
+                    "chance": 65
                 }
             ],
             "range": {
@@ -512,7 +512,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "fear": 5
                 }
             ],
@@ -550,7 +550,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 60,
                     "cutting": 25,
                     "crushing": 5
                 },
@@ -583,7 +583,7 @@
             },
             "damage": [
                 {
-                    "chance": 65,
+                    "chance": 70,
                     "cutting": 35,
                     "crushing": 10
                 },
@@ -619,7 +619,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 60,
                     "cutting": 35,
                     "stubbing": 5,
                     "fear": 5
@@ -656,7 +656,7 @@
             },
             "damage": [
                 {
-                    "chance": 50,
+                    "chance": 55,
                     "cutting": 5,
                     "crushing": 30
                 },
@@ -692,7 +692,7 @@
             },
             "damage": [
                 {
-                    "chance": 50,
+                    "chance": 55,
                     "cutting": 25,
                     "crushing": 5
                 },
