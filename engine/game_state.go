@@ -26,6 +26,7 @@ type GameState struct {
 	ActiveUnitsQueue []uint           `json:"activeUnitsQueue"`
 	InactiveUnits    []uint           `json:"inactiveUnits"`
 	Booty            domain.UnitBooty `json:"booty"`
+	SpotNumber       int              `json:"spotNumber"`
 	phase            GamePhase
 }
 
@@ -35,6 +36,10 @@ func NewGameState() *GameState {
 	s.ActiveUnitsQueue = make([]uint, 0, 10)
 	s.InactiveUnits = make([]uint, 0, 10)
 	return s
+}
+
+func (s *GameState) IncrementSpotNumber() {
+	s.SpotNumber++
 }
 
 func (s *GameState) MakeUnitsQueue(units []*GameUnit) {

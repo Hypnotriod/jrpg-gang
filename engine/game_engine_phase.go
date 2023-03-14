@@ -43,6 +43,7 @@ func (e *GameEngine) NextPhaseRequired() bool {
 func (e *GameEngine) prepareNextSpot(actors []*GameUnit) {
 	e.scenario.PrepareNextSpot(actors)
 	e.state.MakeUnitsQueue(e.battlefield().Units)
+	e.state.IncrementSpotNumber()
 }
 
 func (e *GameEngine) processStartRound() {
