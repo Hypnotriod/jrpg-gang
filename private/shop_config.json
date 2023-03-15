@@ -10,7 +10,7 @@
             "code": "arrow-frost-01"
         },
         {
-            "code": "arrow-lighting-01"
+            "code": "arrow-lightning-01"
         },
         {
             "code": "fire-charge-01"
@@ -19,7 +19,7 @@
             "code": "cold-charge-01"
         },
         {
-            "code": "lighting-charge-01"
+            "code": "lightning-charge-01"
         },
         {
             "code": "poison-charge-01"
@@ -79,7 +79,7 @@
             "code": "gloves-02"
         },
         {
-            "code": "lighting-gloves-01"
+            "code": "lightning-gloves-01"
         },
         {
             "code": "sorcerer-hat-01"

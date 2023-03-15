@@ -10,7 +10,7 @@ type Damage struct {
 	Crushing       float32 `json:"crushing,omitempty" bson:"crushing,omitempty"`     // affects health
 	Fire           float32 `json:"fire,omitempty" bson:"fire,omitempty"`             // affects health
 	Cold           float32 `json:"cold,omitempty" bson:"cold,omitempty"`             // affects health
-	Lighting       float32 `json:"lighting,omitempty" bson:"lighting,omitempty"`     // affects health
+	Lightning      float32 `json:"lightning,omitempty" bson:"lightning,omitempty"`   // affects health
 	Poison         float32 `json:"poison,omitempty" bson:"poison,omitempty"`         // affects health
 	Exhaustion     float32 `json:"exhaustion,omitempty" bson:"exhaustion,omitempty"` // affects stamina
 	ManaDrain      float32 `json:"manaDrain,omitempty" bson:"manaDrain,omitempty"`   // affects mana
@@ -29,7 +29,7 @@ func (d *Damage) Accumulate(damage Damage) {
 	d.Crushing += damage.Crushing
 	d.Fire += damage.Fire
 	d.Cold += damage.Cold
-	d.Lighting += damage.Lighting
+	d.Lightning += damage.Lightning
 	d.Poison += damage.Poison
 	d.Exhaustion += damage.Exhaustion
 	d.ManaDrain += damage.ManaDrain
@@ -45,7 +45,7 @@ func (d *Damage) Reduce(damage Damage) {
 	d.Crushing -= damage.Crushing
 	d.Fire -= damage.Fire
 	d.Cold -= damage.Cold
-	d.Lighting -= damage.Lighting
+	d.Lightning -= damage.Lightning
 	d.Poison -= damage.Poison
 	d.Exhaustion -= damage.Exhaustion
 	d.ManaDrain -= damage.ManaDrain
@@ -56,7 +56,7 @@ func (d *Damage) Reduce(damage Damage) {
 }
 
 func (d *Damage) PhysicalDamage() float32 {
-	return d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lighting
+	return d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lightning
 }
 
 func (d *Damage) HasPhysicalEffect() bool {
@@ -65,7 +65,7 @@ func (d *Damage) HasPhysicalEffect() bool {
 		d.Crushing != 0 ||
 		d.Fire != 0 ||
 		d.Cold != 0 ||
-		d.Lighting != 0
+		d.Lightning != 0
 }
 
 func (d *Damage) HasEffect() bool {
@@ -85,7 +85,7 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Crushing = util.AccumulateIfNotZeros(d.Crushing, attributes.Strength)
 	d.Fire = util.AccumulateIfNotZeros(d.Fire, attributes.Intelligence)
 	d.Cold = util.AccumulateIfNotZeros(d.Cold, attributes.Intelligence)
-	d.Lighting = util.AccumulateIfNotZeros(d.Lighting, attributes.Intelligence)
+	d.Lightning = util.AccumulateIfNotZeros(d.Lightning, attributes.Intelligence)
 	d.Exhaustion = util.AccumulateIfNotZeros(d.Exhaustion, attributes.Intelligence)
 	d.ManaDrain = util.AccumulateIfNotZeros(d.ManaDrain, attributes.Intelligence)
 	d.Bleeding = util.AccumulateIfNotZeros(d.Bleeding, attributes.Strength)
@@ -98,7 +98,7 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Crushing = util.AccumulateIfNotZeros(d.Crushing, damage.Crushing)
 	d.Fire = util.AccumulateIfNotZeros(d.Fire, damage.Fire)
 	d.Cold = util.AccumulateIfNotZeros(d.Cold, damage.Cold)
-	d.Lighting = util.AccumulateIfNotZeros(d.Lighting, damage.Lighting)
+	d.Lightning = util.AccumulateIfNotZeros(d.Lightning, damage.Lightning)
 	d.Poison = util.AccumulateIfNotZeros(d.Poison, damage.Poison)
 	d.Exhaustion = util.AccumulateIfNotZeros(d.Exhaustion, damage.Exhaustion)
 	d.ManaDrain = util.AccumulateIfNotZeros(d.ManaDrain, damage.ManaDrain)
@@ -114,7 +114,7 @@ func (d *Damage) MultiplyAll(factor float32) {
 	d.Crushing = util.MultiplyWithRounding(d.Crushing, factor)
 	d.Fire = util.MultiplyWithRounding(d.Fire, factor)
 	d.Cold = util.MultiplyWithRounding(d.Cold, factor)
-	d.Lighting = util.MultiplyWithRounding(d.Lighting, factor)
+	d.Lightning = util.MultiplyWithRounding(d.Lightning, factor)
 	d.Poison = util.MultiplyWithRounding(d.Poison, factor)
 	d.Exhaustion = util.MultiplyWithRounding(d.Exhaustion, factor)
 	d.ManaDrain = util.MultiplyWithRounding(d.ManaDrain, factor)
@@ -130,7 +130,7 @@ func (d *Damage) Normalize() {
 	d.Crushing = util.Max(d.Crushing, 0)
 	d.Fire = util.Max(d.Fire, 0)
 	d.Cold = util.Max(d.Cold, 0)
-	d.Lighting = util.Max(d.Lighting, 0)
+	d.Lightning = util.Max(d.Lightning, 0)
 	d.Poison = util.Max(d.Poison, 0)
 	d.Exhaustion = util.Max(d.Exhaustion, 0)
 	d.ManaDrain = util.Max(d.ManaDrain, 0)
@@ -141,7 +141,7 @@ func (d *Damage) Normalize() {
 }
 
 func (d *Damage) Apply(state *UnitState) {
-	state.Health -= d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lighting + d.Poison + d.Bleeding
+	state.Health -= d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lightning + d.Poison + d.Bleeding
 	state.Stamina -= d.Exhaustion
 	state.Mana -= d.ManaDrain
 	state.Stress += d.Fear + d.Curse + d.Madness

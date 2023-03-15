@@ -81,7 +81,7 @@
             "type": "weapon",
             "name": "Plasma Touch",
             "code": "plasma-touch-01",
-            "description": "Hit by lighting",
+            "description": "Hit by lightning",
             "slot": "weapon",
             "slotsNumber": 1,
             "requirements": {},
@@ -92,12 +92,12 @@
             "damage": [
                 {
                     "chance": 65,
-                    "lighting": 20
+                    "lightning": 20
                 },
                 {
                     "chance": 15,
                     "duration": 3,
-                    "lighting": 3
+                    "lightning": 3
                 }
             ],
             "useCost": {
@@ -241,11 +241,11 @@
                     "chance": 75,
                     "cutting": 30,
                     "crushing": 5,
-                    "lighting": 15
+                    "lightning": 15
                 },
                 {
                     "duration": 1,
-                    "lighting": 5
+                    "lightning": 5
                 },
                 {
                     "duration": 3,
@@ -1062,7 +1062,7 @@
         {
             "type": "armor",
             "name": "Light Gloves",
-            "code": "lighting-gloves-01",
+            "code": "lightning-gloves-01",
             "description": "Lightning Gloves, increase lightning damage",
             "durability": 500,
             "slot": "hand",
@@ -1081,7 +1081,7 @@
                         "crushing": 2
                     },
                     "damage": {
-                        "lighting": 8
+                        "lightning": 8
                     }
                 }
             ],
@@ -1169,7 +1169,7 @@
                     "resistance": {
                         "fire": 2,
                         "cold": 2,
-                        "lighting": 2,
+                        "lightning": 2,
                         "poison": 2,
                         "exhaustion": 2,
                         "manaDrain": 2
@@ -1202,7 +1202,7 @@
                     "resistance": {
                         "fire": 4,
                         "cold": 4,
-                        "lighting": 4,
+                        "lightning": 4,
                         "poison": 2,
                         "exhaustion": 4,
                         "manaDrain": 3,
@@ -1448,7 +1448,7 @@
         {
             "name": "Light Arrow",
             "type": "ammunition",
-            "code": "arrow-lighting-01",
+            "code": "arrow-lightning-01",
             "description": "Lightning arrow",
             "kind": "arrow",
             "canBeSold": true,
@@ -1456,13 +1456,13 @@
             "damage": [
                 {
                     "stabbing": 20,
-                    "lighting": 15
+                    "lightning": 15
                 },
                 {
                     "duration": 3,
                     "chance": 15,
                     "bleeding": 3,
-                    "lighting": 3
+                    "lightning": 3
                 }
             ],
             "price": {
@@ -1558,21 +1558,21 @@
             }
         },
         {
-            "name": "Lighting Chrg",
+            "name": "Lightning Chrg",
             "type": "ammunition",
-            "code": "lighting-charge-01",
-            "description": "Sorcerer staff Lighting Charge",
+            "code": "lightning-charge-01",
+            "description": "Sorcerer staff lightning Charge",
             "kind": "magicCharge",
             "canBeSold": true,
             "canBeThrownAway": true,
             "damage": [
                 {
-                    "lighting": 25
+                    "lightning": 25
                 },
                 {
                     "duration": 3,
                     "chance": 15,
-                    "lighting": 5
+                    "lightning": 5
                 }
             ],
             "price": {

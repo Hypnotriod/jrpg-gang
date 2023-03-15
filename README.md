@@ -11,7 +11,7 @@ Golang project of turn based multiplayer RPG game server
 * `physique`     - affects **stun chance**, for each 10 points adds 1 point to all **physical resistance**
 * `agility`      - affects **attack / dodge chance**
 * `endurance`    - **stamina** recovery
-* `intelligence` - enhances **fire**, **cold**, **lighting**, **exhaustion**, **manaDrain**, **fear**, **curse** and **madness** damage, multiplies by 1% all **modification** points
+* `intelligence` - enhances **fire**, **cold**, **lightning**, **exhaustion**, **manaDrain**, **fear**, **curse** and **madness** damage, multiplies by 1% all **modification** points
 * `initiative`   - affects **turn order**
 * `luck`         - affects **critical chance**
 
@@ -27,7 +27,7 @@ Golang project of turn based multiplayer RPG game server
 * `crushing`   - affects **health** attribute
 * `fire`       - affects **health** attribute
 * `cold`       - affects **health** attribute
-* `lighting`   - affects **health** attribute
+* `lightning`   - affects **health** attribute
 * `poison`     - affects **health** attribute
 * `bleeding`   - affects **health** attribute
 * `exhaustion` - affects **stamina** attribute
@@ -60,7 +60,7 @@ Golang project of turn based multiplayer RPG game server
 * Modification
 
 ## Math:
-* `Physical Damage / Resistance`: **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **Lighting**
+* `Physical Damage / Resistance`: **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **lightning**
 * `Attack chance`: (**unit agility** - **unit stress**) - (**target agility** - **target stress**) + **base chance** | minimum `1`
 * `Attack chance` when `Stunned`: (**unit agility** - **unit stress**) + **target stress** + **base chance** | minimum `1`
 * `Critical attack chance`: (**unit luck** - **unit stress**) - (**target luck** - **target stress**) | minimum `1`
