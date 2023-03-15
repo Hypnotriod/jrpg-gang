@@ -1179,6 +1179,77 @@
         },
         {
             "type": "armor",
+            "name": "Mana Necklace",
+            "description": "Base Mana Necklace",
+            "code": "necklace-01",
+            "price": {
+                "coins": 450
+            },
+            "durability": 500,
+            "slot": "neck",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "intelligence": 8
+            },
+            "modification": [
+                {
+                    "recovery": {
+                        "mana": 4
+                    },
+                    "resistance": {
+                        "manaDrain": 2
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Init Necklace",
+            "description": "Base Initiative Necklace",
+            "code": "necklace-02",
+            "price": {
+                "coins": 450
+            },
+            "durability": 500,
+            "slot": "neck",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {},
+            "modification": [
+                {
+                    "attributes": {
+                        "initiative": 4
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Agil Necklace",
+            "description": "Base Agility Necklace",
+            "code": "necklace-03",
+            "price": {
+                "coins": 450
+            },
+            "durability": 500,
+            "slot": "neck",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {},
+            "modification": [
+                {
+                    "attributes": {
+                        "agility": 4
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
             "name": "Cloak",
             "description": "Base Sorcerer Cloak",
             "code": "sorcerer-cloak-01",
