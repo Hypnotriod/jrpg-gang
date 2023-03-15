@@ -222,7 +222,7 @@
             "type": "weapon",
             "name": "Light Sword",
             "code": "sword-magic-01",
-            "description": "Lighting one-handed sword",
+            "description": "Lightning one-handed sword",
             "durability": 300,
             "slot": "weapon",
             "canBeSold": true,
@@ -975,7 +975,118 @@
                 }
             ],
             "price": {
+                "coins": 400
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Fine Boots",
+            "code": "boots-02",
+            "description": "Fine Boots",
+            "durability": 500,
+            "slot": "leg",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 3,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 3,
+                        "cutting": 3,
+                        "crushing": 3
+                    }
+                }
+            ],
+            "price": {
+                "coins": 1000
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Gloves",
+            "code": "gloves-01",
+            "description": "Base Gloves",
+            "durability": 500,
+            "slot": "hand",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 3,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 1,
+                        "cutting": 1,
+                        "crushing": 1
+                    }
+                }
+            ],
+            "price": {
                 "coins": 300
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Fine Gloves",
+            "code": "gloves-02",
+            "description": "Fine Gloves",
+            "durability": 500,
+            "slot": "hand",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 3,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 2,
+                        "cutting": 2,
+                        "crushing": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 700
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Light Gloves",
+            "code": "lighting-gloves-01",
+            "description": "Lightning Gloves, increase lightning damage",
+            "durability": 500,
+            "slot": "hand",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 3,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 2,
+                        "cutting": 2,
+                        "crushing": 2
+                    },
+                    "damage": {
+                        "lighting": 8
+                    }
+                }
+            ],
+            "price": {
+                "coins": 1000
             }
         },
         {
@@ -1338,7 +1449,7 @@
             "name": "Light Arrow",
             "type": "ammunition",
             "code": "arrow-lighting-01",
-            "description": "Lighting arrow",
+            "description": "Lightning arrow",
             "kind": "arrow",
             "canBeSold": true,
             "canBeThrownAway": true,
