@@ -1179,7 +1179,7 @@
         },
         {
             "type": "armor",
-            "name": "Mana Necklace",
+            "name": "Mana Neck",
             "description": "Base Mana Necklace",
             "code": "necklace-01",
             "price": {
@@ -1206,7 +1206,7 @@
         },
         {
             "type": "armor",
-            "name": "Init Necklace",
+            "name": "Initi Neck",
             "description": "Base Initiative Necklace",
             "code": "necklace-02",
             "price": {
@@ -1228,7 +1228,7 @@
         },
         {
             "type": "armor",
-            "name": "Agil Necklace",
+            "name": "Agili Neck",
             "description": "Base Agility Necklace",
             "code": "necklace-03",
             "price": {
@@ -1629,7 +1629,7 @@
             }
         },
         {
-            "name": "Lightning Chrg",
+            "name": "Light Chrg",
             "type": "ammunition",
             "code": "lightning-charge-01",
             "description": "Sorcerer staff lightning Charge",
