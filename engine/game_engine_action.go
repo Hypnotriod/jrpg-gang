@@ -81,11 +81,31 @@ func (e *GameEngine) executeUseAction(action domain.Action, playerId PlayerId) *
 	default:
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	result := unit.UseInventoryItemOnTarget(&target.Unit, action.ItemUid)
-	action.TargetUid = e.clarifyUseActionTargetuid(unit.Uid, target.Uid, result)
-	if result.Result == domain.ResultAccomplished {
-		e.onUnitUseAction(action.TargetUid, result)
-		e.onUnitCompleteAction(&result.Experience, &result.Drop)
+	result := unit.UseInventoryItemOnTarget(&target.Unit, action.ItemUid, domain.NewActionResult())
+	if result.Result != domain.ResultAccomplished {
+		return result
+	}
+	e.onUseItemOnTarget(target.Uid, result)
+	result = e.manageItemSpread(result, unit, target, action.ItemUid)
+	e.onUseItemOnTarget(unit.Uid, result)
+	unit.Inventory.Filter()
+	e.onUnitCompleteAction(&result.Experience, &result.Drop)
+	return result
+}
+
+func (e *GameEngine) manageItemSpread(result *domain.ActionResult, unit *GameUnit, target *GameUnit, itemUid uint) *domain.ActionResult {
+	spread := unit.Inventory.GetItemSpread(itemUid)
+	for _, p := range spread {
+		p.Shift(target.Position)
+		t := e.battlefield().FindUnitByPosition(p)
+		if t == nil || t.Faction == unit.Faction {
+			continue
+		}
+		result = unit.UseInventoryItemOnTarget(&t.Unit, itemUid, result)
+		if result.Result != domain.ResultAccomplished {
+			break
+		}
+		e.onUseItemOnTarget(t.Uid, result)
 	}
 	return result
 }

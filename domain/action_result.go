@@ -1,12 +1,11 @@
 package domain
 
-import (
-	"jrpg-gang/util"
-)
+import "jrpg-gang/util"
 
 type ActionResultType string
 
 const (
+	ResultEmpty              ActionResultType = ""
 	ResultAccomplished       ActionResultType = "accomplished"
 	ResultNotAccomplished    ActionResultType = "notAccomplished"
 	ResultNotAllowed         ActionResultType = "notAllowed"
@@ -25,32 +24,28 @@ const (
 )
 
 type ActionResult struct {
-	InstantDamage        []Damage                 `json:"instantDamage,omitempty"`
-	TemporalDamage       []DamageImpact           `json:"temporalDamage,omitempty"`
-	InstantRecovery      []UnitRecovery           `json:"instantRecovery,omitempty"`
-	TemporalModification []UnitModificationImpact `json:"temporalModification,omitempty"`
-	Experience           map[uint]uint            `json:"experience,omitempty"`
-	Drop                 map[uint]UnitBooty       `json:"drop,omitempty"`
-	Booty                *UnitBooty               `json:"booty,omitempty"`
-	Result               ActionResultType         `json:"result"`
+	InstantDamage        map[uint][]Damage                 `json:"instantDamage,omitempty"`
+	TemporalDamage       map[uint][]DamageImpact           `json:"temporalDamage,omitempty"`
+	InstantRecovery      map[uint][]UnitRecovery           `json:"instantRecovery,omitempty"`
+	TemporalModification map[uint][]UnitModificationImpact `json:"temporalModification,omitempty"`
+	Experience           map[uint]uint                     `json:"experience,omitempty"`
+	Drop                 map[uint]UnitBooty                `json:"drop,omitempty"`
+	Booty                *UnitBooty                        `json:"booty,omitempty"`
+	Result               ActionResultType                  `json:"result"`
 }
 
-func (r *ActionResult) WithStun() bool {
-	return util.Any(r.InstantDamage, func(damage Damage) bool {
+func (r *ActionResult) WithStun(unitUid uint) bool {
+	return util.Any(r.InstantDamage[unitUid], func(damage Damage) bool {
 		return damage.WithStun
-	})
-}
-
-func (r *ActionResult) IsCriticalMiss() bool {
-	return util.Any(r.InstantDamage, func(damage Damage) bool {
-		return damage.IsCriticalMiss
-	}) || util.Any(r.TemporalDamage, func(damage DamageImpact) bool {
-		return damage.IsCriticalMiss
 	})
 }
 
 func NewActionResult() *ActionResult {
 	action := &ActionResult{}
+	action.InstantDamage = map[uint][]Damage{}
+	action.TemporalDamage = map[uint][]DamageImpact{}
+	action.InstantRecovery = map[uint][]UnitRecovery{}
+	action.TemporalModification = map[uint][]UnitModificationImpact{}
 	action.Experience = map[uint]uint{}
 	action.Drop = map[uint]UnitBooty{}
 	return action

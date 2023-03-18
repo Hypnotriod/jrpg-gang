@@ -227,6 +227,30 @@ func (i *UnitInventory) FindItem(uid uint) *Item {
 	return nil
 }
 
+func (i *UnitInventory) GetItemSpread(uid uint) []Position {
+	for n := range i.Weapon {
+		if i.Weapon[n].Uid == uid {
+			return i.Weapon[n].Spread
+		}
+	}
+	for n := range i.Magic {
+		if i.Magic[n].Uid == uid {
+			return i.Magic[n].Spread
+		}
+	}
+	for n := range i.Disposable {
+		if i.Disposable[n].Uid == uid {
+			return i.Disposable[n].Spread
+		}
+	}
+	return nil
+}
+
+func (i *UnitInventory) Filter() {
+	i.FilterAmmunition()
+	i.FilterDisposable()
+}
+
 func (i *UnitInventory) RemoveWeapon(uid uint) *Weapon {
 	var result *Weapon
 	var filtered []Weapon

@@ -8,3 +8,8 @@ type Position struct {
 func (p *Position) Equals(position Position) bool {
 	return p.X == position.X && p.Y == position.Y
 }
+
+func (p *Position) Shift(position Position) {
+	p.X += position.X
+	p.Y += position.Y
+}

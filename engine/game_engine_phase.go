@@ -133,17 +133,10 @@ func (e *GameEngine) onUnitMoveAction() {
 	}
 }
 
-func (e *GameEngine) onUnitUseAction(targetUid uint, actionResult *domain.ActionResult) {
-	if actionResult != nil && actionResult.WithStun() {
+func (e *GameEngine) onUseItemOnTarget(targetUid uint, actionResult *domain.ActionResult) {
+	if actionResult != nil && actionResult.WithStun(targetUid) {
 		e.state.PopStunnedUnitFromQueue(targetUid)
 	}
-}
-
-func (e *GameEngine) clarifyUseActionTargetuid(unitUit uint, targetUid uint, actionResult *domain.ActionResult) uint {
-	if actionResult != nil && actionResult.IsCriticalMiss() {
-		return unitUit
-	}
-	return targetUid
 }
 
 func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint, dropDistribution *map[uint]domain.UnitBooty) {

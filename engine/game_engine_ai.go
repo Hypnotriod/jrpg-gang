@@ -101,20 +101,23 @@ func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target
 	if result.Result != domain.ResultAccomplished {
 		return false
 	}
-	result = unit.UseInventoryItemOnTarget(&target.Unit, weaponUid)
+	result = unit.UseInventoryItemOnTarget(&target.Unit, weaponUid, domain.NewActionResult())
 	if result.Result != domain.ResultAccomplished {
 		return false
 	}
+	e.onUseItemOnTarget(target.Uid, result)
+	result = e.manageItemSpread(result, unit, target, weaponUid)
+	e.onUseItemOnTarget(unit.Uid, result)
+	unit.Inventory.Filter()
+	e.onUnitCompleteAction(nil, nil)
 	unitAction := NewGameUnitActionResult()
 	unitAction.Action = domain.Action{
 		Action:    domain.ActionUse,
 		Uid:       unit.Uid,
-		TargetUid: e.clarifyUseActionTargetuid(unit.Uid, target.Uid, result),
+		TargetUid: target.Uid,
 		ItemUid:   weaponUid,
 	}
 	unitAction.Result = *result
 	event.UnitActionResult = unitAction
-	e.onUnitUseAction(unitAction.Action.TargetUid, result)
-	e.onUnitCompleteAction(nil, nil)
 	return true
 }
