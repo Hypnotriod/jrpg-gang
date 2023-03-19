@@ -304,7 +304,7 @@
             },
             "range": {
                 "maximumX": 2,
-                "maximumY": 0
+                "maximumY": 1
             },
             "damage": [
                 {
