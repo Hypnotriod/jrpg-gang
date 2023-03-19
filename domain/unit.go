@@ -8,8 +8,6 @@ import (
 	"github.com/seehuhn/mt19937"
 )
 
-type UnitSlots map[EquipmentSlot]uint
-
 type UnitCode string
 
 type UnitClass string
@@ -30,7 +28,7 @@ type Unit struct {
 	Damage       []DamageImpact           `json:"damage,omitempty" bson:"-"`
 	Modification []UnitModificationImpact `json:"modification,omitempty" bson:"-"`
 	Inventory    UnitInventory            `json:"inventory" bson:"inventory"`
-	Slots        UnitSlots                `json:"slots" bson:"slots"`
+	Slots        map[EquipmentSlot]uint   `json:"slots" bson:"slots"`
 	Position     Position                 `json:"position" bson:"-"`
 }
 
