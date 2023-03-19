@@ -88,7 +88,7 @@ func (e *GameEngine) executeUseAction(action domain.Action, playerId PlayerId) *
 	e.onUseItemOnTarget(target.Uid, result)
 	result = e.manageItemSpread(result, unit, target, action.ItemUid)
 	e.onUseItemOnTarget(unit.Uid, result)
-	unit.Inventory.Filter()
+	unit.Inventory.FilterItems()
 	e.onUnitCompleteAction(&result.Experience, &result.Drop)
 	return result
 }

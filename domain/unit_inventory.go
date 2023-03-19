@@ -246,7 +246,7 @@ func (i *UnitInventory) GetItemSpread(uid uint) []Position {
 	return nil
 }
 
-func (i *UnitInventory) Filter() {
+func (i *UnitInventory) FilterItems() {
 	i.FilterAmmunition()
 	i.FilterDisposable()
 }

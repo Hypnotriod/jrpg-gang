@@ -34,13 +34,16 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 		if ammunition == nil {
 			return action.WithResult(ResultNoAmmunition)
 		}
-		if ammunition.Quantity == 0 {
-			return action.WithResult(ResultZeroQuantity)
-		}
 		if ammunition.Kind != weapon.AmmunitionKind {
 			return action.WithResult(ResultNotCompatible)
 		}
-		ammunition.Quantity--
+		if action.Result == ResultEmpty {
+			quantity := 1 + len(weapon.Spread)
+			if ammunition.Quantity < uint(quantity) {
+				return action.WithResult(ResultZeroQuantity)
+			}
+			ammunition.Quantity -= uint(quantity)
+		}
 		damage = ammunition.EnchanceDamageImpact(damage)
 	}
 	instDmg, tmpImp := u.Attack(target, damage)
