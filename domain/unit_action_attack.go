@@ -56,7 +56,6 @@ func (u *Unit) applyInstantDamage(damage Damage) Damage {
 	damage.Normalize()
 	if damage.HasPhysicalEffect() {
 		u.Inventory.IncreaseArmorWearout(true)
-		u.Inventory.UpdateEquipmentByWeareout()
 	}
 	resistance := u.TotalEquipmentModification().Resistance
 	resistance.Normalize()

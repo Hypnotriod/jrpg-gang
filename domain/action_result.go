@@ -5,7 +5,6 @@ import "jrpg-gang/util"
 type ActionResultType string
 
 const (
-	ResultEmpty              ActionResultType = ""
 	ResultAccomplished       ActionResultType = "accomplished"
 	ResultNotAccomplished    ActionResultType = "notAccomplished"
 	ResultNotAllowed         ActionResultType = "notAllowed"
@@ -32,6 +31,8 @@ type ActionResult struct {
 	Drop                 map[uint]UnitBooty                `json:"drop,omitempty"`
 	Booty                *UnitBooty                        `json:"booty,omitempty"`
 	Result               ActionResultType                  `json:"result"`
+	WearoutIncreased     bool                              `json:"-"`
+	UseCostReduced       bool                              `json:"-"`
 }
 
 func (r *ActionResult) WithStun(unitUid uint) bool {

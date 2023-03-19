@@ -17,15 +17,15 @@ func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint, result *ActionRe
 }
 
 func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Weapon) *ActionResult {
-	if action.Result == ResultEmpty {
+	if !action.UseCostReduced {
 		if !weapon.Equipped {
 			return action.WithResult(ResultNotEquipped)
 		}
-		if !u.CheckUseCost(weapon.UseCost) {
-			return action.WithResult(ResultCantUse)
-		}
 		if !u.CanReach(target, weapon.Range) {
 			return action.WithResult(ResultNotReachable)
+		}
+		if !u.CheckUseCost(weapon.UseCost) {
+			return action.WithResult(ResultCantUse)
 		}
 	}
 	var damage []DamageImpact = weapon.Damage
@@ -34,25 +34,28 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 		if ammunition == nil {
 			return action.WithResult(ResultNoAmmunition)
 		}
-		if ammunition.Kind != weapon.AmmunitionKind {
-			return action.WithResult(ResultNotCompatible)
-		}
-		if action.Result == ResultEmpty {
+		if !action.UseCostReduced {
+			if ammunition.Kind != weapon.AmmunitionKind {
+				return action.WithResult(ResultNotCompatible)
+			}
 			quantity := 1 + len(weapon.Spread)
 			if ammunition.Quantity < uint(quantity) {
 				return action.WithResult(ResultZeroQuantity)
 			}
 			ammunition.Quantity -= uint(quantity)
+			weapon.IncreaseWearout()
+			action.WearoutIncreased = true
 		}
 		damage = ammunition.EnchanceDamageImpact(damage)
 	}
 	instDmg, tmpImp := u.Attack(target, damage)
-	if action.Result == ResultEmpty {
+	if !action.UseCostReduced {
 		u.State.Reduce(weapon.UseCost)
-		if len(instDmg) != 0 || len(tmpImp) != 0 {
-			weapon.IncreaseWearout()
-			u.Inventory.UpdateEquipmentByWeareout()
-		}
+		action.UseCostReduced = true
+	}
+	if !action.WearoutIncreased && (len(instDmg) != 0 || len(tmpImp) != 0) {
+		weapon.IncreaseWearout()
+		action.WearoutIncreased = true
 	}
 	action.InstantDamage[target.Uid] = append(action.InstantDamage[target.Uid], instDmg...)
 	action.TemporalDamage[target.Uid] = append(action.TemporalDamage[target.Uid], tmpImp...)
@@ -60,14 +63,15 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 }
 
 func (u *Unit) useMagicOnTarget(action *ActionResult, target *Unit, magic *Magic) *ActionResult {
-	if action.Result == ResultEmpty {
-		if !u.CheckRequirements(magic.Requirements) || !u.CheckUseCost(magic.UseCost) {
-			return action.WithResult(ResultCantUse)
-		}
+	if !action.UseCostReduced {
 		if !u.CanReach(target, magic.Range) {
 			return action.WithResult(ResultNotReachable)
 		}
+		if !u.CheckRequirements(magic.Requirements) || !u.CheckUseCost(magic.UseCost) {
+			return action.WithResult(ResultCantUse)
+		}
 		u.State.Reduce(magic.UseCost)
+		action.UseCostReduced = true
 	}
 	if len(magic.Damage) != 0 {
 		instDmg, tmpImp := u.Attack(target, magic.Damage)
@@ -83,14 +87,15 @@ func (u *Unit) useMagicOnTarget(action *ActionResult, target *Unit, magic *Magic
 }
 
 func (u *Unit) useDisposableOnTarget(action *ActionResult, target *Unit, disposable *Disposable) *ActionResult {
-	if action.Result == ResultEmpty {
-		if disposable.Quantity == 0 {
-			return action.WithResult(ResultZeroQuantity)
-		}
+	if !action.UseCostReduced {
 		if !u.CanReach(target, disposable.Range) {
 			return action.WithResult(ResultNotReachable)
 		}
+		if disposable.Quantity == 0 {
+			return action.WithResult(ResultZeroQuantity)
+		}
 		disposable.Quantity--
+		action.UseCostReduced = true
 	}
 	if len(disposable.Damage) != 0 {
 		instDmg, tmpImp := u.Attack(target, disposable.Damage)

@@ -246,7 +246,8 @@ func (i *UnitInventory) GetItemSpread(uid uint) []Position {
 	return nil
 }
 
-func (i *UnitInventory) FilterItems() {
+func (i *UnitInventory) UpdateItemsState() {
+	i.UpdateEquipmentByWeareout()
 	i.FilterAmmunition()
 	i.FilterDisposable()
 }
@@ -449,7 +450,7 @@ func (i *UnitInventory) FindDisposableByCode(code ItemCode) *Disposable {
 }
 
 func (i *UnitInventory) FilterDisposable() {
-	var filtered []Disposable
+	var filtered []Disposable = make([]Disposable, 0, len(i.Disposable))
 	for _, disp := range i.Disposable {
 		if disp.Quantity != 0 {
 			filtered = append(filtered, disp)
@@ -501,7 +502,7 @@ func (i *UnitInventory) UnequipAmmunition() {
 }
 
 func (i *UnitInventory) FilterAmmunition() {
-	var filtered []Ammunition
+	var filtered []Ammunition = make([]Ammunition, 0, len(i.Ammunition))
 	for _, amm := range i.Ammunition {
 		if amm.Quantity != 0 {
 			filtered = append(filtered, amm)
