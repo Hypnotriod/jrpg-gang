@@ -51,16 +51,22 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 }
 
 func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
-	position := domain.Position{}
+	xShift := 1
 	yShift := []int{0, -1, 1, -2, 2}
+	position := domain.Position{}
+	if weapon := util.Find(unit.Inventory.Weapon, func(weapon domain.Weapon) bool {
+		return weapon.Equipped
+	}); weapon != nil {
+		xShift = weapon.Range.MaximumX
+	}
 	for _, target := range e.battlefield().Units {
 		if target.Faction == unit.Faction {
 			continue
 		}
 		if target.Faction == GameUnitFactionLeft {
-			position.X = target.Position.X + 1
+			position.X = target.Position.X + xShift
 		} else {
-			position.X = target.Position.X - 1
+			position.X = target.Position.X - xShift
 		}
 		for _, y := range yShift {
 			position.Y = target.Position.Y + y
