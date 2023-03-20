@@ -54,7 +54,7 @@ func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
 	xShift := 1
 	yShift := []int{0, -1, 1, -2, 2}
 	position := domain.Position{}
-	if weapon := unit.Inventory.GetEquippedWeapon(); weapon != nil && weapon.Range.Has() {
+	if weapon := unit.Inventory.GetEquippedWeapon(); weapon != nil && weapon.Range.MaximumX > 0 {
 		xShift = weapon.Range.MaximumX
 	}
 	targets := util.Shuffle(e.rndGen, util.Clone(e.battlefield().Units))
@@ -62,17 +62,21 @@ func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
 		if target.Faction == unit.Faction {
 			continue
 		}
-		if target.Faction == GameUnitFactionLeft {
-			position.X = target.Position.X + xShift
-		} else {
-			position.X = target.Position.X - xShift
-		}
-		for _, y := range yShift {
-			position.Y = target.Position.Y + y
-			if e.battlefield().CanMoveUnitTo(unit, position) {
-				e.aiMove(event, unit, position)
-				return true
+		x := xShift
+		for x > 0 {
+			if target.Faction == GameUnitFactionLeft {
+				position.X = target.Position.X + x
+			} else {
+				position.X = target.Position.X - x
 			}
+			for _, y := range yShift {
+				position.Y = target.Position.Y + y
+				if e.battlefield().CanMoveUnitTo(unit, position) {
+					e.aiMove(event, unit, position)
+					return true
+				}
+			}
+			x--
 		}
 	}
 	return false
