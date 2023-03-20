@@ -18,6 +18,11 @@ func IndexOf[T Ordered](values []T, value T) int {
 	return -1
 }
 
+func Clone[T any](values []T) []T {
+	accumulator := make([]T, 0, len(values))
+	return append(accumulator, values...)
+}
+
 func Shuffle[T any](gen *RndGen, values []T) []T {
 	for i1 := range values {
 		i2 := gen.rng.Int() % len(values)

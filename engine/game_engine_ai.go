@@ -54,12 +54,11 @@ func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
 	xShift := 1
 	yShift := []int{0, -1, 1, -2, 2}
 	position := domain.Position{}
-	if weapon := util.Find(unit.Inventory.Weapon, func(weapon domain.Weapon) bool {
-		return weapon.Equipped
-	}); weapon != nil {
+	if weapon := unit.Inventory.GetEquippedWeapon(); weapon != nil && weapon.Range.Has() {
 		xShift = weapon.Range.MaximumX
 	}
-	for _, target := range e.battlefield().Units {
+	targets := util.Shuffle(e.rndGen, util.Clone(e.battlefield().Units))
+	for _, target := range targets {
 		if target.Faction == unit.Faction {
 			continue
 		}

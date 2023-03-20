@@ -71,6 +71,15 @@ func (i *UnitInventory) GetEquipment(equipped bool) []*Equipment {
 	return equipment
 }
 
+func (i *UnitInventory) GetEquippedWeapon() *Weapon {
+	for n := range i.Weapon {
+		if i.Weapon[n].Equipped {
+			return &i.Weapon[n]
+		}
+	}
+	return nil
+}
+
 func (i *UnitInventory) GetEquipmentBySlot(slot EquipmentSlot, equipped bool) []*Equipment {
 	equipment := []*Equipment{}
 	for n := range i.Armor {
