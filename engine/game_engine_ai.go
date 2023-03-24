@@ -8,10 +8,12 @@ import (
 
 func (e *GameEngine) processAI(event *GameEvent) {
 	unit := e.getActiveUnit()
-	if e.aiTryToAttack(event, unit) {
+	targets := e.battlefield().FindReachableTargets(unit)
+	if len(targets) != 0 && e.aiTryToAttack(event, unit, targets) {
 		return
 	}
-	if e.state.phase == GamePhaseMakeMoveOrActionAI && e.aiTryToMove(event, unit) {
+	if e.state.phase == GamePhaseMakeMoveOrActionAI &&
+		len(targets) == 0 && e.aiTryToApproachTheEnemy(event, unit) {
 		return
 	}
 	e.onUnitCompleteAction(nil, nil)
@@ -50,7 +52,7 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 	e.onUnitCompleteAction(nil, nil)
 }
 
-func (e *GameEngine) aiTryToMove(event *GameEvent, unit *GameUnit) bool {
+func (e *GameEngine) aiTryToApproachTheEnemy(event *GameEvent, unit *GameUnit) bool {
 	xShift := 1
 	yShift := []int{0, -1, 1, -2, 2}
 	position := domain.Position{}
@@ -94,8 +96,7 @@ func (e *GameEngine) aiMove(event *GameEvent, unit *GameUnit, position domain.Po
 	e.onUnitMoveAction()
 }
 
-func (e *GameEngine) aiTryToAttack(event *GameEvent, unit *GameUnit) bool {
-	targets := e.battlefield().FindReachableTargets(unit)
+func (e *GameEngine) aiTryToAttack(event *GameEvent, unit *GameUnit, targets []ReachableTarget) bool {
 	targets = util.Shuffle(e.rndGen, targets)
 	for _, t := range targets {
 		if e.aiAttackWithWeapon(event, unit, t.Target, t.WeaponUid) {
