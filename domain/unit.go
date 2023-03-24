@@ -194,6 +194,18 @@ func (u *Unit) CheckRandomChance(percents float32) bool {
 	return float32(rnd) < percents
 }
 
+func (u *Unit) PickDeviation(deviation float32) float32 {
+	if u.rng == nil {
+		u.rng = rand.New(mt19937.New())
+		u.rng.Seed(time.Now().UnixNano())
+	}
+	rnd := u.rng.Int() % int(deviation+1)
+	if deviation < 0 {
+		return float32(rnd * -1)
+	}
+	return float32(rnd)
+}
+
 func (u *Unit) SetRng(rng *rand.Rand) {
 	u.rng = rng
 }

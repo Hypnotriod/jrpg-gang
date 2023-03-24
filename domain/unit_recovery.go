@@ -23,6 +23,14 @@ func (r *UnitRecovery) MultiplyAll(factor float32) {
 	r.Stress = util.MultiplyWithRounding(r.Stress, factor)
 }
 
+func (r *UnitRecovery) EnchanceAll(value float32) {
+	r.Damage.EnchanceAll(value)
+	r.Health = util.AccumulateIfNotZeros(r.Health, value)
+	r.Stamina = util.AccumulateIfNotZeros(r.Stamina, value)
+	r.Mana = util.AccumulateIfNotZeros(r.Mana, value)
+	r.Stress = util.AccumulateIfNotZeros(r.Stress, value)
+}
+
 func (r *UnitRecovery) Accumulate(state UnitRecovery) {
 	r.Damage.Accumulate(state.Damage)
 	r.UnitBaseAttributes.Accumulate(state.UnitBaseAttributes)

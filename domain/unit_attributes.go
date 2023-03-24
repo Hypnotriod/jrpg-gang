@@ -43,3 +43,13 @@ func (a *UnitAttributes) MultiplyAll(factor float32) {
 	a.Initiative = util.MultiplyWithRounding(a.Initiative, factor)
 	a.Luck = util.MultiplyWithRounding(a.Luck, factor)
 }
+
+func (a *UnitAttributes) EnchanceAll(value float32) {
+	a.Strength = util.AccumulateIfNotZeros(a.Strength, value)
+	a.Physique = util.AccumulateIfNotZeros(a.Physique, value)
+	a.Agility = util.AccumulateIfNotZeros(a.Agility, value)
+	a.Endurance = util.AccumulateIfNotZeros(a.Endurance, value)
+	a.Intelligence = util.AccumulateIfNotZeros(a.Intelligence, value)
+	a.Initiative = util.AccumulateIfNotZeros(a.Initiative, value)
+	a.Luck = util.AccumulateIfNotZeros(a.Luck, value)
+}

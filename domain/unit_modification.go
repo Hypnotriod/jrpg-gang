@@ -23,3 +23,11 @@ func (m *UnitModification) MultiplyAll(factor float32) {
 	m.Damage.MultiplyAll(factor)
 	m.Recovery.MultiplyAll(factor)
 }
+
+func (m *UnitModification) EnchanceAll(value float32) {
+	m.BaseAttributes.EnchanceAll(value)
+	m.Attributes.EnchanceAll(value)
+	m.Resistance.EnchanceAll(value)
+	m.Damage.EnchanceAll(value)
+	m.Recovery.EnchanceAll(value)
+}

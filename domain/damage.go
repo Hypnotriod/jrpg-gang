@@ -124,6 +124,22 @@ func (d *Damage) MultiplyAll(factor float32) {
 	d.Madness = util.MultiplyWithRounding(d.Madness, factor)
 }
 
+func (d *Damage) EnchanceAll(value float32) {
+	d.Stabbing = util.AccumulateIfNotZeros(d.Stabbing, value)
+	d.Cutting = util.AccumulateIfNotZeros(d.Cutting, value)
+	d.Crushing = util.AccumulateIfNotZeros(d.Crushing, value)
+	d.Fire = util.AccumulateIfNotZeros(d.Fire, value)
+	d.Cold = util.AccumulateIfNotZeros(d.Cold, value)
+	d.Lightning = util.AccumulateIfNotZeros(d.Lightning, value)
+	d.Poison = util.AccumulateIfNotZeros(d.Poison, value)
+	d.Exhaustion = util.AccumulateIfNotZeros(d.Exhaustion, value)
+	d.ManaDrain = util.AccumulateIfNotZeros(d.ManaDrain, value)
+	d.Bleeding = util.AccumulateIfNotZeros(d.Bleeding, value)
+	d.Fear = util.AccumulateIfNotZeros(d.Fear, value)
+	d.Curse = util.AccumulateIfNotZeros(d.Curse, value)
+	d.Madness = util.AccumulateIfNotZeros(d.Madness, value)
+}
+
 func (d *Damage) Normalize() {
 	d.Stabbing = util.Max(d.Stabbing, 0)
 	d.Cutting = util.Max(d.Cutting, 0)

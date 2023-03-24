@@ -35,7 +35,13 @@ func (a *UnitBaseAttributes) Normalize() {
 }
 
 func (a *UnitBaseAttributes) MultiplyAll(factor float32) {
-	a.Health += util.MultiplyWithRounding(a.Health, factor)
-	a.Mana += util.MultiplyWithRounding(a.Mana, factor)
-	a.Stamina += util.MultiplyWithRounding(a.Stamina, factor)
+	a.Health = util.MultiplyWithRounding(a.Health, factor)
+	a.Mana = util.MultiplyWithRounding(a.Mana, factor)
+	a.Stamina = util.MultiplyWithRounding(a.Stamina, factor)
+}
+
+func (a *UnitBaseAttributes) EnchanceAll(value float32) {
+	a.Health = util.AccumulateIfNotZeros(a.Health, value)
+	a.Mana = util.AccumulateIfNotZeros(a.Mana, value)
+	a.Stamina = util.AccumulateIfNotZeros(a.Stamina, value)
 }

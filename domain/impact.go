@@ -1,8 +1,9 @@
 package domain
 
 type Impact struct {
-	Duration int     `json:"duration,omitempty"`
-	Chance   float32 `json:"chance,omitempty"`
+	Duration  int     `json:"duration,omitempty"`
+	Chance    float32 `json:"chance,omitempty"`
+	Deviation float32 `json:"deviation,omitempty"` // adds random 0 to n to all parameters
 }
 
 func (i *Impact) EnchanceChance(chance float32) {

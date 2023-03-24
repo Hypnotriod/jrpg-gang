@@ -4,18 +4,19 @@ func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]Un
 	instantRecovery := []UnitRecovery{}
 	temporalModification := []UnitModificationImpact{}
 	intelligence := u.TotalIntelligence()
-	for _, ench := range modification {
-		if ench.Chance != 0 && !u.CheckRandomChance(u.CalculateModificationChance(ench)) {
+	for _, imp := range modification {
+		if imp.Chance != 0 && !u.CheckRandomChance(u.CalculateModificationChance(imp)) {
 			break
 		}
-		ench.MultiplyAll(1 + intelligence*INTELLIGENCE_MODIFICATION_FACTOR)
-		ench.Chance = 0
-		if ench.Duration != 0 {
-			target.Modification = append(target.Modification, ench)
-			temporalModification = append(temporalModification, ench)
+		imp.EnchanceAll(u.PickDeviation(imp.Deviation))
+		imp.MultiplyAll(1 + intelligence*INTELLIGENCE_MODIFICATION_FACTOR)
+		imp.Chance = 0
+		if imp.Duration != 0 {
+			target.Modification = append(target.Modification, imp)
+			temporalModification = append(temporalModification, imp)
 		} else {
-			target.ApplyRecovery(ench.Recovery)
-			instantRecovery = append(instantRecovery, ench.Recovery)
+			target.ApplyRecovery(imp.Recovery)
+			instantRecovery = append(instantRecovery, imp.Recovery)
 		}
 	}
 	return instantRecovery, temporalModification
