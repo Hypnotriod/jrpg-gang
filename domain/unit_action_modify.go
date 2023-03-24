@@ -8,7 +8,9 @@ func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]Un
 		if imp.Chance != 0 && !u.CheckRandomChance(u.CalculateModificationChance(imp)) {
 			break
 		}
-		imp.EnchanceAll(u.PickDeviation(imp.Deviation))
+		if imp.Deviation != 0 {
+			imp.EnchanceAll(u.PickDeviation(imp.Deviation))
+		}
 		imp.MultiplyAll(1 + intelligence*INTELLIGENCE_MODIFICATION_FACTOR)
 		imp.Chance = 0
 		if imp.Duration != 0 {
