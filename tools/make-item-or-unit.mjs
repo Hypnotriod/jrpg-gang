@@ -106,10 +106,11 @@ async function makeUnit() {
         name: await makeString('name'),
         code: await makeString('code'),
         code: await makeString('class'),
-        booty: await makeUnitBooty('booty'),
         stats: await makeUnitStats('stats'),
-        inventory: await makeInventory('inventory'),
         slots: await makeSlots('slots'),
+        booty: await makeUnitBooty('booty'),
+        inventory: await makeInventory('inventory'),
+        drop: await makeDrop('drop'),
     }
     return result;
 }
@@ -264,6 +265,18 @@ async function makeUnitBooty(header) {
     return result;
 }
 
+async function makeDrop(header) {
+    // header && stdout.write(`${header}:\r\n`);
+    const result = [];
+    while (await yesNo('drop')) {
+        result.push({
+            ...await makeUnitBooty('drop'),
+            weight: await makeNumber('weight', 1),
+        });
+    }
+    return result;
+}
+
 async function makeItem(type, header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
@@ -331,6 +344,7 @@ async function makeImpact(header) {
     const result = {
         duration: await makeNumber('duration'),
         chance: await makeNumber('chance'),
+        deviation: await makeNumber('deviation'),
     }
     return result;
 }
