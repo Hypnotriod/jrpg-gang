@@ -53,13 +53,22 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 }
 
 func (e *GameEngine) aiTryToApproachTheEnemy(event *GameEvent, unit *GameUnit) bool {
-	xShift := 1
+	xShift := 0
+	xShiftMin := 1
 	yShift := []int{0, -1, 1, -2, 2}
 	position := domain.Position{}
 	for i := range unit.Inventory.Weapon {
 		weapon := &unit.Inventory.Weapon[i]
-		if unit.CanUseWeapon(weapon, false) && xShift < weapon.Range.MaximumX {
+		if !unit.CanUseWeapon(weapon, true) {
+			continue
+		}
+		if xShift < weapon.Range.MaximumX {
 			xShift = weapon.Range.MaximumX
+			if weapon.Range.MinimumX > 1 {
+				xShiftMin = weapon.Range.MinimumX - 1
+			} else {
+				xShiftMin = 1
+			}
 		}
 	}
 	targets := util.Shuffle(e.rndGen, util.Clone(e.battlefield().Units))
@@ -68,7 +77,7 @@ func (e *GameEngine) aiTryToApproachTheEnemy(event *GameEvent, unit *GameUnit) b
 			continue
 		}
 		x := xShift
-		for x > 0 {
+		for x >= xShiftMin {
 			if target.Faction == GameUnitFactionLeft {
 				position.X = target.Position.X + x
 			} else {
