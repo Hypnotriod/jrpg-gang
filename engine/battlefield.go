@@ -208,10 +208,13 @@ func (b *Battlefield) GetUnitsByFaction(faction GameUnitFaction) []*GameUnit {
 	})
 }
 
-func (b *Battlefield) FindReachableTargets(unit *GameUnit) []ReachableTarget {
+func (b *Battlefield) FindReachableTargets(unit *GameUnit, checkCanUseWeapon bool) []ReachableTarget {
 	result := []ReachableTarget{}
 	for i := range unit.Inventory.Weapon {
 		weapon := &unit.Inventory.Weapon[i]
+		if checkCanUseWeapon && !unit.CanUseWeapon(weapon, true) {
+			continue
+		}
 		for _, target := range b.Units {
 			if target.Faction != unit.Faction && unit.CanReach(&target.Unit, weapon.Range) {
 				result = append(result, ReachableTarget{

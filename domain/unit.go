@@ -214,6 +214,23 @@ func (u *Unit) CanReach(target *Unit, actionRange ActionRange) bool {
 	return !actionRange.Has() || actionRange.Check(u.Position, target.Position)
 }
 
+func (u *Unit) CanUseWeapon(weapon *Weapon, checkUseCost bool) bool {
+	if checkUseCost && !u.CheckUseCost(weapon.UseCost) {
+		return false
+	}
+	if weapon.RequiresAmmunition() {
+		ammunition := u.Inventory.FindEquippedAmmunition()
+		quantity := 1 + len(weapon.Spread)
+		if ammunition == nil || ammunition.Quantity < uint(quantity) {
+			return false
+		}
+	}
+	if weapon.IsBroken() {
+		return false
+	}
+	return true
+}
+
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
 	chance := (u.TotalLuck() - u.State.Stress) - (target.TotalLuck() - target.State.Stress)
 	return util.Max(chance, MINIMUM_CHANCE)

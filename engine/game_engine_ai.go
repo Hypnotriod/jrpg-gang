@@ -8,7 +8,7 @@ import (
 
 func (e *GameEngine) processAI(event *GameEvent) {
 	unit := e.getActiveUnit()
-	targets := e.battlefield().FindReachableTargets(unit)
+	targets := e.battlefield().FindReachableTargets(unit, true)
 	if len(targets) != 0 && e.aiTryToAttack(event, unit, targets) {
 		return
 	}
@@ -56,8 +56,11 @@ func (e *GameEngine) aiTryToApproachTheEnemy(event *GameEvent, unit *GameUnit) b
 	xShift := 1
 	yShift := []int{0, -1, 1, -2, 2}
 	position := domain.Position{}
-	if weapon := unit.Inventory.GetEquippedWeapon(); weapon != nil && weapon.Range.MaximumX > 0 {
-		xShift = weapon.Range.MaximumX
+	for i := range unit.Inventory.Weapon {
+		weapon := &unit.Inventory.Weapon[i]
+		if unit.CanUseWeapon(weapon, false) && xShift < weapon.Range.MaximumX {
+			xShift = weapon.Range.MaximumX
+		}
 	}
 	targets := util.Shuffle(e.rndGen, util.Clone(e.battlefield().Units))
 	for _, target := range targets {
