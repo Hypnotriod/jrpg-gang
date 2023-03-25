@@ -8,7 +8,7 @@ import (
 
 func (e *GameEngine) processAI(event *GameEvent) {
 	unit := e.getActiveUnit()
-	targets := e.battlefield().FindReachableTargets(unit, true)
+	targets := e.battlefield().FindReachableTargets(unit, true, false)
 	if len(targets) != 0 && e.aiTryToAttack(event, unit, targets) {
 		return
 	}
