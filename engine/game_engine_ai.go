@@ -69,7 +69,7 @@ func (e *GameEngine) aiTryToApproachTheEnemy(event *GameEvent, unit *GameUnit) b
 				position.X = target.Position.X - x
 			}
 			for n, y := range yShift {
-				if n > bounds.MaximumY {
+				if n > bounds.MaximumY*2 {
 					break
 				}
 				position.Y = target.Position.Y + y
@@ -93,7 +93,7 @@ func (e *GameEngine) getApproachBounds(unit *GameUnit) domain.ActionRange {
 		}
 		if bounds.MaximumX < weapon.Range.MaximumX {
 			bounds.MaximumX = weapon.Range.MaximumX
-			bounds.MaximumY = weapon.Range.MaximumY * 2
+			bounds.MaximumY = weapon.Range.MaximumY
 			if weapon.Range.MinimumX > 1 {
 				bounds.MinimumX = weapon.Range.MinimumX - 1
 			} else {
