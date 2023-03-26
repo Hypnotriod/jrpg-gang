@@ -54,8 +54,7 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 
 func (e *GameEngine) aiTryToApproachTheEnemy(event *GameEvent, unit *GameUnit) bool {
 	bounds := e.getApproachBounds(unit)
-	yShift := []int{0, -1, 1, -2, 2}
-	position := domain.Position{}
+	yShift := [...]int{0, -1, 1, -2, 2, -3, 3, -4, 4, -5, 5}
 	targets := util.Shuffle(e.rndGen, util.Clone(e.battlefield().Units))
 	for _, target := range targets {
 		if target.Faction == unit.Faction {
@@ -63,12 +62,16 @@ func (e *GameEngine) aiTryToApproachTheEnemy(event *GameEvent, unit *GameUnit) b
 		}
 		x := bounds.MaximumX
 		for x >= bounds.MinimumX {
+			position := domain.Position{}
 			if target.Faction == GameUnitFactionLeft {
 				position.X = target.Position.X + x
 			} else {
 				position.X = target.Position.X - x
 			}
-			for _, y := range yShift {
+			for n, y := range yShift {
+				if n > bounds.MaximumY {
+					break
+				}
 				position.Y = target.Position.Y + y
 				if e.battlefield().CanMoveUnitTo(unit, position) {
 					e.aiMove(event, unit, position)
@@ -90,6 +93,7 @@ func (e *GameEngine) getApproachBounds(unit *GameUnit) domain.ActionRange {
 		}
 		if bounds.MaximumX < weapon.Range.MaximumX {
 			bounds.MaximumX = weapon.Range.MaximumX
+			bounds.MaximumY = weapon.Range.MaximumY * 2
 			if weapon.Range.MinimumX > 1 {
 				bounds.MinimumX = weapon.Range.MinimumX - 1
 			} else {
