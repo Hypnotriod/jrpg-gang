@@ -320,7 +320,7 @@
             },
             "range": {
                 "maximumX": 2,
-                "maximumY": 1
+                "maximumY": 2
             },
             "damage": [
                 {
@@ -372,7 +372,7 @@
                 }
             ],
             "useCost": {
-                "stamina": 10
+                "stamina": 8
             }
         },
         {
@@ -631,7 +631,7 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 12
+                "stamina": 14
             },
             "damage": [
                 {
@@ -745,7 +745,7 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 20
+                "stamina": 22
             },
             "damage": [
                 {
