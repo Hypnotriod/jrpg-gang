@@ -2,7 +2,7 @@ package controller
 
 import (
 	"jrpg-gang/controller/users"
-	"jrpg-gang/util"
+	"unsafe"
 )
 
 type ResponseStatus string
@@ -59,5 +59,8 @@ func (r *Response) fillUserStatus(user *users.User) {
 
 func (r *Response) WithStatus(status ResponseStatus) string {
 	r.Status = status
-	return util.ObjectToJson(r)
+	if marshalled, err := json.Marshal(r); err == nil {
+		return unsafe.String(unsafe.SliceData(marshalled), len(marshalled))
+	}
+	return ""
 }

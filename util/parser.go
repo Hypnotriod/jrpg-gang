@@ -1,9 +1,12 @@
 package util
 
 import (
-	"encoding/json"
 	"os"
+
+	jsoniter "github.com/json-iterator/go"
 )
+
+var json jsoniter.API = jsoniter.ConfigCompatibleWithStandardLibrary
 
 func JsonToObject(obj any, config string) (any, error) {
 	return obj, json.Unmarshal([]byte(config), obj)

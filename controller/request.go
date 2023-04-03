@@ -2,8 +2,11 @@ package controller
 
 import (
 	"bytes"
-	"encoding/json"
+
+	jsoniter "github.com/json-iterator/go"
 )
+
+var json jsoniter.API = jsoniter.ConfigCompatibleWithStandardLibrary
 
 type RequestType string
 
