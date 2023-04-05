@@ -22,13 +22,13 @@ type Employment struct {
 	mu           sync.RWMutex
 	jobs         []engine.PlayerJob
 	jobCodeToJob map[engine.PlayerJobCode]*engine.PlayerJob
-	jobsStatus   map[string]*engine.PlayerJobStatus
+	jobsStatus   map[model.UserId]*engine.PlayerJobStatus
 }
 
 func NewEmployment() *Employment {
 	e := &Employment{}
 	e.jobCodeToJob = make(map[engine.PlayerJobCode]*engine.PlayerJob)
-	e.jobsStatus = make(map[string]*engine.PlayerJobStatus)
+	e.jobsStatus = make(map[model.UserId]*engine.PlayerJobStatus)
 	return e
 }
 
@@ -51,11 +51,11 @@ func (e *Employment) prepare(jobs *[]engine.PlayerJob) {
 	}
 }
 
-func (e *Employment) retrieveUserJobStatus(email string) *engine.PlayerJobStatus {
-	status, ok := e.jobsStatus[email]
+func (e *Employment) retrieveUserJobStatus(userId model.UserId) *engine.PlayerJobStatus {
+	status, ok := e.jobsStatus[userId]
 	if !ok {
 		status = engine.NewPlayerJobStatus()
-		e.jobsStatus[email] = status
+		e.jobsStatus[userId] = status
 	}
 	status.Update()
 	return status
@@ -71,19 +71,19 @@ func (e *Employment) SetStatus(user *users.User, jobStatusModel model.JobStatusM
 	}
 	defer e.mu.Unlock()
 	e.mu.Lock()
-	e.jobsStatus[user.Email] = status
+	e.jobsStatus[user.UserId] = status
 }
 
 func (e *Employment) ClearStatus(user *users.User) {
 	defer e.mu.Unlock()
 	e.mu.Lock()
-	delete(e.jobsStatus, user.Email)
+	delete(e.jobsStatus, user.UserId)
 }
 
 func (e *Employment) GetStatus(user *users.User) EmploymentStatus {
 	timeNow := time.Now()
 	e.mu.Lock()
-	status := e.retrieveUserJobStatus(user.Email)
+	status := e.retrieveUserJobStatus(user.UserId)
 	result := EmploymentStatus{
 		IsInProgress:  status.IsInProgress,
 		IsComplete:    status.IsComplete,
@@ -109,7 +109,7 @@ func (e *Employment) GetStatus(user *users.User) EmploymentStatus {
 func (e *Employment) CollectReward(user *users.User) (*engine.PlayerJobStatus, domain.UnitBooty, bool) {
 	defer e.mu.Unlock()
 	e.mu.Lock()
-	status := e.retrieveUserJobStatus(user.Email)
+	status := e.retrieveUserJobStatus(user.UserId)
 	if status.IsInProgress || !status.IsComplete {
 		return nil, domain.UnitBooty{}, false
 	}
@@ -124,7 +124,7 @@ func (e *Employment) CollectReward(user *users.User) (*engine.PlayerJobStatus, d
 func (e *Employment) QuitJob(user *users.User) (*engine.PlayerJobStatus, bool) {
 	defer e.mu.Unlock()
 	e.mu.Lock()
-	status := e.retrieveUserJobStatus(user.Email)
+	status := e.retrieveUserJobStatus(user.UserId)
 	if !status.IsInProgress {
 		return nil, false
 	}
@@ -135,7 +135,7 @@ func (e *Employment) QuitJob(user *users.User) (*engine.PlayerJobStatus, bool) {
 func (e *Employment) ApplyForAJob(user *users.User, code engine.PlayerJobCode) (*engine.PlayerJobStatus, bool) {
 	defer e.mu.Unlock()
 	e.mu.Lock()
-	status := e.retrieveUserJobStatus(user.Email)
+	status := e.retrieveUserJobStatus(user.UserId)
 	if status.IsInProgress || status.IsComplete {
 		return nil, false
 	}

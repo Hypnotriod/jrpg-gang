@@ -18,9 +18,9 @@ func (c *GameController) persistUser(user *users.User) bool {
 	return c.persistance.UpdateUser(userModel)
 }
 
-func (c *GameController) persistJobStatus(email string, jobStatus engine.PlayerJobStatus) bool {
+func (c *GameController) persistJobStatus(userId model.UserId, jobStatus engine.PlayerJobStatus) bool {
 	jobStatusModel := model.JobStatusModel{
-		Email:          email,
+		UserId:         userId,
 		IsInProgress:   jobStatus.IsInProgress,
 		IsComplete:     jobStatus.IsComplete,
 		CompletionTime: jobStatus.CompletionTime,

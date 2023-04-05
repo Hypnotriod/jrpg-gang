@@ -3,6 +3,7 @@ package users
 import (
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
+	"jrpg-gang/persistance/model"
 	"jrpg-gang/util"
 	"sync"
 )
@@ -12,7 +13,7 @@ type Users struct {
 	rndGen            *util.RndGen
 	users             map[engine.PlayerId]*User
 	userNicknameToId  map[string]engine.PlayerId
-	userEmailToId     map[string]engine.PlayerId
+	userEmailToId     map[model.UserEmail]engine.PlayerId
 	userSessionIdToId map[UserSessionId]engine.PlayerId
 }
 
@@ -21,7 +22,7 @@ func NewUsers() *Users {
 	u.rndGen = util.NewRndGen()
 	u.users = make(map[engine.PlayerId]*User)
 	u.userNicknameToId = make(map[string]engine.PlayerId)
-	u.userEmailToId = make(map[string]engine.PlayerId)
+	u.userEmailToId = make(map[model.UserEmail]engine.PlayerId)
 	u.userSessionIdToId = make(map[UserSessionId]engine.PlayerId)
 	return u
 }
@@ -73,7 +74,7 @@ func (u *Users) GetByNickname(nickname string) (User, bool) {
 	return *user, ok
 }
 
-func (u *Users) GetByEmail(email string) (User, bool) {
+func (u *Users) GetByEmail(email model.UserEmail) (User, bool) {
 	defer u.mu.RUnlock()
 	u.mu.RLock()
 	playerId, ok := u.userEmailToId[email]

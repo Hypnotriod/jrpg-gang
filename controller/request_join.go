@@ -64,12 +64,13 @@ func (c *GameController) handleRejoinWithCredentialsRequest(request *Request, re
 	if unit == nil {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusMalformed)
 	}
-	user := users.NewUser(nickname, userModel.Email, class, unit)
+	userId := model.UserId(userModel.Id.Hex())
+	user := users.NewUser(nickname, userModel.Email, userId, class, unit)
 	if userModel.Unit == nil {
 		c.persistUser(user)
 	}
 	c.users.AddUser(user)
-	if jobStatus := c.persistance.GetJobStatus(user.Email); jobStatus != nil {
+	if jobStatus := c.persistance.GetJobStatus(user.UserId); jobStatus != nil {
 		if jobStatus.IsInProgress || jobStatus.IsComplete {
 			c.users.ChangeUserStatus(user.Id, users.UserStatusAtJob)
 		}

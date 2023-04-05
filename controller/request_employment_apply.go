@@ -23,7 +23,7 @@ func (c *GameController) handleApplyForAJobRequest(playerId engine.PlayerId, req
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	if jobStatus != nil {
-		c.persistJobStatus(user.Email, *jobStatus)
+		c.persistJobStatus(user.UserId, *jobStatus)
 	}
 	c.users.ChangeUserStatus(playerId, users.UserStatusAtJob)
 	return response.WithStatus(ResponseStatusOk)

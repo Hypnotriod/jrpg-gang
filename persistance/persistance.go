@@ -21,7 +21,7 @@ type Persistance struct {
 	rndGen               *util.RndGen
 	config               PersistanceConfig
 	db                   *MongoDB
-	userEmailToAuthToken map[string]auth.AuthenticationToken
+	userEmailToAuthToken map[model.UserEmail]auth.AuthenticationToken
 	usersAuthCache       *ttlcache.Cache[auth.AuthenticationToken, *model.UserModel]
 }
 
@@ -29,7 +29,7 @@ func NewPersistance(config PersistanceConfig) *Persistance {
 	p := &Persistance{}
 	p.config = config
 	p.rndGen = util.NewRndGen()
-	p.userEmailToAuthToken = make(map[string]auth.AuthenticationToken)
+	p.userEmailToAuthToken = make(map[model.UserEmail]auth.AuthenticationToken)
 	p.usersAuthCache = ttlcache.New(
 		ttlcache.WithTTL[auth.AuthenticationToken, *model.UserModel](time.Duration(config.PersistanceCacheTimeoutMin) * time.Minute),
 	)
@@ -88,10 +88,10 @@ func (p *Persistance) HasUserWithNickname(nickname string) bool {
 	return user != nil && ok
 }
 
-func (p *Persistance) GetOrCreateUser(creadentials auth.UserCredentials) *model.UserModel {
+func (p *Persistance) GetOrCreateUser(credentials auth.UserCredentials) *model.UserModel {
 	ctx, cancel := p.db.requestContext()
 	defer cancel()
-	user, ok := p.db.UsersRepository.FindByEmail(ctx, creadentials.Email)
+	user, ok := p.db.UsersRepository.FindByEmail(ctx, model.UserEmail(credentials.Email))
 	if !ok {
 		return nil
 	}
@@ -99,8 +99,8 @@ func (p *Persistance) GetOrCreateUser(creadentials auth.UserCredentials) *model.
 		return user
 	}
 	userToPersist := model.UserModel{
-		Email:   creadentials.Email,
-		Picture: creadentials.Picture,
+		Email:   model.UserEmail(credentials.Email),
+		Picture: credentials.Picture,
 	}
 	id, ok := p.db.UsersRepository.InsertOne(ctx, userToPersist)
 	if !ok {
@@ -127,9 +127,9 @@ func (p *Persistance) UpdateJobStatus(jobStatus model.JobStatusModel) bool {
 	return matchedCount != 0 && ok
 }
 
-func (p *Persistance) GetJobStatus(email string) *model.JobStatusModel {
+func (p *Persistance) GetJobStatus(userId model.UserId) *model.JobStatusModel {
 	ctx, cancel := p.db.requestContext()
 	defer cancel()
-	jobStatus, _ := p.db.JobStatusRepository.FindByEmail(ctx, email)
+	jobStatus, _ := p.db.JobStatusRepository.FindByUserId(ctx, userId)
 	return jobStatus
 }

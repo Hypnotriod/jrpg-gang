@@ -3,6 +3,7 @@ package users
 import (
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
+	"jrpg-gang/persistance/model"
 	"jrpg-gang/util"
 )
 
@@ -37,8 +38,8 @@ const (
 
 type User struct {
 	engine.PlayerInfo
+	model.UserCredentials
 	RndGen    *util.RndGen
-	Email     string
 	SessionId UserSessionId
 	Status    UserStatus
 	Unit      *engine.GameUnit
@@ -68,13 +69,15 @@ func (s UserStatus) Test(status UserStatus) bool {
 }
 
 func NewUser(nickname string,
-	email string,
+	email model.UserEmail,
+	userId model.UserId,
 	class domain.UnitClass,
 	unit *engine.GameUnit) *User {
 	u := &User{}
 	u.RndGen = util.NewRndGen()
 	u.Nickname = nickname
 	u.Email = email
+	u.UserId = userId
 	u.Class = class
 	u.Level = unit.Stats.Progress.Level
 	u.Status = UserStatusNotJoined

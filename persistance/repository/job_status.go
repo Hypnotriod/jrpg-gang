@@ -18,13 +18,13 @@ func NewJobStatusRepository(collection *mongo.Collection) *JobStatusRepository {
 	return r
 }
 
-func (r *JobStatusRepository) FindByEmail(ctx context.Context, email string) (*model.JobStatusModel, bool) {
-	filter := primitive.D{{Key: "email", Value: email}}
+func (r *JobStatusRepository) FindByUserId(ctx context.Context, userId model.UserId) (*model.JobStatusModel, bool) {
+	filter := primitive.D{{Key: "user_id", Value: userId}}
 	return r.FindOne(ctx, filter, &model.JobStatusModel{})
 }
 
 func (r *JobStatusRepository) UpdateOrInsertOne(ctx context.Context, model model.JobStatusModel) (int64, bool) {
-	filter := primitive.D{{Key: "email", Value: model.Email}}
+	filter := primitive.D{{Key: "user_id", Value: model.UserId}}
 	fields := primitive.D{
 		{Key: "is_in_progress", Value: model.IsInProgress},
 		{Key: "is_complete", Value: model.IsComplete},

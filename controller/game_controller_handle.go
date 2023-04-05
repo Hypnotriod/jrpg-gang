@@ -4,11 +4,12 @@ import (
 	"jrpg-gang/auth"
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
+	"jrpg-gang/persistance/model"
 )
 
 func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredentials) auth.AuthenticationStatus {
 	status := auth.AuthenticationStatus{}
-	if user, ok := c.users.GetByEmail(credentials.Email); ok {
+	if user, ok := c.users.GetByEmail(model.UserEmail(credentials.Email)); ok {
 		c.Leave(user.Id)
 	}
 	userModel := c.persistance.GetOrCreateUser(credentials)

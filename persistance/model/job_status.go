@@ -7,7 +7,7 @@ import (
 
 type JobStatusModel struct {
 	Model          `bson:",inline"`
-	Email          string                             `bson:"email"`
+	UserId         UserId                             `bson:"user_id"`
 	IsInProgress   bool                               `bson:"is_in_progress,omitempty"`
 	IsComplete     bool                               `bson:"is_complete,omitempty"`
 	CompletionTime time.Time                          `bson:"completion_time,omitempty"`
