@@ -16,7 +16,7 @@ type JoinRequestData struct {
 	SessionId users.UserSessionId      `json:"sessionId,omitempty"`
 }
 
-func (c *GameController) handleJoinRequest(request *Request, response *Response) (engine.PlayerId, string) {
+func (c *GameController) handleJoinRequest(request *Request, response *Response) (engine.PlayerId, []byte) {
 	data := parseRequestData(&JoinRequestData{}, request.Data)
 	if data == nil {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusMalformed)
@@ -31,7 +31,7 @@ func (c *GameController) handleJoinRequest(request *Request, response *Response)
 	return c.handleRejoinWithCredentialsRequest(request, response, data, userModel)
 }
 
-func (c *GameController) handleRejoinRequest(request *Request, response *Response, data *JoinRequestData) (engine.PlayerId, string) {
+func (c *GameController) handleRejoinRequest(request *Request, response *Response, data *JoinRequestData) (engine.PlayerId, []byte) {
 	user, ok := c.users.GetAndRefreshBySessionId(data.SessionId)
 	if !ok {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
@@ -41,7 +41,7 @@ func (c *GameController) handleRejoinRequest(request *Request, response *Respons
 	return user.Id, response.WithStatus(ResponseStatusOk)
 }
 
-func (c *GameController) handleRejoinWithCredentialsRequest(request *Request, response *Response, data *JoinRequestData, userModel *model.UserModel) (engine.PlayerId, string) {
+func (c *GameController) handleRejoinWithCredentialsRequest(request *Request, response *Response, data *JoinRequestData, userModel *model.UserModel) (engine.PlayerId, []byte) {
 	var unit *engine.GameUnit
 	var nickname string
 	var class domain.UnitClass

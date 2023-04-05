@@ -8,7 +8,7 @@ type GameNextPhaseRequestData struct {
 	IsReady bool `json:"isReady"`
 }
 
-func (c *GameController) handleGameNextPhaseRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) handleGameNextPhaseRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	data := parseRequestData(&GameNextPhaseRequestData{}, request.Data)
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)

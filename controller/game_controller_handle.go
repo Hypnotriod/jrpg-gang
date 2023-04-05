@@ -61,7 +61,7 @@ func (c *GameController) Leave(playerId engine.PlayerId) {
 	}
 }
 
-func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []byte) (engine.PlayerId, string) {
+func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []byte) (engine.PlayerId, []byte) {
 	response := NewResponse()
 	request := parseRequest(requestRaw)
 	if request == nil {
@@ -78,7 +78,7 @@ func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []by
 	return engine.PlayerIdEmpty, c.serveRequest(playerId, request, response)
 }
 
-func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	status := c.users.GetUserStatus(playerId)
 	if status == users.UserStatusNotFound {
 		return response.WithStatus(ResponseStatusNotAllowed)

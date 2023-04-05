@@ -5,7 +5,7 @@ import (
 	"jrpg-gang/engine"
 )
 
-func (c *GameController) handleEnterLobbyRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) handleEnterLobbyRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	status := c.users.GetUserStatus(playerId)
 	if status == users.UserStatusInLobby {
 		return response.WithStatus(ResponseStatusNotAllowed)

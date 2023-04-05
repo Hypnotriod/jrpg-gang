@@ -4,7 +4,7 @@ import (
 	"jrpg-gang/engine"
 )
 
-func (c *GameController) handleGameLeaveRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) handleGameLeaveRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	wrapper, ok := c.engines.Unregister(playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)

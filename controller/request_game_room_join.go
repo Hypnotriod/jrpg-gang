@@ -9,7 +9,7 @@ type JoinGameRoomRequestData struct {
 	RoomUid uint `json:"roomUid"`
 }
 
-func (c *GameController) handleJoinGameRoomRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) handleJoinGameRoomRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	data := parseRequestData(&JoinGameRoomRequestData{}, request.Data)
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)

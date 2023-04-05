@@ -4,7 +4,7 @@ import "jrpg-gang/engine"
 
 type broadcast struct {
 	playerId engine.PlayerId
-	message  string
+	message  []byte
 }
 
 func (h *Hub) broadcastGameMessageRoutine(broadcastPool <-chan broadcast) {
@@ -15,13 +15,13 @@ func (h *Hub) broadcastGameMessageRoutine(broadcastPool <-chan broadcast) {
 	}
 }
 
-func (h *Hub) BroadcastGameMessageAsync(playerIds []engine.PlayerId, message string) {
+func (h *Hub) BroadcastGameMessageAsync(playerIds []engine.PlayerId, message []byte) {
 	for _, playerId := range playerIds {
 		h.broadcastPool <- broadcast{playerId, message}
 	}
 }
 
-func (h *Hub) BroadcastGameMessageSync(playerIds []engine.PlayerId, message string) {
+func (h *Hub) BroadcastGameMessageSync(playerIds []engine.PlayerId, message []byte) {
 	for _, playerId := range playerIds {
 		if client := h.getClient(playerId); client != nil {
 			client.WriteMessage(message)

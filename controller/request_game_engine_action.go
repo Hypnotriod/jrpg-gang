@@ -9,7 +9,7 @@ type GameActionRequestData struct {
 	domain.Action
 }
 
-func (c *GameController) handleGameActionRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) handleGameActionRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	data := parseRequestData(&GameActionRequestData{}, request.Data)
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)

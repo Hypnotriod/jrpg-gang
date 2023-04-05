@@ -30,13 +30,13 @@ func NewClient(connection *websocket.Conn, hub *Hub) *Client {
 	return c
 }
 
-func (c *Client) WriteMessage(message string) {
+func (c *Client) WriteMessage(message []byte) {
 	c.mu.Lock()
 	if c.left || c.kicked {
 		c.mu.Unlock()
 		return
 	}
-	err := c.conn.WriteMessage(websocket.TextMessage, []byte(message))
+	err := c.conn.WriteMessage(websocket.TextMessage, message)
 	c.mu.Unlock()
 	if err != nil && websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 		log.Error("Client (", c.playerId, ") write message error:", err)

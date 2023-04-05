@@ -10,7 +10,7 @@ type CreateGameRoomRequestData struct {
 	ScenarioId engine.GameScenarioId `json:"scenarioId"`
 }
 
-func (c *GameController) handleCreateGameRoomRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) handleCreateGameRoomRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	data := parseRequestData(&CreateGameRoomRequestData{}, request.Data)
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)

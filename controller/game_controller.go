@@ -14,8 +14,8 @@ import (
 )
 
 type GameControllerBroadcaster interface {
-	BroadcastGameMessageSync(playerIds []engine.PlayerId, message string)
-	BroadcastGameMessageAsync(playerIds []engine.PlayerId, message string)
+	BroadcastGameMessageSync(playerIds []engine.PlayerId, message []byte)
+	BroadcastGameMessageAsync(playerIds []engine.PlayerId, message []byte)
 }
 
 type GameController struct {

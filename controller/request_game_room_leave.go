@@ -5,7 +5,7 @@ import (
 	"jrpg-gang/engine"
 )
 
-func (c *GameController) handleLeaveGameRoomRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) handleLeaveGameRoomRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	roomUid, ok := c.rooms.GetUidByPlayerId(playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)

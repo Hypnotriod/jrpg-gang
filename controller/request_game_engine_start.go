@@ -6,7 +6,7 @@ import (
 	"jrpg-gang/engine"
 )
 
-func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	room, ok := c.rooms.PopByHostId(playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)

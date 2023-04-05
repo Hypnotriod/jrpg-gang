@@ -9,7 +9,7 @@ type ConfiguratorActionRequestData struct {
 	domain.Action
 }
 
-func (c *GameController) handleConfiguratorActionRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) handleConfiguratorActionRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	data := parseRequestData(&ConfiguratorActionRequestData{}, request.Data)
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)

@@ -9,7 +9,7 @@ type ApplyForAJobRequestData struct {
 	Code engine.PlayerJobCode `json:"code"`
 }
 
-func (c *GameController) handleApplyForAJobRequest(playerId engine.PlayerId, request *Request, response *Response) string {
+func (c *GameController) handleApplyForAJobRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	data := parseRequestData(&ApplyForAJobRequestData{}, request.Data)
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)

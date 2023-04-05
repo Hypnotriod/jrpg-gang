@@ -38,8 +38,8 @@ func (c *GameController) broadcastRoomStatus(uid uint) {
 	c.broadcaster.BroadcastGameMessageAsync(playerIds, response.WithStatus(ResponseStatusOk))
 }
 
-func (c *GameController) BroadcastGameMessageSync(playerIds []engine.PlayerId, message string) {
+func (c *GameController) BroadcastGameMessageSync(playerIds []engine.PlayerId, message []byte) {
 }
 
-func (c *GameController) BroadcastGameMessageAsync(playerIds []engine.PlayerId, message string) {
+func (c *GameController) BroadcastGameMessageAsync(playerIds []engine.PlayerId, message []byte) {
 }
