@@ -27,11 +27,13 @@ type GameState struct {
 	InactiveUnits    []uint           `json:"inactiveUnits"`
 	Booty            domain.UnitBooty `json:"booty"`
 	SpotNumber       int              `json:"spotNumber"`
+	SpotsTotal       int              `json:"spotsTotal"`
 	phase            GamePhase
 }
 
-func NewGameState() *GameState {
+func NewGameState(scenario *GameScenario) *GameState {
 	s := &GameState{}
+	s.SpotsTotal = len(scenario.Path)
 	s.phase = GamePhasePrepareUnit
 	s.ActiveUnitsQueue = make([]uint, 0, 10)
 	s.InactiveUnits = make([]uint, 0, 10)

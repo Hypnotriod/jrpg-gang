@@ -14,10 +14,10 @@ type GameEngine struct {
 
 func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
 	e := &GameEngine{}
-	e.rndGen = util.NewRndGen()
-	e.state = NewGameState()
 	e.scenario = scenario
 	e.actors = actors
+	e.rndGen = util.NewRndGen()
+	e.state = NewGameState(scenario)
 	e.scenario.Initialize(e.rndGen, actors)
 	e.resetActorsReady()
 	e.prepareActors(actors)
