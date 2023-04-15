@@ -11,10 +11,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type MongoDBObjectId string
+type ObjectId string
 
 const (
-	MongoDBObjectIdEmpty MongoDBObjectId = ""
+	ObjectIdEmpty ObjectId = ""
 )
 
 type MongoDBRepositoryModel interface {
@@ -25,19 +25,19 @@ type MongoDBRepository[T MongoDBRepositoryModel] struct {
 	collection *mongo.Collection
 }
 
-func (r *MongoDBRepository[T]) InsertOne(ctx context.Context, model T) (MongoDBObjectId, bool) {
+func (r *MongoDBRepository[T]) InsertOne(ctx context.Context, model T) (ObjectId, bool) {
 	result, err := r.collection.InsertOne(ctx, model)
 	if err != nil {
 		log.Error("Mongodb: InsertOne (", model, ") to collection:", r.collection.Name(), " fail: ", err)
-		return MongoDBObjectIdEmpty, false
+		return ObjectIdEmpty, false
 	}
 	if objectId, ok := result.InsertedID.(primitive.ObjectID); ok {
-		return MongoDBObjectId(objectId.Hex()), true
+		return ObjectId(objectId.Hex()), true
 	}
-	return MongoDBObjectIdEmpty, false
+	return ObjectIdEmpty, false
 }
 
-func (r *MongoDBRepository[T]) UpdateOneById(ctx context.Context, id MongoDBObjectId, fields bson.D) (int64, bool) {
+func (r *MongoDBRepository[T]) UpdateOneById(ctx context.Context, id ObjectId, fields bson.D) (int64, bool) {
 	objectId, err := primitive.ObjectIDFromHex(string(id))
 	if err != nil {
 		log.Error("Mongodb: UpdateOneById: ", id, " in collection:", r.collection.Name(), " fail: ", err)
@@ -66,7 +66,7 @@ func (r *MongoDBRepository[T]) UpdateOne(ctx context.Context, filter bson.D, fie
 	return result.MatchedCount, true
 }
 
-func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id MongoDBObjectId, accumulator *T) (*T, bool) {
+func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id ObjectId, accumulator *T) (*T, bool) {
 	objectId, err := primitive.ObjectIDFromHex(string(id))
 	if err != nil {
 		log.Error("Mongodb: FindOneById: ", id, " in collection:", r.collection.Name(), " fail: ", err)
@@ -96,7 +96,7 @@ func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.D, accum
 	return accumulator, true
 }
 
-func (r *MongoDBRepository[T]) DeleteOneById(ctx context.Context, id MongoDBObjectId) (int64, bool) {
+func (r *MongoDBRepository[T]) DeleteOneById(ctx context.Context, id ObjectId) (int64, bool) {
 	objectId, err := primitive.ObjectIDFromHex(string(id))
 	if err != nil {
 		log.Error("Mongodb: DeleteOneById: ", id, " from collection:", r.collection.Name(), " fail: ", err)

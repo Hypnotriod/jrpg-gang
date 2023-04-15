@@ -18,7 +18,7 @@ func NewUserRepository(collection *mongo.Collection) *UserRepository {
 	return r
 }
 
-func (r *UserRepository) InsertOne(ctx context.Context, model model.UserModel) (MongoDBObjectId, bool) {
+func (r *UserRepository) InsertOne(ctx context.Context, model model.UserModel) (ObjectId, bool) {
 	model.OnCreate()
 	return r.MongoDBRepository.InsertOne(ctx, model)
 }
