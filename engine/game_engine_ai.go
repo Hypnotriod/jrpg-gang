@@ -16,6 +16,7 @@ func (e *GameEngine) processAI(event *GameEvent) {
 		len(targets) == 0 && e.aiTryToApproachTheEnemy(event, unit) {
 		return
 	}
+	unit.State.ClearActionPoints()
 	e.onUnitCompleteAction(nil, nil)
 }
 

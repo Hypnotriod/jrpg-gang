@@ -80,9 +80,7 @@ func (s *GameScenario) prepareUnits() {
 
 func (s *GameScenario) prepareUnit(unit *GameUnit) {
 	unit.Uid = s.rndGen.NextUid()
-	if unit.State.IsEmpty() {
-		unit.State.UnitBaseAttributes = unit.Stats.BaseAttributes
-	}
+	unit.State.RestoreDefault(unit.Stats.BaseAttributes)
 	unit.Inventory.PopulateUids(s.rndGen)
 }
 

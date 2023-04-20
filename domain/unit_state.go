@@ -10,8 +10,12 @@ type UnitState struct {
 	IsStunned bool    `json:"isStunned,omitempty"` // stun flag
 }
 
-func (s *UnitState) IsEmpty() bool {
-	return s.Stress == 0 && s.Health == 0 && s.Mana == 0 && s.Stamina == 0
+func (s *UnitState) RestoreDefault(limit UnitBaseAttributes) {
+	s.Stress = 0
+	s.ActionPoints = 0
+	s.Health = limit.Health
+	s.Mana = limit.Mana
+	s.Stamina = limit.Stamina
 }
 
 func (s *UnitState) RestoreToHalf(limit UnitBaseAttributes) {

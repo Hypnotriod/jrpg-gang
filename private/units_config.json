@@ -12,7 +12,8 @@
             },
             "baseAttributes": {
                 "health": 80,
-                "stamina": 80
+                "stamina": 80,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 10,
@@ -84,7 +85,8 @@
             },
             "baseAttributes": {
                 "health": 75,
-                "stamina": 75
+                "stamina": 75,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 8,
@@ -156,7 +158,8 @@
             },
             "baseAttributes": {
                 "health": 50,
-                "stamina": 50
+                "stamina": 50,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 5,
@@ -237,7 +240,8 @@
             "baseAttributes": {
                 "health": 50,
                 "stamina": 50,
-                "mana": 75
+                "mana": 75,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 2,
@@ -328,7 +332,8 @@
             },
             "baseAttributes": {
                 "health": 200,
-                "stamina": 200
+                "stamina": 200,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 15,
@@ -389,7 +394,8 @@
             },
             "baseAttributes": {
                 "health": 100,
-                "stamina": 100
+                "stamina": 100,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 10,
@@ -463,7 +469,8 @@
             },
             "baseAttributes": {
                 "health": 50,
-                "stamina": 50
+                "stamina": 50,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 6,
@@ -526,7 +533,8 @@
             },
             "baseAttributes": {
                 "health": 50,
-                "stamina": 50
+                "stamina": 50,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 8,
@@ -589,7 +597,8 @@
             },
             "baseAttributes": {
                 "health": 60,
-                "stamina": 40
+                "stamina": 40,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 9,
@@ -653,7 +662,8 @@
             "baseAttributes": {
                 "health": 100,
                 "stamina": 100,
-                "mana": 100
+                "mana": 100,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 10,
@@ -725,7 +735,8 @@
             "baseAttributes": {
                 "health": 120,
                 "stamina": 100,
-                "mana": 100
+                "mana": 100,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 8,
@@ -797,7 +808,8 @@
             "baseAttributes": {
                 "health": 90,
                 "stamina": 100,
-                "mana": 100
+                "mana": 100,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 10,
@@ -869,7 +881,8 @@
             },
             "baseAttributes": {
                 "health": 60,
-                "stamina": 100
+                "stamina": 100,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 12,
@@ -932,7 +945,8 @@
             },
             "baseAttributes": {
                 "health": 75,
-                "stamina": 75
+                "stamina": 75,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 12,
@@ -999,7 +1013,8 @@
             },
             "baseAttributes": {
                 "health": 50,
-                "stamina": 75
+                "stamina": 75,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 12,
@@ -1062,7 +1077,8 @@
             },
             "baseAttributes": {
                 "health": 150,
-                "stamina": 150
+                "stamina": 150,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 15,
@@ -1132,7 +1148,8 @@
             },
             "baseAttributes": {
                 "health": 125,
-                "stamina": 300
+                "stamina": 300,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 15,
@@ -1199,7 +1216,8 @@
             },
             "baseAttributes": {
                 "health": 75,
-                "stamina": 300
+                "stamina": 300,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 15,
@@ -1270,7 +1288,8 @@
             "baseAttributes": {
                 "health": 500,
                 "stamina": 200,
-                "mana": 200
+                "mana": 200,
+                "actionPoints": 2
             },
             "attributes": {
                 "strength": 35,

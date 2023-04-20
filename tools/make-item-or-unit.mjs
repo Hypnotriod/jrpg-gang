@@ -294,7 +294,7 @@ async function makeItem(type, header) {
 async function makeEquipment(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
-        durability: await makeNumber('durability', 300),
+        durability: await makeNumber('durability', 500),
         wearout: await makeNumber('wearout'),
         slot: await makeList('slot', ['weapon', 'head', 'neck', 'body', 'hand', 'leg']),
         slotsNumber: await makeNumber('slotsNumber', 1),
@@ -335,6 +335,7 @@ async function makeUnitBaseAttributes(header) {
         health: await makeNumber('health'),
         stamina: await makeNumber('stamina'),
         mana: await makeNumber('mana'),
+        mana: await makeNumber('actionPoints', 2),
     }
     return result;
 }

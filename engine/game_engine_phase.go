@@ -91,6 +91,15 @@ func (e *GameEngine) processSpotComplete(event *GameEvent) {
 
 func (e *GameEngine) switchToNextUnit() {
 	unit := e.getActiveUnit()
+	if unit.State.ActionPoints > 0 {
+		if unit.HasPlayerId() {
+			e.state.ChangePhase(GamePhaseMakeAction)
+		} else {
+			e.state.ChangePhase(GamePhaseMakeActionAI)
+		}
+		return
+	}
+	unit.State.ActionPoints = unit.Stats.BaseAttributes.ActionPoints
 	unit.State.IsStunned = false
 	if unit.CheckRandomChance(unit.CalculateRetreatChance()) {
 		e.state.ChangePhase(GamePhaseRetreatAction)
@@ -126,7 +135,10 @@ func (e *GameEngine) isLastRound() bool {
 
 func (e *GameEngine) onUnitMoveAction() {
 	unit := e.getActiveUnit()
-	if unit.HasPlayerId() {
+	unit.State.ReduceActionPoint()
+	if unit.State.ActionPoints == 0 {
+		e.onUnitCompleteAction(nil, nil)
+	} else if unit.HasPlayerId() {
 		e.state.ChangePhase(GamePhaseMakeAction)
 	} else {
 		e.state.ChangePhase(GamePhaseMakeActionAI)
@@ -140,11 +152,15 @@ func (e *GameEngine) onUseItemOnTarget(targetUid uint, actionResult *domain.Acti
 }
 
 func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint, dropDistribution *map[uint]domain.UnitBooty) {
+	unit := e.getActiveUnit()
+	unit.State.ReduceActionPoint()
 	corpses := e.battlefield().FilterSurvivors()
 	e.accumulateDrop(corpses, dropDistribution)
 	e.applyExperience(corpses, expDistribution)
 	e.battlefield().UpdateCellsFactions()
-	e.state.ShiftUnitsQueue()
+	if unit.IsDead || unit.State.ActionPoints == 0 {
+		e.state.ShiftUnitsQueue()
+	}
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	e.state.ChangePhase(GamePhaseActionComplete)
 }
