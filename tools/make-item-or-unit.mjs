@@ -164,6 +164,7 @@ async function makeDisposable() {
     const result = {
         ...await makeItem('disposable'),
         range: await makeActionRange('range'),
+        useCost: await makeUnitBaseAttributes('useCost'),
         damage: [],
         modification: [],
     }

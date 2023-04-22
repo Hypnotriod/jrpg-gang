@@ -135,7 +135,7 @@ func (e *GameEngine) isLastRound() bool {
 
 func (e *GameEngine) onUnitMoveAction() {
 	unit := e.getActiveUnit()
-	unit.State.ReduceActionPoint()
+	unit.State.ReduceActionPoints(MOVE_ACTION_POINTS)
 	if unit.State.ActionPoints == 0 {
 		e.onUnitCompleteAction(nil, nil)
 	} else if unit.HasPlayerId() {
@@ -153,7 +153,6 @@ func (e *GameEngine) onUseItemOnTarget(targetUid uint, actionResult *domain.Acti
 
 func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint, dropDistribution *map[uint]domain.UnitBooty) {
 	unit := e.getActiveUnit()
-	unit.State.ReduceActionPoint()
 	corpses := e.battlefield().FilterSurvivors()
 	e.accumulateDrop(corpses, dropDistribution)
 	e.applyExperience(corpses, expDistribution)

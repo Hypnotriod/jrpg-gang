@@ -178,7 +178,8 @@ func (e *GameEngine) executeMoveAction(action domain.Action, playerId PlayerId) 
 	if unit == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
-	if unit.IsDead || unit.GetPlayerId() != playerId || !e.state.IsCurrentActiveUnit(unit) {
+	if unit.IsDead || unit.GetPlayerId() != playerId ||
+		!e.state.IsCurrentActiveUnit(unit) || unit.State.ActionPoints < MOVE_ACTION_POINTS {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	result := e.battlefield().MoveUnit(unit.Uid, *action.Position)

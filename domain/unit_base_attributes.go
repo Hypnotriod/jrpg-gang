@@ -53,9 +53,10 @@ func (a *UnitBaseAttributes) EnchanceAll(value float32) {
 	a.ActionPoints = util.AccumulateIfNotZeros(a.ActionPoints, value)
 }
 
-func (a *UnitBaseAttributes) ReduceActionPoint() {
-	if a.ActionPoints > 0 {
-		a.ActionPoints--
+func (a *UnitBaseAttributes) ReduceActionPoints(points float32) {
+	a.ActionPoints -= points
+	if a.ActionPoints < 0 {
+		a.ActionPoints = 0
 	}
 }
 

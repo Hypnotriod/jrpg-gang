@@ -94,6 +94,10 @@ func (u *Unit) useDisposableOnTarget(action *ActionResult, target *Unit, disposa
 		if disposable.Quantity == 0 {
 			return action.WithResult(ResultZeroQuantity)
 		}
+		if !u.CheckUseCost(disposable.UseCost) {
+			return action.WithResult(ResultCantUse)
+		}
+		u.State.Reduce(disposable.UseCost)
 		disposable.Quantity--
 		action.UseCostReduced = true
 	}
