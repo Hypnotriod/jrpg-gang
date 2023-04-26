@@ -75,8 +75,6 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 }
 
 func main() {
-	http.Handle("/", http.FileServer(http.Dir("./public")))
-
 	authConfig, hubConfig, persistanceConfig := configs()
 	persistance := persistance.NewPersistance(persistanceConfig)
 	controller := controller.NewGameController(persistance)
