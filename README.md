@@ -2,9 +2,10 @@
 Golang project of turn based multiplayer RPG game server
 
 ## BaseAttributes:
-* `health`  - the **hit points** unit can take, till die
-* `stamina` - a weapon may require **stamina points** to perform action
-* `mana`    - a weapon or spell may require **mana points** to perform action
+* `health`        - the **hit points** unit can take, till die
+* `stamina`       - a weapon may require **stamina points** to perform action
+* `mana`          - a weapon or spell may require **mana points** to perform action
+* `action points` - a weapon, spell or disposable require **action points** to perform action
 
 ## Attributes:
 * `strength`     - enhances **stabbing**, **cutting**, **crushing** and **bleeding** damage
@@ -68,6 +69,12 @@ Golang project of turn based multiplayer RPG game server
 * `Stun Chance`: (**physical damage** - **unit stress**) - (**target physique** - **target stress**) | minimum `1`
 * `Retreat Chance`: **unit stress** | minimum `0`
 * `Critical Miss Chance`: **unit stress** | minimum `0`
+
+## Game Phases
+* `Prepare Unit Phase` - Unit can be placed on available positions before battle starts. Only `equip` or `unequip` actions can be used.
+* `Move` action - Can be performed only once per turn if no `weapon`, `spell` or `disposable` where used in current turn. Requires **4 action points**
+* `Equip` or `Unequip` action - Can be performed any time while **actions points** remains more than **4**
+* `Use` action - Reduces required **actions points**. To be able to perform additional action, the number of **actions points** remaining should be greater than or equal to **4**.
 
 ## Mechanics:
 * `Critical Damage` - Doubles the damage.
