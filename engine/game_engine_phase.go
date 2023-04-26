@@ -136,7 +136,7 @@ func (e *GameEngine) isLastRound() bool {
 func (e *GameEngine) onUnitMoveAction() {
 	unit := e.getActiveUnit()
 	unit.State.ReduceActionPoints(MOVE_ACTION_POINTS)
-	if unit.State.ActionPoints == 0 {
+	if unit.State.ActionPoints < MIN_ACTION_POINTS {
 		e.onUnitCompleteAction(nil, nil)
 	} else if unit.HasPlayerId() {
 		e.state.ChangePhase(GamePhaseMakeAction)
@@ -157,8 +157,9 @@ func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint, dropDi
 	e.accumulateDrop(corpses, dropDistribution)
 	e.applyExperience(corpses, expDistribution)
 	e.battlefield().UpdateCellsFactions()
-	if unit.IsDead || unit.State.ActionPoints == 0 {
+	if unit.IsDead || unit.State.ActionPoints < MIN_ACTION_POINTS {
 		e.state.ShiftUnitsQueue()
+		unit.State.ClearActionPoints()
 	}
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	e.state.ChangePhase(GamePhaseActionComplete)

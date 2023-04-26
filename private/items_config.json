@@ -20,7 +20,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 5
+                "stamina": 5,
+                "actionPoints": 4
             }
         },
         {
@@ -49,7 +50,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 10
+                "stamina": 10,
+                "actionPoints": 4
             }
         },
         {
@@ -78,7 +80,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 10
+                "stamina": 10,
+                "actionPoints": 5
             }
         },
         {
@@ -108,7 +111,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 10
+                "stamina": 10,
+                "actionPoints": 5
             }
         },
         {
@@ -138,7 +142,8 @@
             ],
             "useCost": {
                 "mana": 10,
-                "stamina": 3
+                "stamina": 3,
+                "actionPoints": 5
             }
         },
         {
@@ -161,7 +166,8 @@
                 }
             ],
             "useCost": {
-                "mana": 10
+                "mana": 10,
+                "actionPoints": 5
             }
         },
         {
@@ -184,7 +190,8 @@
                 }
             ],
             "useCost": {
-                "mana": 10
+                "mana": 10,
+                "actionPoints": 5
             }
         },
         {
@@ -217,7 +224,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 10
+                "stamina": 10,
+                "actionPoints": 4
             }
         },
         {
@@ -252,7 +260,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 12
+                "stamina": 12,
+                "actionPoints": 4
             },
             "price": {
                 "coins": 2000
@@ -302,7 +311,8 @@
             },
             "price": {
                 "coins": 3000,
-                "ruby": 10
+                "ruby": 10,
+                "actionPoints": 5
             }
         },
         {
@@ -343,7 +353,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 10
+                "stamina": 10,
+                "actionPoints": 5
             },
             "price": {
                 "coins": 1500
@@ -372,7 +383,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 8
+                "stamina": 8,
+                "actionPoints": 5
             }
         },
         {
@@ -402,7 +414,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 10
+                "stamina": 10,
+                "actionPoints": 5
             },
             "price": {
                 "coins": 1500
@@ -441,7 +454,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 10
+                "stamina": 10,
+                "actionPoints": 5
             },
             "price": {
                 "coins": 2000,
@@ -478,7 +492,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 5
+                "stamina": 5,
+                "actionPoints": 4
             }
         },
         {
@@ -513,7 +528,8 @@
                 }
             ],
             "useCost": {
-                "stamina": 7
+                "stamina": 7,
+                "actionPoints": 4
             },
             "price": {
                 "coins": 1000
@@ -543,7 +559,8 @@
             },
             "useCost": {
                 "mana": 5,
-                "stamina": 2
+                "stamina": 2,
+                "actionPoints": 5
             }
         },
         {
@@ -573,7 +590,8 @@
             },
             "useCost": {
                 "mana": 7,
-                "stamina": 3
+                "stamina": 3,
+                "actionPoints": 5
             },
             "price": {
                 "coins": 3000,
@@ -596,7 +614,8 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 12
+                "stamina": 12,
+                "actionPoints": 4
             },
             "damage": [
                 {
@@ -631,7 +650,8 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 14
+                "stamina": 14,
+                "actionPoints": 5
             },
             "damage": [
                 {
@@ -668,7 +688,8 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 25
+                "stamina": 25,
+                "actionPoints": 6
             },
             "damage": [
                 {
@@ -707,7 +728,8 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 25
+                "stamina": 25,
+                "actionPoints": 5
             },
             "damage": [
                 {
@@ -745,7 +767,8 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 22
+                "stamina": 22,
+                "actionPoints": 5
             },
             "damage": [
                 {
@@ -784,7 +807,8 @@
                 "maximumY": 10
             },
             "useCost": {
-                "mana": 15
+                "mana": 15,
+                "actionPoints": 5
             },
             "damage": [],
             "modification": [
@@ -813,7 +837,8 @@
                 "maximumY": 10
             },
             "useCost": {
-                "mana": 30
+                "mana": 30,
+                "actionPoints": 6
             },
             "damage": [],
             "modification": [
@@ -841,7 +866,8 @@
                 "maximumY": 10
             },
             "useCost": {
-                "mana": 10
+                "mana": 10,
+                "actionPoints": 4
             },
             "damage": [],
             "modification": [
@@ -870,7 +896,8 @@
                 "maximumY": 10
             },
             "useCost": {
-                "mana": 20
+                "mana": 20,
+                "actionPoints": 5
             },
             "damage": [],
             "modification": [
@@ -1377,6 +1404,9 @@
             ],
             "price": {
                 "coins": 25
+            },
+            "useCost": {
+                "actionPoints": 4
             }
         },
         {
@@ -1404,6 +1434,9 @@
             ],
             "price": {
                 "coins": 25
+            },
+            "useCost": {
+                "actionPoints": 4
             }
         },
         {
@@ -1431,6 +1464,9 @@
             ],
             "price": {
                 "coins": 30
+            },
+            "useCost": {
+                "actionPoints": 4
             }
         },
         {
@@ -1444,13 +1480,16 @@
                 {
                     "duration": 5,
                     "attributes": {
-                        "agility": 8,
+                        "agility": 4,
                         "deviation": 1
                     }
                 }
             ],
             "price": {
                 "coins": 35
+            },
+            "useCost": {
+                "actionPoints": 4
             }
         },
         {
@@ -1469,6 +1508,9 @@
             ],
             "price": {
                 "coins": 25
+            },
+            "useCost": {
+                "actionPoints": 5
             }
         },
         {
@@ -1488,6 +1530,9 @@
             ],
             "price": {
                 "coins": 25
+            },
+            "useCost": {
+                "actionPoints": 4
             }
         },
         {
@@ -1516,7 +1561,10 @@
                     "deviation": 4
                 }
             ],
-            "modification": []
+            "modification": [],
+            "useCost": {
+                "actionPoints": 6
+            }
         }
     ],
     "ammunition": [
