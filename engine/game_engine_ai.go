@@ -16,7 +16,7 @@ func (e *GameEngine) processAI(event *GameEvent) {
 		unit.State.ActionPoints >= MOVE_ACTION_POINTS && e.aiTryToApproachTheEnemy(event, unit) {
 		return
 	}
-	unit.State.ClearActionPoints()
+	unit.ClearActionPoints()
 	e.onUnitCompleteAction(nil, nil)
 }
 
@@ -50,6 +50,7 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 			}
 		}
 	}
+	unit.ClearActionPoints()
 	e.onUnitCompleteAction(nil, nil)
 }
 

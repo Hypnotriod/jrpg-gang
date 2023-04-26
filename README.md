@@ -5,7 +5,7 @@ Golang project of turn based multiplayer RPG game server
 * `health`        - the **hit points** unit can take, till die
 * `stamina`       - a weapon may require **stamina points** to perform action
 * `mana`          - a weapon or spell may require **mana points** to perform action
-* `action points` - a weapon, spell or disposable require **action points** to perform action
+* `action points` - a weapon, spell or disposable require **action points** to perform action. Each 10 levels adds **1 action point**
 
 ## Attributes:
 * `strength`     - enhances **stabbing**, **cutting**, **crushing** and **bleeding** damage

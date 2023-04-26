@@ -108,6 +108,20 @@ func (u *Unit) TotalLuck() float32 {
 	return util.Max(luck, 0)
 }
 
+func (u *Unit) TotalActionPoints() float32 {
+	var actionPoints float32 = u.Stats.BaseAttributes.ActionPoints
+	actionPoints += float32(u.Stats.Progress.Level / 10)
+	for _, ench := range u.Modification {
+		actionPoints += ench.BaseAttributes.ActionPoints
+	}
+	for _, item := range u.Inventory.GetEquipment(true) {
+		for _, ench := range item.Modification {
+			actionPoints += ench.BaseAttributes.ActionPoints
+		}
+	}
+	return util.Max(actionPoints, 0)
+}
+
 func (u *Unit) TotalInitiative() float32 {
 	if u.State.IsStunned {
 		return -1
@@ -230,6 +244,17 @@ func (u *Unit) CanUseWeapon(weapon *Weapon, checkUseCost bool) bool {
 		return false
 	}
 	return true
+}
+
+func (u *Unit) ReduceActionPoints(points float32) {
+	u.State.ActionPoints -= points
+	if u.State.ActionPoints < 0 {
+		u.State.ActionPoints = 0
+	}
+}
+
+func (u *Unit) ClearActionPoints() {
+	u.State.ActionPoints = 0
 }
 
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {

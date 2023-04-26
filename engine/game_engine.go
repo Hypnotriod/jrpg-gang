@@ -110,7 +110,7 @@ func (e *GameEngine) RemoveActor(playerId PlayerId) bool {
 		return false
 	}
 	if e.state.IsCurrentActiveUnit(actor) && e.isActionPhase() {
-		actor.State.ClearActionPoints()
+		actor.ClearActionPoints()
 		e.onUnitCompleteAction(nil, nil)
 	}
 	actor.PlayerInfo.IsReady = false
@@ -145,7 +145,7 @@ func (e *GameEngine) UpdateUserConnectionStatus(playerId PlayerId, isOffline boo
 
 func (e *GameEngine) ClearActiveUnitActionPoints() {
 	if unit := e.getActiveUnit(); unit != nil {
-		unit.State.ClearActionPoints()
+		unit.ClearActionPoints()
 	}
 }
 

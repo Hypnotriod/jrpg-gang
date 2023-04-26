@@ -200,7 +200,7 @@ func (e *GameEngine) executeSkipAction(action domain.Action, playerId PlayerId) 
 	if unit.IsDead || unit.GetPlayerId() != playerId || !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
-	unit.State.ClearActionPoints()
+	unit.ClearActionPoints()
 	result := domain.NewActionResult()
 	e.onUnitCompleteAction(&result.Experience, &result.Drop)
 	return result.WithResult(domain.ResultAccomplished)

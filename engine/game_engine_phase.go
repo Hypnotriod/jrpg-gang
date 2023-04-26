@@ -99,7 +99,7 @@ func (e *GameEngine) switchToNextUnit() {
 		}
 		return
 	}
-	unit.State.ActionPoints = unit.Stats.BaseAttributes.ActionPoints
+	unit.State.ActionPoints = unit.TotalActionPoints()
 	unit.State.IsStunned = false
 	if unit.CheckRandomChance(unit.CalculateRetreatChance()) {
 		e.state.ChangePhase(GamePhaseRetreatAction)
@@ -135,7 +135,7 @@ func (e *GameEngine) isLastRound() bool {
 
 func (e *GameEngine) onUnitMoveAction() {
 	unit := e.getActiveUnit()
-	unit.State.ReduceActionPoints(MOVE_ACTION_POINTS)
+	unit.ReduceActionPoints(MOVE_ACTION_POINTS)
 	if unit.State.ActionPoints < MIN_ACTION_POINTS {
 		e.onUnitCompleteAction(nil, nil)
 	} else if unit.HasPlayerId() {
@@ -158,7 +158,7 @@ func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint, dropDi
 	e.applyExperience(corpses, expDistribution)
 	e.battlefield().UpdateCellsFactions()
 	if unit.IsDead || unit.State.ActionPoints < MIN_ACTION_POINTS {
-		unit.State.ClearActionPoints()
+		unit.ClearActionPoints()
 		e.state.ShiftUnitsQueue()
 	}
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
