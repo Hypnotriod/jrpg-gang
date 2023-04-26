@@ -143,6 +143,12 @@ func (e *GameEngine) UpdateUserConnectionStatus(playerId PlayerId, isOffline boo
 	return true
 }
 
+func (e *GameEngine) ClearActiveUnitActionPoints() {
+	if unit := e.getActiveUnit(); unit != nil {
+		unit.State.ClearActionPoints()
+	}
+}
+
 func (e *GameEngine) battlefield() *Battlefield {
 	return &e.scenario.CurrentSpot().Battlefield
 }

@@ -44,7 +44,7 @@ func (w *GameEngineWrapper) setNextPhaseTimer() {
 		if timerId != w.nextPhaseTimer.Id() {
 			return
 		}
-		if result, broadcastPlayerIds, ok := w.NextPhase(); ok {
+		if result, broadcastPlayerIds, ok := w.SkipToNextPhase(); ok {
 			w.broadcastGameAction(broadcastPlayerIds, result)
 		}
 	})

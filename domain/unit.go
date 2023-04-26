@@ -182,7 +182,8 @@ func (u *Unit) CheckRequirements(requirements UnitRequirements) bool {
 func (u *Unit) CheckUseCost(useCost UnitBaseAttributes) bool {
 	return u.State.Health >= useCost.Health &&
 		u.State.Mana >= useCost.Mana &&
-		u.State.Stamina >= useCost.Stamina
+		u.State.Stamina >= useCost.Stamina &&
+		u.State.ActionPoints >= useCost.ActionPoints
 }
 
 func (u *Unit) CheckRandomChance(percents float32) bool {

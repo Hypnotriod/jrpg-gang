@@ -158,8 +158,8 @@ func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint, dropDi
 	e.applyExperience(corpses, expDistribution)
 	e.battlefield().UpdateCellsFactions()
 	if unit.IsDead || unit.State.ActionPoints < MIN_ACTION_POINTS {
-		e.state.ShiftUnitsQueue()
 		unit.State.ClearActionPoints()
+		e.state.ShiftUnitsQueue()
 	}
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	e.state.ChangePhase(GamePhaseActionComplete)

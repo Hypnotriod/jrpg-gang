@@ -70,10 +70,11 @@ func (w *GameEngineWrapper) ReadyForNextPhase(playerId engine.PlayerId, isReady 
 	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastPlayerIds, true
 }
 
-func (w *GameEngineWrapper) NextPhase() (*engine.GameEvent, []engine.PlayerId, bool) {
+func (w *GameEngineWrapper) SkipToNextPhase() (*engine.GameEvent, []engine.PlayerId, bool) {
 	if w.engine.AllActorsDead() {
 		return nil, nil, false
 	}
+	w.engine.ClearActiveUnitActionPoints()
 	event := w.engine.NextPhase()
 	w.setNextPhaseTimer()
 	broadcastPlayerIds := w.engine.GetPlayerIds()
