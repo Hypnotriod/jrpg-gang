@@ -93,9 +93,9 @@ func (e *GameEngine) switchToNextUnit() {
 	unit := e.getActiveUnit()
 	if unit.State.ActionPoints > 0 {
 		if unit.HasPlayerId() {
-			e.state.ChangePhase(GamePhaseMakeAction)
+			e.state.ChangePhase(GamePhaseMakeMoveOrAction)
 		} else {
-			e.state.ChangePhase(GamePhaseMakeActionAI)
+			e.state.ChangePhase(GamePhaseMakeMoveOrActionAI)
 		}
 		return
 	}
@@ -139,9 +139,9 @@ func (e *GameEngine) onUnitMoveAction() {
 	if unit.State.ActionPoints < MIN_ACTION_POINTS {
 		e.onUnitCompleteAction(nil, nil)
 	} else if unit.HasPlayerId() {
-		e.state.ChangePhase(GamePhaseMakeAction)
+		e.state.ChangePhase(GamePhaseMakeMoveOrAction)
 	} else {
-		e.state.ChangePhase(GamePhaseMakeActionAI)
+		e.state.ChangePhase(GamePhaseMakeMoveOrActionAI)
 	}
 }
 

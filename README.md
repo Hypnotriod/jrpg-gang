@@ -71,10 +71,11 @@ Golang project of turn based multiplayer RPG game server
 * `Critical Miss Chance`: **unit stress** | minimum `0`
 
 ## Game Phases
-* `Prepare Unit Phase` - Unit can be placed on available positions before battle starts. Only `equip` or `unequip` actions can be used.
-* `Move` action - Can be performed only once per turn if no `weapon`, `spell` or `disposable` where used in current turn. Requires **4 action points**
-* `Equip` or `Unequip` action - Can be performed any time while **actions points** remains more than **4**
-* `Use` action - Reduces required **actions points**. To be able to perform additional action, the number of **actions points** remaining should be greater than or equal to **4**.
+* `Prepare Unit Phase` - Unit can be placed on any available position before battle starts. Only `Equip` or `Unequip` actions can be performed during this phase.
+* `Move or Action Phase` - During this phase `Move`, `Use`, `Equip` or `Unequip` actions can be performed while **actions points** remains more than **4**
+** `Use` action - Can be performed with `weapon`, `magic` and `disposable` items. Reduces required **actions points**.
+** `Move` action - Requires **4 action points**
+** `Equip` or `Unequip` action - Can be performed with `equipment` any time.
 
 ## Mechanics:
 * `Critical Damage` - Doubles the damage.
