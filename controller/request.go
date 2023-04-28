@@ -60,12 +60,14 @@ func parseRequestData[T ParsebleRequestData](data T, requestRaw []byte) T {
 func parseRequest(r []byte) *Request {
 	var typeStr string
 	var idStr string
+	var last int
 	if len(r) < 10 || !bytes.Equal(r[:9], []byte(`{"type":"`)) {
 		return nil
 	}
 	r = r[9:]
+	last = len(r) - 1
 	for i, c := range r {
-		if i == len(r)-1 {
+		if i == last {
 			return nil
 		} else if c == '"' {
 			typeStr = string(r[:i])
@@ -77,8 +79,9 @@ func parseRequest(r []byte) *Request {
 		return nil
 	}
 	r = r[7:]
+	last = len(r) - 1
 	for i, c := range r {
-		if i == len(r)-1 {
+		if i == last {
 			return nil
 		} else if c == '"' {
 			idStr = string(r[:i])
@@ -86,11 +89,14 @@ func parseRequest(r []byte) *Request {
 			break
 		}
 	}
-	if len(r) < 10 || !bytes.Equal(r[:9], []byte(`,"data":{`)) {
+	if len(r) == 1 && r[0] == '}' {
 		return &Request{
 			Type: RequestType(typeStr),
 			Id:   idStr,
 		}
+	}
+	if len(r) < 10 || !bytes.Equal(r[:9], []byte(`,"data":{`)) {
+		return nil
 	}
 	r = r[8:]
 	n := 0
@@ -100,12 +106,12 @@ func parseRequest(r []byte) *Request {
 		} else if c == '}' {
 			n--
 		}
+		if i == len(r)-1 {
+			return nil
+		}
 		if n == 0 {
 			r = r[:i+1]
 			break
-		}
-		if i == len(r)-1 {
-			return nil
 		}
 	}
 	return &Request{
