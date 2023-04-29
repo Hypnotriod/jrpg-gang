@@ -63,7 +63,7 @@ Golang project of turn based multiplayer RPG game server
 
 ## Items:
 * `Weapon`     - is an `equipment` and represents any **weapon** unit can equip and use against the enemy. **Weapon** may require special `ammunition`.
-* `Ammunition` - is an `equipment` and represents the **ammunition** required by the **weapon**. Should equipped before the **weapon** usage.
+* `Ammunition` - is an `equipment` and represents the **ammunition** required by the **weapon**. Should be equipped before the **weapon** usage.
 * `Armor`      - is an `equipment` and represents any **armor** unit can equip. Can have a quantity.
 * `Magic`      - is a *knowledge* that unit can use as a `weapon` against the enemy or as a `modification` to modify/recover stats of friendly units or himself.
 * `Disposable` - is any sort of "single-use" item. Can have a quantity.
