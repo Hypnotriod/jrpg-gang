@@ -110,7 +110,7 @@ func (u *Unit) TotalLuck() float32 {
 
 func (u *Unit) TotalActionPoints() float32 {
 	var actionPoints float32 = u.Stats.BaseAttributes.ActionPoints
-	actionPoints += float32(u.Stats.Attributes.Initiative / 10)
+	actionPoints += float32(uint(u.Stats.Attributes.Initiative) / 10)
 	for _, ench := range u.Modification {
 		actionPoints += ench.BaseAttributes.ActionPoints
 	}
