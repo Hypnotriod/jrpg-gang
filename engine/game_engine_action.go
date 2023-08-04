@@ -20,6 +20,8 @@ func (e *GameEngine) ExecuteUserAction(action domain.Action, playerId PlayerId) 
 		actionResult = e.executeMoveAction(action, playerId)
 	case domain.ActionSkip:
 		actionResult = e.executeSkipAction(action, playerId)
+	case domain.ActionWait:
+		actionResult = e.executeWaitAction(action, playerId)
 	default:
 		actionResult = domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 	}
@@ -203,6 +205,22 @@ func (e *GameEngine) executeSkipAction(action domain.Action, playerId PlayerId) 
 	unit.ClearActionPoints()
 	result := domain.NewActionResult()
 	e.onUnitCompleteAction(&result.Experience, &result.Drop)
+	return result.WithResult(domain.ResultAccomplished)
+}
+
+func (e *GameEngine) executeWaitAction(action domain.Action, playerId PlayerId) *domain.ActionResult {
+	if !e.isActionPhase() {
+		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+	}
+	unit := e.battlefield().FindUnit(action.Uid)
+	if unit == nil {
+		return domain.NewActionResult().WithResult(domain.ResultNotFound)
+	}
+	if unit.IsDead || unit.State.WaitingOrder != 0 || unit.GetPlayerId() != playerId || !e.state.IsCurrentActiveUnit(unit) {
+		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+	}
+	result := domain.NewActionResult()
+	e.onUnitWaitAction()
 	return result.WithResult(domain.ResultAccomplished)
 }
 

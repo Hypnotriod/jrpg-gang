@@ -42,11 +42,13 @@ func (e *GameEngine) NextPhaseRequired() bool {
 
 func (e *GameEngine) prepareNextSpot(actors []*GameUnit) {
 	e.scenario.PrepareNextSpot(actors)
+	e.state.ResetWaitingOrder()
 	e.state.MakeUnitsQueue(e.battlefield().Units)
 	e.state.IncrementSpotNumber()
 }
 
 func (e *GameEngine) processStartRound() {
+	e.state.ResetWaitingOrder()
 	e.state.MakeUnitsQueue(e.battlefield().Units)
 	e.battlefield().UpdateCellsFactions()
 	e.switchToNextUnit()
@@ -145,6 +147,13 @@ func (e *GameEngine) onUnitMoveAction() {
 	}
 }
 
+func (e *GameEngine) onUnitWaitAction() {
+	unit := e.getActiveUnit()
+	e.state.AddUnitToWaitingOrder(unit)
+	e.state.UpdateUnitsQueue(e.battlefield().Units)
+	e.state.ChangePhase(GamePhaseActionComplete)
+}
+
 func (e *GameEngine) onUseItemOnTarget(targetUid uint, actionResult *domain.ActionResult) {
 	if actionResult != nil && actionResult.WithStun(targetUid) {
 		e.state.PopStunnedUnitFromQueue(targetUid)
@@ -158,6 +167,7 @@ func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint, dropDi
 	e.applyExperience(corpses, expDistribution)
 	e.battlefield().UpdateCellsFactions()
 	if unit.IsDead || unit.State.ActionPoints < MIN_ACTION_POINTS {
+		unit.ClearWaitingOrder()
 		unit.ClearActionPoints()
 		e.state.ShiftUnitsQueue()
 	}

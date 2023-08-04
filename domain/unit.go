@@ -123,6 +123,9 @@ func (u *Unit) TotalActionPoints() float32 {
 }
 
 func (u *Unit) TotalInitiative() float32 {
+	if u.State.WaitingOrder != 0 {
+		return -float32(u.State.WaitingOrder + 1)
+	}
 	if u.State.IsStunned {
 		return -1
 	}
@@ -255,6 +258,10 @@ func (u *Unit) ReduceActionPoints(points float32) {
 
 func (u *Unit) ClearActionPoints() {
 	u.State.ActionPoints = 0
+}
+
+func (u *Unit) ClearWaitingOrder() {
+	u.State.WaitingOrder = 0
 }
 
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {

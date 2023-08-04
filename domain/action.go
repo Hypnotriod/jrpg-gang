@@ -13,6 +13,7 @@ const (
 	ActionRepair    AtionType = "repair"
 	ActionThrowAway AtionType = "throwAway"
 	ActionSkip      AtionType = "skip"
+	ActionWait      AtionType = "wait"
 	ActionLevelUp   AtionType = "levelUp"
 	ActionSkillUp   AtionType = "skillUp"
 )

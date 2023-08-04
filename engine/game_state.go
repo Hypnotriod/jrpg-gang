@@ -29,6 +29,7 @@ type GameState struct {
 	SpotNumber       int              `json:"spotNumber"`
 	SpotsTotal       int              `json:"spotsTotal"`
 	phase            GamePhase
+	waitingOrder     uint
 }
 
 func NewGameState(scenario *GameScenario) *GameState {
@@ -42,6 +43,10 @@ func NewGameState(scenario *GameScenario) *GameState {
 
 func (s *GameState) IncrementSpotNumber() {
 	s.SpotNumber++
+}
+
+func (s *GameState) ResetWaitingOrder() {
+	s.waitingOrder = 0
 }
 
 func (s *GameState) MakeUnitsQueue(units []*GameUnit) {
@@ -72,6 +77,11 @@ func (s *GameState) PopStunnedUnitFromQueue(unitUid uint) {
 	s.ActiveUnitsQueue = util.Filter(s.ActiveUnitsQueue, func(uid uint) bool {
 		return unitUid != uid
 	})
+}
+
+func (s *GameState) AddUnitToWaitingOrder(unit *GameUnit) {
+	s.waitingOrder++
+	unit.State.WaitingOrder = s.waitingOrder
 }
 
 func (s *GameState) ShiftUnitsQueue() {
