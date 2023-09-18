@@ -35,6 +35,7 @@ const (
 	RequestQuitJob            RequestType = "quitJob"
 	RequestCompleteJob        RequestType = "completeJob"
 	RequestJobsStatus         RequestType = "jobsStatus"
+	RequestSwitchUnit         RequestType = "switchUnit"
 )
 
 type Request struct {
@@ -46,7 +47,7 @@ type Request struct {
 type ParsebleRequestData interface {
 	*Request | *GameActionRequestData | *CreateGameRoomRequestData | *JoinRequestData |
 		*JoinGameRoomRequestData | *ShopActionRequestData | *ConfiguratorActionRequestData |
-		*GameNextPhaseRequestData | *ApplyForAJobRequestData
+		*GameNextPhaseRequestData | *ApplyForAJobRequestData | *SwitchUnitRequestData
 }
 
 func parseRequestData[T ParsebleRequestData](data T, requestRaw []byte) T {

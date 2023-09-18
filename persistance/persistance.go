@@ -88,6 +88,16 @@ func (p *Persistance) HasUserWithNickname(nickname string) bool {
 	return user != nil && ok
 }
 
+func (p *Persistance) GetUserByEmail(email model.UserEmail) *model.UserModel {
+	ctx, cancel := p.db.requestContext()
+	defer cancel()
+	user, ok := p.db.UsersRepository.FindByEmail(ctx, email)
+	if !ok {
+		return nil
+	}
+	return user
+}
+
 func (p *Persistance) GetOrCreateUser(credentials auth.UserCredentials) *model.UserModel {
 	ctx, cancel := p.db.requestContext()
 	defer cancel()

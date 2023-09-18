@@ -38,6 +38,7 @@ func (u *Unit) Clone() *Unit {
 	r.Uid = u.Uid
 	r.Name = u.Name
 	r.Code = u.Code
+	r.Class = u.Class
 	r.Booty = u.Booty
 	r.State = u.State
 	r.Stats = u.Stats

@@ -147,6 +147,8 @@ func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request
 		return c.handleConfiguratorActionRequest(playerId, request, response)
 	case RequestShopAction:
 		return c.handleShopActionRequest(playerId, request, response)
+	case RequestSwitchUnit:
+		return c.handleSwitchUnitRequest(playerId, request, response)
 	}
 
 	return response.WithStatus(ResponseStatusUnsupported)

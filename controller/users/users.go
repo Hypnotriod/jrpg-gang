@@ -140,6 +140,19 @@ func (u *Users) UpdateWithUnitOnGameComplete(playerId engine.PlayerId, unit *dom
 	user.Unit.PlayerInfo = nil
 }
 
+func (u *Users) UpdateWithNewGameUnit(playerId engine.PlayerId, unit *engine.GameUnit) {
+	defer u.mu.Unlock()
+	u.mu.Lock()
+	user, ok := u.users[playerId]
+	if !ok {
+		return
+	}
+	user.Unit = unit
+	user.Class = unit.Class
+	user.Unit.PrepareForUser()
+	user.Unit.Inventory.PopulateUids(user.RndGen)
+}
+
 func (u *Users) AccumulateBooty(playerId engine.PlayerId, booty domain.UnitBooty) {
 	defer u.mu.Unlock()
 	u.mu.Lock()
