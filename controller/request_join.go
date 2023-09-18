@@ -45,11 +45,15 @@ func (c *GameController) handleRejoinWithCredentialsRequest(request *Request, re
 	var unit *engine.GameUnit
 	var nickname string
 	var class domain.UnitClass
-	if userModel.Unit != nil {
-		unit = engine.NewGameUnit(userModel.Unit)
-		c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
-		nickname = userModel.Nickname
+	if len(userModel.Units) != 0 {
 		class = userModel.Class
+		nickname = userModel.Nickname
+		u, ok := userModel.Units[class]
+		if !ok {
+			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
+		}
+		unit = engine.NewGameUnit(u)
+		c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
 	} else {
 		if matched, _ := regexp.MatchString(USER_NICKNAME_REGEX, data.Nickname); !matched {
 			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusMalformed)
@@ -66,7 +70,7 @@ func (c *GameController) handleRejoinWithCredentialsRequest(request *Request, re
 	}
 	userId := model.UserId(userModel.Id.Hex())
 	user := users.NewUser(nickname, userModel.Email, userId, class, unit)
-	if userModel.Unit == nil {
+	if len(userModel.Units) == 0 {
 		c.persistUser(user)
 	}
 	c.users.AddUser(user)
