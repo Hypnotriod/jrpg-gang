@@ -39,6 +39,7 @@ func (r *UserRepository) UpdateOneWithUnit(ctx context.Context, user model.UserM
 		{Key: "class", Value: user.Class},
 		{Key: "nickname", Value: user.Nickname},
 		{Key: "unit", Value: user.Unit},
+		{Key: "units." + string(user.Class), Value: user.Unit},
 	}
 	return r.UpdateOne(ctx, filter, fields)
 }

@@ -17,6 +17,9 @@ func (c *GameController) handleGameLeaveRequest(playerId engine.PlayerId, reques
 	}
 	c.users.ResetUser(playerId)
 	c.users.UpdateWithUnitOnGameComplete(playerId, &unit)
+	if user, ok := c.users.Get(playerId); ok {
+		c.persistUser(&user)
+	}
 	if len(broadcastPlayerIds) > 0 {
 		c.broadcastGameAction(broadcastPlayerIds, result)
 	}

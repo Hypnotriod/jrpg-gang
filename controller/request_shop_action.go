@@ -20,6 +20,7 @@ func (c *GameController) handleShopActionRequest(playerId engine.PlayerId, reque
 	}
 	actionResult := c.shop.ExecuteAction(data.Action, &user)
 	if actionResult.Result == domain.ResultAccomplished {
+		c.persistUser(&user)
 		response.Data[DataKeyUnit] = user.Unit
 	}
 	response.Data[DataKeyAction] = data.Action

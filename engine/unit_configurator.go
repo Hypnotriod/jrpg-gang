@@ -17,7 +17,7 @@ func (c *UnitConfigurator) ExecuteAction(action domain.Action, unit *domain.Unit
 	case domain.ActionUnequip:
 		return unit.Unequip(action.ItemUid)
 	case domain.ActionThrowAway:
-		//todo
+		return unit.ThrowAway(action.ItemUid, action.Quantity)
 	case domain.ActionLevelUp:
 		return unit.LevelUp()
 	case domain.ActionSkillUp:

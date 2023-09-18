@@ -19,11 +19,16 @@ func (c *GameController) handleConfiguratorActionRequest(playerId engine.PlayerI
 		return response.WithStatus(ResponseStatusNotFound)
 	}
 	actionResult := c.configurator.ExecuteAction(data.Action, &user.Unit.Unit)
-	if actionResult.Result == domain.ResultAccomplished {
-		response.Data[DataKeyUnit] = user.Unit
-	}
 	if user.Level != user.Unit.Stats.Progress.Level {
 		c.users.UpdateOnLevelUp(playerId, &user.Unit.Unit)
+	}
+	if actionResult.Result == domain.ResultAccomplished {
+		if data.Action.Action == domain.ActionThrowAway ||
+			data.Action.Action == domain.ActionLevelUp ||
+			data.Action.Action == domain.ActionSkillUp {
+			c.persistUser(&user)
+		}
+		response.Data[DataKeyUnit] = user.Unit
 	}
 	response.Data[DataKeyAction] = request.Data
 	response.Data[DataKeyActionResult] = actionResult
