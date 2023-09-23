@@ -39,7 +39,7 @@ func (c *Client) WriteMessage(message []byte) {
 	err := c.conn.WriteMessage(websocket.TextMessage, message)
 	c.mu.Unlock()
 	if err != nil && websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-		log.Error("Client (", c.playerId, ") write message error:", err)
+		log.Error("Client (", c.Info(), ") write message error:", err)
 	}
 }
 
@@ -49,7 +49,7 @@ func (c *Client) Serve() {
 		mt, message, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-				log.Error("Client (", c.playerId, ") read message error:", err)
+				log.Error("Client (", c.Info(), ") read message error:", err)
 			}
 			break
 		}
@@ -74,10 +74,14 @@ func (c *Client) Kick() {
 	c.kicked = true
 }
 
+func (c *Client) Info() string {
+	return c.conn.RemoteAddr().String() + " " + string(c.playerId)
+}
+
 func (c *Client) begin() {
 	c.noPlayerIdTimer = time.AfterFunc(time.Duration(c.hub.config.UserWithoutIdTimeoutSec)*time.Second, func() {
 		c.Kick()
-		log.Info("Client didn't obtain the id and was kicked")
+		log.Info("Client didn't obtain the id and was kicked: ", c.Info())
 	})
 }
 
@@ -95,7 +99,7 @@ func (c *Client) complete() {
 	c.mu.Lock()
 	c.left = true
 	if !c.kicked {
-		c.hub.unregisterClient(c.playerId)
+		c.hub.unregisterClient(c)
 		c.conn.Close()
 	}
 }

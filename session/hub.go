@@ -75,7 +75,7 @@ func (h *Hub) serveWsRequest(writer http.ResponseWriter, request *http.Request) 
 		log.Error("Can't serve ws request:", err)
 		return
 	}
-	log.Info("Connection established")
+	log.Info("Connection established: ", request.RemoteAddr)
 	NewClient(conn, h).Serve()
 }
 
@@ -90,27 +90,27 @@ func (h *Hub) registerClient(client *Client) {
 		timer.Stop()
 		h.mu.Unlock()
 		h.controller.ConnectionStatusChanged(client.playerId, false)
-		log.Info("Client back online: ", client.playerId)
+		log.Info("Client back online: ", client.Info())
 		return
 	}
 	h.mu.Unlock()
-	log.Info("Register Client: ", client.playerId)
+	log.Info("Register Client: ", client.Info())
 }
 
-func (h *Hub) unregisterClient(playerId engine.PlayerId) {
-	if playerId == engine.PlayerIdEmpty {
-		log.Info("Client left without joining")
+func (h *Hub) unregisterClient(client *Client) {
+	if client.playerId == engine.PlayerIdEmpty {
+		log.Info("Client left without joining: ", client.Info())
 		return
 	}
 	h.mu.Lock()
-	delete(h.clients, playerId)
-	h.setupUserOfflineTimeout(playerId)
+	delete(h.clients, client.playerId)
+	h.setupUserOfflineTimeout(client.playerId, client.Info())
 	h.mu.Unlock()
-	h.controller.ConnectionStatusChanged(playerId, true)
-	log.Info("Client went offline: ", playerId)
+	h.controller.ConnectionStatusChanged(client.playerId, true)
+	log.Info("Client went offline: ", client.Info())
 }
 
-func (h *Hub) setupUserOfflineTimeout(playerId engine.PlayerId) {
+func (h *Hub) setupUserOfflineTimeout(playerId engine.PlayerId, clientInfo string) {
 	h.offlineTimers[playerId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
 		h.mu.Lock()
 		if _, ok := h.offlineTimers[playerId]; !ok {
@@ -120,7 +120,7 @@ func (h *Hub) setupUserOfflineTimeout(playerId engine.PlayerId) {
 		delete(h.offlineTimers, playerId)
 		h.mu.Unlock()
 		h.controller.Leave(playerId)
-		log.Info("Unregister Client by timeout: ", playerId)
+		log.Info("Unregister Client by timeout: ", clientInfo)
 	})
 }
 
