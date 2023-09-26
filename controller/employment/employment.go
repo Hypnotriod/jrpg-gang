@@ -37,8 +37,8 @@ func (e *Employment) Load(path string) error {
 	if err != nil {
 		return err
 	}
-	defer e.mu.Unlock()
 	e.mu.Lock()
+	defer e.mu.Unlock()
 	e.prepare(jobs)
 	return nil
 }
@@ -69,14 +69,14 @@ func (e *Employment) SetStatus(user *users.User, jobStatusModel model.JobStatusM
 		Code:           jobStatusModel.Code,
 		Countdown:      jobStatusModel.Countdown,
 	}
-	defer e.mu.Unlock()
 	e.mu.Lock()
+	defer e.mu.Unlock()
 	e.jobsStatus[user.UserId] = status
 }
 
 func (e *Employment) ClearStatus(user *users.User) {
-	defer e.mu.Unlock()
 	e.mu.Lock()
+	defer e.mu.Unlock()
 	delete(e.jobsStatus, user.UserId)
 }
 
@@ -96,8 +96,8 @@ func (e *Employment) GetStatus(user *users.User) EmploymentStatus {
 	if status.IsInProgress {
 		result.TimeLeft = float32(status.CompletionTime.Sub(timeNow).Seconds())
 	}
-	defer e.mu.RUnlock()
 	e.mu.RLock()
+	defer e.mu.RUnlock()
 	for _, job := range e.jobs {
 		if _, ok := status.Countdown[job.Code]; !ok {
 			result.AvailableJobs = append(result.AvailableJobs, job)
@@ -107,8 +107,8 @@ func (e *Employment) GetStatus(user *users.User) EmploymentStatus {
 }
 
 func (e *Employment) CollectReward(user *users.User) (*engine.PlayerJobStatus, domain.UnitBooty, bool) {
-	defer e.mu.Unlock()
 	e.mu.Lock()
+	defer e.mu.Unlock()
 	status := e.retrieveUserJobStatus(user.UserId)
 	if status.IsInProgress || !status.IsComplete {
 		return nil, domain.UnitBooty{}, false
@@ -122,8 +122,8 @@ func (e *Employment) CollectReward(user *users.User) (*engine.PlayerJobStatus, d
 }
 
 func (e *Employment) QuitJob(user *users.User) (*engine.PlayerJobStatus, bool) {
-	defer e.mu.Unlock()
 	e.mu.Lock()
+	defer e.mu.Unlock()
 	status := e.retrieveUserJobStatus(user.UserId)
 	if !status.IsInProgress {
 		return nil, false
@@ -133,8 +133,8 @@ func (e *Employment) QuitJob(user *users.User) (*engine.PlayerJobStatus, bool) {
 }
 
 func (e *Employment) ApplyForAJob(user *users.User, code engine.PlayerJobCode) (*engine.PlayerJobStatus, bool) {
-	defer e.mu.Unlock()
 	e.mu.Lock()
+	defer e.mu.Unlock()
 	status := e.retrieveUserJobStatus(user.UserId)
 	if status.IsInProgress || status.IsComplete {
 		return nil, false

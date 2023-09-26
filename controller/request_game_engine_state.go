@@ -7,8 +7,8 @@ func (c *GameController) handleGameStateRequest(playerId engine.PlayerId, reques
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	defer wrapper.RUnlock()
 	wrapper.RLock()
+	defer wrapper.RUnlock()
 	result, _, ok := wrapper.ReadGameState(playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)

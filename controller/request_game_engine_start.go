@@ -17,8 +17,8 @@ func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, reques
 	}
 	actors := room.GetActors()
 	wrapper := gameengines.NewGameEngineWrapper(engine.NewGameEngine(scenario, actors), c.broadcastGameAction)
-	defer wrapper.Unlock()
 	wrapper.Lock()
+	defer wrapper.Unlock()
 	state, playerIds := c.engines.Register(wrapper)
 	for _, playerId := range playerIds {
 		c.users.ChangeUserStatus(playerId, users.UserStatusInGame)

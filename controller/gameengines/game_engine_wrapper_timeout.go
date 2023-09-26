@@ -39,8 +39,8 @@ func (w *GameEngineWrapper) setNextPhaseTimer() {
 	}
 	timerId := w.nextPhaseTimer.Id()
 	w.nextPhaseTimer.AfterFunc(time.Duration(timeout)*time.Second, func() {
-		defer w.Unlock()
 		w.Lock()
+		defer w.Unlock()
 		if timerId != w.nextPhaseTimer.Id() {
 			return
 		}

@@ -28,8 +28,8 @@ func (c *GameController) ConnectionStatusChanged(playerId engine.PlayerId, isOff
 		c.broadcastRoomStatus(roomUid)
 	}
 	if wrapper, ok := c.engines.Find(playerId); ok {
-		defer wrapper.Unlock()
 		wrapper.Lock()
+		defer wrapper.Unlock()
 		state, broadcastPlayerIds, ok := wrapper.ConnectionStatusChanged(playerId, isOffline)
 		if ok {
 			c.broadcastGameAction(broadcastPlayerIds, state)

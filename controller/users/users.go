@@ -39,8 +39,8 @@ func (u *Users) Get(playerId engine.PlayerId) (User, bool) {
 }
 
 func (u *Users) GetByIds(playerIds []engine.PlayerId) []User {
-	defer u.mu.RUnlock()
 	u.mu.RLock()
+	defer u.mu.RUnlock()
 	result := []User{}
 	for _, user := range u.users {
 		if util.Contains(playerIds, user.Id) {
@@ -51,21 +51,21 @@ func (u *Users) GetByIds(playerIds []engine.PlayerId) []User {
 }
 
 func (u *Users) Has(playerId engine.PlayerId) bool {
-	defer u.mu.RUnlock()
 	u.mu.RLock()
+	defer u.mu.RUnlock()
 	_, exists := u.users[playerId]
 	return exists
 }
 
 func (u *Users) TotalCount() int {
-	defer u.mu.RUnlock()
 	u.mu.RLock()
+	defer u.mu.RUnlock()
 	return len(u.users)
 }
 
 func (u *Users) GetByNickname(nickname string) (User, bool) {
-	defer u.mu.RUnlock()
 	u.mu.RLock()
+	defer u.mu.RUnlock()
 	playerId, ok := u.userNicknameToId[nickname]
 	if !ok {
 		return User{}, false
@@ -75,8 +75,8 @@ func (u *Users) GetByNickname(nickname string) (User, bool) {
 }
 
 func (u *Users) GetByEmail(email model.UserEmail) (User, bool) {
-	defer u.mu.RUnlock()
 	u.mu.RLock()
+	defer u.mu.RUnlock()
 	playerId, ok := u.userEmailToId[email]
 	if !ok {
 		return User{}, false
@@ -86,8 +86,8 @@ func (u *Users) GetByEmail(email model.UserEmail) (User, bool) {
 }
 
 func (u *Users) GetAndRefreshBySessionId(sessionId UserSessionId) (User, bool) {
-	defer u.mu.Unlock()
 	u.mu.Lock()
+	defer u.mu.Unlock()
 	playerId, ok := u.userSessionIdToId[sessionId]
 	if !ok {
 		return User{}, false
@@ -103,8 +103,8 @@ func (u *Users) GetAndRefreshBySessionId(sessionId UserSessionId) (User, bool) {
 }
 
 func (u *Users) GetIdsByStatus(status UserStatus, onlineOnly bool) []engine.PlayerId {
-	defer u.mu.RUnlock()
 	u.mu.RLock()
+	defer u.mu.RUnlock()
 	result := []engine.PlayerId{}
 	for _, user := range u.users {
 		if user.Status&status != 0 && (!onlineOnly || !user.IsOffline) {
@@ -115,8 +115,8 @@ func (u *Users) GetIdsByStatus(status UserStatus, onlineOnly bool) []engine.Play
 }
 
 func (u *Users) GetIdsByStatusExcept(status UserStatus, playerId engine.PlayerId) []engine.PlayerId {
-	defer u.mu.RUnlock()
 	u.mu.RLock()
+	defer u.mu.RUnlock()
 	result := []engine.PlayerId{}
 	for _, user := range u.users {
 		if user.Id != playerId && user.Status&status != 0 {
@@ -127,8 +127,8 @@ func (u *Users) GetIdsByStatusExcept(status UserStatus, playerId engine.PlayerId
 }
 
 func (u *Users) UpdateWithUnitOnGameComplete(playerId engine.PlayerId, unit *domain.Unit) {
-	defer u.mu.Unlock()
 	u.mu.Lock()
+	defer u.mu.Unlock()
 	user, ok := u.users[playerId]
 	if !ok {
 		return
@@ -154,8 +154,8 @@ func (u *Users) UpdateWithNewGameUnit(playerId engine.PlayerId, unit *engine.Gam
 }
 
 func (u *Users) AccumulateBooty(playerId engine.PlayerId, booty domain.UnitBooty) {
-	defer u.mu.Unlock()
 	u.mu.Lock()
+	defer u.mu.Unlock()
 	user, ok := u.users[playerId]
 	if !ok {
 		return
@@ -164,8 +164,8 @@ func (u *Users) AccumulateBooty(playerId engine.PlayerId, booty domain.UnitBooty
 }
 
 func (u *Users) UpdateOnLevelUp(playerId engine.PlayerId, unit *domain.Unit) {
-	defer u.mu.Unlock()
 	u.mu.Lock()
+	defer u.mu.Unlock()
 	user, ok := u.users[playerId]
 	if !ok {
 		return
@@ -174,8 +174,8 @@ func (u *Users) UpdateOnLevelUp(playerId engine.PlayerId, unit *domain.Unit) {
 }
 
 func (u *Users) ResetUser(playerId engine.PlayerId) {
-	defer u.mu.Unlock()
 	u.mu.Lock()
+	defer u.mu.Unlock()
 	user, ok := u.users[playerId]
 	if !ok {
 		return
@@ -185,8 +185,8 @@ func (u *Users) ResetUser(playerId engine.PlayerId) {
 }
 
 func (u *Users) AddUser(user *User) {
-	defer u.mu.Unlock()
 	u.mu.Lock()
+	defer u.mu.Unlock()
 	user.Id = engine.PlayerId(u.rndGen.MakeUUIDWithUniquenessCheck(func(value string) bool {
 		_, ok := u.users[engine.PlayerId(value)]
 		return !ok
@@ -203,8 +203,8 @@ func (u *Users) AddUser(user *User) {
 }
 
 func (u *Users) RemoveUser(playerId engine.PlayerId) *User {
-	defer u.mu.Unlock()
 	u.mu.Lock()
+	defer u.mu.Unlock()
 	user, ok := u.users[playerId]
 	if !ok {
 		return nil
@@ -217,8 +217,8 @@ func (u *Users) RemoveUser(playerId engine.PlayerId) *User {
 }
 
 func (u *Users) ChangeUserStatus(playerId engine.PlayerId, status UserStatus) {
-	defer u.mu.Unlock()
 	u.mu.Lock()
+	defer u.mu.Unlock()
 	user, ok := u.users[playerId]
 	if !ok {
 		return
@@ -237,8 +237,8 @@ func (u *Users) GetUserStatus(playerId engine.PlayerId) UserStatus {
 }
 
 func (u *Users) ConnectionStatusChanged(playerId engine.PlayerId, isOffline bool) {
-	defer u.mu.Unlock()
 	u.mu.Lock()
+	defer u.mu.Unlock()
 	user, ok := u.users[playerId]
 	if !ok {
 		return

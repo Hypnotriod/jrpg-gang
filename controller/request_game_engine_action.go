@@ -18,8 +18,8 @@ func (c *GameController) handleGameActionRequest(playerId engine.PlayerId, reque
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	defer wrapper.Unlock()
 	wrapper.Lock()
+	defer wrapper.Unlock()
 	result, broadcastPlayerIds, ok := wrapper.ExecuteUserAction(data.Action, playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
