@@ -52,8 +52,8 @@ func (p *Persistance) AddUserToAuthCache(userModel *model.UserModel) auth.Authen
 }
 
 func (p *Persistance) GetUserFromAuthCache(token auth.AuthenticationToken) (*model.UserModel, bool) {
-	defer p.mu.RUnlock()
 	p.mu.RLock()
+	defer p.mu.RUnlock()
 	item := p.usersAuthCache.Get(token)
 	if item == nil || item.IsExpired() {
 		return nil, false
@@ -62,8 +62,8 @@ func (p *Persistance) GetUserFromAuthCache(token auth.AuthenticationToken) (*mod
 }
 
 func (p *Persistance) RemoveUserFromAuthCache(token auth.AuthenticationToken) {
-	defer p.mu.Unlock()
 	p.mu.Lock()
+	defer p.mu.Unlock()
 	item := p.usersAuthCache.Get(token)
 	if item != nil {
 		email := item.Value().Email
@@ -74,8 +74,8 @@ func (p *Persistance) RemoveUserFromAuthCache(token auth.AuthenticationToken) {
 
 func (p *Persistance) onUserAuthCacheEviction(ctx context.Context, reson ttlcache.EvictionReason, item *ttlcache.Item[auth.AuthenticationToken, *model.UserModel]) {
 	if reson != ttlcache.EvictionReasonDeleted {
-		defer p.mu.Unlock()
 		p.mu.Lock()
+		defer p.mu.Unlock()
 		email := item.Value().Email
 		delete(p.userEmailToAuthToken, email)
 	}

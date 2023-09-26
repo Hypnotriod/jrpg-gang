@@ -9,8 +9,8 @@ func (c *GameController) handleGameLeaveRequest(playerId engine.PlayerId, reques
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	defer wrapper.Unlock()
 	wrapper.Lock()
+	defer wrapper.Unlock()
 	result, broadcastPlayerIds, unit, ok := wrapper.LeaveGame(playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)

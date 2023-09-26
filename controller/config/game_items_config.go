@@ -23,8 +23,8 @@ func (c *GameItemsConfig) Load(path string) error {
 	if err != nil {
 		return err
 	}
-	defer c.mu.Unlock()
 	c.mu.Lock()
+	defer c.mu.Unlock()
 	c.prepare(items)
 	return nil
 }
@@ -37,8 +37,8 @@ func (c *GameItemsConfig) prepare(items *domain.UnitInventory) {
 }
 
 func (c *GameItemsConfig) PopulateFromDescriptor(inventory *domain.UnitInventory) {
-	defer c.mu.RUnlock()
 	c.mu.RLock()
+	defer c.mu.RUnlock()
 	for n := range inventory.Descriptor {
 		desc := inventory.Descriptor[n]
 		if item, ok := c.codeToItem[desc.Code]; ok {

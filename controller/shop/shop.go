@@ -24,21 +24,21 @@ func (s *Shop) LoadItems(path string, itemsConfig *config.GameItemsConfig) error
 	if err != nil {
 		return err
 	}
-	defer s.mu.Unlock()
 	s.mu.Lock()
+	defer s.mu.Unlock()
 	itemsConfig.PopulateFromDescriptor(items)
 	s.shop = engine.NewGameShop(items)
 	return nil
 }
 
 func (s *Shop) GetStatus(unit *domain.Unit) *engine.GameShopStatus {
-	defer s.mu.RUnlock()
 	s.mu.RLock()
+	defer s.mu.RUnlock()
 	return s.shop.GetStatus(unit)
 }
 
 func (s *Shop) ExecuteAction(action domain.Action, user *users.User) *domain.ActionResult {
-	defer s.mu.RUnlock()
 	s.mu.RLock()
+	defer s.mu.RUnlock()
 	return s.shop.ExecuteAction(action, &user.Unit.Unit, user.RndGen)
 }

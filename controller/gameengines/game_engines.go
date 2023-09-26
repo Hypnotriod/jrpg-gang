@@ -20,8 +20,8 @@ func NewGameEngines() *GameEngines {
 }
 
 func (e *GameEngines) Register(wrapper *GameEngineWrapper) (*engine.GameEvent, []engine.PlayerId) {
-	defer e.mu.Unlock()
 	e.mu.Lock()
+	defer e.mu.Unlock()
 	for _, playerId := range wrapper.engine.GetPlayerIds() {
 		e.playerIdToEngine[playerId] = wrapper
 	}
@@ -52,8 +52,8 @@ func (e *GameEngines) Unregister(playerId engine.PlayerId) (*GameEngineWrapper, 
 }
 
 func (e *GameEngines) IsUserInGame(playerId engine.PlayerId) bool {
-	defer e.mu.RUnlock()
 	e.mu.RLock()
+	defer e.mu.RUnlock()
 	_, ok := e.playerIdToEngine[playerId]
 	return ok
 }

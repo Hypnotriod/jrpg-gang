@@ -18,15 +18,15 @@ func NewGameScenariosConfig() *GameScenariosConfig {
 }
 
 func (c *GameScenariosConfig) Has(id engine.GameScenarioId) bool {
-	defer c.mu.RUnlock()
 	c.mu.RLock()
+	defer c.mu.RUnlock()
 	_, ok := c.scenarios[id]
 	return ok
 }
 
 func (c *GameScenariosConfig) Get(id engine.GameScenarioId) *engine.GameScenario {
-	defer c.mu.RUnlock()
 	c.mu.RLock()
+	defer c.mu.RUnlock()
 	scenario, ok := c.scenarios[id]
 	if !ok {
 		return nil
@@ -40,8 +40,8 @@ func (c *GameScenariosConfig) LoadScenarios(path string, unitsConfig *GameUnitsC
 	if err != nil {
 		return err
 	}
-	defer c.mu.Unlock()
 	c.mu.Lock()
+	defer c.mu.Unlock()
 	c.prepare(scenarios, unitsConfig)
 	return nil
 }

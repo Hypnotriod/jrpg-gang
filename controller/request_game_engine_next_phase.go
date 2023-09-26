@@ -17,8 +17,8 @@ func (c *GameController) handleGameNextPhaseRequest(playerId engine.PlayerId, re
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	defer wrapper.Unlock()
 	wrapper.Lock()
+	defer wrapper.Unlock()
 	result, broadcastPlayerIds, ok := wrapper.ReadyForNextPhase(playerId, data.IsReady)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)

@@ -66,8 +66,8 @@ func (c *Client) Serve() {
 }
 
 func (c *Client) Kick() {
-	defer c.mu.Unlock()
 	c.mu.Lock()
+	defer c.mu.Unlock()
 	if !c.left && !c.kicked {
 		c.conn.Close()
 	}
@@ -91,8 +91,8 @@ func (c *Client) managePlayerId(playerId engine.PlayerId) {
 }
 
 func (c *Client) complete() {
-	defer c.mu.Unlock()
 	c.mu.Lock()
+	defer c.mu.Unlock()
 	c.left = true
 	if !c.kicked {
 		c.hub.unregisterClient(c.playerId)

@@ -7,8 +7,8 @@ func (c *GameController) handlePlayerInfoRequest(playerId engine.PlayerId, reque
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	defer wrapper.RUnlock()
 	wrapper.RLock()
+	defer wrapper.RUnlock()
 	result, ok := wrapper.ReadPlayerInfo(playerId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
