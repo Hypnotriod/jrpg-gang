@@ -141,8 +141,8 @@ func (u *Users) UpdateWithUnitOnGameComplete(playerId engine.PlayerId, unit *dom
 }
 
 func (u *Users) UpdateWithNewGameUnit(playerId engine.PlayerId, unit *engine.GameUnit) {
-	defer u.mu.Unlock()
 	u.mu.Lock()
+	defer u.mu.Unlock()
 	user, ok := u.users[playerId]
 	if !ok {
 		return
