@@ -142,14 +142,20 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 	if !item.CanBeSold {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
-	if item.Type == domain.ItemTypeAmmunition && unit.Inventory.RemoveAmmunition(action.ItemUid, action.Quantity) == nil {
-		return result.WithResult(domain.ResultNotEnoughResources)
-	} else if item.Type == domain.ItemTypeDisposable && unit.Inventory.RemoveDisposable(action.ItemUid, action.Quantity) == nil {
-		return result.WithResult(domain.ResultNotEnoughResources)
+	if item.Type == domain.ItemTypeAmmunition {
+		if unit.Inventory.RemoveAmmunition(action.ItemUid, action.Quantity) == nil {
+			return result.WithResult(domain.ResultNotEnoughResources)
+		}
+	} else if item.Type == domain.ItemTypeDisposable {
+		if unit.Inventory.RemoveDisposable(action.ItemUid, action.Quantity) == nil {
+			return result.WithResult(domain.ResultNotEnoughResources)
+		}
 	} else if action.Quantity != 1 {
 		return result.WithResult(domain.ResultNotAllowed)
-	} else if item.Type == domain.ItemTypeMagic && unit.Inventory.RemoveMagic(action.ItemUid) == nil {
-		return result.WithResult(domain.ResultNotEnoughResources)
+	} else if item.Type == domain.ItemTypeMagic {
+		if unit.Inventory.RemoveMagic(action.ItemUid) == nil {
+			return result.WithResult(domain.ResultNotEnoughResources)
+		}
 	} else {
 		equipment := unit.Inventory.RemoveEquipment(action.ItemUid)
 		if equipment == nil {
