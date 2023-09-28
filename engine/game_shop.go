@@ -139,7 +139,7 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 	if item == nil {
 		return result.WithResult(domain.ResultNotFound)
 	}
-	if !item.CanBeSold {
+	if !item.CanBeSold || item.Type == domain.ItemTypeMagic {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
 	if item.Type == domain.ItemTypeAmmunition {
@@ -152,14 +152,10 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 		}
 	} else if action.Quantity != 1 {
 		return result.WithResult(domain.ResultNotAllowed)
-	} else if item.Type == domain.ItemTypeMagic {
-		if unit.Inventory.RemoveMagic(action.ItemUid) == nil {
-			return result.WithResult(domain.ResultNotEnoughResources)
-		}
 	} else {
 		equipment := unit.Inventory.RemoveEquipment(action.ItemUid)
 		if equipment == nil {
-			return result.WithResult(domain.ResultNotEnoughResources)
+			return result.WithResult(domain.ResultNotFound)
 		}
 		if equipment.Durability <= 0 {
 			wearoutFactor = 0
