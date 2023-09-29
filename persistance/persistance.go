@@ -108,7 +108,7 @@ func (p *Persistance) GetOrCreateUser(credentials auth.UserCredentials) *model.U
 	if user != nil {
 		return user
 	}
-	userToPersist := model.UserModel{
+	userToPersist := &model.UserModel{
 		Email:   model.UserEmail(credentials.Email),
 		Picture: credentials.Picture,
 	}
@@ -123,14 +123,14 @@ func (p *Persistance) GetOrCreateUser(credentials auth.UserCredentials) *model.U
 	return user
 }
 
-func (p *Persistance) UpdateUser(user model.UserModel) bool {
+func (p *Persistance) UpdateUser(user *model.UserModel) bool {
 	ctx, cancel := p.db.requestContext()
 	defer cancel()
 	updated, ok := p.db.UsersRepository.UpdateOneWithUnit(ctx, user)
 	return updated != 0 && ok
 }
 
-func (p *Persistance) UpdateJobStatus(jobStatus model.JobStatusModel) bool {
+func (p *Persistance) UpdateJobStatus(jobStatus *model.JobStatusModel) bool {
 	ctx, cancel := p.db.requestContext()
 	defer cancel()
 	matchedCount, ok := p.db.JobStatusRepository.UpdateOrInsertOne(ctx, jobStatus)

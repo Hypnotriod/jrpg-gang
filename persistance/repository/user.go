@@ -9,18 +9,13 @@ import (
 )
 
 type UserRepository struct {
-	MongoDBRepository[model.UserModel]
+	MongoDBRepository[*model.UserModel]
 }
 
 func NewUserRepository(collection *mongo.Collection) *UserRepository {
 	r := &UserRepository{}
 	r.collection = collection
 	return r
-}
-
-func (r *UserRepository) InsertOne(ctx context.Context, model model.UserModel) (ObjectId, bool) {
-	model.OnCreate()
-	return r.MongoDBRepository.InsertOne(ctx, model)
 }
 
 func (r *UserRepository) FindByEmail(ctx context.Context, email model.UserEmail) (*model.UserModel, bool) {
@@ -33,7 +28,7 @@ func (r *UserRepository) FindByNickname(ctx context.Context, nickname string) (*
 	return r.FindOne(ctx, filter, &model.UserModel{})
 }
 
-func (r *UserRepository) UpdateOneWithUnit(ctx context.Context, user model.UserModel) (int64, bool) {
+func (r *UserRepository) UpdateOneWithUnit(ctx context.Context, user *model.UserModel) (int64, bool) {
 	filter := primitive.D{{Key: "email", Value: user.Email}}
 	fields := primitive.D{
 		{Key: "class", Value: user.Class},

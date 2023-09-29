@@ -9,7 +9,7 @@ import (
 
 func (c *GameController) persistUser(user *users.User) bool {
 	unit := user.Unit.ToPersist()
-	userModel := model.UserModel{
+	userModel := &model.UserModel{
 		Email:    user.Email,
 		Nickname: user.Nickname,
 		Class:    user.Class,
@@ -19,7 +19,7 @@ func (c *GameController) persistUser(user *users.User) bool {
 }
 
 func (c *GameController) persistJobStatus(userId model.UserId, jobStatus engine.PlayerJobStatus) bool {
-	jobStatusModel := model.JobStatusModel{
+	jobStatusModel := &model.JobStatusModel{
 		UserId:         userId,
 		IsInProgress:   jobStatus.IsInProgress,
 		IsComplete:     jobStatus.IsComplete,

@@ -9,7 +9,7 @@ import (
 )
 
 type JobStatusRepository struct {
-	MongoDBRepository[model.JobStatusModel]
+	MongoDBRepository[*model.JobStatusModel]
 }
 
 func NewJobStatusRepository(collection *mongo.Collection) *JobStatusRepository {
@@ -23,7 +23,7 @@ func (r *JobStatusRepository) FindByUserId(ctx context.Context, userId model.Use
 	return r.FindOne(ctx, filter, &model.JobStatusModel{})
 }
 
-func (r *JobStatusRepository) UpdateOrInsertOne(ctx context.Context, model model.JobStatusModel) (int64, bool) {
+func (r *JobStatusRepository) UpdateOrInsertOne(ctx context.Context, model *model.JobStatusModel) (int64, bool) {
 	filter := primitive.D{{Key: "user_id", Value: model.UserId}}
 	fields := primitive.D{
 		{Key: "is_in_progress", Value: model.IsInProgress},
@@ -36,7 +36,6 @@ func (r *JobStatusRepository) UpdateOrInsertOne(ctx context.Context, model model
 	if !ok || matchedCount != 0 {
 		return matchedCount, ok
 	}
-	model.OnCreate()
 	if _, ok := r.InsertOne(ctx, model); ok {
 		return 1, true
 	}

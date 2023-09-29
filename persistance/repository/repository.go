@@ -18,7 +18,8 @@ const (
 )
 
 type MongoDBRepositoryModel interface {
-	model.UserModel | model.JobStatusModel
+	model.Interface
+	*model.UserModel | *model.JobStatusModel
 }
 
 type MongoDBRepository[T MongoDBRepositoryModel] struct {
@@ -26,6 +27,7 @@ type MongoDBRepository[T MongoDBRepositoryModel] struct {
 }
 
 func (r *MongoDBRepository[T]) InsertOne(ctx context.Context, model T) (ObjectId, bool) {
+	model.OnCreate()
 	result, err := r.collection.InsertOne(ctx, model)
 	if err != nil {
 		log.Error("Mongodb: InsertOne (", model, ") to collection:", r.collection.Name(), " fail: ", err)
@@ -66,7 +68,7 @@ func (r *MongoDBRepository[T]) UpdateOne(ctx context.Context, filter bson.D, fie
 	return result.MatchedCount, true
 }
 
-func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id ObjectId, accumulator *T) (*T, bool) {
+func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id ObjectId, accumulator T) (T, bool) {
 	objectId, err := primitive.ObjectIDFromHex(string(id))
 	if err != nil {
 		log.Error("Mongodb: FindOneById: ", id, " in collection:", r.collection.Name(), " fail: ", err)
@@ -84,7 +86,7 @@ func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id ObjectId, acc
 	return accumulator, true
 }
 
-func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.D, accumulator *T) (*T, bool) {
+func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.D, accumulator T) (T, bool) {
 	err := r.collection.FindOne(ctx, filter).Decode(accumulator)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
