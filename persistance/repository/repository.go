@@ -18,7 +18,7 @@ const (
 )
 
 type MongoDBRepositoryModel interface {
-	model.Interface
+	OnCreate()
 	*model.UserModel | *model.JobStatusModel
 }
 
