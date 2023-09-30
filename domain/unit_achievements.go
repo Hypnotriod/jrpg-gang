@@ -15,3 +15,12 @@ func (a UnitAchievements) Merge(achievements UnitAchievements) {
 		a[achievement] += value
 	}
 }
+
+func (a UnitAchievements) Test(achievements UnitAchievements) bool {
+	for achievement, value := range achievements {
+		if a[achievement] < value {
+			return false
+		}
+	}
+	return true
+}

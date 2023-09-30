@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"jrpg-gang/domain"
 	"jrpg-gang/util"
 )
 
@@ -17,11 +18,12 @@ func (p GamePath) Weight() int {
 }
 
 type GameScenario struct {
-	Spots     map[GameSpotId]*Spot `json:"spots"`
-	Path      [][]GamePath         `json:"path"`
-	rndGen    *util.RndGen
-	spot      *Spot
-	pathIndex int
+	Spots        map[GameSpotId]*Spot    `json:"spots"`
+	Path         [][]GamePath            `json:"path"`
+	Requirements domain.UnitRequirements `json:"requirements"`
+	rndGen       *util.RndGen
+	spot         *Spot
+	pathIndex    int
 }
 
 func (s *GameScenario) Clone() *GameScenario {

@@ -1,5 +1,6 @@
 {
     "easy-01": {
+        "requirements": {},
         "spots": {
             "1-0": {
                 "name": "Winter Cave",
@@ -1234,6 +1235,7 @@
         ]
     },
     "advanced-01": {
+        "requirements": {},
         "spots": {
             "1-0": {
                 "name": "Winter Cave",

@@ -196,7 +196,7 @@ func (u *Unit) CheckRequirements(requirements UnitRequirements) bool {
 	attributes := u.TotalModification().Attributes
 	attributes.Accumulate(u.Stats.Attributes)
 	attributes.Normalize()
-	return requirements.Check(u.Class, attributes)
+	return requirements.Check(u, attributes)
 }
 
 func (u *Unit) CheckUseCost(useCost UnitBaseAttributes) bool {

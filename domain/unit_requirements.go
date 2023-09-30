@@ -2,11 +2,15 @@ package domain
 
 type UnitRequirements struct {
 	UnitAttributes
-	Class UnitClass `json:"class,omitempty"`
+	Level        uint             `json:"level"`
+	Class        UnitClass        `json:"class,omitempty"`
+	Achievements UnitAchievements `json:"achievements,omitempty"`
 }
 
-func (r *UnitRequirements) Check(class UnitClass, attributes UnitAttributes) bool {
-	return (r.Class == UnitClassEmpty || r.Class == class) &&
+func (r *UnitRequirements) Check(unit *Unit, attributes UnitAttributes) bool {
+	return (r.Class == UnitClassEmpty || r.Class == unit.Class) &&
+		r.Level <= unit.Stats.Progress.Level &&
+		unit.Achievements.Test(r.Achievements) &&
 		r.Strength <= attributes.Strength &&
 		r.Physique <= attributes.Physique &&
 		r.Agility <= attributes.Agility &&

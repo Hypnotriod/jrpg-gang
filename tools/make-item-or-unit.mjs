@@ -109,6 +109,7 @@ async function makeUnit() {
         stats: await makeUnitStats('stats'),
         slots: await makeSlots('slots'),
         booty: await makeUnitBooty('booty'),
+        achievements: await makeAchievements('achievements'),
         inventory: await makeInventory('inventory'),
         drop: await makeDrop('drop'),
     }
@@ -245,6 +246,18 @@ async function makeSlots(header) {
     return result;
 }
 
+async function makeAchievements(header) {
+    header && stdout.write(`${header}:\r\n`);
+    const result = {
+    }
+    while (await yesNo('achievement')) {
+        const key = await makeString('achievement id');
+        const value = await makeNumber('times acquired', 1);
+        result[key] = value;
+    }
+    return result;
+}
+
 async function makeActionRange(header) {
     header && stdout.write(`${header}:\r\n`);
     const result = {
@@ -336,7 +349,7 @@ async function makeUnitBaseAttributes(header) {
         health: await makeNumber('health'),
         stamina: await makeNumber('stamina'),
         mana: await makeNumber('mana'),
-        mana: await makeNumber('actionPoints', 2),
+        mana: await makeNumber('actionPoints', 9),
     }
     return result;
 }
