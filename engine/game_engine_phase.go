@@ -13,7 +13,7 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
 		e.processAI(result)
 	case GamePhaseMakeMoveOrAction, GamePhaseMakeAction:
-		e.onUnitCompleteAction(nil, nil)
+		e.onUnitCompleteAction(nil)
 	case GamePhaseRetreatAction:
 		e.processRetreatActionAI(result)
 	case GamePhaseActionComplete:
@@ -74,8 +74,9 @@ func (e *GameEngine) processRoundComplete(event *GameEvent) {
 func (e *GameEngine) processBeforeSpotComplete(event *GameEvent) {
 	event.SpotCompleteResult = NewSpotCompleteResult()
 	if e.battlefield().FactionUnitsCount(GameUnitFactionLeft) != 0 {
-		e.accumulateSpotBooty(event)
-		e.applySpotExperience(event)
+		e.accumulateSpotBooty(event.SpotCompleteResult)
+		e.applySpotExperience(event.SpotCompleteResult)
+		e.applySpotAchievements(event.SpotCompleteResult)
 		e.restoreActorsState()
 	}
 	if e.scenario.IsLastSpot() {
@@ -126,8 +127,9 @@ func (e *GameEngine) endRound(event *GameEvent) {
 		unit.ReduceModificationOnNextTurn()
 	}
 	corpses := e.battlefield().FilterSurvivors()
-	e.accumulateDrop(corpses, &result.Drop)
-	e.applyExperience(corpses, &result.Experience)
+	e.accumulateDrop(corpses, result.Drop)
+	e.applyExperience(corpses, result.Experience)
+	e.applyAchievements(corpses, result.Achievements)
 	event.EndRoundResult = result
 }
 
@@ -139,7 +141,7 @@ func (e *GameEngine) onUnitMoveAction() {
 	unit := e.getActiveUnit()
 	unit.ReduceActionPoints(MOVE_ACTION_POINTS)
 	if unit.State.ActionPoints < MIN_ACTION_POINTS {
-		e.onUnitCompleteAction(nil, nil)
+		e.onUnitCompleteAction(nil)
 	} else if unit.HasPlayerId() {
 		e.state.ChangePhase(GamePhaseMakeMoveOrAction)
 	} else {
@@ -160,11 +162,18 @@ func (e *GameEngine) onUseItemOnTarget(targetUid uint, actionResult *domain.Acti
 	}
 }
 
-func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint, dropDistribution *map[uint]domain.UnitBooty) {
+func (e *GameEngine) onUnitCompleteAction(result *domain.ActionResult) {
 	unit := e.getActiveUnit()
 	corpses := e.battlefield().FilterSurvivors()
-	e.accumulateDrop(corpses, dropDistribution)
-	e.applyExperience(corpses, expDistribution)
+	if result != nil {
+		e.accumulateDrop(corpses, result.Drop)
+		e.applyExperience(corpses, result.Experience)
+		e.applyAchievements(corpses, result.Achievements)
+	} else {
+		e.accumulateDrop(corpses, nil)
+		e.applyExperience(corpses, nil)
+		e.applyAchievements(corpses, nil)
+	}
 	e.battlefield().UpdateCellsFactions()
 	if unit.IsDead || unit.State.ActionPoints < MIN_ACTION_POINTS {
 		unit.ClearWaitingOrder()
@@ -175,23 +184,32 @@ func (e *GameEngine) onUnitCompleteAction(expDistribution *map[uint]uint, dropDi
 	e.state.ChangePhase(GamePhaseActionComplete)
 }
 
-func (e *GameEngine) accumulateSpotBooty(event *GameEvent) {
+func (e *GameEngine) accumulateSpotBooty(spotCompleteResult *SpotCompleteResult) {
 	booty := util.RandomPick(e.rndGen, e.scenario.CurrentSpot().Booty)
 	booty.W = 0
 	e.state.Booty.Accumulate(booty)
-	event.SpotCompleteResult.Booty = booty
+	spotCompleteResult.Booty = booty
 }
 
-func (e *GameEngine) applySpotExperience(event *GameEvent) {
+func (e *GameEngine) applySpotExperience(spotCompleteResult *SpotCompleteResult) {
 	experience := e.scenario.CurrentSpot().Experience
 	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
 	for _, unit := range leftUnits {
 		unit.Stats.Progress.Experience += experience
-		event.SpotCompleteResult.Experience[unit.Uid] += experience
+		spotCompleteResult.Experience[unit.Uid] += experience
 	}
 }
 
-func (e *GameEngine) accumulateDrop(corpses []*GameUnit, dropDistribution *map[uint]domain.UnitBooty) {
+func (e *GameEngine) applySpotAchievements(spotCompleteResult *SpotCompleteResult) {
+	achievements := e.scenario.CurrentSpot().Achievements
+	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
+	for _, unit := range leftUnits {
+		unit.Achievements.Accumulate(achievements)
+	}
+	spotCompleteResult.Achievements.Accumulate(achievements)
+}
+
+func (e *GameEngine) accumulateDrop(corpses []*GameUnit, dropDistribution map[uint]domain.UnitBooty) {
 	for n := range corpses {
 		if len(corpses[n].Drop) == 0 {
 			continue
@@ -202,13 +220,13 @@ func (e *GameEngine) accumulateDrop(corpses []*GameUnit, dropDistribution *map[u
 		}
 		if dropDistribution != nil {
 			drop.W = 0
-			(*dropDistribution)[corpses[n].Uid] = drop
+			dropDistribution[corpses[n].Uid] = drop
 		}
 		e.state.Booty.Accumulate(drop)
 	}
 }
 
-func (e *GameEngine) applyExperience(corpses []*GameUnit, expDistribution *map[uint]uint) {
+func (e *GameEngine) applyExperience(corpses []*GameUnit, expDistribution map[uint]uint) {
 	if len(corpses) == 0 {
 		return
 	}
@@ -227,15 +245,37 @@ func (e *GameEngine) applyExperience(corpses []*GameUnit, expDistribution *map[u
 	for _, unit := range leftUnits {
 		unit.Stats.Progress.Experience += unitExperience
 		if expDistribution != nil {
-			(*expDistribution)[unit.Uid] = unitExperience
+			expDistribution[unit.Uid] = unitExperience
 		}
 		if totalExperience > 0 {
 			unit.Stats.Progress.Experience += 1
 			if expDistribution != nil {
-				(*expDistribution)[unit.Uid]++
+				expDistribution[unit.Uid]++
 			}
 			totalExperience--
 		}
+	}
+}
+
+func (e *GameEngine) applyAchievements(corpses []*GameUnit, achDistribution domain.UnitAchievements) {
+	if len(corpses) == 0 {
+		return
+	}
+	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
+	if len(leftUnits) == 0 {
+		return
+	}
+	rightCorpses := util.Filter(corpses, func(corpse *GameUnit) bool {
+		return corpse.Faction == GameUnitFactionRight
+	})
+	if achDistribution == nil {
+		achDistribution = domain.UnitAchievements{}
+	}
+	for _, corpse := range rightCorpses {
+		achDistribution.Merge(corpse.Achievements)
+	}
+	for _, unit := range leftUnits {
+		unit.Achievements.Merge(achDistribution)
 	}
 }
 

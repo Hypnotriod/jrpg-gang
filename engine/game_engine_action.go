@@ -91,7 +91,7 @@ func (e *GameEngine) executeUseAction(action domain.Action, playerId PlayerId) *
 	result = e.manageItemSpread(result, unit, target, action.ItemUid)
 	e.onUseItemOnTarget(unit.Uid, result)
 	unit.Inventory.UpdateItemsState()
-	e.onUnitCompleteAction(&result.Experience, &result.Drop)
+	e.onUnitCompleteAction(result)
 	return result
 }
 
@@ -204,7 +204,7 @@ func (e *GameEngine) executeSkipAction(action domain.Action, playerId PlayerId) 
 	}
 	unit.ClearActionPoints()
 	result := domain.NewActionResult()
-	e.onUnitCompleteAction(&result.Experience, &result.Drop)
+	e.onUnitCompleteAction(result)
 	return result.WithResult(domain.ResultAccomplished)
 }
 

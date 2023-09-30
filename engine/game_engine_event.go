@@ -5,10 +5,11 @@ import (
 )
 
 type EndRoundResult struct {
-	Damage     map[uint]domain.Damage       `json:"damage,omitempty"`
-	Recovery   map[uint]domain.UnitRecovery `json:"recovery,omitempty"`
-	Experience map[uint]uint                `json:"experience,omitempty"`
-	Drop       map[uint]domain.UnitBooty    `json:"drop,omitempty"`
+	Damage       map[uint]domain.Damage       `json:"damage,omitempty"`
+	Recovery     map[uint]domain.UnitRecovery `json:"recovery,omitempty"`
+	Experience   map[uint]uint                `json:"experience,omitempty"`
+	Drop         map[uint]domain.UnitBooty    `json:"drop,omitempty"`
+	Achievements domain.UnitAchievements      `json:"achievements,omitempty"`
 }
 
 func NewEndRoundResult() *EndRoundResult {
@@ -17,17 +18,20 @@ func NewEndRoundResult() *EndRoundResult {
 	result.Recovery = map[uint]domain.UnitRecovery{}
 	result.Experience = map[uint]uint{}
 	result.Drop = map[uint]domain.UnitBooty{}
+	result.Achievements = domain.UnitAchievements{}
 	return result
 }
 
 type SpotCompleteResult struct {
-	Experience map[uint]uint    `json:"experience,omitempty"`
-	Booty      domain.UnitBooty `json:"booty"`
+	Experience   map[uint]uint           `json:"experience,omitempty"`
+	Booty        domain.UnitBooty        `json:"booty"`
+	Achievements domain.UnitAchievements `json:"achievements,omitempty"`
 }
 
 func NewSpotCompleteResult() *SpotCompleteResult {
 	result := &SpotCompleteResult{}
 	result.Experience = map[uint]uint{}
+	result.Achievements = domain.UnitAchievements{}
 	return result
 }
 

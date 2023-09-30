@@ -29,6 +29,7 @@ type ActionResult struct {
 	TemporalModification map[uint][]UnitModificationImpact `json:"temporalModification,omitempty"`
 	Experience           map[uint]uint                     `json:"experience,omitempty"`
 	Drop                 map[uint]UnitBooty                `json:"drop,omitempty"`
+	Achievements         UnitAchievements                  `json:"achievements,omitempty"`
 	Booty                *UnitBooty                        `json:"booty,omitempty"`
 	Result               ActionResultType                  `json:"result"`
 	WearoutIncreased     bool                              `json:"-"`
@@ -42,14 +43,15 @@ func (r *ActionResult) WithStun(unitUid uint) bool {
 }
 
 func NewActionResult() *ActionResult {
-	action := &ActionResult{}
-	action.InstantDamage = map[uint][]Damage{}
-	action.TemporalDamage = map[uint][]DamageImpact{}
-	action.InstantRecovery = map[uint][]UnitRecovery{}
-	action.TemporalModification = map[uint][]UnitModificationImpact{}
-	action.Experience = map[uint]uint{}
-	action.Drop = map[uint]UnitBooty{}
-	return action
+	r := &ActionResult{}
+	r.InstantDamage = map[uint][]Damage{}
+	r.TemporalDamage = map[uint][]DamageImpact{}
+	r.InstantRecovery = map[uint][]UnitRecovery{}
+	r.TemporalModification = map[uint][]UnitModificationImpact{}
+	r.Experience = map[uint]uint{}
+	r.Drop = map[uint]UnitBooty{}
+	r.Achievements = UnitAchievements{}
+	return r
 }
 
 func (r *ActionResult) WithResult(result ActionResultType) *ActionResult {

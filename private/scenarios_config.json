@@ -15,6 +15,7 @@
                     }
                 ],
                 "experience": 35,
+                "achievements": ["first-blood"],
                 "battlefield": {
                     "matrix": [
                         [
@@ -64,6 +65,7 @@
                     }
                 ],
                 "experience": 35,
+                "achievements": ["first-blood"],
                 "battlefield": {
                     "matrix": [
                         [
@@ -113,6 +115,7 @@
                     }
                 ],
                 "experience": 35,
+                "achievements": ["first-blood"],
                 "battlefield": {
                     "matrix": [
                         [
@@ -992,6 +995,7 @@
                     }
                 ],
                 "experience": 300,
+                "achievements": ["scenario-easy-01-completed"],
                 "battlefield": {
                     "matrix": [
                         [
@@ -1083,6 +1087,7 @@
                     }
                 ],
                 "experience": 300,
+                "achievements": ["scenario-easy-01-completed"],
                 "battlefield": {
                     "matrix": [
                         [
@@ -2715,6 +2720,7 @@
                     }
                 ],
                 "experience": 1000,
+                "achievements": ["scenario-advanced-01-completed"],
                 "battlefield": {
                     "matrix": [
                         [
