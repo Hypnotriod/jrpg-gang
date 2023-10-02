@@ -2,8 +2,6 @@ package auth
 
 import (
 	"context"
-	"encoding/json"
-	"io"
 	"jrpg-gang/util"
 	"net/http"
 	"strconv"
@@ -78,22 +76,10 @@ func (a *Authenticator) googleAuth2AcquireUserInfo(r *http.Request, token *oauth
 	ctx, cancel := context.WithTimeout(r.Context(), time.Duration(a.config.RequestTimeoutSec)*time.Second)
 	defer cancel()
 	url := "https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken
-	response, err := util.HttpGet(ctx, url)
+	userInfo, err := util.HttpGetJson[GoogleOauth2UserInfo](ctx, url)
 	if err != nil {
 		return nil, err
 	}
 
-	defer response.Body.Close()
-	data, err := io.ReadAll(response.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	var userInfo GoogleOauth2UserInfo
-	err = json.Unmarshal(data, &userInfo)
-	if err != nil {
-		return nil, err
-	}
-
-	return &userInfo, nil
+	return userInfo, nil
 }
