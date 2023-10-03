@@ -3,8 +3,20 @@ package util
 import (
 	"context"
 	"io"
+	"net"
 	"net/http"
+	"time"
 )
+
+var httpClient http.Client = http.Client{
+	Timeout: 30 * time.Second,
+	Transport: &http.Transport{
+		Dial: (&net.Dialer{
+			Timeout: 5 * time.Second,
+		}).Dial,
+		TLSHandshakeTimeout: 5 * time.Second,
+	},
+}
 
 func HttpGet(ctx context.Context, url string) (*http.Response, error) {
 	request, _ := http.NewRequestWithContext(
@@ -23,7 +35,7 @@ func HttpGetJson[T any](ctx context.Context, url string) (*T, error) {
 		url,
 		nil)
 
-	response, err := http.DefaultClient.Do(request)
+	response, err := httpClient.Do(request)
 	if err != nil {
 		return nil, err
 	}
