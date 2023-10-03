@@ -14,9 +14,12 @@ var httpClient http.Client = http.Client{
 			Timeout:   30 * time.Second,
 			KeepAlive: 30 * time.Second,
 		}).Dial,
+		ForceAttemptHTTP2:     true,
+		MaxIdleConns:          10,
 		TLSHandshakeTimeout:   10 * time.Second,
 		ResponseHeaderTimeout: 10 * time.Second,
 		IdleConnTimeout:       10 * time.Second,
+		ExpectContinueTimeout: 0,
 	},
 }
 
