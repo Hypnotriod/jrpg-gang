@@ -248,8 +248,7 @@ async function makeSlots(header) {
 
 async function makeAchievements(header) {
     header && stdout.write(`${header}:\r\n`);
-    const result = {
-    }
+    const result = {};
     while (await yesNo('achievement')) {
         const key = await makeString('achievement id');
         const value = await makeNumber('times acquired', 1);
@@ -349,7 +348,7 @@ async function makeUnitBaseAttributes(header) {
         health: await makeNumber('health'),
         stamina: await makeNumber('stamina'),
         mana: await makeNumber('mana'),
-        mana: await makeNumber('actionPoints', 9),
+        actionPoints: await makeNumber('actionPoints', 9),
     }
     return result;
 }
