@@ -99,7 +99,7 @@ func (h *Hub) registerClient(client *Client) {
 
 func (h *Hub) unregisterClient(client *Client) {
 	if client.playerId == engine.PlayerIdEmpty {
-		log.Info("Client left without joining: ", client.Info())
+		log.Info("Client with no id was disconnected: ", client.Info())
 		return
 	}
 	h.mu.Lock()

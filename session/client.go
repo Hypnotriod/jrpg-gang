@@ -57,7 +57,10 @@ func (c *Client) Serve() {
 			break
 		}
 		playerId, response := c.hub.controller.HandleRequest(c.playerId, message)
-		if playerId != engine.PlayerIdEmpty {
+		if c.playerId == engine.PlayerIdEmpty {
+			if playerId == engine.PlayerIdEmpty {
+				break
+			}
 			c.managePlayerId(playerId)
 		}
 		c.WriteMessage(response)
@@ -81,7 +84,7 @@ func (c *Client) Info() string {
 func (c *Client) begin() {
 	c.noPlayerIdTimer = time.AfterFunc(time.Duration(c.hub.config.UserWithoutIdTimeoutSec)*time.Second, func() {
 		c.Kick()
-		log.Info("Client didn't obtain the id and was kicked: ", c.Info())
+		log.Info("Client didn't obtain the id in time and was kicked: ", c.Info())
 	})
 }
 
@@ -97,6 +100,7 @@ func (c *Client) managePlayerId(playerId engine.PlayerId) {
 func (c *Client) complete() {
 	c.mu.Lock()
 	defer c.mu.Unlock()
+	c.noPlayerIdTimer.Stop()
 	c.left = true
 	if !c.kicked {
 		c.hub.unregisterClient(c)
