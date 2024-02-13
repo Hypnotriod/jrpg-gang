@@ -40,10 +40,8 @@ func (c *Client) WriteMessage(message []byte) {
 	c.conn.SetWriteDeadline(time.Now().Add(time.Duration(c.hub.config.WriteDeadlineSec) * time.Second))
 	err := c.conn.WriteMessage(websocket.TextMessage, message)
 	c.mu.Unlock()
-	if err != nil {
-		if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-			log.Error("Client (", c.Info(), ") write message error:", err)
-		}
+	if err != nil && websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
+		log.Error("Client (", c.Info(), ") write message error:", err)
 		c.Kick()
 	}
 }
@@ -58,10 +56,8 @@ func (c *Client) Ping() {
 	c.conn.SetWriteDeadline(time.Now().Add(time.Duration(c.hub.config.WriteDeadlineSec) * time.Second))
 	err := c.conn.WriteMessage(websocket.PingMessage, []byte{})
 	c.mu.Unlock()
-	if err != nil {
-		if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-			log.Error("Client (", c.Info(), ") ping error:", err)
-		}
+	if err != nil && websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
+		log.Error("Client (", c.Info(), ") ping error:", err)
 		c.Kick()
 	}
 }
