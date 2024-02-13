@@ -15,6 +15,7 @@ type Client struct {
 	hub             *Hub
 	playerId        engine.PlayerId
 	noPlayerIdTimer *time.Timer
+	pingTimer       *time.Timer
 	kicked          bool
 	left            bool
 }
@@ -36,6 +37,7 @@ func (c *Client) WriteMessage(message []byte) {
 		c.mu.Unlock()
 		return
 	}
+	c.conn.SetWriteDeadline(time.Now().Add(time.Duration(c.hub.config.WriteDeadlineSec) * time.Second))
 	err := c.conn.WriteMessage(websocket.TextMessage, message)
 	c.mu.Unlock()
 	if err != nil && websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
@@ -43,9 +45,25 @@ func (c *Client) WriteMessage(message []byte) {
 	}
 }
 
+func (c *Client) Ping() {
+	c.mu.Lock()
+	if c.left || c.kicked {
+		c.mu.Unlock()
+		return
+	}
+	// log.Info("Client (", c.Info(), ") ping")
+	c.conn.SetWriteDeadline(time.Now().Add(time.Duration(c.hub.config.WriteDeadlineSec) * time.Second))
+	err := c.conn.WriteMessage(websocket.PingMessage, []byte{})
+	if err != nil && websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
+		log.Error("Client (", c.Info(), ") ping error:", err)
+	}
+	c.mu.Unlock()
+}
+
 func (c *Client) Serve() {
 	c.begin()
 	for {
+		c.updateReadDeadline()
 		mt, message, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
@@ -59,6 +77,7 @@ func (c *Client) Serve() {
 		playerId, response := c.hub.controller.HandleRequest(c.playerId, message)
 		if c.playerId == engine.PlayerIdEmpty {
 			if playerId == engine.PlayerIdEmpty {
+				c.WriteMessage(response)
 				break
 			}
 			c.managePlayerId(playerId)
@@ -86,6 +105,20 @@ func (c *Client) begin() {
 		c.Kick()
 		log.Info("Client didn't obtain the id in time and was kicked: ", c.Info())
 	})
+	c.conn.SetPongHandler(func(string) error {
+		return c.updateReadDeadline()
+	})
+}
+
+func (c *Client) updateReadDeadline() error {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	if c.pingTimer != nil {
+		c.pingTimer.Reset(time.Duration(c.hub.config.PingTimeoutSec) * time.Second)
+	} else {
+		c.pingTimer = time.AfterFunc(time.Duration(c.hub.config.PingTimeoutSec)*time.Second, c.Ping)
+	}
+	return c.conn.SetReadDeadline(time.Now().Add(time.Duration(c.hub.config.ReadDeadlineSec) * time.Second))
 }
 
 func (c *Client) managePlayerId(playerId engine.PlayerId) {
@@ -101,6 +134,7 @@ func (c *Client) complete() {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	c.noPlayerIdTimer.Stop()
+	c.pingTimer.Stop()
 	c.left = true
 	if !c.kicked {
 		c.hub.unregisterClient(c)

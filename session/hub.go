@@ -22,6 +22,9 @@ type HubConfig struct {
 	MaxMessageSize          int64  `json:"maxMessageSize"`
 	UserOfflineTimeoutSec   int64  `json:"userOfflineTimeoutSec"`
 	UserWithoutIdTimeoutSec int64  `json:"userWithoutIdTimeoutSec"`
+	PingTimeoutSec          int64  `json:"pingTimeout"`
+	ReadDeadlineSec         int64  `json:"readDeadlineSec"`
+	WriteDeadlineSec        int64  `json:"writeDeadlineSec"`
 }
 
 type Hub struct {

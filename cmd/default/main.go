@@ -33,7 +33,10 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 	broadcastQueueSize := flag.Int("broadcastQueueSize", 4096, "broadcast channel queue size")
 	maxMessageSize := flag.Int64("maxMessageSize", 1024, "max message size sent by peer")
 	userOfflineTimeoutSec := flag.Int64("userOfflineTimeoutSec", 10, "user offline timeout in seconds")
-	userWithoutIdTimeoutSec := flag.Int64("userWithoutIdTimeoutSec", 1, "user hasn't obtained id timeout in seconds")
+	userWithoutIdTimeoutSec := flag.Int64("userWithoutIdTimeoutSec", 2, "user hasn't obtained id timeout in seconds")
+	pingTimeoutSec := flag.Int64("pingTimeoutSec", 30, "server ping timeout in seconds")
+	readDeadlineSec := flag.Int64("readDeadlineSec", 35, "client read deadline timeout in seconds (including pong messages)")
+	writeDeadlineSec := flag.Int64("writeDeadlineSec", 2, "client write deadline timeout in seconds")
 
 	persistanceCacheTimeoutMin := flag.Int64("persistanceCacheTimeoutMin", 30, "Persistance cache timeout in minutes")
 	mongodbUri := util.Getenv("MONGODB_URI", "mongodb://localhost:27017")
@@ -61,6 +64,9 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 		MaxMessageSize:          *maxMessageSize,
 		UserOfflineTimeoutSec:   *userOfflineTimeoutSec,
 		UserWithoutIdTimeoutSec: *userWithoutIdTimeoutSec,
+		PingTimeoutSec:          *pingTimeoutSec,
+		ReadDeadlineSec:         *readDeadlineSec,
+		WriteDeadlineSec:        *writeDeadlineSec,
 	}
 
 	persistanceConfig = persistance.PersistanceConfig{
