@@ -30,6 +30,7 @@ const (
 	RequestGameAction         RequestType = "gameAction"
 	RequestNextGamePhase      RequestType = "nextGamePhase"
 	RequestGameState          RequestType = "gameState"
+	RequestSetPlayerInfo      RequestType = "setPlayerInfo"
 	RequestPlayerInfo         RequestType = "playerInfo"
 	RequestApplyForAJob       RequestType = "applyForAJob"
 	RequestQuitJob            RequestType = "quitJob"
@@ -47,7 +48,7 @@ type Request struct {
 type ParsebleRequestData interface {
 	*Request | *GameActionRequestData | *CreateGameRoomRequestData | *JoinRequestData |
 		*JoinGameRoomRequestData | *ShopActionRequestData | *ConfiguratorActionRequestData |
-		*GameNextPhaseRequestData | *ApplyForAJobRequestData | *SwitchUnitRequestData
+		*GameNextPhaseRequestData | *ApplyForAJobRequestData | *SwitchUnitRequestData | *SetPlayerInfoRequestData
 }
 
 func parseRequestData[T ParsebleRequestData](data T, requestRaw []byte) T {

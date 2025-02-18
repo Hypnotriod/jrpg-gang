@@ -62,6 +62,21 @@ func (c *GameController) Leave(playerId engine.PlayerId) {
 	}
 }
 
+func (c *GameController) HandleConfigurationRequest(requestRaw []byte) []byte {
+	response := NewResponse()
+	request := parseRequest(requestRaw)
+	if request == nil {
+		return response.WithStatus(ResponseStatusMalformed)
+	}
+	response.Type = request.Type
+	response.Id = request.Id
+	switch request.Type {
+	case RequestSetPlayerInfo:
+		return c.handleSetPlayerInfoRequest(request, response)
+	}
+	return response.WithStatus(ResponseStatusUnsupported)
+}
+
 func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []byte) (engine.PlayerId, []byte) {
 	response := NewResponse()
 	request := parseRequest(requestRaw)

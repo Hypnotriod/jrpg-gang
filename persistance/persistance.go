@@ -3,6 +3,7 @@ package persistance
 import (
 	"context"
 	"jrpg-gang/auth"
+	"jrpg-gang/domain"
 	"jrpg-gang/persistance/model"
 	"jrpg-gang/util"
 	"sync"
@@ -59,6 +60,23 @@ func (p *Persistance) GetUserFromAuthCache(token auth.AuthenticationToken) (*mod
 		return nil, false
 	}
 	return item.Value(), true
+}
+
+func (p *Persistance) SetUserInfoToAuthCache(token auth.AuthenticationToken, nickname string, class domain.UnitClass, unit *domain.Unit) bool {
+	p.mu.RLock()
+	defer p.mu.RUnlock()
+	item := p.usersAuthCache.Get(token)
+	if item == nil || item.IsExpired() {
+		return false
+	}
+	model := item.Value()
+	if model.Units == nil {
+		model.Units = make(map[domain.UnitClass]*domain.Unit)
+	}
+	model.Nickname = nickname
+	model.Class = class
+	model.Units[class] = unit
+	return true
 }
 
 func (p *Persistance) RemoveUserFromAuthCache(token auth.AuthenticationToken) {

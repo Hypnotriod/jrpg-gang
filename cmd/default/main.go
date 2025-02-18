@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"io"
 	"jrpg-gang/auth"
 	"jrpg-gang/controller"
 	"jrpg-gang/persistance"
@@ -87,6 +88,11 @@ func main() {
 	auth := auth.NewAuthenticator(authConfig, controller)
 	http.HandleFunc("/google/oauth2", auth.HandleGoogleAuth2)
 	http.HandleFunc("/google/oauth2/callback", auth.HandleGoogleAuth2Callback)
+	http.HandleFunc("/configuration", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		data, _ := io.ReadAll(r.Body)
+		w.Write(controller.HandleConfigurationRequest(data))
+	})
 
 	hub := session.NewHub(hubConfig, controller)
 	hub.Start()
