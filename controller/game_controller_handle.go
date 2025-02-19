@@ -77,24 +77,20 @@ func (c *GameController) HandleConfigurationRequest(requestRaw []byte) []byte {
 	return response.WithStatus(ResponseStatusUnsupported)
 }
 
-func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []byte) (engine.PlayerId, []byte) {
+func (c *GameController) HandleJoinRequest(data *JoinRequestData) (engine.PlayerId, []byte) {
+	response := NewResponse()
+	response.Type = RequestJoin
+	return c.handleJoinRequest(data, response)
+}
+
+func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []byte) []byte {
 	response := NewResponse()
 	request := parseRequest(requestRaw)
 	if request == nil {
-		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusMalformed)
+		return response.WithStatus(ResponseStatusMalformed)
 	}
 	response.Type = request.Type
 	response.Id = request.Id
-	if request.Type == RequestJoin {
-		if playerId != engine.PlayerIdEmpty {
-			return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
-		}
-		return c.handleJoinRequest(request, response)
-	}
-	return engine.PlayerIdEmpty, c.serveRequest(playerId, request, response)
-}
-
-func (c *GameController) serveRequest(playerId engine.PlayerId, request *Request, response *Response) []byte {
 	status := c.users.GetUserStatus(playerId)
 	if status == users.UserStatusNotFound {
 		return response.WithStatus(ResponseStatusNotAllowed)

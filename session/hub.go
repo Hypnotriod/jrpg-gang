@@ -1,7 +1,9 @@
 package session
 
 import (
+	"jrpg-gang/auth"
 	"jrpg-gang/controller"
+	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 	"net/http"
 	"sync"
@@ -72,14 +74,25 @@ func (h *Hub) checkOrigin(r *http.Request) bool {
 	return true
 }
 
-func (h *Hub) serveWsRequest(writer http.ResponseWriter, request *http.Request) {
-	conn, err := h.upgrader.Upgrade(writer, request, nil)
+func (h *Hub) serveWsRequest(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
+	sessionId := query.Get("sessionId")
+	token := query.Get("token")
+	if sessionId == "" && token == "" {
+		http.Error(w, "", http.StatusBadRequest)
+		return
+	}
+	conn, err := h.upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Error("Can't serve ws request:", err)
 		return
 	}
-	log.Info("Connection established: ", request.RemoteAddr)
-	NewClient(conn, h).Serve()
+	log.Info("Connection established: ", r.RemoteAddr)
+	credentials := controller.JoinRequestData{
+		Token:     auth.AuthenticationToken(token),
+		SessionId: users.UserSessionId(sessionId),
+	}
+	NewClient(conn, h).Serve(&credentials)
 }
 
 func (h *Hub) registerClient(client *Client) {
@@ -102,7 +115,7 @@ func (h *Hub) registerClient(client *Client) {
 
 func (h *Hub) unregisterClient(client *Client) {
 	if client.playerId == engine.PlayerIdEmpty {
-		log.Info("Client with no id was disconnected: ", client.Info())
+		log.Info("Client failed to join: ", client.Info())
 		return
 	}
 	h.mu.Lock()
