@@ -20,11 +20,11 @@ func (c *GameController) handleSetPlayerInfoRequest(request *Request, response *
 		return response.WithStatus(ResponseStatusMalformed)
 	}
 	userModel, ok := c.persistance.GetUserFromAuthCache(data.Token)
-	if len(userModel.Units) != 0 {
-		return response.WithStatus(ResponseStatusNotAllowed)
-	}
 	if userModel == nil || !ok {
 		return response.WithStatus(ResponseStatusNotFound)
+	}
+	if len(userModel.Units) != 0 {
+		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	if matched, _ := regexp.MatchString(USER_NICKNAME_REGEX, data.Nickname); !matched {
 		return response.WithStatus(ResponseStatusMalformed)

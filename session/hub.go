@@ -5,28 +5,32 @@ import (
 	"jrpg-gang/controller"
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
+	"jrpg-gang/util"
 	"net/http"
 	"sync"
 	"time"
 
+	"github.com/gorilla/handlers"
+	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	log "github.com/sirupsen/logrus"
 )
 
 type HubConfig struct {
-	Port                    string `json:"port"`
-	TlsKey                  string `json:"tlsKey"`
-	TlsCert                 string `json:"tlsCert"`
-	ReadBufferSize          int    `json:"readBufferSize"`
-	WriteBufferSize         int    `json:"writeBufferSize"`
-	BroadcasterPoolSize     int    `json:"broadcasterPoolSize"`
-	BroadcastQueueSize      int    `json:"broadcastQueueSize"`
-	MaxMessageSize          int64  `json:"maxMessageSize"`
-	UserOfflineTimeoutSec   int64  `json:"userOfflineTimeoutSec"`
-	UserWithoutIdTimeoutSec int64  `json:"userWithoutIdTimeoutSec"`
-	PingTimeoutSec          int64  `json:"pingTimeout"`
-	ReadDeadlineSec         int64  `json:"readDeadlineSec"`
-	WriteDeadlineSec        int64  `json:"writeDeadlineSec"`
+	Port                    string   `json:"port"`
+	TlsKey                  string   `json:"tlsKey"`
+	TlsCert                 string   `json:"tlsCert"`
+	AllowedOrigins          []string `json:"allowedOrigins"`
+	ReadBufferSize          int      `json:"readBufferSize"`
+	WriteBufferSize         int      `json:"writeBufferSize"`
+	BroadcasterPoolSize     int      `json:"broadcasterPoolSize"`
+	BroadcastQueueSize      int      `json:"broadcastQueueSize"`
+	MaxMessageSize          int64    `json:"maxMessageSize"`
+	UserOfflineTimeoutSec   int64    `json:"userOfflineTimeoutSec"`
+	UserWithoutIdTimeoutSec int64    `json:"userWithoutIdTimeoutSec"`
+	PingTimeoutSec          int64    `json:"pingTimeout"`
+	ReadDeadlineSec         int64    `json:"readDeadlineSec"`
+	WriteDeadlineSec        int64    `json:"writeDeadlineSec"`
 }
 
 type Hub struct {
@@ -35,28 +39,38 @@ type Hub struct {
 	server        *http.Server
 	upgrader      *websocket.Upgrader
 	controller    *controller.GameController
+	auth          *auth.Authenticator
 	clients       map[engine.PlayerId]*Client
 	offlineTimers map[engine.PlayerId]*time.Timer
 	broadcastPool chan broadcast
 }
 
-func NewHub(config HubConfig, controller *controller.GameController) *Hub {
+func NewHub(config HubConfig, controller *controller.GameController, auth *auth.Authenticator) *Hub {
+	router := mux.NewRouter()
+	cors := handlers.CORS(
+		handlers.AllowedOrigins(config.AllowedOrigins),
+		handlers.AllowedMethods([]string{http.MethodGet, http.MethodPost, http.MethodOptions}),
+		handlers.AllowedHeaders([]string{"Content-Type"}),
+	)
 	hub := &Hub{}
 	hub.config = config
 	hub.controller = controller
+	hub.auth = auth
 	hub.clients = make(map[engine.PlayerId]*Client)
 	hub.offlineTimers = make(map[engine.PlayerId]*time.Timer)
 	hub.upgrader = &websocket.Upgrader{
-		CheckOrigin:     hub.checkOrigin,
+		CheckOrigin:     hub.checkOrigin(config.AllowedOrigins),
 		ReadBufferSize:  config.ReadBufferSize,
 		WriteBufferSize: config.WriteBufferSize,
 	}
 	hub.server = &http.Server{
-		Addr: ":" + config.Port,
+		Addr:    ":" + config.Port,
+		Handler: cors(router),
 	}
+	hub.initRoutes(router)
 	hub.broadcastPool = make(chan broadcast, config.BroadcastQueueSize)
 	controller.RegisterBroadcaster(hub)
-	http.HandleFunc("/ws", hub.serveWsRequest)
+	router.HandleFunc("/ws", hub.serveWsRequest)
 	return hub
 }
 
@@ -70,8 +84,13 @@ func (h *Hub) Start() error {
 	return h.server.ListenAndServe()
 }
 
-func (h *Hub) checkOrigin(r *http.Request) bool {
-	return true
+func (h *Hub) checkOrigin(allowedOrigins []string) func(r *http.Request) bool {
+	return func(r *http.Request) bool {
+		origin := r.Header.Get("Origin")
+		return util.Any(allowedOrigins, func(o string) bool {
+			return o == "*" || o == origin
+		})
+	}
 }
 
 func (h *Hub) serveWsRequest(w http.ResponseWriter, r *http.Request) {

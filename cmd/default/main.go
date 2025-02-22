@@ -26,6 +26,7 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 	port := util.Getenv("PORT", "8080")
 	key := flag.String("key", "", "path to TLS key.pem")
 	cert := flag.String("cert", "", "path to TLS cert.pem")
+	allowedOrigins := util.GetenvArr("ALLOWED_ORIGINS", []string{"*"})
 	rBuffSize := flag.Int("rBuffSize", 1024, "ws read buffer size")
 	wBuffSize := flag.Int("wBuffSize", 4096, "ws write buffer size")
 	broadcasterPoolSize := flag.Int("broadcasterPoolSize", 32, "broadcaster routines pool size")
@@ -56,6 +57,7 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 		Port:                    port,
 		TlsKey:                  *key,
 		TlsCert:                 *cert,
+		AllowedOrigins:          allowedOrigins,
 		ReadBufferSize:          *rBuffSize,
 		WriteBufferSize:         *wBuffSize,
 		BroadcasterPoolSize:     *broadcasterPoolSize,
@@ -84,7 +86,6 @@ func main() {
 	persistance := persistance.NewPersistance(persistanceConfig)
 	controller := controller.NewGameController(persistance)
 	auth := auth.NewAuthenticator(authConfig, controller)
-	session.InitRoutes(controller, auth)
-	hub := session.NewHub(hubConfig, controller)
+	hub := session.NewHub(hubConfig, controller, auth)
 	hub.Start()
 }

@@ -2,27 +2,25 @@ package session
 
 import (
 	"io"
-	"jrpg-gang/auth"
-	"jrpg-gang/controller"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
-const MaxPayloadSize = 256
+const ConfigurationPayloadMaxSize = 256
 
-func InitRoutes(controller *controller.GameController, auth *auth.Authenticator) {
-	http.HandleFunc("GET /google/oauth2", auth.HandleGoogleAuth2)
-	http.HandleFunc("GET /google/oauth2/callback", auth.HandleGoogleAuth2Callback)
-	http.HandleFunc("POST /configuration", handleConfigurationRequest(controller))
+func (h *Hub) initRoutes(router *mux.Router) {
+	router.HandleFunc("/google/oauth2", h.auth.HandleGoogleAuth2).Methods(http.MethodGet)
+	router.HandleFunc("/google/oauth2/callback", h.auth.HandleGoogleAuth2Callback).Methods(http.MethodGet)
+	router.HandleFunc("/configuration", h.handleConfigurationRequest).
+		Methods(http.MethodPost, http.MethodOptions).Headers("Content-Type", "application/json")
 }
 
-func handleConfigurationRequest(controller *controller.GameController) func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		r.Body = http.MaxBytesReader(w, r.Body, MaxPayloadSize)
-		if data, err := io.ReadAll(r.Body); err == nil {
-			w.Write(controller.HandleConfigurationRequest(data))
-		} else {
-			http.Error(w, "", http.StatusBadRequest)
-		}
+func (h *Hub) handleConfigurationRequest(w http.ResponseWriter, r *http.Request) {
+	r.Body = http.MaxBytesReader(w, r.Body, ConfigurationPayloadMaxSize)
+	if data, err := io.ReadAll(r.Body); err == nil {
+		w.Write(h.controller.HandleConfigurationRequest(data))
+	} else {
+		http.Error(w, "", http.StatusBadRequest)
 	}
 }
