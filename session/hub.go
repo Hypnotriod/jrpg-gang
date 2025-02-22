@@ -50,7 +50,7 @@ func NewHub(config HubConfig, controller *controller.GameController, auth *auth.
 	cors := handlers.CORS(
 		handlers.AllowedOrigins(config.AllowedOrigins),
 		handlers.AllowedMethods([]string{http.MethodGet, http.MethodPost, http.MethodOptions}),
-		handlers.AllowedHeaders([]string{"Content-Type"}),
+		handlers.AllowedHeaders([]string{HeaderContentType}),
 	)
 	hub := &Hub{}
 	hub.config = config
@@ -86,7 +86,7 @@ func (h *Hub) Start() error {
 
 func (h *Hub) checkOrigin(allowedOrigins []string) func(r *http.Request) bool {
 	return func(r *http.Request) bool {
-		origin := r.Header.Get("Origin")
+		origin := r.Header.Get(HeaderOrigin)
 		return util.Any(allowedOrigins, func(o string) bool {
 			return o == "*" || o == origin
 		})
@@ -95,8 +95,8 @@ func (h *Hub) checkOrigin(allowedOrigins []string) func(r *http.Request) bool {
 
 func (h *Hub) serveWsRequest(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
-	sessionId := query.Get("sessionId")
-	token := query.Get("token")
+	sessionId := query.Get(QueryKeySessionId)
+	token := query.Get(QueryKeyToken)
 	if sessionId == "" && token == "" {
 		http.Error(w, "", http.StatusBadRequest)
 		return
