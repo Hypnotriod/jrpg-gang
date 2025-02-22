@@ -50,7 +50,6 @@ func NewHub(config HubConfig, controller *controller.GameController, auth *auth.
 	cors := handlers.CORS(
 		handlers.AllowedOrigins(config.AllowedOrigins),
 		handlers.AllowedMethods([]string{http.MethodGet, http.MethodPost, http.MethodOptions}),
-		handlers.AllowedHeaders([]string{"Content-Type"}),
 	)
 	hub := &Hub{}
 	hub.config = config
