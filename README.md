@@ -80,7 +80,7 @@ Golang project of turn based multiplayer RPG game server
 
 ## Game Phases
 * `Prepare Unit Phase` - Unit can be placed on any available position before battle starts. Only `Equip` or `Unequip` actions can be performed during this phase.
-* `Move or Action Phase` - During this phase `Move`, `Use`, `Equip`, `Unequip`, `Wait` or `Skip` actions can be performed while **actions points** remains more than **4**
+* `Move or Action Phase` - During this phase `Move`, `Use`, `Equip`, `Unequip`, `Wait` or `Skip` actions can be performed while **actions points** remains more or equal to **4**
   * `Use` action - Can be performed with `weapon`, `magic` and `disposable` items. Reduces required **actions points**.
   * `Move` action - Requires **4 action points**
   * `Equip` or `Unequip` action - Can be performed with `equipment` any time and requires no ation points.
