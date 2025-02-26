@@ -101,6 +101,7 @@ func parseRequest(r []byte) *Request {
 		return nil
 	}
 	r = r[8:]
+	last = len(r) - 1
 	n := 0
 	for i, c := range r {
 		if c == '{' {
@@ -108,7 +109,7 @@ func parseRequest(r []byte) *Request {
 		} else if c == '}' {
 			n--
 		}
-		if i == len(r)-1 {
+		if i == last {
 			return nil
 		}
 		if n == 0 {
