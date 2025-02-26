@@ -113,6 +113,9 @@ func parseRequest(r []byte) *Request {
 			return nil
 		}
 		if n == 0 {
+			if i+1 != last || r[i+1] != '}' {
+				return nil
+			}
 			r = r[:i+1]
 			break
 		}
