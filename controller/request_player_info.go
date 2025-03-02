@@ -32,9 +32,9 @@ func (c *GameController) handleSetPlayerInfoRequest(request *Request, response *
 	if ok := c.persistance.HasUserWithNickname(data.Nickname); ok {
 		return response.WithStatus(ResponseStatusAlreadyExists)
 	}
-	unit := c.unitsConfig.GetByCode(domain.UnitCode(data.Class)) // todo: allow only specific unit codes
+	unit := c.unitsConfig.GetByClass(domain.UnitClass(data.Class))
 	if unit == nil {
-		return response.WithStatus(ResponseStatusMalformed)
+		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	if !c.persistance.SetUserInfoToAuthCache(data.Token, data.Nickname, data.Class, &unit.Unit) {
 		return response.WithStatus(ResponseStatusNotFound)

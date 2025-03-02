@@ -23,12 +23,14 @@ func (c *GameController) handleSwitchUnitRequest(playerId engine.PlayerId, reque
 		return response.WithStatus(ResponseStatusNotFound)
 	}
 	var unit *engine.GameUnit
-	u, ok := userModel.Units[data.Class]
-	if ok {
+	if u, ok := userModel.Units[data.Class]; ok {
 		unit = engine.NewGameUnit(u)
 		c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
 	} else {
-		unit = c.unitsConfig.GetByCode(domain.UnitCode(data.Class)) // todo: allow only specific unit codes
+		unit = c.unitsConfig.GetByClass(domain.UnitClass(data.Class))
+	}
+	if unit == nil {
+		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	c.users.UpdateWithNewGameUnit(playerId, unit)
 	response.Data[DataKeyUnit] = user.Unit

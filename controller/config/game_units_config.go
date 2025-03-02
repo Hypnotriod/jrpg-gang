@@ -8,14 +8,16 @@ import (
 )
 
 type GameUnitsConfig struct {
-	mu         sync.RWMutex
-	units      []engine.GameUnit
-	codeToUnit map[domain.UnitCode]*engine.GameUnit
+	mu          sync.RWMutex
+	units       []engine.GameUnit
+	codeToUnit  map[domain.UnitCode]*engine.GameUnit
+	classToUnit map[domain.UnitClass]*engine.GameUnit
 }
 
 func NewGameUnitsConfig() *GameUnitsConfig {
 	c := &GameUnitsConfig{}
 	c.codeToUnit = make(map[domain.UnitCode]*engine.GameUnit)
+	c.classToUnit = make(map[domain.UnitClass]*engine.GameUnit)
 	return c
 }
 
@@ -23,6 +25,16 @@ func (c *GameUnitsConfig) GetByCode(code domain.UnitCode) *engine.GameUnit {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	unit, ok := c.codeToUnit[code]
+	if !ok {
+		return nil
+	}
+	return unit.Clone()
+}
+
+func (c *GameUnitsConfig) GetByClass(class domain.UnitClass) *engine.GameUnit {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	unit, ok := c.classToUnit[class]
 	if !ok {
 		return nil
 	}
@@ -43,8 +55,13 @@ func (c *GameUnitsConfig) LoadUnits(path string, itemsConfig *GameItemsConfig) e
 func (c *GameUnitsConfig) update(units *[]engine.GameUnit, itemsConfig *GameItemsConfig) {
 	c.units = *units
 	c.codeToUnit = make(map[domain.UnitCode]*engine.GameUnit)
+	c.classToUnit = make(map[domain.UnitClass]*engine.GameUnit)
 	for i := range c.units {
-		itemsConfig.PopulateFromDescriptor(&c.units[i].Inventory)
-		c.codeToUnit[c.units[i].Code] = &c.units[i]
+		unit := &c.units[i]
+		itemsConfig.PopulateFromDescriptor(&unit.Inventory)
+		c.codeToUnit[unit.Code] = unit
+		if unit.Class != domain.UnitClassEmpty {
+			c.classToUnit[unit.Class] = unit
+		}
 	}
 }
