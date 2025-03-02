@@ -100,7 +100,7 @@ func (e *GameEngine) manageItemSpread(result *domain.ActionResult, unit *GameUni
 	for _, p := range spread {
 		p.Shift(target.Position)
 		t := e.battlefield().FindUnitByPosition(p)
-		if t == nil || t.Faction == unit.Faction {
+		if t == nil || t.Faction != target.Faction {
 			continue
 		}
 		result = unit.UseInventoryItemOnTarget(&t.Unit, itemUid, result)
