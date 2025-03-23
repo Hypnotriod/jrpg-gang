@@ -2,7 +2,6 @@ package repository
 
 import (
 	"context"
-	"jrpg-gang/persistance/model"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -17,17 +16,20 @@ const (
 	ObjectIdEmpty ObjectId = ""
 )
 
-type MongoDBRepositoryModel interface {
-	OnCreate()
-	*model.UserModel | *model.JobStatusModel
+type MongoDBRepositoryModelPointer[T any] interface {
+	SetCreatedAt(t time.Time)
+	SetUpdatedAt(t time.Time)
+	*T
 }
 
-type MongoDBRepository[T MongoDBRepositoryModel] struct {
+type MongoDBRepository[T any, P MongoDBRepositoryModelPointer[T]] struct {
 	collection *mongo.Collection
 }
 
-func (r *MongoDBRepository[T]) InsertOne(ctx context.Context, model T) (ObjectId, bool) {
-	model.OnCreate()
+func (r *MongoDBRepository[T, P]) InsertOne(ctx context.Context, model P) (ObjectId, bool) {
+	t := time.Now()
+	model.SetCreatedAt(t)
+	model.SetUpdatedAt(t)
 	result, err := r.collection.InsertOne(ctx, model)
 	if err != nil {
 		log.Error("Mongodb: InsertOne (", model, ") to collection:", r.collection.Name(), " fail: ", err)
@@ -39,7 +41,7 @@ func (r *MongoDBRepository[T]) InsertOne(ctx context.Context, model T) (ObjectId
 	return ObjectIdEmpty, false
 }
 
-func (r *MongoDBRepository[T]) UpdateOneById(ctx context.Context, id ObjectId, fields bson.D) (int64, bool) {
+func (r *MongoDBRepository[T, P]) UpdateOneById(ctx context.Context, id ObjectId, fields bson.D) (int64, bool) {
 	objectId, err := primitive.ObjectIDFromHex(string(id))
 	if err != nil {
 		log.Error("Mongodb: UpdateOneById: ", id, " in collection:", r.collection.Name(), " fail: ", err)
@@ -57,7 +59,7 @@ func (r *MongoDBRepository[T]) UpdateOneById(ctx context.Context, id ObjectId, f
 	return result.MatchedCount, true
 }
 
-func (r *MongoDBRepository[T]) UpdateOne(ctx context.Context, filter bson.D, fields bson.D) (int64, bool) {
+func (r *MongoDBRepository[T, P]) UpdateOne(ctx context.Context, filter bson.D, fields bson.D) (int64, bool) {
 	fields = append(fields, bson.E{Key: "updated_at", Value: time.Now()})
 	update := bson.D{{Key: "$set", Value: fields}}
 	result, err := r.collection.UpdateOne(ctx, filter, update)
@@ -68,7 +70,7 @@ func (r *MongoDBRepository[T]) UpdateOne(ctx context.Context, filter bson.D, fie
 	return result.MatchedCount, true
 }
 
-func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id ObjectId, accumulator T) (T, bool) {
+func (r *MongoDBRepository[T, P]) FindOneById(ctx context.Context, id ObjectId, accumulator P) (P, bool) {
 	objectId, err := primitive.ObjectIDFromHex(string(id))
 	if err != nil {
 		log.Error("Mongodb: FindOneById: ", id, " in collection:", r.collection.Name(), " fail: ", err)
@@ -86,7 +88,7 @@ func (r *MongoDBRepository[T]) FindOneById(ctx context.Context, id ObjectId, acc
 	return accumulator, true
 }
 
-func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.D, accumulator T) (T, bool) {
+func (r *MongoDBRepository[T, P]) FindOne(ctx context.Context, filter bson.D, accumulator P) (P, bool) {
 	err := r.collection.FindOne(ctx, filter).Decode(accumulator)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -98,7 +100,7 @@ func (r *MongoDBRepository[T]) FindOne(ctx context.Context, filter bson.D, accum
 	return accumulator, true
 }
 
-func (r *MongoDBRepository[T]) DeleteOneById(ctx context.Context, id ObjectId) (int64, bool) {
+func (r *MongoDBRepository[T, P]) DeleteOneById(ctx context.Context, id ObjectId) (int64, bool) {
 	objectId, err := primitive.ObjectIDFromHex(string(id))
 	if err != nil {
 		log.Error("Mongodb: DeleteOneById: ", id, " from collection:", r.collection.Name(), " fail: ", err)

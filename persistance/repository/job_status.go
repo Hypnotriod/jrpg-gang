@@ -9,7 +9,7 @@ import (
 )
 
 type JobStatusRepository struct {
-	MongoDBRepository[*model.JobStatusModel]
+	MongoDBRepository[model.JobStatusModel, *model.JobStatusModel]
 }
 
 func NewJobStatusRepository(collection *mongo.Collection) *JobStatusRepository {

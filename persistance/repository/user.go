@@ -9,7 +9,7 @@ import (
 )
 
 type UserRepository struct {
-	MongoDBRepository[*model.UserModel]
+	MongoDBRepository[model.UserModel, *model.UserModel]
 }
 
 func NewUserRepository(collection *mongo.Collection) *UserRepository {

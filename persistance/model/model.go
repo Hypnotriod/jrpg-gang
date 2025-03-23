@@ -12,8 +12,10 @@ type Model struct {
 	UpdatedAt time.Time          `bson:"updated_at,omitempty"`
 }
 
-func (m *Model) OnCreate() {
-	t := time.Now()
+func (m *Model) SetCreatedAt(t time.Time) {
 	m.CreatedAt = t
+}
+
+func (m *Model) SetUpdatedAt(t time.Time) {
 	m.UpdatedAt = t
 }
