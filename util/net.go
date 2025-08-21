@@ -2,11 +2,17 @@ package util
 
 import (
 	"net"
+	"net/http"
+
+	"github.com/tomasen/realip"
 )
 
-func GetIP(address string) net.IP {
-	host, _, _ := net.SplitHostPort(address)
-	if host != "" {
+func GetIP(r *http.Request) net.IP {
+	address := realip.FromRequest(r)
+	if address == "" {
+		address = r.RemoteAddr
+	}
+	if host, _, _ := net.SplitHostPort(address); host != "" {
 		address = host
 	}
 	ip := net.ParseIP(address)

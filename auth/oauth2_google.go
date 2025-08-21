@@ -24,7 +24,7 @@ type GoogleOauth2UserInfo struct {
 
 func (a *Authenticator) HandleGoogleAuth2(w http.ResponseWriter, r *http.Request) {
 	state := a.rndGen.MakeUUID()
-	ip := util.GetIP(r.RemoteAddr)
+	ip := util.GetIP(r)
 	a.stateCache.Set(state, ip, ttlcache.DefaultTTL)
 	url := a.googleSso.AuthCodeURL(state)
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)

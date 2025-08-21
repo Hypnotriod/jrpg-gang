@@ -11,6 +11,7 @@ require (
 	github.com/lithammer/shortuuid/v4 v4.0.0
 	github.com/seehuhn/mt19937 v1.0.0
 	github.com/sirupsen/logrus v1.8.1
+	github.com/tomasen/realip v0.0.0-20180522021738-f0c99a92ddce
 	go.mongodb.org/mongo-driver v1.12.1
 	golang.org/x/oauth2 v0.12.0
 )

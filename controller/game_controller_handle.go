@@ -71,7 +71,7 @@ func (c *GameController) HandleConfigurationRequest(r *http.Request, requestRaw 
 	if request == nil {
 		return response.WithStatus(ResponseStatusMalformed)
 	}
-	ip := util.GetIP(r.RemoteAddr)
+	ip := util.GetIP(r)
 	response.Type = request.Type
 	response.Id = request.Id
 	switch request.Type {

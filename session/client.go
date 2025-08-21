@@ -3,7 +3,6 @@ package session
 import (
 	"jrpg-gang/controller"
 	"jrpg-gang/engine"
-	"jrpg-gang/util"
 	"sync"
 	"time"
 
@@ -12,19 +11,21 @@ import (
 )
 
 type Client struct {
-	mu        sync.Mutex
-	conn      *websocket.Conn
-	hub       *Hub
-	playerId  engine.PlayerId
-	pingTimer *time.Timer
-	kicked    bool
-	left      bool
+	mu          sync.Mutex
+	conn        *websocket.Conn
+	hub         *Hub
+	credentials *controller.JoinRequestData
+	playerId    engine.PlayerId
+	pingTimer   *time.Timer
+	kicked      bool
+	left        bool
 }
 
-func NewClient(connection *websocket.Conn, hub *Hub) *Client {
+func NewClient(connection *websocket.Conn, hub *Hub, credentials *controller.JoinRequestData) *Client {
 	c := &Client{}
 	c.conn = connection
 	c.hub = hub
+	c.credentials = credentials
 	c.playerId = engine.PlayerIdEmpty
 	c.kicked = false
 	c.left = false
@@ -62,8 +63,8 @@ func (c *Client) Ping() {
 	}
 }
 
-func (c *Client) Serve(credentials *controller.JoinRequestData) {
-	if !c.join(credentials) {
+func (c *Client) Serve() {
+	if !c.join() {
 		c.complete()
 		return
 	}
@@ -96,12 +97,11 @@ func (c *Client) Kick() {
 }
 
 func (c *Client) Info() string {
-	remoteAddr := c.conn.RemoteAddr().String()
-	return util.GetIP(remoteAddr).String() + " " + string(c.playerId)
+	return c.credentials.Ip.String() + " " + string(c.playerId)
 }
 
-func (c *Client) join(credentials *controller.JoinRequestData) bool {
-	playerId, response := c.hub.controller.HandleJoinRequest(credentials)
+func (c *Client) join() bool {
+	playerId, response := c.hub.controller.HandleJoinRequest(c.credentials)
 	if playerId == engine.PlayerIdEmpty {
 		c.WriteMessage(response)
 		return false
