@@ -106,10 +106,11 @@ func (h *Hub) serveWsRequest(w http.ResponseWriter, r *http.Request) {
 		log.Error("Can't serve ws request:", err)
 		return
 	}
-	log.Info("Connection established: ", r.RemoteAddr)
+	log.Info("Connection established: ", util.GetIP(r.RemoteAddr))
 	credentials := controller.JoinRequestData{
 		Token:     auth.AuthenticationToken(token),
 		SessionId: users.UserSessionId(sessionId),
+		Ip:        util.GetIP(r.RemoteAddr),
 	}
 	NewClient(conn, h).Serve(&credentials)
 }

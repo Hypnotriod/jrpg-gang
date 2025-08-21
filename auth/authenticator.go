@@ -2,6 +2,7 @@ package auth
 
 import (
 	"jrpg-gang/util"
+	"net"
 	"time"
 
 	"github.com/jellydator/ttlcache/v3"
@@ -21,6 +22,7 @@ type AuthenticatorConfig struct {
 type UserCredentials struct {
 	Picture string
 	Email   string
+	Ip      net.IP
 }
 
 type AuthenticationToken string
@@ -43,7 +45,7 @@ type Authenticator struct {
 	rndGen     *util.RndGen
 	config     AuthenticatorConfig
 	googleSso  oauth2.Config
-	stateCache *ttlcache.Cache[string, bool]
+	stateCache *ttlcache.Cache[string, net.IP]
 	handler    AuthenticationHandler
 }
 
@@ -51,7 +53,7 @@ func NewAuthenticator(config AuthenticatorConfig, handler AuthenticationHandler)
 	auth := &Authenticator{}
 	auth.rndGen = util.NewRndGen()
 	auth.stateCache = ttlcache.New(
-		ttlcache.WithTTL[string, bool](time.Duration(config.StateCacheTimeoutMin) * time.Minute),
+		ttlcache.WithTTL[string, net.IP](time.Duration(config.StateCacheTimeoutMin) * time.Minute),
 	)
 	auth.config = config
 	auth.googleSso = oauth2.Config{

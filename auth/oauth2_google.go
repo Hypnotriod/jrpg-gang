@@ -24,7 +24,8 @@ type GoogleOauth2UserInfo struct {
 
 func (a *Authenticator) HandleGoogleAuth2(w http.ResponseWriter, r *http.Request) {
 	state := a.rndGen.MakeUUID()
-	a.stateCache.Set(state, true, ttlcache.DefaultTTL)
+	ip := util.GetIP(r.RemoteAddr)
+	a.stateCache.Set(state, ip, ttlcache.DefaultTTL)
 	url := a.googleSso.AuthCodeURL(state)
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 }
@@ -53,7 +54,7 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 		return
 	}
 
-	credentials := UserCredentials{Email: userInfo.Email, Picture: userInfo.Picture}
+	credentials := UserCredentials{Email: userInfo.Email, Picture: userInfo.Picture, Ip: item.Value()}
 	status := a.handler.HandleUserAuthenticated(credentials)
 	if !status.IsAuthenticated {
 		log.Info("Google Oauth: authentication rejected for: ", credentials.Email)

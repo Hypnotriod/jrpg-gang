@@ -19,7 +19,7 @@ func (h *Hub) handleConfigurationRequest(w http.ResponseWriter, r *http.Request)
 	r.Body = http.MaxBytesReader(w, r.Body, ConfigurationPayloadMaxSize)
 	if data, err := io.ReadAll(r.Body); err == nil {
 		w.Header().Add(HeaderContentType, ContentTypeApplicationJson)
-		w.Write(h.controller.HandleConfigurationRequest(data))
+		w.Write(h.controller.HandleConfigurationRequest(r, data))
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
 	}

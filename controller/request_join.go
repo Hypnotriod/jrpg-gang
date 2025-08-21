@@ -3,14 +3,15 @@ package controller
 import (
 	"jrpg-gang/auth"
 	"jrpg-gang/controller/users"
-	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"jrpg-gang/persistance/model"
+	"net"
 )
 
 type JoinRequestData struct {
 	Token     auth.AuthenticationToken `json:"token,omitempty"`
 	SessionId users.UserSessionId      `json:"sessionId,omitempty"`
+	Ip        net.IP                   `json:"ip,omitempty"`
 }
 
 func (c *GameController) handleJoinRequest(data *JoinRequestData, response *Response) (engine.PlayerId, []byte) {
@@ -23,6 +24,9 @@ func (c *GameController) handleJoinRequest(data *JoinRequestData, response *Resp
 	userModel, ok := c.persistance.GetUserFromAuthCache(data.Token)
 	if userModel == nil || !ok {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
+	}
+	if !userModel.Ip.Equal(data.Ip) {
+		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
 	}
 	return c.handleRejoinWithAuthTokenRequest(response, data, userModel)
 }
@@ -38,19 +42,16 @@ func (c *GameController) handleRejoinRequest(response *Response, data *JoinReque
 }
 
 func (c *GameController) handleRejoinWithAuthTokenRequest(response *Response, data *JoinRequestData, userModel *model.UserModel) (engine.PlayerId, []byte) {
-	var unit *engine.GameUnit
-	var nickname string
-	var class domain.UnitClass
 	if len(userModel.Units) == 0 {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
 	}
-	class = userModel.Class
-	nickname = userModel.Nickname
+	class := userModel.Class
+	nickname := userModel.Nickname
 	u, ok := userModel.Units[class]
 	if !ok {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
 	}
-	unit = engine.NewGameUnit(u)
+	unit := engine.NewGameUnit(u)
 	c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
 	userId := model.UserId(userModel.Id.Hex())
 	user := users.NewUser(nickname, userModel.Email, userId, class, unit)

@@ -11,7 +11,7 @@
             "env": {
                 "PORT": "3000",
                 "HOST_URL": "http://localhost:3000",
-                "AUTH_REDIRECT_URL": "http://localhost:3000",
+                "AUTH_REDIRECT_URL": "http://localhost:9000",
                 "MONGODB_URI": "mongodb://localhost:27017"
             }
         },

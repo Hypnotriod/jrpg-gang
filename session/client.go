@@ -3,6 +3,7 @@ package session
 import (
 	"jrpg-gang/controller"
 	"jrpg-gang/engine"
+	"jrpg-gang/util"
 	"sync"
 	"time"
 
@@ -95,7 +96,8 @@ func (c *Client) Kick() {
 }
 
 func (c *Client) Info() string {
-	return c.conn.RemoteAddr().String() + " " + string(c.playerId)
+	remoteAddr := c.conn.RemoteAddr().String()
+	return util.GetIP(remoteAddr).String() + " " + string(c.playerId)
 }
 
 func (c *Client) join(credentials *controller.JoinRequestData) bool {
