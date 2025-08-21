@@ -4,6 +4,8 @@ REGION=europe-central2
 IMAGE=${NAME}:${TAG}
 SERVICE=${NAME}
 PROJECT=${NAME}
+REPOSITORY=${NAME}
+ARTIFACT_REGISTRY_IMAGE=${REGION}-docker.pkg.dev/${PROJECT}/${REPOSITORY}/${IMAGE}
 
 build:
 	go build -o bin/${NAME} cmd/default/main.go
@@ -19,13 +21,13 @@ gcloud-setup:
 	gcloud auth configure-docker
 
 gcloud-image-build:
-	docker build . -t gcr.io/${PROJECT}/${IMAGE}
+	docker build . -t ${ARTIFACT_REGISTRY_IMAGE}
 
 gcloud-image-push:
-	docker push gcr.io/${PROJECT}/${IMAGE}
+	docker push ${ARTIFACT_REGISTRY_IMAGE}
 
 gcloud-image-deploy:
-	gcloud run deploy ${SERVICE} --project ${PROJECT} --image gcr.io/${PROJECT}/${IMAGE} --region ${REGION}
+	gcloud run deploy ${SERVICE} --project ${PROJECT} --image ${ARTIFACT_REGISTRY_IMAGE} --platform managed --region ${REGION}
 
 gcloud-deploy:
 	gcloud run deploy ${SERVICE} --project ${PROJECT} --source . --region ${REGION}
