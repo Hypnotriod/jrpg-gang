@@ -25,9 +25,6 @@ func (c *GameController) handleJoinRequest(data *JoinRequestData, response *Resp
 	if userModel == nil || !ok {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
 	}
-	if !userModel.Ip.Equal(data.Ip) {
-		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
-	}
 	return c.handleRejoinWithAuthTokenRequest(response, data, userModel)
 }
 
@@ -36,12 +33,18 @@ func (c *GameController) handleRejoinRequest(response *Response, data *JoinReque
 	if !ok {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
 	}
+	if !user.Ip.Equal(data.Ip) {
+		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
+	}
 	user.IsOffline = false
 	response.fillUserStatus(&user)
 	return user.Id, response.WithStatus(ResponseStatusOk)
 }
 
 func (c *GameController) handleRejoinWithAuthTokenRequest(response *Response, data *JoinRequestData, userModel *model.UserModel) (engine.PlayerId, []byte) {
+	if !userModel.Ip.Equal(data.Ip) {
+		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
+	}
 	if len(userModel.Units) == 0 {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
 	}
@@ -54,7 +57,7 @@ func (c *GameController) handleRejoinWithAuthTokenRequest(response *Response, da
 	unit := engine.NewGameUnit(u)
 	c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
 	userId := model.UserId(userModel.Id.Hex())
-	user := users.NewUser(nickname, userModel.Email, userId, class, unit)
+	user := users.NewUser(userModel.Ip, nickname, userModel.Email, userId, class, unit)
 	c.users.AddUser(user)
 	if jobStatus := c.persistance.GetJobStatus(user.UserId); jobStatus != nil {
 		if jobStatus.IsInProgress || jobStatus.IsComplete {

@@ -44,7 +44,7 @@ func (c *GameController) handleSetPlayerInfoRequest(ip net.IP, request *Request,
 		return response.WithStatus(ResponseStatusNotFound)
 	}
 	userId := model.UserId(userModel.Id.Hex())
-	user := users.NewUser(data.Nickname, userModel.Email, userId, data.Class, unit)
+	user := users.NewUser(userModel.Ip, data.Nickname, userModel.Email, userId, data.Class, unit)
 	c.persistUser(user)
 	return response.WithStatus(ResponseStatusOk)
 }

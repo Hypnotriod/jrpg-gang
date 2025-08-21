@@ -40,6 +40,13 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 		return
 	}
 
+	ip := item.Value()
+	if !ip.Equal(util.GetIP(r)) {
+		log.Info("Google Oauth: IP address mismatch")
+		http.Redirect(w, r, a.config.RedirectUrl, http.StatusTemporaryRedirect)
+		return
+	}
+
 	token, err := a.googleAuth2AcquireToken(r)
 	if err != nil {
 		log.Info("Google Oauth: couldn't acquire token: ", err.Error())
@@ -54,7 +61,7 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 		return
 	}
 
-	credentials := UserCredentials{Email: userInfo.Email, Picture: userInfo.Picture, Ip: item.Value()}
+	credentials := UserCredentials{Email: userInfo.Email, Picture: userInfo.Picture, Ip: ip}
 	status := a.handler.HandleUserAuthenticated(credentials)
 	if !status.IsAuthenticated {
 		log.Info("Google Oauth: authentication rejected for: ", credentials.Email)
