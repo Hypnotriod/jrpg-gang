@@ -61,7 +61,7 @@ func (a *Authenticator) HandleGoogleAuth2Callback(w http.ResponseWriter, r *http
 		return
 	}
 
-	credentials := UserCredentials{Email: userInfo.Email, Picture: userInfo.Picture, Ip: ip}
+	credentials := UserCredentials{Email: userInfo.Email, Picture: userInfo.Picture}
 	status := a.handler.HandleUserAuthenticated(credentials)
 	if !status.IsAuthenticated {
 		log.Info("Google Oauth: authentication rejected for: ", credentials.Email)

@@ -22,7 +22,6 @@ type AuthenticatorConfig struct {
 type UserCredentials struct {
 	Picture string
 	Email   string
-	Ip      net.IP
 }
 
 type AuthenticationToken string
