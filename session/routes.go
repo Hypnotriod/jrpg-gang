@@ -2,7 +2,6 @@ package session
 
 import (
 	"io"
-	"jrpg-gang/util"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -20,7 +19,7 @@ func (h *Hub) handleConfigurationRequest(w http.ResponseWriter, r *http.Request)
 	r.Body = http.MaxBytesReader(w, r.Body, ConfigurationPayloadMaxSize)
 	if data, err := io.ReadAll(r.Body); err == nil {
 		w.Header().Add(HeaderContentType, ContentTypeApplicationJson)
-		w.Write(h.controller.HandleConfigurationRequest(util.GetIP(r), data))
+		w.Write(h.controller.HandleConfigurationRequest(data))
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
 	}

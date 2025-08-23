@@ -5,7 +5,6 @@ import (
 	"jrpg-gang/engine"
 	"jrpg-gang/persistance/model"
 	"jrpg-gang/util"
-	"net"
 )
 
 type UserSessionId string
@@ -44,7 +43,6 @@ type User struct {
 	SessionId UserSessionId
 	Status    UserStatus
 	Unit      *engine.GameUnit
-	Ip        net.IP
 }
 
 func (s UserStatus) Display() UserDisplayStatus {
@@ -71,14 +69,12 @@ func (s UserStatus) Test(status UserStatus) bool {
 }
 
 func NewUser(
-	ip net.IP,
 	nickname string,
 	email model.UserEmail,
 	userId model.UserId,
 	class domain.UnitClass,
 	unit *engine.GameUnit) *User {
 	u := &User{}
-	u.Ip = ip
 	u.RndGen = util.NewRndGen()
 	u.Nickname = nickname
 	u.Email = email

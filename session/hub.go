@@ -110,9 +110,8 @@ func (h *Hub) serveWsRequest(w http.ResponseWriter, r *http.Request) {
 	credentials := &controller.JoinRequestData{
 		Token:     auth.AuthenticationToken(token),
 		SessionId: users.UserSessionId(sessionId),
-		Ip:        util.GetIP(r),
 	}
-	NewClient(conn, h, credentials).Serve()
+	NewClient(util.GetIP(r), conn, h).Serve(credentials)
 }
 
 func (h *Hub) registerClient(client *Client) {

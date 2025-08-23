@@ -5,7 +5,6 @@ import (
 	"jrpg-gang/controller/users"
 	"jrpg-gang/domain"
 	"jrpg-gang/persistance/model"
-	"net"
 	"regexp"
 )
 
@@ -15,7 +14,7 @@ type SetPlayerInfoRequestData struct {
 	Class    domain.UnitClass         `json:"class"`
 }
 
-func (c *GameController) handleSetPlayerInfoRequest(ip net.IP, request *Request, response *Response) []byte {
+func (c *GameController) handleSetPlayerInfoRequest(request *Request, response *Response) []byte {
 	data := parseRequestData(&SetPlayerInfoRequestData{}, request.Data)
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)
@@ -23,9 +22,6 @@ func (c *GameController) handleSetPlayerInfoRequest(ip net.IP, request *Request,
 	userModel, ok := c.persistance.GetUserFromAuthCache(data.Token)
 	if userModel == nil || !ok {
 		return response.WithStatus(ResponseStatusNotFound)
-	}
-	if !userModel.Ip.Equal(ip) {
-		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	if len(userModel.Units) != 0 {
 		return response.WithStatus(ResponseStatusNotAllowed)
@@ -44,7 +40,7 @@ func (c *GameController) handleSetPlayerInfoRequest(ip net.IP, request *Request,
 		return response.WithStatus(ResponseStatusNotFound)
 	}
 	userId := model.UserId(userModel.Id.Hex())
-	user := users.NewUser(userModel.Ip, data.Nickname, userModel.Email, userId, data.Class, unit)
+	user := users.NewUser(data.Nickname, userModel.Email, userId, data.Class, unit)
 	c.persistUser(user)
 	return response.WithStatus(ResponseStatusOk)
 }

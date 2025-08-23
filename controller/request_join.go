@@ -5,13 +5,11 @@ import (
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 	"jrpg-gang/persistance/model"
-	"net"
 )
 
 type JoinRequestData struct {
 	Token     auth.AuthenticationToken `json:"token,omitempty"`
 	SessionId users.UserSessionId      `json:"sessionId,omitempty"`
-	Ip        net.IP                   `json:"ip,omitempty"`
 }
 
 func (c *GameController) handleJoinRequest(data *JoinRequestData, response *Response) (engine.PlayerId, []byte) {
@@ -33,18 +31,12 @@ func (c *GameController) handleRejoinRequest(response *Response, data *JoinReque
 	if !ok {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotFound)
 	}
-	if !user.Ip.Equal(data.Ip) {
-		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
-	}
 	user.IsOffline = false
 	response.fillUserStatus(&user)
 	return user.Id, response.WithStatus(ResponseStatusOk)
 }
 
 func (c *GameController) handleRejoinWithAuthTokenRequest(response *Response, data *JoinRequestData, userModel *model.UserModel) (engine.PlayerId, []byte) {
-	if !userModel.Ip.Equal(data.Ip) {
-		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
-	}
 	if len(userModel.Units) == 0 {
 		return engine.PlayerIdEmpty, response.WithStatus(ResponseStatusNotAllowed)
 	}
@@ -57,7 +49,7 @@ func (c *GameController) handleRejoinWithAuthTokenRequest(response *Response, da
 	unit := engine.NewGameUnit(u)
 	c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
 	userId := model.UserId(userModel.Id.Hex())
-	user := users.NewUser(userModel.Ip, nickname, userModel.Email, userId, class, unit)
+	user := users.NewUser(nickname, userModel.Email, userId, class, unit)
 	c.users.AddUser(user)
 	if jobStatus := c.persistance.GetJobStatus(user.UserId); jobStatus != nil {
 		if jobStatus.IsInProgress || jobStatus.IsComplete {

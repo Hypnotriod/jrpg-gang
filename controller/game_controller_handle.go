@@ -5,7 +5,6 @@ import (
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 	"jrpg-gang/persistance/model"
-	"net"
 )
 
 func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredentials) auth.AuthenticationStatus {
@@ -17,7 +16,6 @@ func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredential
 	if userModel == nil {
 		return status
 	}
-	userModel.Ip = credentials.Ip
 	status.Token = c.persistance.AddUserToAuthCache(userModel)
 	status.IsNewPlayer = len(userModel.Units) == 0
 	status.IsAuthenticated = true
@@ -64,7 +62,7 @@ func (c *GameController) Leave(playerId engine.PlayerId) {
 	}
 }
 
-func (c *GameController) HandleConfigurationRequest(ip net.IP, requestRaw []byte) []byte {
+func (c *GameController) HandleConfigurationRequest(requestRaw []byte) []byte {
 	response := NewResponse()
 	request := parseRequest(requestRaw)
 	if request == nil {
@@ -74,7 +72,7 @@ func (c *GameController) HandleConfigurationRequest(ip net.IP, requestRaw []byte
 	response.Id = request.Id
 	switch request.Type {
 	case RequestSetPlayerInfo:
-		return c.handleSetPlayerInfoRequest(ip, request, response)
+		return c.handleSetPlayerInfoRequest(request, response)
 	}
 	return response.WithStatus(ResponseStatusUnsupported)
 }
