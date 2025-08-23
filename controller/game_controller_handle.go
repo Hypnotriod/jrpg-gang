@@ -5,8 +5,7 @@ import (
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 	"jrpg-gang/persistance/model"
-	"jrpg-gang/util"
-	"net/http"
+	"net"
 )
 
 func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredentials) auth.AuthenticationStatus {
@@ -65,13 +64,12 @@ func (c *GameController) Leave(playerId engine.PlayerId) {
 	}
 }
 
-func (c *GameController) HandleConfigurationRequest(r *http.Request, requestRaw []byte) []byte {
+func (c *GameController) HandleConfigurationRequest(ip net.IP, requestRaw []byte) []byte {
 	response := NewResponse()
 	request := parseRequest(requestRaw)
 	if request == nil {
 		return response.WithStatus(ResponseStatusMalformed)
 	}
-	ip := util.GetIP(r)
 	response.Type = request.Type
 	response.Id = request.Id
 	switch request.Type {
