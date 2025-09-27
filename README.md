@@ -1,6 +1,8 @@
 # jrpg-gang
 Golang project of turn based multiplayer RPG game server
 
+[hypnotriod.org/jrpg-gang](https://hypnotriod.org/jrpg-gang)
+
 ## BaseAttributes:
 * `health`        - the **hit points** unit can take, till die
 * `stamina`       - a weapon may require **stamina points** to perform action

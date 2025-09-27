@@ -225,7 +225,7 @@ func (e *GameEngine) executeWaitAction(action domain.Action, playerId PlayerId) 
 }
 
 func (e *GameEngine) isActionPhase() bool {
-	return e.state.phase == GamePhaseMakeAction || e.state.phase == GamePhaseMakeMoveOrAction
+	return e.state.phase == GamePhaseTakeAction || e.state.phase == GamePhaseMakeMoveOrAction
 }
 
 func (e *GameEngine) canTakeAShare() bool {

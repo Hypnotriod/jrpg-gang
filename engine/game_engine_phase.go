@@ -10,9 +10,9 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	switch e.state.phase {
 	case GamePhaseReadyForStartRound, GamePhasePrepareUnit:
 		e.processStartRound()
-	case GamePhaseMakeMoveOrActionAI, GamePhaseMakeActionAI:
+	case GamePhaseMakeMoveOrActionAI, GamePhaseTakeActionAI:
 		e.processAI(result)
-	case GamePhaseMakeMoveOrAction, GamePhaseMakeAction:
+	case GamePhaseMakeMoveOrAction, GamePhaseTakeAction:
 		e.onUnitCompleteAction(nil)
 	case GamePhaseRetreatAction:
 		e.processRetreatActionAI(result)
@@ -33,7 +33,7 @@ func (e *GameEngine) NextPhaseRequired() bool {
 	return e.state.phase == GamePhaseReadyForStartRound ||
 		e.state.phase == GamePhasePrepareUnit ||
 		e.state.phase == GamePhaseMakeMoveOrActionAI ||
-		e.state.phase == GamePhaseMakeActionAI ||
+		e.state.phase == GamePhaseTakeActionAI ||
 		e.state.phase == GamePhaseRetreatAction ||
 		e.state.phase == GamePhaseActionComplete ||
 		e.state.phase == GamePhaseBeforeSpotComplete ||
