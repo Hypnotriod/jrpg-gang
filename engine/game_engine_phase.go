@@ -10,9 +10,9 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	switch e.state.phase {
 	case GamePhaseReadyForStartRound, GamePhasePrepareUnit:
 		e.processStartRound()
-	case GamePhaseMakeMoveOrActionAI, GamePhaseTakeActionAI:
+	case GamePhaseTakeActionAI:
 		e.processAI(result)
-	case GamePhaseMakeMoveOrAction, GamePhaseTakeAction:
+	case GamePhaseTakeAction:
 		e.onUnitCompleteAction(nil)
 	case GamePhaseRetreatAction:
 		e.processRetreatActionAI(result)
@@ -32,7 +32,6 @@ func (e *GameEngine) NextPhase() *GameEvent {
 func (e *GameEngine) NextPhaseRequired() bool {
 	return e.state.phase == GamePhaseReadyForStartRound ||
 		e.state.phase == GamePhasePrepareUnit ||
-		e.state.phase == GamePhaseMakeMoveOrActionAI ||
 		e.state.phase == GamePhaseTakeActionAI ||
 		e.state.phase == GamePhaseRetreatAction ||
 		e.state.phase == GamePhaseActionComplete ||
@@ -96,9 +95,9 @@ func (e *GameEngine) switchToNextUnit() {
 	unit := e.getActiveUnit()
 	if unit.State.ActionPoints > 0 {
 		if unit.HasPlayerId() {
-			e.state.ChangePhase(GamePhaseMakeMoveOrAction)
+			e.state.ChangePhase(GamePhaseTakeAction)
 		} else {
-			e.state.ChangePhase(GamePhaseMakeMoveOrActionAI)
+			e.state.ChangePhase(GamePhaseTakeActionAI)
 		}
 		return
 	}
@@ -107,9 +106,9 @@ func (e *GameEngine) switchToNextUnit() {
 	if unit.CheckRandomChance(unit.CalculateRetreatChance()) {
 		e.state.ChangePhase(GamePhaseRetreatAction)
 	} else if unit.HasPlayerId() {
-		e.state.ChangePhase(GamePhaseMakeMoveOrAction)
+		e.state.ChangePhase(GamePhaseTakeAction)
 	} else {
-		e.state.ChangePhase(GamePhaseMakeMoveOrActionAI)
+		e.state.ChangePhase(GamePhaseTakeActionAI)
 	}
 }
 
@@ -143,9 +142,9 @@ func (e *GameEngine) onUnitMoveAction() {
 	if unit.State.ActionPoints < MIN_ACTION_POINTS {
 		e.onUnitCompleteAction(nil)
 	} else if unit.HasPlayerId() {
-		e.state.ChangePhase(GamePhaseMakeMoveOrAction)
+		e.state.ChangePhase(GamePhaseTakeAction)
 	} else {
-		e.state.ChangePhase(GamePhaseMakeMoveOrActionAI)
+		e.state.ChangePhase(GamePhaseTakeActionAI)
 	}
 }
 

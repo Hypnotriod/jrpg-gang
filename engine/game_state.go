@@ -11,9 +11,7 @@ type GamePhase string
 const (
 	GamePhasePrepareUnit        GamePhase = "prepareUnit"
 	GamePhaseReadyForStartRound GamePhase = "readyForStartRound"
-	GamePhaseMakeMoveOrActionAI GamePhase = "makeMoveOrActionAI"
 	GamePhaseTakeActionAI       GamePhase = "takeActionAI"
-	GamePhaseMakeMoveOrAction   GamePhase = "makeMoveOrAction"
 	GamePhaseTakeAction         GamePhase = "takeAction"
 	GamePhaseRetreatAction      GamePhase = "retreatAction"
 	GamePhaseActionComplete     GamePhase = "actionComplete"

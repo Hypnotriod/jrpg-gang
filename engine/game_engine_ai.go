@@ -12,7 +12,7 @@ func (e *GameEngine) processAI(event *GameEvent) {
 	if len(targets) != 0 && e.aiTryToAttack(event, unit, targets) {
 		return
 	}
-	if e.state.phase == GamePhaseMakeMoveOrActionAI && len(targets) == 0 &&
+	if e.state.phase == GamePhaseTakeActionAI && len(targets) == 0 &&
 		unit.State.ActionPoints >= MOVE_ACTION_POINTS && e.aiTryToApproachTheEnemy(event, unit) {
 		return
 	}

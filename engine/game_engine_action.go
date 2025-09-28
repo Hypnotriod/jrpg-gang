@@ -173,7 +173,7 @@ func (e *GameEngine) executeThrowAwayAction(action domain.Action, playerId Playe
 }
 
 func (e *GameEngine) executeMoveAction(action domain.Action, playerId PlayerId) *domain.ActionResult {
-	if e.state.phase != GamePhaseMakeMoveOrAction {
+	if e.state.phase != GamePhaseTakeAction {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnit(action.Uid)
@@ -225,7 +225,7 @@ func (e *GameEngine) executeWaitAction(action domain.Action, playerId PlayerId) 
 }
 
 func (e *GameEngine) isActionPhase() bool {
-	return e.state.phase == GamePhaseTakeAction || e.state.phase == GamePhaseMakeMoveOrAction
+	return e.state.phase == GamePhaseTakeAction
 }
 
 func (e *GameEngine) canTakeAShare() bool {

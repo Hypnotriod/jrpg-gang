@@ -14,11 +14,9 @@ func (w *GameEngineWrapper) getNextPhaseTimeout() (int, bool) {
 	case engine.GamePhasePrepareUnit,
 		engine.GamePhaseSpotComplete:
 		return NEXT_PHASE_TIMEOUT_LONG_SEC, true
-	case engine.GamePhaseMakeMoveOrAction,
-		engine.GamePhaseTakeAction:
+	case engine.GamePhaseTakeAction:
 		return NEXT_PHASE_TIMEOUT_MEDIUM_SEC, true
 	case engine.GamePhaseReadyForStartRound,
-		engine.GamePhaseMakeMoveOrActionAI,
 		engine.GamePhaseTakeActionAI,
 		engine.GamePhaseRetreatAction,
 		engine.GamePhaseActionComplete,
