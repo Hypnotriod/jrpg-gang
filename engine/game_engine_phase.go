@@ -282,5 +282,6 @@ func (e *GameEngine) restoreActorsState() {
 	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
 	for i := range leftUnits {
 		leftUnits[i].ClearImpact()
+		leftUnits[i].State.IsStunned = false
 	}
 }
