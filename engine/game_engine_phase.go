@@ -139,13 +139,7 @@ func (e *GameEngine) isLastRound() bool {
 func (e *GameEngine) onUnitMoveAction() {
 	unit := e.getActiveUnit()
 	unit.ReduceActionPoints(MOVE_ACTION_POINTS)
-	if unit.State.ActionPoints < MIN_ACTION_POINTS {
-		e.onUnitCompleteAction(nil)
-	} else if unit.HasPlayerId() {
-		e.state.ChangePhase(GamePhaseTakeAction)
-	} else {
-		e.state.ChangePhase(GamePhaseTakeActionAI)
-	}
+	e.onUnitCompleteAction(nil)
 }
 
 func (e *GameEngine) onUnitWaitAction() {
