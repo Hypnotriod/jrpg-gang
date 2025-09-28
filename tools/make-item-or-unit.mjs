@@ -66,6 +66,7 @@ function storeNewItem(item) {
         case 'magic': config.magic.push(item); break;
         case 'disposable': config.disposable.push(item); break;
         case 'ammunition': config.ammunition.push(item); break;
+        case 'provision': config.provision.push(item); break;
         default: return;
     }
     configStr = JSON.stringify(config, null, 4);
@@ -80,7 +81,8 @@ async function createItem() {
         3 - magic
         4 - disposable
         5 - ammunition
-        6 - unit\r\n`);
+        6 - provision
+        7 - unit\r\n`);
     const i = Number.parseInt(r);
     switch (i) {
         case 1:
@@ -94,6 +96,8 @@ async function createItem() {
         case 5:
             return await makeAmmunition();
         case 6:
+            return await makeProvision();
+        case 7:
             return await makeUnit();
         default:
             return null;
@@ -188,6 +192,15 @@ async function makeAmmunition() {
     }
     while (await yesNo('damage')) {
         result.damage.push(await makeDamageImpact('damage'));
+    }
+    return result;
+}
+
+async function makeProvision() {
+    stdout.write('provision:\r\n');
+    const result = {
+        ...await makeItem('provision'),
+        recovery: await makeUnitRecovery('recovery')
     }
     return result;
 }

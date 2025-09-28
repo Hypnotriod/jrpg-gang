@@ -12,6 +12,8 @@ func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint, result *ActionRe
 		return u.useDisposableOnTarget(result, target, v)
 	case *Magic:
 		return u.useMagicOnTarget(result, target, v)
+	case *Provision:
+		return u.useProvisionOnTarget(result, target, v)
 	}
 	return result.WithResult(ResultNotAccomplished)
 }
@@ -111,5 +113,15 @@ func (u *Unit) useDisposableOnTarget(action *ActionResult, target *Unit, disposa
 		action.InstantRecovery[target.Uid] = append(action.InstantRecovery[target.Uid], instRec...)
 		action.TemporalModification[target.Uid] = append(action.TemporalModification[target.Uid], tmpEnch...)
 	}
+	return action.WithResult(ResultAccomplished)
+}
+
+func (u *Unit) useProvisionOnTarget(action *ActionResult, target *Unit, provision *Provision) *ActionResult {
+	if provision.Quantity == 0 {
+		return action.WithResult(ResultZeroQuantity)
+	}
+	provision.Quantity--
+	u.ApplyRecovery(provision.Recovery)
+	action.InstantRecovery[target.Uid] = append(action.InstantRecovery[target.Uid], provision.Recovery)
 	return action.WithResult(ResultAccomplished)
 }

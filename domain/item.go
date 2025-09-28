@@ -8,6 +8,7 @@ const (
 	ItemTypeMagic      ItemType = "magic"
 	ItemTypeDisposable ItemType = "disposable"
 	ItemTypeAmmunition ItemType = "ammunition"
+	ItemTypeProvision  ItemType = "provision"
 	ItemTypeNone       ItemType = "none"
 )
 

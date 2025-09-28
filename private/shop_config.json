@@ -134,6 +134,21 @@
         },
         {
             "code": "magic-stamina-02"
+        },
+        {
+            "code": "provision-ham-01"
+        },
+        {
+            "code": "provision-pumpkin-01"
+        },
+        {
+            "code": "provision-wine-01"
+        },
+        {
+            "code": "provision-salad-01"
+        },
+        {
+            "code": "provision-fried-rice-01"
         }
     ]
 }

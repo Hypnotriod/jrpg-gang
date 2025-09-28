@@ -1790,5 +1790,80 @@
                 "coins": 3
             }
         }
+    ],
+    "provision": [
+        {
+            "type": "provision",
+            "name": "Ham",
+            "description": "Provision Ham",
+            "code": "provision-ham-01",
+            "canBeThrownAway": true,
+            "canBeSold": true,
+            "price": {
+                "coins": 20
+            },
+            "recovery": {
+                "health": 70
+            }
+        },
+        {
+            "type": "provision",
+            "name": "Pumpkin",
+            "description": "Provision Pumkin",
+            "code": "provision-pumpkin-01",
+            "canBeThrownAway": true,
+            "canBeSold": true,
+            "price": {
+                "coins": 20
+            },
+            "recovery": {
+                "stamina": 70
+            }
+        },
+        {
+            "type": "provision",
+            "name": "Wine",
+            "description": "Provision Wine",
+            "code": "provision-wine-01",
+            "canBeThrownAway": true,
+            "canBeSold": true,
+            "price": {
+                "coins": 25
+            },
+            "recovery": {
+                "mana": 70
+            }
+        },
+        {
+            "type": "provision",
+            "name": "Salad",
+            "description": "Provision Salad",
+            "code": "provision-salad-01",
+            "canBeThrownAway": true,
+            "canBeSold": true,
+            "price": {
+                "coins": 30
+            },
+            "recovery": {
+                "stamina": 100,
+                "mana": 10
+            }
+        },
+        {
+            "type": "provision",
+            "name": "Fried Rice",
+            "description": "Provision Fried Rice",
+            "code": "provision-fried-rice-01",
+            "canBeThrownAway": true,
+            "canBeSold": true,
+            "price": {
+                "coins": 50
+            },
+            "recovery": {
+                "health": 80,
+                "stamina": 80,
+                "mana": 30
+            }
+        }
     ]
 }

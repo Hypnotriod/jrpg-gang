@@ -18,6 +18,7 @@ type UnitInventory struct {
 	Armor      []Armor                   `json:"armor,omitempty" bson:"-"`
 	Disposable []Disposable              `json:"disposable,omitempty" bson:"-"`
 	Ammunition []Ammunition              `json:"ammunition,omitempty" bson:"-"`
+	Provision  []Provision               `json:"provision,omitempty" bson:"-"`
 }
 
 func (i *UnitInventory) Clone() *UnitInventory {
@@ -27,6 +28,7 @@ func (i *UnitInventory) Clone() *UnitInventory {
 	r.Armor = append(r.Armor, i.Armor...)
 	r.Disposable = append(r.Disposable, i.Disposable...)
 	r.Ammunition = append(r.Ammunition, i.Ammunition...)
+	r.Provision = append(r.Provision, i.Provision...)
 	return r
 }
 
@@ -154,6 +156,20 @@ func (i *UnitInventory) Add(item any) bool {
 			i.Ammunition = append(i.Ammunition, *v)
 		}
 		return true
+	case Provision:
+		if s := i.FindProvisionByCode(v.Code); s != nil {
+			s.Quantity += v.Quantity
+		} else {
+			i.Provision = append(i.Provision, v)
+		}
+		return true
+	case *Provision:
+		if s := i.FindProvisionByCode(v.Code); s != nil {
+			s.Quantity += v.Quantity
+		} else {
+			i.Provision = append(i.Provision, *v)
+		}
+		return true
 	}
 	return false
 }
@@ -184,6 +200,11 @@ func (i *UnitInventory) Find(uid uint) any {
 			return &i.Ammunition[n]
 		}
 	}
+	for n := range i.Provision {
+		if i.Provision[n].Uid == uid {
+			return &i.Provision[n]
+		}
+	}
 	return nil
 }
 
@@ -203,6 +224,9 @@ func (i *UnitInventory) GetItems() []*Item {
 	}
 	for n := range i.Ammunition {
 		r = append(r, &i.Ammunition[n].Item)
+	}
+	for n := range i.Provision {
+		r = append(r, &i.Provision[n].Item)
 	}
 	return r
 }
@@ -233,6 +257,11 @@ func (i *UnitInventory) FindItem(uid uint) *Item {
 			return &i.Ammunition[n].Item
 		}
 	}
+	for n := range i.Provision {
+		if i.Provision[n].Uid == uid {
+			return &i.Provision[n].Item
+		}
+	}
 	return nil
 }
 
@@ -259,6 +288,7 @@ func (i *UnitInventory) UpdateItemsState() {
 	i.UpdateEquipmentByWeareout()
 	i.FilterAmmunition()
 	i.FilterDisposable()
+	i.FilterProvision()
 }
 
 func (i *UnitInventory) RemoveWeapon(uid uint) *Weapon {
@@ -336,6 +366,24 @@ func (i *UnitInventory) RemoveAmmunition(uid uint, quantity uint) *Ammunition {
 		}
 	}
 	i.Ammunition = filtered
+	return result
+}
+
+func (i *UnitInventory) RemoveProvision(uid uint, quantity uint) *Provision {
+	var result *Provision
+	var filtered []Provision
+	for n := range i.Provision {
+		if i.Provision[n].Uid != uid || i.Provision[n].Quantity < quantity {
+			filtered = append(filtered, i.Provision[n])
+			continue
+		}
+		i.Provision[n].Quantity -= quantity
+		result = &i.Provision[n]
+		if i.Provision[n].Quantity != 0 {
+			filtered = append(filtered, i.Provision[n])
+		}
+	}
+	i.Provision = filtered
 	return result
 }
 
@@ -520,6 +568,37 @@ func (i *UnitInventory) FilterAmmunition() {
 	i.Ammunition = filtered
 }
 
+func (i *UnitInventory) FindProvision(uid uint) *Provision {
+	for n := range i.Provision {
+		if i.Provision[n].Uid == uid {
+			return &i.Provision[n]
+		}
+	}
+	return nil
+}
+
+func (i *UnitInventory) FindProvisionByCode(code ItemCode) *Provision {
+	if code == ItemCodeEmpty {
+		return nil
+	}
+	for n := range i.Provision {
+		if i.Provision[n].Code == code {
+			return &i.Provision[n]
+		}
+	}
+	return nil
+}
+
+func (i *UnitInventory) FilterProvision() {
+	var filtered []Provision = make([]Provision, 0, len(i.Provision))
+	for _, disp := range i.Provision {
+		if disp.Quantity != 0 {
+			filtered = append(filtered, disp)
+		}
+	}
+	i.Provision = filtered
+}
+
 func (i *UnitInventory) GetItemType(uid uint) ItemType {
 	item := i.Find(uid)
 	if item == nil {
@@ -536,43 +615,51 @@ func (i *UnitInventory) GetItemType(uid uint) ItemType {
 		return ItemTypeDisposable
 	case *Ammunition:
 		return ItemTypeAmmunition
+	case *Provision:
+		return ItemTypeProvision
 	}
 	return ItemTypeNone
 }
 
 func (i *UnitInventory) PopulateUids(rndGen *util.RndGen) {
-	for j := range i.Ammunition {
-		i.Ammunition[j].Uid = rndGen.NextUid()
+	for n := range i.Ammunition {
+		i.Ammunition[n].Uid = rndGen.NextUid()
 	}
-	for j := range i.Armor {
-		i.Armor[j].Uid = rndGen.NextUid()
+	for n := range i.Armor {
+		i.Armor[n].Uid = rndGen.NextUid()
 	}
-	for j := range i.Disposable {
-		i.Disposable[j].Uid = rndGen.NextUid()
+	for n := range i.Disposable {
+		i.Disposable[n].Uid = rndGen.NextUid()
 	}
-	for j := range i.Magic {
-		i.Magic[j].Uid = rndGen.NextUid()
+	for n := range i.Magic {
+		i.Magic[n].Uid = rndGen.NextUid()
 	}
-	for j := range i.Weapon {
-		i.Weapon[j].Uid = rndGen.NextUid()
+	for n := range i.Weapon {
+		i.Weapon[n].Uid = rndGen.NextUid()
+	}
+	for n := range i.Provision {
+		i.Provision[n].Uid = rndGen.NextUid()
 	}
 }
 
 func (i *UnitInventory) PopulateCodeToItemMap(codeToItem *map[ItemCode]any) {
-	for j := range i.Ammunition {
-		(*codeToItem)[i.Ammunition[j].Code] = &i.Ammunition[j]
+	for n := range i.Ammunition {
+		(*codeToItem)[i.Ammunition[n].Code] = &i.Ammunition[n]
 	}
-	for j := range i.Armor {
-		(*codeToItem)[i.Armor[j].Code] = &i.Armor[j]
+	for n := range i.Armor {
+		(*codeToItem)[i.Armor[n].Code] = &i.Armor[n]
 	}
-	for j := range i.Disposable {
-		(*codeToItem)[i.Disposable[j].Code] = &i.Disposable[j]
+	for n := range i.Disposable {
+		(*codeToItem)[i.Disposable[n].Code] = &i.Disposable[n]
 	}
-	for j := range i.Magic {
-		(*codeToItem)[i.Magic[j].Code] = &i.Magic[j]
+	for n := range i.Magic {
+		(*codeToItem)[i.Magic[n].Code] = &i.Magic[n]
 	}
-	for j := range i.Weapon {
-		(*codeToItem)[i.Weapon[j].Code] = &i.Weapon[j]
+	for n := range i.Weapon {
+		(*codeToItem)[i.Weapon[n].Code] = &i.Weapon[n]
+	}
+	for n := range i.Provision {
+		(*codeToItem)[i.Provision[n].Code] = &i.Provision[n]
 	}
 }
 
@@ -607,6 +694,12 @@ func (i *UnitInventory) FillDescriptor() {
 			Code:     item.Code,
 			Equipped: item.Equipped,
 			Wearout:  item.Wearout,
+		})
+	}
+	for _, item := range i.Provision {
+		i.Descriptor = append(i.Descriptor, UnitInventoryDescriptor{
+			Code:     item.Code,
+			Quantity: item.Quantity,
 		})
 	}
 }

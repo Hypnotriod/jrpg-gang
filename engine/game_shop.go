@@ -45,6 +45,11 @@ func (s *GameShop) GetStatus(unit *domain.Unit) *GameShopStatus {
 			r.Purchase[unit.Inventory.Ammunition[i].Uid] = s.calculatePurchasePrice(&unit.Inventory.Ammunition[i].Item, 1, 1)
 		}
 	}
+	for i := range unit.Inventory.Provision {
+		if unit.Inventory.Provision[i].CanBeSold {
+			r.Purchase[unit.Inventory.Provision[i].Uid] = s.calculatePurchasePrice(&unit.Inventory.Provision[i].Item, 1, 1)
+		}
+	}
 	for i := range unit.Inventory.Armor {
 		if unit.Inventory.Armor[i].CanBeSold {
 			r.Purchase[unit.Inventory.Armor[i].Uid] = s.calculatePurchasePrice(
@@ -73,7 +78,7 @@ func (s *GameShop) ExecuteAction(action domain.Action, unit *domain.Unit, rndGen
 	case domain.ActionSell:
 		return s.sell(action, unit, rndGen)
 	case domain.ActionRepair:
-		return s.repair(action, unit, rndGen)
+		return s.repair(action, unit)
 	}
 	return domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 }
@@ -126,6 +131,14 @@ func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.Rnd
 		unit.Inventory.Add(&itemClone)
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
+	if itemRef := s.Items.FindProvision(action.ItemUid); itemRef != nil {
+		itemClone := *itemRef
+		itemClone.Uid = rndGen.NextUid()
+		itemClone.Quantity = action.Quantity
+		unit.Booty.Reduce(item.Price, action.Quantity)
+		unit.Inventory.Add(&itemClone)
+		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
+	}
 	return domain.NewActionResult().WithResult(domain.ResultNotFound)
 }
 
@@ -148,6 +161,10 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 		}
 	} else if item.Type == domain.ItemTypeDisposable {
 		if unit.Inventory.RemoveDisposable(action.ItemUid, action.Quantity) == nil {
+			return result.WithResult(domain.ResultNotEnoughResources)
+		}
+	} else if item.Type == domain.ItemTypeProvision {
+		if unit.Inventory.RemoveProvision(action.ItemUid, action.Quantity) == nil {
 			return result.WithResult(domain.ResultNotEnoughResources)
 		}
 	} else if action.Quantity != 1 {
@@ -182,7 +199,7 @@ func (s *GameShop) calculatePurchasePrice(item *domain.Item, quantity uint, wear
 	return price
 }
 
-func (s *GameShop) repair(action domain.Action, unit *domain.Unit, rndGen *util.RndGen) *domain.ActionResult {
+func (s *GameShop) repair(action domain.Action, unit *domain.Unit) *domain.ActionResult {
 	result := domain.NewActionResult()
 	item := unit.Inventory.FindItem(action.ItemUid)
 	if item == nil {

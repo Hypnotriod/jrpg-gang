@@ -65,6 +65,10 @@ func (c *GameItemsConfig) PopulateFromDescriptor(inventory *domain.UnitInventory
 				itemClone.Quantity = desc.Quantity
 				itemClone.Equipped = desc.Equipped
 				inventory.Add(&itemClone)
+			case *domain.Provision:
+				itemClone := *v
+				itemClone.Quantity = desc.Quantity
+				inventory.Add(&itemClone)
 			}
 		}
 	}

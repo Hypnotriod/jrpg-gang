@@ -46,7 +46,10 @@ func (e *GameEngine) executePlaceAction(action domain.Action, playerId PlayerId)
 }
 
 func (e *GameEngine) executeUseAction(action domain.Action, playerId PlayerId) *domain.ActionResult {
-	if !e.isActionPhase() {
+	if e.state.phase == GamePhaseSpotComplete {
+		return e.executeUseProvisionAction(action, playerId)
+	}
+	if e.state.phase != GamePhaseTakeAction {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnit(action.Uid)
@@ -95,6 +98,24 @@ func (e *GameEngine) executeUseAction(action domain.Action, playerId PlayerId) *
 	return result
 }
 
+func (e *GameEngine) executeUseProvisionAction(action domain.Action, playerId PlayerId) *domain.ActionResult {
+	unit := e.battlefield().FindUnit(action.Uid)
+	target := e.battlefield().FindUnit(action.TargetUid)
+	if unit == nil || target == nil {
+		return domain.NewActionResult().WithResult(domain.ResultNotFound)
+	}
+	if unit.IsDead || target.IsDead || unit.GetPlayerId() != playerId {
+		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+	}
+	provision := unit.Inventory.FindProvision(action.ItemUid)
+	if provision == nil {
+		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+	}
+	result := unit.UseInventoryItemOnTarget(&target.Unit, action.ItemUid, domain.NewActionResult())
+	unit.Inventory.UpdateItemsState()
+	return result
+}
+
 func (e *GameEngine) manageItemSpread(result *domain.ActionResult, unit *GameUnit, target *GameUnit, itemUid uint) *domain.ActionResult {
 	spread := unit.Inventory.GetItemSpread(itemUid)
 	for _, p := range spread {
@@ -113,7 +134,9 @@ func (e *GameEngine) manageItemSpread(result *domain.ActionResult, unit *GameUni
 }
 
 func (e *GameEngine) executeEquipAction(action domain.Action, playerId PlayerId) *domain.ActionResult {
-	if !e.isActionPhase() && e.state.phase != GamePhasePrepareUnit {
+	if e.state.phase != GamePhaseTakeAction &&
+		e.state.phase != GamePhasePrepareUnit &&
+		e.state.phase != GamePhaseSpotComplete {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnit(action.Uid)
@@ -121,7 +144,7 @@ func (e *GameEngine) executeEquipAction(action domain.Action, playerId PlayerId)
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
 	if unit.IsDead || unit.GetPlayerId() != playerId ||
-		e.state.phase != GamePhasePrepareUnit && !e.state.IsCurrentActiveUnit(unit) {
+		e.state.phase == GamePhaseTakeAction && !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	result := unit.Equip(action.ItemUid)
@@ -132,7 +155,9 @@ func (e *GameEngine) executeEquipAction(action domain.Action, playerId PlayerId)
 }
 
 func (e *GameEngine) executeUnequipAction(action domain.Action, playerId PlayerId) *domain.ActionResult {
-	if !e.isActionPhase() && e.state.phase != GamePhasePrepareUnit {
+	if e.state.phase != GamePhaseTakeAction &&
+		e.state.phase != GamePhasePrepareUnit &&
+		e.state.phase != GamePhaseSpotComplete {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnit(action.Uid)
@@ -140,7 +165,7 @@ func (e *GameEngine) executeUnequipAction(action domain.Action, playerId PlayerI
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
 	if unit.IsDead || unit.GetPlayerId() != playerId ||
-		e.state.phase != GamePhasePrepareUnit && !e.state.IsCurrentActiveUnit(unit) {
+		e.state.phase == GamePhaseTakeAction && !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	result := unit.Unequip(action.ItemUid)
@@ -151,7 +176,9 @@ func (e *GameEngine) executeUnequipAction(action domain.Action, playerId PlayerI
 }
 
 func (e *GameEngine) executeThrowAwayAction(action domain.Action, playerId PlayerId) *domain.ActionResult {
-	if !e.isActionPhase() && e.state.phase != GamePhasePrepareUnit {
+	if e.state.phase != GamePhaseTakeAction &&
+		e.state.phase != GamePhasePrepareUnit &&
+		e.state.phase != GamePhaseSpotComplete {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnit(action.Uid)
@@ -159,7 +186,7 @@ func (e *GameEngine) executeThrowAwayAction(action domain.Action, playerId Playe
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
 	}
 	if unit.IsDead || unit.GetPlayerId() != playerId ||
-		e.state.phase != GamePhasePrepareUnit && !e.state.IsCurrentActiveUnit(unit) {
+		e.state.phase == GamePhaseTakeAction && !e.state.IsCurrentActiveUnit(unit) {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	if action.Quantity == 0 {
@@ -192,7 +219,7 @@ func (e *GameEngine) executeMoveAction(action domain.Action, playerId PlayerId) 
 }
 
 func (e *GameEngine) executeSkipAction(action domain.Action, playerId PlayerId) *domain.ActionResult {
-	if !e.isActionPhase() {
+	if e.state.phase != GamePhaseTakeAction {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnit(action.Uid)
@@ -209,7 +236,7 @@ func (e *GameEngine) executeSkipAction(action domain.Action, playerId PlayerId) 
 }
 
 func (e *GameEngine) executeWaitAction(action domain.Action, playerId PlayerId) *domain.ActionResult {
-	if !e.isActionPhase() {
+	if e.state.phase != GamePhaseTakeAction {
 		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	unit := e.battlefield().FindUnit(action.Uid)
@@ -222,10 +249,6 @@ func (e *GameEngine) executeWaitAction(action domain.Action, playerId PlayerId) 
 	result := domain.NewActionResult()
 	e.onUnitWaitAction()
 	return result.WithResult(domain.ResultAccomplished)
-}
-
-func (e *GameEngine) isActionPhase() bool {
-	return e.state.phase == GamePhaseTakeAction
 }
 
 func (e *GameEngine) canTakeAShare() bool {
