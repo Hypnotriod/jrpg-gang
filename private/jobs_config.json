@@ -6,7 +6,7 @@
         "reward": {
             "coins": 25
         },
-        "duration": 300,
+        "duration": 20,
         "countdown": 3600,
         "requirements": {
             "physique": 3
@@ -19,7 +19,7 @@
         "reward": {
             "coins": 30
         },
-        "duration": 360,
+        "duration": 25,
         "countdown": 3600,
         "requirements": {
             "agility": 3
@@ -32,7 +32,7 @@
         "reward": {
             "coins": 50
         },
-        "duration": 600,
+        "duration": 30,
         "countdown": 3600,
         "requirements": {
             "intelligence": 10
