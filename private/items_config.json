@@ -728,7 +728,7 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 25,
+                "stamina": 15,
                 "actionPoints": 5
             },
             "damage": [
@@ -767,7 +767,7 @@
                 "maximumY": 2
             },
             "useCost": {
-                "stamina": 22,
+                "stamina": 13,
                 "actionPoints": 5
             },
             "damage": [
@@ -1539,11 +1539,11 @@
             "type": "disposable",
             "name": "Bomb",
             "code": "bomb-01",
-            "description": "Throw this towards your enemy",
+            "description": "Throw this towards your enemies",
             "canBeSold": true,
             "canBeThrownAway": true,
             "price": {
-                "coins": 50
+                "coins": 60
             },
             "range": {
                 "maximumX": 10,
@@ -1559,6 +1559,14 @@
                     "chance": 10,
                     "fire": 8,
                     "deviation": 4
+                }
+            ],
+            "spread": [
+                {
+                    "y": 1
+                },
+                {
+                    "y": -1
                 }
             ],
             "modification": [],
@@ -1614,6 +1622,11 @@
                     "deviation": 1
                 }
             ],
+            "spread": [
+                {
+                    "x": 1
+                }
+            ],
             "price": {
                 "coins": 5
             }
@@ -1640,6 +1653,11 @@
                     "deviation": 1
                 }
             ],
+            "spread": [
+                {
+                    "x": 1
+                }
+            ],
             "price": {
                 "coins": 5
             }
@@ -1664,6 +1682,11 @@
                     "bleeding": 3,
                     "lightning": 3,
                     "deviation": 1
+                }
+            ],
+            "spread": [
+                {
+                    "x": 1
                 }
             ],
             "price": {
