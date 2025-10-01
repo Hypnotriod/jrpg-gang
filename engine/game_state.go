@@ -75,8 +75,8 @@ func (s *GameState) PopStunnedUnitFromQueue(unitUid uint) {
 	s.ActiveUnitsQueue = util.Filter(s.ActiveUnitsQueue, func(uid uint) bool {
 		return unitUid != uid
 	})
-	if util.Every(s.InactiveUnits, func(uid uint) bool {
-		return unitUid != uid
+	if !util.Any(s.InactiveUnits, func(uid uint) bool {
+		return unitUid == uid
 	}) {
 		s.InactiveUnits = append(s.InactiveUnits, unitUid)
 	}
