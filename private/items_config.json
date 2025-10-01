@@ -1622,11 +1622,6 @@
                     "deviation": 1
                 }
             ],
-            "spread": [
-                {
-                    "x": 1
-                }
-            ],
             "price": {
                 "coins": 5
             }
@@ -1653,11 +1648,6 @@
                     "deviation": 1
                 }
             ],
-            "spread": [
-                {
-                    "x": 1
-                }
-            ],
             "price": {
                 "coins": 5
             }
@@ -1682,11 +1672,6 @@
                     "bleeding": 3,
                     "lightning": 3,
                     "deviation": 1
-                }
-            ],
-            "spread": [
-                {
-                    "x": 1
                 }
             ],
             "price": {
