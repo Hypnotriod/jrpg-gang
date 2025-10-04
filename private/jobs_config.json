@@ -1,8 +1,8 @@
 [
     {
         "code": "job-clean-01",
-        "name": "The floor cleaning",
-        "description": "Cleaning the floor in a local tavern",
+        "name": "Tavern floor scouring",
+        "description": "Scrub the ale-stained floorboards of the local tavern, banishing the grime and echoes of last night's revelry. A humble task for those seeking coin and humility.",
         "reward": {
             "coins": 25
         },
@@ -14,8 +14,8 @@
     },
     {
         "code": "job-clean-02",
-        "name": "Clean the dishes",
-        "description": "Washing dishes in a local tavern",
+        "name": "Dishwashing",
+        "description": "Plunge your hands into greasy water and cleanse the tavern's mountain of soiled plates and tankards. The work is thankless, but the pay is certain.",
         "reward": {
             "coins": 30
         },
@@ -27,8 +27,8 @@
     },
     {
         "code": "job-library-01",
-        "name": "Library work",
-        "description": "Helping a local scholar in his library",
+        "name": "Library attendant",
+        "description": "Assist a reclusive scholar in his dust-choked library, sorting ancient tomes and deciphering cryptic manuscripts. Knowledge and coin await the diligent.",
         "reward": {
             "coins": 50
         },
