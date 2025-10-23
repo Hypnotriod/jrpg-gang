@@ -94,6 +94,9 @@ func (e *GameEngine) executeUseAction(action domain.Action, playerId PlayerId) *
 	result = e.manageItemSpread(result, unit, target, action.ItemUid)
 	e.onUseItemOnTarget(unit.Uid, result)
 	unit.Inventory.UpdateItemsState()
+	if unit != target {
+		target.Inventory.UpdateEquipmentByWeareout()
+	}
 	e.onUnitCompleteAction(result)
 	return result
 }
@@ -129,6 +132,7 @@ func (e *GameEngine) manageItemSpread(result *domain.ActionResult, unit *GameUni
 			break
 		}
 		e.onUseItemOnTarget(t.Uid, result)
+		target.Inventory.UpdateEquipmentByWeareout()
 	}
 	return result
 }
