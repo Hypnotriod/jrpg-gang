@@ -19,6 +19,7 @@ func (c *GameController) handleCompleteJobRequest(playerId engine.PlayerId, requ
 	}
 	c.users.ChangeUserStatus(playerId, users.UserStatusJoined)
 	c.users.AccumulateBooty(playerId, reward)
+	c.persistUser(&user)
 	response.Data[DataKeyReward] = reward
 	return response.WithStatus(ResponseStatusOk)
 }
