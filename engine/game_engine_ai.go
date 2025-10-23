@@ -141,6 +141,7 @@ func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target
 	result = e.manageItemSpread(result, unit, target, weaponUid)
 	e.onUseItemOnTarget(unit.Uid, result)
 	unit.Inventory.UpdateItemsState()
+	target.Inventory.UpdateEquipmentByWeareout()
 	e.onUnitCompleteAction(nil)
 	unitAction := NewGameUnitActionResult()
 	unitAction.Action = domain.Action{
