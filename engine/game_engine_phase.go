@@ -277,5 +277,6 @@ func (e *GameEngine) restoreActorsState() {
 	for i := range leftUnits {
 		leftUnits[i].ClearImpact()
 		leftUnits[i].State.IsStunned = false
+		leftUnits[i].State.Stamina = leftUnits[i].Stats.BaseAttributes.Stamina
 	}
 }

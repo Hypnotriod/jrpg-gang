@@ -1814,21 +1814,7 @@
                 "coins": 20
             },
             "recovery": {
-                "health": 70
-            }
-        },
-        {
-            "type": "provision",
-            "name": "Pumpkin",
-            "description": "A plump pumpkin, its flesh sweet and hearty. A humble feast for those who survive on the edge of darkness.",
-            "code": "provision-pumpkin-01",
-            "canBeThrownAway": true,
-            "canBeSold": true,
-            "price": {
-                "coins": 20
-            },
-            "recovery": {
-                "stamina": 70
+                "health": 75
             }
         },
         {
@@ -1842,22 +1828,7 @@
                 "coins": 25
             },
             "recovery": {
-                "mana": 70
-            }
-        },
-        {
-            "type": "provision",
-            "name": "Salad",
-            "description": "A bowl of wild greens and roots, gathered from the haunted woods.",
-            "code": "provision-salad-01",
-            "canBeThrownAway": true,
-            "canBeSold": true,
-            "price": {
-                "coins": 30
-            },
-            "recovery": {
-                "stamina": 100,
-                "mana": 10
+                "mana": 75
             }
         },
         {
@@ -1868,12 +1839,11 @@
             "canBeThrownAway": true,
             "canBeSold": true,
             "price": {
-                "coins": 50
+                "coins": 40
             },
             "recovery": {
-                "health": 80,
-                "stamina": 80,
-                "mana": 30
+                "health": 100,
+                "mana": 100
             }
         }
     ]
