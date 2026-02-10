@@ -7,19 +7,20 @@ import (
 	"jrpg-gang/persistance/model"
 )
 
-func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredentials) auth.AuthenticationStatus {
+func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredentials) (auth.AuthenticationStatus, engine.PlayerId) {
 	status := auth.AuthenticationStatus{}
-	if user, ok := c.users.GetByEmail(model.UserEmail(credentials.Email)); ok {
+	user, ok := c.users.GetByEmail(model.UserEmail(credentials.Email))
+	if ok {
 		c.Leave(user.Id)
 	}
 	userModel := c.persistance.GetOrCreateUser(credentials)
 	if userModel == nil {
-		return status
+		return status, user.Id
 	}
 	status.Token = c.persistance.AddUserToAuthCache(userModel)
 	status.IsNewPlayer = len(userModel.Units) == 0
 	status.IsAuthenticated = true
-	return status
+	return status, user.Id
 }
 
 func (c *GameController) ConnectionStatusChanged(playerId engine.PlayerId, isOffline bool) {

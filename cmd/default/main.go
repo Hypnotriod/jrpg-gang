@@ -85,7 +85,7 @@ func main() {
 	authConfig, hubConfig, persistanceConfig := configs()
 	persistance := persistance.NewPersistance(persistanceConfig)
 	controller := controller.NewGameController(persistance)
-	auth := auth.NewAuthenticator(authConfig, controller)
+	auth := auth.NewAuthenticator(authConfig)
 	hub := session.NewHub(hubConfig, controller, auth)
 	hub.Start()
 }

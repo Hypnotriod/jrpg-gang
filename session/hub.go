@@ -71,7 +71,18 @@ func NewHub(config HubConfig, controller *controller.GameController, auth *auth.
 	hub.broadcastPool = make(chan broadcast, config.BroadcastQueueSize)
 	controller.RegisterBroadcaster(hub)
 	router.HandleFunc("/ws", hub.serveWsRequest)
+	auth.SetHandler(hub)
 	return hub
+}
+
+func (h *Hub) HandleUserAuthenticated(credentials auth.UserCredentials) auth.AuthenticationStatus {
+	status, oldPlayerId := h.controller.HandleUserAuthenticated(credentials)
+	h.mu.Lock()
+	if oldClient, ok := h.clients[oldPlayerId]; ok {
+		oldClient.Kick()
+	}
+	h.mu.Unlock()
+	return status
 }
 
 func (h *Hub) Start() error {

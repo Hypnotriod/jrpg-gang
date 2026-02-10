@@ -48,7 +48,7 @@ type Authenticator struct {
 	handler    AuthenticationHandler
 }
 
-func NewAuthenticator(config AuthenticatorConfig, handler AuthenticationHandler) *Authenticator {
+func NewAuthenticator(config AuthenticatorConfig) *Authenticator {
 	auth := &Authenticator{}
 	auth.rndGen = util.NewRndGen()
 	auth.stateCache = ttlcache.New(
@@ -64,7 +64,10 @@ func NewAuthenticator(config AuthenticatorConfig, handler AuthenticationHandler)
 			"https://www.googleapis.com/auth/userinfo.email",
 		},
 	}
-	auth.handler = handler
 	go auth.stateCache.Start()
 	return auth
+}
+
+func (a *Authenticator) SetHandler(handler AuthenticationHandler) {
+	a.handler = handler
 }
