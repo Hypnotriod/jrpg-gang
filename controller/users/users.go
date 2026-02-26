@@ -150,6 +150,7 @@ func (u *Users) UpdateWithNewGameUnit(playerId engine.PlayerId, unit *engine.Gam
 	}
 	user.Unit = unit
 	user.Class = unit.Class
+	user.Level = unit.Stats.Progress.Level
 	user.Unit.PrepareForUser()
 	user.Unit.Inventory.PopulateUids(user.RndGen)
 }
