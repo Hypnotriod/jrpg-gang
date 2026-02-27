@@ -121,6 +121,10 @@ func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []by
 			return c.handlePlayerInfoRequest(playerId, request, response)
 		case RequestLeaveGame:
 			return c.handleGameLeaveRequest(playerId, request, response)
+		case RequestChatState:
+			return c.handleGameChatStateRequest(playerId, request, response)
+		case RequestChatMessage:
+			return c.handleGameChatMessageRequest(playerId, request, response)
 		}
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}

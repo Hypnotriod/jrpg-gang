@@ -1,29 +1,36 @@
 package gameengines
 
 import (
+	"jrpg-gang/controller/chat"
 	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"sync"
 )
 
+type BroadcastGameActionFunc func(playerIds []engine.PlayerId, result *engine.GameEvent)
+
 type GameEngineWrapper struct {
 	sync.RWMutex
 	nextPhaseTimer      engine.GameEngineTimer
-	broadcastGameAction func(playerIds []engine.PlayerId, result *engine.GameEvent)
+	broadcastGameAction BroadcastGameActionFunc
 	engine              *engine.GameEngine
+	chat                *chat.Chat
 }
 
 func NewGameEngineWrapper(
 	engine *engine.GameEngine,
-	broadcastGameAction func(playerIds []engine.PlayerId, result *engine.GameEvent)) *GameEngineWrapper {
+	broadcastGameAction BroadcastGameActionFunc,
+	chat *chat.Chat) *GameEngineWrapper {
 	w := &GameEngineWrapper{}
 	w.engine = engine
 	w.broadcastGameAction = broadcastGameAction
+	w.chat = chat
 	return w
 }
 
 func (w *GameEngineWrapper) Dispose() {
 	w.engine.Dispose()
+	w.chat.Dispose()
 	w.stopNextPhaseTimer()
 	w.broadcastGameAction = nil
 }
@@ -127,4 +134,12 @@ func (w *GameEngineWrapper) RemoveUser(playerId engine.PlayerId) (*engine.GameEv
 	}
 	event := w.engine.NewGameEventWithPlayersInfo()
 	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), playerIds, true
+}
+
+func (w *GameEngineWrapper) SendChatMessage(from engine.PlayerId, message string) *chat.ChatMessage {
+	return w.chat.SendMessage(from, message)
+}
+
+func (w *GameEngineWrapper) ChatState() *chat.ChatState {
+	return w.chat.State()
 }
