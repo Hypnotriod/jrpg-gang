@@ -105,6 +105,7 @@ func (w *GameEngineWrapper) LeaveGame(playerId engine.PlayerId) (*engine.GameEve
 		}
 	}
 	w.engine.RemoveActor(playerId)
+	w.chat.RemoveParticipant(playerId)
 	if w.engine.NextPhaseRequired() && w.engine.AllActorsReady() && !w.engine.AllActorsDead() {
 		event := w.engine.NextPhase()
 		w.setNextPhaseTimer()
@@ -121,6 +122,7 @@ func (w *GameEngineWrapper) LeaveGame(playerId engine.PlayerId) (*engine.GameEve
 
 func (w *GameEngineWrapper) RemoveUser(playerId engine.PlayerId) (*engine.GameEvent, []engine.PlayerId, bool) {
 	w.engine.RemoveActor(playerId)
+	w.chat.RemoveParticipant(playerId)
 	playerIds := w.engine.GetPlayerIds()
 	if len(playerIds) == 0 {
 		w.Dispose()
