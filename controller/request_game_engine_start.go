@@ -22,7 +22,7 @@ func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, reques
 		MaxMessageLength: CHAT_MAX_MESSAGE_LENGTH,
 	}, c.broadcastChatMessage)
 	for _, actor := range actors {
-		ch.AddParticipant(actor.GetPlayerId(), chat.ChatParticipant{
+		ch.AddParticipant(actor.GetPlayerId(), &chat.ChatParticipant{
 			Nickname: actor.PlayerInfo.Nickname,
 		})
 	}

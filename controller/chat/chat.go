@@ -22,7 +22,8 @@ type ChatMessage struct {
 }
 
 type ChatParticipant struct {
-	Nickname string `json:"nickname"`
+	Nickname    string `json:"nickname"`
+	Unavailable bool   `json:"unavailable,omitempty"`
 }
 
 type ChatState struct {
@@ -31,7 +32,7 @@ type ChatState struct {
 }
 
 type Chat struct {
-	participants         map[engine.PlayerId]ChatParticipant
+	participants         map[engine.PlayerId]*ChatParticipant
 	messages             []*ChatMessage
 	config               ChatConfig
 	broadcastChatMessage BroadcastChatMessageFunc
@@ -40,7 +41,7 @@ type Chat struct {
 
 func NewChat(config ChatConfig, broadcastChatMessage BroadcastChatMessageFunc) *Chat {
 	c := &Chat{
-		participants:         make(map[engine.PlayerId]ChatParticipant),
+		participants:         make(map[engine.PlayerId]*ChatParticipant),
 		messages:             []*ChatMessage{},
 		config:               config,
 		broadcastChatMessage: broadcastChatMessage,
@@ -48,7 +49,7 @@ func NewChat(config ChatConfig, broadcastChatMessage BroadcastChatMessageFunc) *
 	return c
 }
 
-func (c *Chat) AddParticipant(playerId engine.PlayerId, participant ChatParticipant) {
+func (c *Chat) AddParticipant(playerId engine.PlayerId, participant *ChatParticipant) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	c.participants[playerId] = participant
@@ -57,7 +58,9 @@ func (c *Chat) AddParticipant(playerId engine.PlayerId, participant ChatParticip
 func (c *Chat) RemoveParticipant(playerId engine.PlayerId) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	delete(c.participants, playerId)
+	if p, ok := c.participants[playerId]; ok {
+		p.Unavailable = true
+	}
 }
 
 func (c *Chat) SendMessage(from engine.PlayerId, message string) *ChatMessage {
@@ -93,7 +96,7 @@ func (c *Chat) State() *ChatState {
 		Messages:     c.messages[:],
 	}
 	for id, p := range c.participants {
-		r.Participants[id] = p
+		r.Participants[id] = *p
 	}
 	return r
 }
