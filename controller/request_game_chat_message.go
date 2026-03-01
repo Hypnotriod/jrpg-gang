@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"jrpg-gang/controller/chat"
 	"jrpg-gang/engine"
 )
 
@@ -17,7 +18,13 @@ func (c *GameController) handleGameChatMessageRequest(playerId engine.PlayerId, 
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	msg := wrapper.SendChatMessage(playerId, data.Message)
+	msg, err := wrapper.SendChatMessage(playerId, data.Message)
+	if err != nil {
+		if err == chat.ErrMessagerateLimit {
+			return response.WithStatus(ResponseStatusNotAllowed)
+		}
+		return response.WithStatus(ResponseStatusMalformed)
+	}
 	response.Data[DataKeyMessage] = msg
 	return response.WithStatus(ResponseStatusOk)
 }

@@ -18,8 +18,10 @@ func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, reques
 	}
 	actors := room.GetActors()
 	ch := chat.NewChat(chat.ChatConfig{
-		MaxMessages:      CHAT_MAX_MESSAGES,
-		MaxMessageLength: CHAT_MAX_MESSAGE_LENGTH,
+		MaxMessages:         CHAT_MAX_MESSAGES,
+		MaxMessageLength:    CHAT_MAX_MESSAGE_LENGTH,
+		MessageRate:         CHAT_MESSAGE_RATE,
+		MessageRateDuration: CHAT_MESSAGE_RATE_DURATION,
 	}, c.broadcastChatMessage)
 	for _, actor := range actors {
 		ch.AddParticipant(actor.GetPlayerId(), &chat.ChatParticipant{

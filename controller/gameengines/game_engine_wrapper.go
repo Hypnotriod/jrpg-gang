@@ -138,7 +138,7 @@ func (w *GameEngineWrapper) RemoveUser(playerId engine.PlayerId) (*engine.GameEv
 	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), playerIds, true
 }
 
-func (w *GameEngineWrapper) SendChatMessage(from engine.PlayerId, message string) *chat.ChatMessage {
+func (w *GameEngineWrapper) SendChatMessage(from engine.PlayerId, message string) (*chat.ChatMessage, error) {
 	return w.chat.SendMessage(from, message)
 }
 

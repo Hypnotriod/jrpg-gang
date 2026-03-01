@@ -1,9 +1,13 @@
 package controller
 
+import "time"
+
 const USER_NICKNAME_REGEX string = `^[a-zA-Z0-9][a-zA-Z0-9-_ ]{2,18}[a-zA-Z0-9]$`
 const GAME_ROOM_MAX_CAPACITY uint = 4
 const CHAT_MAX_MESSAGES uint = 50
 const CHAT_MAX_MESSAGE_LENGTH uint = 128
+const CHAT_MESSAGE_RATE uint = 2
+const CHAT_MESSAGE_RATE_DURATION time.Duration = 5 * time.Second
 
 const ITEMS_CONFIG_PATH string = "./private/items_config.json"
 const UNITS_CONFIG_PATH string = "./private/units_config.json"

@@ -1,17 +1,26 @@
 package chat
 
 import (
+	"errors"
 	"jrpg-gang/engine"
 	"sync"
 	"time"
 	"unicode/utf8"
 )
 
+var (
+	ErrMessageIsTooLong    error = errors.New("chat message is too long")
+	ErrParticipantNotFound error = errors.New("chat participant not found")
+	ErrMessagerateLimit    error = errors.New("chat message rate limit reached")
+)
+
 type BroadcastChatMessageFunc func(playerIds []engine.PlayerId, message *ChatMessage)
 
 type ChatConfig struct {
-	MaxMessages      uint `json:"maxMessages"`
-	MaxMessageLength uint `json:"maxMessageLength"`
+	MaxMessages         uint          `json:"maxMessages"`
+	MaxMessageLength    uint          `json:"maxMessageLength"`
+	MessageRate         uint          `json:"messagerate"`
+	MessageRateDuration time.Duration `json:"messagerateDuration"`
 }
 
 type ChatMessage struct {
@@ -22,8 +31,10 @@ type ChatMessage struct {
 }
 
 type ChatParticipant struct {
-	Nickname    string `json:"nickname"`
-	Unavailable bool   `json:"unavailable,omitempty"`
+	Nickname             string `json:"nickname"`
+	Unavailable          bool   `json:"unavailable,omitempty"`
+	lastMessageTimestamp time.Time
+	messageRate          float64
 }
 
 type ChatState struct {
@@ -52,6 +63,7 @@ func NewChat(config ChatConfig, broadcastChatMessage BroadcastChatMessageFunc) *
 func (c *Chat) AddParticipant(playerId engine.PlayerId, participant *ChatParticipant) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
+	participant.lastMessageTimestamp = time.Now()
 	c.participants[playerId] = participant
 }
 
@@ -63,11 +75,20 @@ func (c *Chat) RemoveParticipant(playerId engine.PlayerId) {
 	}
 }
 
-func (c *Chat) SendMessage(from engine.PlayerId, message string) *ChatMessage {
+func (c *Chat) SendMessage(from engine.PlayerId, message string) (*ChatMessage, error) {
 	if utf8.RuneCountInString(message) > int(c.config.MaxMessageLength) {
-		return nil
+		return nil, ErrMessageIsTooLong
 	}
 	c.mu.Lock()
+	sender, ok := c.participants[from]
+	if !ok || sender.Unavailable {
+		c.mu.Unlock()
+		return nil, ErrParticipantNotFound
+	}
+	if !c.manageMessageRate(sender) {
+		c.mu.Unlock()
+		return nil, ErrMessagerateLimit
+	}
 	msg := &ChatMessage{
 		From:      from,
 		Message:   string(message),
@@ -77,7 +98,7 @@ func (c *Chat) SendMessage(from engine.PlayerId, message string) *ChatMessage {
 	if len(c.messages) > int(c.config.MaxMessages) {
 		c.messages = c.messages[1:]
 	}
-	to := []engine.PlayerId{}
+	to := make([]engine.PlayerId, 0, len(c.participants)-1)
 	for playerId := range c.participants {
 		if playerId != from {
 			to = append(to, playerId)
@@ -85,7 +106,7 @@ func (c *Chat) SendMessage(from engine.PlayerId, message string) *ChatMessage {
 	}
 	c.mu.Unlock()
 	c.broadcastChatMessage(to, msg)
-	return msg
+	return msg, nil
 }
 
 func (c *Chat) State() *ChatState {
@@ -107,4 +128,13 @@ func (c *Chat) Dispose() {
 	c.messages = nil
 	c.participants = nil
 	c.broadcastChatMessage = nil
+}
+
+func (c *Chat) manageMessageRate(participant *ChatParticipant) bool {
+	now := time.Now()
+	elapsed := now.Sub(participant.lastMessageTimestamp)
+	participant.messageRate += 1.0 - elapsed.Seconds()*(float64(c.config.MessageRate)/c.config.MessageRateDuration.Seconds())
+	participant.messageRate = max(participant.messageRate, 1.0)
+	participant.lastMessageTimestamp = now
+	return participant.messageRate < float64(c.config.MessageRate)
 }
