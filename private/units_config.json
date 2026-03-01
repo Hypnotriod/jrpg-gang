@@ -74,9 +74,9 @@
         }
     },
     {
-        "name": "Tank",
-        "code": "tank",
-        "class": "tank",
+        "name": "Warrior",
+        "code": "warrior",
+        "class": "warrior",
         "booty": {
             "coins": 300
         },
@@ -148,9 +148,9 @@
         }
     },
     {
-        "name": "Rogue",
-        "code": "rogue",
-        "class": "rogue",
+        "name": "Ranger",
+        "code": "ranger",
+        "class": "ranger",
         "booty": {
             "coins": 300
         },
