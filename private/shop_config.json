@@ -49,22 +49,43 @@
             "code": "rag-armor-01"
         },
         {
-            "code": "rusty-shield-01"
-        },
-        {
-            "code": "rusty-helmet-01"
-        },
-        {
-            "code": "rusty-boots-01"
+            "code": "basic-armor-01"
         },
         {
             "code": "armor-01"
         },
         {
+            "code": "armor-02"
+        },
+        {
+            "code": "armor-03"
+        },
+        {
+            "code": "rusty-shield-01"
+        },
+        {
             "code": "shield-01"
         },
         {
+            "code": "shield-02"
+        },
+        {
+            "code": "shield-03"
+        },
+        {
+            "code": "rusty-helmet-01"
+        },
+        {
             "code": "helmet-01"
+        },
+        {
+            "code": "helmet-02"
+        },
+        {
+            "code": "helmet-03"
+        },
+        {
+            "code": "rusty-boots-01"
         },
         {
             "code": "boots-01"
@@ -73,10 +94,16 @@
             "code": "boots-02"
         },
         {
+            "code": "boots-03"
+        },
+        {
             "code": "gloves-01"
         },
         {
             "code": "gloves-02"
+        },
+        {
+            "code": "gloves-03"
         },
         {
             "code": "lightning-gloves-01"

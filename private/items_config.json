@@ -1018,7 +1018,7 @@
         },
         {
             "type": "armor",
-            "name": "Helmet",
+            "name": "Helmet I",
             "code": "helmet-01",
             "description": "A sturdy helmet, forged for those who expect to meet death and wish to spit in its face.",
             "durability": 500,
@@ -1046,7 +1046,64 @@
         },
         {
             "type": "armor",
-            "name": "Boots",
+            "name": "Helmet II",
+            "code": "helmet-02",
+            "description": "A crude iron helm, hammered in haste and stained by the blood of its first wearer. It offers cold certainty against the whispers of the grave.",
+            "durability": 500,
+            "slot": "head",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 3,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 3,
+                        "cutting": 3,
+                        "crushing": 4,
+                        "bleeding": 3
+                    }
+                }
+            ],
+            "price": {
+                "coins": 900
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Helmet III",
+            "code": "helmet-03",
+            "description": "An open-faced helm charred black, its crest still smoking from battles against demons. Wearing it is to feel the scorch of hellfire and the gaze of unseen enemies.",
+            "durability": 500,
+            "slot": "head",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 6,
+                "physique": 6
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 5,
+                        "cutting": 4,
+                        "crushing": 5,
+                        "fire": 5
+                    }
+                }
+            ],
+            "price": {
+                "coins": 1600,
+                "ruby": 10
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Boots I",
             "code": "boots-01",
             "description": "Boots of thick hide, their soles worn thin by endless marches through mud and blood.",
             "durability": 500,
@@ -1073,7 +1130,7 @@
         },
         {
             "type": "armor",
-            "name": "Fine Boots",
+            "name": "Boots II",
             "code": "boots-02",
             "description": "Boots of supple leather, crafted for nobles but stained by the road. They whisper of both privilege and peril.",
             "durability": 500,
@@ -1096,6 +1153,34 @@
             ],
             "price": {
                 "coins": 1000
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Boots III",
+            "code": "boots-03",
+            "description": "Boots forged in the black heat of the abyss, their iron plates still whispering with the cries of fallen knights. Each step rings like chains around a condemned soul.",
+            "durability": 500,
+            "slot": "leg",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 7,
+                "physique": 7
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 5,
+                        "cutting": 4,
+                        "crushing": 5,
+                        "bleeding": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 1700
             }
         },
         {
@@ -1154,6 +1239,34 @@
         },
         {
             "type": "armor",
+            "name": "Knight Gloves",
+            "code": "gloves-03",
+            "description": "Gauntlets of hardened leather, once worn by a knight whose soul rotted beneath his armor. They still carry the chill of his final breath and the echo of steel on bone.",
+            "durability": 500,
+            "slot": "hand",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 3,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 3,
+                        "cutting": 3,
+                        "crushing": 3,
+                        "bleeding": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 1000
+            }
+        },
+        {
+            "type": "armor",
             "name": "Light Gloves",
             "code": "lightning-gloves-01",
             "description": "Gloves woven with silver thread, crackling faintly with arcane lightning. Each strike is charged with the storm's fury.",
@@ -1184,7 +1297,7 @@
         },
         {
             "type": "armor",
-            "name": "Shield",
+            "name": "Shield I",
             "code": "shield-01",
             "description": "A broad shield, its face scarred by a hundred blows. It stands as a bulwark between its bearer and the abyss.",
             "durability": 500,
@@ -1211,7 +1324,91 @@
         },
         {
             "type": "armor",
-            "name": "Armor",
+            "name": "Shield II",
+            "code": "shield-02",
+            "description": "A weighty slab of iron, dented and scorched by infernal flames. Its face bears the ghostly handprints of those who fell beneath its edge, a grim reminder that it has turned more than steel.",
+            "durability": 500,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 7,
+                "physique": 7
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 4,
+                        "cutting": 4,
+                        "crushing": 4,
+                        "bleeding": 1
+                    }
+                }
+            ],
+            "price": {
+                "coins": 1000
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Fire Shield",
+            "code": "shield-03",
+            "description": "A scorched barrier of blackened steel, humming with imprisoned embers. Flames crawl along its rim like living things, searing any who dare strike its face while sparing its bearer.",
+            "durability": 500,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 7,
+                "physique": 7
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 4,
+                        "cutting": 5,
+                        "crushing": 5,
+                        "fire": 5
+                    }
+                }
+            ],
+            "price": {
+                "coins": 1700,
+                "ruby": 10
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Armor I",
+            "code": "basic-armor-01",
+            "description": "A pallid cuirass of stitched hide, soaked in the sweat and blood of countless nameless warriors. It whispers of a fragile shield between a mortal chest and the ravenous void.",
+            "durability": 300,
+            "slot": "body",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 3,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 2,
+                        "cutting": 2,
+                        "crushing": 3
+                    }
+                }
+            ],
+            "price": {
+                "coins": 750
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Armor II",
             "code": "armor-01",
             "description": "A cuirass of boiled leather, bearing the scars of many battles. It creaks with every breath, a reminder of survival.",
             "durability": 500,
@@ -1235,6 +1432,64 @@
             ],
             "price": {
                 "coins": 1500
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Armor III",
+            "code": "armor-02",
+            "description": "A hulking shell of cold metal plates, hammered from the bones of vanquished giants. It groans with each movement, as if the weight of countless dead souls presses upon its wearer.",
+            "durability": 500,
+            "slot": "body",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 5,
+                "physique": 5
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 6,
+                        "cutting": 7,
+                        "crushing": 8
+                    }
+                }
+            ],
+            "price": {
+                "coins": 2500
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Armor IV",
+            "code": "armor-03",
+            "description": "An ancient suit of plate warped by eldritch wards, its surface etched with runes that hiss like snakes. Fire, ice and lightning hiss and shatter against it, but each ward demands a toll from the flesh within.",
+            "durability": 500,
+            "slot": "body",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 10,
+                "physique": 10
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 9,
+                        "cutting": 10,
+                        "crushing": 9,
+                        "fire": 4,
+                        "cold": 4,
+                        "lightning": 4
+                    }
+                }
+            ],
+            "price": {
+                "coins": 4000,
+                "ruby": 20
             }
         },
         {
