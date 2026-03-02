@@ -130,6 +130,15 @@
             "code": "rusty-mace-01"
         },
         {
+            "code": "club-01"
+        },
+        {
+            "code": "mace-01"
+        },
+        {
+            "code": "scimitar-01"
+        },
+        {
             "code": "sword-02"
         },
         {
@@ -137,6 +146,9 @@
         },
         {
             "code": "spear-01"
+        },
+        {
+            "code": "harpoon-01"
         },
         {
             "code": "bow-02"

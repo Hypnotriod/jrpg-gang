@@ -196,7 +196,7 @@
         },
         {
             "type": "weapon",
-            "name": "Short Sword",
+            "name": "Hero Sword",
             "code": "sword-01",
             "description": "A battered blade, its edge dulled by countless battles. Reliable in the hands of the desperate.",
             "slot": "weapon",
@@ -248,9 +248,9 @@
             "damage": [
                 {
                     "chance": 75,
-                    "cutting": 28,
+                    "cutting": 30,
                     "crushing": 5,
-                    "deviation": 2
+                    "deviation": 3
                 },
                 {
                     "duration": 3,
@@ -288,7 +288,7 @@
             "damage": [
                 {
                     "chance": 75,
-                    "cutting": 27,
+                    "cutting": 28,
                     "crushing": 5,
                     "lightning": 10,
                     "deviation": 5
@@ -345,13 +345,6 @@
                     "deviation": 3
                 }
             ],
-            "modification": [
-                {
-                    "damage": {
-                        "stabbing": 10
-                    }
-                }
-            ],
             "useCost": {
                 "stamina": 10,
                 "actionPoints": 5
@@ -362,7 +355,7 @@
         },
         {
             "type": "weapon",
-            "name": "Bow",
+            "name": "Hero Bow",
             "code": "bow-01",
             "description": "A weathered bow, its string taut with the promise of silent death from afar.",
             "ammunitionKind": "arrow",
@@ -389,7 +382,7 @@
         },
         {
             "type": "weapon",
-            "name": "Bow",
+            "name": "Hunter Bow",
             "code": "bow-02",
             "description": "A hunter's bow, its wood darkened by years of use and the blood of quarry.",
             "ammunitionKind": "arrow",
@@ -464,7 +457,7 @@
         },
         {
             "type": "weapon",
-            "name": "Dagger",
+            "name": "Hero Dagger",
             "code": "dagger-01",
             "description": "A slender blade, perfect for silent murders and quick betrayals in the night.",
             "slot": "weapon",
@@ -498,7 +491,7 @@
         },
         {
             "type": "weapon",
-            "name": "Dagger",
+            "name": "Fine Dagger",
             "code": "dagger-02",
             "description": "A rogue's companion, its edge eager to taste the blood of the unwary.",
             "durability": 300,
@@ -537,7 +530,7 @@
         },
         {
             "type": "weapon",
-            "name": "Staff",
+            "name": "Hero Staff",
             "code": "sorcerer-staff-01",
             "description": "A gnarled staff, humming with arcane power. The mark of a true sorcerer.",
             "ammunitionKind": "magicCharge",
@@ -600,7 +593,7 @@
         },
         {
             "type": "weapon",
-            "name": "Axe",
+            "name": "Hero Axe",
             "code": "axe-01",
             "description": "A brutal axe, its blade chipped and stained with the memories of old massacres.",
             "slot": "weapon",
@@ -634,7 +627,7 @@
         },
         {
             "type": "weapon",
-            "name": "Axe",
+            "name": "Fine Axe",
             "code": "axe-02",
             "description": "A heavy axe, forged for war and the splitting of skulls.",
             "durability": 300,
@@ -694,14 +687,14 @@
             "damage": [
                 {
                     "chance": 60,
-                    "cutting": 34,
+                    "cutting": 38,
                     "stubbing": 4,
                     "fear": 4,
-                    "deviation": 2
+                    "deviation": 5
                 },
                 {
                     "duration": 3,
-                    "chance": 30,
+                    "chance": 50,
                     "bleeding": 10,
                     "deviation": 1
                 }
@@ -786,6 +779,161 @@
             ],
             "price": {
                 "coins": 200
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Spiky Club",
+            "code": "club-01",
+            "description": "A brutal club, its wooden shaft embedded with iron spikes, wicked enough to shatter skulls and shatter souls.",
+            "durability": 100,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 8,
+                "physique": 7
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "useCost": {
+                "stamina": 18,
+                "actionPoints": 5
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "stabbing": 5,
+                    "crushing": 27,
+                    "deviation": 2
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3,
+                    "deviation": 1
+                }
+            ],
+            "price": {
+                "coins": 750
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Mace",
+            "code": "mace-01",
+            "description": "A cruel mace studded with jagged iron spikes, each strike ringing like the death-knell of the damned.",
+            "durability": 200,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 5
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "useCost": {
+                "stamina": 15,
+                "actionPoints": 5
+            },
+            "damage": [
+                {
+                    "chance": 65,
+                    "stabbing": 12,
+                    "crushing": 18,
+                    "deviation": 2
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3,
+                    "deviation": 1
+                }
+            ],
+            "price": {
+                "coins": 1000
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Scimitar",
+            "code": "scimitar-01",
+            "description": "A curved blade honed on the bones of desert wraiths, thirsty for flesh and whispering old curses.",
+            "durability": 300,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 4
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "useCost": {
+                "stamina": 12,
+                "actionPoints": 4
+            },
+            "damage": [
+                {
+                    "chance": 70,
+                    "cutting": 26,
+                    "deviation": 7
+                },
+                {
+                    "duration": 3,
+                    "chance": 25,
+                    "bleeding": 3,
+                    "deviation": 3
+                }
+            ],
+            "price": {
+                "coins": 1250
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Harpoon",
+            "code": "harpoon-01",
+            "description": "A barbed spear dripping with toxic ichor, meant to drag victims beneath roiling seas of despair.",
+            "durability": 300,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "physique": 7
+            },
+            "range": {
+                "maximumX": 2,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 75,
+                    "cutting": 27,
+                    "deviation": 5
+                },
+                {
+                    "duration": 3,
+                    "chance": 25,
+                    "poison": 10,
+                    "deviation": 2
+                }
+            ],
+            "useCost": {
+                "stamina": 10,
+                "actionPoints": 5
+            },
+            "price": {
+                "coins": 1800
             }
         }
     ],
