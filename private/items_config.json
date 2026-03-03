@@ -884,7 +884,7 @@
             "damage": [
                 {
                     "chance": 70,
-                    "cutting": 26,
+                    "cutting": 28,
                     "deviation": 7
                 },
                 {

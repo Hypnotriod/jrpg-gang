@@ -30,7 +30,7 @@ func (c *GameController) handleConfiguratorActionRequest(playerId engine.PlayerI
 		}
 		response.Data[DataKeyUnit] = user.Unit
 	}
-	response.Data[DataKeyAction] = request.Data
+	response.Data[DataKeyAction] = data.Action
 	response.Data[DataKeyActionResult] = actionResult
 	return response.WithStatus(ResponseStatusOk)
 }
