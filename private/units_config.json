@@ -889,11 +889,11 @@
                 "actionPoints": 9
             },
             "attributes": {
-                "strength": 12,
+                "strength": 8,
                 "physique": 5,
                 "agility": 3,
                 "endurance": 6,
-                "intelligence": 15,
+                "intelligence": 4,
                 "initiative": 5,
                 "luck": 5
             },
@@ -988,7 +988,7 @@
         "inventory": {
             "descriptor": [
                 {
-                    "code": "fist-01",
+                    "code": "poison-teeth-01",
                     "equipped": true
                 }
             ]
@@ -1357,6 +1357,173 @@
                 "weight": 1,
                 "coins": 125,
                 "ruby": 5
+            }
+        ]
+    },
+    {
+        "name": "Mosquito",
+        "code": "mosquito-01",
+        "stats": {
+            "progress": {
+                "level": 1,
+                "experience": 30
+            },
+            "baseAttributes": {
+                "health": 40,
+                "stamina": 40,
+                "actionPoints": 9
+            },
+            "attributes": {
+                "strength": 6,
+                "physique": 2,
+                "agility": 12,
+                "endurance": 6,
+                "initiative": 7,
+                "luck": 7
+            },
+            "resistance": {}
+        },
+        "slots": {
+            "head": 1,
+            "body": 1,
+            "leg": 6,
+            "weapon": 1
+        },
+        "booty": {},
+        "achievements": {},
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "mosquito-byte-01"
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 1
+            },
+            {
+                "weight": 1,
+                "coins": 2
+            }
+        ]
+    },
+    {
+        "name": "Toad",
+        "code": "toad-01",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 40
+            },
+            "baseAttributes": {
+                "health": 80,
+                "stamina": 50,
+                "actionPoints": 9
+            },
+            "attributes": {
+                "strength": 8,
+                "physique": 8,
+                "agility": 3,
+                "endurance": 9,
+                "initiative": 3,
+                "luck": 8
+            },
+            "resistance": {
+                "fire": 12,
+                "poison": 10
+            }
+        },
+        "slots": {
+            "head": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 1
+        },
+        "booty": {},
+        "achievements": {},
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "long-tongue-01",
+                    "equipped": true
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 10
+            },
+            {
+                "weight": 10,
+                "coins": 2
+            },
+            {
+                "weight": 10,
+                "coins": 3
+            },
+            {
+                "weight": 1,
+                "ruby": 1
+            }
+        ]
+    },
+    {
+        "name": "Snake",
+        "code": "snake-01",
+        "stats": {
+            "progress": {
+                "level": 2,
+                "experience": 30
+            },
+            "baseAttributes": {
+                "health": 60,
+                "stamina": 40,
+                "actionPoints": 9
+            },
+            "attributes": {
+                "strength": 5,
+                "physique": 5,
+                "agility": 12,
+                "endurance": 6,
+                "initiative": 5,
+                "luck": 5
+            },
+            "resistance": {
+                "poison": 100
+            }
+        },
+        "slots": {
+            "head": 1,
+            "body": 1,
+            "weapon": 1
+        },
+        "booty": {},
+        "achievements": {},
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "poison-teeth-01",
+                    "equipped": true
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 1
+            },
+            {
+                "weight": 1,
+                "coins": 2
             }
         ]
     }

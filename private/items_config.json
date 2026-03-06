@@ -26,6 +26,85 @@
         },
         {
             "type": "weapon",
+            "name": "Poison Teeth",
+            "code": "poison-teeth-01",
+            "description": "Fangs dripping with virulent venom, their bite a slow dance with death and despair wrought in poison.",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {},
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "stabbing": 8,
+                    "deviation": 3
+                },
+                {
+                    "chance": 25,
+                    "duration": 3,
+                    "poison": 7,
+                    "deviation": 1
+                }
+            ],
+            "useCost": {
+                "stamina": 10,
+                "actionPoints": 4
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Mosquito Teeth",
+            "code": "mosquito-byte-01",
+            "description": "A tiny but vicious proboscis quivering with eldritch hunger, its sting drains not just blood but the very essence of magic from those it pierces.",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {},
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "stabbing": 8,
+                    "manaDrain": 5,
+                    "deviation": 7
+                }
+            ],
+            "useCost": {
+                "stamina": 10,
+                "actionPoints": 4
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Long Tongue",
+            "code": "long-tongue-01",
+            "description": "A grotesque appendage, hardened by eldritch mutations and dripping with caustic venom. Each lash scorches and dissolves, a creature's only weapon wrought into savage hunger.",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {},
+            "range": {
+                "maximumX": 2,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "crushing": 5,
+                    "deviation": 5
+                }
+            ],
+            "useCost": {
+                "stamina": 12,
+                "actionPoints": 4
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Teeth",
             "code": "teeth-01",
             "description": "Gnashing fangs, eager to tear flesh and taste the copper tang of blood. A savage bite in the darkness.",
@@ -100,7 +179,7 @@
                 {
                     "chance": 60,
                     "crushing": 8,
-                    "fire": 12,
+                    "fire": 8,
                     "deviation": 3
                 },
                 {
@@ -889,7 +968,7 @@
                 },
                 {
                     "duration": 3,
-                    "chance": 25,
+                    "chance": 35,
                     "bleeding": 3,
                     "deviation": 3
                 }
@@ -1929,8 +2008,28 @@
             "modification": [
                 {
                     "recovery": {
-                        "bleeding": 50,
-                        "deviation": 5
+                        "bleeding": 50
+                    }
+                }
+            ],
+            "price": {
+                "coins": 25
+            },
+            "useCost": {
+                "actionPoints": 4
+            }
+        },
+        {
+            "name": "Antidote",
+            "type": "disposable",
+            "code": "antidote-potion-01",
+            "description": "A silvery draught distilled from moonflowers and sacred earth, a desperate salvation against the creeping death of poison.",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "modification": [
+                {
+                    "recovery": {
+                        "poison": 50
                     }
                 }
             ],
