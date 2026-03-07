@@ -42,14 +42,14 @@ func (i *UnitInventory) IncreaseArmorWearout(equipped bool) {
 }
 
 func (i *UnitInventory) UpdateEquipmentByWeareout() {
-	for n := range i.Armor {
-		item := &i.Armor[n].Equipment
+	for n := range i.Weapon {
+		item := &i.Weapon[n].Equipment
 		if item.Equipped && item.IsBroken() {
 			item.Equipped = false
 		}
 	}
-	for n := range i.Weapon {
-		item := &i.Weapon[n].Equipment
+	for n := range i.Armor {
+		item := &i.Armor[n].Equipment
 		if item.Equipped && item.IsBroken() {
 			item.Equipped = false
 		}
@@ -58,14 +58,14 @@ func (i *UnitInventory) UpdateEquipmentByWeareout() {
 
 func (i *UnitInventory) GetEquipment(equipped bool) []*Equipment {
 	equipment := []*Equipment{}
-	for n := range i.Armor {
-		item := &i.Armor[n].Equipment
+	for n := range i.Weapon {
+		item := &i.Weapon[n].Equipment
 		if item.Equipped || !equipped {
 			equipment = append(equipment, item)
 		}
 	}
-	for n := range i.Weapon {
-		item := &i.Weapon[n].Equipment
+	for n := range i.Armor {
+		item := &i.Armor[n].Equipment
 		if item.Equipped || !equipped {
 			equipment = append(equipment, item)
 		}
@@ -84,14 +84,14 @@ func (i *UnitInventory) GetEquippedWeapon() *Weapon {
 
 func (i *UnitInventory) GetEquipmentBySlot(slot EquipmentSlot, equipped bool) []*Equipment {
 	equipment := []*Equipment{}
-	for n := range i.Armor {
-		item := &i.Armor[n].Equipment
+	for n := range i.Weapon {
+		item := &i.Weapon[n].Equipment
 		if (item.Equipped || !equipped) && item.Slot == slot {
 			equipment = append(equipment, item)
 		}
 	}
-	for n := range i.Weapon {
-		item := &i.Weapon[n].Equipment
+	for n := range i.Armor {
+		item := &i.Armor[n].Equipment
 		if (item.Equipped || !equipped) && item.Slot == slot {
 			equipment = append(equipment, item)
 		}
