@@ -1243,11 +1243,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 35
+                        "coins": 75
                     },
                     {
                         "weight": 1,
-                        "coins": 40
+                        "coins": 100
                     }
                 ],
                 "experience": 40,
@@ -1308,11 +1308,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 35
+                        "coins": 60
                     },
                     {
                         "weight": 1,
-                        "coins": 45
+                        "coins": 90
                     }
                 ],
                 "experience": 40,
@@ -1373,11 +1373,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 35
+                        "coins": 75
                     },
                     {
                         "weight": 1,
-                        "coins": 50
+                        "coins": 100
                     }
                 ],
                 "experience": 40,
@@ -1438,11 +1438,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 70
+                        "coins": 100
                     },
                     {
                         "weight": 1,
-                        "coins": 80
+                        "coins": 125
                     }
                 ],
                 "experience": 80,
@@ -1511,11 +1511,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 70
+                        "coins": 100
                     },
                     {
                         "weight": 1,
-                        "coins": 80
+                        "coins": 125
                     }
                 ],
                 "experience": 70,
@@ -1584,11 +1584,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 80
+                        "coins": 125
                     },
                     {
                         "weight": 1,
-                        "coins": 90
+                        "coins": 150
                     }
                 ],
                 "experience": 65,
@@ -1665,11 +1665,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 120
+                        "coins": 125
                     },
                     {
                         "weight": 1,
-                        "coins": 140
+                        "coins": 175
                     }
                 ],
                 "experience": 100,
@@ -1746,11 +1746,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 120
+                        "coins": 150
                     },
                     {
                         "weight": 1,
-                        "coins": 150
+                        "coins": 175
                     }
                 ],
                 "experience": 100,
@@ -1827,11 +1827,11 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 110
+                        "coins": 125
                     },
                     {
                         "weight": 1,
-                        "coins": 125
+                        "coins": 150
                     }
                 ],
                 "experience": 100,
@@ -2447,7 +2447,7 @@
                     },
                     {
                         "weight": 1,
-                        "coins": 450,
+                        "coins": 500,
                         "ruby": 10
                     }
                 ],
@@ -2534,12 +2534,12 @@
                 "booty": [
                     {
                         "weight": 2,
-                        "coins": 400,
+                        "coins": 450,
                         "ruby": 8
                     },
                     {
                         "weight": 1,
-                        "coins": 450,
+                        "coins": 550,
                         "ruby": 10
                     }
                 ],
