@@ -4,9 +4,9 @@
         "name": "Tavern floor scouring",
         "description": "Scrub the ale-stained floorboards of the local tavern, banishing the grime and echoes of last night's revelry. A humble task for those seeking coin and humility.",
         "reward": {
-            "coins": 25
+            "coins": 35
         },
-        "duration": 20,
+        "duration": 10,
         "countdown": 3600,
         "requirements": {
             "physique": 3
@@ -17,9 +17,9 @@
         "name": "Dishwashing",
         "description": "Plunge your hands into greasy water and cleanse the tavern's mountain of soiled plates and tankards. The work is thankless, but the pay is certain.",
         "reward": {
-            "coins": 30
+            "coins": 40
         },
-        "duration": 25,
+        "duration": 12,
         "countdown": 3600,
         "requirements": {
             "agility": 3
@@ -30,9 +30,9 @@
         "name": "Library attendant",
         "description": "Assist a reclusive scholar in his dust-choked library, sorting ancient tomes and deciphering cryptic manuscripts. Knowledge and coin await the diligent.",
         "reward": {
-            "coins": 50
+            "coins": 100
         },
-        "duration": 30,
+        "duration": 15,
         "countdown": 3600,
         "requirements": {
             "intelligence": 10

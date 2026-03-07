@@ -1721,7 +1721,7 @@
         },
         {
             "type": "armor",
-            "name": "Hat",
+            "name": "Mage Hat",
             "description": "A pointed hat of midnight blue, worn by those who consort with shadows and secrets. Its brim hides both wisdom and madness.",
             "code": "sorcerer-hat-01",
             "price": {
@@ -1825,7 +1825,7 @@
         },
         {
             "type": "armor",
-            "name": "Cloak",
+            "name": "Mage Cloak",
             "description": "A cloak woven from midnight and mystery, favored by those who walk the hidden paths of power.",
             "code": "sorcerer-cloak-01",
             "price": {
