@@ -38,7 +38,7 @@ func (e *GameEngine) resetActorsReady() {
 }
 
 func (e *GameEngine) UpdateActorReady(playerId PlayerId, value bool) bool {
-	unit := util.Findp(e.actors, func(actor *GameUnit) bool {
+	unit := util.FindPtr(e.actors, func(actor *GameUnit) bool {
 		return actor.PlayerInfo.Id == playerId
 	})
 	if unit != nil {
@@ -99,7 +99,7 @@ func (e *GameEngine) GetRestPlayerIds(playerId PlayerId) []PlayerId {
 }
 
 func (e *GameEngine) FindActorByPlayerId(playerId PlayerId) *GameUnit {
-	return util.Findp(e.actors, func(u *GameUnit) bool {
+	return util.FindPtr(e.actors, func(u *GameUnit) bool {
 		return u.GetPlayerId() == playerId
 	})
 }

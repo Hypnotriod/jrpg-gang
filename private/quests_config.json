@@ -1,0 +1,76 @@
+[
+    {
+        "code": "quest-kill-rats-01",
+        "name": "Kill 5 Rats",
+        "description": "",
+        "reward": {
+            "coins": 250
+        },
+        "activation": {
+            "achievements": {
+                "kill-rat-01": 0
+            },
+            "requirements": {}
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-rat-01": 5
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-rats-02",
+        "name": "Kill 10 Rats",
+        "description": "",
+        "reward": {
+            "coins": 500
+        },
+        "activation": {
+            "achievements": {
+                "kill-rat-01": 0
+            },
+            "requirements": {
+                "physique": 3,
+                "quests": {
+                    "quest-kill-rats-01": 2
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-rat-01": 10
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-rats-03",
+        "name": "Kill 20 Rats",
+        "description": "",
+        "reward": {
+            "coins": 1000
+        },
+        "activation": {
+            "achievements": {
+                "kill-rat-01": 0
+            },
+            "requirements": {
+                "strength": 5,
+                "quests": {
+                    "quest-kill-rats-01": 2,
+                    "quest-kill-rats-02": 2
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-rat-01": 20
+                }
+            }
+        }
+    }
+]

@@ -23,6 +23,12 @@ func Clone[T any](values []T) []T {
 	return append(accumulator, values...)
 }
 
+func ClonePtr[T any](values *[]T) *[]T {
+	accumulator := make([]T, 0, len(*values))
+	accumulator = append(accumulator, *values...)
+	return &accumulator
+}
+
 func Shuffle[T any](gen *RndGen, values []T) []T {
 	for i1 := range values {
 		i2 := gen.rng.Int() % len(values)
@@ -40,7 +46,7 @@ func Find[T any](values []T, predicate func(value T) bool) *T {
 	return nil
 }
 
-func Findp[T any](values []*T, predicate func(value *T) bool) *T {
+func FindPtr[T any](values []*T, predicate func(value *T) bool) *T {
 	for i := range values {
 		if predicate(values[i]) {
 			return values[i]

@@ -111,13 +111,13 @@ func (b *Battlefield) MoveToCorpses(uid uint) {
 }
 
 func (b *Battlefield) FindUnit(uid uint) *GameUnit {
-	return util.Findp(b.Units, func(u *GameUnit) bool {
+	return util.FindPtr(b.Units, func(u *GameUnit) bool {
 		return u.Uid == uid
 	})
 }
 
 func (b *Battlefield) FindUnitByPosition(position domain.Position) *GameUnit {
-	return util.Findp(b.Units, func(u *GameUnit) bool {
+	return util.FindPtr(b.Units, func(u *GameUnit) bool {
 		return u.Position.Equals(position)
 	})
 }

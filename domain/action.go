@@ -3,19 +3,22 @@ package domain
 type AtionType string
 
 const (
-	ActionUse       AtionType = "use"
-	ActionEquip     AtionType = "equip"
-	ActionUnequip   AtionType = "unequip"
-	ActionPlace     AtionType = "place"
-	ActionMove      AtionType = "move"
-	ActionBuy       AtionType = "buy"
-	ActionSell      AtionType = "sell"
-	ActionRepair    AtionType = "repair"
-	ActionThrowAway AtionType = "throwAway"
-	ActionSkip      AtionType = "skip"
-	ActionWait      AtionType = "wait"
-	ActionLevelUp   AtionType = "levelUp"
-	ActionSkillUp   AtionType = "skillUp"
+	ActionUse        AtionType = "use"
+	ActionEquip      AtionType = "equip"
+	ActionUnequip    AtionType = "unequip"
+	ActionPlace      AtionType = "place"
+	ActionMove       AtionType = "move"
+	ActionBuy        AtionType = "buy"
+	ActionSell       AtionType = "sell"
+	ActionActivate   AtionType = "activate"
+	ActionDeactivate AtionType = "deactivate"
+	ActionComplete   AtionType = "complete"
+	ActionRepair     AtionType = "repair"
+	ActionThrowAway  AtionType = "throwAway"
+	ActionSkip       AtionType = "skip"
+	ActionWait       AtionType = "wait"
+	ActionLevelUp    AtionType = "levelUp"
+	ActionSkillUp    AtionType = "skillUp"
 )
 
 type ActionProperty string
