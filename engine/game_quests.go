@@ -5,9 +5,15 @@ import (
 	"jrpg-gang/util"
 )
 
+type GameQuestProgress struct {
+	Target uint `json:"target"`
+	Goal   uint `json:"goal"`
+}
+
 type GameQuestStatus struct {
 	domain.Quest
-	Status domain.UnitQuestStatus `json:"status"`
+	Status   domain.UnitQuestStatus                       `json:"status"`
+	Progress map[domain.UnitAchievement]GameQuestProgress `json:"progress,omitempty"`
 }
 
 type GameQuestsStatus struct {
@@ -16,11 +22,20 @@ type GameQuestsStatus struct {
 
 type GameQuests struct {
 	quests *[]domain.Quest
+	rndGen *util.RndGen
 }
 
-func NewGameQuests(quests *[]domain.Quest) *GameQuests {
-	r := &GameQuests{
-		quests: quests,
+func NewGameQuests(quests *[]domain.Quest, populateFromDescriptor func(inventory *domain.UnitInventory)) *GameQuests {
+	r := &GameQuests{}
+	r.quests = quests
+	r.rndGen = util.NewRndGen()
+	for i := range *quests {
+		items := (*quests)[i].Reward.Items
+		if items != nil {
+			populateFromDescriptor(items)
+			items.PopulateUids(r.rndGen)
+			items.UnequipAmmunition()
+		}
 	}
 	return r
 }
@@ -34,20 +49,32 @@ func (q *GameQuests) GetStatus(unit *domain.Unit) *GameQuestsStatus {
 		if quest.Activation.Requirements != nil && !unit.Quests.Test(quest.Activation.Requirements.Quests) {
 			continue
 		}
-		r.Quests[i].Quest = *quest
-		r.Quests[i].Status = unit.Quests[quest.Code]
+		status := unit.Quests[quest.Code]
+		r.Quests[i].Quest = *quest.Clone()
+		r.Quests[i].Status = status
+		if status != domain.UnitQuestStatusActive || quest.Completion.Requirements == nil {
+			continue
+		}
+		r.Quests[i].Progress = make(map[domain.UnitAchievement]GameQuestProgress)
+		for achievement, goal := range quest.Completion.Requirements.Achievements {
+			target := unit.Achievements[achievement]
+			r.Quests[i].Progress[achievement] = GameQuestProgress{
+				Target: target,
+				Goal:   goal,
+			}
+		}
 	}
 	return r
 }
 
-func (q *GameQuests) ExecuteAction(action domain.Action, unit *domain.Unit, code domain.QuestCode) *domain.ActionResult {
+func (q *GameQuests) ExecuteAction(action domain.Action, unit *domain.Unit, rndGen *util.RndGen) *domain.ActionResult {
 	switch action.Action {
 	case domain.ActionActivate:
-		return q.activate(unit, code)
+		return q.activate(unit, action.QuestCode)
 	case domain.ActionDeactivate:
-		return q.deactivate(unit, code)
+		return q.deactivate(unit, action.QuestCode)
 	case domain.ActionComplete:
-		return q.complete(unit, code)
+		return q.complete(unit, action.QuestCode, rndGen)
 	}
 	return domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 }
@@ -82,7 +109,7 @@ func (q *GameQuests) deactivate(unit *domain.Unit, code domain.QuestCode) *domai
 	return result.WithResult(domain.ResultAccomplished)
 }
 
-func (q *GameQuests) complete(unit *domain.Unit, code domain.QuestCode) *domain.ActionResult {
+func (q *GameQuests) complete(unit *domain.Unit, code domain.QuestCode, rndGen *util.RndGen) *domain.ActionResult {
 	result := domain.NewActionResult()
 	quest := util.Find(*q.quests, func(quest domain.Quest) bool {
 		return quest.Code == code
@@ -101,9 +128,11 @@ func (q *GameQuests) complete(unit *domain.Unit, code domain.QuestCode) *domain.
 		result.Booty = &domain.UnitBooty{}
 		result.Booty.Accumulate(quest.Reward.UnitBooty)
 	}
+	if quest.Reward.Items != nil {
+		unit.Inventory.Merge(quest.Reward.Items, rndGen)
+	}
 	unit.Achievements.Accumulate(*quest.Reward.Achievements)
 	result.Achievements.Accumulate(*quest.Reward.Achievements)
-	result.Items = util.ClonePtr(quest.Reward.Items)
 	unit.Quests[code] = domain.UnitQuestStatusDone
 	return result.WithResult(domain.ResultAccomplished)
 }

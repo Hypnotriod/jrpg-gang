@@ -12,5 +12,6 @@ const CHAT_MESSAGE_RATE_DURATION time.Duration = 5 * time.Second
 const ITEMS_CONFIG_PATH string = "./private/items_config.json"
 const UNITS_CONFIG_PATH string = "./private/units_config.json"
 const SHOP_CONFIG_PATH string = "./private/shop_config.json"
+const QUESTS_CONFIG_PATH string = "./private/quests_config.json"
 const SCENARIO_CONFIG_PATH string = "./private/scenarios_config.json"
 const JOBS_CONFIG_PATH string = "./private/jobs_config.json"

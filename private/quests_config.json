@@ -4,7 +4,15 @@
         "name": "Kill 5 Rats",
         "description": "",
         "reward": {
-            "coins": 250
+            "coins": 250,
+            "items": {
+                "descriptor": [
+                    {
+                        "code": "antidote-potion-01",
+                        "quantity": 1
+                    }
+                ]
+            }
         },
         "activation": {
             "achievements": {
@@ -25,7 +33,15 @@
         "name": "Kill 10 Rats",
         "description": "",
         "reward": {
-            "coins": 500
+            "coins": 500,
+            "items": {
+                "descriptor": [
+                    {
+                        "code": "antidote-potion-01",
+                        "quantity": 3
+                    }
+                ]
+            }
         },
         "activation": {
             "achievements": {
@@ -51,7 +67,15 @@
         "name": "Kill 20 Rats",
         "description": "",
         "reward": {
-            "coins": 1000
+            "coins": 1000,
+            "items": {
+                "descriptor": [
+                    {
+                        "code": "antidote-potion-01",
+                        "quantity": 5
+                    }
+                ]
+            }
         },
         "activation": {
             "achievements": {

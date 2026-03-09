@@ -104,6 +104,8 @@ func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []by
 		return c.handleJobStatusRequest(playerId, request, response)
 	case RequestShopStatus:
 		return c.handleShopStatusRequest(playerId, request, response)
+	case RequestQuestsStatus:
+		return c.handleQuestsStatusRequest(playerId, request, response)
 	case RequestLobbyStatus:
 		return c.handleLobbyStatusRequest(playerId, request, response)
 	case RequestUserStatus:
@@ -163,6 +165,8 @@ func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []by
 		return c.handleConfiguratorActionRequest(playerId, request, response)
 	case RequestShopAction:
 		return c.handleShopActionRequest(playerId, request, response)
+	case RequestQuestAction:
+		return c.handleQuestsActionRequest(playerId, request, response)
 	case RequestSwitchUnit:
 		return c.handleSwitchUnitRequest(playerId, request, response)
 	}

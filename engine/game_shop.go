@@ -16,10 +16,11 @@ type GameShop struct {
 	rndGen *util.RndGen
 }
 
-func NewGameShop(items *domain.UnitInventory) *GameShop {
+func NewGameShop(items *domain.UnitInventory, populateFromDescriptor func(inventory *domain.UnitInventory)) *GameShop {
 	s := &GameShop{}
 	s.rndGen = util.NewRndGen()
 	s.items = items
+	populateFromDescriptor(s.items)
 	s.items.PopulateUids(s.rndGen)
 	s.items.UnequipAmmunition()
 	return s

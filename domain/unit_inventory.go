@@ -642,6 +642,39 @@ func (i *UnitInventory) PopulateUids(rndGen *util.RndGen) {
 	}
 }
 
+func (i *UnitInventory) Merge(inventory *UnitInventory, rndGen *util.RndGen) {
+	for n := range inventory.Ammunition {
+		itemClone := inventory.Ammunition[n]
+		itemClone.Uid = rndGen.NextUid()
+		i.Add(itemClone)
+	}
+	for n := range inventory.Armor {
+		itemClone := inventory.Armor[n]
+		itemClone.Uid = rndGen.NextUid()
+		i.Add(itemClone)
+	}
+	for n := range inventory.Disposable {
+		itemClone := inventory.Disposable[n]
+		itemClone.Uid = rndGen.NextUid()
+		i.Add(itemClone)
+	}
+	for n := range inventory.Magic {
+		itemClone := inventory.Magic[n]
+		itemClone.Uid = rndGen.NextUid()
+		i.Add(itemClone)
+	}
+	for n := range inventory.Weapon {
+		itemClone := inventory.Weapon[n]
+		itemClone.Uid = rndGen.NextUid()
+		i.Add(itemClone)
+	}
+	for n := range inventory.Provision {
+		itemClone := inventory.Provision[n]
+		itemClone.Uid = rndGen.NextUid()
+		i.Add(itemClone)
+	}
+}
+
 func (i *UnitInventory) PopulateCodeToItemMap(codeToItem *map[ItemCode]any) {
 	for n := range i.Ammunition {
 		(*codeToItem)[i.Ammunition[n].Code] = &i.Ammunition[n]

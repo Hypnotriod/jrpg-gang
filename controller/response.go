@@ -33,6 +33,7 @@ const (
 	DataKeyChat         ResponseDataKey = "chat"
 	DataKeyMessage      ResponseDataKey = "message"
 	DataKeyShop         ResponseDataKey = "shop"
+	DataKeyQuests       ResponseDataKey = "quests"
 	DataKeyUsersCount   ResponseDataKey = "usersCount"
 	DataKeyEmployment   ResponseDataKey = "employment"
 	DataKeyReward       ResponseDataKey = "reward"

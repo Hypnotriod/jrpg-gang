@@ -43,5 +43,6 @@ type Action struct {
 	ItemUid   uint           `json:"itemUid,omitempty"`
 	Quantity  uint           `json:"quantity,omitempty"`
 	Property  ActionProperty `json:"property,omitempty"`
+	QuestCode QuestCode      `json:"questCode,omitempty"`
 	Position  *Position      `json:"position,omitempty"`
 }

@@ -26,8 +26,7 @@ func (s *Shop) LoadItems(path string, itemsConfig *config.GameItemsConfig) error
 	}
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	itemsConfig.PopulateFromDescriptor(items)
-	s.shop = engine.NewGameShop(items)
+	s.shop = engine.NewGameShop(items, itemsConfig.PopulateFromDescriptor)
 	return nil
 }
 

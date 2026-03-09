@@ -31,7 +31,6 @@ type ActionResult struct {
 	Drop                 map[uint]UnitBooty                `json:"drop,omitempty"`
 	Achievements         UnitAchievements                  `json:"achievements,omitempty"`
 	Booty                *UnitBooty                        `json:"booty,omitempty"`
-	Items                *[]UnitInventoryDescriptor        `json:"items,omitempty"`
 	Result               ActionResultType                  `json:"result"`
 	WearoutIncreased     bool                              `json:"-"`
 	UseCostReduced       bool                              `json:"-"`

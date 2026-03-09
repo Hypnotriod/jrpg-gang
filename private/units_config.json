@@ -1005,7 +1005,10 @@
                 "weight": 1,
                 "coins": 7
             }
-        ]
+        ],
+        "achievements": {
+            "kill-rat-01": 1
+        }
     },
     {
         "name": "Ghost",
