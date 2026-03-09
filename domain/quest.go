@@ -6,20 +6,20 @@ type QuestCode string
 
 type QuestTrigger struct {
 	Requirements *UnitRequirements `json:"requirements,omitempty"`
-	Achievements *UnitAchievements `json:"achievements,omitempty"`
+	Achievements UnitAchievements  `json:"achievements,omitempty"`
 }
 
 type QuestReward struct {
 	UnitBooty
-	Achievements *[]UnitAchievement `json:"achievements,omitempty"`
-	Items        *UnitInventory     `json:"items,omitempty"`
+	Achievements UnitAchievements `json:"achievements,omitempty"`
+	Items        *UnitInventory   `json:"items,omitempty"`
 }
 
 func (r *QuestReward) Clone() *QuestReward {
 	res := &QuestReward{}
 	res.UnitBooty = r.UnitBooty
 	if r.Achievements != nil {
-		res.Achievements = util.ClonePtr(r.Achievements)
+		res.Achievements = util.CloneMap(r.Achievements)
 	}
 	if r.Items != nil {
 		res.Items = r.Items.Clone()

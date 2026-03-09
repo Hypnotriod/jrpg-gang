@@ -50,6 +50,9 @@ func (q *GameQuests) GetStatus(unit *domain.Unit) *GameQuestsStatus {
 			continue
 		}
 		status := unit.Quests[quest.Code]
+		if status == domain.UnitQuestStatusEmpty {
+			status = domain.UnitQuestStatusInactive
+		}
 		r.Quests[i].Quest = *quest.Clone()
 		r.Quests[i].Status = status
 		if status != domain.UnitQuestStatusActive || quest.Completion.Requirements == nil {
@@ -91,7 +94,7 @@ func (q *GameQuests) activate(unit *domain.Unit, code domain.QuestCode) *domain.
 		return result.WithResult(domain.ResultNotAllowed)
 	}
 	if quest.Activation.Achievements != nil {
-		unit.Achievements.Set(*quest.Activation.Achievements)
+		unit.Achievements.Set(quest.Activation.Achievements)
 	}
 	unit.Quests[code] = domain.UnitQuestStatusActive
 	return result.WithResult(domain.ResultAccomplished)
@@ -121,7 +124,7 @@ func (q *GameQuests) complete(unit *domain.Unit, code domain.QuestCode, rndGen *
 		return result.WithResult(domain.ResultNotAllowed)
 	}
 	if quest.Completion.Achievements != nil {
-		unit.Achievements.Set(*quest.Completion.Achievements)
+		unit.Achievements.Set(quest.Completion.Achievements)
 	}
 	if !quest.Reward.UnitBooty.IsEmpty() {
 		unit.Booty.Accumulate(quest.Reward.UnitBooty)
@@ -130,9 +133,10 @@ func (q *GameQuests) complete(unit *domain.Unit, code domain.QuestCode, rndGen *
 	}
 	if quest.Reward.Items != nil {
 		unit.Inventory.Merge(quest.Reward.Items, rndGen)
+		result.Items = quest.Reward.Items.Clone()
 	}
-	unit.Achievements.Accumulate(*quest.Reward.Achievements)
-	result.Achievements.Accumulate(*quest.Reward.Achievements)
-	unit.Quests[code] = domain.UnitQuestStatusDone
+	unit.Achievements.Merge(quest.Reward.Achievements)
+	result.Achievements.Merge(quest.Reward.Achievements)
+	unit.Quests[code] = domain.UnitQuestStatusCompleted
 	return result.WithResult(domain.ResultAccomplished)
 }

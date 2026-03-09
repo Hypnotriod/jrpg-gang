@@ -50,7 +50,7 @@
             "requirements": {
                 "physique": 3,
                 "quests": {
-                    "quest-kill-rats-01": 2
+                    "quest-kill-rats-01": "completed"
                 }
             }
         },
@@ -84,8 +84,8 @@
             "requirements": {
                 "strength": 5,
                 "quests": {
-                    "quest-kill-rats-01": 2,
-                    "quest-kill-rats-02": 2
+                    "quest-kill-rats-01": "completed",
+                    "quest-kill-rats-02": "completed"
                 }
             }
         },
