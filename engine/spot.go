@@ -5,12 +5,12 @@ import (
 )
 
 type Spot struct {
-	Name         string                   `json:"name"`
-	Code         string                   `json:"code"`
-	Battlefield  Battlefield              `json:"battlefield"`
-	Booty        []domain.UnitBooty       `json:"booty"`
-	Experience   uint                     `json:"experience"`
-	Achievements []domain.UnitAchievement `json:"achievements"`
+	Name          string                `json:"name"`
+	Code          string                `json:"code"`
+	Battlefield   Battlefield           `json:"battlefield"`
+	Booty         []domain.UnitBooty    `json:"booty"`
+	Experience    uint                  `json:"experience"`
+	QuestTriggers []domain.QuestTrigger `json:"questTriggers"`
 }
 
 func (s *Spot) Clone() *Spot {
@@ -20,6 +20,6 @@ func (s *Spot) Clone() *Spot {
 	r.Battlefield = *s.Battlefield.Clone()
 	r.Experience = s.Experience
 	r.Booty = s.Booty
-	r.Achievements = s.Achievements
+	r.QuestTriggers = s.QuestTriggers
 	return r
 }

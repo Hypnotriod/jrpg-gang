@@ -16,7 +16,13 @@
                     }
                 ],
                 "experience": 35,
-                "achievements": ["first-blood"],
+                "questTriggers": [
+                    {
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -66,7 +72,13 @@
                     }
                 ],
                 "experience": 35,
-                "achievements": ["first-blood"],
+                "questTriggers": [
+                    {
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -116,7 +128,13 @@
                     }
                 ],
                 "experience": 35,
-                "achievements": ["first-blood"],
+                "questTriggers": [
+                    {
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -996,7 +1014,13 @@
                     }
                 ],
                 "experience": 300,
-                "achievements": ["scenario-easy-01-completed"],
+                "questTriggers": [
+                    {
+                        "achievements": {
+                            "scenario-easy-01-completed": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -1088,7 +1112,13 @@
                     }
                 ],
                 "experience": 300,
-                "achievements": ["scenario-easy-01-completed"],
+                "questTriggers": [
+                    {
+                        "achievements": {
+                            "scenario-easy-01-completed": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -2452,7 +2482,13 @@
                     }
                 ],
                 "experience": 500,
-                "achievements": ["scenario-medium-01-completed"],
+                "questTriggers": [
+                    {
+                        "achievements": {
+                            "scenario-medium-01-completed": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -2544,7 +2580,13 @@
                     }
                 ],
                 "experience": 500,
-                "achievements": ["scenario-medium-01-completed"],
+                "questTriggers": [
+                    {
+                        "achievements": {
+                            "scenario-medium-01-completed": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -4194,7 +4236,13 @@
                     }
                 ],
                 "experience": 1000,
-                "achievements": ["scenario-advanced-01-completed"],
+                "questTriggers": [
+                    {
+                        "achievements": {
+                            "scenario-advanced-01-completed": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [

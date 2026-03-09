@@ -10,12 +10,6 @@ func (a UnitAchievements) Set(achievements UnitAchievements) {
 	}
 }
 
-func (a UnitAchievements) Accumulate(achievements []UnitAchievement) {
-	for _, achievement := range achievements {
-		a[achievement] += 1
-	}
-}
-
 func (a UnitAchievements) Merge(achievements UnitAchievements) {
 	for achievement, value := range achievements {
 		a[achievement] += value

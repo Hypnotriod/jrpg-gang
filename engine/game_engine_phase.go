@@ -194,12 +194,20 @@ func (e *GameEngine) applySpotExperience(spotCompleteResult *SpotCompleteResult)
 }
 
 func (e *GameEngine) applySpotAchievements(spotCompleteResult *SpotCompleteResult) {
-	achievements := e.scenario.CurrentSpot().Achievements
+	triggers := e.scenario.CurrentSpot().QuestTriggers
 	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
-	for _, unit := range leftUnits {
-		unit.Achievements.Accumulate(achievements)
+	for _, trigger := range triggers {
+		for _, unit := range leftUnits {
+			if trigger.Requirements != nil && !unit.CheckRequirements(*trigger.Requirements) {
+				continue
+			}
+			unit.Achievements.Merge(trigger.Achievements)
+			if spotCompleteResult.Achievements[unit.Uid] == nil {
+				spotCompleteResult.Achievements[unit.Uid] = domain.UnitAchievements{}
+			}
+			spotCompleteResult.Achievements[unit.Uid].Merge(trigger.Achievements)
+		}
 	}
-	spotCompleteResult.Achievements.Accumulate(achievements)
 }
 
 func (e *GameEngine) accumulateDrop(corpses []*GameUnit, dropDistribution map[uint]domain.UnitBooty) {

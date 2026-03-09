@@ -23,15 +23,15 @@ func NewEndRoundResult() *EndRoundResult {
 }
 
 type SpotCompleteResult struct {
-	Experience   map[uint]uint           `json:"experience,omitempty"`
-	Booty        domain.UnitBooty        `json:"booty"`
-	Achievements domain.UnitAchievements `json:"achievements,omitempty"`
+	Experience   map[uint]uint                    `json:"experience,omitempty"`
+	Booty        domain.UnitBooty                 `json:"booty"`
+	Achievements map[uint]domain.UnitAchievements `json:"achievements,omitempty"`
 }
 
 func NewSpotCompleteResult() *SpotCompleteResult {
 	result := &SpotCompleteResult{}
 	result.Experience = map[uint]uint{}
-	result.Achievements = domain.UnitAchievements{}
+	result.Achievements = map[uint]domain.UnitAchievements{}
 	return result
 }
 
