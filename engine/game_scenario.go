@@ -29,7 +29,7 @@ type GameScenario struct {
 func (s *GameScenario) Clone() *GameScenario {
 	r := &GameScenario{}
 	r.Path = s.Path
-	r.Spots = make(map[GameSpotId]*Spot)
+	r.Spots = map[GameSpotId]*Spot{}
 	for id, spot := range s.Spots {
 		r.Spots[id] = spot.Clone()
 	}

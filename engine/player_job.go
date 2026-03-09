@@ -31,7 +31,7 @@ type PlayerJobStatus struct {
 
 func NewPlayerJobStatus() *PlayerJobStatus {
 	status := &PlayerJobStatus{}
-	status.Countdown = make(map[PlayerJobCode]time.Time)
+	status.Countdown = map[PlayerJobCode]time.Time{}
 	return status
 }
 
@@ -55,7 +55,7 @@ func (s *PlayerJobStatus) Clone() *PlayerJobStatus {
 		IsComplete:     s.IsComplete,
 		Code:           s.Code,
 		CompletionTime: s.CompletionTime,
-		Countdown:      make(map[PlayerJobCode]time.Time),
+		Countdown:      map[PlayerJobCode]time.Time{},
 	}
 	for k, v := range s.Countdown {
 		status.Countdown[k] = v

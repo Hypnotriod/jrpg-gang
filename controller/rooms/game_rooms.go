@@ -17,8 +17,8 @@ type GameRooms struct {
 func NewGameRooms() *GameRooms {
 	r := &GameRooms{}
 	r.rndGen = util.NewRndGen()
-	r.rooms = make(map[uint]*GameRoom)
-	r.playerIdToRoomUid = make(map[engine.PlayerId]uint)
+	r.rooms = map[uint]*GameRoom{}
+	r.playerIdToRoomUid = map[engine.PlayerId]uint{}
 	return r
 }
 

@@ -13,7 +13,7 @@ type GameScenariosConfig struct {
 
 func NewGameScenariosConfig() *GameScenariosConfig {
 	c := &GameScenariosConfig{}
-	c.scenarios = make(map[engine.GameScenarioId]*engine.GameScenario)
+	c.scenarios = map[engine.GameScenarioId]*engine.GameScenario{}
 	return c
 }
 
@@ -35,7 +35,7 @@ func (c *GameScenariosConfig) Get(id engine.GameScenarioId) *engine.GameScenario
 }
 
 func (c *GameScenariosConfig) LoadScenarios(path string, unitsConfig *GameUnitsConfig) error {
-	obj := make(map[engine.GameScenarioId]*engine.GameScenario)
+	obj := map[engine.GameScenarioId]*engine.GameScenario{}
 	scenarios, err := util.ReadJsonFile(&obj, path)
 	if err != nil {
 		return err

@@ -20,10 +20,10 @@ type Users struct {
 func NewUsers() *Users {
 	u := &Users{}
 	u.rndGen = util.NewRndGen()
-	u.users = make(map[engine.PlayerId]*User)
-	u.userNicknameToId = make(map[string]engine.PlayerId)
-	u.userEmailToId = make(map[model.UserEmail]engine.PlayerId)
-	u.userSessionIdToId = make(map[UserSessionId]engine.PlayerId)
+	u.users = map[engine.PlayerId]*User{}
+	u.userNicknameToId = map[string]engine.PlayerId{}
+	u.userEmailToId = map[model.UserEmail]engine.PlayerId{}
+	u.userSessionIdToId = map[UserSessionId]engine.PlayerId{}
 	return u
 }
 

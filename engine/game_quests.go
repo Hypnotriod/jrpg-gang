@@ -58,7 +58,7 @@ func (q *GameQuests) GetStatus(unit *domain.Unit) *GameQuestsStatus {
 		if status != domain.UnitQuestStatusActive || quest.Completion.Requirements == nil {
 			continue
 		}
-		r.Quests[i].Progress = make(map[domain.UnitAchievement]GameQuestProgress)
+		r.Quests[i].Progress = map[domain.UnitAchievement]GameQuestProgress{}
 		for achievement, goal := range quest.Completion.Requirements.Achievements {
 			target := unit.Achievements[achievement]
 			r.Quests[i].Progress[achievement] = GameQuestProgress{

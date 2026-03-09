@@ -26,7 +26,7 @@ func (c *GameController) persistJobStatus(userId model.UserId, jobStatus engine.
 		CompletionTime: jobStatus.CompletionTime,
 		Code:           jobStatus.Code,
 	}
-	jobStatusModel.Countdown = make(map[engine.PlayerJobCode]time.Time)
+	jobStatusModel.Countdown = map[engine.PlayerJobCode]time.Time{}
 	for k, v := range jobStatus.Countdown {
 		jobStatusModel.Countdown[k] = v
 	}

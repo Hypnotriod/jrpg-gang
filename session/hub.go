@@ -56,8 +56,8 @@ func NewHub(config HubConfig, controller *controller.GameController, auth *auth.
 	hub.config = config
 	hub.controller = controller
 	hub.auth = auth
-	hub.clients = make(map[engine.PlayerId]*Client)
-	hub.offlineTimers = make(map[engine.PlayerId]*time.Timer)
+	hub.clients = map[engine.PlayerId]*Client{}
+	hub.offlineTimers = map[engine.PlayerId]*time.Timer{}
 	hub.upgrader = &websocket.Upgrader{
 		CheckOrigin:     hub.checkOrigin(config.AllowedOrigins),
 		ReadBufferSize:  config.ReadBufferSize,

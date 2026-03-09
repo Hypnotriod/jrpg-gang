@@ -1,6 +1,6 @@
 package domain
 
-func AsEquipment(item interface{}) (*Equipment, bool) {
+func AsEquipment(item any) (*Equipment, bool) {
 	var r *Equipment
 	var ok bool = false
 	switch v := item.(type) {

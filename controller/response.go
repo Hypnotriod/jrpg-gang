@@ -40,15 +40,15 @@ const (
 )
 
 type Response struct {
-	Type   RequestType                     `json:"type,omitempty"`
-	Id     string                          `json:"id,omitempty"`
-	Status ResponseStatus                  `json:"status"`
-	Data   map[ResponseDataKey]interface{} `json:"data,omitempty"`
+	Type   RequestType             `json:"type,omitempty"`
+	Id     string                  `json:"id,omitempty"`
+	Status ResponseStatus          `json:"status"`
+	Data   map[ResponseDataKey]any `json:"data,omitempty"`
 }
 
 func NewResponse() *Response {
 	response := &Response{}
-	response.Data = make(map[ResponseDataKey]interface{})
+	response.Data = map[ResponseDataKey]any{}
 	return response
 }
 

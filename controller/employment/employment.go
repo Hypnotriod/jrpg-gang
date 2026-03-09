@@ -27,8 +27,8 @@ type Employment struct {
 
 func NewEmployment() *Employment {
 	e := &Employment{}
-	e.jobCodeToJob = make(map[engine.PlayerJobCode]*engine.PlayerJob)
-	e.jobsStatus = make(map[model.UserId]*engine.PlayerJobStatus)
+	e.jobCodeToJob = map[engine.PlayerJobCode]*engine.PlayerJob{}
+	e.jobsStatus = map[model.UserId]*engine.PlayerJobStatus{}
 	return e
 }
 

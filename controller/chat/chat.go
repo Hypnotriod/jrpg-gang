@@ -52,7 +52,7 @@ type Chat struct {
 
 func NewChat(config ChatConfig, broadcastChatMessage BroadcastChatMessageFunc) *Chat {
 	c := &Chat{
-		participants:         make(map[engine.PlayerId]*ChatParticipant),
+		participants:         map[engine.PlayerId]*ChatParticipant{},
 		messages:             []*ChatMessage{},
 		config:               config,
 		broadcastChatMessage: broadcastChatMessage,

@@ -14,7 +14,7 @@ type GameItemsConfig struct {
 
 func NewGameItemsConfig() *GameItemsConfig {
 	c := &GameItemsConfig{}
-	c.codeToItem = make(map[domain.ItemCode]any)
+	c.codeToItem = map[domain.ItemCode]any{}
 	return c
 }
 
@@ -31,7 +31,7 @@ func (c *GameItemsConfig) Load(path string) error {
 
 func (c *GameItemsConfig) prepare(items *domain.UnitInventory) {
 	c.items = items
-	c.codeToItem = make(map[domain.ItemCode]any)
+	c.codeToItem = map[domain.ItemCode]any{}
 	c.items.UnequipAmmunition()
 	c.items.PopulateCodeToItemMap(&c.codeToItem)
 }

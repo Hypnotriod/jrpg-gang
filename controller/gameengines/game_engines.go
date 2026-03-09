@@ -15,7 +15,7 @@ type GameEngines struct {
 func NewGameEngines() *GameEngines {
 	e := &GameEngines{}
 	e.rndGen = util.NewRndGen()
-	e.playerIdToEngine = make(map[engine.PlayerId]*GameEngineWrapper)
+	e.playerIdToEngine = map[engine.PlayerId]*GameEngineWrapper{}
 	return e
 }
 

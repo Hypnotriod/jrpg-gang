@@ -30,7 +30,7 @@ func NewPersistance(config PersistanceConfig) *Persistance {
 	p := &Persistance{}
 	p.config = config
 	p.rndGen = util.NewRndGen()
-	p.userEmailToAuthToken = make(map[model.UserEmail]auth.AuthenticationToken)
+	p.userEmailToAuthToken = map[model.UserEmail]auth.AuthenticationToken{}
 	p.usersAuthCache = ttlcache.New(
 		ttlcache.WithTTL[auth.AuthenticationToken, *model.UserModel](time.Duration(config.PersistanceCacheTimeoutMin) * time.Minute),
 	)
@@ -71,7 +71,7 @@ func (p *Persistance) SetUserInfoToAuthCache(token auth.AuthenticationToken, nic
 	}
 	model := item.Value()
 	if model.Units == nil {
-		model.Units = make(map[domain.UnitClass]*domain.Unit)
+		model.Units = map[domain.UnitClass]*domain.Unit{}
 	}
 	model.Nickname = nickname
 	model.Class = class

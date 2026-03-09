@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func AsCommaSeparatedObjectsSlice(slice interface{}) string {
+func AsCommaSeparatedObjectsSlice(slice any) string {
 	values := reflect.ValueOf(slice)
 	var sb strings.Builder
 	for i := 0; i < values.Len(); i++ {
@@ -18,7 +18,7 @@ func AsCommaSeparatedObjectsSlice(slice interface{}) string {
 	return sb.String()
 }
 
-func AsCommaSeparatedSlice(slice interface{}) string {
+func AsCommaSeparatedSlice(slice any) string {
 	values := reflect.ValueOf(slice)
 	var sb strings.Builder
 	for i := 0; i < values.Len(); i++ {

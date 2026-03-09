@@ -16,8 +16,8 @@ type GameUnitsConfig struct {
 
 func NewGameUnitsConfig() *GameUnitsConfig {
 	c := &GameUnitsConfig{}
-	c.codeToUnit = make(map[domain.UnitCode]*engine.GameUnit)
-	c.classToUnit = make(map[domain.UnitClass]*engine.GameUnit)
+	c.codeToUnit = map[domain.UnitCode]*engine.GameUnit{}
+	c.classToUnit = map[domain.UnitClass]*engine.GameUnit{}
 	return c
 }
 
@@ -54,8 +54,8 @@ func (c *GameUnitsConfig) LoadUnits(path string, itemsConfig *GameItemsConfig) e
 
 func (c *GameUnitsConfig) update(units *[]engine.GameUnit, itemsConfig *GameItemsConfig) {
 	c.units = *units
-	c.codeToUnit = make(map[domain.UnitCode]*engine.GameUnit)
-	c.classToUnit = make(map[domain.UnitClass]*engine.GameUnit)
+	c.codeToUnit = map[domain.UnitCode]*engine.GameUnit{}
+	c.classToUnit = map[domain.UnitClass]*engine.GameUnit{}
 	for i := range c.units {
 		unit := &c.units[i]
 		itemsConfig.PopulateFromDescriptor(&unit.Inventory)
