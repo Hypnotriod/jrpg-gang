@@ -135,6 +135,10 @@ func (q *GameQuests) complete(unit *domain.Unit, code domain.QuestCode, rndGen *
 		unit.Inventory.Merge(quest.Reward.Items, rndGen)
 		result.Items = quest.Reward.Items.Clone()
 	}
+	if quest.Reward.Experience != 0 {
+		unit.Stats.Progress.Experience += quest.Reward.Experience
+		result.Experience[unit.Uid] = quest.Reward.Experience
+	}
 	unit.Achievements.Merge(quest.Reward.Achievements)
 	result.Achievements.Merge(quest.Reward.Achievements)
 	unit.Quests[code] = domain.UnitQuestStatusCompleted

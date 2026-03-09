@@ -5,6 +5,7 @@
         "description": "",
         "reward": {
             "coins": 250,
+            "experience": 500,
             "items": {
                 "descriptor": [
                     {
@@ -34,6 +35,7 @@
         "description": "",
         "reward": {
             "coins": 500,
+            "experience": 1000,
             "items": {
                 "descriptor": [
                     {
@@ -68,6 +70,7 @@
         "description": "",
         "reward": {
             "coins": 1000,
+            "experience": 2000,
             "items": {
                 "descriptor": [
                     {

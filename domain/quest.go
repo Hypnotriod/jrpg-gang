@@ -11,6 +11,7 @@ type QuestTrigger struct {
 
 type QuestReward struct {
 	UnitBooty
+	Experience   uint             `json:"experience"`
 	Achievements UnitAchievements `json:"achievements,omitempty"`
 	Items        *UnitInventory   `json:"items,omitempty"`
 }
