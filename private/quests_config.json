@@ -1,11 +1,11 @@
 [
     {
-        "code": "quest-kill-rats-01",
-        "name": "Kill 5 Rats",
+        "code": "quest-kill-10-rats",
+        "name": "Kill 10 Rats",
         "description": "",
         "reward": {
             "coins": 250,
-            "experience": 500,
+            "experience": 750,
             "items": {
                 "descriptor": [
                     {
@@ -16,86 +16,63 @@
             }
         },
         "activation": {
-            "achievements": {
-                "kill-rat-01": 0
-            },
             "requirements": {}
         },
         "completion": {
             "requirements": {
                 "achievements": {
-                    "kill-rat-01": 5
+                    "kill-10-rats": 10
                 }
             }
         }
     },
     {
-        "code": "quest-kill-rats-02",
-        "name": "Kill 10 Rats",
-        "description": "",
-        "reward": {
-            "coins": 500,
-            "experience": 1000,
-            "items": {
-                "descriptor": [
-                    {
-                        "code": "antidote-potion-01",
-                        "quantity": 3
-                    }
-                ]
-            }
-        },
-        "activation": {
-            "achievements": {
-                "kill-rat-01": 0
-            },
-            "requirements": {
-                "physique": 3,
-                "quests": {
-                    "quest-kill-rats-01": "completed"
-                }
-            }
-        },
-        "completion": {
-            "requirements": {
-                "achievements": {
-                    "kill-rat-01": 10
-                }
-            }
-        }
-    },
-    {
-        "code": "quest-kill-rats-03",
+        "code": "quest-kill-20-rats",
         "name": "Kill 20 Rats",
         "description": "",
         "reward": {
-            "coins": 1000,
-            "experience": 2000,
+            "coins": 500,
+            "experience": 1500,
             "items": {
                 "descriptor": [
                     {
                         "code": "antidote-potion-01",
-                        "quantity": 5
+                        "quantity": 2
                     }
                 ]
             }
         },
         "activation": {
-            "achievements": {
-                "kill-rat-01": 0
-            },
             "requirements": {
                 "strength": 5,
                 "quests": {
-                    "quest-kill-rats-01": "completed",
-                    "quest-kill-rats-02": "completed"
+                    "quest-kill-10-rats": "completed"
                 }
             }
         },
         "completion": {
             "requirements": {
                 "achievements": {
-                    "kill-rat-01": 20
+                    "kill-20-rats": 20
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-find-artifact-01",
+        "name": "Find Bowl Artifact",
+        "description": "",
+        "reward": {
+            "coins": 1000,
+            "experience": 2000
+        },
+        "activation": {
+            "requirements": {}
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "artifact-01": 1
                 }
             }
         }

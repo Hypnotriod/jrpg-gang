@@ -1006,9 +1006,34 @@
                 "coins": 7
             }
         ],
-        "achievements": {
-            "kill-rat-01": 1
-        }
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-rats": "active"
+                    },
+                    "achievements": {
+                        "kill-10-rats": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-rats": 1
+                }
+            },
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-20-rats": "active"
+                    },
+                    "achievements": {
+                        "kill-20-rats": -20
+                    }
+                },
+                "achievements": {
+                    "kill-20-rats": 1
+                }
+            }
+        ]
     },
     {
         "name": "Ghost",
@@ -1392,8 +1417,6 @@
             "leg": 6,
             "weapon": 1
         },
-        "booty": {},
-        "achievements": {},
         "inventory": {
             "descriptor": [
                 {
@@ -1448,8 +1471,6 @@
             "leg": 2,
             "weapon": 1
         },
-        "booty": {},
-        "achievements": {},
         "inventory": {
             "descriptor": [
                 {
@@ -1506,8 +1527,6 @@
             "body": 1,
             "weapon": 1
         },
-        "booty": {},
-        "achievements": {},
         "inventory": {
             "descriptor": [
                 {

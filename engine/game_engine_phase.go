@@ -202,7 +202,7 @@ func (e *GameEngine) applySpotAchievements(spotCompleteResult *SpotCompleteResul
 				continue
 			}
 			unit.Achievements.Merge(trigger.Achievements)
-			if spotCompleteResult.Achievements[unit.Uid] == nil {
+			if _, ok := spotCompleteResult.Achievements[unit.Uid]; !ok {
 				spotCompleteResult.Achievements[unit.Uid] = domain.UnitAchievements{}
 			}
 			spotCompleteResult.Achievements[unit.Uid].Merge(trigger.Achievements)
@@ -258,7 +258,7 @@ func (e *GameEngine) applyExperience(corpses []*GameUnit, expDistribution map[ui
 	}
 }
 
-func (e *GameEngine) applyAchievements(corpses []*GameUnit, achDistribution domain.UnitAchievements) {
+func (e *GameEngine) applyAchievements(corpses []*GameUnit, achDistribution map[uint]domain.UnitAchievements) {
 	if len(corpses) == 0 {
 		return
 	}
@@ -270,14 +270,24 @@ func (e *GameEngine) applyAchievements(corpses []*GameUnit, achDistribution doma
 		return corpse.Faction == GameUnitFactionRight
 	})
 	if achDistribution == nil {
-		achDistribution = domain.UnitAchievements{}
+		achDistribution = map[uint]domain.UnitAchievements{}
 	}
 	for _, corpse := range rightCorpses {
-		achDistribution.Merge(corpse.Achievements)
+		triggers := corpse.QuestTriggers
+		for _, trigger := range triggers {
+			for _, unit := range leftUnits {
+				if trigger.Requirements != nil && !unit.CheckRequirements(*trigger.Requirements) {
+					continue
+				}
+				unit.Achievements.Merge(trigger.Achievements)
+				if _, ok := achDistribution[unit.Uid]; !ok {
+					achDistribution[unit.Uid] = domain.UnitAchievements{}
+				}
+				achDistribution[unit.Uid].Merge(trigger.Achievements)
+			}
+		}
 	}
-	for _, unit := range leftUnits {
-		unit.Achievements.Merge(achDistribution)
-	}
+
 }
 
 func (e *GameEngine) restoreActorsState() {

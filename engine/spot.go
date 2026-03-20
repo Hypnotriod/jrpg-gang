@@ -10,7 +10,7 @@ type Spot struct {
 	Battlefield   Battlefield           `json:"battlefield"`
 	Booty         []domain.UnitBooty    `json:"booty"`
 	Experience    uint                  `json:"experience"`
-	QuestTriggers []domain.QuestTrigger `json:"questTriggers"`
+	QuestTriggers []domain.QuestTrigger `json:"questTriggers,omitempty"`
 }
 
 func (s *Spot) Clone() *Spot {

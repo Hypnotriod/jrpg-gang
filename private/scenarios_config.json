@@ -477,6 +477,21 @@
                     }
                 ],
                 "experience": 40,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-01": "active"
+                            },
+                            "achievements": {
+                                "artifact-01": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-01": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [

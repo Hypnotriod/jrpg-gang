@@ -13,10 +13,11 @@ const (
 
 type GameUnit struct {
 	domain.Unit
-	Faction    GameUnitFaction    `json:"faction"`
-	PlayerInfo *PlayerInfo        `json:"playerInfo,omitempty"`
-	Drop       []domain.UnitBooty `json:"drop,omitempty"`
-	IsDead     bool               `json:"isDead,omitempty"`
+	Faction       GameUnitFaction       `json:"faction"`
+	PlayerInfo    *PlayerInfo           `json:"playerInfo,omitempty"`
+	Drop          []domain.UnitBooty    `json:"drop,omitempty"`
+	QuestTriggers []domain.QuestTrigger `json:"questTriggers,omitempty"`
+	IsDead        bool                  `json:"isDead,omitempty"`
 }
 
 func NewGameUnit(unit *domain.Unit) *GameUnit {

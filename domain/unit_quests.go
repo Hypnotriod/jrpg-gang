@@ -24,9 +24,9 @@ func (a UnitQuests) Complete(questId QuestCode) {
 	a[questId] = UnitQuestStatusCompleted
 }
 
-func (a UnitQuests) Merge(quests UnitQuests) {
+func (a UnitQuests) Set(quests UnitQuests) {
 	for questId, value := range quests {
-		a[questId] = max(a[questId], value)
+		a[questId] = value
 	}
 }
 

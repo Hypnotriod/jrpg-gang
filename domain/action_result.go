@@ -29,7 +29,8 @@ type ActionResult struct {
 	TemporalModification map[uint][]UnitModificationImpact `json:"temporalModification,omitempty"`
 	Experience           map[uint]uint                     `json:"experience,omitempty"`
 	Drop                 map[uint]UnitBooty                `json:"drop,omitempty"`
-	Achievements         UnitAchievements                  `json:"achievements,omitempty"`
+	Achievements         map[uint]UnitAchievements         `json:"achievements,omitempty"`
+	Quests               map[uint]UnitQuests               `json:"quests,omitempty"`
 	Booty                *UnitBooty                        `json:"booty,omitempty"`
 	Items                *UnitInventory                    `json:"items,omitempty"`
 	Result               ActionResultType                  `json:"result"`
@@ -51,7 +52,8 @@ func NewActionResult() *ActionResult {
 	r.TemporalModification = map[uint][]UnitModificationImpact{}
 	r.Experience = map[uint]uint{}
 	r.Drop = map[uint]UnitBooty{}
-	r.Achievements = UnitAchievements{}
+	r.Achievements = map[uint]UnitAchievements{}
+	r.Quests = map[uint]UnitQuests{}
 	return r
 }
 

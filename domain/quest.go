@@ -7,6 +7,7 @@ type QuestCode string
 type QuestTrigger struct {
 	Requirements *UnitRequirements `json:"requirements,omitempty"`
 	Achievements UnitAchievements  `json:"achievements,omitempty"`
+	Quests       UnitQuests        `json:"quests,omitempty"`
 }
 
 type QuestReward struct {

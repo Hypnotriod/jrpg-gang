@@ -136,6 +136,7 @@ func (u *Users) UpdateWithUnitOnGameComplete(playerId engine.PlayerId, unit *dom
 	user.Unit.Stats.Progress = unit.Stats.Progress
 	user.Unit.Booty.Accumulate(unit.Booty)
 	user.Unit.Achievements = util.CloneMap(unit.Achievements)
+	user.Unit.Quests = util.CloneMap(unit.Quests)
 	user.Unit.Inventory = *unit.Inventory.Clone()
 	user.Unit.Inventory.PopulateUids(user.RndGen)
 	user.Unit.PlayerInfo = nil

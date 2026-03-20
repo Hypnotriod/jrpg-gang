@@ -6,8 +6,8 @@ import (
 )
 
 type GameQuestProgress struct {
-	Target uint `json:"target"`
-	Goal   uint `json:"goal"`
+	Target int `json:"target"`
+	Goal   int `json:"goal"`
 }
 
 type GameQuestStatus struct {
@@ -90,11 +90,22 @@ func (q *GameQuests) activate(unit *domain.Unit, code domain.QuestCode) *domain.
 	if quest == nil {
 		return result.WithResult(domain.ResultNotFound)
 	}
+	if unit.Quests[code] != domain.UnitQuestStatusEmpty && unit.Quests[code] != domain.UnitQuestStatusInactive {
+		return result.WithResult(domain.ResultNotAllowed)
+	}
 	if quest.Activation.Requirements != nil && !unit.CheckRequirements(*quest.Activation.Requirements) {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
+	if quest.Activation.Quests != nil {
+		unit.Quests.Set(quest.Activation.Quests)
+		result.Quests[unit.Uid] = quest.Activation.Quests
+	}
 	if quest.Activation.Achievements != nil {
+		if _, ok := result.Achievements[unit.Uid]; !ok {
+			result.Achievements[unit.Uid] = domain.UnitAchievements{}
+		}
 		unit.Achievements.Set(quest.Activation.Achievements)
+		result.Achievements[unit.Uid].Set(quest.Activation.Achievements)
 	}
 	unit.Quests[code] = domain.UnitQuestStatusActive
 	return result.WithResult(domain.ResultAccomplished)
@@ -108,6 +119,9 @@ func (q *GameQuests) deactivate(unit *domain.Unit, code domain.QuestCode) *domai
 	if quest == nil {
 		return result.WithResult(domain.ResultNotFound)
 	}
+	if unit.Quests[code] != domain.UnitQuestStatusActive {
+		return result.WithResult(domain.ResultNotAllowed)
+	}
 	unit.Quests[code] = domain.UnitQuestStatusInactive
 	return result.WithResult(domain.ResultAccomplished)
 }
@@ -120,11 +134,29 @@ func (q *GameQuests) complete(unit *domain.Unit, code domain.QuestCode, rndGen *
 	if quest == nil {
 		return result.WithResult(domain.ResultNotFound)
 	}
+	if unit.Quests[code] != domain.UnitQuestStatusActive {
+		return result.WithResult(domain.ResultNotAllowed)
+	}
 	if quest.Completion.Requirements != nil && !unit.CheckRequirements(*quest.Completion.Requirements) {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
+	if quest.Completion.Quests != nil {
+		unit.Quests.Set(quest.Completion.Quests)
+		result.Quests[unit.Uid] = quest.Completion.Quests
+	}
 	if quest.Completion.Achievements != nil {
+		if _, ok := result.Achievements[unit.Uid]; !ok {
+			result.Achievements[unit.Uid] = domain.UnitAchievements{}
+		}
 		unit.Achievements.Set(quest.Completion.Achievements)
+		result.Achievements[unit.Uid].Set(quest.Completion.Achievements)
+	}
+	if quest.Reward.Achievements != nil {
+		if _, ok := result.Achievements[unit.Uid]; !ok {
+			result.Achievements[unit.Uid] = domain.UnitAchievements{}
+		}
+		unit.Achievements.Merge(quest.Reward.Achievements)
+		result.Achievements[unit.Uid].Merge(quest.Reward.Achievements)
 	}
 	if !quest.Reward.UnitBooty.IsEmpty() {
 		unit.Booty.Accumulate(quest.Reward.UnitBooty)
@@ -139,8 +171,6 @@ func (q *GameQuests) complete(unit *domain.Unit, code domain.QuestCode, rndGen *
 		unit.Stats.Progress.Experience += quest.Reward.Experience
 		result.Experience[unit.Uid] = quest.Reward.Experience
 	}
-	unit.Achievements.Merge(quest.Reward.Achievements)
-	result.Achievements.Merge(quest.Reward.Achievements)
 	unit.Quests[code] = domain.UnitQuestStatusCompleted
 	return result.WithResult(domain.ResultAccomplished)
 }
