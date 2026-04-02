@@ -2,21 +2,15 @@
     {
         "code": "quest-kill-10-rats",
         "name": "Kill 10 Rats",
-        "description": "",
+        "description": "The Hunters Guild sounds an urgent call. A vile infestation of grotesque vermin plagues the lower dungeons. Cull their numbers to stem the spreading blight before darkness consumes all.",
         "reward": {
-            "coins": 250,
-            "experience": 750,
-            "items": {
-                "descriptor": [
-                    {
-                        "code": "antidote-potion-01",
-                        "quantity": 1
-                    }
-                ]
-            }
+            "coins": 600,
+            "experience": 750
         },
         "activation": {
-            "requirements": {}
+            "requirements": {
+                "level": 1
+            }
         },
         "completion": {
             "requirements": {
@@ -29,22 +23,14 @@
     {
         "code": "quest-kill-20-rats",
         "name": "Kill 20 Rats",
-        "description": "",
+        "description": "The darkness grows deeper still. The Hunters Guild pleads for your aid once more. The rat plague consumes the shadows below without mercy. Eradicate them completely, or their corruption will breach the mortal realm.",
         "reward": {
-            "coins": 500,
-            "experience": 1500,
-            "items": {
-                "descriptor": [
-                    {
-                        "code": "antidote-potion-01",
-                        "quantity": 2
-                    }
-                ]
-            }
+            "coins": 1200,
+            "experience": 1300
         },
         "activation": {
             "requirements": {
-                "strength": 5,
+                "level": 2,
                 "quests": {
                     "quest-kill-10-rats": "completed"
                 }
@@ -59,20 +45,111 @@
         }
     },
     {
-        "code": "quest-find-artifact-01",
-        "name": "Find Bowl Artifact",
-        "description": "",
+        "code": "quest-kill-10-snakes",
+        "name": "Kill 10 Snakes",
+        "description": "The Hunters Guild beseeches you to purge the haunted marshland of lethal serpents. Ten coils of venomous shadow must be severed before their hypnotic fangs drag more souls into the abyss.",
         "reward": {
             "coins": 1000,
+            "experience": 1200
+        },
+        "activation": {
+            "requirements": {
+                "level": 2
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-10-snakes": 10
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-30-mosquitoes",
+        "name": "Kill 30 Mosquitoes",
+        "description": "A swarm of bloodthirsty horrors descends upon the shadowed marshes. The Hunters Guild demands you slay thirty of these vampiric fiends before their insatiable hunger drains the life from the land itself. Strike swiftly, for their buzzing heralds the coming of greater plagues.",
+        "reward": {
+            "coins": 1600,
+            "experience": 1500
+        },
+        "activation": {
+            "requirements": {
+                "level": 2,
+                "quests": {
+                    "quest-kill-10-rats": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-30-mosquitoes": 30
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-find-artifact-01",
+        "name": "Find Cursed Goblet",
+        "description": "The Adventurers Guild seeks a perilous relic: the Cursed Goblet. An artifact of forbidden power lost beneath the Forgotten Ruins. Venture into the third level's shadowed depths to claim it, if the ancient darkness permits your return.",
+        "reward": {
+            "coins": 1500,
             "experience": 2000
         },
         "activation": {
-            "requirements": {}
+            "requirements": {
+                "level": 3
+            }
         },
         "completion": {
             "requirements": {
                 "achievements": {
                     "artifact-01": 1
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-find-artifact-02",
+        "name": "Find Sinister Skull",
+        "description": "Deep within the Cursed Swamp lies a relic of pure malice, the Sinister Skull. An artifact that whispers dark incantations to those who draw near. The Adventurers Guild commands you to retrieve it from the fourth level's mire, where death itself seems to breathe.",
+        "reward": {
+            "coins": 2500,
+            "ruby": 10,
+            "experience": 4000
+        },
+        "activation": {
+            "requirements": {
+                "level": 4
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "artifact-02": 1
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-find-artifact-03",
+        "name": "Find Seekers Book",
+        "description": "The Seekers Book awaits in the abyssal depths of the Dragon's Lair. A tome bound in shadow itself, containing forbidden knowledge that mortals were never meant to possess. Descend to the fifth level and claim it, if your mind can bear the weight of such terrible truths.",
+        "reward": {
+            "coins": 4000,
+            "ruby": 30,
+            "experience": 6000
+        },
+        "activation": {
+            "requirements": {
+                "level": 5
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "artifact-03": 1
                 }
             }
         }

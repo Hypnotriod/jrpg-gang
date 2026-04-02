@@ -10,6 +10,18 @@ type QuestTrigger struct {
 	Quests       UnitQuests        `json:"quests,omitempty"`
 }
 
+func (t *QuestTrigger) Clone() *QuestTrigger {
+	res := &QuestTrigger{}
+	res.Requirements = t.Requirements
+	if t.Achievements != nil {
+		res.Achievements = util.CloneMap(t.Achievements)
+	}
+	if t.Quests != nil {
+		res.Quests = util.CloneMap(t.Quests)
+	}
+	return res
+}
+
 type QuestReward struct {
 	UnitBooty
 	Experience   uint             `json:"experience"`
@@ -20,6 +32,7 @@ type QuestReward struct {
 func (r *QuestReward) Clone() *QuestReward {
 	res := &QuestReward{}
 	res.UnitBooty = r.UnitBooty
+	res.Experience = r.Experience
 	if r.Achievements != nil {
 		res.Achievements = util.CloneMap(r.Achievements)
 	}

@@ -5,15 +5,9 @@ import (
 	"jrpg-gang/util"
 )
 
-type GameQuestProgress struct {
-	Target int `json:"target"`
-	Goal   int `json:"goal"`
-}
-
 type GameQuestStatus struct {
 	domain.Quest
-	Status   domain.UnitQuestStatus                       `json:"status"`
-	Progress map[domain.UnitAchievement]GameQuestProgress `json:"progress,omitempty"`
+	Status domain.UnitQuestStatus `json:"status"`
 }
 
 type GameQuestsStatus struct {
@@ -53,19 +47,8 @@ func (q *GameQuests) GetStatus(unit *domain.Unit) *GameQuestsStatus {
 		if status == domain.UnitQuestStatusEmpty {
 			status = domain.UnitQuestStatusInactive
 		}
-		r.Quests[i].Quest = *quest.Clone()
-		r.Quests[i].Status = status
-		if status != domain.UnitQuestStatusActive || quest.Completion.Requirements == nil {
-			continue
-		}
-		r.Quests[i].Progress = map[domain.UnitAchievement]GameQuestProgress{}
-		for achievement, goal := range quest.Completion.Requirements.Achievements {
-			target := unit.Achievements[achievement]
-			r.Quests[i].Progress[achievement] = GameQuestProgress{
-				Target: target,
-				Goal:   goal,
-			}
-		}
+		questStatus := GameQuestStatus{Quest: *quest.Clone(), Status: status}
+		r.Quests = append(r.Quests, questStatus)
 	}
 	return r
 }

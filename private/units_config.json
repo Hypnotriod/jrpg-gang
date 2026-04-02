@@ -1436,6 +1436,21 @@
                 "weight": 1,
                 "coins": 2
             }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-30-mosquitoes": "active"
+                    },
+                    "achievements": {
+                        "kill-30-mosquitoes": -30
+                    }
+                },
+                "achievements": {
+                    "kill-30-mosquitoes": 1
+                }
+            }
         ]
     },
     {
@@ -1546,6 +1561,21 @@
             {
                 "weight": 1,
                 "coins": 2
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-snakes": "active"
+                    },
+                    "achievements": {
+                        "kill-10-snakes": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-snakes": 1
+                }
             }
         ]
     }

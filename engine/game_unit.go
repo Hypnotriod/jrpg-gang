@@ -2,6 +2,7 @@ package engine
 
 import (
 	"jrpg-gang/domain"
+	"jrpg-gang/util"
 )
 
 type GameUnitFaction uint
@@ -43,6 +44,9 @@ func (u *GameUnit) Clone() *GameUnit {
 	r.IsDead = u.IsDead
 	r.Drop = []domain.UnitBooty{}
 	r.Drop = append(r.Drop, u.Drop...)
+	r.QuestTriggers = util.Map(u.QuestTriggers, func(trigger domain.QuestTrigger) domain.QuestTrigger {
+		return *trigger.Clone()
+	})
 	r.Unit = *u.Unit.Clone()
 	if u.PlayerInfo != nil {
 		r.PlayerInfo = u.PlayerInfo.Clone()
