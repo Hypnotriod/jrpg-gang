@@ -1921,7 +1921,7 @@
                 "coins": 45
             },
             "useCost": {
-                "actionPoints": 4
+                "actionPoints": 5
             }
         },
         {
@@ -1981,7 +1981,7 @@
                 "coins": 45
             },
             "useCost": {
-                "actionPoints": 4
+                "actionPoints": 5
             }
         },
         {
@@ -2041,7 +2041,7 @@
                 "coins": 55
             },
             "useCost": {
-                "actionPoints": 4
+                "actionPoints": 5
             }
         },
         {
@@ -2065,6 +2065,29 @@
             },
             "useCost": {
                 "actionPoints": 4
+            }
+        },
+        {
+            "name": "Agility Bg",
+            "type": "disposable",
+            "code": "agility-potion-02",
+            "description": "A swirling elixir of liquid mercury and captured shadows, forged from the essence of hunted phantoms and the blood of swift predators. It grants unearthly speed and reflexes, turning the drinker into a blur of motion, though the shadows cling to their soul and whisper of relentless pursuit.",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "modification": [
+                {
+                    "duration": 5,
+                    "attributes": {
+                        "agility": 8,
+                        "deviation": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 70
+            },
+            "useCost": {
+                "actionPoints": 5
             }
         },
         {
