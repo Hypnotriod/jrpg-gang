@@ -28,10 +28,19 @@
             "code": "health-potion-01"
         },
         {
+            "code": "health-potion-02"
+        },
+        {
             "code": "stamina-potion-01"
         },
         {
+            "code": "stamina-potion-02"
+        },
+        {
             "code": "mana-potion-01"
+        },
+        {
+            "code": "mana-potion-02"
         },
         {
             "code": "agility-potion-01"

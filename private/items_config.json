@@ -1895,6 +1895,36 @@
             }
         },
         {
+            "name": "Health Bg",
+            "type": "disposable",
+            "code": "health-potion-02",
+            "description": "A vial of thick crimson essence, swirling with raw vitality torn from the dying moments of forgotten beasts. Its power mends grievous wounds, though those who drink it claim to taste the lingering screams of its creation.",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "modification": [
+                {
+                    "recovery": {
+                        "health": 100,
+                        "deviation": 10
+                    }
+                },
+                {
+                    "chance": 50,
+                    "duration": 5,
+                    "recovery": {
+                        "health": 5,
+                        "deviation": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 45
+            },
+            "useCost": {
+                "actionPoints": 4
+            }
+        },
+        {
             "name": "Stamina Sm",
             "type": "disposable",
             "code": "stamina-potion-01",
@@ -1925,6 +1955,36 @@
             }
         },
         {
+            "name": "Stamina Bg",
+            "type": "disposable",
+            "code": "stamina-potion-02",
+            "description": "A potent draught of midnight hue, brewed from the distilled fury of restless spirits and the marrow of fallen titans. It floods weary limbs with an otherworldly strength, though the body aches long after the power fades.",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "modification": [
+                {
+                    "recovery": {
+                        "stamina": 100,
+                        "deviation": 10
+                    }
+                },
+                {
+                    "chance": 50,
+                    "duration": 5,
+                    "recovery": {
+                        "stamina": 5,
+                        "deviation": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 45
+            },
+            "useCost": {
+                "actionPoints": 4
+            }
+        },
+        {
             "name": "Mana Sm",
             "type": "disposable",
             "code": "mana-potion-01",
@@ -1949,6 +2009,36 @@
             ],
             "price": {
                 "coins": 30
+            },
+            "useCost": {
+                "actionPoints": 4
+            }
+        },
+        {
+            "name": "Mana Bg",
+            "type": "disposable",
+            "code": "mana-potion-02",
+            "description": "A vessel of swirling indigo essence, distilled from the shattered minds of mad sorcerers and the dying echoes of forbidden incantations. It floods the mind with eldritch power and arcane clarity, though visions of cosmic truths and gnawing madness linger long in the drinker's darkest hours.",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "modification": [
+                {
+                    "recovery": {
+                        "mana": 100,
+                        "deviation": 10
+                    }
+                },
+                {
+                    "chance": 50,
+                    "duration": 5,
+                    "recovery": {
+                        "mana": 5,
+                        "deviation": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 55
             },
             "useCost": {
                 "actionPoints": 4
