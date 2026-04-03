@@ -62,6 +62,10 @@
                 {
                     "code": "stamina-potion-01",
                     "quantity": 3
+                },
+                {
+                    "code": "provision-ham-01",
+                    "quantity": 3
                 }
             ]
         },
@@ -136,6 +140,10 @@
                 },
                 {
                     "code": "stamina-potion-01",
+                    "quantity": 5
+                },
+                {
+                    "code": "provision-ham-01",
                     "quantity": 5
                 }
             ]
@@ -220,6 +228,10 @@
                 {
                     "code": "stamina-potion-01",
                     "quantity": 5
+                },
+                {
+                    "code": "provision-ham-01",
+                    "quantity": 3
                 }
             ]
         },
@@ -318,6 +330,14 @@
                 {
                     "code": "mana-potion-01",
                     "quantity": 5
+                },
+                {
+                    "code": "provision-ham-01",
+                    "quantity": 3
+                },
+                {
+                    "code": "provision-wine-01",
+                    "quantity": 3
                 }
             ]
         },
