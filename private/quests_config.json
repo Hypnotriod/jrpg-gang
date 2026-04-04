@@ -376,5 +376,27 @@
                 }
             }
         }
+    },
+    {
+        "code": "quest-save-princess",
+        "name": "Defeat the Dragon and save the Princess",
+        "description": "The Dragon holds the Princess captive within his molten throne room, her fate bound by flame and shadow. Break through his lair, defeat the ancient wyrm, and free her from the terror that grips the realm.",
+        "reward": {
+            "coins": 5000,
+            "ruby": 50,
+            "experience": 15000
+        },
+        "activation": {
+            "requirements": {
+                "level": 9
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "save-princess": 1
+                }
+            }
+        }
     }
 ]

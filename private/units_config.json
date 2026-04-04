@@ -1534,6 +1534,21 @@
                 "coins": 125,
                 "ruby": 5
             }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-save-princess": "active"
+                    },
+                    "achievements": {
+                        "save-princess": -1
+                    }
+                },
+                "achievements": {
+                    "save-princess": 1
+                }
+            }
         ]
     },
     {
