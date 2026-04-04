@@ -8,6 +8,7 @@
         },
         "achievements": {},
         "quests": {},
+        "description": "A hulking brute from the frozen wastes, wielding axe and fury in equal measure.",
         "stats": {
             "progress": {
                 "level": 1
@@ -87,6 +88,7 @@
         },
         "achievements": {},
         "quests": {},
+        "description": "A disciplined fighter clad in steel, master of sword and shield.",
         "stats": {
             "progress": {
                 "level": 1
@@ -166,6 +168,7 @@
         },
         "achievements": {},
         "quests": {},
+        "description": "A swift archer of the wilds, deadly with bow and blade.",
         "stats": {
             "progress": {
                 "level": 1
@@ -253,6 +256,7 @@
         },
         "achievements": {},
         "quests": {},
+        "description": "A scholarly sorcerer wielding arcane forces, bending magic to their will.",
         "stats": {
             "progress": {
                 "level": 1
@@ -353,6 +357,7 @@
     {
         "name": "North Troll",
         "code": "troll-01",
+        "description": "A massive, dim-witted giant from the icy north, crushing foes with brute strength.",
         "stats": {
             "progress": {
                 "level": 5,
@@ -415,6 +420,7 @@
     {
         "name": "Nasty Goblin",
         "code": "goblin-01",
+        "description": "A cunning, green-skinned pest, armed with rusty weapons and wicked schemes.",
         "stats": {
             "progress": {
                 "level": 4,
@@ -485,11 +491,27 @@
                 "weight": 1,
                 "coins": 10
             }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-goblins": "active"
+                    },
+                    "achievements": {
+                        "kill-10-goblins": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-goblins": 1
+                }
+            }
         ]
     },
     {
         "name": "Bat",
         "code": "bat-01",
+        "description": "A screeching fiend of the night, swooping down with razor-sharp fangs.",
         "stats": {
             "progress": {
                 "level": 1,
@@ -549,11 +571,27 @@
                 "weight": 1,
                 "coins": 3
             }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-20-bats": "active"
+                    },
+                    "achievements": {
+                        "kill-20-bats": -20
+                    }
+                },
+                "achievements": {
+                    "kill-20-bats": 1
+                }
+            }
         ]
     },
     {
         "name": "Green Slime",
         "code": "slime-01",
+        "description": "A gelatinous horror that dissolves flesh on contact.",
         "stats": {
             "progress": {
                 "level": 1,
@@ -618,6 +656,7 @@
     {
         "name": "Slow Green Slime",
         "code": "slime-02",
+        "description": "A sluggish, acidic blob that slowly engulfs its prey.",
         "stats": {
             "progress": {
                 "level": 2,
@@ -680,8 +719,9 @@
         ]
     },
     {
-        "name": "Cacodemon Green",
-        "code": "cacodemon-01",
+        "name": "Cacodaemon Green",
+        "code": "cacodaemon-01",
+        "description": "A venomous demon from the abyss, spewing poison and fear.",
         "stats": {
             "progress": {
                 "level": 4,
@@ -750,11 +790,27 @@
                 "weight": 1,
                 "coins": 10
             }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-daemons": "active"
+                    },
+                    "achievements": {
+                        "kill-10-daemons": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-daemons": 1
+                }
+            }
         ]
     },
     {
-        "name": "Cacodemon Blue",
-        "code": "cacodemon-02",
+        "name": "Cacodaemon Blue",
+        "code": "cacodaemon-02",
+        "description": "A frigid demon of ice, freezing souls with its chilling touch.",
         "stats": {
             "progress": {
                 "level": 4,
@@ -823,11 +879,27 @@
                 "weight": 1,
                 "coins": 12
             }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-daemons": "active"
+                    },
+                    "achievements": {
+                        "kill-10-daemons": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-daemons": 1
+                }
+            }
         ]
     },
     {
-        "name": "Cacodemon Yellow",
-        "code": "cacodemon-03",
+        "name": "Cacodaemon Yellow",
+        "code": "cacodaemon-03",
+        "description": "A blazing demon of fire, incinerating all in its path.",
         "stats": {
             "progress": {
                 "level": 4,
@@ -897,11 +969,27 @@
                 "weight": 1,
                 "coins": 14
             }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-daemons": "active"
+                    },
+                    "achievements": {
+                        "kill-10-daemons": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-daemons": 1
+                }
+            }
         ]
     },
     {
         "name": "Fire Scull",
         "code": "scull-01",
+        "description": "A flaming skull animated by dark magic, burning with unholy fire.",
         "stats": {
             "progress": {
                 "level": 4,
@@ -966,6 +1054,7 @@
     {
         "name": "Rat",
         "code": "rat-01",
+        "description": "A filthy, disease-ridden vermin that swarms in the shadows.",
         "stats": {
             "progress": {
                 "level": 2,
@@ -1062,6 +1151,7 @@
     {
         "name": "Ghost",
         "code": "ghost-01",
+        "description": "A spectral apparition, haunting the living with ethereal terror.",
         "stats": {
             "progress": {
                 "level": 2,
@@ -1126,6 +1216,7 @@
     {
         "name": "Death",
         "code": "death-01",
+        "description": "The Grim Reaper himself, wielding scythe and doom.",
         "stats": {
             "progress": {
                 "level": 5,
@@ -1197,6 +1288,7 @@
     {
         "name": "Zombie",
         "code": "zombie-01",
+        "description": "A rotting corpse reanimated by necromancy, driven by insatiable hunger.",
         "stats": {
             "progress": {
                 "level": 3,
@@ -1260,11 +1352,27 @@
                 "weight": 1,
                 "coins": 20
             }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-zombies": "active"
+                    },
+                    "achievements": {
+                        "kill-10-zombies": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-zombies": 1
+                }
+            }
         ]
     },
     {
         "name": "Skeleton",
         "code": "skeleton-01",
+        "description": "A bony warrior risen from the grave, clattering with eternal malice.",
         "stats": {
             "progress": {
                 "level": 4,
@@ -1331,11 +1439,27 @@
                 "weight": 1,
                 "coins": 25
             }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-skeletons": "active"
+                    },
+                    "achievements": {
+                        "kill-10-skeletons": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-skeletons": 1
+                }
+            }
         ]
     },
     {
         "name": "Dragon",
         "code": "dragon-01",
+        "description": "A colossal wyrm of legend, breathing fire and commanding the skies.",
         "stats": {
             "progress": {
                 "level": 10,
@@ -1415,6 +1539,7 @@
     {
         "name": "Mosquito",
         "code": "mosquito-01",
+        "description": "A buzzing bloodsucker, tiny but deadly in swarms.",
         "stats": {
             "progress": {
                 "level": 1,
@@ -1465,14 +1590,14 @@
             {
                 "requirements": {
                     "quests": {
-                        "quest-kill-30-mosquitoes": "active"
+                        "quest-kill-20-mosquitoes": "active"
                     },
                     "achievements": {
-                        "kill-30-mosquitoes": -30
+                        "kill-20-mosquitoes": -20
                     }
                 },
                 "achievements": {
-                    "kill-30-mosquitoes": 1
+                    "kill-20-mosquitoes": 1
                 }
             }
         ]
@@ -1480,6 +1605,7 @@
     {
         "name": "Toad",
         "code": "toad-01",
+        "description": "A bloated amphibian with a tongue like a whip, lurking in murky waters.",
         "stats": {
             "progress": {
                 "level": 2,
@@ -1539,6 +1665,7 @@
     {
         "name": "Snake",
         "code": "snake-01",
+        "description": "A slithering serpent, striking with venomous fangs.",
         "stats": {
             "progress": {
                 "level": 2,

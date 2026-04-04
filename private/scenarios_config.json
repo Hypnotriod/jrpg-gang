@@ -580,6 +580,21 @@
                     }
                 ],
                 "experience": 50,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-04": "active"
+                            },
+                            "achievements": {
+                                "artifact-04": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-04": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -726,6 +741,21 @@
                     }
                 ],
                 "experience": 70,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-06": "active"
+                            },
+                            "achievements": {
+                                "artifact-06": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-06": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -2268,6 +2298,21 @@
                     }
                 ],
                 "experience": 275,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-05": "active"
+                            },
+                            "achievements": {
+                                "artifact-05": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-05": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -2414,7 +2459,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodaemon-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2503,7 +2548,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodaemon-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2598,7 +2643,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-02",
+                            "code": "cacodaemon-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2606,7 +2651,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodaemon-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2614,7 +2659,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodaemon-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2701,7 +2746,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodaemon-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2709,7 +2754,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-02",
+                            "code": "cacodaemon-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2717,7 +2762,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-02",
+                            "code": "cacodaemon-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3404,7 +3449,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodaemon-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3482,7 +3527,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-02",
+                            "code": "cacodaemon-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3576,7 +3621,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodaemon-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3584,7 +3629,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodaemon-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3850,7 +3895,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-03",
+                            "code": "cacodaemon-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3858,7 +3903,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-03",
+                            "code": "cacodaemon-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3936,7 +3981,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-01",
+                            "code": "cacodaemon-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3944,7 +3989,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-02",
+                            "code": "cacodaemon-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3952,7 +3997,7 @@
                             }
                         },
                         {
-                            "code": "cacodemon-03",
+                            "code": "cacodaemon-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4238,6 +4283,21 @@
                     }
                 ],
                 "experience": 250,
+                 "questTriggers": [
+                    {
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-07": "active"
+                            },
+                            "achievements": {
+                                "artifact-07": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-07": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -4376,7 +4436,7 @@
                                 "y": 2
                             }
                         },
-                         {
+                        {
                             "code": "scull-01",
                             "faction": 1,
                             "position": {

@@ -32,6 +32,7 @@ type Unit struct {
 	Achievements UnitAchievements         `json:"achievements" bson:"achievements"`
 	Quests       UnitQuests               `json:"quests" bson:"quests"`
 	Position     Position                 `json:"position" bson:"-"`
+	Description  string                   `json:"description,omitempty" bson:"-"`
 }
 
 func (u *Unit) Clone() *Unit {
@@ -53,6 +54,7 @@ func (u *Unit) Clone() *Unit {
 	r.Achievements = util.CloneMap(u.Achievements)
 	r.Quests = util.CloneMap(u.Quests)
 	r.Position = u.Position
+	r.Description = u.Description
 	return r
 }
 

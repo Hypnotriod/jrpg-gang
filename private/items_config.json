@@ -2055,7 +2055,7 @@
                 {
                     "duration": 5,
                     "attributes": {
-                        "agility": 4,
+                        "agility": 5,
                         "deviation": 1
                     }
                 }
@@ -2078,7 +2078,7 @@
                 {
                     "duration": 5,
                     "attributes": {
-                        "agility": 8,
+                        "agility": 10,
                         "deviation": 2
                     }
                 }
