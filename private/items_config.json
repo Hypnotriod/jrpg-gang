@@ -715,7 +715,7 @@
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
-                "strength": 15
+                "strength": 14
             },
             "range": {
                 "maximumX": 1,
@@ -753,7 +753,8 @@
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
-                "strength": 10
+                "strength": 12,
+                "agility": 10
             },
             "range": {
                 "maximumX": 1,

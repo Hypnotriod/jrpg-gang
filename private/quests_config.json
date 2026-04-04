@@ -4,7 +4,7 @@
         "name": "Kill 10 Rats",
         "description": "The Hunters Guild sounds an urgent call. A vile infestation of grotesque vermin plagues the lower dungeons. Cull their numbers to stem the spreading blight before darkness consumes all.",
         "reward": {
-            "coins": 600,
+            "coins": 350,
             "experience": 750
         },
         "activation": {
@@ -25,7 +25,7 @@
         "name": "Kill 20 Bats",
         "description": "The cavern echoes with the frantic flutter of leathery wings. A colony of bloodthirsty bats has overrun the upper tunnels, their piercing screeches driving miners to madness. The Hunters Guild demands you thin their numbers by twenty before their swarm consumes the light entirely.",
         "reward": {
-            "coins": 1000,
+            "coins": 600,
             "experience": 1000
         },
         "activation": {
@@ -49,7 +49,7 @@
         "name": "Kill 10 Skeletons",
         "description": "Bone-chilling winds carry the clatter of rattling armor from the ancient crypts. Skeletal warriors, animated by dark necromancy, patrol the forgotten halls. The Hunters Guild requires you to shatter ten of these undead guardians before their bony grasp claims more victims.",
         "reward": {
-            "coins": 1800,
+            "coins": 1000,
             "experience": 3000
         },
         "activation": {
@@ -73,7 +73,7 @@
         "name": "Kill 20 Rats",
         "description": "The darkness grows deeper still. The Hunters Guild pleads for your aid once more. The rat plague consumes the shadows below without mercy. Eradicate them completely, or their corruption will breach the mortal realm.",
         "reward": {
-            "coins": 1200,
+            "coins": 700,
             "experience": 1300
         },
         "activation": {
@@ -97,7 +97,7 @@
         "name": "Kill 10 Zombies",
         "description": "The stench of decay permeates the marshlands as shambling corpses rise from their watery graves. These rotting horrors, driven by unholy hunger, threaten to overrun the villages. The Hunters Guild commands you to destroy ten of these abominations before their plague spreads further.",
         "reward": {
-            "coins": 2000,
+            "coins": 1200,
             "experience": 4000
         },
         "activation": {
@@ -121,7 +121,7 @@
         "name": "Kill 10 Snakes",
         "description": "The Hunters Guild beseeches you to purge the haunted marshland of lethal serpents. Ten coils of venomous shadow must be severed before their hypnotic fangs drag more souls into the abyss.",
         "reward": {
-            "coins": 1000,
+            "coins": 400,
             "experience": 1200
         },
         "activation": {
@@ -142,7 +142,7 @@
         "name": "Kill 20 Mosquitoes",
         "description": "A swarm of bloodthirsty horrors descends upon the shadowed marshes. The Hunters Guild demands you slay twenty of these vampiric fiends before their insatiable hunger drains the life from the land itself. Strike swiftly, for their buzzing heralds the coming of greater plagues.",
         "reward": {
-            "coins": 1600,
+            "coins": 700,
             "experience": 1500
         },
         "activation": {
@@ -166,7 +166,7 @@
         "name": "Kill 10 Goblins",
         "description": "Cackling laughter echoes from the twisted forests where goblin tribes plot their mischief. These cunning green-skinned raiders, armed with crude weapons and wicked traps, terrorize travelers and steal livestock. The Hunters Guild demands you eliminate ten of these pestilent creatures to restore peace to the woodland paths.",
         "reward": {
-            "coins": 2000,
+            "coins": 1500,
             "ruby": 5,
             "experience": 6000
         },
@@ -216,7 +216,7 @@
         "name": "Find Cursed Goblet",
         "description": "The Adventurers Guild seeks a perilous relic: the Cursed Goblet. An artifact of forbidden power lost beneath the Forgotten Ruins. Venture into the third level's shadowed depths to claim it, if the ancient darkness permits your return.",
         "reward": {
-            "coins": 1200,
+            "coins": 1000,
             "experience": 2000
         },
         "activation": {
@@ -237,7 +237,7 @@
         "name": "Find Sinister Skull",
         "description": "Deep within the Cursed Swamp lies a relic of pure malice, the Sinister Skull. An artifact that whispers dark incantations to those who draw near. The Adventurers Guild commands you to retrieve it from the fourth level's mire, where death itself seems to breathe.",
         "reward": {
-            "coins": 1800,
+            "coins": 1200,
             "experience": 4000
         },
         "activation": {
@@ -258,7 +258,7 @@
         "name": "Find Seekers Book",
         "description": "The Seekers Book awaits in the abyssal depths of the Dragon's Lair. A tome bound in shadow itself, containing forbidden knowledge that mortals were never meant to possess. Descend to the fifth level and claim it, if your mind can bear the weight of such terrible truths.",
         "reward": {
-            "coins": 2500,
+            "coins": 1500,
             "experience": 6000
         },
         "activation": {
@@ -304,7 +304,7 @@
         "name": "Find Runes of Chaos",
         "description": "The Runes of Chaos lie hidden within the treacherous mire of the Cursed Swamp. Ancient symbols etched in blood, capable of unraveling reality itself. The Adventurers Guild tasks you with claiming them from the fifth level's suffocating depths, where madness and magic intertwine.",
         "reward": {
-            "coins": 2200,
+            "coins": 1700,
             "ruby": 5,
             "experience": 3000
         },
@@ -329,7 +329,7 @@
         "name": "Find Scroll of Eternal Darkness",
         "description": "The Scroll of Eternal Darkness awaits in the abyssal heart of the Forgotten Ruins. A parchment inscribed with incantations that summon perpetual night. The Adventurers Guild commands you to seize it from the fifth level's eternal gloom, lest its power extinguishes the light forever.",
         "reward": {
-            "coins": 3000,
+            "coins": 2000,
             "ruby": 5,
             "experience": 7000
         },
