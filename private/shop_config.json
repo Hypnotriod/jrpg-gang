@@ -145,6 +145,9 @@
             "code": "rusty-mace-01"
         },
         {
+            "code": "wooden-staff-01"
+        },
+        {
             "code": "club-01"
         },
         {
@@ -188,6 +191,21 @@
         },
         {
             "code": "magic-stamina-02"
+        },
+        {
+            "code": "magic-shield-01"
+        },
+        {
+            "code": "magic-blessing-01"
+        },
+        {
+            "code": "magic-exhaustion-01"
+        },
+        {
+            "code": "magic-mana-drain-01"
+        },
+        {
+            "code": "magic-lighting-strike-01"
         },
         {
             "code": "provision-ham-01"

@@ -270,9 +270,9 @@
             "attributes": {
                 "strength": 2,
                 "physique": 2,
-                "agility": 2,
+                "agility": 5,
                 "endurance": 3,
-                "intelligence": 10,
+                "intelligence": 8,
                 "initiative": 8,
                 "luck": 8
             },
