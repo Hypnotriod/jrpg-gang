@@ -10,10 +10,25 @@ func (c *GameController) RegisterBroadcaster(broadcaster GameControllerBroadcast
 	c.broadcaster = broadcaster
 }
 
-func (c *GameController) broadcastChatMessage(playerIds []engine.PlayerId, message *chat.ChatMessage) {
+func (c *GameController) broadcastGameChatMessage(playerIds []engine.PlayerId, message *chat.ChatMessage) {
 	response := NewResponse()
-	response.Type = RequestChatMessage
+	response.Type = RequestGameChatMessage
 	response.Data[DataKeyMessage] = message
+	c.broadcaster.BroadcastGameMessageSync(playerIds, response.WithStatus(ResponseStatusOk))
+}
+
+func (c *GameController) broadcastLobbyChatMessage(playerIds []engine.PlayerId, message *chat.ChatMessage) {
+	response := NewResponse()
+	response.Type = RequestLobbyChatMessage
+	response.Data[DataKeyMessage] = message
+	c.broadcaster.BroadcastGameMessageSync(playerIds, response.WithStatus(ResponseStatusOk))
+}
+
+func (c *GameController) broadcastLobbyChatParticipant(playerIds []engine.PlayerId, playerId engine.PlayerId, participant *chat.ChatParticipant) {
+	response := NewResponse()
+	response.Type = RequestLobbyChatParticipant
+	response.Data[DataKeyPlayerId] = playerId
+	response.Data[DataKeyParticipant] = participant
 	c.broadcaster.BroadcastGameMessageSync(playerIds, response.WithStatus(ResponseStatusOk))
 }
 

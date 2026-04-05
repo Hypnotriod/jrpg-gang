@@ -11,5 +11,6 @@ func (c *GameController) handleExitLobbyRequest(playerId engine.PlayerId, reques
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	c.users.ChangeUserStatus(playerId, users.UserStatusJoined)
+	c.lobbyChat.RemoveParticipant(playerId)
 	return response.WithStatus(ResponseStatusOk)
 }

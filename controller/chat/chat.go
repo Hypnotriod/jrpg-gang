@@ -15,6 +15,7 @@ var (
 )
 
 type BroadcastChatMessageFunc func(playerIds []engine.PlayerId, message *ChatMessage)
+type BroadcastChatParticipantFunc func(playerIds []engine.PlayerId, playerId engine.PlayerId, participant *ChatParticipant)
 
 type ChatConfig struct {
 	MaxMessages         uint          `json:"maxMessages"`
@@ -43,19 +44,21 @@ type ChatState struct {
 }
 
 type Chat struct {
-	participants         map[engine.PlayerId]*ChatParticipant
-	messages             []*ChatMessage
-	config               ChatConfig
-	broadcastChatMessage BroadcastChatMessageFunc
-	mu                   sync.RWMutex
+	participants             map[engine.PlayerId]*ChatParticipant
+	messages                 []*ChatMessage
+	config                   ChatConfig
+	broadcastChatMessage     BroadcastChatMessageFunc
+	broadcastChatParticipant BroadcastChatParticipantFunc
+	mu                       sync.RWMutex
 }
 
-func NewChat(config ChatConfig, broadcastChatMessage BroadcastChatMessageFunc) *Chat {
+func NewChat(config ChatConfig, broadcastChatMessage BroadcastChatMessageFunc, broadcastChatParticipant BroadcastChatParticipantFunc) *Chat {
 	c := &Chat{
-		participants:         map[engine.PlayerId]*ChatParticipant{},
-		messages:             []*ChatMessage{},
-		config:               config,
-		broadcastChatMessage: broadcastChatMessage,
+		participants:             map[engine.PlayerId]*ChatParticipant{},
+		messages:                 []*ChatMessage{},
+		config:                   config,
+		broadcastChatMessage:     broadcastChatMessage,
+		broadcastChatParticipant: broadcastChatParticipant,
 	}
 	return c
 }
@@ -65,13 +68,33 @@ func (c *Chat) AddParticipant(playerId engine.PlayerId, participant *ChatPartici
 	defer c.mu.Unlock()
 	participant.lastMessageTimestamp = time.Now()
 	c.participants[playerId] = participant
+	if c.broadcastChatParticipant != nil {
+		to := make([]engine.PlayerId, 0, len(c.participants)-1)
+		for participantId := range c.participants {
+			if playerId != participantId {
+				to = append(to, participantId)
+			}
+		}
+		c.broadcastChatParticipant(to, playerId, participant)
+	}
 }
 
 func (c *Chat) RemoveParticipant(playerId engine.PlayerId) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	if p, ok := c.participants[playerId]; ok {
-		p.Unavailable = true
+	participant, ok := c.participants[playerId]
+	if !ok {
+		return
+	}
+	participant.Unavailable = true
+	if c.broadcastChatParticipant != nil {
+		to := make([]engine.PlayerId, 0, len(c.participants)-1)
+		for participantId := range c.participants {
+			if playerId != participantId {
+				to = append(to, participantId)
+			}
+		}
+		c.broadcastChatParticipant(to, playerId, participant)
 	}
 }
 

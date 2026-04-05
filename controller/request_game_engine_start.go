@@ -22,7 +22,7 @@ func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, reques
 		MaxMessageLength:    CHAT_MAX_MESSAGE_LENGTH,
 		MessageRate:         CHAT_MESSAGE_RATE,
 		MessageRateDuration: CHAT_MESSAGE_RATE_DURATION,
-	}, c.broadcastChatMessage)
+	}, c.broadcastGameChatMessage, nil)
 	for _, actor := range actors {
 		ch.AddParticipant(actor.GetPlayerId(), &chat.ChatParticipant{
 			Nickname: actor.PlayerInfo.Nickname,
@@ -34,6 +34,7 @@ func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, reques
 	state, playerIds := c.engines.Register(wrapper)
 	for _, playerId := range playerIds {
 		c.users.ChangeUserStatus(playerId, users.UserStatusInGame)
+		c.lobbyChat.RemoveParticipant(playerId)
 	}
 	c.broadcastGameAction(playerIds, state)
 	c.broadcastRoomStatus(room.Uid)
