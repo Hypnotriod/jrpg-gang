@@ -57,6 +57,8 @@ func (c *GameController) Leave(playerId engine.PlayerId) {
 		}
 	}
 	user := c.users.RemoveUser(playerId)
+	c.broadcastServerStatus(c.users.GetIdsExcept(playerId))
+	c.lobbyChat.RemoveParticipant(playerId)
 	if user != nil {
 		c.persistUser(user)
 		c.employment.ClearStatus(user)
@@ -110,6 +112,8 @@ func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []by
 		return c.handleLobbyStatusRequest(playerId, request, response)
 	case RequestUserStatus:
 		return c.handleUserStatusRequest(playerId, request, response)
+	case RequestServerStatus:
+		return c.handleServerStatusRequest(playerId, request, response)
 	}
 	if status.Test(users.UserStatusInGame) {
 		switch request.Type {

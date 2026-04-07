@@ -38,6 +38,6 @@ func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, reques
 	}
 	c.broadcastGameAction(playerIds, state)
 	c.broadcastRoomStatus(room.Uid)
-	c.broadcastUsersStatus(playerIds)
+	c.broadcastUserStatus(playerIds)
 	return response.WithStatus(ResponseStatusOk)
 }

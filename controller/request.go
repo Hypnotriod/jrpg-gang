@@ -22,6 +22,7 @@ const (
 	RequestLobbyStatus          RequestType = "lobbyStatus"
 	RequestRoomStatus           RequestType = "roomStatus"
 	RequestConfiguratorAction   RequestType = "configuratorAction"
+	RequestServerStatus         RequestType = "serverStatus"
 	RequestUserStatus           RequestType = "userStatus"
 	RequestShopStatus           RequestType = "shopStatus"
 	RequestShopAction           RequestType = "shopAction"

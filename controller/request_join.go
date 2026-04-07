@@ -58,6 +58,7 @@ func (c *GameController) handleRejoinWithAuthTokenRequest(response *Response, da
 		c.employment.SetStatus(user, *jobStatus)
 	}
 	c.persistance.RemoveUserFromAuthCache(data.Token)
+	c.broadcastServerStatus(c.users.GetIdsExcept(user.Id))
 	response.fillUserStatus(user)
 	return user.Id, response.WithStatus(ResponseStatusOk)
 }

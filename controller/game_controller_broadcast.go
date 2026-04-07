@@ -39,7 +39,19 @@ func (c *GameController) broadcastGameAction(playerIds []engine.PlayerId, result
 	c.broadcaster.BroadcastGameMessageSync(playerIds, response.WithStatus(ResponseStatusOk))
 }
 
-func (c *GameController) broadcastUsersStatus(playerIds []engine.PlayerId) {
+func (c *GameController) broadcastServerStatus(playerIds []engine.PlayerId) {
+	response := NewResponse()
+	response.Type = RequestServerStatus
+	response.Data[DataKeyUsersNumber] = c.users.Total()
+	for _, playerId := range playerIds {
+		if _, ok := c.users.Get(playerId); !ok {
+			continue
+		}
+		c.broadcaster.BroadcastGameMessageAsync([]engine.PlayerId{playerId}, response.WithStatus(ResponseStatusOk))
+	}
+}
+
+func (c *GameController) broadcastUserStatus(playerIds []engine.PlayerId) {
 	for _, playerId := range playerIds {
 		user, ok := c.users.Get(playerId)
 		if !ok {
@@ -56,7 +68,6 @@ func (c *GameController) broadcastRoomStatus(uid uint) {
 	response := NewResponse()
 	response.Type = RequestRoomStatus
 	response.Data[DataKeyRoom] = c.rooms.GetRoomInfoByUid(uid)
-	response.Data[DataKeyUsersCount] = c.users.TotalCount()
 	playerIds := c.users.GetIdsByStatus(users.UserStatusInLobby|users.UserStatusInRoom, true)
 	c.broadcaster.BroadcastGameMessageAsync(playerIds, response.WithStatus(ResponseStatusOk))
 }

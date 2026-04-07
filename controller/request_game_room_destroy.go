@@ -18,6 +18,6 @@ func (c *GameController) handleDestroyGameRoomRequest(playerId engine.PlayerId, 
 		c.users.ChangeUserStatus(playerId, users.UserStatusInLobby)
 	}
 	c.broadcastRoomStatus(room.Uid)
-	c.broadcastUsersStatus(playerIds)
+	c.broadcastUserStatus(playerIds)
 	return response.WithStatus(ResponseStatusOk)
 }

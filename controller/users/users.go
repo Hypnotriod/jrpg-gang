@@ -57,7 +57,7 @@ func (u *Users) Has(playerId engine.PlayerId) bool {
 	return exists
 }
 
-func (u *Users) TotalCount() int {
+func (u *Users) Total() int {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	return len(u.users)
@@ -100,6 +100,18 @@ func (u *Users) GetAndRefreshBySessionId(sessionId UserSessionId) (User, bool) {
 	}))
 	u.userSessionIdToId[user.SessionId] = user.Id
 	return *user, ok
+}
+
+func (u *Users) GetIdsExcept(playerId engine.PlayerId) []engine.PlayerId {
+	u.mu.RLock()
+	defer u.mu.RUnlock()
+	result := []engine.PlayerId{}
+	for _, user := range u.users {
+		if user.Id != playerId {
+			result = append(result, user.Id)
+		}
+	}
+	return result
 }
 
 func (u *Users) GetIdsByStatus(status UserStatus, onlineOnly bool) []engine.PlayerId {
