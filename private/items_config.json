@@ -1477,6 +1477,9 @@
             },
             "modification": [
                 {
+                    "attributes": {
+                        "agility": -1
+                    },
                     "resistance": {
                         "stabbing": 3,
                         "cutting": 3,
@@ -1588,6 +1591,9 @@
             },
             "modification": [
                 {
+                    "attributes": {
+                        "agility": -1
+                    },
                     "resistance": {
                         "stabbing": 5,
                         "cutting": 4,
@@ -1812,6 +1818,9 @@
             },
             "modification": [
                 {
+                    "attributes": {
+                        "agility": -1
+                    },
                     "resistance": {
                         "stabbing": 2,
                         "cutting": 2,
@@ -1839,6 +1848,10 @@
             },
             "modification": [
                 {
+                    "attributes": {
+                        "agility": -2,
+                        "initiative": -1
+                    },
                     "resistance": {
                         "stabbing": 4,
                         "cutting": 4,
@@ -1867,6 +1880,10 @@
             },
             "modification": [
                 {
+                    "attributes": {
+                        "agility": -4,
+                        "initiative": -2
+                    },
                     "resistance": {
                         "stabbing": 6,
                         "cutting": 7,
