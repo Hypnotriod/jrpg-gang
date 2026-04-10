@@ -744,6 +744,48 @@
         },
         {
             "type": "weapon",
+            "name": "Fire Axe",
+            "code": "fire-axe-01",
+            "description": "A massive axe forged in the heart of a volcano, its blade still glowing with infernal heat. Each swing leaves trails of flame and the acrid stench of burning souls.",
+            "durability": 300,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 16,
+                "physique": 12
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "useCost": {
+                "stamina": 17,
+                "actionPoints": 5
+            },
+            "damage": [
+                {
+                    "chance": 75,
+                    "cutting": 34,
+                    "crushing": 10,
+                    "fire": 12,
+                    "deviation": 5
+                },
+                {
+                    "duration": 3,
+                    "chance": 35,
+                    "fire": 5,
+                    "deviation": 5
+                }
+            ],
+            "price": {
+                "coins": 3500,
+                "ruby": 20
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Scythe",
             "code": "scythe-01",
             "description": "A reaper's scythe, its curved blade thirsting for souls beneath the pale moon.",
