@@ -1928,11 +1928,44 @@
         },
         {
             "type": "armor",
-            "name": "Mage Hat",
-            "description": "A pointed hat of midnight blue, worn by those who consort with shadows and secrets. Its brim hides both wisdom and madness.",
+            "name": "Mage Hat I",
+            "description": "A pointed hat of woven indigo, its brim embroidered with trembling runes that glow faintly in the darkness. It marks one as a student of the arcane arts, though whether blessing or curse remains unclear.",
             "code": "sorcerer-hat-01",
             "price": {
-                "coins": 450,
+                "coins": 450
+            },
+            "durability": 300,
+            "slot": "head",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "intelligence": 8
+            },
+            "modification": [
+                {
+                    "baseAttributes": {
+                        "mana": 5
+                    },
+                    "resistance": {
+                        "exhaustion": 2,
+                        "manaDrain": 2
+                    },
+                    "damage": {
+                        "lightning": 2,
+                        "fire": 2,
+                        "cold": 2
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Mage Hat II",
+            "description": "A tall cone of midnight silk, crowned with an ornament that pulses with inner light. Those who wear it feel the weight of forbidden knowledge pressing against their mind, a constant reminder of the price of power.",
+            "code": "sorcerer-hat-02",
+            "price": {
+                "coins": 1200,
                 "ruby": 2
             },
             "durability": 500,
@@ -1941,7 +1974,7 @@
             "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
-                "intelligence": 8
+                "intelligence": 12
             },
             "modification": [
                 {
@@ -1955,6 +1988,11 @@
                         "poison": 2,
                         "exhaustion": 2,
                         "manaDrain": 2
+                    },
+                    "damage": {
+                        "lightning": 3,
+                        "fire": 3,
+                        "cold": 3
                     }
                 }
             ]
@@ -2032,14 +2070,13 @@
         },
         {
             "type": "armor",
-            "name": "Mage Cloak",
-            "description": "A cloak woven from midnight and mystery, favored by those who walk the hidden paths of power.",
+            "name": "Student Cloak",
+            "description": "A novice's mantle of deep violet, its threads faintly shimmering with borrowed magic. It whispers of the wearer's first steps into forbidden knowledge and the price they will yet pay.",
             "code": "sorcerer-cloak-01",
             "price": {
-                "coins": 1200,
-                "ruby": 5
+                "coins": 650
             },
-            "durability": 500,
+            "durability": 300,
             "slot": "body",
             "canBeSold": true,
             "canBeThrownAway": true,
@@ -2049,22 +2086,100 @@
             },
             "modification": [
                 {
+                    "resistance": {
+                        "cutting": 1,
+                        "crushing": 1,
+                        "stabbing": 1
+                    },
+                    "recovery": {
+                        "health": 2,
+                        "mana": 3
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Mage Cloak I",
+            "description": "A cloak of twilight shadow, worn by those who have tasted true power. Its weave shifts subtly in candlelight, as if the fabric itself draws from an unseen dimension beyond our own.",
+            "code": "sorcerer-cloak-02",
+            "price": {
+                "coins": 1800
+            },
+            "durability": 500,
+            "slot": "body",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "intelligence": 10
+            },
+            "modification": [
+                {
+                    "baseAttributes": {
+                        "mana": 10
+                    },
+                    "resistance": {
+                        "cutting": 2,
+                        "crushing": 2,
+                        "stabbing": 2
+                    },
+                    "recovery": {
+                        "health": 5,
+                        "stamina": 5,
+                        "mana": 5
+                    },
+                    "damage": {
+                        "lightning": 2,
+                        "fire": 2,
+                        "cold": 2
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Mage Cloak II",
+            "description": "A garment of woven starlight and shadow, worn only by those who have mastered the eldritch arts. Its hem trails wisps of spectral flame, and those who look upon it too long swear they see impossible geometries folded within its folds.",
+            "code": "sorcerer-cloak-03",
+            "price": {
+                "coins": 3500,
+                "ruby": 10
+            },
+            "durability": 500,
+            "slot": "body",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "intelligence": 14
+            },
+            "modification": [
+                {
                     "baseAttributes": {
                         "mana": 20
                     },
                     "resistance": {
+                        "cutting": 3,
+                        "crushing": 3,
+                        "stabbing": 3,
                         "fire": 4,
                         "cold": 4,
                         "lightning": 4,
-                        "poison": 2,
-                        "exhaustion": 4,
+                        "poison": 3,
+                        "exhaustion": 3,
                         "manaDrain": 3,
-                        "bleeding": 2
+                        "bleeding": 3
                     },
                     "recovery": {
-                        "health": 5,
-                        "mana": 10,
-                        "bleeding": 3
+                        "health": 10,
+                        "stamina": 10,
+                        "mana": 10
+                    },
+                    "damage": {
+                        "lightning": 4,
+                        "fire": 4,
+                        "cold": 4
                     }
                 }
             ]
