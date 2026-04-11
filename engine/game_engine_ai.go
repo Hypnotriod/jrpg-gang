@@ -4,6 +4,7 @@ import (
 	"jrpg-gang/domain"
 	"jrpg-gang/util"
 	"math/rand"
+	"sort"
 )
 
 func (e *GameEngine) processAI(event *GameEvent) {
@@ -120,6 +121,11 @@ func (e *GameEngine) aiMove(event *GameEvent, unit *GameUnit, position domain.Po
 
 func (e *GameEngine) aiTryToAttack(event *GameEvent, unit *GameUnit, targets []ReachableTarget) bool {
 	targets = util.Shuffle(e.rndGen, targets)
+	sort.SliceStable(targets, func(a, b int) bool {
+		weaponA := unit.Inventory.FindWeapon(targets[a].WeaponUid)
+		weaponB := unit.Inventory.FindWeapon(targets[b].WeaponUid)
+		return (weaponA.Equipped && !weaponB.Equipped)
+	})
 	for _, t := range targets {
 		if e.aiAttackWithWeapon(event, unit, t.Target, t.WeaponUid) {
 			return true
