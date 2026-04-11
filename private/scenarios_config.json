@@ -4647,6 +4647,100 @@
                     ]
                 }
             },
+            "7-1": {
+                "name": "Dragon's lair",
+                "code": "dragons-lair-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 450
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 550
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 600,
+                        "ruby": 10
+                    }
+                ],
+                "experience": 500,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-01", "factions": []},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 1, "code": "tile-wall-01", "factions": []},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "skeleton-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "skeleton-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "skeleton-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "scull-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "cacodaemon-03",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "scull-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
             "8-0": {
                 "name": "Dragon's lair",
                 "code": "dragons-lair-01",
@@ -4741,6 +4835,100 @@
                     ]
                 }
             },
+            "8-1": {
+                "name": "Dragon's lair",
+                "code": "dragons-lair-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 500
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 600
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 650,
+                        "ruby": 10
+                    }
+                ],
+                "experience": 700,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-01", "factions": []},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "troll-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "troll-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "cacodaemon-03",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "cacodaemon-03",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "cacodaemon-03",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
             "9-0": {
                 "name": "Dragon's lair",
                 "code": "dragons-lair-01",
@@ -4773,7 +4961,7 @@
                         ],
                         [
                             {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
                             {"type": 0, "code": "tile-floor-01", "factions": [0]}
                         ],
                         [
@@ -4806,6 +4994,104 @@
                         },
                         {
                             "code": "scull-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "cacodaemon-03",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "dragon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "cacodaemon-03",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "9-1": {
+                "name": "Dragon's lair",
+                "code": "dragons-lair-01",
+                "booty": [
+                    {
+                        "weight": 1,
+                        "coins": 2500,
+                        "ruby": 50
+                    }
+                ],
+                "experience": 1000,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "achievements": {
+                                "scenario-advanced-01-completed": -1
+                            }
+                        },
+                        "achievements": {
+                            "scenario-advanced-01-completed": 1
+                        }
+                    }
+                ],
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "skeleton-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "death-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "skeleton-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -4925,18 +5211,30 @@
                 {
                     "weight": 1,
                     "spotId": "7-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "7-1"
                 }
             ],
             [
                 {
                     "weight": 1,
                     "spotId": "8-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "8-1"
                 }
             ],
             [
                 {
                     "weight": 1,
                     "spotId": "9-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "9-1"
                 }
             ]
         ]
