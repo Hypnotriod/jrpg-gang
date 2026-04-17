@@ -366,7 +366,7 @@
             "baseAttributes": {
                 "health": 200,
                 "stamina": 200,
-                "actionPoints": 9
+                "actionPoints": 10
             },
             "attributes": {
                 "strength": 15,
@@ -429,7 +429,7 @@
             "baseAttributes": {
                 "health": 100,
                 "stamina": 100,
-                "actionPoints": 9
+                "actionPoints": 10
             },
             "attributes": {
                 "strength": 10,
@@ -1225,7 +1225,7 @@
             "baseAttributes": {
                 "health": 150,
                 "stamina": 150,
-                "actionPoints": 9
+                "actionPoints": 12
             },
             "attributes": {
                 "strength": 15,
@@ -1469,7 +1469,7 @@
                 "health": 500,
                 "stamina": 200,
                 "mana": 200,
-                "actionPoints": 9
+                "actionPoints": 12
             },
             "attributes": {
                 "strength": 35,
