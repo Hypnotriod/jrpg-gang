@@ -268,6 +268,14 @@
                     "chance": 70
                 }
             ],
+            "spread": [
+                {
+                    "y": 1
+                },
+                {
+                    "y": -1
+                }
+            ],
             "useCost": {
                 "mana": 10,
                 "actionPoints": 5
