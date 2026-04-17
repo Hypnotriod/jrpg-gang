@@ -480,7 +480,7 @@
             "slotsNumber": 2,
             "requirements": {
                 "physique": 5,
-                "agility": 5
+                "agility": 8
             },
             "range": {
                 "maximumX": 5,
@@ -513,8 +513,8 @@
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
-                "physique": 5,
-                "agility": 8
+                "physique": 6,
+                "agility": 10
             },
             "range": {
                 "maximumX": 5,
@@ -539,6 +539,47 @@
             },
             "price": {
                 "coins": 2000,
+                "ruby": 10
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Triple Bow",
+            "code": "bow-triple-01",
+            "description": "A bow of dark wood thrumming with eldritch power. Each draw releases three arrows in a devastating spray of spectral death.",
+            "ammunitionKind": "arrow",
+            "durability": 300,
+            "slot": "weapon",
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "physique": 6,
+                "agility": 12
+            },
+            "range": {
+                "maximumX": 5,
+                "maximumY": 5,
+                "minimumX": 2
+            },
+            "damage": [
+                {
+                    "chance": 75
+                }
+            ],
+            "spread": [
+                {
+                    "y": 1
+                },
+                {
+                    "y": -1
+                }
+            ],
+            "useCost": {
+                "stamina": 16,
+                "actionPoints": 6
+            },
+            "price": {
+                "coins": 2500,
                 "ruby": 10
             }
         },
