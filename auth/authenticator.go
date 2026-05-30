@@ -3,6 +3,7 @@ package auth
 import (
 	"jrpg-gang/util"
 	"net"
+	"sync/atomic"
 	"time"
 
 	"github.com/jellydator/ttlcache/v3"
@@ -20,8 +21,9 @@ type AuthenticatorConfig struct {
 }
 
 type UserCredentials struct {
-	Picture string
-	Email   string
+	Picture  string
+	Email    string
+	Nickname string
 }
 
 type AuthenticationToken string
@@ -38,14 +40,16 @@ type AuthenticationStatus struct {
 
 type AuthenticationHandler interface {
 	HandleUserAuthenticated(credentials UserCredentials) AuthenticationStatus
+	HandleGuestUserAuthenticated(credentials UserCredentials) AuthenticationStatus
 }
 
 type Authenticator struct {
-	rndGen     *util.RndGen
-	config     AuthenticatorConfig
-	googleSso  oauth2.Config
-	stateCache *ttlcache.Cache[string, net.IP]
-	handler    AuthenticationHandler
+	rndGen       *util.RndGen
+	config       AuthenticatorConfig
+	googleSso    oauth2.Config
+	stateCache   *ttlcache.Cache[string, net.IP]
+	handler      AuthenticationHandler
+	guestCounter atomic.Uint64
 }
 
 func NewAuthenticator(config AuthenticatorConfig) *Authenticator {

@@ -10,6 +10,7 @@ import (
 func (h *Hub) initRoutes(router *mux.Router) {
 	router.HandleFunc("/google/oauth2", h.auth.HandleGoogleAuth2).Methods(http.MethodGet)
 	router.HandleFunc("/google/oauth2/callback", h.auth.HandleGoogleAuth2Callback).Methods(http.MethodGet)
+	router.HandleFunc("/guest/auth", h.auth.HandleGuestAuth).Methods(http.MethodGet)
 	router.HandleFunc("/configuration", h.handleConfigurationRequest).Methods(http.MethodPost).
 		Headers(HeaderContentType, ContentTypeApplicationJson)
 	router.NotFoundHandler = http.HandlerFunc(h.handleNotFoundRequest)

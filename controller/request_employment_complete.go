@@ -15,7 +15,7 @@ func (c *GameController) handleCompleteJobRequest(playerId engine.PlayerId, requ
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	if jobStatus != nil {
-		c.persistJobStatus(user.UserId, *jobStatus)
+		c.persistJobStatus(&user, *jobStatus)
 	}
 	c.users.ChangeUserStatus(playerId, users.UserStatusJoined)
 	c.users.AccumulateBooty(playerId, reward)

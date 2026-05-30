@@ -85,6 +85,11 @@ func (h *Hub) HandleUserAuthenticated(credentials auth.UserCredentials) auth.Aut
 	return status
 }
 
+func (h *Hub) HandleGuestUserAuthenticated(credentials auth.UserCredentials) auth.AuthenticationStatus {
+	status := h.controller.HandleGuestUserAuthenticated(credentials)
+	return status
+}
+
 func (h *Hub) Start() error {
 	for n := h.config.BroadcasterPoolSize; n > 0; n-- {
 		go h.broadcastGameMessageRoutine(h.broadcastPool)

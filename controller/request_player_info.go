@@ -26,21 +26,26 @@ func (c *GameController) handleSetPlayerInfoRequest(request *Request, response *
 	if len(userModel.Units) != 0 {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	if matched, _ := regexp.MatchString(USER_NICKNAME_REGEX, data.Nickname); !matched {
-		return response.WithStatus(ResponseStatusMalformed)
-	}
-	if ok := c.persistance.HasUserWithNickname(data.Nickname); ok {
-		return response.WithStatus(ResponseStatusAlreadyExists)
+	nickname := data.Nickname
+	if userModel.Guest {
+		nickname = userModel.Nickname
+	} else {
+		if matched, _ := regexp.MatchString(USER_NICKNAME_REGEX, nickname); !matched {
+			return response.WithStatus(ResponseStatusMalformed)
+		}
+		if ok := c.persistance.HasUserWithNickname(nickname); ok {
+			return response.WithStatus(ResponseStatusAlreadyExists)
+		}
 	}
 	unit := c.unitsConfig.GetByClass(domain.UnitClass(data.Class))
 	if unit == nil {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	if !c.persistance.SetUserInfoToAuthCache(data.Token, data.Nickname, data.Class, &unit.Unit) {
+	if !c.persistance.SetUserInfoToAuthCache(data.Token, nickname, data.Class, &unit.Unit) {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
 	userId := model.UserId(userModel.Id.Hex())
-	user := users.NewUser(data.Nickname, userModel.Email, userId, data.Class, unit)
+	user := users.NewUser(nickname, userModel.Email, userModel.Guest, userId, data.Class, unit)
 	c.persistUser(user)
 	return response.WithStatus(ResponseStatusOk)
 }

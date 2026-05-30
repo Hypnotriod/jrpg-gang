@@ -43,6 +43,7 @@ type User struct {
 	SessionId UserSessionId
 	Status    UserStatus
 	Unit      *engine.GameUnit
+	Guest     bool
 }
 
 func (s UserStatus) Display() UserDisplayStatus {
@@ -71,6 +72,7 @@ func (s UserStatus) Test(status UserStatus) bool {
 func NewUser(
 	nickname string,
 	email model.UserEmail,
+	guest bool,
 	userId model.UserId,
 	class domain.UnitClass,
 	unit *engine.GameUnit) *User {
@@ -78,6 +80,7 @@ func NewUser(
 	u.RndGen = util.NewRndGen()
 	u.Nickname = nickname
 	u.Email = email
+	u.Guest = guest
 	u.UserId = userId
 	u.Class = class
 	u.Level = unit.Stats.Progress.Level

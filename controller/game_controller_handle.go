@@ -23,6 +23,20 @@ func (c *GameController) HandleUserAuthenticated(credentials auth.UserCredential
 	return status, user.Id
 }
 
+func (c *GameController) HandleGuestUserAuthenticated(credentials auth.UserCredentials) auth.AuthenticationStatus {
+	status := auth.AuthenticationStatus{}
+	userModel := &model.UserModel{
+		Email:    model.UserEmail(credentials.Email),
+		Nickname: credentials.Nickname,
+		Picture:  credentials.Picture,
+		Guest:    true,
+	}
+	status.Token = c.persistance.AddUserToAuthCache(userModel)
+	status.IsNewPlayer = true
+	status.IsAuthenticated = true
+	return status
+}
+
 func (c *GameController) ConnectionStatusChanged(playerId engine.PlayerId, isOffline bool) {
 	c.users.ConnectionStatusChanged(playerId, isOffline)
 	if roomUid, ok := c.rooms.ConnectionStatusChanged(playerId, isOffline); ok {

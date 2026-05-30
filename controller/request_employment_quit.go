@@ -15,7 +15,7 @@ func (c *GameController) handleQuitJobRequest(playerId engine.PlayerId, request 
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	if jobStatus != nil {
-		c.persistJobStatus(user.UserId, *jobStatus)
+		c.persistJobStatus(&user, *jobStatus)
 	}
 	c.users.ChangeUserStatus(playerId, users.UserStatusJoined)
 	return response.WithStatus(ResponseStatusOk)
