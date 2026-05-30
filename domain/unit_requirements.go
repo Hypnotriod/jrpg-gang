@@ -2,7 +2,7 @@ package domain
 
 type UnitRequirements struct {
 	UnitAttributes
-	Level        uint             `json:"level"`
+	Level        uint             `json:"level,omitempty"`
 	Class        UnitClass        `json:"class,omitempty"`
 	Achievements UnitAchievements `json:"achievements,omitempty"`
 	Quests       UnitQuests       `json:"quests,omitempty"`
