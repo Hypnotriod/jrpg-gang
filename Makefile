@@ -17,6 +17,7 @@ image-build:
 	docker build . -t ${IMAGE}
 
 gcloud-setup:
+	gcloud components update
 	gcloud auth login
 	gcloud auth configure-docker
 
