@@ -27,6 +27,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 		if imp.Deviation != 0 {
 			imp.EnchanceAll(u.PickDeviation(imp.Deviation))
 		}
+		imp.Deviation = 0
 		imp.Enchance(totalModification.Attributes, totalModification.Damage)
 		imp.Normalize()
 		if imp.Damage.IsCritical {

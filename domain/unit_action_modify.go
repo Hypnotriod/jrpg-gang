@@ -11,6 +11,7 @@ func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]Un
 		if imp.Deviation != 0 {
 			imp.EnchanceAll(u.PickDeviation(imp.Deviation))
 		}
+		imp.Deviation = 0
 		imp.MultiplyAll(1 + intelligence*INTELLIGENCE_MODIFICATION_FACTOR)
 		imp.Chance = 0
 		if imp.Duration != 0 {

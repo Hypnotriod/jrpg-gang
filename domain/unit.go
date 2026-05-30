@@ -211,24 +211,24 @@ func (u *Unit) CheckUseCost(useCost UnitBaseAttributes) bool {
 }
 
 func (u *Unit) CheckRandomChance(percents float32) bool {
-	if u.rng == nil {
-		u.rng = rand.New(mt19937.New())
-		u.rng.Seed(time.Now().UnixNano())
-	}
-	rnd := u.rng.Int() % int(MAXIMUM_CHANCE)
+	rnd := u.Rng().Int() % int(MAXIMUM_CHANCE)
 	return float32(rnd) < percents
 }
 
 func (u *Unit) PickDeviation(deviation float32) float32 {
-	if u.rng == nil {
-		u.rng = rand.New(mt19937.New())
-		u.rng.Seed(time.Now().UnixNano())
-	}
-	rnd := u.rng.Int() % int(deviation+1)
+	rnd := u.Rng().Int() % int(deviation+1)
 	if deviation < 0 {
 		return float32(rnd * -1)
 	}
 	return float32(rnd)
+}
+
+func (u *Unit) Rng() *rand.Rand {
+	if u.rng == nil {
+		u.rng = rand.New(mt19937.New())
+		u.rng.Seed(time.Now().UnixNano())
+	}
+	return u.rng
 }
 
 func (u *Unit) SetRng(rng *rand.Rand) {
