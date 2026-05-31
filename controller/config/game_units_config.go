@@ -52,6 +52,16 @@ func (c *GameUnitsConfig) LoadUnits(path string, itemsConfig *GameItemsConfig) e
 	return nil
 }
 
+func (c *GameUnitsConfig) SynchronizeUnitInfo(unit *engine.GameUnit) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	u, ok := c.codeToUnit[unit.Code]
+	if !ok {
+		return
+	}
+	unit.Description = u.Description
+}
+
 func (c *GameUnitsConfig) update(units *[]engine.GameUnit, itemsConfig *GameItemsConfig) {
 	c.units = *units
 	c.codeToUnit = map[domain.UnitCode]*engine.GameUnit{}

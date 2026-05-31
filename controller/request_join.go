@@ -48,6 +48,7 @@ func (c *GameController) handleRejoinWithAuthTokenRequest(response *Response, da
 	}
 	unit := engine.NewGameUnit(u)
 	c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
+	c.unitsConfig.SynchronizeUnitInfo(unit)
 	userId := model.UserId(userModel.Id.Hex())
 	user := users.NewUser(nickname, userModel.Email, userModel.Guest, userId, class, unit)
 	c.users.AddUser(user)

@@ -32,6 +32,7 @@ func (c *GameController) handleSwitchUnitRequest(playerId engine.PlayerId, reque
 	if unit == nil {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
+	c.unitsConfig.SynchronizeUnitInfo(unit)
 	c.users.UpdateWithNewGameUnit(playerId, unit)
 	response.Data[DataKeyUnit] = user.Unit
 	return response.WithStatus(ResponseStatusOk)
