@@ -27,7 +27,7 @@ func (c *GameController) handleSetPlayerInfoRequest(request *Request, response *
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
 	nickname := data.Nickname
-	if userModel.Guest {
+	if userModel.IsGuest {
 		nickname = userModel.Nickname
 	} else {
 		if matched, _ := regexp.MatchString(USER_NICKNAME_REGEX, nickname); !matched {
@@ -45,7 +45,7 @@ func (c *GameController) handleSetPlayerInfoRequest(request *Request, response *
 		return response.WithStatus(ResponseStatusNotFound)
 	}
 	userId := model.UserId(userModel.Id.Hex())
-	user := users.NewUser(nickname, userModel.Email, userModel.Guest, userId, data.Class, unit)
+	user := users.NewUser(nickname, userModel.Email, userModel.IsGuest, userId, data.Class, unit)
 	c.persistUser(user)
 	return response.WithStatus(ResponseStatusOk)
 }

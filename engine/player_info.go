@@ -16,6 +16,7 @@ type PlayerInfo struct {
 	UnitUid   uint             `json:"unitUid,omitempty"`
 	IsOffline bool             `json:"isOffline,omitempty"`
 	IsReady   bool             `json:"isReady,omitempty"`
+	IsGuest   bool             `json:"isGuest,omitempty"`
 }
 
 func (p PlayerInfo) Clone() *PlayerInfo {

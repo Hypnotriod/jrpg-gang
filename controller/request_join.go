@@ -50,7 +50,7 @@ func (c *GameController) handleRejoinWithAuthTokenRequest(response *Response, da
 	c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
 	c.unitsConfig.SynchronizeUnitInfo(unit)
 	userId := model.UserId(userModel.Id.Hex())
-	user := users.NewUser(nickname, userModel.Email, userModel.Guest, userId, class, unit)
+	user := users.NewUser(nickname, userModel.Email, userModel.IsGuest, userId, class, unit)
 	c.users.AddUser(user)
 	if jobStatus := c.persistance.GetJobStatus(user.UserId); jobStatus != nil {
 		if jobStatus.IsInProgress || jobStatus.IsComplete {

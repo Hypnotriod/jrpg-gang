@@ -12,5 +12,5 @@ type UserModel struct {
 	Picture  string                            `bson:"picture,omitempty"`
 	Unit     *domain.Unit                      `bson:"-"`
 	Units    map[domain.UnitClass]*domain.Unit `bson:"units,omitempty"`
-	Guest    bool                              `bson:"-"`
+	IsGuest  bool                              `bson:"-"`
 }

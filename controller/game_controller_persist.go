@@ -8,7 +8,7 @@ import (
 )
 
 func (c *GameController) persistUser(user *users.User) bool {
-	if user.Guest {
+	if user.IsGuest {
 		return true
 	}
 	unit := user.Unit.ToPersist()
@@ -22,7 +22,7 @@ func (c *GameController) persistUser(user *users.User) bool {
 }
 
 func (c *GameController) persistJobStatus(user *users.User, jobStatus engine.PlayerJobStatus) bool {
-	if user.Guest {
+	if user.IsGuest {
 		return true
 	}
 	jobStatusModel := &model.JobStatusModel{

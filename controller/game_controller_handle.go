@@ -29,7 +29,7 @@ func (c *GameController) HandleGuestUserAuthenticated(credentials auth.UserCrede
 		Email:    model.UserEmail(credentials.Email),
 		Nickname: credentials.Nickname,
 		Picture:  credentials.Picture,
-		Guest:    true,
+		IsGuest:  true,
 	}
 	status.Token = c.persistance.AddUserToAuthCache(userModel)
 	status.IsNewPlayer = true
