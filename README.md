@@ -1,7 +1,7 @@
 # jrpg-gang
-Golang project for a turn-based multiplayer RPG game server
+Golang project of a turn-based multiplayer RPG game server.  
 
-[hypnotriod.org/jrpg-gang](https://hypnotriod.org/jrpg-gang)
+Hosted at: [hypnotriod.github.io/jrpg-gang-html-client](https://hypnotriod.github.io/jrpg-gang-html-client/)  
 
 ## BaseAttributes:
 * `health`        - the **hit points** a unit can take before dying
