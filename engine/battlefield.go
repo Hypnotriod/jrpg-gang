@@ -252,11 +252,13 @@ func (b *Battlefield) tryToPlaceUnit(unit *GameUnit, position domain.Position) b
 	return true
 }
 
-func (b *Battlefield) placeUnitDefault(unit *GameUnit) {
-	var x, y int
+func (b *Battlefield) placeUnitDefault(unit *GameUnit, totalUnits int) {
+	var x, y, yOffset int
 	for x = 0; x < len(b.Matrix); x++ {
 		for y = 0; y < len(b.Matrix[x]); y++ {
-			position := domain.Position{X: x, Y: y}
+			yOffset = (len(b.Matrix[x]) - totalUnits) / 2
+			yOffset = max(yOffset, 0)
+			position := domain.Position{X: x, Y: (y + yOffset) % len(b.Matrix[x])}
 			if b.tryToPlaceUnit(unit, position) {
 				return
 			}
@@ -266,6 +268,6 @@ func (b *Battlefield) placeUnitDefault(unit *GameUnit) {
 
 func (b *Battlefield) placeUnitsDefault(units []*GameUnit) {
 	for _, unit := range units {
-		b.placeUnitDefault(unit)
+		b.placeUnitDefault(unit, len(units))
 	}
 }
