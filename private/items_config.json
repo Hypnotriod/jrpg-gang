@@ -2107,7 +2107,7 @@
             "modification": [
                 {
                     "recovery": {
-                        "mana": 4
+                        "mana": 5
                     },
                     "resistance": {
                         "manaDrain": 2
@@ -2132,7 +2132,7 @@
             "modification": [
                 {
                     "attributes": {
-                        "initiative": 4
+                        "initiative": 5
                     }
                 }
             ]
@@ -2154,7 +2154,73 @@
             "modification": [
                 {
                     "attributes": {
-                        "agility": 4
+                        "agility": 5
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Stamina Neck",
+            "description": "A choker of charred bone and withered flesh, bound by a cord of shadow-sinew. It draws vigor from the lingering heat of ruin, lending its wearer a restless endurance in the heart of decay.",
+            "code": "necklace-04",
+            "price": {
+                "coins": 300
+            },
+            "durability": 500,
+            "slot": "neck",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {},
+            "modification": [
+                {
+                    "recovery": {
+                        "stamina": 5
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Vital Neck",
+            "description": "A braided collar of blackened sinew and frostbitten marrow, set with a pulse of slow-burning vitality. It whispers of life stolen from the dying earth, keeping the bearer's blood warm against the ruin of night.",
+            "code": "necklace-05",
+            "price": {
+                "coins": 500
+            },
+            "durability": 500,
+            "slot": "neck",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {},
+            "modification": [
+                {
+                    "recovery": {
+                        "health": 5
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
+            "name": "Luck Neck",
+            "description": "A blackened chain of bone and wyrm-tooth, its pendant a blood-black opal that hums with the cruel favor of fate. The bearer feels unseen eyes watching every die cast and every step taken in the shadows.",
+            "code": "necklace-06",
+            "price": {
+                "coins": 500
+            },
+            "durability": 500,
+            "slot": "neck",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {},
+            "modification": [
+                {
+                    "attributes": {
+                        "luck": 5
                     }
                 }
             ]
