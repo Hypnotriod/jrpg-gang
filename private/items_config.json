@@ -222,7 +222,7 @@
             "useCost": {
                 "mana": 10,
                 "stamina": 3,
-                "actionPoints": 5
+                "actionPoints": 4
             }
         },
         {
@@ -464,7 +464,7 @@
             ],
             "useCost": {
                 "stamina": 8,
-                "actionPoints": 5
+                "actionPoints": 4
             }
         },
         {
@@ -681,7 +681,7 @@
             "useCost": {
                 "mana": 5,
                 "stamina": 2,
-                "actionPoints": 5
+                "actionPoints": 4
             }
         },
         {
