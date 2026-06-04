@@ -18,16 +18,25 @@ func (c *GameController) handleSwitchUnitRequest(playerId engine.PlayerId, reque
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
-	userModel := c.persistance.GetUserByEmail(user.Email)
-	if userModel == nil {
-		return response.WithStatus(ResponseStatusNotFound)
-	}
 	var unit *engine.GameUnit
-	if u, ok := userModel.Units[data.Class]; ok {
-		unit = engine.NewGameUnit(u)
-		c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
+	if user.IsGuest {
+		user.Units[user.Unit.Class] = user.Unit
+		if u, ok := user.Units[data.Class]; ok {
+			unit = u
+		} else {
+			unit = c.unitsConfig.GetByClass(domain.UnitClass(data.Class))
+		}
 	} else {
-		unit = c.unitsConfig.GetByClass(domain.UnitClass(data.Class))
+		userModel := c.persistance.GetUserByEmail(user.Email)
+		if userModel == nil {
+			return response.WithStatus(ResponseStatusNotFound)
+		}
+		if u, ok := userModel.Units[data.Class]; ok {
+			unit = engine.NewGameUnit(u)
+			c.itemsConfig.PopulateFromDescriptor(&unit.Inventory)
+		} else {
+			unit = c.unitsConfig.GetByClass(domain.UnitClass(data.Class))
+		}
 	}
 	if unit == nil {
 		return response.WithStatus(ResponseStatusNotAllowed)

@@ -18,15 +18,15 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 	if len(googleClientId) == 0 || len(googleClientSecret) == 0 {
 		log.Fatal("Google credentials are not specified for the environment")
 	}
-	googleAuthCallbackUrl := util.Getenv("HOST_URL", "http://localhost:8080") + "/google/oauth2/callback"
-	authRedirectUrl := util.Getenv("AUTH_REDIRECT_URL", "http://localhost:8080")
+	googleAuthCallbackUrl := util.GetEnv("HOST_URL", "http://localhost:8080") + "/google/oauth2/callback"
+	authRedirectUrl := util.GetEnv("AUTH_REDIRECT_URL", "http://localhost:8080")
 	authRequestTimeoutSec := flag.Int64("authRequestTimeoutSec", 10, "HTTP request timeout in seconds")
 	authStateCacheTimeoutMin := flag.Int64("authStateCacheTimeoutMin", 30, "State cache timeout in minutes")
 
-	port := util.Getenv("PORT", "8080")
+	port := util.GetEnv("PORT", "8080")
 	key := flag.String("key", "", "path to TLS key.pem")
 	cert := flag.String("cert", "", "path to TLS cert.pem")
-	allowedOrigins := util.GetenvArr("ALLOWED_ORIGINS", []string{"*"})
+	allowedOrigins := util.GetEnvSlice("ALLOWED_ORIGINS", []string{"*"})
 	rBuffSize := flag.Int("rBuffSize", 1024, "ws read buffer size")
 	wBuffSize := flag.Int("wBuffSize", 4096, "ws write buffer size")
 	broadcasterPoolSize := flag.Int("broadcasterPoolSize", 32, "broadcaster routines pool size")
@@ -39,7 +39,7 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 	writeDeadlineSec := flag.Int64("writeDeadlineSec", 2, "client write deadline timeout in seconds")
 
 	persistanceCacheTimeoutMin := flag.Int64("persistanceCacheTimeoutMin", 30, "Persistance cache timeout in minutes")
-	mongodbUri := util.Getenv("MONGODB_URI", "mongodb://localhost:27017")
+	mongodbUri := util.GetEnv("MONGODB_URI", "mongodb://localhost:27017")
 	requestTimeoutSec := flag.Int64("dbRequestTimeoutSec", 10, "Database request timeout seconds")
 
 	flag.Parse()

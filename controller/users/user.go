@@ -43,6 +43,7 @@ type User struct {
 	SessionId UserSessionId
 	Status    UserStatus
 	Unit      *engine.GameUnit
+	Units     map[domain.UnitClass]*engine.GameUnit
 }
 
 func (s UserStatus) Display() UserDisplayStatus {
@@ -87,5 +88,6 @@ func NewUser(
 	u.Unit = unit
 	u.Unit.PrepareForUser()
 	u.Unit.Inventory.PopulateUids(u.RndGen)
+	u.Units = map[domain.UnitClass]*engine.GameUnit{}
 	return u
 }
