@@ -82,7 +82,9 @@ func (s *GameScenario) prepareUnits() {
 
 func (s *GameScenario) prepareUnit(unit *GameUnit) {
 	unit.Uid = s.rndGen.NextUid()
-	unit.State.RestoreDefault(unit.Stats.BaseAttributes)
+	modBaseAttributes := unit.TotalModification().BaseAttributes
+	modBaseAttributes.Accumulate(unit.Stats.BaseAttributes)
+	unit.State.RestoreDefault(modBaseAttributes)
 	unit.Inventory.PopulateUids(s.rndGen)
 }
 
