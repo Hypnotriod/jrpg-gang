@@ -50,7 +50,7 @@ func (e *GameEngine) UpdateActorReady(playerId PlayerId, value bool) bool {
 
 func (e *GameEngine) AllActorsReady() bool {
 	return util.Every(e.actors, func(actor *GameUnit) bool {
-		return actor.PlayerInfo.IsReady
+		return actor.PlayerInfo.IsReady || actor.IsDead
 	})
 }
 

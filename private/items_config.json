@@ -196,37 +196,6 @@
         },
         {
             "type": "weapon",
-            "name": "Plasma Touch",
-            "code": "plasma-touch-01",
-            "description": "A touch crackling with eldritch lightning, burning the flesh and soul with unholy energy.",
-            "slot": "weapon",
-            "slotsNumber": 1,
-            "requirements": {},
-            "range": {
-                "maximumX": 1,
-                "maximumY": 2
-            },
-            "damage": [
-                {
-                    "chance": 65,
-                    "lightning": 17,
-                    "deviation": 5
-                },
-                {
-                    "chance": 15,
-                    "duration": 3,
-                    "lightning": 3,
-                    "deviation": 2
-                }
-            ],
-            "useCost": {
-                "mana": 10,
-                "stamina": 3,
-                "actionPoints": 4
-            }
-        },
-        {
-            "type": "weapon",
             "name": "Sight",
             "code": "sight-01",
             "description": "A baleful gaze unleashes a spectral projectile, cold and merciless as the grave.",
@@ -539,7 +508,7 @@
             },
             "price": {
                 "coins": 2000,
-                "ruby": 10
+                "ruby": 5
             }
         },
         {
@@ -704,6 +673,15 @@
                     "fear": 5
                 }
             ],
+            "modification": [
+                {
+                    "damage": {
+                        "lightning": 8,
+                        "fire": 8,
+                        "cold": 8
+                    }
+                }
+            ],
             "range": {
                 "maximumX": 5,
                 "minimumX": 2,
@@ -715,8 +693,8 @@
                 "actionPoints": 5
             },
             "price": {
-                "coins": 3000,
-                "ruby": 10
+                "coins": 2000,
+                "ruby": 5
             }
         },
         {
@@ -1148,7 +1126,7 @@
             "description": "A whispered incantation, weaving faint threads of life into wounded flesh. The touch of hope in a world of agony.",
             "code": "magic-health-01",
             "price": {
-                "coins": 400
+                "coins": 350
             },
             "requirements": {
                 "intelligence": 8
@@ -1177,7 +1155,7 @@
             "description": "A ritual of blood and will, mending grievous wounds and staving off the cold embrace of death.",
             "code": "magic-health-02",
             "price": {
-                "coins": 800
+                "coins": 700
             },
             "requirements": {
                 "intelligence": 12
@@ -1416,6 +1394,71 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "magic",
+            "name": "Plasma Touch",
+            "code": "plasma-touch-01",
+            "description": "A touch crackling with eldritch lightning, burning the flesh and soul with unholy energy.",
+            "requirements": {
+                "intelligence": 8
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 65,
+                    "lightning": 17,
+                    "deviation": 5
+                },
+                {
+                    "chance": 15,
+                    "duration": 3,
+                    "lightning": 3,
+                    "deviation": 2
+                }
+            ],
+            "useCost": {
+                "mana": 10,
+                "stamina": 3,
+                "actionPoints": 4
+            }
+        },
+        {
+            "type": "magic",
+            "name": "Fire Touch",
+            "code": "fire-touch-01",
+            "description": "A searing hand of flame, scorching enemies with burning heat that claws at flesh and bone.",
+            "requirements": {
+                "intelligence": 10
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 75,
+                    "fire": 25,
+                    "deviation": 7
+                },
+                {
+                    "chance": 25,
+                    "duration": 3,
+                    "fire": 5,
+                    "deviation": 2
+                }
+            ],
+            "useCost": {
+                "mana": 15,
+                "stamina": 4,
+                "actionPoints": 5
+            },
+            "price": {
+                "coins": 700
+            }
         }
     ],
     "armor": [

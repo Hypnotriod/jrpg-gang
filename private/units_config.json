@@ -298,9 +298,6 @@
                     "code": "fist-01"
                 },
                 {
-                    "code": "plasma-touch-01"
-                },
-                {
                     "code": "sorcerer-staff-01",
                     "equipped": true
                 },
@@ -318,10 +315,7 @@
                     "quantity": 10
                 },
                 {
-                    "code": "magic-health-01"
-                },
-                {
-                    "code": "magic-stamina-01"
+                    "code": "plasma-touch-01"
                 },
                 {
                     "code": "rag-armor-01",
