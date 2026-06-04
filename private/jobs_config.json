@@ -6,8 +6,8 @@
         "reward": {
             "coins": 35
         },
-        "duration": 10,
-        "countdown": 3600,
+        "duration": 7,
+        "countdown": 600,
         "requirements": {
             "physique": 3
         }
@@ -19,8 +19,8 @@
         "reward": {
             "coins": 40
         },
-        "duration": 12,
-        "countdown": 3600,
+        "duration": 8,
+        "countdown": 1200,
         "requirements": {
             "agility": 3
         }
@@ -32,10 +32,63 @@
         "reward": {
             "coins": 100
         },
-        "duration": 15,
+        "duration": 12,
         "countdown": 3600,
         "requirements": {
             "intelligence": 10
+        }
+    },
+    {
+        "code": "job-chicken-chase-01",
+        "name": "Chickens on the loose",
+        "description": "Round up every chicken that fled the farmer's hoop before their frantic clucks draw darker things from the hedgerow.",
+        "reward": {
+            "coins": 100
+        },
+        "duration": 12,
+        "countdown": 86400,
+        "requirements": {
+            "agility": 10
+        }
+    },
+    {
+        "code": "job-mining-01",
+        "name": "Prospecting",
+        "description": "Spend your hours with a pickaxe in the haunted mines, seeking ruby and gold hidden in stone steeped with restless shadows.",
+        "reward": {
+            "coins": 100,
+            "ruby": 3
+        },
+        "duration": 15,
+        "countdown": 86400,
+        "requirements": {
+            "physique": 10
+        }
+    },
+    {
+        "code": "job-arm-wrestling-01",
+        "name": "Arm wrestling",
+        "description": "Win the arm wrestling contest in a local tavern, driving your rival's hand down under the weight of stale ale and hungry whispers.",
+        "reward": {
+            "coins": 250
+        },
+        "duration": 12,
+        "countdown": 86400,
+        "requirements": {
+            "strength": 15
+        }
+    },
+    {
+        "code": "job-dice-rolling-01",
+        "name": "Dice rolling",
+        "description": "Test your luck in a dice game against the tavern's crowd, casting bones beneath flickering torchlight to outplay every shadowed rival.",
+        "reward": {
+            "coins": 200
+        },
+        "duration": 12,
+        "countdown": 86400,
+        "requirements": {
+            "luck": 10
         }
     }
 ]
