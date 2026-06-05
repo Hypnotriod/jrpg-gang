@@ -1,10 +1,31 @@
 [
     {
+        "code": "quest-kill-5-slimes",
+        "name": "Kill 5 Slimes",
+        "description": "The Hunters Guild whispers of a wicked ooze festering in the drowned marshes. Five leering slimes must be purged before their corrosive taint devours the land and the shadowed hunger spreads beyond the fetid bog.",
+        "reward": {
+            "coins": 300,
+            "experience": 500
+        },
+        "activation": {
+            "requirements": {
+                "level": 1
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-5-slimes": 5
+                }
+            }
+        }
+    },
+    {
         "code": "quest-kill-10-rats",
         "name": "Kill 10 Rats",
         "description": "The Hunters Guild sounds an urgent call. A vile infestation of grotesque vermin plagues the lower dungeons. Cull their numbers to stem the spreading blight before darkness consumes all.",
         "reward": {
-            "coins": 350,
+            "coins": 400,
             "experience": 750
         },
         "activation": {
@@ -21,11 +42,35 @@
         }
     },
     {
+        "code": "quest-kill-10-slimes",
+        "name": "Kill 10 Slimes",
+        "description": "The Hunters Guild warns the slime outbreak is worsening as the cursed marsh swells with corrupted ooze. Hunt down ten of these writhing masses before their toxic seepage swallows the paths and spreads decay through the lowlands.",
+        "reward": {
+            "coins": 600,
+            "experience": 1000
+        },
+        "activation": {
+            "requirements": {
+                "level": 2,
+                "quests": {
+                    "quest-kill-5-slimes": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-10-slimes": 10
+                }
+            }
+        }
+    },
+    {
         "code": "quest-kill-20-bats",
         "name": "Kill 20 Bats",
         "description": "The cavern echoes with the frantic flutter of leathery wings. A colony of bloodthirsty bats has overrun the upper tunnels, their piercing screeches driving miners to madness. The Hunters Guild demands you thin their numbers by twenty before their swarm consumes the light entirely.",
         "reward": {
-            "coins": 600,
+            "coins": 700,
             "experience": 1000
         },
         "activation": {
@@ -73,7 +118,7 @@
         "name": "Kill 20 Rats",
         "description": "The darkness grows deeper still. The Hunters Guild pleads for your aid once more. The rat plague consumes the shadows below without mercy. Eradicate them completely, or their corruption will breach the mortal realm.",
         "reward": {
-            "coins": 700,
+            "coins": 800,
             "experience": 1300
         },
         "activation": {
@@ -157,6 +202,30 @@
             "requirements": {
                 "achievements": {
                     "kill-20-mosquitoes": 20
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-10-toads",
+        "name": "Kill 10 Toads",
+        "description": "A foul chorus echoes from the swamp where corrupted toads breed beneath the moon. The Hunters Guild orders you to slay ten of these bloated beasts before their venomous spawn poisons the nearby villages and the stench attracts even darker horrors.",
+        "reward": {
+            "coins": 1000,
+            "experience": 2000
+        },
+        "activation": {
+            "requirements": {
+                "level": 3,
+                "quests": {
+                    "quest-kill-10-snakes": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-10-toads": 10
                 }
             }
         }

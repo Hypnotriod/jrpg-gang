@@ -645,6 +645,34 @@
                 "weight": 1,
                 "coins": 3
             }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-5-slimes": "active"
+                    },
+                    "achievements": {
+                        "kill-5-slimes": -5
+                    }
+                },
+                "achievements": {
+                    "kill-5-slimes": 1
+                }
+            },
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-slimes": "active"
+                    },
+                    "achievements": {
+                        "kill-10-slimes": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-slimes": 1
+                }
+            }
         ]
     },
     {
@@ -709,6 +737,34 @@
             {
                 "weight": 1,
                 "coins": 4
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-5-slimes": "active"
+                    },
+                    "achievements": {
+                        "kill-5-slimes": -5
+                    }
+                },
+                "achievements": {
+                    "kill-5-slimes": 1
+                }
+            },
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-slimes": "active"
+                    },
+                    "achievements": {
+                        "kill-10-slimes": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-slimes": 1
+                }
             }
         ]
     },
@@ -1668,6 +1724,21 @@
             {
                 "weight": 1,
                 "ruby": 1
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-toads": "active"
+                    },
+                    "achievements": {
+                        "kill-10-toads": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-toads": 1
+                }
             }
         ]
     },
