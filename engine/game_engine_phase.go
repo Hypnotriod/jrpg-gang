@@ -39,8 +39,8 @@ func (e *GameEngine) NextPhaseRequired() bool {
 		e.state.phase == GamePhaseSpotComplete
 }
 
-func (e *GameEngine) prepareNextSpot(actors []*GameUnit) {
-	e.scenario.PrepareNextSpot(actors)
+func (e *GameEngine) prepareNextSpot(actors []*GameUnit, corpses []*GameUnit) {
+	e.scenario.PrepareNextSpot(actors, corpses)
 	e.state.ResetWaitingOrder()
 	e.state.MakeUnitsQueue(e.battlefield().Units)
 	e.state.IncrementSpotNumber()
@@ -86,7 +86,10 @@ func (e *GameEngine) processBeforeSpotComplete(event *GameEvent) {
 }
 
 func (e *GameEngine) processSpotComplete(event *GameEvent) {
-	e.prepareNextSpot(e.battlefield().Units)
+	leftCorpses := util.Filter(e.battlefield().Corpses, func(corpse *GameUnit) bool {
+		return corpse.Faction == GameUnitFactionLeft
+	})
+	e.prepareNextSpot(e.battlefield().Units, leftCorpses)
 	e.state.ChangePhase(GamePhasePrepareUnit)
 	event.Spot = e.scenario.CurrentSpot()
 }
@@ -238,6 +241,9 @@ func (e *GameEngine) applyExperience(corpses []*GameUnit, expDistribution map[ui
 	rightCorpses := util.Filter(corpses, func(corpse *GameUnit) bool {
 		return corpse.Faction == GameUnitFactionRight
 	})
+	if len(rightCorpses) == 0 {
+		return
+	}
 	totalExperience := util.Reduce(rightCorpses, 0, func(acc uint, corpse *GameUnit) uint {
 		return acc + corpse.Stats.Progress.Experience
 	})
@@ -269,6 +275,9 @@ func (e *GameEngine) applyAchievements(corpses []*GameUnit, achDistribution map[
 	rightCorpses := util.Filter(corpses, func(corpse *GameUnit) bool {
 		return corpse.Faction == GameUnitFactionRight
 	})
+	if len(rightCorpses) == 0 {
+		return
+	}
 	if achDistribution == nil {
 		achDistribution = map[uint]domain.UnitAchievements{}
 	}

@@ -94,6 +94,20 @@ func (b *Battlefield) MoveUnit(uid uint, position domain.Position) *domain.Actio
 	return result.WithResult(domain.ResultAccomplished)
 }
 
+func (b *Battlefield) RemoveUnit(uid uint) {
+	unit := b.FindUnit(uid)
+	if unit == nil {
+		return
+	}
+	survivedUnits := []*GameUnit{}
+	for _, u := range b.Units {
+		if u.Uid != uid {
+			survivedUnits = append(survivedUnits, u)
+		}
+	}
+	b.Units = survivedUnits
+}
+
 func (b *Battlefield) MoveToCorpses(uid uint) {
 	unit := b.FindUnit(uid)
 	if unit == nil {
@@ -106,6 +120,7 @@ func (b *Battlefield) MoveToCorpses(uid uint) {
 		}
 	}
 	unit.IsDead = true
+	unit.Position = domain.PositionOutOfBounds
 	b.Units = survivedUnits
 	b.Corpses = append(b.Corpses, unit)
 }

@@ -5,6 +5,8 @@ type Position struct {
 	Y int `json:"y"`
 }
 
+var PositionOutOfBounds = Position{X: -1, Y: -1}
+
 func (p *Position) Equals(position Position) bool {
 	return p.X == position.X && p.Y == position.Y
 }

@@ -43,9 +43,12 @@ func (s *GameScenario) Initialize(rndGen *util.RndGen, actors []*GameUnit) {
 	s.prepareUnits()
 }
 
-func (s *GameScenario) PrepareNextSpot(actors []*GameUnit) {
+func (s *GameScenario) PrepareNextSpot(actors []*GameUnit, corpses []*GameUnit) {
 	s.pickSpot()
 	s.placeActors(actors)
+	if corpses != nil {
+		s.prepareCorpses(corpses)
+	}
 	s.pathIndex++
 }
 
@@ -97,4 +100,11 @@ func (s *GameScenario) prepareActors(actors []*GameUnit) {
 
 func (s *GameScenario) placeActors(actors []*GameUnit) {
 	s.spot.Battlefield.placeUnitsDefault(actors)
+}
+
+func (s *GameScenario) prepareCorpses(corpses []*GameUnit) {
+	for _, c := range corpses {
+		c.Position = domain.PositionOutOfBounds
+	}
+	s.CurrentBattlefield().Corpses = append(s.CurrentBattlefield().Corpses, corpses...)
 }

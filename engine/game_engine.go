@@ -21,7 +21,7 @@ func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
 	e.scenario.Initialize(e.rndGen, actors)
 	e.resetActorsReady()
 	e.prepareActors(actors)
-	e.prepareNextSpot(actors)
+	e.prepareNextSpot(actors, nil)
 	return e
 }
 
@@ -114,7 +114,7 @@ func (e *GameEngine) RemoveActor(playerId PlayerId) bool {
 		e.onUnitCompleteAction(nil)
 	}
 	actor.PlayerInfo.IsReady = false
-	e.battlefield().MoveToCorpses(actor.Uid)
+	e.battlefield().RemoveUnit(actor.Uid)
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	restActors := []*GameUnit{}
 	for i := 0; i < len(e.actors); i++ {
