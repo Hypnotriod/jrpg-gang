@@ -27,7 +27,7 @@ type MongoDBRepository[T any, P MongoDBRepositoryModelPointer[T]] struct {
 }
 
 func (r *MongoDBRepository[T, P]) InsertOne(ctx context.Context, model P) (ObjectId, bool) {
-	t := time.Now()
+	t := time.Now().UTC()
 	model.SetCreatedAt(t)
 	model.SetUpdatedAt(t)
 	result, err := r.collection.InsertOne(ctx, model)
@@ -48,7 +48,7 @@ func (r *MongoDBRepository[T, P]) UpdateOneById(ctx context.Context, id ObjectId
 		return 0, false
 	}
 
-	fields = append(fields, bson.E{Key: "updated_at", Value: time.Now()})
+	fields = append(fields, bson.E{Key: "updated_at", Value: time.Now().UTC()})
 	filter := bson.D{{Key: "_id", Value: objectId}}
 	update := bson.D{{Key: "$set", Value: fields}}
 	result, err := r.collection.UpdateOne(ctx, filter, update)
@@ -60,7 +60,7 @@ func (r *MongoDBRepository[T, P]) UpdateOneById(ctx context.Context, id ObjectId
 }
 
 func (r *MongoDBRepository[T, P]) UpdateOne(ctx context.Context, filter bson.D, fields bson.D) (int64, bool) {
-	fields = append(fields, bson.E{Key: "updated_at", Value: time.Now()})
+	fields = append(fields, bson.E{Key: "updated_at", Value: time.Now().UTC()})
 	update := bson.D{{Key: "$set", Value: fields}}
 	result, err := r.collection.UpdateOne(ctx, filter, update)
 	if err != nil {

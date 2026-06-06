@@ -18,7 +18,7 @@ func (t *GameEngineTimer) AfterFunc(d time.Duration, f func()) int {
 	}
 	t.duration = d
 	t.timer = time.AfterFunc(d, f)
-	t.startTime = time.Now()
+	t.startTime = time.Now().UTC()
 	return t.id
 }
 

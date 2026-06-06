@@ -81,7 +81,7 @@ func (e *Employment) ClearStatus(user *users.User) {
 }
 
 func (e *Employment) GetStatus(user *users.User) EmploymentStatus {
-	timeNow := time.Now()
+	timeNow := time.Now().UTC()
 	e.mu.Lock()
 	status := e.retrieveUserJobStatus(user.UserId)
 	result := EmploymentStatus{

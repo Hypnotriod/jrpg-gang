@@ -66,7 +66,7 @@ func NewChat(config ChatConfig, broadcastChatMessage BroadcastChatMessageFunc, b
 func (c *Chat) AddParticipant(playerId engine.PlayerId, participant *ChatParticipant) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	participant.lastMessageTimestamp = time.Now()
+	participant.lastMessageTimestamp = time.Now().UTC()
 	c.participants[playerId] = participant
 	if c.broadcastChatParticipant != nil {
 		to := make([]engine.PlayerId, 0, len(c.participants)-1)
@@ -115,7 +115,7 @@ func (c *Chat) SendMessage(from engine.PlayerId, message string) (*ChatMessage, 
 	msg := &ChatMessage{
 		From:      from,
 		Message:   string(message),
-		Timestamp: time.Now(),
+		Timestamp: time.Now().UTC(),
 	}
 	c.messages = append(c.messages, msg)
 	if len(c.messages) > int(c.config.MaxMessages) {
@@ -154,7 +154,7 @@ func (c *Chat) Dispose() {
 }
 
 func (c *Chat) manageMessageRate(participant *ChatParticipant) bool {
-	now := time.Now()
+	now := time.Now().UTC()
 	elapsed := now.Sub(participant.lastMessageTimestamp)
 	participant.messageRate += 1.0 - elapsed.Seconds()*(float64(c.config.MessageRate)/c.config.MessageRateDuration.Seconds())
 	participant.messageRate = max(participant.messageRate, 1.0)

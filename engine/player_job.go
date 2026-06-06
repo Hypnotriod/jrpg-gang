@@ -36,7 +36,7 @@ func NewPlayerJobStatus() *PlayerJobStatus {
 }
 
 func (s *PlayerJobStatus) Update() {
-	timeNow := time.Now()
+	timeNow := time.Now().UTC()
 	for k, u := range s.Countdown {
 		if timeNow.Compare(u) >= 0 {
 			delete(s.Countdown, k)
@@ -64,7 +64,7 @@ func (s *PlayerJobStatus) Clone() *PlayerJobStatus {
 }
 
 func (s *PlayerJobStatus) Apply(config PlayerJob) {
-	timeNow := time.Now()
+	timeNow := time.Now().UTC()
 	s.IsInProgress = true
 	s.IsComplete = false
 	s.CompletionTime = timeNow.Add(time.Duration(config.Duration) * time.Second)
