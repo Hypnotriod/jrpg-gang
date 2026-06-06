@@ -29,11 +29,10 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 	allowedOrigins := util.GetEnvSlice("ALLOWED_ORIGINS", []string{"*"})
 	rBuffSize := flag.Int("rBuffSize", 1024, "ws read buffer size")
 	wBuffSize := flag.Int("wBuffSize", 4096, "ws write buffer size")
-	broadcasterPoolSize := flag.Int("broadcasterPoolSize", 32, "broadcaster routines pool size")
+	broadcasterPoolSize := flag.Int("broadcasterPoolSize", 8, "broadcaster routines pool size")
 	broadcastQueueSize := flag.Int("broadcastQueueSize", 4096, "broadcast channel queue size")
 	maxMessageSize := flag.Int64("maxMessageSize", 1024, "max message size sent by peer")
 	userOfflineTimeoutSec := flag.Int64("userOfflineTimeoutSec", 10, "user offline timeout in seconds")
-	userWithoutIdTimeoutSec := flag.Int64("userWithoutIdTimeoutSec", 2, "user hasn't obtained id timeout in seconds")
 	pingTimeoutSec := flag.Int64("pingTimeoutSec", 30, "server ping timeout in seconds")
 	readDeadlineSec := flag.Int64("readDeadlineSec", 35, "client read deadline timeout in seconds (including pong messages)")
 	writeDeadlineSec := flag.Int64("writeDeadlineSec", 2, "client write deadline timeout in seconds")
@@ -54,20 +53,19 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 	}
 
 	hubConfig = session.HubConfig{
-		Port:                    port,
-		TlsKey:                  *key,
-		TlsCert:                 *cert,
-		AllowedOrigins:          allowedOrigins,
-		ReadBufferSize:          *rBuffSize,
-		WriteBufferSize:         *wBuffSize,
-		BroadcasterPoolSize:     *broadcasterPoolSize,
-		BroadcastQueueSize:      *broadcastQueueSize,
-		MaxMessageSize:          *maxMessageSize,
-		UserOfflineTimeoutSec:   *userOfflineTimeoutSec,
-		UserWithoutIdTimeoutSec: *userWithoutIdTimeoutSec,
-		PingTimeoutSec:          *pingTimeoutSec,
-		ReadDeadlineSec:         *readDeadlineSec,
-		WriteDeadlineSec:        *writeDeadlineSec,
+		Port:                  port,
+		TlsKey:                *key,
+		TlsCert:               *cert,
+		AllowedOrigins:        allowedOrigins,
+		ReadBufferSize:        *rBuffSize,
+		WriteBufferSize:       *wBuffSize,
+		BroadcasterPoolSize:   *broadcasterPoolSize,
+		BroadcastQueueSize:    *broadcastQueueSize,
+		MaxMessageSize:        *maxMessageSize,
+		UserOfflineTimeoutSec: *userOfflineTimeoutSec,
+		PingTimeoutSec:        *pingTimeoutSec,
+		ReadDeadlineSec:       *readDeadlineSec,
+		WriteDeadlineSec:      *writeDeadlineSec,
 	}
 
 	persistanceConfig = persistance.PersistanceConfig{

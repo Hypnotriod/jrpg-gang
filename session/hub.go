@@ -17,20 +17,19 @@ import (
 )
 
 type HubConfig struct {
-	Port                    string   `json:"port"`
-	TlsKey                  string   `json:"tlsKey"`
-	TlsCert                 string   `json:"tlsCert"`
-	AllowedOrigins          []string `json:"allowedOrigins"`
-	ReadBufferSize          int      `json:"readBufferSize"`
-	WriteBufferSize         int      `json:"writeBufferSize"`
-	BroadcasterPoolSize     int      `json:"broadcasterPoolSize"`
-	BroadcastQueueSize      int      `json:"broadcastQueueSize"`
-	MaxMessageSize          int64    `json:"maxMessageSize"`
-	UserOfflineTimeoutSec   int64    `json:"userOfflineTimeoutSec"`
-	UserWithoutIdTimeoutSec int64    `json:"userWithoutIdTimeoutSec"`
-	PingTimeoutSec          int64    `json:"pingTimeout"`
-	ReadDeadlineSec         int64    `json:"readDeadlineSec"`
-	WriteDeadlineSec        int64    `json:"writeDeadlineSec"`
+	Port                  string   `json:"port"`
+	TlsKey                string   `json:"tlsKey"`
+	TlsCert               string   `json:"tlsCert"`
+	AllowedOrigins        []string `json:"allowedOrigins"`
+	ReadBufferSize        int      `json:"readBufferSize"`
+	WriteBufferSize       int      `json:"writeBufferSize"`
+	BroadcasterPoolSize   int      `json:"broadcasterPoolSize"`
+	BroadcastQueueSize    int      `json:"broadcastQueueSize"`
+	MaxMessageSize        int64    `json:"maxMessageSize"`
+	UserOfflineTimeoutSec int64    `json:"userOfflineTimeoutSec"`
+	PingTimeoutSec        int64    `json:"pingTimeout"`
+	ReadDeadlineSec       int64    `json:"readDeadlineSec"`
+	WriteDeadlineSec      int64    `json:"writeDeadlineSec"`
 }
 
 type Hub struct {
