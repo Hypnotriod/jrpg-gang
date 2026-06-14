@@ -1516,9 +1516,9 @@
                 "experience": 80
             },
             "baseAttributes": {
-                "health": 500,
-                "stamina": 200,
-                "mana": 200,
+                "health": 1000,
+                "stamina": 500,
+                "mana": 500,
                 "actionPoints": 12
             },
             "attributes": {
