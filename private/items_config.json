@@ -346,7 +346,7 @@
                     "chance": 75,
                     "cutting": 28,
                     "crushing": 5,
-                    "lightning": 10,
+                    "lightning": 18,
                     "deviation": 5
                 },
                 {
@@ -363,7 +363,8 @@
             ],
             "useCost": {
                 "stamina": 12,
-                "mana": 3
+                "mana": 3,
+                "actionPoints": 4
             },
             "price": {
                 "coins": 3000,
