@@ -447,13 +447,64 @@
         }
     },
     {
+        "code": "quest-kill-grim-reaper",
+        "name": "Defeat the Grim Reaper",
+        "description": "Descend into the deepest chasm of the Forgotten Ruins, where cold shadow and the scent of old grave earth cling to every step. There the Grim Reaper waits beneath a veil of black mist, a deathless wraith whose scythe rends both body and soul. Steel your courage and strike true, for only by shattering its endless harvest can the land be spared another night of endless mourning.",
+        "reward": {
+            "coins": 2000,
+            "ruby": 10,
+            "experience": 7000
+        },
+        "activation": {
+            "requirements": {
+                "level": 6,
+                "quests": {
+                    "quest-kill-10-skeletons": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-grim-reaper": 1
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-hydra",
+        "name": "Defeat the Hydra",
+        "description": "Venture into the drowned heart of the Cursed Swamp, where black waters boil with venom and the air hangs heavy with rot. There the Hydra's many eyes gleam like dying embers from beneath a crown of writhing heads, each strike a storm of fangs and acid. Slay this primordial horror before its blood-black tide swallows the marshlands whole and the world's last flicker of hope is lost to its ravenous hunger.",
+        "reward": {
+            "coins": 4000,
+            "ruby": 20,
+            "experience": 12000
+        },
+        "activation": {
+            "requirements": {
+                "level": 8,
+                "quests": {
+                    "quest-kill-20-mosquitoes": "completed",
+                    "quest-kill-10-toads": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-hydra": 1
+                }
+            }
+        }
+    },
+    {
         "code": "quest-save-princess",
         "name": "Defeat the Dragon and save the Princess",
         "description": "The Dragon holds the Princess captive within his molten throne room, her fate bound by flame and shadow. Break through his lair, defeat the ancient wyrm, and free her from the terror that grips the realm.",
         "reward": {
-            "coins": 5000,
+            "coins": 10000,
             "ruby": 50,
-            "experience": 15000
+            "experience": 18000
         },
         "activation": {
             "requirements": {

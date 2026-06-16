@@ -2821,7 +2821,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-02",
+                            "code": "hydra-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2924,7 +2924,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-01",
+                            "code": "hydra-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,

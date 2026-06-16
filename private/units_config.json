@@ -355,7 +355,7 @@
         "stats": {
             "progress": {
                 "level": 5,
-                "experience": 150
+                "experience": 300
             },
             "baseAttributes": {
                 "health": 200,
@@ -418,7 +418,7 @@
         "stats": {
             "progress": {
                 "level": 4,
-                "experience": 70
+                "experience": 150
             },
             "baseAttributes": {
                 "health": 100,
@@ -775,7 +775,7 @@
         "stats": {
             "progress": {
                 "level": 4,
-                "experience": 100
+                "experience": 200
             },
             "baseAttributes": {
                 "health": 100,
@@ -864,7 +864,7 @@
         "stats": {
             "progress": {
                 "level": 4,
-                "experience": 120
+                "experience": 250
             },
             "baseAttributes": {
                 "health": 120,
@@ -953,7 +953,7 @@
         "stats": {
             "progress": {
                 "level": 4,
-                "experience": 120
+                "experience": 250
             },
             "baseAttributes": {
                 "health": 90,
@@ -1205,7 +1205,7 @@
         "stats": {
             "progress": {
                 "level": 2,
-                "experience": 45
+                "experience": 100
             },
             "baseAttributes": {
                 "health": 50,
@@ -1270,7 +1270,7 @@
         "stats": {
             "progress": {
                 "level": 5,
-                "experience": 100
+                "experience": 800
             },
             "baseAttributes": {
                 "health": 150,
@@ -1332,6 +1332,116 @@
             {
                 "weight": 1,
                 "coins": 30
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-grim-reaper": "active"
+                    },
+                    "achievements": {
+                        "kill-grim-reaper": -1
+                    }
+                },
+                "achievements": {
+                    "kill-grim-reaper": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Hydra",
+        "code": "hydra-01",
+        "description": "A nightmarish Hydra of writhing heads and venom-black scales, born from the rot of the Cursed Swamp.",
+        "stats": {
+            "progress": {
+                "level": 7,
+                "experience": 1500
+            },
+            "baseAttributes": {
+                "health": 500,
+                "stamina": 300,
+                "mana": 300,
+                "actionPoints": 12
+            },
+            "attributes": {
+                "strength": 25,
+                "physique": 10,
+                "agility": 15,
+                "endurance": 30,
+                "intelligence": 15,
+                "initiative": 8,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 10,
+                "cutting": 10,
+                "crushing": 10,
+                "fire": 10,
+                "cold": 10,
+                "lightning": 10,
+                "poison": 100,
+                "exhaustion": 10,
+                "manaDrain": 10,
+                "bleeding": 0,
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
+            }
+        },
+        "slots": {
+            "head": 9,
+            "neck": 9,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "poison-teeth-01"
+                },
+                {
+                    "code": "sight-02",
+                    "equipped": true
+                },
+                {
+                    "code": "poison-charge-01",
+                    "quantity": 100,
+                    "equipped": true
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 1,
+                "coins": 250
+            },
+            {
+                "weight": 1,
+                "coins": 300
+            },
+            {
+                "weight": 1,
+                "coins": 400,
+                "ruby": 5
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-hydra": "active"
+                    },
+                    "achievements": {
+                        "kill-hydra": -1
+                    }
+                },
+                "achievements": {
+                    "kill-hydra": 1
+                }
             }
         ]
     },
@@ -1426,7 +1536,7 @@
         "stats": {
             "progress": {
                 "level": 4,
-                "experience": 80
+                "experience": 120
             },
             "baseAttributes": {
                 "health": 75,
@@ -1513,12 +1623,12 @@
         "stats": {
             "progress": {
                 "level": 10,
-                "experience": 80
+                "experience": 2500
             },
             "baseAttributes": {
                 "health": 1000,
-                "stamina": 500,
-                "mana": 500,
+                "stamina": 600,
+                "mana": 600,
                 "actionPoints": 12
             },
             "attributes": {
@@ -1565,7 +1675,7 @@
                 },
                 {
                     "code": "fire-charge-02",
-                    "quantity": 50,
+                    "quantity": 100,
                     "equipped": true
                 }
             ]
@@ -1573,15 +1683,15 @@
         "drop": [
             {
                 "weight": 1,
-                "coins": 75
+                "coins": 750
             },
             {
                 "weight": 1,
-                "coins": 100
+                "coins": 1000
             },
             {
                 "weight": 1,
-                "coins": 125,
+                "coins": 1250,
                 "ruby": 5
             }
         ],

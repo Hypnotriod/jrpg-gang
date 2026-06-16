@@ -220,6 +220,38 @@
         },
         {
             "type": "weapon",
+            "name": "Sight",
+            "code": "sight-02",
+            "description": "A baleful gaze unleashes a spectral projectile, cold and merciless as the grave.",
+            "ammunitionKind": "magicCharge",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "requirements": {},
+            "range": {
+                "maximumX": 5,
+                "maximumY": 5,
+                "minimumX": 2
+            },
+            "damage": [
+                {
+                    "chance": 70
+                }
+            ],
+            "spread": [
+                {
+                    "y": 1
+                },
+                {
+                    "y": -1
+                }
+            ],
+            "useCost": {
+                "mana": 20,
+                "actionPoints": 5
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Throat",
             "code": "throat-01",
             "description": "A guttural incantation, spewing forth a cursed missile from the abyss within.",
@@ -246,7 +278,7 @@
                 }
             ],
             "useCost": {
-                "mana": 10,
+                "mana": 30,
                 "actionPoints": 5
             }
         },
@@ -2878,7 +2910,7 @@
             "canBeThrownAway": true,
             "damage": [
                 {
-                    "fire": 48,
+                    "fire": 36,
                     "deviation": 5
                 },
                 {
