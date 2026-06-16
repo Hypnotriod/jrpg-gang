@@ -426,7 +426,7 @@
                 "actionPoints": 10
             },
             "attributes": {
-                "strength": 10,
+                "strength": 8,
                 "physique": 5,
                 "agility": 12,
                 "endurance": 15,
