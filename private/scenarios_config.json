@@ -1787,7 +1787,7 @@
                         ],
                         [
                             {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 1, "code": "tile-floor-01", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
                             {"type": 0, "code": "tile-floor-01", "factions": [1]}
                         ],
                         [
