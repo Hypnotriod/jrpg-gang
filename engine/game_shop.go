@@ -196,7 +196,8 @@ func (s *GameShop) calculateWearoutFactor(equipment *domain.Equipment) float32 {
 
 func (s *GameShop) calculatePurchasePrice(item *domain.Item, quantity uint, wearoutFactor float32) domain.UnitBooty {
 	price := item.Price
-	price.MultiplyAll(PURCHASE_ITEM_PRICE_FACTOR * float32(quantity) * wearoutFactor)
+	price.MultiplyAll(PURCHASE_ITEM_PRICE_FACTOR * wearoutFactor)
+	price.MultiplyAll((float32(quantity)))
 	return price
 }
 
