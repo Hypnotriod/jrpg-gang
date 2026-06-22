@@ -395,7 +395,7 @@
             ],
             "useCost": {
                 "stamina": 12,
-                "mana": 3,
+                "mana": 1,
                 "actionPoints": 4
             },
             "price": {
