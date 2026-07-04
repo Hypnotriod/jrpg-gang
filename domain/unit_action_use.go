@@ -121,7 +121,7 @@ func (u *Unit) useProvisionOnTarget(action *ActionResult, target *Unit, provisio
 		return action.WithResult(ResultZeroQuantity)
 	}
 	provision.Quantity--
-	u.ApplyRecovery(provision.Recovery)
+	target.ApplyRecovery(provision.Recovery)
 	action.InstantRecovery[target.Uid] = append(action.InstantRecovery[target.Uid], provision.Recovery)
 	return action.WithResult(ResultAccomplished)
 }

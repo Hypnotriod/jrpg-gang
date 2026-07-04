@@ -23,7 +23,7 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	case GamePhaseSpotComplete:
 		e.processSpotComplete(result)
 	}
-	e.resetActorsReady()
+	e.resetPlayersReady()
 	result.PlayersInfo = e.GetPlayersInfo()
 	result.NextPhase = e.state.phase
 	return result

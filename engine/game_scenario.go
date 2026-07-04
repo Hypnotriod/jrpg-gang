@@ -94,7 +94,9 @@ func (s *GameScenario) prepareUnit(unit *GameUnit) {
 func (s *GameScenario) prepareActors(actors []*GameUnit) {
 	for i := range actors {
 		s.prepareUnit(actors[i])
-		actors[i].PlayerInfo.UnitUid = actors[i].Uid
+		if actors[i].PlayerInfo != nil {
+			actors[i].PlayerInfo.UnitUid = actors[i].Uid
+		}
 	}
 }
 

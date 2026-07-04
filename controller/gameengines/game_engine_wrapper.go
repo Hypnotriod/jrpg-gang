@@ -62,11 +62,11 @@ func (w *GameEngineWrapper) ExecuteUserAction(action domain.Action, playerId eng
 }
 
 func (w *GameEngineWrapper) ReadyForNextPhase(playerId engine.PlayerId, isReady bool) (*engine.GameEvent, []engine.PlayerId, bool) {
-	if !w.engine.NextPhaseRequired() || w.engine.AllActorsDead() {
+	if !w.engine.NextPhaseRequired() || w.engine.AllPlayersDead() {
 		return nil, nil, false
 	}
-	w.engine.UpdateActorReady(playerId, isReady)
-	if w.engine.AllActorsReady() {
+	w.engine.UpdatePlayerReady(playerId, isReady)
+	if w.engine.AllPlayersReady() {
 		event := w.engine.NextPhase()
 		w.setNextPhaseTimer()
 		broadcastPlayerIds := w.engine.GetRestPlayerIds(playerId)
@@ -78,7 +78,7 @@ func (w *GameEngineWrapper) ReadyForNextPhase(playerId engine.PlayerId, isReady 
 }
 
 func (w *GameEngineWrapper) SkipToNextPhase() (*engine.GameEvent, []engine.PlayerId, bool) {
-	if w.engine.AllActorsDead() {
+	if w.engine.AllPlayersDead() {
 		return nil, nil, false
 	}
 	w.engine.ClearActiveUnitActionPoints()
@@ -89,7 +89,7 @@ func (w *GameEngineWrapper) SkipToNextPhase() (*engine.GameEvent, []engine.Playe
 }
 
 func (w *GameEngineWrapper) ConnectionStatusChanged(playerId engine.PlayerId, isOffline bool) (*engine.GameEvent, []engine.PlayerId, bool) {
-	w.engine.UpdateUserConnectionStatus(playerId, isOffline)
+	w.engine.UpdatePlayerConnectionStatus(playerId, isOffline)
 	broadcastPlayerIds := w.engine.GetRestPlayerIds(playerId)
 	event := w.engine.NewGameEventWithPlayersInfo()
 	return event.WithPhaseTimeout(w.nextPhaseTimer.SecondsLeft()), broadcastPlayerIds, true
@@ -106,7 +106,7 @@ func (w *GameEngineWrapper) LeaveGame(playerId engine.PlayerId) (*engine.GameEve
 	}
 	w.engine.RemoveActor(playerId)
 	w.chat.RemoveParticipant(playerId)
-	if w.engine.NextPhaseRequired() && w.engine.AllActorsReady() && !w.engine.AllActorsDead() {
+	if w.engine.NextPhaseRequired() && w.engine.AllPlayersReady() && !w.engine.AllPlayersDead() {
 		event := w.engine.NextPhase()
 		w.setNextPhaseTimer()
 		broadcastPlayerIds := w.engine.GetRestPlayerIds(playerId)
@@ -128,7 +128,7 @@ func (w *GameEngineWrapper) RemoveUser(playerId engine.PlayerId) (*engine.GameEv
 		w.Dispose()
 		return nil, nil, false
 	}
-	if w.engine.NextPhaseRequired() && w.engine.AllActorsReady() && !w.engine.AllActorsDead() {
+	if w.engine.NextPhaseRequired() && w.engine.AllPlayersReady() && !w.engine.AllPlayersDead() {
 		event := w.engine.NextPhase()
 		w.setNextPhaseTimer()
 		broadcastPlayerIds := w.engine.GetRestPlayerIds(playerId)

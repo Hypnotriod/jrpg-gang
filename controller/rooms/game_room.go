@@ -11,6 +11,7 @@ type GameRoom struct {
 	ScenarioId  engine.GameScenarioId `json:"scenarioId"`
 	joinedUsers []users.User
 	host        users.User
+	mercenaries []*engine.GameUnit
 }
 
 func (r *GameRoom) IsFull() bool {
@@ -51,11 +52,15 @@ func (r *GameRoom) GetActors() []*engine.GameUnit {
 		unit.PlayerInfo = u.PlayerInfo.Clone()
 		result = append(result, unit)
 	}
+	for i := range r.mercenaries {
+		result = append(result, r.mercenaries[i])
+	}
 	return result
 }
 
 func newGameRoom() *GameRoom {
 	r := &GameRoom{}
 	r.joinedUsers = []users.User{}
+	r.mercenaries = []*engine.GameUnit{}
 	return r
 }

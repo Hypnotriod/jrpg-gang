@@ -19,7 +19,7 @@ func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
 	e.rndGen = util.NewRndGen()
 	e.state = NewGameState(scenario)
 	e.scenario.Initialize(e.rndGen, actors)
-	e.resetActorsReady()
+	e.resetPlayersReady()
 	e.prepareActors(actors)
 	e.prepareNextSpot(actors, nil)
 	return e
@@ -31,15 +31,17 @@ func (e *GameEngine) prepareActors(actors []*GameUnit) {
 	}
 }
 
-func (e *GameEngine) resetActorsReady() {
+func (e *GameEngine) resetPlayersReady() {
 	for _, actor := range e.actors {
-		actor.PlayerInfo.IsReady = false
+		if actor.PlayerInfo != nil {
+			actor.PlayerInfo.IsReady = false
+		}
 	}
 }
 
-func (e *GameEngine) UpdateActorReady(playerId PlayerId, value bool) bool {
+func (e *GameEngine) UpdatePlayerReady(playerId PlayerId, value bool) bool {
 	unit := util.FindPtr(e.actors, func(actor *GameUnit) bool {
-		return actor.PlayerInfo.Id == playerId
+		return actor.PlayerInfo != nil && actor.PlayerInfo.Id == playerId
 	})
 	if unit != nil {
 		unit.PlayerInfo.IsReady = value
@@ -48,9 +50,15 @@ func (e *GameEngine) UpdateActorReady(playerId PlayerId, value bool) bool {
 	return false
 }
 
-func (e *GameEngine) AllActorsReady() bool {
+func (e *GameEngine) AllPlayersReady() bool {
 	return util.Every(e.actors, func(actor *GameUnit) bool {
-		return actor.PlayerInfo.IsReady || actor.IsDead
+		return actor.PlayerInfo == nil || actor.PlayerInfo.IsReady || actor.IsDead
+	})
+}
+
+func (e *GameEngine) AllPlayersDead() bool {
+	return util.Every(e.actors, func(actor *GameUnit) bool {
+		return actor.PlayerInfo == nil || actor.IsDead
 	})
 }
 
@@ -75,7 +83,9 @@ func (e *GameEngine) GetPhase() GamePhase {
 func (e *GameEngine) GetPlayersInfo() []PlayerInfo {
 	result := []PlayerInfo{}
 	for _, unit := range e.actors {
-		result = append(result, *unit.PlayerInfo)
+		if unit.PlayerInfo != nil {
+			result = append(result, *unit.PlayerInfo)
+		}
 	}
 	return result
 }
@@ -83,7 +93,9 @@ func (e *GameEngine) GetPlayersInfo() []PlayerInfo {
 func (e *GameEngine) GetPlayerIds() []PlayerId {
 	result := []PlayerId{}
 	for _, unit := range e.actors {
-		result = append(result, unit.GetPlayerId())
+		if unit.PlayerInfo != nil {
+			result = append(result, unit.GetPlayerId())
+		}
 	}
 	return result
 }
@@ -113,7 +125,9 @@ func (e *GameEngine) RemoveActor(playerId PlayerId) bool {
 		actor.ClearActionPoints()
 		e.onUnitCompleteAction(nil)
 	}
-	actor.PlayerInfo.IsReady = false
+	if actor.PlayerInfo != nil {
+		actor.PlayerInfo.IsReady = false
+	}
 	e.battlefield().RemoveUnit(actor.Uid)
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	restActors := []*GameUnit{}
@@ -134,7 +148,7 @@ func (e *GameEngine) TakeAShare() domain.UnitBooty {
 	return e.state.Booty.TakeAShare(leftUnits)
 }
 
-func (e *GameEngine) UpdateUserConnectionStatus(playerId PlayerId, isOffline bool) bool {
+func (e *GameEngine) UpdatePlayerConnectionStatus(playerId PlayerId, isOffline bool) bool {
 	actor := e.FindActorByPlayerId(playerId)
 	if actor == nil {
 		return false

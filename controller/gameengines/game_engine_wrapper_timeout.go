@@ -28,7 +28,7 @@ func (w *GameEngineWrapper) getNextPhaseTimeout() (int, bool) {
 
 func (w *GameEngineWrapper) setNextPhaseTimer() {
 	w.stopNextPhaseTimer()
-	if w.engine.AllActorsDead() {
+	if w.engine.AllPlayersDead() {
 		return
 	}
 	timeout, ok := w.getNextPhaseTimeout()

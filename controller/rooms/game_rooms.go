@@ -96,6 +96,20 @@ func (r *GameRooms) RemoveUser(playerId engine.PlayerId) (uint, bool) {
 	return roomUid, true
 }
 
+func (r *GameRooms) AddMercenary(roomUid uint, unit *engine.GameUnit) bool {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	room, ok := r.rooms[roomUid]
+	if !ok {
+		return false
+	}
+	if room.IsFull() {
+		return false
+	}
+	room.mercenaries = append(room.mercenaries, unit)
+	return true
+}
+
 func (r *GameRooms) Has(uid uint) bool {
 	r.mu.RLock()
 	defer r.mu.RUnlock()

@@ -24,9 +24,11 @@ func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, reques
 		MessageRateDuration: CHAT_MESSAGE_RATE_DURATION,
 	}, c.broadcastGameChatMessage, nil)
 	for _, actor := range actors {
-		ch.AddParticipant(actor.GetPlayerId(), &chat.ChatParticipant{
-			Nickname: actor.PlayerInfo.Nickname,
-		})
+		if actor.PlayerInfo != nil {
+			ch.AddParticipant(actor.GetPlayerId(), &chat.ChatParticipant{
+				Nickname: actor.PlayerInfo.Nickname,
+			})
+		}
 	}
 	wrapper := gameengines.NewGameEngineWrapper(engine.NewGameEngine(scenario, actors), c.broadcastGameAction, ch)
 	wrapper.Lock()
