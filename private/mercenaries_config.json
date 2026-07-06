@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Villager",
+        "code": "villager-01",
+        "class": "opportunist",
+        "booty": {},
+        "achievements": {},
+        "quests": {},
+        "description": "Sed aut iste aut est sunt. Numquam ut inventore quia aut accusamus officiis. Qui sit assumenda et exercitationem. Assumenda quos ipsa odio magni aut. Libero dolores est possimus voluptate cum laboriosam laudantium.",
+        "stats": {
+            "progress": {
+                "level": 1
+            },
+            "baseAttributes": {
+                "health": 75,
+                "stamina": 75,
+                "actionPoints": 9
+            },
+            "attributes": {
+                "strength": 6,
+                "physique": 5,
+                "agility": 3,
+                "endurance": 5,
+                "intelligence": 1,
+                "initiative": 3,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 0,
+                "cutting": 0,
+                "crushing": 0,
+                "fire": 0,
+                "cold": 0,
+                "lightning": 0,
+                "poison": 0,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "bleeding": 0,
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
+            }
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "fist-01"
+                },
+                {
+                    "code": "wooden-staff-01",
+                    "equipped": true
+                },
+                {
+                    "code": "rag-armor-01",
+                    "equipped": true
+                }
+            ]
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "requirements": {
+            "level": 1
+        },
+        "price": {
+            "coins": 50
+        }
+    }
+]

@@ -83,6 +83,7 @@ func NewUser(
 	u.IsGuest = isGuest
 	u.UserId = userId
 	u.Class = class
+	u.Code = unit.Code
 	u.Level = unit.Stats.Progress.Level
 	u.Status = UserStatusNotJoined
 	u.Unit = unit

@@ -96,18 +96,22 @@ func (r *GameRooms) RemoveUser(playerId engine.PlayerId) (uint, bool) {
 	return roomUid, true
 }
 
-func (r *GameRooms) AddMercenary(roomUid uint, unit *engine.GameUnit) bool {
+func (r *GameRooms) AddMercenary(playerId engine.PlayerId, mercenary *engine.GameUnit) (uint, bool) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
+	roomUid, ok := r.playerIdToRoomUid[playerId]
+	if !ok {
+		return roomUid, false
+	}
 	room, ok := r.rooms[roomUid]
 	if !ok {
-		return false
+		return roomUid, false
 	}
 	if room.IsFull() {
-		return false
+		return roomUid, false
 	}
-	room.mercenaries = append(room.mercenaries, unit)
-	return true
+	room.mercenaries = append(room.mercenaries, mercenary)
+	return roomUid, true
 }
 
 func (r *GameRooms) Has(uid uint) bool {
@@ -167,7 +171,7 @@ func (r *GameRooms) ConnectionStatusChanged(playerId engine.PlayerId, isOffline 
 	return roomUid, room.UpdateUserConnectionStatus(playerId, isOffline)
 }
 
-func (r *GameRooms) GetAllRoomInfosList() []GameRoomInfo {
+func (r *GameRooms) GetAllRoomInfos() []GameRoomInfo {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	rooms := []GameRoomInfo{}

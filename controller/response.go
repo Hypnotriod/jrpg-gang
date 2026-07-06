@@ -36,6 +36,7 @@ const (
 	DataKeyParticipant  ResponseDataKey = "participant"
 	DataKeyShop         ResponseDataKey = "shop"
 	DataKeyQuests       ResponseDataKey = "quests"
+	DataKeyMercenaries  ResponseDataKey = "mercenaries"
 	DataKeyUsersNumber  ResponseDataKey = "usersNumber"
 	DataKeyEmployment   ResponseDataKey = "employment"
 	DataKeyReward       ResponseDataKey = "reward"

@@ -9,16 +9,17 @@ type GameRoomInfo struct {
 	Uid         uint                  `json:"uid"`
 	Capacity    uint                  `json:"capacity,omitempty"`
 	ScenarioId  engine.GameScenarioId `json:"scenarioId,omitempty"`
-	JoinedUsers []engine.PlayerInfo   `json:"joinedUsers"`
 	Host        engine.PlayerInfo     `json:"host,omitempty"`
-	Inactive    bool                  `json:"inactive,omitempty"`
+	JoinedUsers []engine.PlayerInfo   `json:"joinedUsers"`
 	Mercenaries []engine.PlayerInfo   `json:"mercenaries"`
+	Inactive    bool                  `json:"inactive,omitempty"`
 }
 
 func toInactiveGameRoomInfo(roomUid uint) GameRoomInfo {
 	return GameRoomInfo{
 		Uid:         roomUid,
 		JoinedUsers: []engine.PlayerInfo{},
+		Mercenaries: []engine.PlayerInfo{},
 		Inactive:    true,
 	}
 }
@@ -46,8 +47,10 @@ func toMercenaryInfos(mercenaries []*engine.GameUnit) []engine.PlayerInfo {
 	result := []engine.PlayerInfo{}
 	for i := range mercenaries {
 		result = append(result, engine.PlayerInfo{
-			Class: mercenaries[i].Class,
-			Level: mercenaries[i].Stats.Progress.Level,
+			Nickname: mercenaries[i].Name,
+			Class:    mercenaries[i].Class,
+			Code:     mercenaries[i].Code,
+			Level:    mercenaries[i].Stats.Progress.Level,
 		})
 	}
 	return result

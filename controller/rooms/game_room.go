@@ -9,13 +9,13 @@ type GameRoom struct {
 	Uid         uint                  `json:"uid"`
 	Capacity    uint                  `json:"capacity"`
 	ScenarioId  engine.GameScenarioId `json:"scenarioId"`
-	joinedUsers []users.User
 	host        users.User
+	joinedUsers []users.User
 	mercenaries []*engine.GameUnit
 }
 
 func (r *GameRoom) IsFull() bool {
-	return len(r.joinedUsers) >= int(r.Capacity)-1
+	return len(r.joinedUsers)+len(r.mercenaries) >= int(r.Capacity)-1
 }
 
 func (r *GameRoom) GetPlayerIds() []engine.PlayerId {

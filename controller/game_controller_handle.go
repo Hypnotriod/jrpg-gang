@@ -124,6 +124,8 @@ func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []by
 		return c.handleQuestsStatusRequest(playerId, request, response)
 	case RequestLobbyStatus:
 		return c.handleLobbyStatusRequest(playerId, request, response)
+	case RequestMercenariesStatus:
+		return c.handleMercenariesStatusRequest(playerId, request, response)
 	case RequestUserStatus:
 		return c.handleUserStatusRequest(playerId, request, response)
 	case RequestServerStatus:
@@ -172,6 +174,8 @@ func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []by
 		return c.handleDestroyGameRoomRequest(playerId, request, response)
 	case RequestJoinGameRoom:
 		return c.handleJoinGameRoomRequest(playerId, request, response)
+	case RequestHireMercenary:
+		return c.handleGameRoomHireMercenaryRequest(playerId, request, response)
 	case RequestLeaveGameRoom:
 		return c.handleLeaveGameRoomRequest(playerId, request, response)
 	case RequestStartGame:

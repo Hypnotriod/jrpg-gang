@@ -5,6 +5,7 @@ import (
 	"jrpg-gang/controller/config"
 	"jrpg-gang/controller/employment"
 	"jrpg-gang/controller/gameengines"
+	"jrpg-gang/controller/mercenaries"
 	"jrpg-gang/controller/quests"
 	"jrpg-gang/controller/rooms"
 	"jrpg-gang/controller/shop"
@@ -26,6 +27,7 @@ type GameController struct {
 	engines        *gameengines.GameEngines
 	shop           *shop.Shop
 	quests         *quests.Quests
+	mercenaries    *mercenaries.Mercenaries
 	employment     *employment.Employment
 	configurator   *engine.UnitConfigurator
 	itemsConfig    *config.GameItemsConfig
@@ -43,6 +45,7 @@ func NewGameController(persistance *persistance.Persistance) *GameController {
 	c.engines = gameengines.NewGameEngines()
 	c.shop = shop.NewShop()
 	c.quests = quests.NewQuests()
+	c.mercenaries = mercenaries.NewMercenaries()
 	c.employment = employment.NewEmployment()
 	c.itemsConfig = config.NewGameItemsConfig()
 	c.unitsConfig = config.NewGameUnitsConfig()
@@ -69,6 +72,9 @@ func (c *GameController) init() {
 	}
 	if err := c.quests.LoadItems(QUESTS_CONFIG_PATH, c.itemsConfig); err != nil {
 		log.Fatal("Unable to load quests configuration: ", err)
+	}
+	if err := c.mercenaries.LoadItems(MERCENARIES_CONFIG_PATH, c.itemsConfig); err != nil {
+		log.Fatal("Unable to load mercenaries configuration: ", err)
 	}
 	if err := c.unitsConfig.LoadUnits(UNITS_CONFIG_PATH, c.itemsConfig); err != nil {
 		log.Fatal("Unable to load units configuration: ", err)

@@ -12,6 +12,7 @@ type PlayerInfo struct {
 	Id        PlayerId         `json:"playerId"`
 	Nickname  string           `json:"nickname"`
 	Class     domain.UnitClass `json:"class"`
+	Code      domain.UnitCode  `json:"code"`
 	Level     uint             `json:"level"`
 	UnitUid   uint             `json:"unitUid,omitempty"`
 	IsOffline bool             `json:"isOffline,omitempty"`

@@ -20,18 +20,18 @@ type GameQuests struct {
 }
 
 func NewGameQuests(quests *[]domain.Quest, populateFromDescriptor func(inventory *domain.UnitInventory)) *GameQuests {
-	r := &GameQuests{}
-	r.quests = quests
-	r.rndGen = util.NewRndGen()
+	q := &GameQuests{}
+	q.quests = quests
+	q.rndGen = util.NewRndGen()
 	for i := range *quests {
 		items := (*quests)[i].Reward.Items
 		if items != nil {
 			populateFromDescriptor(items)
-			items.PopulateUids(r.rndGen)
+			items.PopulateUids(q.rndGen)
 			items.UnequipAmmunition()
 		}
 	}
-	return r
+	return q
 }
 
 func (q *GameQuests) GetStatus(unit *domain.Unit) *GameQuestsStatus {

@@ -15,8 +15,8 @@ type Quests struct {
 }
 
 func NewQuests() *Quests {
-	s := &Quests{}
-	return s
+	q := &Quests{}
+	return q
 }
 
 func (q *Quests) LoadItems(path string, itemsConfig *config.GameItemsConfig) error {
