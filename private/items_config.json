@@ -1120,6 +1120,45 @@
         },
         {
             "type": "weapon",
+            "name": "Halberd",
+            "code": "halberd-01",
+            "description": "A war pike stained with old blood, its blade forged to rend armor and marrow alike. It feels alive in the hands of one who walks the twilight between war and nightmare.",
+            "durability": 500,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 8,
+                "physique": 10
+            },
+            "range": {
+                "maximumX": 2,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 75,
+                    "cutting": 32,
+                    "deviation": 3
+                },
+                {
+                    "duration": 2,
+                    "chance": 33,
+                    "bleeding": 8,
+                    "deviation": 2
+                }
+            ],
+            "useCost": {
+                "stamina": 12,
+                "actionPoints": 5
+            },
+            "price": {
+                "coins": 2200
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Wooden Staff",
             "code": "wooden-staff-01",
             "description": "A crooked staff of rough-hewn wood, etched with novice runes in forgotten caverns. It hums with untapped potential, a fragile beacon in shadowed realms where darkness awaits.",
@@ -1149,6 +1188,39 @@
             },
             "price": {
                 "coins": 300
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Pitchfork",
+            "code": "pitchfork-01",
+            "description": "A warped farming fork stained with old blood, its tines whispering of graves and harvests of flesh. It is the kind of tool that turns the desperate into hunters beneath a broken sky.",
+            "durability": 150,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "physique": 2,
+                "agility": 2
+            },
+            "range": {
+                "maximumX": 2,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 65,
+                    "stabbing": 10,
+                    "deviation": 6
+                }
+            ],
+            "useCost": {
+                "stamina": 7,
+                "actionPoints": 4
+            },
+            "price": {
+                "coins": 100
             }
         }
     ],

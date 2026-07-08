@@ -122,8 +122,8 @@ func (e *GameEngine) aiMove(event *GameEvent, unit *GameUnit, position domain.Po
 func (e *GameEngine) aiTryToAttack(event *GameEvent, unit *GameUnit, targets []ReachableTarget) bool {
 	targets = util.Shuffle(e.rndGen, targets)
 	sort.SliceStable(targets, func(a, b int) bool {
-		return util.Abs(targets[a].Target.Position.Y-unit.Position.Y) < util.Abs(targets[b].Target.Position.Y-unit.Position.Y) ||
-			util.Abs(targets[a].Target.Position.X-unit.Position.X) < util.Abs(targets[b].Target.Position.X-unit.Position.X)
+		return util.Abs(targets[a].Target.Position.X-unit.Position.X) < util.Abs(targets[b].Target.Position.X-unit.Position.X) ||
+			util.Abs(targets[a].Target.Position.Y-unit.Position.Y) < util.Abs(targets[b].Target.Position.Y-unit.Position.Y)
 	})
 	sort.SliceStable(targets, func(a, b int) bool {
 		weaponA := unit.Inventory.FindWeapon(targets[a].WeaponUid)

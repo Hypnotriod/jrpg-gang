@@ -157,6 +157,9 @@
             "code": "sorcerer-cloak-03"
         },
         {
+            "code": "pitchfork-01"
+        },
+        {
             "code": "rusty-axe-01"
         },
         {
@@ -185,6 +188,9 @@
         },
         {
             "code": "harpoon-01"
+        },
+        {
+            "code": "halberd-01"
         },
         {
             "code": "bow-02"

@@ -1,5 +1,26 @@
 [
     {
+        "code": "quest-first-blood",
+        "name": "Prove yourself",
+        "description": "Prove yourself by descending into the first floor of a dungeon's shadowed maw and clawing your way back into the world with your precious life intact.",
+        "reward": {
+            "coins": 100,
+            "experience": 250
+        },
+        "activation": {
+            "requirements": {
+                "level": 1
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "first-blood": 1
+                }
+            }
+        }
+    },
+    {
         "code": "quest-kill-5-slimes",
         "name": "Kill 5 Slimes",
         "description": "The Hunters Guild whispers of a wicked ooze festering in the drowned marshes. Five leering slimes must be purged before their corrosive taint devours the land and the shadowed hunger spreads beyond the fetid bog.",

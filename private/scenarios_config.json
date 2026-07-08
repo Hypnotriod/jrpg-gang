@@ -1351,6 +1351,18 @@
                     }
                 ],
                 "experience": 40,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "achievements": {
+                                "first-blood": -1
+                            }
+                        },
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -1416,6 +1428,18 @@
                     }
                 ],
                 "experience": 40,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "achievements": {
+                                "first-blood": -1
+                            }
+                        },
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -1481,6 +1505,18 @@
                     }
                 ],
                 "experience": 40,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "achievements": {
+                                "first-blood": -1
+                            }
+                        },
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -3063,6 +3099,18 @@
                     }
                 ],
                 "experience": 100,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "achievements": {
+                                "first-blood": -1
+                            }
+                        },
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -3144,6 +3192,18 @@
                     }
                 ],
                 "experience": 100,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "achievements": {
+                                "first-blood": -1
+                            }
+                        },
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -3225,6 +3285,18 @@
                     }
                 ],
                 "experience": 100,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "achievements": {
+                                "first-blood": -1
+                            }
+                        },
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -3306,6 +3378,18 @@
                     }
                 ],
                 "experience": 100,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "achievements": {
+                                "first-blood": -1
+                            }
+                        },
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
