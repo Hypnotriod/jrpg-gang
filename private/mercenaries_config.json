@@ -211,6 +211,10 @@
                     "equipped": true
                 },
                 {
+                    "code": "shield-02",
+                    "equipped": true
+                },
+                {
                     "code": "gloves-03",
                     "equipped": true
                 },
