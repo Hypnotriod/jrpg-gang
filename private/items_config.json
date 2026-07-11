@@ -14,7 +14,7 @@
             },
             "damage": [
                 {
-                    "chance": 65,
+                    "chance": 70,
                     "crushing": 8,
                     "deviation": 3
                 }
@@ -299,14 +299,14 @@
             },
             "damage": [
                 {
-                    "chance": 65,
+                    "chance": 70,
                     "cutting": 18,
                     "crushing": 3,
                     "deviation": 2
                 },
                 {
                     "duration": 3,
-                    "chance": 5,
+                    "chance": 10,
                     "bleeding": 3,
                     "deviation": 1
                 }
@@ -335,14 +335,14 @@
             },
             "damage": [
                 {
-                    "chance": 75,
+                    "chance": 80,
                     "cutting": 30,
                     "crushing": 5,
                     "deviation": 3
                 },
                 {
                     "duration": 3,
-                    "chance": 15,
+                    "chance": 20,
                     "bleeding": 3,
                     "deviation": 1
                 }
@@ -375,7 +375,7 @@
             },
             "damage": [
                 {
-                    "chance": 75,
+                    "chance": 80,
                     "cutting": 28,
                     "crushing": 5,
                     "lightning": 18,
@@ -388,7 +388,7 @@
                 },
                 {
                     "duration": 3,
-                    "chance": 15,
+                    "chance": 20,
                     "bleeding": 3,
                     "deviation": 1
                 }
@@ -461,7 +461,7 @@
             },
             "damage": [
                 {
-                    "chance": 65
+                    "chance": 70
                 }
             ],
             "useCost": {
@@ -491,7 +491,7 @@
             },
             "damage": [
                 {
-                    "chance": 75,
+                    "chance": 80,
                     "stabbing": 10
                 }
             ],
@@ -525,7 +525,7 @@
             },
             "damage": [
                 {
-                    "chance": 75,
+                    "chance": 80,
                     "stabbing": 10,
                     "fire": 10
                 },
@@ -565,7 +565,7 @@
             },
             "damage": [
                 {
-                    "chance": 75
+                    "chance": 80
                 }
             ],
             "spread": [
@@ -603,13 +603,13 @@
             },
             "damage": [
                 {
-                    "chance": 65,
+                    "chance": 70,
                     "cutting": 14,
                     "deviation": 2
                 },
                 {
                     "duration": 3,
-                    "chance": 10,
+                    "chance": 15,
                     "bleeding": 5,
                     "deviation": 3
                 }
@@ -639,13 +639,13 @@
             },
             "damage": [
                 {
-                    "chance": 75,
+                    "chance": 80,
                     "cutting": 24,
                     "deviation": 2
                 },
                 {
                     "duration": 3,
-                    "chance": 15,
+                    "chance": 20,
                     "bleeding": 8,
                     "deviation": 3
                 }
@@ -672,7 +672,7 @@
             },
             "damage": [
                 {
-                    "chance": 65
+                    "chance": 70
                 }
             ],
             "range": {
@@ -702,7 +702,7 @@
             },
             "damage": [
                 {
-                    "chance": 75,
+                    "chance": 80,
                     "fear": 5
                 }
             ],
@@ -751,14 +751,14 @@
             },
             "damage": [
                 {
-                    "chance": 60,
+                    "chance": 65,
                     "cutting": 22,
                     "crushing": 2,
                     "deviation": 5
                 },
                 {
                     "duration": 3,
-                    "chance": 5,
+                    "chance": 10,
                     "bleeding": 5,
                     "deviation": 1
                 }
@@ -787,14 +787,14 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "cutting": 32,
                     "crushing": 7,
                     "deviation": 5
                 },
                 {
                     "duration": 3,
-                    "chance": 15,
+                    "chance": 20,
                     "bleeding": 5
                 }
             ],
@@ -826,7 +826,7 @@
             },
             "damage": [
                 {
-                    "chance": 75,
+                    "chance": 80,
                     "cutting": 34,
                     "crushing": 10,
                     "fire": 12,
@@ -908,7 +908,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 60,
                     "cutting": 2,
                     "crushing": 27,
                     "deviation": 5
@@ -947,7 +947,7 @@
             },
             "damage": [
                 {
-                    "chance": 55,
+                    "chance": 65,
                     "cutting": 24,
                     "crushing": 4,
                     "deviation": 2
@@ -987,7 +987,7 @@
             },
             "damage": [
                 {
-                    "chance": 60,
+                    "chance": 65,
                     "stabbing": 5,
                     "crushing": 27,
                     "deviation": 2
@@ -1026,7 +1026,7 @@
             },
             "damage": [
                 {
-                    "chance": 65,
+                    "chance": 70,
                     "stabbing": 12,
                     "crushing": 18,
                     "deviation": 2
@@ -1065,7 +1065,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "cutting": 28,
                     "deviation": 7
                 },
@@ -1177,7 +1177,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "crushing": 14,
                     "deviation": 4
                 }
@@ -1210,7 +1210,7 @@
             },
             "damage": [
                 {
-                    "chance": 65,
+                    "chance": 70,
                     "stabbing": 10,
                     "deviation": 6
                 }
@@ -1425,13 +1425,13 @@
             ],
             "damage": [
                 {
-                    "chance": 75,
+                    "chance": 80,
                     "lightning": 30,
                     "deviation": 5
                 },
                 {
                     "duration": 3,
-                    "chance": 15,
+                    "chance": 25,
                     "lightning": 8,
                     "deviation": 4
                 }
@@ -1514,12 +1514,12 @@
             },
             "damage": [
                 {
-                    "chance": 65,
+                    "chance": 70,
                     "lightning": 17,
                     "deviation": 5
                 },
                 {
-                    "chance": 15,
+                    "chance": 20,
                     "duration": 3,
                     "lightning": 3,
                     "deviation": 2
@@ -1545,12 +1545,12 @@
             },
             "damage": [
                 {
-                    "chance": 75,
+                    "chance": 80,
                     "fire": 25,
                     "deviation": 7
                 },
                 {
-                    "chance": 25,
+                    "chance": 33,
                     "duration": 3,
                     "fire": 5,
                     "deviation": 2
