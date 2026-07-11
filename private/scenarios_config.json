@@ -1834,7 +1834,7 @@
                     ],
                     "unitDescriptor": [
                         {
-                            "code": "goblin-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1842,7 +1842,7 @@
                             }
                         },
                         {
-                            "code": "goblin-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1915,7 +1915,7 @@
                     ],
                     "unitDescriptor": [
                         {
-                            "code": "goblin-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1923,7 +1923,7 @@
                             }
                         },
                         {
-                            "code": "goblin-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1939,7 +1939,7 @@
                             }
                         },
                         {
-                            "code": "goblin-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -1996,7 +1996,7 @@
                     ],
                     "unitDescriptor": [
                         {
-                            "code": "goblin-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -2004,7 +2004,7 @@
                             }
                         },
                         {
-                            "code": "goblin-01",
+                            "code": "zombie-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -2093,7 +2093,7 @@
                             }
                         },
                         {
-                            "code": "zombie-01",
+                            "code": "goblin-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -2181,7 +2181,7 @@
                     ],
                     "unitDescriptor": [
                         {
-                            "code": "zombie-01",
+                            "code": "goblin-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -2189,7 +2189,7 @@
                             }
                         },
                         {
-                            "code": "zombie-01",
+                            "code": "goblin-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
