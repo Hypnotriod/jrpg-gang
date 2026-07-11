@@ -247,19 +247,10 @@ func (e *GameEngine) applyExperience(corpses []*GameUnit, expDistribution map[ui
 	totalExperience := util.Reduce(rightCorpses, 0, func(acc uint, corpse *GameUnit) uint {
 		return acc + corpse.Stats.Progress.Experience
 	})
-	unitExperience := totalExperience / uint(len(leftUnits))
-	totalExperience -= unitExperience * uint(len(leftUnits))
 	for _, unit := range leftUnits {
-		unit.Stats.Progress.Experience += unitExperience
+		unit.Stats.Progress.Experience += totalExperience
 		if expDistribution != nil {
-			expDistribution[unit.Uid] = unitExperience
-		}
-		if totalExperience > 0 {
-			unit.Stats.Progress.Experience += 1
-			if expDistribution != nil {
-				expDistribution[unit.Uid]++
-			}
-			totalExperience--
+			expDistribution[unit.Uid] = totalExperience
 		}
 	}
 }
