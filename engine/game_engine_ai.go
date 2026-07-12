@@ -152,7 +152,7 @@ func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target
 	e.onUseItemOnTarget(unit.Uid, result)
 	unit.Inventory.UpdateItemsState()
 	target.Inventory.UpdateEquipmentByWeareout()
-	e.onUnitCompleteAction(nil)
+	e.onUnitCompleteAction(result)
 	unitAction := NewGameUnitActionResult()
 	unitAction.Action = domain.Action{
 		Action:    domain.ActionUse,
