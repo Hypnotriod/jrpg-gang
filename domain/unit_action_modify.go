@@ -18,17 +18,21 @@ func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]Un
 			target.Modification = append(target.Modification, imp)
 			temporalModification = append(temporalModification, imp)
 		} else {
-			target.ApplyRecovery(imp.Recovery)
+			target.ApplyRecovery(&imp.Recovery)
 			instantRecovery = append(instantRecovery, imp.Recovery)
 		}
 	}
 	return instantRecovery, temporalModification
 }
 
-func (u *Unit) ApplyRecovery(recovery UnitRecovery) {
+func (u *Unit) ApplyRecovery(recovery *UnitRecovery) {
 	modification := u.TotalModification()
 	attributes := modification.BaseAttributes
 	attributes.Accumulate(u.Stats.BaseAttributes)
+	if recovery.Deviation != 0 {
+		recovery.EnchanceAll(u.PickDeviation(recovery.Deviation))
+	}
+	recovery.Deviation = 0
 	u.ReduceDamageImpact(recovery.Damage)
 	u.State.Accumulate(recovery.UnitState)
 	u.State.Saturate(attributes)

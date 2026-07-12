@@ -1249,6 +1249,7 @@
                 {
                     "recovery": {
                         "health": 25,
+                        "stamina": 25,
                         "deviation": 5
                     }
                 }
@@ -1256,7 +1257,7 @@
         },
         {
             "type": "magic",
-            "name": "Rg Treatment",
+            "name": "Lg Treatment",
             "description": "A ritual of blood and will, mending grievous wounds and staving off the cold embrace of death.",
             "code": "magic-health-02",
             "price": {
@@ -1278,63 +1279,6 @@
                 {
                     "recovery": {
                         "health": 50,
-                        "deviation": 5
-                    }
-                }
-            ]
-        },
-        {
-            "type": "magic",
-            "name": "Sm Stamina",
-            "description": "A fleeting surge of vigor, summoned from forgotten spirits. Muscles burn with unnatural strength.",
-            "code": "magic-stamina-01",
-            "price": {
-                "coins": 300
-            },
-            "requirements": {
-                "intelligence": 8
-            },
-            "range": {
-                "maximumX": 10,
-                "maximumY": 10
-            },
-            "useCost": {
-                "mana": 10,
-                "actionPoints": 4
-            },
-            "damage": [],
-            "modification": [
-                {
-                    "recovery": {
-                        "stamina": 25,
-                        "deviation": 5
-                    }
-                }
-            ]
-        },
-        {
-            "type": "magic",
-            "name": "Rg Stamina",
-            "description": "A chant that fills weary limbs with the relentless energy of the abyss. Endurance for the damned.",
-            "code": "magic-stamina-02",
-            "price": {
-                "coins": 600
-            },
-            "requirements": {
-                "intelligence": 10
-            },
-            "range": {
-                "maximumX": 10,
-                "maximumY": 10
-            },
-            "useCost": {
-                "mana": 20,
-                "actionPoints": 5
-            },
-            "damage": [],
-            "modification": [
-                {
-                    "recovery": {
                         "stamina": 50,
                         "deviation": 5
                     }
@@ -1401,7 +1345,7 @@
             "code": "magic-lighting-strike-01",
             "description": "A terrible channeling of jagged lightning that splits the sky and scorches flesh. The storm's wrath made manifest, spreading ruin in twin arcs of divine fury.",
             "price": {
-                "coins": 1000,
+                "coins": 1800,
                 "ruby": 10
             },
             "requirements": {
@@ -2192,9 +2136,9 @@
                         "manaDrain": 2
                     },
                     "damage": {
-                        "lightning": 2,
-                        "fire": 2,
-                        "cold": 2
+                        "lightning": 3,
+                        "fire": 3,
+                        "cold": 3
                     }
                 }
             ]
@@ -2230,9 +2174,9 @@
                         "manaDrain": 2
                     },
                     "damage": {
-                        "lightning": 3,
-                        "fire": 3,
-                        "cold": 3
+                        "lightning": 4,
+                        "fire": 4,
+                        "cold": 4
                     }
                 }
             ]
@@ -2400,6 +2344,9 @@
                     "recovery": {
                         "health": 2,
                         "mana": 3
+                    },
+                    "damage": {
+                        "lightning": 3
                     }
                 }
             ]
@@ -2410,7 +2357,7 @@
             "description": "A cloak of twilight shadow, worn by those who have tasted true power. Its weave shifts subtly in candlelight, as if the fabric itself draws from an unseen dimension beyond our own.",
             "code": "sorcerer-cloak-02",
             "price": {
-                "coins": 1800
+                "coins": 1400
             },
             "durability": 500,
             "slot": "body",
@@ -2436,9 +2383,9 @@
                         "mana": 5
                     },
                     "damage": {
-                        "lightning": 2,
-                        "fire": 2,
-                        "cold": 2
+                        "lightning": 5,
+                        "fire": 5,
+                        "cold": 5
                     }
                 }
             ]
@@ -2449,7 +2396,7 @@
             "description": "A garment of woven starlight and shadow, worn only by those who have mastered the eldritch arts. Its hem trails wisps of spectral flame, and those who look upon it too long swear they see impossible geometries folded within its folds.",
             "code": "sorcerer-cloak-03",
             "price": {
-                "coins": 3500,
+                "coins": 2500,
                 "ruby": 10
             },
             "durability": 700,
@@ -2483,9 +2430,9 @@
                         "mana": 10
                     },
                     "damage": {
-                        "lightning": 4,
-                        "fire": 4,
-                        "cold": 4
+                        "lightning": 8,
+                        "fire": 8,
+                        "cold": 8
                     }
                 }
             ]
@@ -2728,12 +2675,12 @@
             "damage": [
                 {
                     "duration": 3,
-                    "poison": 15,
-                    "deviation": 1
+                    "poison": 25,
+                    "deviation": 5
                 }
             ],
             "price": {
-                "coins": 25
+                "coins": 45
             },
             "useCost": {
                 "actionPoints": 5

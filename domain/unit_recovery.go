@@ -5,6 +5,7 @@ import "jrpg-gang/util"
 type UnitRecovery struct {
 	UnitState
 	Damage
+	Deviation float32 `json:"deviation,omitempty"`
 }
 
 func (r *UnitRecovery) Normalize() {

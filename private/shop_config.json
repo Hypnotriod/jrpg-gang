@@ -223,25 +223,19 @@
             "code": "magic-health-01"
         },
         {
-            "code": "magic-stamina-01"
-        },
-        {
             "code": "magic-health-02"
         },
         {
-            "code": "magic-stamina-02"
-        },
-        {
             "code": "magic-shield-01"
-        },
-        {
-            "code": "magic-blessing-01"
         },
         {
             "code": "magic-exhaustion-01"
         },
         {
             "code": "magic-mana-drain-01"
+        },
+        {
+            "code": "magic-blessing-01"
         },
         {
             "code": "magic-lighting-strike-01"
