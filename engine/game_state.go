@@ -70,7 +70,7 @@ func (s *GameState) sortActiveUnitsQueue(units []*GameUnit) {
 		unitAInitiative := units[a].TotalInitiative()
 		unitBInitiative := units[b].TotalInitiative()
 		if unitAInitiative == unitBInitiative {
-			return units[a].Faction < units[b].Faction
+			return units[a].Uid < units[b].Uid
 		}
 		return unitAInitiative > unitBInitiative
 	})
