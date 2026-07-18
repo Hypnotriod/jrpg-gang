@@ -416,6 +416,31 @@
         }
     },
     {
+        "code": "quest-kill-5-trolls",
+        "name": "Kill 5 Trolls",
+        "description": "The Adventurers Guild calls for the slaughter of five northern trolls before their brute strength tears through the mountain passes. These ancient brutes stalk the snowbound wastes with hunger and malice, leaving broken roads and bloodied villages in their wake. Bring down their hulking forms, and the frontier may yet endure one more winter.",
+        "reward": {
+            "coins": 2000,
+            "ruby": 5,
+            "experience": 7000
+        },
+        "activation": {
+            "requirements": {
+                "level": 6,
+                "quests": {
+                    "quest-kill-10-goblins": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-5-trolls": 5
+                }
+            }
+        }
+    },
+    {
         "code": "quest-find-artifact-06",
         "name": "Find Scroll of Eternal Darkness",
         "description": "The Scroll of Eternal Darkness awaits in the abyssal heart of the Forgotten Ruins. A parchment inscribed with incantations that summon perpetual night. The Adventurers Guild commands you to seize it from the fifth level's eternal gloom, lest its power extinguishes the light forever.",
@@ -445,16 +470,13 @@
         "name": "Defeat the Grim Reaper",
         "description": "Descend into the deepest chasm of the Forgotten Ruins, where cold shadow and the scent of old grave earth cling to every step. There the Grim Reaper waits beneath a veil of black mist, a deathless wraith whose scythe rends both body and soul. Steel your courage and strike true, for only by shattering its endless harvest can the land be spared another night of endless mourning.",
         "reward": {
-            "coins": 2000,
+            "coins": 2500,
             "ruby": 10,
-            "experience": 7000
+            "experience": 8000
         },
         "activation": {
             "requirements": {
-                "level": 7,
-                "quests": {
-                    "quest-kill-10-skeletons": "completed"
-                }
+                "level": 7
             }
         },
         "completion": {
@@ -504,10 +526,7 @@
         },
         "activation": {
             "requirements": {
-                "level": 8,
-                "quests": {
-                    "quest-kill-10-goblins": "completed"
-                }
+                "level": 8
             }
         },
         "completion": {

@@ -409,7 +409,39 @@
                     "equipped": true
                 }
             ]
-        }
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 15
+            },
+            {
+                "weight": 1,
+                "coins": 25
+            },
+            {
+                "weight": 1,
+                "ruby": 1
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-5-trolls": "active"
+                    },
+                    "achievements": {
+                        "kill-5-trolls": -5
+                    }
+                },
+                "achievements": {
+                    "kill-5-trolls": 1
+                }
+            }
+        ]
     },
     {
         "name": "Nasty Goblin",
