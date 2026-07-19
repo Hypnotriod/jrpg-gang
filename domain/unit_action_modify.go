@@ -29,10 +29,6 @@ func (u *Unit) ApplyRecovery(recovery *UnitRecovery) {
 	modification := u.TotalModification()
 	attributes := modification.BaseAttributes
 	attributes.Accumulate(u.Stats.BaseAttributes)
-	if recovery.Deviation != 0 {
-		recovery.EnchanceAll(u.PickDeviation(recovery.Deviation))
-	}
-	recovery.Deviation = 0
 	u.ReduceDamageImpact(recovery.Damage)
 	u.State.Accumulate(recovery.UnitState)
 	u.State.Saturate(attributes)

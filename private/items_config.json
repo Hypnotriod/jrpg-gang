@@ -1247,10 +1247,10 @@
             "damage": [],
             "modification": [
                 {
+                    "deviation": 5,
                     "recovery": {
                         "health": 25,
-                        "stamina": 25,
-                        "deviation": 5
+                        "stamina": 25
                     }
                 }
             ]
@@ -1277,10 +1277,10 @@
             "damage": [],
             "modification": [
                 {
+                    "deviation": 5,
                     "recovery": {
                         "health": 50,
-                        "stamina": 50,
-                        "deviation": 5
+                        "stamina": 50
                     }
                 }
             ]
@@ -2448,17 +2448,17 @@
             "canBeThrownAway": true,
             "modification": [
                 {
+                    "deviation": 5,
                     "recovery": {
-                        "health": 50,
-                        "deviation": 5
+                        "health": 50
                     }
                 },
                 {
                     "chance": 50,
                     "duration": 5,
+                    "deviation": 1,
                     "recovery": {
-                        "health": 2,
-                        "deviation": 1
+                        "health": 2
                     }
                 }
             ],
@@ -2478,17 +2478,17 @@
             "canBeThrownAway": true,
             "modification": [
                 {
+                    "deviation": 10,
                     "recovery": {
-                        "health": 100,
-                        "deviation": 10
+                        "health": 100
                     }
                 },
                 {
                     "chance": 50,
                     "duration": 5,
+                    "deviation": 2,
                     "recovery": {
-                        "health": 5,
-                        "deviation": 2
+                        "health": 5
                     }
                 }
             ],
@@ -2508,17 +2508,17 @@
             "canBeThrownAway": true,
             "modification": [
                 {
+                    "deviation": 5,
                     "recovery": {
-                        "stamina": 50,
-                        "deviation": 5
+                        "stamina": 50
                     }
                 },
                 {
                     "chance": 50,
                     "duration": 5,
+                    "deviation": 1,
                     "recovery": {
-                        "stamina": 2,
-                        "deviation": 1
+                        "stamina": 2
                     }
                 }
             ],
@@ -2538,17 +2538,17 @@
             "canBeThrownAway": true,
             "modification": [
                 {
+                    "deviation": 10,
                     "recovery": {
-                        "stamina": 100,
-                        "deviation": 10
+                        "stamina": 100
                     }
                 },
                 {
                     "chance": 50,
                     "duration": 5,
+                    "deviation": 2,
                     "recovery": {
-                        "stamina": 5,
-                        "deviation": 2
+                        "stamina": 5
                     }
                 }
             ],
@@ -2568,17 +2568,17 @@
             "canBeThrownAway": true,
             "modification": [
                 {
+                    "deviation": 5,
                     "recovery": {
-                        "mana": 50,
-                        "deviation": 5
+                        "mana": 50
                     }
                 },
                 {
                     "chance": 50,
                     "duration": 5,
+                    "deviation": 1,
                     "recovery": {
-                        "mana": 2,
-                        "deviation": 1
+                        "mana": 2
                     }
                 }
             ],
@@ -2598,17 +2598,17 @@
             "canBeThrownAway": true,
             "modification": [
                 {
+                    "deviation": 10,
                     "recovery": {
-                        "mana": 100,
-                        "deviation": 10
+                        "mana": 100
                     }
                 },
                 {
                     "chance": 50,
                     "duration": 5,
+                    "deviation": 2,
                     "recovery": {
-                        "mana": 5,
-                        "deviation": 2
+                        "mana": 5
                     }
                 }
             ],
