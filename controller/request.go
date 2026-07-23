@@ -114,11 +114,18 @@ func parseRequest(r []byte) *Request {
 	r = r[8:]
 	last = len(r) - 1
 	n := 0
+	inQuotes := false
 	for i, c := range r {
-		if c == '{' {
-			n++
-		} else if c == '}' {
-			n--
+		if c == '"' && (i == 0 || r[i-1] != '\\') {
+			inQuotes = !inQuotes
+		}
+		if !inQuotes {
+			switch c {
+			case '{':
+				n++
+			case '}':
+				n--
+			}
 		}
 		if i == last {
 			return nil
