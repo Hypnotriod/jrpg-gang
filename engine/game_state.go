@@ -3,6 +3,7 @@ package engine
 import (
 	"jrpg-gang/domain"
 	"jrpg-gang/util"
+	"slices"
 	"sort"
 )
 
@@ -80,7 +81,7 @@ func (s *GameState) PopStunnedUnitFromQueue(unitUid uint) {
 	s.ActiveUnitsQueue = util.Filter(s.ActiveUnitsQueue, func(uid uint) bool {
 		return unitUid != uid
 	})
-	if !util.Any(s.InactiveUnits, func(uid uint) bool {
+	if !slices.ContainsFunc(s.InactiveUnits, func(uid uint) bool {
 		return unitUid == uid
 	}) {
 		s.InactiveUnits = append(s.InactiveUnits, unitUid)
@@ -120,5 +121,5 @@ func (s *GameState) HasActiveUnits() bool {
 }
 
 func (s *GameState) isUnitActive(uid uint) bool {
-	return util.Contains(s.ActiveUnitsQueue, uid)
+	return slices.Contains(s.ActiveUnitsQueue, uid)
 }

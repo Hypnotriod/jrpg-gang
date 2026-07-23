@@ -23,6 +23,6 @@ type Item struct {
 	Type            ItemType  `json:"type"`
 	CanBeThrownAway bool      `json:"canBeThrownAway,omitempty"`
 	CanBeSold       bool      `json:"canBeSold,omitempty"`
-	Price           UnitBooty `json:"price,omitempty"`
+	Price           UnitBooty `json:"price"`
 	Description     string    `json:"description,omitempty"`
 }

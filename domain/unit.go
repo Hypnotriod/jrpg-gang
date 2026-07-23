@@ -2,6 +2,7 @@ package domain
 
 import (
 	"jrpg-gang/util"
+	"maps"
 	"math/rand"
 	"time"
 
@@ -50,9 +51,9 @@ func (u *Unit) Clone() *Unit {
 	r.Modification = []UnitModificationImpact{}
 	r.Modification = append(r.Modification, u.Modification...)
 	r.Inventory = *u.Inventory.Clone()
-	r.Slots = util.CloneMap(u.Slots)
-	r.Achievements = util.CloneMap(u.Achievements)
-	r.Quests = util.CloneMap(u.Quests)
+	r.Slots = maps.Clone(u.Slots)
+	r.Achievements = maps.Clone(u.Achievements)
+	r.Quests = maps.Clone(u.Quests)
 	r.Position = u.Position
 	r.Description = u.Description
 	return r

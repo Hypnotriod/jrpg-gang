@@ -5,6 +5,8 @@ import (
 	"jrpg-gang/engine"
 	"jrpg-gang/persistance/model"
 	"jrpg-gang/util"
+	"maps"
+	"slices"
 	"sync"
 )
 
@@ -43,7 +45,7 @@ func (u *Users) GetByIds(playerIds []engine.PlayerId) []User {
 	defer u.mu.RUnlock()
 	result := []User{}
 	for _, user := range u.users {
-		if util.Contains(playerIds, user.Id) {
+		if slices.Contains(playerIds, user.Id) {
 			result = append(result, *user)
 		}
 	}
@@ -147,8 +149,8 @@ func (u *Users) UpdateWithUnitOnGameComplete(playerId engine.PlayerId, unit *dom
 	}
 	user.Unit.Stats.Progress = unit.Stats.Progress
 	user.Unit.Booty.Accumulate(unit.Booty)
-	user.Unit.Achievements = util.CloneMap(unit.Achievements)
-	user.Unit.Quests = util.CloneMap(unit.Quests)
+	user.Unit.Achievements = maps.Clone(unit.Achievements)
+	user.Unit.Quests = maps.Clone(unit.Quests)
 	user.Unit.Inventory = *unit.Inventory.Clone()
 	user.Unit.Inventory.PopulateUids(user.RndGen)
 	user.Unit.PlayerInfo = nil

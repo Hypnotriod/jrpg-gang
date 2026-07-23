@@ -1,5 +1,7 @@
 package engine
 
+import "slices"
+
 type CellType int
 
 const (
@@ -27,10 +29,5 @@ func (c *Cell) CanPlaceUnit() bool {
 }
 
 func (c *Cell) ContainsFaction(faction GameUnitFaction) bool {
-	for _, v := range c.Factions {
-		if v == faction {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(c.Factions, faction)
 }

@@ -1,14 +1,5 @@
 package util
 
-func Contains[T Ordered](values []T, value T) bool {
-	for _, v := range values {
-		if v == value {
-			return true
-		}
-	}
-	return false
-}
-
 func IndexOf[T Ordered](values []T, value T) int {
 	for i, v := range values {
 		if v == value {
@@ -16,17 +7,6 @@ func IndexOf[T Ordered](values []T, value T) int {
 		}
 	}
 	return -1
-}
-
-func Clone[T any](values []T) []T {
-	accumulator := make([]T, 0, len(values))
-	return append(accumulator, values...)
-}
-
-func ClonePtr[T any](values *[]T) *[]T {
-	accumulator := make([]T, 0, len(*values))
-	accumulator = append(accumulator, *values...)
-	return &accumulator
 }
 
 func Shuffle[T any](gen *RndGen, values []T) []T {
@@ -53,15 +33,6 @@ func FindPtr[T any](values []*T, predicate func(value *T) bool) *T {
 		}
 	}
 	return nil
-}
-
-func Any[T any](values []T, predicate func(value T) bool) bool {
-	for i := range values {
-		if predicate(values[i]) {
-			return true
-		}
-	}
-	return false
 }
 
 func Every[T any](values []T, predicate func(value T) bool) bool {

@@ -1,5 +1,7 @@
 package domain
 
+import "maps"
+
 type UnitQuestStatus string
 
 const (
@@ -25,9 +27,7 @@ func (a UnitQuests) Complete(questId QuestCode) {
 }
 
 func (a UnitQuests) Set(quests UnitQuests) {
-	for questId, value := range quests {
-		a[questId] = value
-	}
+	maps.Copy(a, quests)
 }
 
 func (a UnitQuests) Test(quests UnitQuests) bool {

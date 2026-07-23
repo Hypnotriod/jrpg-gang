@@ -4,6 +4,7 @@ import (
 	"jrpg-gang/domain"
 	"jrpg-gang/util"
 	"math/rand"
+	"slices"
 	"sort"
 )
 
@@ -29,7 +30,7 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 		lenY := len((*matrix)[x])
 		yOffset := rand.Intn(lenY)
 		position.X = x
-		for y := 0; y < lenY; y++ {
+		for y := range lenY {
 			position.Y = (yOffset + y) % lenY
 			if e.battlefield().CanMoveUnitTo(unit, position) {
 				e.aiMove(event, unit, position)
@@ -58,7 +59,7 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 func (e *GameEngine) aiTryToApproachTheEnemy(event *GameEvent, unit *GameUnit) bool {
 	bounds := e.getApproachBounds(unit)
 	yShift := [...]int{0, -1, 1, -2, 2, -3, 3, -4, 4, -5, 5}
-	targets := util.Shuffle(e.rndGen, util.Clone(e.battlefield().Units))
+	targets := util.Shuffle(e.rndGen, slices.Clone(e.battlefield().Units))
 	for _, target := range targets {
 		if target.Faction == unit.Faction {
 			continue

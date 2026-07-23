@@ -7,6 +7,7 @@ import (
 	"jrpg-gang/engine"
 	"jrpg-gang/util"
 	"net/http"
+	"slices"
 	"sync"
 	"time"
 
@@ -102,7 +103,7 @@ func (h *Hub) Start() error {
 func (h *Hub) checkOrigin(allowedOrigins []string) func(r *http.Request) bool {
 	return func(r *http.Request) bool {
 		origin := r.Header.Get(HeaderOrigin)
-		return util.Any(allowedOrigins, func(o string) bool {
+		return slices.ContainsFunc(allowedOrigins, func(o string) bool {
 			return o == "*" || o == origin
 		})
 	}

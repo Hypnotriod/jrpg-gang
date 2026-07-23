@@ -1,6 +1,8 @@
 package domain
 
-import "jrpg-gang/util"
+import (
+	"maps"
+)
 
 type QuestCode string
 
@@ -14,10 +16,10 @@ func (t *QuestTrigger) Clone() *QuestTrigger {
 	res := &QuestTrigger{}
 	res.Requirements = t.Requirements
 	if t.Achievements != nil {
-		res.Achievements = util.CloneMap(t.Achievements)
+		res.Achievements = maps.Clone(t.Achievements)
 	}
 	if t.Quests != nil {
-		res.Quests = util.CloneMap(t.Quests)
+		res.Quests = maps.Clone(t.Quests)
 	}
 	return res
 }
@@ -34,7 +36,7 @@ func (r *QuestReward) Clone() *QuestReward {
 	res.UnitBooty = r.UnitBooty
 	res.Experience = r.Experience
 	if r.Achievements != nil {
-		res.Achievements = util.CloneMap(r.Achievements)
+		res.Achievements = maps.Clone(r.Achievements)
 	}
 	if r.Items != nil {
 		res.Items = r.Items.Clone()

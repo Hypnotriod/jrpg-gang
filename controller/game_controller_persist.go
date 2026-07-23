@@ -4,6 +4,7 @@ import (
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
 	"jrpg-gang/persistance/model"
+	"maps"
 	"time"
 )
 
@@ -33,8 +34,6 @@ func (c *GameController) persistJobStatus(user *users.User, jobStatus engine.Pla
 		Code:           jobStatus.Code,
 	}
 	jobStatusModel.Countdown = map[engine.PlayerJobCode]time.Time{}
-	for k, v := range jobStatus.Countdown {
-		jobStatusModel.Countdown[k] = v
-	}
+	maps.Copy(jobStatusModel.Countdown, jobStatus.Countdown)
 	return c.persistance.UpdateJobStatus(jobStatusModel)
 }

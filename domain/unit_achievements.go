@@ -1,13 +1,13 @@
 package domain
 
+import "maps"
+
 type UnitAchievement string
 
 type UnitAchievements map[UnitAchievement]int
 
 func (a UnitAchievements) Set(achievements UnitAchievements) {
-	for achievement, value := range achievements {
-		a[achievement] = value
-	}
+	maps.Copy(a, achievements)
 }
 
 func (a UnitAchievements) Merge(achievements UnitAchievements) {

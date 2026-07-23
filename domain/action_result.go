@@ -1,6 +1,6 @@
 package domain
 
-import "jrpg-gang/util"
+import "slices"
 
 type ActionResultType string
 
@@ -39,7 +39,7 @@ type ActionResult struct {
 }
 
 func (r *ActionResult) WithStun(unitUid uint) bool {
-	return util.Any(r.InstantDamage[unitUid], func(damage Damage) bool {
+	return slices.ContainsFunc(r.InstantDamage[unitUid], func(damage Damage) bool {
 		return damage.WithStun
 	})
 }

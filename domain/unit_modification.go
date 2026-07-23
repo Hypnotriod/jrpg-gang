@@ -1,11 +1,11 @@
 package domain
 
 type UnitModification struct {
-	BaseAttributes UnitBaseAttributes `json:"baseAttributes,omitempty"`
-	Attributes     UnitAttributes     `json:"attributes,omitempty"`
-	Resistance     UnitResistance     `json:"resistance,omitempty"`
-	Damage         Damage             `json:"damage,omitempty"`
-	Recovery       UnitRecovery       `json:"recovery,omitempty"`
+	BaseAttributes UnitBaseAttributes `json:"baseAttributes,omitzero"`
+	Attributes     UnitAttributes     `json:"attributes,omitzero"`
+	Resistance     UnitResistance     `json:"resistance,omitzero"`
+	Damage         Damage             `json:"damage,omitzero"`
+	Recovery       UnitRecovery       `json:"recovery,omitzero"`
 }
 
 func (m *UnitModification) Accumulate(modification UnitModification) {

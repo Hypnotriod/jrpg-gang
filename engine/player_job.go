@@ -2,6 +2,7 @@ package engine
 
 import (
 	"jrpg-gang/domain"
+	"maps"
 	"time"
 )
 
@@ -24,7 +25,7 @@ type PlayerJob struct {
 type PlayerJobStatus struct {
 	IsInProgress   bool                        `json:"isInProgress,omitempty"`
 	IsComplete     bool                        `json:"isComplete,omitempty"`
-	CompletionTime time.Time                   `json:"completionTime,omitempty"`
+	CompletionTime time.Time                   `json:"completionTime"`
 	Code           PlayerJobCode               `json:"code,omitempty"`
 	Countdown      map[PlayerJobCode]time.Time `json:"countdown"`
 }
@@ -57,9 +58,7 @@ func (s *PlayerJobStatus) Clone() *PlayerJobStatus {
 		CompletionTime: s.CompletionTime,
 		Countdown:      map[PlayerJobCode]time.Time{},
 	}
-	for k, v := range s.Countdown {
-		status.Countdown[k] = v
-	}
+	maps.Copy(status.Countdown, s.Countdown)
 	return status
 }
 

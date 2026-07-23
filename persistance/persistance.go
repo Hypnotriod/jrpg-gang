@@ -13,7 +13,7 @@ import (
 )
 
 type PersistanceConfig struct {
-	MongoDBConfig              MongoDBConfig `json:"mongoDBConfig,omitempty"`
+	MongoDBConfig              MongoDBConfig `json:"mongoDBConfig"`
 	PersistanceCacheTimeoutMin int64
 }
 
