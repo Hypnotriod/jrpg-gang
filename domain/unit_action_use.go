@@ -50,7 +50,7 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 		}
 		damage = ammunition.EnchanceDamageImpact(damage)
 	}
-	instDmg, tmpImp := u.Attack(target, damage)
+	target, instDmg, tmpImp := u.Attack(target, damage)
 	if !action.UseCostReduced {
 		u.State.Reduce(weapon.UseCost)
 		action.UseCostReduced = true
@@ -76,7 +76,7 @@ func (u *Unit) useMagicOnTarget(action *ActionResult, target *Unit, magic *Magic
 		action.UseCostReduced = true
 	}
 	if len(magic.Damage) != 0 {
-		instDmg, tmpImp := u.Attack(target, magic.Damage)
+		target, instDmg, tmpImp := u.Attack(target, magic.Damage)
 		action.InstantDamage[target.Uid] = append(action.InstantDamage[target.Uid], instDmg...)
 		action.TemporalDamage[target.Uid] = append(action.TemporalDamage[target.Uid], tmpImp...)
 	}
@@ -104,7 +104,7 @@ func (u *Unit) useDisposableOnTarget(action *ActionResult, target *Unit, disposa
 		action.UseCostReduced = true
 	}
 	if len(disposable.Damage) != 0 {
-		instDmg, tmpImp := u.Attack(target, disposable.Damage)
+		target, instDmg, tmpImp := u.Attack(target, disposable.Damage)
 		action.InstantDamage[target.Uid] = append(action.InstantDamage[target.Uid], instDmg...)
 		action.TemporalDamage[target.Uid] = append(action.TemporalDamage[target.Uid], tmpImp...)
 	}

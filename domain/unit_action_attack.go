@@ -2,7 +2,7 @@ package domain
 
 import "jrpg-gang/util"
 
-func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageImpact) {
+func (u *Unit) Attack(target *Unit, damage []DamageImpact) (*Unit, []Damage, []DamageImpact) {
 	wasStunned := target.State.IsStunned
 	instantDamage := []Damage{}
 	temporalDamage := []DamageImpact{}
@@ -49,7 +49,7 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) ([]Damage, []DamageIm
 	if wasStunned && len(instantDamage) != 0 {
 		target.State.IsStunned = false
 	}
-	return instantDamage, temporalDamage
+	return target, instantDamage, temporalDamage
 }
 
 func (u *Unit) applyInstantDamage(damage Damage) Damage {
