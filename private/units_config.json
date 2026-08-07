@@ -1078,7 +1078,7 @@
                 "experience": 120
             },
             "baseAttributes": {
-                "health": 60,
+                "health": 120,
                 "stamina": 100,
                 "actionPoints": 9
             },
@@ -1087,14 +1087,14 @@
                 "physique": 5,
                 "agility": 3,
                 "endurance": 6,
-                "intelligence": 4,
+                "intelligence": 8,
                 "initiative": 5,
                 "luck": 5
             },
             "resistance": {
                 "stabbing": 5,
                 "cutting": 5,
-                "crushing": 5,
+                "crushing": 0,
                 "fire": 100,
                 "cold": 0,
                 "lightning": 10,
