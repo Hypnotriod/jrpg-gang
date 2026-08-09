@@ -68,8 +68,8 @@ func (s *GameState) UpdateUnitsQueue(units []*GameUnit) {
 
 func (s *GameState) sortActiveUnitsQueue(units []*GameUnit) {
 	sort.SliceStable(units, func(a, b int) bool {
-		unitAInitiative := units[a].TotalInitiative()
-		unitBInitiative := units[b].TotalInitiative()
+		unitAInitiative := units[a].TurnOrderInitiative()
+		unitBInitiative := units[b].TurnOrderInitiative()
 		if unitAInitiative == unitBInitiative {
 			return units[a].Uid < units[b].Uid
 		}

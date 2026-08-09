@@ -65,7 +65,7 @@ func (u *Unit) ClearImpact() {
 }
 
 func (u *Unit) TotalAgility() float32 {
-	var agility float32 = u.Stats.Attributes.Agility
+	agility := u.Stats.Attributes.Agility
 	for _, ench := range u.Modification {
 		agility += ench.Attributes.Agility
 	}
@@ -78,7 +78,7 @@ func (u *Unit) TotalAgility() float32 {
 }
 
 func (u *Unit) TotalPhysique() float32 {
-	var physique float32 = u.Stats.Attributes.Physique
+	physique := u.Stats.Attributes.Physique
 	for _, ench := range u.Modification {
 		physique += ench.Attributes.Physique
 	}
@@ -91,7 +91,7 @@ func (u *Unit) TotalPhysique() float32 {
 }
 
 func (u *Unit) TotalIntelligence() float32 {
-	var intelligence float32 = u.Stats.Attributes.Intelligence
+	intelligence := u.Stats.Attributes.Intelligence
 	for _, ench := range u.Modification {
 		intelligence += ench.Attributes.Intelligence
 	}
@@ -104,7 +104,7 @@ func (u *Unit) TotalIntelligence() float32 {
 }
 
 func (u *Unit) TotalLuck() float32 {
-	var luck float32 = u.Stats.Attributes.Luck
+	luck := u.Stats.Attributes.Luck
 	for _, ench := range u.Modification {
 		luck += ench.Attributes.Luck
 	}
@@ -117,8 +117,8 @@ func (u *Unit) TotalLuck() float32 {
 }
 
 func (u *Unit) TotalActionPoints() float32 {
-	var actionPoints float32 = u.Stats.BaseAttributes.ActionPoints
-	actionPoints += float32(uint(u.Stats.Attributes.Initiative) / 10)
+	actionPoints := u.Stats.BaseAttributes.ActionPoints
+	actionPoints += float32(uint(u.TotalInitiative() * INITIATIVE_TO_ACTION_POINTS_FACTOR))
 	for _, ench := range u.Modification {
 		actionPoints += ench.BaseAttributes.ActionPoints
 	}
@@ -131,13 +131,7 @@ func (u *Unit) TotalActionPoints() float32 {
 }
 
 func (u *Unit) TotalInitiative() float32 {
-	if u.State.WaitingOrder != 0 {
-		return -float32(u.State.WaitingOrder + 1)
-	}
-	if u.State.IsStunned {
-		return -1
-	}
-	var initiative float32 = u.Stats.Attributes.Initiative
+	initiative := u.Stats.Attributes.Initiative
 	for _, ench := range u.Modification {
 		initiative += ench.Attributes.Initiative
 	}
@@ -149,8 +143,18 @@ func (u *Unit) TotalInitiative() float32 {
 	return util.Max(initiative, 0)
 }
 
+func (u *Unit) TurnOrderInitiative() float32 {
+	if u.State.WaitingOrder != 0 {
+		return -float32(u.State.WaitingOrder + 1)
+	}
+	if u.State.IsStunned {
+		return -1
+	}
+	return u.TotalInitiative()
+}
+
 func (u *Unit) TotalUnitModification() *UnitModification {
-	var modification *UnitModification = &UnitModification{}
+	modification := &UnitModification{}
 	for _, ench := range u.Modification {
 		modification.Accumulate(ench.UnitModification)
 	}
@@ -158,7 +162,7 @@ func (u *Unit) TotalUnitModification() *UnitModification {
 }
 
 func (u *Unit) TotalEquipmentModification() *UnitModification {
-	var modification *UnitModification = &UnitModification{}
+	modification := &UnitModification{}
 	for _, item := range u.Inventory.GetEquipment(true) {
 		for _, ench := range item.Modification {
 			modification.Accumulate(ench)
