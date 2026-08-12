@@ -43,8 +43,8 @@ func (b *UnitBooty) TakeAShare(participants int) UnitBooty {
 }
 
 func (b *UnitBooty) Normalize() {
-	b.Coins = util.Max(b.Coins, 0)
-	b.Ruby = util.Max(b.Ruby, 0)
+	b.Coins = max(b.Coins, 0)
+	b.Ruby = max(b.Ruby, 0)
 }
 
 func (b *UnitBooty) Check(booty UnitBooty, quantity uint) bool {

@@ -149,9 +149,9 @@ func (b *Battlefield) UpdateCellsFactions() {
 	rightBound := len(b.Matrix)
 	for _, unit := range b.Units {
 		if unit.Faction == GameUnitFactionLeft {
-			leftBound = util.Max(unit.Position.X, leftBound)
+			leftBound = max(unit.Position.X, leftBound)
 		} else {
-			rightBound = util.Min(unit.Position.X, rightBound)
+			rightBound = min(unit.Position.X, rightBound)
 		}
 	}
 	for x := range b.Matrix {

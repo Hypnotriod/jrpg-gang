@@ -1,7 +1,5 @@
 package domain
 
-import "jrpg-gang/util"
-
 type UnitResistance struct {
 	Damage `bson:",inline"`
 }
@@ -20,10 +18,10 @@ func (r *UnitResistance) AccumulatePhysical(value float32) {
 }
 
 func (r *UnitResistance) PhysicalAbsorption(damage Damage) float32 {
-	return util.Min(r.Stabbing, damage.Stabbing) +
-		util.Min(r.Cutting, damage.Cutting) +
-		util.Min(r.Crushing, damage.Crushing) +
-		util.Min(r.Fire, damage.Fire) +
-		util.Min(r.Cold, damage.Cold) +
-		util.Min(r.Lightning, damage.Lightning)
+	return min(r.Stabbing, damage.Stabbing) +
+		min(r.Cutting, damage.Cutting) +
+		min(r.Crushing, damage.Crushing) +
+		min(r.Fire, damage.Fire) +
+		min(r.Cold, damage.Cold) +
+		min(r.Lightning, damage.Lightning)
 }

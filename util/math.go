@@ -11,20 +11,6 @@ func MultiplyWithRounding[T Float](a, b T) T {
 	return T(uint64((a * b) + 0.5))
 }
 
-func Max[T Number](a, b T) T {
-	if a > b {
-		return a
-	}
-	return b
-}
-
-func Min[T Number](a, b T) T {
-	if a < b {
-		return a
-	}
-	return b
-}
-
 func Abs[T Number](v T) T {
 	if v < 0 {
 		return -v

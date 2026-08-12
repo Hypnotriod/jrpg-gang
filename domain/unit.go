@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"jrpg-gang/util"
 	"maps"
 	"math/rand"
 	"time"
@@ -74,7 +73,7 @@ func (u *Unit) TotalAgility() float32 {
 			agility += ench.Attributes.Agility
 		}
 	}
-	return util.Max(agility, 0)
+	return max(agility, 0)
 }
 
 func (u *Unit) TotalPhysique() float32 {
@@ -87,7 +86,7 @@ func (u *Unit) TotalPhysique() float32 {
 			physique += ench.Attributes.Physique
 		}
 	}
-	return util.Max(physique, 0)
+	return max(physique, 0)
 }
 
 func (u *Unit) TotalIntelligence() float32 {
@@ -100,7 +99,7 @@ func (u *Unit) TotalIntelligence() float32 {
 			intelligence += ench.Attributes.Intelligence
 		}
 	}
-	return util.Max(intelligence, 0)
+	return max(intelligence, 0)
 }
 
 func (u *Unit) TotalLuck() float32 {
@@ -113,7 +112,7 @@ func (u *Unit) TotalLuck() float32 {
 			luck += ench.Attributes.Luck
 		}
 	}
-	return util.Max(luck, 0)
+	return max(luck, 0)
 }
 
 func (u *Unit) TotalActionPoints() float32 {
@@ -127,7 +126,7 @@ func (u *Unit) TotalActionPoints() float32 {
 			actionPoints += ench.BaseAttributes.ActionPoints
 		}
 	}
-	return util.Max(actionPoints, MINIMUM_BASE_ATTRIBUTE_ACTION_POINTS)
+	return max(actionPoints, MINIMUM_BASE_ATTRIBUTE_ACTION_POINTS)
 }
 
 func (u *Unit) TotalInitiative() float32 {
@@ -140,7 +139,7 @@ func (u *Unit) TotalInitiative() float32 {
 			initiative += ench.Attributes.Initiative
 		}
 	}
-	return util.Max(initiative, 0)
+	return max(initiative, 0)
 }
 
 func (u *Unit) TurnOrderInitiative() float32 {
@@ -278,34 +277,34 @@ func (u *Unit) ClearWaitingOrder() {
 
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
 	chance := (u.TotalLuck() - u.State.Stress) - (target.TotalLuck() - target.State.Stress)
-	return util.Max(chance, MINIMUM_CHANCE)
+	return max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateAttackChance(target *Unit, damage DamageImpact) float32 {
 	if target.State.IsStunned {
 		chance := (u.TotalAgility() - u.State.Stress) + target.State.Stress + damage.Chance
-		return util.Max(chance, MINIMUM_CHANCE)
+		return max(chance, MINIMUM_CHANCE)
 	}
 	chance := (u.TotalAgility() - u.State.Stress) - (target.TotalAgility() - target.State.Stress) + damage.Chance
-	return util.Max(chance, MINIMUM_CHANCE)
+	return max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateModificationChance(modification UnitModificationImpact) float32 {
 	chance := (u.TotalIntelligence() - u.State.Stress) + modification.Chance
-	return util.Max(chance, MINIMUM_CHANCE)
+	return max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateStunChance(target *Unit, damage Damage) float32 {
 	chance := (damage.PhysicalDamage() - u.State.Stress) - (target.TotalPhysique() - target.State.Stress)
-	return util.Max(chance, MINIMUM_CHANCE)
+	return max(chance, MINIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateRetreatChance() float32 {
 	chance := u.State.Stress
-	return util.Max(chance, 0)
+	return max(chance, 0)
 }
 
 func (u *Unit) CalculateCriticalMissChance() float32 {
 	chance := u.State.Stress
-	return util.Max(chance, 0)
+	return max(chance, 0)
 }

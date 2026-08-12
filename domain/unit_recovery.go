@@ -9,10 +9,10 @@ type UnitRecovery struct {
 
 func (r *UnitRecovery) Normalize() {
 	r.Damage.Normalize()
-	r.Health = util.Max(r.Health, 0)
-	r.Stamina = util.Max(r.Stamina, 0)
-	r.Mana = util.Max(r.Mana, 0)
-	r.Stress = util.Max(r.Stress, 0)
+	r.Health = max(r.Health, 0)
+	r.Stamina = max(r.Stamina, 0)
+	r.Mana = max(r.Mana, 0)
+	r.Stress = max(r.Stress, 0)
 }
 
 func (r *UnitRecovery) MultiplyAll(factor float32) {

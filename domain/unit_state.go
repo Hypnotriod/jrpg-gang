@@ -20,10 +20,10 @@ func (s *UnitState) RestoreDefault(limit UnitBaseAttributes) {
 }
 
 func (s *UnitState) RestoreToHalf(limit UnitBaseAttributes) {
-	s.Stress = util.Max(s.Stress-HALF_CHANCE, s.Stress)
-	s.Health = util.Max(util.Round(limit.Health/2), s.Health)
-	s.Mana = util.Max(util.Round(limit.Mana/2), s.Mana)
-	s.Stamina = util.Max(util.Round(limit.Stamina/2), s.Stamina)
+	s.Stress = max(s.Stress-HALF_CHANCE, s.Stress)
+	s.Health = max(util.Round(limit.Health/2), s.Health)
+	s.Mana = max(util.Round(limit.Mana/2), s.Mana)
+	s.Stamina = max(util.Round(limit.Stamina/2), s.Stamina)
 }
 
 func (s *UnitState) Accumulate(state UnitState) {
@@ -33,10 +33,10 @@ func (s *UnitState) Accumulate(state UnitState) {
 
 func (s *UnitState) Normalize() {
 	s.UnitBaseAttributes.Normalize()
-	s.Stress = util.Max(s.Stress, 0)
+	s.Stress = max(s.Stress, 0)
 }
 
 func (s *UnitState) Saturate(limit UnitBaseAttributes) {
 	s.UnitBaseAttributes.Saturate(limit)
-	s.Stress = util.Min(MAXIMUM_CHANCE, s.Stress)
+	s.Stress = min(MAXIMUM_CHANCE, s.Stress)
 }

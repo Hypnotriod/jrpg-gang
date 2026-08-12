@@ -39,7 +39,7 @@ func (t *GameEngineTimer) SecondsLeft() float32 {
 	}
 	result := (t.duration - time.Since(t.startTime)).Seconds()
 	result = util.Round(result)
-	result = util.Max(result, 0)
+	result = max(result, 0)
 	return float32(result)
 }
 

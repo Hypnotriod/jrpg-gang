@@ -26,17 +26,17 @@ func (a *UnitBaseAttributes) Reduce(attributes UnitBaseAttributes) {
 }
 
 func (a *UnitBaseAttributes) Saturate(limit UnitBaseAttributes) {
-	a.Health = util.Min(a.Health, limit.Health)
-	a.Mana = util.Min(a.Mana, limit.Mana)
-	a.Stamina = util.Min(a.Stamina, limit.Stamina)
-	a.ActionPoints = util.Min(a.ActionPoints, limit.ActionPoints)
+	a.Health = min(a.Health, limit.Health)
+	a.Mana = min(a.Mana, limit.Mana)
+	a.Stamina = min(a.Stamina, limit.Stamina)
+	a.ActionPoints = min(a.ActionPoints, limit.ActionPoints)
 }
 
 func (a *UnitBaseAttributes) Normalize() {
-	a.Health = util.Max(a.Health, MINIMUM_BASE_ATTRIBUTE_HEALTH)
-	a.Mana = util.Max(a.Mana, MINIMUM_BASE_ATTRIBUTE_MANA)
-	a.Stamina = util.Max(a.Stamina, MINIMUM_BASE_ATTRIBUTE_STAMINA)
-	a.ActionPoints = util.Max(a.ActionPoints, MINIMUM_BASE_ATTRIBUTE_ACTION_POINTS)
+	a.Health = max(a.Health, MINIMUM_BASE_ATTRIBUTE_HEALTH)
+	a.Mana = max(a.Mana, MINIMUM_BASE_ATTRIBUTE_MANA)
+	a.Stamina = max(a.Stamina, MINIMUM_BASE_ATTRIBUTE_STAMINA)
+	a.ActionPoints = max(a.ActionPoints, MINIMUM_BASE_ATTRIBUTE_ACTION_POINTS)
 }
 
 func (a *UnitBaseAttributes) MultiplyAll(factor float32) {

@@ -141,19 +141,19 @@ func (d *Damage) EnchanceAll(value float32) {
 }
 
 func (d *Damage) Normalize() {
-	d.Stabbing = util.Max(d.Stabbing, 0)
-	d.Cutting = util.Max(d.Cutting, 0)
-	d.Crushing = util.Max(d.Crushing, 0)
-	d.Fire = util.Max(d.Fire, 0)
-	d.Cold = util.Max(d.Cold, 0)
-	d.Lightning = util.Max(d.Lightning, 0)
-	d.Poison = util.Max(d.Poison, 0)
-	d.Exhaustion = util.Max(d.Exhaustion, 0)
-	d.ManaDrain = util.Max(d.ManaDrain, 0)
-	d.Bleeding = util.Max(d.Bleeding, 0)
-	d.Fear = util.Max(d.Fear, 0)
-	d.Curse = util.Max(d.Curse, 0)
-	d.Madness = util.Max(d.Madness, 0)
+	d.Stabbing = max(d.Stabbing, 0)
+	d.Cutting = max(d.Cutting, 0)
+	d.Crushing = max(d.Crushing, 0)
+	d.Fire = max(d.Fire, 0)
+	d.Cold = max(d.Cold, 0)
+	d.Lightning = max(d.Lightning, 0)
+	d.Poison = max(d.Poison, 0)
+	d.Exhaustion = max(d.Exhaustion, 0)
+	d.ManaDrain = max(d.ManaDrain, 0)
+	d.Bleeding = max(d.Bleeding, 0)
+	d.Fear = max(d.Fear, 0)
+	d.Curse = max(d.Curse, 0)
+	d.Madness = max(d.Madness, 0)
 }
 
 func (d *Damage) Apply(state *UnitState) {
@@ -162,7 +162,7 @@ func (d *Damage) Apply(state *UnitState) {
 	state.Mana -= d.ManaDrain
 	state.Stress += d.Fear + d.Curse + d.Madness
 
-	state.Health = util.Max(state.Health, 0)
-	state.Stamina = util.Max(state.Stamina, 0)
-	state.Mana = util.Max(state.Mana, 0)
+	state.Health = max(state.Health, 0)
+	state.Stamina = max(state.Stamina, 0)
+	state.Mana = max(state.Mana, 0)
 }

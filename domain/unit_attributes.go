@@ -25,13 +25,13 @@ func (a *UnitAttributes) Accumulate(attributes UnitAttributes) {
 }
 
 func (a *UnitAttributes) Normalize() {
-	a.Strength = util.Max(a.Strength, 0)
-	a.Physique = util.Max(a.Physique, 0)
-	a.Agility = util.Max(a.Agility, 0)
-	a.Endurance = util.Max(a.Endurance, 0)
-	a.Intelligence = util.Max(a.Intelligence, 0)
-	a.Initiative = util.Max(a.Initiative, 0)
-	a.Luck = util.Max(a.Luck, 0)
+	a.Strength = max(a.Strength, 0)
+	a.Physique = max(a.Physique, 0)
+	a.Agility = max(a.Agility, 0)
+	a.Endurance = max(a.Endurance, 0)
+	a.Intelligence = max(a.Intelligence, 0)
+	a.Initiative = max(a.Initiative, 0)
+	a.Luck = max(a.Luck, 0)
 }
 
 func (a *UnitAttributes) MultiplyAll(factor float32) {
