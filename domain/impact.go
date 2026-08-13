@@ -7,11 +7,10 @@ type Impact struct {
 }
 
 func (i *Impact) EnchanceChance(chance float32) {
-	if i.Chance != 0 {
-		i.Chance += chance
-		if i.Chance < MINIMUM_CHANCE {
-			i.Chance = MINIMUM_CHANCE
-		}
+	if i.Chance == 0 && chance < 0 {
+		i.Chance = max(FULL_CHANCE+chance, MINIMUM_CHANCE)
+	} else if i.Chance != 0 {
+		i.Chance = max(i.Chance+chance, MINIMUM_CHANCE)
 	}
 }
 

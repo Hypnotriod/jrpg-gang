@@ -38,5 +38,5 @@ func (s *UnitState) Normalize() {
 
 func (s *UnitState) Saturate(limit UnitBaseAttributes) {
 	s.UnitBaseAttributes.Saturate(limit)
-	s.Stress = min(MAXIMUM_CHANCE, s.Stress)
+	s.Stress = min(FULL_CHANCE, s.Stress)
 }

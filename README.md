@@ -73,13 +73,13 @@ Hosted at: [hypnotriod.github.io/jrpg-gang-html-client](https://hypnotriod.githu
 
 ## Math:
 * `Physical Damage / Resistance`: **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **Lightning**
-* `Attack chance`: (**unit agility** - **unit stress**) - (**target agility** - **target stress**) + **base chance** | minimum `1`
-* `Attack chance` when `Stunned`: (**unit agility** - **unit stress**) + **target stress** + **base chance** | minimum `1`
-* `Critical attack chance`: (**unit luck** - **unit stress**) - (**target luck** - **target stress**) | minimum `1`
-* `Modification chance`: (**unit intelligence** - **unit stress**) + **base chance** | minimum `1`
-* `Stun Chance`: (**physical damage** - **unit stress**) - (**target physique** - **target stress**) | minimum `1`
-* `Retreat Chance`: **unit stress** | minimum `0`
-* `Critical Miss Chance`: **unit stress** | minimum `0`
+* `Attack chance`: (**unit agility** - **unit stress**) - (**target agility** - **target stress**) + **base chance** | minimum `1`, maximum `95`
+* `Attack chance` when `Stunned`: (**unit agility** - **unit stress**) + **target stress** + **base chance** | minimum `1`, maximum `95`
+* `Critical attack chance`: (**unit luck** - **unit stress**) - (**target luck** - **target stress**) | minimum `1`, maximum `95`
+* `Modification chance`: (**unit intelligence** - **unit stress**) + **base chance** | minimum `1`, maximum `100`
+* `Stun Chance`: (**physical damage** - **unit stress**) - (**target physique** - **target stress**) | minimum `1`, maximum `95`
+* `Retreat Chance`: **unit stress** | minimum `0`, maximum `95`
+* `Critical Miss Chance`: **unit stress** | minimum `0`, maximum `95`
 
 ## Game Phases
 * `Prepare Unit Phase` *(prepareUnit)* - Unit can be placed in any available position before the battle starts. Only `Equip` and `Unequip` actions can be performed during this phase.

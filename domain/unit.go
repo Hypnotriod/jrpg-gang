@@ -215,7 +215,7 @@ func (u *Unit) CheckUseCost(useCost UnitBaseAttributes) bool {
 }
 
 func (u *Unit) CheckRandomChance(percents float32) bool {
-	rnd := u.Rng().Int() % int(MAXIMUM_CHANCE)
+	rnd := u.Rng().Int() % int(FULL_CHANCE)
 	return float32(rnd) < percents
 }
 
@@ -277,34 +277,34 @@ func (u *Unit) ClearWaitingOrder() {
 
 func (u *Unit) CalculateCritilalAttackChance(target *Unit) float32 {
 	chance := (u.TotalLuck() - u.State.Stress) - (target.TotalLuck() - target.State.Stress)
-	return max(chance, MINIMUM_CHANCE)
+	return min(max(chance, MINIMUM_CHANCE), MAXIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateAttackChance(target *Unit, damage DamageImpact) float32 {
 	if target.State.IsStunned {
 		chance := (u.TotalAgility() - u.State.Stress) + target.State.Stress + damage.Chance
-		return max(chance, MINIMUM_CHANCE)
+		return min(max(chance, MINIMUM_CHANCE), MAXIMUM_CHANCE)
 	}
 	chance := (u.TotalAgility() - u.State.Stress) - (target.TotalAgility() - target.State.Stress) + damage.Chance
-	return max(chance, MINIMUM_CHANCE)
+	return min(max(chance, MINIMUM_CHANCE), MAXIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateModificationChance(modification UnitModificationImpact) float32 {
 	chance := (u.TotalIntelligence() - u.State.Stress) + modification.Chance
-	return max(chance, MINIMUM_CHANCE)
+	return min(max(chance, MINIMUM_CHANCE), FULL_CHANCE)
 }
 
 func (u *Unit) CalculateStunChance(target *Unit, damage Damage) float32 {
 	chance := (damage.PhysicalDamage() - u.State.Stress) - (target.TotalPhysique() - target.State.Stress)
-	return max(chance, MINIMUM_CHANCE)
+	return min(max(chance, MINIMUM_CHANCE), MAXIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateRetreatChance() float32 {
 	chance := u.State.Stress
-	return max(chance, 0)
+	return min(max(chance, 0), MAXIMUM_CHANCE)
 }
 
 func (u *Unit) CalculateCriticalMissChance() float32 {
 	chance := u.State.Stress
-	return max(chance, 0)
+	return min(max(chance, 0), MAXIMUM_CHANCE)
 }
