@@ -492,7 +492,8 @@
             "damage": [
                 {
                     "chance": 80,
-                    "stabbing": 10
+                    "stabbing": 10,
+                    "deviation": 6
                 }
             ],
             "useCost": {
@@ -527,7 +528,8 @@
                 {
                     "chance": 80,
                     "stabbing": 10,
-                    "fire": 10
+                    "fire": 12,
+                    "deviation": 2
                 },
                 {
                     "duration": 1,
@@ -565,7 +567,9 @@
             },
             "damage": [
                 {
-                    "chance": 80
+                    "chance": 80,
+                    "stabbing": 4,
+                    "deviation": 2
                 }
             ],
             "spread": [
@@ -703,7 +707,8 @@
             "damage": [
                 {
                     "chance": 80,
-                    "fear": 5
+                    "fear": 5,
+                    "deviation": 3
                 }
             ],
             "modification": [
@@ -2780,13 +2785,13 @@
             "damage": [
                 {
                     "stabbing": 24,
-                    "deviation": 2
+                    "deviation": 3
                 },
                 {
                     "duration": 3,
                     "chance": 15,
                     "bleeding": 3,
-                    "deviation": 1
+                    "deviation": 2
                 }
             ],
             "price": {
@@ -2805,14 +2810,14 @@
                 {
                     "stabbing": 20,
                     "fire": 14,
-                    "deviation": 2
+                    "deviation": 3
                 },
                 {
                     "duration": 3,
                     "chance": 15,
                     "bleeding": 3,
                     "fire": 3,
-                    "deviation": 1
+                    "deviation": 2
                 }
             ],
             "price": {
@@ -2831,14 +2836,14 @@
                 {
                     "stabbing": 20,
                     "cold": 14,
-                    "deviation": 2
+                    "deviation": 3
                 },
                 {
                     "duration": 3,
                     "chance": 15,
                     "bleeding": 3,
                     "cold": 3,
-                    "deviation": 1
+                    "deviation": 2
                 }
             ],
             "price": {
@@ -2857,14 +2862,14 @@
                 {
                     "stabbing": 20,
                     "lightning": 14,
-                    "deviation": 2
+                    "deviation": 3
                 },
                 {
                     "duration": 3,
                     "chance": 15,
                     "bleeding": 3,
                     "lightning": 3,
-                    "deviation": 1
+                    "deviation": 2
                 }
             ],
             "price": {
@@ -2882,13 +2887,13 @@
             "damage": [
                 {
                     "poison": 24,
-                    "deviation": 2
+                    "deviation": 3
                 },
                 {
                     "duration": 3,
                     "chance": 15,
                     "poison": 5,
-                    "deviation": 1
+                    "deviation": 2
                 }
             ],
             "price": {
@@ -2906,13 +2911,13 @@
             "damage": [
                 {
                     "fire": 24,
-                    "deviation": 2
+                    "deviation": 3
                 },
                 {
                     "duration": 3,
                     "chance": 15,
                     "fire": 5,
-                    "deviation": 1
+                    "deviation": 2
                 }
             ],
             "price": {
@@ -2954,13 +2959,13 @@
             "damage": [
                 {
                     "cold": 24,
-                    "deviation": 2
+                    "deviation": 3
                 },
                 {
                     "duration": 3,
                     "chance": 15,
                     "cold": 5,
-                    "deviation": 1
+                    "deviation": 2
                 }
             ],
             "price": {
@@ -2978,13 +2983,13 @@
             "damage": [
                 {
                     "lightning": 24,
-                    "deviation": 2
+                    "deviation": 3
                 },
                 {
                     "duration": 3,
                     "chance": 15,
                     "lightning": 5,
-                    "deviation": 1
+                    "deviation": 2
                 }
             ],
             "price": {

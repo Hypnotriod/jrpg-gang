@@ -14,7 +14,7 @@ type Ammunition struct {
 	Damage   []DamageImpact `json:"damage,omitempty"`
 }
 
-func (a *Ammunition) EnchanceDamageImpact(damage []DamageImpact) []DamageImpact {
+func (a *Ammunition) EnchanceDamageImpact(damage []DamageImpact, pickDeviation func(deviation float32) float32) []DamageImpact {
 	instantDamageEnchanced := false
 	instantDamage := DamageImpact{}
 	temporalDamage := []DamageImpact{}
@@ -23,9 +23,13 @@ func (a *Ammunition) EnchanceDamageImpact(damage []DamageImpact) []DamageImpact 
 		if imp.Duration == 0 {
 			instantDamage.Accumulate(imp.Damage)
 			instantDamage.Chance += imp.Chance
+			instantDamage.Deviation += imp.Deviation
 		} else {
 			temporalDamage = append(temporalDamage, imp)
 		}
+	}
+	if instantDamage.Deviation != 0 {
+		instantDamage.EnchanceAll(pickDeviation(instantDamage.Deviation))
 	}
 	for _, imp := range damage {
 		if imp.Duration == 0 {

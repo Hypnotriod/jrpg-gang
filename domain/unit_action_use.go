@@ -48,7 +48,7 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 			weapon.IncreaseWearout()
 			action.WearoutIncreased = true
 		}
-		damage = ammunition.EnchanceDamageImpact(damage)
+		damage = ammunition.EnchanceDamageImpact(damage, u.PickDeviation)
 	}
 	target, instDmg, tmpImp := u.Attack(target, damage)
 	if !action.UseCostReduced {
