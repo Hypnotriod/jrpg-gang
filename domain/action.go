@@ -38,10 +38,10 @@ const (
 
 type Action struct {
 	Action    AtionType      `json:"action"`
-	Uid       uint           `json:"uid,omitempty"`
-	TargetUid uint           `json:"targetUid,omitempty"`
-	ItemUid   uint           `json:"itemUid,omitempty"`
-	Quantity  uint           `json:"quantity,omitempty"`
+	Uid       uint           `json:"uid,omitzero"`
+	TargetUid uint           `json:"targetUid,omitzero"`
+	ItemUid   uint           `json:"itemUid,omitzero"`
+	Quantity  uint           `json:"quantity,omitzero"`
 	Property  ActionProperty `json:"property,omitempty"`
 	QuestCode QuestCode      `json:"questCode,omitempty"`
 	Position  *Position      `json:"position,omitempty"`

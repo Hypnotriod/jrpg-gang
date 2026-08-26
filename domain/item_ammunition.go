@@ -8,9 +8,9 @@ const (
 
 type Ammunition struct {
 	Item
-	Equipped bool           `json:"equipped,omitempty"`
+	Equipped bool           `json:"equipped,omitzero"`
 	Kind     AmmunitionKind `json:"kind"`
-	Quantity uint           `json:"quantity,omitempty"`
+	Quantity uint           `json:"quantity,omitzero"`
 	Damage   []DamageImpact `json:"damage,omitempty"`
 }
 

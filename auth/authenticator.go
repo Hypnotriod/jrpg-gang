@@ -35,7 +35,7 @@ const (
 type AuthenticationStatus struct {
 	IsAuthenticated bool                `json:"isAuthenticated"`
 	Token           AuthenticationToken `json:"token,omitempty"`
-	IsNewPlayer     bool                `json:"isNewPlayer,omitempty"`
+	IsNewPlayer     bool                `json:"isNewPlayer,omitzero"`
 }
 
 type AuthenticationHandler interface {

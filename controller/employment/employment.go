@@ -12,9 +12,9 @@ import (
 
 type EmploymentStatus struct {
 	CurrentJob    *engine.PlayerJob  `json:"currentJob,omitempty"`
-	IsInProgress  bool               `json:"isInProgress,omitempty"`
-	IsComplete    bool               `json:"isComplete,omitempty"`
-	TimeLeft      float32            `json:"timeLeft,omitempty"`
+	IsInProgress  bool               `json:"isInProgress,omitzero"`
+	IsComplete    bool               `json:"isComplete,omitzero"`
+	TimeLeft      float32            `json:"timeLeft,omitzero"`
 	AvailableJobs []engine.PlayerJob `json:"availableJobs"`
 }
 

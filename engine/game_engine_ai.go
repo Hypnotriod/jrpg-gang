@@ -46,7 +46,7 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 			}
 		}
 	} else {
-		for x := len(*matrix) - 1; x >= 0; x-- {
+		for x := range slices.Backward(*matrix) {
 			if testColumn(x) {
 				break
 			}

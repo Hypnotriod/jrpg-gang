@@ -7,12 +7,12 @@ import (
 
 type GameRoomInfo struct {
 	Uid         uint                  `json:"uid"`
-	Capacity    uint                  `json:"capacity,omitempty"`
+	Capacity    uint                  `json:"capacity,omitzero"`
 	ScenarioId  engine.GameScenarioId `json:"scenarioId,omitempty"`
 	Host        engine.PlayerInfo     `json:"host"`
 	JoinedUsers []engine.PlayerInfo   `json:"joinedUsers"`
 	Mercenaries []engine.PlayerInfo   `json:"mercenaries"`
-	Inactive    bool                  `json:"inactive,omitempty"`
+	Inactive    bool                  `json:"inactive,omitzero"`
 }
 
 func toInactiveGameRoomInfo(roomUid uint) GameRoomInfo {

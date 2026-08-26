@@ -2,7 +2,7 @@ package domain
 
 type Disposable struct {
 	Item
-	Quantity     uint                     `json:"quantity,omitempty"`
+	Quantity     uint                     `json:"quantity,omitzero"`
 	Range        ActionRange              `json:"range"`
 	Spread       []Position               `json:"spread,omitempty"`
 	UseCost      UnitBaseAttributes       `json:"useCost"`

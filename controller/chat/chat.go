@@ -33,7 +33,7 @@ type ChatMessage struct {
 
 type ChatParticipant struct {
 	Nickname             string `json:"nickname"`
-	Unavailable          bool   `json:"unavailable,omitempty"`
+	Unavailable          bool   `json:"unavailable,omitzero"`
 	lastMessageTimestamp time.Time
 	messageRate          float64
 }

@@ -23,7 +23,7 @@ type GoogleOauth2UserInfo struct {
 }
 
 func (a *Authenticator) HandleGoogleAuth2(w http.ResponseWriter, r *http.Request) {
-	state := a.rndGen.MakeUUID()
+	state := util.ShortUUID()
 	ip := util.GetIP(r)
 	a.stateCache.Set(state, ip, ttlcache.DefaultTTL)
 	url := a.googleSso.AuthCodeURL(state)

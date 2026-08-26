@@ -48,7 +48,7 @@ func NewGameUnitActionResult() *GameUnitActionResult {
 type GameEvent struct {
 	Phase              GamePhase             `json:"phase"`
 	NextPhase          GamePhase             `json:"nextPhase"`
-	PhaseTimeout       float32               `json:"phaseTimeout,omitempty"`
+	PhaseTimeout       float32               `json:"phaseTimeout,omitzero"`
 	State              *GameState            `json:"state"`
 	Spot               *Spot                 `json:"spot"`
 	PlayersInfo        []PlayerInfo          `json:"players"`

@@ -5,11 +5,11 @@ import (
 )
 
 type ActionRange struct {
-	MinimumX int `json:"minimumX,omitempty"`
-	MaximumX int `json:"maximumX,omitempty"`
-	MinimumY int `json:"minimumY,omitempty"`
-	MaximumY int `json:"maximumY,omitempty"`
-	Radius   int `json:"radius,omitempty"`
+	MinimumX int `json:"minimumX,omitzero"`
+	MaximumX int `json:"maximumX,omitzero"`
+	MinimumY int `json:"minimumY,omitzero"`
+	MaximumY int `json:"maximumY,omitzero"`
+	Radius   int `json:"radius,omitzero"`
 }
 
 func (r *ActionRange) Has() bool {

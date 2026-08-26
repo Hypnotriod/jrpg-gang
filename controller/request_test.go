@@ -35,24 +35,24 @@ func TestParseRequestManual(t *testing.T) {
 
 func BenchmarkParseRequestManual(b *testing.B) {
 	requestRaw := []byte(requestStr)
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+
+	for b.Loop() {
 		parseRequest(requestRaw)
 	}
 }
 
 func BenchmarkParseRequestRegexp(b *testing.B) {
 	typeIdRegexp := regexp.MustCompile(`({"type":"[a-zA-Z0-9]+)|((,"id":")[a-zA-Z0-9]+)`)
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+
+	for b.Loop() {
 		parseRequestRegexp(requestStr, typeIdRegexp)
 	}
 }
 
 func BenchmarkParseRequestJson(b *testing.B) {
 	requestRaw := []byte(requestStr)
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+
+	for b.Loop() {
 		parseRequestData(&Request{}, requestRaw)
 	}
 }

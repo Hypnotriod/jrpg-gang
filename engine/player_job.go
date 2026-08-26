@@ -23,8 +23,8 @@ type PlayerJob struct {
 }
 
 type PlayerJobStatus struct {
-	IsInProgress   bool                        `json:"isInProgress,omitempty"`
-	IsComplete     bool                        `json:"isComplete,omitempty"`
+	IsInProgress   bool                        `json:"isInProgress,omitzero"`
+	IsComplete     bool                        `json:"isComplete,omitzero"`
 	CompletionTime time.Time                   `json:"completionTime"`
 	Code           PlayerJobCode               `json:"code,omitempty"`
 	Countdown      map[PlayerJobCode]time.Time `json:"countdown"`

@@ -6,8 +6,8 @@ import (
 
 type UnitInventoryDescriptor struct {
 	Code     ItemCode `json:"code" bson:"code"`
-	Quantity uint     `json:"quantity,omitempty" bson:"quantity,omitempty"`
-	Equipped bool     `json:"equipped,omitempty" bson:"equipped,omitempty"`
+	Quantity uint     `json:"quantity,omitzero" bson:"quantity,omitempty"`
+	Equipped bool     `json:"equipped,omitzero" bson:"equipped,omitempty"`
 	Wearout  float32  `json:"wearout" bson:"wearout,omitempty"`
 }
 

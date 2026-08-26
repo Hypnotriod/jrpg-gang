@@ -11,7 +11,7 @@ const (
 
 type Cell struct {
 	Factions []GameUnitFaction `json:"factions"`
-	Type     CellType          `json:"type,omitempty"`
+	Type     CellType          `json:"type,omitzero"`
 	Code     string            `json:"code,omitempty"`
 }
 

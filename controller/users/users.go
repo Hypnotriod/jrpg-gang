@@ -96,7 +96,7 @@ func (u *Users) GetAndRefreshBySessionId(sessionId UserSessionId) (User, bool) {
 	}
 	user, ok := u.users[playerId]
 	delete(u.userSessionIdToId, user.SessionId)
-	user.SessionId = UserSessionId(u.rndGen.MakeUUIDWithUniquenessCheck(func(value string) bool {
+	user.SessionId = UserSessionId(util.ShortUUIDUnique(func(value string) bool {
 		_, ok := u.userSessionIdToId[UserSessionId(value)]
 		return !ok
 	}))
@@ -205,11 +205,11 @@ func (u *Users) ResetUser(playerId engine.PlayerId) {
 func (u *Users) AddUser(user *User) {
 	u.mu.Lock()
 	defer u.mu.Unlock()
-	user.Id = engine.PlayerId(u.rndGen.MakeUUIDWithUniquenessCheck(func(value string) bool {
+	user.Id = engine.PlayerId(util.ShortUUIDUnique(func(value string) bool {
 		_, ok := u.users[engine.PlayerId(value)]
 		return !ok
 	}))
-	user.SessionId = UserSessionId(u.rndGen.MakeUUIDWithUniquenessCheck(func(value string) bool {
+	user.SessionId = UserSessionId(util.ShortUUIDUnique(func(value string) bool {
 		_, ok := u.userSessionIdToId[UserSessionId(value)]
 		return !ok
 	}))

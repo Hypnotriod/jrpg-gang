@@ -18,7 +18,7 @@ const (
 
 type Unit struct {
 	rng          *rand.Rand
-	Uid          uint                     `json:"uid,omitempty" bson:"-"`
+	Uid          uint                     `json:"uid,omitzero" bson:"-"`
 	Name         string                   `json:"name" bson:"name"`
 	Code         UnitCode                 `json:"code,omitempty" bson:"code,omitempty"`
 	Class        UnitClass                `json:"class,omitempty" bson:"class,omitempty"`

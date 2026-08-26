@@ -6,8 +6,8 @@ import (
 
 type UnitBooty struct {
 	Coins int `json:"coins" bson:"coins"`
-	Ruby  int `json:"ruby,omitempty" bson:"ruby,omitempty"`
-	W     int `json:"weight,omitempty" bson:"weight,omitempty"`
+	Ruby  int `json:"ruby,omitzero" bson:"ruby,omitempty"`
+	W     int `json:"weight,omitzero" bson:"weight,omitempty"`
 }
 
 func (b UnitBooty) Weight() int {

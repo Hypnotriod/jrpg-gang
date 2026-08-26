@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"encoding/json/v2"
 	"jrpg-gang/controller/users"
 )
 

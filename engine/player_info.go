@@ -14,10 +14,10 @@ type PlayerInfo struct {
 	Class     domain.UnitClass `json:"class"`
 	Code      domain.UnitCode  `json:"code"`
 	Level     uint             `json:"level"`
-	UnitUid   uint             `json:"unitUid,omitempty"`
-	IsOffline bool             `json:"isOffline,omitempty"`
-	IsReady   bool             `json:"isReady,omitempty"`
-	IsGuest   bool             `json:"isGuest,omitempty"`
+	UnitUid   uint             `json:"unitUid,omitzero"`
+	IsOffline bool             `json:"isOffline,omitzero"`
+	IsReady   bool             `json:"isReady,omitzero"`
+	IsGuest   bool             `json:"isGuest,omitzero"`
 }
 
 func (p PlayerInfo) Clone() *PlayerInfo {

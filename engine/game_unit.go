@@ -18,7 +18,7 @@ type GameUnit struct {
 	PlayerInfo    *PlayerInfo           `json:"playerInfo,omitempty"`
 	Drop          []domain.UnitBooty    `json:"drop,omitempty"`
 	QuestTriggers []domain.QuestTrigger `json:"questTriggers,omitempty"`
-	IsDead        bool                  `json:"isDead,omitempty"`
+	IsDead        bool                  `json:"isDead,omitzero"`
 }
 
 func NewGameUnit(unit *domain.Unit) *GameUnit {
