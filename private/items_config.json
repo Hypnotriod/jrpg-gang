@@ -7,7 +7,6 @@
             "description": "A bloodied fist. The weapon of the desperate and the damned.",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {},
             "range": {
                 "maximumX": 1,
                 "maximumY": 2
@@ -31,7 +30,6 @@
             "description": "Fangs dripping with virulent venom, their bite a slow dance with death and despair wrought in poison.",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {},
             "range": {
                 "maximumX": 1,
                 "maximumY": 2
@@ -61,7 +59,6 @@
             "description": "A tiny but vicious proboscis quivering with eldritch hunger, its sting drains not just blood but the very essence of magic from those it pierces.",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {},
             "range": {
                 "maximumX": 1,
                 "maximumY": 2
@@ -86,7 +83,6 @@
             "description": "A grotesque appendage, hardened by eldritch mutations and dripping with caustic venom. Each lash scorches and dissolves, a creature's only weapon wrought into savage hunger.",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {},
             "range": {
                 "maximumX": 2,
                 "maximumY": 2
@@ -110,7 +106,6 @@
             "description": "Gnashing fangs, eager to tear flesh and taste the copper tang of blood. A savage bite in the darkness.",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {},
             "range": {
                 "maximumX": 1,
                 "maximumY": 2
@@ -140,7 +135,6 @@
             "description": "A feral lunge from above, jaws snapping with primal hunger. The shriek of prey echoes in the night.",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {},
             "range": {
                 "maximumX": 2,
                 "maximumY": 2
@@ -170,7 +164,6 @@
             "description": "A fist wreathed in searing flame, scorching flesh and soul alike. Pain and fire entwined.",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {},
             "range": {
                 "maximumX": 1,
                 "maximumY": 2
@@ -202,7 +195,6 @@
             "ammunitionKind": "magicCharge",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {},
             "range": {
                 "maximumX": 5,
                 "maximumY": 5,
@@ -226,7 +218,6 @@
             "ammunitionKind": "magicCharge",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {},
             "range": {
                 "maximumX": 5,
                 "maximumY": 5,
@@ -258,7 +249,6 @@
             "ammunitionKind": "magicCharge",
             "slot": "weapon",
             "slotsNumber": 1,
-            "requirements": {},
             "range": {
                 "maximumX": 5,
                 "maximumY": 5,
@@ -2226,7 +2216,6 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
-            "requirements": {},
             "modification": [
                 {
                     "attributes": {
@@ -2248,7 +2237,6 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
-            "requirements": {},
             "modification": [
                 {
                     "attributes": {
@@ -2270,7 +2258,6 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
-            "requirements": {},
             "modification": [
                 {
                     "recovery": {
@@ -2292,7 +2279,6 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
-            "requirements": {},
             "modification": [
                 {
                     "recovery": {
@@ -2314,7 +2300,6 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
-            "requirements": {},
             "modification": [
                 {
                     "attributes": {

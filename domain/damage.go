@@ -166,3 +166,19 @@ func (d *Damage) Apply(state *UnitState) {
 	state.Stamina = max(state.Stamina, 0)
 	state.Mana = max(state.Mana, 0)
 }
+
+func (d Damage) IsZero() bool {
+	return d.Stabbing == 0 &&
+		d.Cutting == 0 &&
+		d.Crushing == 0 &&
+		d.Fire == 0 &&
+		d.Cold == 0 &&
+		d.Lightning == 0 &&
+		d.Poison == 0 &&
+		d.Exhaustion == 0 &&
+		d.ManaDrain == 0 &&
+		d.Bleeding == 0 &&
+		d.Fear == 0 &&
+		d.Curse == 0 &&
+		d.Madness == 0
+}

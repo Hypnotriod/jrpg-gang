@@ -52,3 +52,7 @@ func (a *UnitBaseAttributes) EnchanceAll(value float32) {
 	a.Stamina = util.AccumulateIfNotZeros(a.Stamina, value)
 	a.ActionPoints = util.AccumulateIfNotZeros(a.ActionPoints, value)
 }
+
+func (a UnitBaseAttributes) IsZero() bool {
+	return a.Health == 0 && a.Stamina == 0 && a.Mana == 0 && a.ActionPoints == 0
+}

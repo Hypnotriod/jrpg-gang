@@ -16,7 +16,7 @@ func (u *Unit) Equip(uid uint) *ActionResult {
 	if equipment.IsBroken() {
 		return result.WithResult(ResultIsBroken)
 	}
-	if !u.CheckRequirements(equipment.Requirements) {
+	if equipment.Requirements != nil && !u.CheckRequirements(*equipment.Requirements) {
 		return result.WithResult(ResultCantUse)
 	}
 	freeSlots := u.GetFreeSlotsNumber(equipment.Slot)

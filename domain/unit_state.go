@@ -6,7 +6,7 @@ import (
 
 type UnitState struct {
 	UnitBaseAttributes
-	Stress       float32 `json:"stress"`                // reduces action chance, affects retreat chance
+	Stress       float32 `json:"stress,omitzero"`       // reduces action chance, affects retreat chance
 	IsStunned    bool    `json:"isStunned,omitzero"`    // stun flag
 	WaitingOrder uint    `json:"waitingOrder,omitzero"` // waiting order
 }

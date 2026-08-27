@@ -53,3 +53,13 @@ func (a *UnitAttributes) EnchanceAll(value float32) {
 	a.Initiative = util.AccumulateIfNotZeros(a.Initiative, value)
 	a.Luck = util.AccumulateIfNotZeros(a.Luck, value)
 }
+
+func (a UnitAttributes) IsZero() bool {
+	return a.Strength == 0 &&
+		a.Physique == 0 &&
+		a.Agility == 0 &&
+		a.Endurance == 0 &&
+		a.Intelligence == 0 &&
+		a.Initiative == 0 &&
+		a.Luck == 0
+}

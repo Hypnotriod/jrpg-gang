@@ -25,3 +25,7 @@ func (r *UnitResistance) PhysicalAbsorption(damage Damage) float32 {
 		min(r.Cold, damage.Cold) +
 		min(r.Lightning, damage.Lightning)
 }
+
+func (r UnitResistance) IsZero() bool {
+	return r.Damage.IsZero()
+}

@@ -7,8 +7,8 @@ import (
 
 type GameRoomInfo struct {
 	Uid         uint                  `json:"uid"`
-	Capacity    uint                  `json:"capacity,omitzero"`
-	ScenarioId  engine.GameScenarioId `json:"scenarioId,omitempty"`
+	Capacity    uint                  `json:"capacity"`
+	ScenarioId  engine.GameScenarioId `json:"scenarioId"`
 	Host        engine.PlayerInfo     `json:"host"`
 	JoinedUsers []engine.PlayerInfo   `json:"joinedUsers"`
 	Mercenaries []engine.PlayerInfo   `json:"mercenaries"`

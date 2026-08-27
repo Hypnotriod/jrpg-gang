@@ -69,7 +69,8 @@ func (u *Unit) useMagicOnTarget(action *ActionResult, target *Unit, magic *Magic
 		if !u.CanReach(target, magic.Range) {
 			return action.WithResult(ResultNotReachable)
 		}
-		if !u.CheckRequirements(magic.Requirements) || !u.CheckUseCost(magic.UseCost) {
+		if magic.Requirements != nil && !u.CheckRequirements(*magic.Requirements) ||
+			!u.CheckUseCost(magic.UseCost) {
 			return action.WithResult(ResultCantUse)
 		}
 		u.State.Reduce(magic.UseCost)

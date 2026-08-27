@@ -44,3 +44,7 @@ func (r *UnitRecovery) HasEffect() bool {
 		r.Mana != 0 ||
 		r.Stress != 0
 }
+
+func (r UnitRecovery) IsZero() bool {
+	return r.Damage.IsZero() && r.UnitState.IsZero()
+}
