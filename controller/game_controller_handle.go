@@ -70,10 +70,9 @@ func (c *GameController) Leave(playerId engine.PlayerId) {
 			}
 		}
 	}
-	user := c.users.RemoveUser(playerId)
-	c.broadcastServerStatus(c.users.GetIdsExcept(playerId))
 	c.lobbyChat.RemoveParticipant(playerId)
-	if user != nil {
+	if user := c.users.RemoveUser(playerId); user != nil {
+		c.broadcastServerStatus(c.users.GetIdsExcept(playerId))
 		c.persistUser(user)
 		c.employment.ClearStatus(user)
 	}
