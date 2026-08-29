@@ -31,8 +31,8 @@ func NewUsers() *Users {
 
 func (u *Users) Get(playerId engine.PlayerId) (User, bool) {
 	u.mu.RLock()
+	defer u.mu.RUnlock()
 	user, ok := u.users[playerId]
-	u.mu.RUnlock()
 	if ok {
 		return *user, ok
 	} else {
@@ -246,8 +246,8 @@ func (u *Users) ChangeUserStatus(playerId engine.PlayerId, status UserStatus) {
 
 func (u *Users) GetUserStatus(playerId engine.PlayerId) UserStatus {
 	u.mu.RLock()
+	defer u.mu.RUnlock()
 	user, ok := u.users[playerId]
-	u.mu.RUnlock()
 	if !ok {
 		return UserStatusNotFound
 	}
