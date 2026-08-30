@@ -42,13 +42,13 @@ func NewPersistance(config PersistanceConfig) *Persistance {
 
 func (p *Persistance) AddUserToAuthCache(userModel *model.UserModel) auth.AuthenticationToken {
 	p.mu.Lock()
+	defer p.mu.Unlock()
 	if oldToken, ok := p.userEmailToAuthToken[userModel.Email]; ok {
 		p.usersAuthCache.Delete(oldToken)
 	}
 	token := auth.AuthenticationToken(util.ShortUUID())
 	p.userEmailToAuthToken[userModel.Email] = token
 	p.usersAuthCache.Set(token, userModel, ttlcache.DefaultTTL)
-	p.mu.Unlock()
 	return token
 }
 

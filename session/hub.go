@@ -78,10 +78,10 @@ func NewHub(config HubConfig, controller *controller.GameController, auth *auth.
 func (h *Hub) HandleUserAuthenticated(credentials auth.UserCredentials) auth.AuthenticationStatus {
 	status, oldPlayerId := h.controller.HandleUserAuthenticated(credentials)
 	h.mu.Lock()
+	defer h.mu.Unlock()
 	if oldClient, ok := h.clients[oldPlayerId]; ok {
 		oldClient.Kick()
 	}
-	h.mu.Unlock()
 	return status
 }
 
@@ -177,8 +177,8 @@ func (h *Hub) setupUserOfflineTimeout(playerId engine.PlayerId, clientInfo strin
 
 func (h *Hub) getClient(playerId engine.PlayerId) *Client {
 	h.mu.RLock()
+	defer h.mu.RUnlock()
 	client, ok := h.clients[playerId]
-	h.mu.RUnlock()
 	if !ok {
 		return nil
 	}

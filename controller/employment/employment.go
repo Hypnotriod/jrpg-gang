@@ -92,10 +92,10 @@ func (e *Employment) GetStatus(user *users.User) EmploymentStatus {
 	if job, ok := e.jobCodeToJob[status.Code]; ok {
 		result.CurrentJob = job
 	}
-	e.mu.Unlock()
 	if status.IsInProgress {
 		result.TimeLeft = float32(status.CompletionTime.Sub(timeNow).Seconds())
 	}
+	e.mu.Unlock()
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, job := range e.jobs {

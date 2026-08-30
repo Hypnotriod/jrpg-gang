@@ -41,13 +41,12 @@ func (e *GameEngines) Find(playerId engine.PlayerId) (*GameEngineWrapper, bool) 
 
 func (e *GameEngines) Unregister(playerId engine.PlayerId) (*GameEngineWrapper, bool) {
 	e.mu.Lock()
+	defer e.mu.Unlock()
 	wrapper, ok := e.playerIdToEngine[playerId]
 	if !ok {
-		e.mu.Unlock()
 		return wrapper, ok
 	}
 	delete(e.playerIdToEngine, playerId)
-	e.mu.Unlock()
 	return wrapper, ok
 }
 
