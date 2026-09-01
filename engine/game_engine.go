@@ -19,7 +19,7 @@ func NewGameEngine(scenario *GameScenario, actors []*GameUnit) *GameEngine {
 	e.rndGen = util.NewRndGen()
 	e.state = NewGameState(scenario)
 	e.scenario.Initialize(e.rndGen, actors)
-	e.resetPlayersReady()
+	e.ResetPlayersReady()
 	e.prepareActors(actors)
 	e.prepareNextSpot(actors, nil)
 	return e
@@ -31,7 +31,7 @@ func (e *GameEngine) prepareActors(actors []*GameUnit) {
 	}
 }
 
-func (e *GameEngine) resetPlayersReady() {
+func (e *GameEngine) ResetPlayersReady() {
 	for _, actor := range e.actors {
 		if actor.PlayerInfo != nil {
 			actor.PlayerInfo.IsReady = false
