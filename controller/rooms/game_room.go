@@ -3,19 +3,25 @@ package rooms
 import (
 	"jrpg-gang/controller/users"
 	"jrpg-gang/engine"
+	"slices"
 )
 
 type GameRoom struct {
-	Uid         uint                  `json:"uid"`
-	Capacity    uint                  `json:"capacity"`
-	ScenarioId  engine.GameScenarioId `json:"scenarioId"`
-	host        users.User
-	joinedUsers []users.User
-	mercenaries []*engine.GameUnit
+	Uid              uint                  `json:"uid"`
+	Capacity         uint                  `json:"capacity"`
+	ScenarioId       engine.GameScenarioId `json:"scenarioId"`
+	host             users.User
+	joinedUsers      []users.User
+	blockedPlayerIds []engine.PlayerId
+	mercenaries      []*engine.GameUnit
 }
 
 func (r *GameRoom) IsFull() bool {
 	return len(r.joinedUsers)+len(r.mercenaries) >= int(r.Capacity)-1
+}
+
+func (r *GameRoom) IsBlocked(playerId engine.PlayerId) bool {
+	return slices.Contains(r.blockedPlayerIds, playerId)
 }
 
 func (r *GameRoom) GetPlayerIds() []engine.PlayerId {

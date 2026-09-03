@@ -15,6 +15,7 @@ const (
 	RequestCreateGameRoom       RequestType = "createRoom"
 	RequestDestroyGameRoom      RequestType = "destroyRoom"
 	RequestJoinGameRoom         RequestType = "joinRoom"
+	RequestKickFromGameRoom     RequestType = "kickFromRoom"
 	RequestHireMercenary        RequestType = "hireMercenary"
 	RequestLeaveGameRoom        RequestType = "leaveRoom"
 	RequestLobbyStatus          RequestType = "lobbyStatus"
@@ -53,7 +54,7 @@ type Request struct {
 }
 
 type ParsebleRequestData interface {
-	*Request | *GameActionRequestData | *CreateGameRoomRequestData | *JoinRequestData |
+	*Request | *GameActionRequestData | *CreateGameRoomRequestData | *KickFromGameRoomRequestData | *JoinRequestData |
 		*JoinGameRoomRequestData | *ShopActionRequestData | *ConfiguratorActionRequestData |
 		*GameNextPhaseRequestData | *ApplyForAJobRequestData | *SwitchUnitRequestData | *SetPlayerInfoRequestData |
 		*ChatMessageRequestData | *QuestsActionRequestData | *GameRoomHireMercenaryRequestData

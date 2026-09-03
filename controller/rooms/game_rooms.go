@@ -66,6 +66,9 @@ func (r *GameRooms) AddUser(roomUid uint, user users.User) bool {
 	if room.IsFull() {
 		return false
 	}
+	if room.IsBlocked(user.Id) {
+		return false
+	}
 	room.joinedUsers = append(room.joinedUsers, user)
 	r.playerIdToRoomUid[user.Id] = roomUid
 	return true
@@ -94,6 +97,28 @@ func (r *GameRooms) RemoveUser(playerId engine.PlayerId) (uint, bool) {
 	}
 	room.joinedUsers = restUsers
 	return roomUid, true
+}
+
+func (r *GameRooms) KickUser(roomUid uint, playerId engine.PlayerId) bool {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	room, ok := r.rooms[roomUid]
+	if !ok {
+		return false
+	}
+	if room.host.Id == playerId {
+		return false
+	}
+	delete(r.playerIdToRoomUid, playerId)
+	restUsers := []users.User{}
+	for _, u := range room.joinedUsers {
+		if u.Id != playerId {
+			restUsers = append(restUsers, u)
+		}
+	}
+	room.joinedUsers = restUsers
+	room.blockedPlayerIds = append(room.blockedPlayerIds, playerId)
+	return true
 }
 
 func (r *GameRooms) AddMercenary(playerId engine.PlayerId, mercenary *engine.GameUnit) (uint, bool) {
