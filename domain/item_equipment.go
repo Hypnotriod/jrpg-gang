@@ -19,7 +19,7 @@ type Equipment struct {
 	SlotsNumber  uint               `json:"slotsNumber"`
 	Equipped     bool               `json:"equipped,omitzero"`
 	Requirements *UnitRequirements  `json:"requirements,omitempty"`
-	Modification []UnitModification `json:"modification"`
+	Modification []UnitModification `json:"modification,omitempty"`
 }
 
 func (e *Equipment) IncreaseWearout() {
