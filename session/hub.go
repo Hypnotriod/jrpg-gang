@@ -81,6 +81,7 @@ func (h *Hub) HandleUserAuthenticated(credentials auth.UserCredentials) auth.Aut
 	defer h.mu.Unlock()
 	if oldClient, ok := h.clients[oldPlayerId]; ok {
 		oldClient.Kick()
+		delete(h.clients, oldClient.playerId)
 	}
 	return status
 }
@@ -133,7 +134,9 @@ func (h *Hub) serveWsRequest(w http.ResponseWriter, r *http.Request) {
 func (h *Hub) registerClient(client *Client) {
 	h.mu.Lock()
 	if oldClient, ok := h.clients[client.playerId]; ok {
+		client.time = oldClient.time
 		oldClient.Kick()
+		delete(h.clients, oldClient.playerId)
 	}
 	h.clients[client.playerId] = client
 	if timer, ok := h.offlineTimers[client.playerId]; ok {
@@ -154,23 +157,23 @@ func (h *Hub) unregisterClient(client *Client) {
 		return
 	}
 	h.mu.Lock()
-	delete(h.clients, client.playerId)
-	h.setupUserOfflineTimeout(client.playerId, client)
+	h.setupUserOfflineTimeout(client)
 	h.mu.Unlock()
 	h.controller.ConnectionStatusChanged(client.playerId, true)
 	log.Info("Client went offline: ", client.Info())
 }
 
-func (h *Hub) setupUserOfflineTimeout(playerId engine.PlayerId, client *Client) {
-	h.offlineTimers[playerId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
+func (h *Hub) setupUserOfflineTimeout(client *Client) {
+	h.offlineTimers[client.playerId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
 		h.mu.Lock()
-		if _, ok := h.offlineTimers[playerId]; !ok {
+		if _, ok := h.offlineTimers[client.playerId]; !ok {
 			h.mu.Unlock()
 			return
 		}
-		delete(h.offlineTimers, playerId)
+		delete(h.offlineTimers, client.playerId)
+		delete(h.clients, client.playerId)
 		h.mu.Unlock()
-		h.controller.Leave(playerId)
+		h.controller.Leave(client.playerId)
 		log.Info("Unregister Client by timeout: ", client.Info())
 	})
 }
