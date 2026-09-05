@@ -105,7 +105,7 @@ func (c *Client) Info() string {
 	return fmt.Sprintf("%s %s %02d:%02d:%02d",
 		c.ip.String(),
 		string(c.playerId),
-		uint32(duration.Hours()), uint32(duration.Minutes()), uint32(duration.Seconds()))
+		uint32(duration.Hours()), uint32(duration.Minutes())%60, uint32(duration.Seconds())%60)
 }
 
 func (c *Client) join(credentials *controller.JoinRequestData) bool {
