@@ -2,6 +2,7 @@ package controller
 
 import "time"
 
+const GUEST_USER_NICKNAME_REGEX string = `^Guest [0-9]+$`
 const USER_NICKNAME_REGEX string = `^[a-zA-Z0-9][a-zA-Z0-9-_ ]{2,18}[a-zA-Z0-9]$`
 const GAME_ROOM_MAX_CAPACITY uint = 4
 const CHAT_MAX_MESSAGES uint = 50

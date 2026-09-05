@@ -1,6 +1,7 @@
 package session
 
 import (
+	"fmt"
 	"jrpg-gang/controller"
 	"jrpg-gang/engine"
 	"net"
@@ -18,6 +19,7 @@ type Client struct {
 	ip        net.IP
 	playerId  engine.PlayerId
 	pingTimer *time.Timer
+	time      time.Time
 	kicked    bool
 	left      bool
 }
@@ -31,6 +33,7 @@ func NewClient(ip net.IP, connection *websocket.Conn, hub *Hub) *Client {
 	c.kicked = false
 	c.left = false
 	c.conn.SetReadLimit(c.hub.config.MaxMessageSize)
+	c.time = time.Now()
 	return c
 }
 
@@ -98,7 +101,11 @@ func (c *Client) Kick() {
 }
 
 func (c *Client) Info() string {
-	return c.ip.String() + " " + string(c.playerId)
+	duration := time.Since(c.time)
+	return fmt.Sprintf("%s %s %02d:%02d:%02d",
+		c.ip.String(),
+		string(c.playerId),
+		uint32(duration.Hours()), uint32(duration.Minutes()), uint32(duration.Seconds()))
 }
 
 func (c *Client) join(credentials *controller.JoinRequestData) bool {

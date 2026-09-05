@@ -33,6 +33,9 @@ func (c *GameController) handleSetPlayerInfoRequest(request *Request, response *
 		if matched, _ := regexp.MatchString(USER_NICKNAME_REGEX, nickname); !matched {
 			return response.WithStatus(ResponseStatusMalformed)
 		}
+		if matched, _ := regexp.MatchString(GUEST_USER_NICKNAME_REGEX, nickname); matched {
+			return response.WithStatus(ResponseStatusNotAllowed)
+		}
 		if ok := c.persistance.HasUserWithNickname(nickname); ok {
 			return response.WithStatus(ResponseStatusAlreadyExists)
 		}

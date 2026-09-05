@@ -155,13 +155,13 @@ func (h *Hub) unregisterClient(client *Client) {
 	}
 	h.mu.Lock()
 	delete(h.clients, client.playerId)
-	h.setupUserOfflineTimeout(client.playerId, client.Info())
+	h.setupUserOfflineTimeout(client.playerId, client)
 	h.mu.Unlock()
 	h.controller.ConnectionStatusChanged(client.playerId, true)
 	log.Info("Client went offline: ", client.Info())
 }
 
-func (h *Hub) setupUserOfflineTimeout(playerId engine.PlayerId, clientInfo string) {
+func (h *Hub) setupUserOfflineTimeout(playerId engine.PlayerId, client *Client) {
 	h.offlineTimers[playerId] = time.AfterFunc(time.Duration(h.config.UserOfflineTimeoutSec)*time.Second, func() {
 		h.mu.Lock()
 		if _, ok := h.offlineTimers[playerId]; !ok {
@@ -171,7 +171,7 @@ func (h *Hub) setupUserOfflineTimeout(playerId engine.PlayerId, clientInfo strin
 		delete(h.offlineTimers, playerId)
 		h.mu.Unlock()
 		h.controller.Leave(playerId)
-		log.Info("Unregister Client by timeout: ", clientInfo)
+		log.Info("Unregister Client by timeout: ", client.Info())
 	})
 }
 
