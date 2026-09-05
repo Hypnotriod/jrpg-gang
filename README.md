@@ -14,7 +14,7 @@ Hosted at: [hypnotriod.github.io/jrpg-gang-html-client](https://hypnotriod.githu
 * `physique`     - affects **stun chance**. For every 10 points, adds 1 point to all **physical resistances**
 * `agility`      - affects **attack/dodge chance**
 * `endurance`    - affects **stamina** recovery
-* `intelligence` - enhances **fire**, **cold**, **lightning**, **exhaustion**, **manaDrain**, **fear**, **curse**, and **madness** damage. Multiplies by 1% all the **modification** points
+* `intelligence` - enhances **fire**, **cold**, **lightning**, **exhaustion**, **manaDrain**, **fear**, **curse**, and **madness** damage.
 * `initiative`   - affects **turn order**. For every 10 points, adds **1 action point**
 * `luck`         - affects **critical chance**
 

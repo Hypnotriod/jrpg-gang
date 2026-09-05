@@ -3,7 +3,6 @@ package domain
 func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]UnitRecovery, []UnitModificationImpact) {
 	instantRecovery := []UnitRecovery{}
 	temporalModification := []UnitModificationImpact{}
-	intelligence := u.TotalIntelligence()
 	for _, imp := range modification {
 		if imp.Chance != 0 && !u.CheckRandomChance(u.CalculateModificationChance(imp)) {
 			break
@@ -12,7 +11,6 @@ func (u *Unit) Modify(target *Unit, modification []UnitModificationImpact) ([]Un
 			imp.EnchanceAll(u.PickDeviation(imp.Deviation))
 		}
 		imp.Deviation = 0
-		imp.MultiplyAll(1 + intelligence*INTELLIGENCE_MODIFICATION_FACTOR)
 		imp.Chance = 0
 		if imp.Duration != 0 {
 			target.Modification = append(target.Modification, imp)
