@@ -303,16 +303,8 @@
                 },
                 {
                     "code": "fire-charge-01",
-                    "quantity": 10,
+                    "quantity": 30,
                     "equipped": true
-                },
-                {
-                    "code": "cold-charge-01",
-                    "quantity": 10
-                },
-                {
-                    "code": "lightning-charge-01",
-                    "quantity": 10
                 },
                 {
                     "code": "plasma-touch-01"
