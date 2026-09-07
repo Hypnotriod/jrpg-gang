@@ -1410,7 +1410,7 @@
         },
         {
             "type": "magic",
-            "name": "Mg Shield",
+            "name": "Magic Shield",
             "code": "magic-shield-01",
             "description": "A shimmering ward of spectral force that hardens flesh against piercing blows and crushing strikes. It weaves a cold barrier around the bearer, turning enemy blows into brittle echoes.",
             "price": {
@@ -2205,7 +2205,7 @@
         },
         {
             "type": "armor",
-            "name": "Initi Neck",
+            "name": "Initiative Neck",
             "description": "A chain of black iron, worn by those who would seize fate before it seizes them. It sharpens the mind for the coming storm.",
             "code": "necklace-02",
             "price": {
@@ -2226,7 +2226,7 @@
         },
         {
             "type": "armor",
-            "name": "Agili Neck",
+            "name": "Agility Neck",
             "description": "A slender chain, light as a whisper, granting its wearer the swiftness of a shadow fleeing the dawn.",
             "code": "necklace-03",
             "price": {
@@ -2268,7 +2268,7 @@
         },
         {
             "type": "armor",
-            "name": "Vital Neck",
+            "name": "Vitality Neck",
             "description": "A braided collar of blackened sinew and frostbitten marrow, set with a pulse of slow-burning vitality. It whispers of life stolen from the dying earth, keeping the bearer's blood warm against the ruin of night.",
             "code": "necklace-05",
             "price": {
@@ -2430,7 +2430,7 @@
     ],
     "disposable": [
         {
-            "name": "Health Sm",
+            "name": "Health Small",
             "type": "disposable",
             "code": "health-potion-01",
             "description": "A vial of crimson elixir, rumored to be distilled from the blood of saints and sinners alike. Its warmth staves off death, if only for a while.",
@@ -2460,7 +2460,7 @@
             }
         },
         {
-            "name": "Health Bg",
+            "name": "Health Big",
             "type": "disposable",
             "code": "health-potion-02",
             "description": "A vial of thick crimson essence, swirling with raw vitality torn from the dying moments of forgotten beasts. Its power mends grievous wounds, though those who drink it claim to taste the lingering screams of its creation.",
@@ -2490,7 +2490,7 @@
             }
         },
         {
-            "name": "Stamina Sm",
+            "name": "Stamina Small",
             "type": "disposable",
             "code": "stamina-potion-01",
             "description": "A flask of bitter draught, brewed by witches in the wild. It fills the weary with a fleeting surge of vigor.",
@@ -2520,7 +2520,7 @@
             }
         },
         {
-            "name": "Stamina Bg",
+            "name": "Stamina Big",
             "type": "disposable",
             "code": "stamina-potion-02",
             "description": "A potent draught of midnight hue, brewed from the distilled fury of restless spirits and the marrow of fallen titans. It floods weary limbs with an otherworldly strength, though the body aches long after the power fades.",
@@ -2550,7 +2550,7 @@
             }
         },
         {
-            "name": "Mana Sm",
+            "name": "Mana Small",
             "type": "disposable",
             "code": "mana-potion-01",
             "description": "A bottle of shimmering blue liquid, cold as the grave and sharp as a wizard's wit. Restores the mind's arcane fire.",
@@ -2580,7 +2580,7 @@
             }
         },
         {
-            "name": "Mana Bg",
+            "name": "Mana Big",
             "type": "disposable",
             "code": "mana-potion-02",
             "description": "A vessel of swirling indigo essence, distilled from the shattered minds of mad sorcerers and the dying echoes of forbidden incantations. It floods the mind with eldritch power and arcane clarity, though visions of cosmic truths and gnawing madness linger long in the drinker's darkest hours.",
@@ -2610,7 +2610,7 @@
             }
         },
         {
-            "name": "Agility Sm",
+            "name": "Agility Small",
             "type": "disposable",
             "code": "agility-potion-01",
             "description": "A draught of quicksilver and shadow, said to grant the swiftness of a midnight fox to those who dare drink.",
@@ -2633,7 +2633,7 @@
             }
         },
         {
-            "name": "Agility Bg",
+            "name": "Agility Big",
             "type": "disposable",
             "code": "agility-potion-02",
             "description": "A swirling elixir of liquid mercury and captured shadows, forged from the essence of hunted phantoms and the blood of swift predators. It grants unearthly speed and reflexes, turning the drinker into a blur of motion, though the shadows cling to their soul and whisper of relentless pursuit.",
@@ -2862,7 +2862,7 @@
             }
         },
         {
-            "name": "Poison Chrg",
+            "name": "Poison Charge",
             "type": "ammunition",
             "code": "poison-charge-01",
             "description": "A glass vial brimming with venomous mist, meant for a sorcerer's staff. Its touch brings a slow, inevitable demise.",
@@ -2958,7 +2958,7 @@
             }
         },
         {
-            "name": "Light Chrg",
+            "name": "Light Charge",
             "type": "ammunition",
             "code": "lightning-charge-01",
             "description": "A vial of bottled lightning, restless and wild. It crackles with the fury of a midnight storm.",
