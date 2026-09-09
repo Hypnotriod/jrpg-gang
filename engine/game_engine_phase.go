@@ -14,7 +14,7 @@ func (e *GameEngine) NextPhase() *GameEvent {
 	case GamePhaseTakeActionAI:
 		e.processAI(result)
 	case GamePhaseTakeAction:
-		e.onUnitCompleteAction(nil)
+		e.onUnitCompleteAction(e.getActiveUnit(), nil)
 	case GamePhaseRetreatAction:
 		e.processRetreatActionAI(result)
 	case GamePhaseActionComplete:
@@ -150,7 +150,7 @@ func (e *GameEngine) isLastRound() bool {
 func (e *GameEngine) onUnitMoveAction() {
 	unit := e.getActiveUnit()
 	unit.ReduceActionPoints(MOVE_ACTION_POINTS)
-	e.onUnitCompleteAction(nil)
+	e.onUnitCompleteAction(unit, nil)
 }
 
 func (e *GameEngine) onUnitWaitAction() {
@@ -166,8 +166,7 @@ func (e *GameEngine) onUseItemOnTarget(targetUid uint, actionResult *domain.Acti
 	}
 }
 
-func (e *GameEngine) onUnitCompleteAction(result *domain.ActionResult) {
-	unit := e.getActiveUnit()
+func (e *GameEngine) onUnitCompleteAction(unit *GameUnit, result *domain.ActionResult) {
 	corpses := e.battlefield().FilterSurvivors()
 	if result != nil {
 		e.accumulateDrop(corpses, result.Drop)
@@ -179,10 +178,12 @@ func (e *GameEngine) onUnitCompleteAction(result *domain.ActionResult) {
 		e.applyAchievements(corpses, nil)
 	}
 	e.battlefield().UpdateCellsFactions()
-	if unit.IsDead || unit.State.ActionPoints < MIN_ACTION_POINTS {
+	if unit.IsDead || unit.State.IsStunned || unit.State.ActionPoints < MIN_ACTION_POINTS {
 		unit.ClearWaitingOrder()
 		unit.ClearActionPoints()
-		e.state.ShiftUnitsQueue()
+		if e.state.IsCurrentActiveUnit(unit) {
+			e.state.ShiftUnitsQueue()
+		}
 	}
 	e.state.UpdateUnitsQueue(e.battlefield().Units)
 	e.state.ChangePhase(GamePhaseActionComplete)

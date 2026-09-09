@@ -19,7 +19,7 @@ func (e *GameEngine) processAI(event *GameEvent) {
 		return
 	}
 	unit.ClearActionPoints()
-	e.onUnitCompleteAction(nil)
+	e.onUnitCompleteAction(unit, nil)
 }
 
 func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
@@ -53,7 +53,7 @@ func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
 		}
 	}
 	unit.ClearActionPoints()
-	e.onUnitCompleteAction(nil)
+	e.onUnitCompleteAction(unit, nil)
 }
 
 func (e *GameEngine) aiTryToApproachTheEnemy(event *GameEvent, unit *GameUnit) bool {
@@ -153,7 +153,7 @@ func (e *GameEngine) aiAttackWithWeapon(event *GameEvent, unit *GameUnit, target
 	e.onUseItemOnTarget(unit.Uid, result)
 	unit.Inventory.UpdateItemsState()
 	target.Inventory.UpdateEquipmentByWeareout()
-	e.onUnitCompleteAction(result)
+	e.onUnitCompleteAction(unit, result)
 	unitAction := NewGameUnitActionResult()
 	unitAction.Action = domain.Action{
 		Action:    domain.ActionUse,

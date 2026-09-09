@@ -123,7 +123,7 @@ func (e *GameEngine) RemoveActor(playerId PlayerId) bool {
 	}
 	if e.state.IsCurrentActiveUnit(actor) && e.state.phase == GamePhaseTakeAction {
 		actor.ClearActionPoints()
-		e.onUnitCompleteAction(nil)
+		e.onUnitCompleteAction(actor, nil)
 	}
 	if actor.PlayerInfo != nil {
 		actor.PlayerInfo.IsReady = false

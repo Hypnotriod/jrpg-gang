@@ -97,7 +97,7 @@ func (e *GameEngine) executeUseAction(action domain.Action, playerId PlayerId) *
 	if unit != target {
 		target.Inventory.UpdateEquipmentByWeareout()
 	}
-	e.onUnitCompleteAction(result)
+	e.onUnitCompleteAction(unit, result)
 	return result
 }
 
@@ -235,7 +235,7 @@ func (e *GameEngine) executeSkipAction(action domain.Action, playerId PlayerId) 
 	}
 	unit.ClearActionPoints()
 	result := domain.NewActionResult()
-	e.onUnitCompleteAction(result)
+	e.onUnitCompleteAction(unit, result)
 	return result.WithResult(domain.ResultAccomplished)
 }
 
