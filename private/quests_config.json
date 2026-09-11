@@ -7,7 +7,9 @@
             "experience": 50
         },
         "activation": {
-            "requirements": {}
+            "requirements": {
+                "level": 1
+            }
         },
         "completion": {
             "requirements": {
