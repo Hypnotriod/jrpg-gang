@@ -2,13 +2,15 @@ package domain
 
 import (
 	"jrpg-gang/util"
+	"slices"
 )
 
 type UnitInventoryDescriptor struct {
-	Code     ItemCode `json:"code" bson:"code"`
-	Quantity uint     `json:"quantity,omitzero" bson:"quantity,omitempty"`
-	Equipped bool     `json:"equipped,omitzero" bson:"equipped,omitempty"`
-	Wearout  float32  `json:"wearout" bson:"wearout,omitempty"`
+	Code         ItemCode          `json:"code" bson:"code"`
+	Quantity     uint              `json:"quantity,omitzero" bson:"quantity,omitempty"`
+	Equipped     bool              `json:"equipped,omitzero" bson:"equipped,omitempty"`
+	Wearout      float32           `json:"wearout" bson:"wearout,omitempty"`
+	Requirements *UnitRequirements `json:"requirements,omitempty" bson:"-"`
 }
 
 type UnitInventory struct {
@@ -29,6 +31,44 @@ func (i *UnitInventory) Clone() *UnitInventory {
 	r.Disposable = append(r.Disposable, i.Disposable...)
 	r.Ammunition = append(r.Ammunition, i.Ammunition...)
 	r.Provision = append(r.Provision, i.Provision...)
+	return r
+}
+
+func (i *UnitInventory) CloneFiltered(unit *Unit) *UnitInventory {
+	r := &UnitInventory{}
+	attributes := unit.TotalModification().Attributes
+	attributes.Accumulate(unit.Stats.Attributes)
+	attributes.Normalize()
+	r.Weapon = util.Filter(i.Weapon, func(w Weapon) bool {
+		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
+			return d.Code == w.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
+		})
+	})
+	r.Magic = util.Filter(i.Magic, func(m Magic) bool {
+		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
+			return d.Code == m.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
+		})
+	})
+	r.Armor = util.Filter(i.Armor, func(m Armor) bool {
+		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
+			return d.Code == m.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
+		})
+	})
+	r.Disposable = util.Filter(i.Disposable, func(m Disposable) bool {
+		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
+			return d.Code == m.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
+		})
+	})
+	r.Ammunition = util.Filter(i.Ammunition, func(m Ammunition) bool {
+		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
+			return d.Code == m.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
+		})
+	})
+	r.Provision = util.Filter(i.Provision, func(m Provision) bool {
+		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
+			return d.Code == m.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
+		})
+	})
 	return r
 }
 

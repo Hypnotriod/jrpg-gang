@@ -28,7 +28,7 @@ func NewGameShop(items *domain.UnitInventory, populateFromDescriptor func(invent
 
 func (s *GameShop) GetStatus(unit *domain.Unit) *GameShopStatus {
 	r := &GameShopStatus{}
-	r.Items = s.items.Clone()
+	r.Items = s.items.CloneFiltered(unit)
 	r.Purchase = map[uint]domain.UnitBooty{}
 	r.Repair = map[uint]domain.UnitBooty{}
 	for i := range unit.Inventory.Magic {

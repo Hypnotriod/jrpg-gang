@@ -72,5 +72,4 @@ func (c *GameItemsConfig) PopulateFromDescriptor(inventory *domain.UnitInventory
 			}
 		}
 	}
-	inventory.Descriptor = []domain.UnitInventoryDescriptor{}
 }

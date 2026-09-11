@@ -4,49 +4,79 @@
             "code": "arrow-01"
         },
         {
-            "code": "arrow-fire-01"
+            "code": "arrow-fire-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "arrow-frost-01"
+            "code": "arrow-frost-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "arrow-lightning-01"
+            "code": "arrow-lightning-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
             "code": "fire-charge-01"
         },
         {
-            "code": "cold-charge-01"
+            "code": "cold-charge-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "lightning-charge-01"
+            "code": "lightning-charge-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "poison-charge-01"
+            "code": "poison-charge-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
             "code": "health-potion-01"
         },
         {
-            "code": "health-potion-02"
+            "code": "health-potion-02",
+            "requirements": {
+                "level": 3
+            }
         },
         {
             "code": "stamina-potion-01"
         },
         {
-            "code": "stamina-potion-02"
+            "code": "stamina-potion-02",
+            "requirements": {
+                "level": 3
+            }
         },
         {
             "code": "mana-potion-01"
         },
         {
-            "code": "mana-potion-02"
+            "code": "mana-potion-02",
+            "requirements": {
+                "level": 3
+            }
         },
         {
             "code": "agility-potion-01"
         },
         {
-            "code": "agility-potion-02"
+            "code": "agility-potion-02",
+            "requirements": {
+                "level": 3
+            }
         },
         {
             "code": "bandage-01"
@@ -55,10 +85,16 @@
             "code": "antidote-potion-01"
         },
         {
-            "code": "poison-01"
+            "code": "poison-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "bomb-01"
+            "code": "bomb-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
             "code": "rag-armor-01"
@@ -88,73 +124,136 @@
             "code": "shield-01"
         },
         {
-            "code": "gloves-02"
+            "code": "gloves-02",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "armor-01"
+            "code": "armor-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "helmet-02"
+            "code": "helmet-02",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "boots-02"
+            "code": "boots-02",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "shield-02"
+            "code": "shield-02",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "gloves-03"
+            "code": "gloves-03",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "armor-02"
+            "code": "armor-02",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "helmet-03"
+            "code": "helmet-03",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "boots-03"
+            "code": "boots-03",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "shield-03"
+            "code": "shield-03",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "lightning-gloves-01"
+            "code": "lightning-gloves-01",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "armor-03"
+            "code": "armor-03",
+            "requirements": {
+                "level": 5
+            }
         },
         {
-            "code": "necklace-01"
+            "code": "necklace-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "necklace-02"
+            "code": "necklace-02",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "necklace-03"
+            "code": "necklace-03",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "necklace-04"
+            "code": "necklace-04",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "necklace-05"
+            "code": "necklace-05",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "necklace-06"
+            "code": "necklace-06",
+            "requirements": {
+                "level": 2
+            }
         },
         {
             "code": "sorcerer-hat-01"
         },
         {
-            "code": "sorcerer-hat-02"
+            "code": "sorcerer-hat-02",
+            "requirements": {
+                "level": 3
+            }
         },
         {
             "code": "sorcerer-cloak-01"
         },
         {
-            "code": "sorcerer-cloak-02"
+            "code": "sorcerer-cloak-02",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "sorcerer-cloak-03"
+            "code": "sorcerer-cloak-03",
+            "requirements": {
+                "level": 5
+            }
         },
         {
             "code": "pitchfork-01"
@@ -169,61 +268,114 @@
             "code": "wooden-staff-01"
         },
         {
-            "code": "club-01"
+            "code": "club-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "mace-01"
+            "code": "mace-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "scimitar-01"
+            "code": "scimitar-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "sword-02"
+            "code": "sword-02",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "sword-magic-01"
+            "code": "sword-magic-01",
+            "requirements": {
+                "level": 5
+            }
         },
         {
             "code": "spear-01"
         },
         {
-            "code": "harpoon-01"
+            "code": "harpoon-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "halberd-01"
+            "code": "halberd-01",
+            "requirements": {
+                "level": 5
+            }
         },
         {
-            "code": "bow-02"
+            "code": "bow-02",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "bow-magic-01"
+            "code": "bow-magic-01",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "bow-triple-01"
+            "code": "bow-triple-01",
+            "requirements": {
+                "level": 5
+            }
         },
         {
-            "code": "dagger-02"
+            "code": "dagger-02",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "sorcerer-staff-02"
+            "code": "sorcerer-staff-02",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "axe-02"
+            "code": "axe-02",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "fire-axe-01"
+            "code": "fire-axe-01",
+            "requirements": {
+                "level": 5
+            }
         },
         {
-            "code": "scythe-01"
+            "code": "scythe-01",
+            "requirements": {
+                "achievements": {
+                    "kill-grim-reaper": 1
+                }
+            }
         },
         {
-            "code": "fire-touch-01"
+            "code": "fire-touch-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
             "code": "magic-health-01"
         },
         {
-            "code": "magic-health-02"
+            "code": "magic-health-02",
+            "requirements": {
+                "level": 3
+            }
         },
         {
             "code": "magic-shield-01"
@@ -235,10 +387,16 @@
             "code": "magic-mana-drain-01"
         },
         {
-            "code": "magic-blessing-01"
+            "code": "magic-blessing-01",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "magic-lighting-strike-01"
+            "code": "magic-lighting-strike-01",
+            "requirements": {
+                "level": 5
+            }
         },
         {
             "code": "provision-ham-01"
@@ -250,10 +408,16 @@
             "code": "provision-wine-01"
         },
         {
-            "code": "provision-salad-01"
+            "code": "provision-salad-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "provision-fried-rice-01"
+            "code": "provision-fried-rice-01",
+            "requirements": {
+                "level": 2
+            }
         }
     ]
 }
