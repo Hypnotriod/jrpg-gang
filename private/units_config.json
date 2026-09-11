@@ -1943,5 +1943,27 @@
                 }
             }
         ]
+    },
+    {
+        "name": "Dummy",
+        "code": "dummy-01",
+        "description": "A training dummy.",
+        "stats": {
+            "progress": {
+                "level": 0,
+                "experience": 10
+            },
+            "baseAttributes": {
+                "health": 50,
+                "stamina": 1,
+                "actionPoints": 0
+            },
+            "attributes": {},
+            "resistance": {}
+        },
+        "slots": {},
+        "inventory": {
+            "descriptor": []
+        }
     }
 ]

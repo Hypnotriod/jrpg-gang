@@ -1,4 +1,98 @@
 {
+     "training-01": {
+        "requirements": {},
+        "spots": {
+            "1-0": {
+                "name": "Forgotten Ruins",
+                "code": "training-01",
+                "booty": [
+                    {
+                        "weight": 1,
+                        "coins": 10
+                    }
+                ],
+                "experience": 10,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "achievements": {
+                                "training-completed": -1
+                            }
+                        },
+                        "achievements": {
+                            "training-completed": 1
+                        }
+                    }
+                ],
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-wall-04", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-wall-04", "factions": []}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-wall-04", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-wall-04", "factions": []}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "dummy-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 1,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "dummy-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "dummy-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "dummy-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "path": [
+            [
+                {
+                    "weight": 1,
+                    "spotId": "1-0"
+                }
+            ]
+        ]
+    },
     "easy-01": {
         "requirements": {},
         "spots": {
