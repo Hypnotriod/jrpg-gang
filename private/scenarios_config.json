@@ -1366,24 +1366,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -1443,24 +1443,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -1520,24 +1520,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -1585,24 +1585,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -1658,24 +1658,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -1731,24 +1731,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -1812,24 +1812,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -1893,24 +1893,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -1974,24 +1974,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []}
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -2055,24 +2055,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -2159,24 +2159,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -2248,24 +2248,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -2352,24 +2352,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -2441,24 +2441,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -2530,24 +2530,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -2619,24 +2619,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -2708,24 +2708,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -2811,24 +2811,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-02", "factions": []},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -2914,24 +2914,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-02", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -3114,24 +3114,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -3207,24 +3207,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -3300,24 +3300,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -3393,24 +3393,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -3487,24 +3487,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -3581,24 +3581,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -3675,24 +3675,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -3753,24 +3753,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -3847,24 +3847,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -3941,24 +3941,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4019,24 +4019,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4113,24 +4113,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4207,24 +4207,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4301,24 +4301,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4410,24 +4410,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4504,24 +4504,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4605,24 +4605,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4691,24 +4691,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4785,24 +4785,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4879,24 +4879,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -4949,24 +4949,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 1, "code": "tile-wall-01", "factions": []},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 1, "code": "tile-wall-03", "factions": []},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 1, "code": "tile-wall-01", "factions": []}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-03", "factions": []}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -5039,24 +5039,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
@@ -5137,24 +5137,24 @@
                 "battlefield": {
                     "matrix": [
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [0]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ],
                         [
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]},
-                            {"type": 0, "code": "tile-floor-01", "factions": [1]}
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-03", "factions": [1]}
                         ]
                     ],
                     "unitDescriptor": [
