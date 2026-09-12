@@ -12,7 +12,7 @@ func (c *GameController) handleStartGameRequest(playerId engine.PlayerId, reques
 	if !ok {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	scenario := c.scenariosConfig.Scenario(room.ScenarioId)
+	scenario := c.scenariosConfig.GetScenario(room.ScenarioId)
 	if scenario == nil {
 		return response.WithStatus(ResponseStatusNotFound)
 	}

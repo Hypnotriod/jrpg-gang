@@ -17,7 +17,7 @@ func (c *GameController) handleCreateGameRoomRequest(playerId engine.PlayerId, r
 	if c.rooms.ExistsForPlayerId(playerId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	config, ok := c.scenariosConfig.ScenarioConfig(data.ScenarioId)
+	config, ok := c.scenariosConfig.GetScenarioConfig(data.ScenarioId)
 	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}

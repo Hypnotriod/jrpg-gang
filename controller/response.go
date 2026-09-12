@@ -32,6 +32,7 @@ const (
 	DataKeyUnit         ResponseDataKey = "unit"
 	DataKeyRoom         ResponseDataKey = "room"
 	DataKeyRooms        ResponseDataKey = "rooms"
+	DataKeyScenarios    ResponseDataKey = "scenarios"
 	DataKeyChat         ResponseDataKey = "chat"
 	DataKeyMessage      ResponseDataKey = "message"
 	DataKeyParticipant  ResponseDataKey = "participant"

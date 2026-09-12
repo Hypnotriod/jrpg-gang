@@ -18,6 +18,8 @@ func (p GamePath) Weight() int {
 }
 
 type GameScenarioConfig struct {
+	Id           GameScenarioId          `json:"id"`
+	Name         string                  `json:"name"`
 	Capacity     uint                    `json:"capacity"`
 	Requirements domain.UnitRequirements `json:"requirements"`
 }

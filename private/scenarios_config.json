@@ -1,6 +1,8 @@
-{
-     "training-01": {
+[
+    {
         "config": {
+            "id": "training-01",
+            "name": "Training Camp",
             "capacity": 1,
             "requirements": {}
         },
@@ -96,8 +98,10 @@
             ]
         ]
     },
-    "easy-01": {
+    {
         "config": {
+            "id": "easy-01",
+            "name": "Forgotten Ruins",
             "capacity": 4,
             "requirements": {}
         },
@@ -1434,8 +1438,10 @@
             ]
         ]
     },
-    "medium-01": {
+    {
         "config": {
+            "id": "medium-01",
+            "name": "Cursed Swamp",
             "capacity": 4,
             "requirements": {
                 "level": 2
@@ -3187,8 +3193,10 @@
             ]
         ]
     },
-    "advanced-01": {
+    {
         "config": {
+            "id": "advanced-01",
+            "name": "Dragon's Lair",
             "capacity": 4,
             "requirements": {
                 "level": 3
@@ -5433,4 +5441,4 @@
             ]
         ]
     }
-}
+]
