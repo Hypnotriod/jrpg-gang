@@ -20,9 +20,12 @@ func NewGameScenariosConfig() *GameScenariosConfig {
 func (c *GameScenariosConfig) GetScenario(id engine.GameScenarioId) *engine.GameScenario {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	return util.FindPtr(c.scenarios, func(value *engine.GameScenario) bool {
+	if scenario := util.FindPtr(c.scenarios, func(value *engine.GameScenario) bool {
 		return value.Config.Id == id
-	})
+	}); scenario != nil {
+		return scenario.Clone()
+	}
+	return nil
 }
 
 func (c *GameScenariosConfig) GetScenarioConfig(id engine.GameScenarioId) (engine.GameScenarioConfig, bool) {
