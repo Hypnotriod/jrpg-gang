@@ -22,20 +22,20 @@ type GameControllerBroadcaster interface {
 }
 
 type GameController struct {
-	users          *users.Users
-	rooms          *rooms.GameRooms
-	engines        *gameengines.GameEngines
-	shop           *shop.Shop
-	quests         *quests.Quests
-	mercenaries    *mercenaries.Mercenaries
-	employment     *employment.Employment
-	configurator   *engine.UnitConfigurator
-	itemsConfig    *config.GameItemsConfig
-	unitsConfig    *config.GameUnitsConfig
-	scenarioConfig *config.GameScenariosConfig
-	broadcaster    GameControllerBroadcaster
-	persistance    *persistance.Persistance
-	lobbyChat      *chat.Chat
+	users           *users.Users
+	rooms           *rooms.GameRooms
+	engines         *gameengines.GameEngines
+	shop            *shop.Shop
+	quests          *quests.Quests
+	mercenaries     *mercenaries.Mercenaries
+	employment      *employment.Employment
+	configurator    *engine.UnitConfigurator
+	itemsConfig     *config.GameItemsConfig
+	unitsConfig     *config.GameUnitsConfig
+	scenariosConfig *config.GameScenariosConfig
+	broadcaster     GameControllerBroadcaster
+	persistance     *persistance.Persistance
+	lobbyChat       *chat.Chat
 }
 
 func NewGameController(persistance *persistance.Persistance) *GameController {
@@ -49,7 +49,7 @@ func NewGameController(persistance *persistance.Persistance) *GameController {
 	c.employment = employment.NewEmployment()
 	c.itemsConfig = config.NewGameItemsConfig()
 	c.unitsConfig = config.NewGameUnitsConfig()
-	c.scenarioConfig = config.NewGameScenariosConfig()
+	c.scenariosConfig = config.NewGameScenariosConfig()
 	c.configurator = engine.NewUnitConfigurator()
 	c.broadcaster = c
 	c.persistance = persistance
@@ -79,7 +79,7 @@ func (c *GameController) init() {
 	if err := c.unitsConfig.LoadUnits(UNITS_CONFIG_PATH, c.itemsConfig); err != nil {
 		log.Fatal("Unable to load units configuration: ", err)
 	}
-	if err := c.scenarioConfig.LoadScenarios(SCENARIO_CONFIG_PATH, c.unitsConfig); err != nil {
+	if err := c.scenariosConfig.LoadScenarios(SCENARIO_CONFIG_PATH, c.unitsConfig); err != nil {
 		log.Fatal("Unable to load scenarios configuration: ", err)
 	}
 	if err := c.employment.Load(JOBS_CONFIG_PATH); err != nil {

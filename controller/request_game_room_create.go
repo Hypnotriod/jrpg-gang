@@ -6,7 +6,6 @@ import (
 )
 
 type CreateGameRoomRequestData struct {
-	Capacity   uint                  `json:"capacity"`
 	ScenarioId engine.GameScenarioId `json:"scenarioId"`
 }
 
@@ -15,18 +14,19 @@ func (c *GameController) handleCreateGameRoomRequest(playerId engine.PlayerId, r
 	if data == nil {
 		return response.WithStatus(ResponseStatusMalformed)
 	}
-	if data.Capacity == 0 || data.Capacity > GAME_ROOM_MAX_CAPACITY {
-		return response.WithStatus(ResponseStatusNotAllowed)
-	}
 	if c.rooms.ExistsForPlayerId(playerId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	if !c.scenarioConfig.Has(data.ScenarioId) {
+	config, ok := c.scenariosConfig.ScenarioConfig(data.ScenarioId)
+	if !ok {
 		return response.WithStatus(ResponseStatusNotFound)
 	}
 	hostUser, _ := c.users.Get(playerId)
+	if !hostUser.Unit.CheckRequirements(config.Requirements) {
+		return response.WithStatus(ResponseStatusNotAllowed)
+	}
 	c.rooms.Create(
-		data.Capacity,
+		config.Capacity,
 		data.ScenarioId,
 		hostUser,
 	)

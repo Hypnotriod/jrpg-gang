@@ -1,6 +1,9 @@
 {
      "training-01": {
-        "requirements": {},
+        "config": {
+            "capacity": 1,
+            "requirements": {}
+        },
         "spots": {
             "1-0": {
                 "name": "Training Camp",
@@ -94,7 +97,10 @@
         ]
     },
     "easy-01": {
-        "requirements": {},
+        "config": {
+            "capacity": 4,
+            "requirements": {}
+        },
         "spots": {
             "1-0": {
                 "name": "Forgotten Ruins",
@@ -1429,7 +1435,12 @@
         ]
     },
     "medium-01": {
-        "requirements": {},
+        "config": {
+            "capacity": 4,
+            "requirements": {
+                "level": 2
+            }
+        },
         "spots": {
             "1-0": {
                 "name": "Cursed Swamp",
@@ -3177,7 +3188,12 @@
         ]
     },
     "advanced-01": {
-        "requirements": {},
+        "config": {
+            "capacity": 4,
+            "requirements": {
+                "level": 3
+            }
+        },
         "spots": {
             "1-0": {
                 "name": "Dragon's Lair",

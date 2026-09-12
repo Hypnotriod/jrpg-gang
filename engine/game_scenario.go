@@ -17,13 +17,18 @@ func (p GamePath) Weight() int {
 	return p.W
 }
 
-type GameScenario struct {
-	Spots        map[GameSpotId]*Spot    `json:"spots"`
-	Path         [][]GamePath            `json:"path"`
+type GameScenarioConfig struct {
+	Capacity     uint                    `json:"capacity"`
 	Requirements domain.UnitRequirements `json:"requirements"`
-	rndGen       *util.RndGen
-	spot         *Spot
-	pathIndex    int
+}
+
+type GameScenario struct {
+	Spots     map[GameSpotId]*Spot `json:"spots"`
+	Path      [][]GamePath         `json:"path"`
+	Config    GameScenarioConfig   `json:"config"`
+	rndGen    *util.RndGen
+	spot      *Spot
+	pathIndex int
 }
 
 func (s *GameScenario) Clone() *GameScenario {
