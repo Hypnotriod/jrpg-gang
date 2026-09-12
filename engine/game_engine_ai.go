@@ -18,8 +18,7 @@ func (e *GameEngine) processAI(event *GameEvent) {
 		unit.State.ActionPoints >= MOVE_ACTION_POINTS && e.aiTryToApproachTheEnemy(event, unit) {
 		return
 	}
-	unit.ClearActionPoints()
-	e.onUnitCompleteAction(unit, nil)
+	e.aiSkip(event, unit)
 }
 
 func (e *GameEngine) processRetreatActionAI(event *GameEvent) {
@@ -106,6 +105,18 @@ func (e *GameEngine) getApproachBounds(unit *GameUnit) domain.ActionRange {
 		}
 	}
 	return bounds
+}
+
+func (e *GameEngine) aiSkip(event *GameEvent, unit *GameUnit) {
+	unitAction := NewGameUnitActionResult()
+	unitAction.Action = domain.Action{
+		Action: domain.ActionSkip,
+		Uid:    unit.Uid,
+	}
+	unitAction.Result = *domain.NewActionResult().WithResult(domain.ResultAccomplished)
+	event.UnitActionResult = unitAction
+	unit.ClearActionPoints()
+	e.onUnitCompleteAction(unit, nil)
 }
 
 func (e *GameEngine) aiMove(event *GameEvent, unit *GameUnit, position domain.Position) {

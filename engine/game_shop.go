@@ -12,14 +12,17 @@ type GameShopStatus struct {
 }
 
 type GameShop struct {
-	items  *domain.UnitInventory
-	rndGen *util.RndGen
+	items        *domain.UnitInventory
+	requirements map[domain.ItemCode]domain.UnitRequirements
+	rndGen       *util.RndGen
 }
 
 func NewGameShop(items *domain.UnitInventory, populateFromDescriptor func(inventory *domain.UnitInventory)) *GameShop {
 	s := &GameShop{}
+	s.requirements = map[domain.ItemCode]domain.UnitRequirements{}
 	s.rndGen = util.NewRndGen()
 	s.items = items
+	s.readItemRequirements(s.items)
 	populateFromDescriptor(s.items)
 	s.items.PopulateUids(s.rndGen)
 	s.items.UnequipAmmunition()
@@ -28,7 +31,7 @@ func NewGameShop(items *domain.UnitInventory, populateFromDescriptor func(invent
 
 func (s *GameShop) GetStatus(unit *domain.Unit) *GameShopStatus {
 	r := &GameShopStatus{}
-	r.Items = s.items.CloneFiltered(unit)
+	r.Items = s.filterItemsByRequirements(unit)
 	r.Purchase = map[uint]domain.UnitBooty{}
 	r.Repair = map[uint]domain.UnitBooty{}
 	for i := range unit.Inventory.Magic {
@@ -91,6 +94,9 @@ func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.Rnd
 	item := s.items.FindItem(action.ItemUid)
 	if item == nil {
 		return domain.NewActionResult().WithResult(domain.ResultNotFound)
+	}
+	if requirements, ok := s.requirements[item.Code]; ok && !unit.CheckRequirements(requirements) {
+		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
 	}
 	if !item.Price.Check(unit.Booty, action.Quantity) {
 		return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
@@ -224,4 +230,44 @@ func (s *GameShop) calculateRepairPrice(equipment *domain.Equipment) domain.Unit
 	price := equipment.Price
 	price.MultiplyAll(REPAIR_ITEM_PRICE_FACTOR * equipment.Wearout / equipment.Durability)
 	return price
+}
+
+func (s *GameShop) readItemRequirements(items *domain.UnitInventory) {
+	for _, d := range items.Descriptor {
+		if d.Requirements != nil {
+			s.requirements[d.Code] = *d.Requirements
+		}
+	}
+}
+
+func (s *GameShop) filterItemsByRequirements(unit *domain.Unit) *domain.UnitInventory {
+	r := &domain.UnitInventory{}
+	attributes := unit.TotalModification().Attributes
+	attributes.Accumulate(unit.Stats.Attributes)
+	attributes.Normalize()
+	r.Weapon = util.Filter(s.items.Weapon, func(item domain.Weapon) bool {
+		requirements, ok := s.requirements[item.Code]
+		return !ok || requirements.Check(unit, attributes)
+	})
+	r.Magic = util.Filter(s.items.Magic, func(item domain.Magic) bool {
+		requirements, ok := s.requirements[item.Code]
+		return !ok || requirements.Check(unit, attributes)
+	})
+	r.Armor = util.Filter(s.items.Armor, func(item domain.Armor) bool {
+		requirements, ok := s.requirements[item.Code]
+		return !ok || requirements.Check(unit, attributes)
+	})
+	r.Disposable = util.Filter(s.items.Disposable, func(item domain.Disposable) bool {
+		requirements, ok := s.requirements[item.Code]
+		return !ok || requirements.Check(unit, attributes)
+	})
+	r.Ammunition = util.Filter(s.items.Ammunition, func(item domain.Ammunition) bool {
+		requirements, ok := s.requirements[item.Code]
+		return !ok || requirements.Check(unit, attributes)
+	})
+	r.Provision = util.Filter(s.items.Provision, func(item domain.Provision) bool {
+		requirements, ok := s.requirements[item.Code]
+		return !ok || requirements.Check(unit, attributes)
+	})
+	return r
 }

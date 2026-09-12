@@ -2,7 +2,6 @@ package domain
 
 import (
 	"jrpg-gang/util"
-	"slices"
 )
 
 type UnitInventoryDescriptor struct {
@@ -31,44 +30,6 @@ func (i *UnitInventory) Clone() *UnitInventory {
 	r.Disposable = append(r.Disposable, i.Disposable...)
 	r.Ammunition = append(r.Ammunition, i.Ammunition...)
 	r.Provision = append(r.Provision, i.Provision...)
-	return r
-}
-
-func (i *UnitInventory) CloneFiltered(unit *Unit) *UnitInventory {
-	r := &UnitInventory{}
-	attributes := unit.TotalModification().Attributes
-	attributes.Accumulate(unit.Stats.Attributes)
-	attributes.Normalize()
-	r.Weapon = util.Filter(i.Weapon, func(w Weapon) bool {
-		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
-			return d.Code == w.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
-		})
-	})
-	r.Magic = util.Filter(i.Magic, func(m Magic) bool {
-		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
-			return d.Code == m.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
-		})
-	})
-	r.Armor = util.Filter(i.Armor, func(m Armor) bool {
-		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
-			return d.Code == m.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
-		})
-	})
-	r.Disposable = util.Filter(i.Disposable, func(m Disposable) bool {
-		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
-			return d.Code == m.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
-		})
-	})
-	r.Ammunition = util.Filter(i.Ammunition, func(m Ammunition) bool {
-		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
-			return d.Code == m.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
-		})
-	})
-	r.Provision = util.Filter(i.Provision, func(m Provision) bool {
-		return slices.ContainsFunc(i.Descriptor, func(d UnitInventoryDescriptor) bool {
-			return d.Code == m.Code && (d.Requirements == nil || d.Requirements.Check(unit, attributes))
-		})
-	})
 	return r
 }
 
@@ -736,7 +697,8 @@ func (i *UnitInventory) PopulateCodeToItemMap(codeToItem *map[ItemCode]any) {
 	}
 }
 
-func (i *UnitInventory) FillDescriptor() {
+func (i *UnitInventory) UpdateDescriptor() {
+	i.Descriptor = []UnitInventoryDescriptor{}
 	for _, item := range i.Ammunition {
 		i.Descriptor = append(i.Descriptor, UnitInventoryDescriptor{
 			Code:     item.Code,

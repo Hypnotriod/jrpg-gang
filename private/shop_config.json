@@ -198,13 +198,13 @@
         {
             "code": "necklace-01",
             "requirements": {
-                "level": 2
+                "level": 3
             }
         },
         {
             "code": "necklace-02",
             "requirements": {
-                "level": 2
+                "level": 3
             }
         },
         {
@@ -222,13 +222,13 @@
         {
             "code": "necklace-05",
             "requirements": {
-                "level": 2
+                "level": 3
             }
         },
         {
             "code": "necklace-06",
             "requirements": {
-                "level": 2
+                "level": 5
             }
         },
         {
@@ -270,7 +270,9 @@
         {
             "code": "club-01",
             "requirements": {
-                "level": 2
+                "achievements": {
+                    "kill-5-trolls": 5
+                }
             }
         },
         {
@@ -298,12 +300,15 @@
             }
         },
         {
-            "code": "spear-01"
+            "code": "spear-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
             "code": "harpoon-01",
             "requirements": {
-                "level": 2
+                "level": 3
             }
         },
         {
@@ -345,7 +350,7 @@
         {
             "code": "axe-02",
             "requirements": {
-                "level": 2
+                "level": 3
             }
         },
         {
@@ -363,13 +368,10 @@
             }
         },
         {
-            "code": "fire-touch-01",
-            "requirements": {
-                "level": 2
-            }
+            "code": "magic-health-01"
         },
         {
-            "code": "magic-health-01"
+            "code": "fire-touch-01"
         },
         {
             "code": "magic-health-02",
@@ -378,18 +380,27 @@
             }
         },
         {
-            "code": "magic-shield-01"
+            "code": "magic-shield-01",
+            "requirements": {
+                "level": 2
+            }
         },
         {
-            "code": "magic-exhaustion-01"
+            "code": "magic-exhaustion-01",
+            "requirements": {
+                "level": 3
+            }
         },
         {
-            "code": "magic-mana-drain-01"
+            "code": "magic-mana-drain-01",
+            "requirements": {
+                "level": 3
+            }
         },
         {
             "code": "magic-blessing-01",
             "requirements": {
-                "level": 3
+                "level": 5
             }
         },
         {

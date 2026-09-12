@@ -56,7 +56,7 @@ func (u *GameUnit) Clone() *GameUnit {
 
 func (u *GameUnit) ToPersist() *GameUnit {
 	r := u.Clone()
-	r.Inventory.FillDescriptor()
+	r.Inventory.UpdateDescriptor()
 	return r
 }
 

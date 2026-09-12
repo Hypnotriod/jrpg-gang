@@ -801,7 +801,7 @@
             "type": "weapon",
             "name": "Fire Axe",
             "code": "fire-axe-01",
-            "description": "A massive axe forged in the heart of a volcano, its blade still glowing with infernal heat. Each swing leaves trails of flame and the acrid stench of burning souls.",
+            "description": "A massive axe forged in the heart of a volcano, its blade still glowing with infernal heat.",
             "durability": 800,
             "slot": "weapon",
             "canBeSold": true,
@@ -1117,7 +1117,7 @@
             "type": "weapon",
             "name": "Halberd",
             "code": "halberd-01",
-            "description": "A war pike stained with old blood, its blade forged to rend armor and marrow alike. It feels alive in the hands of one who walks the twilight between war and nightmare.",
+            "description": "A war pike stained with old blood, its blade forged to rend armor and marrow alike.",
             "durability": 500,
             "slot": "weapon",
             "canBeSold": true,
@@ -1156,7 +1156,7 @@
             "type": "weapon",
             "name": "Wooden Staff",
             "code": "wooden-staff-01",
-            "description": "A crooked staff of rough-hewn wood, etched with novice runes in forgotten caverns. It hums with untapped potential, a fragile beacon in shadowed realms where darkness awaits.",
+            "description": "A crooked staff of rough-hewn wood, etched with novice runes in forgotten caverns.",
             "durability": 100,
             "slot": "weapon",
             "canBeSold": true,
@@ -1189,7 +1189,7 @@
             "type": "weapon",
             "name": "Pitchfork",
             "code": "pitchfork-01",
-            "description": "A warped farming fork stained with old blood, its tines whispering of graves and harvests of flesh. It is the kind of tool that turns the desperate into hunters beneath a broken sky.",
+            "description": "A warped farming fork stained with old blood, its tines whispering of graves and harvests of flesh.",
             "durability": 150,
             "slot": "weapon",
             "canBeSold": true,
@@ -1284,7 +1284,7 @@
             "type": "magic",
             "name": "Exhaustion",
             "code": "magic-exhaustion-01",
-            "description": "A withering curse that drains the vital essence from enemies, leaving them hollow and spent. Their limbs grow leaden as the spell feeds on their very vigor.",
+            "description": "A withering curse that drains the vital essence from enemies, leaving them hollow and spent.",
             "price": {
                 "coins": 800,
                 "ruby": 3
@@ -1311,7 +1311,7 @@
             "type": "magic",
             "name": "Mana Drain",
             "code": "magic-mana-drain-01",
-            "description": "A parasitic spell that hungrily siphons arcane power from the minds of mages. Their inner light dims as their magic is drawn into the abyss.",
+            "description": "A parasitic spell that hungrily siphons arcane power from the minds of mages.",
             "price": {
                 "coins": 650,
                 "ruby": 3
@@ -1338,7 +1338,7 @@
             "type": "magic",
             "name": "Light Strike",
             "code": "magic-lighting-strike-01",
-            "description": "A terrible channeling of jagged lightning that splits the sky and scorches flesh. The storm's wrath made manifest, spreading ruin in twin arcs of divine fury.",
+            "description": "A terrible channeling of jagged lightning that splits the sky and scorches flesh.",
             "price": {
                 "coins": 1800,
                 "ruby": 10
@@ -1380,7 +1380,7 @@
             "type": "magic",
             "name": "Blessing",
             "code": "magic-blessing-01",
-            "description": "An eldritch enchantment that heightens the senses and quickens the body, granting glimpses of fate's flow. The blessed move like shadows and strike before thought.",
+            "description": "An eldritch enchantment that heightens the senses and quickens the body, granting glimpses of fate's flow.",
             "price": {
                 "coins": 1500,
                 "ruby": 3
@@ -1412,7 +1412,7 @@
             "type": "magic",
             "name": "Magic Shield",
             "code": "magic-shield-01",
-            "description": "A shimmering ward of spectral force that hardens flesh against piercing blows and crushing strikes. It weaves a cold barrier around the bearer, turning enemy blows into brittle echoes.",
+            "description": "A shimmering ward of spectral force that hardens flesh against piercing blows and crushing strikes.",
             "price": {
                 "coins": 1000
             },
@@ -1510,7 +1510,7 @@
             "type": "armor",
             "name": "Rusty Helmet",
             "code": "rusty-helmet-01",
-            "description": "A battered helm, its iron pitted and stained by the blood of forgotten battles. Offers scant protection, but better than a bare skull beneath the moon.",
+            "description": "A battered helm, its iron pitted and stained by the blood of forgotten battles.",
             "price": {
                 "coins": 30
             },
@@ -1536,7 +1536,7 @@
             "type": "armor",
             "name": "Rusty Boots",
             "code": "rusty-boots-01",
-            "description": "Boots of cracked leather and rusted buckles, worn by countless miles and misery. Each step echoes with the ghosts of the fallen.",
+            "description": "Boots of cracked leather and rusted buckles, worn by countless miles and misery.",
             "price": {
                 "coins": 30
             },
@@ -1562,7 +1562,7 @@
             "type": "armor",
             "name": "Rusty Shield",
             "code": "rusty-shield-01",
-            "description": "A splintered shield, its surface marred by axe and arrow. It has turned aside death more than once, but its time is nearly spent.",
+            "description": "A splintered shield, its surface marred by axe and arrow.",
             "price": {
                 "coins": 50
             },
@@ -1644,7 +1644,7 @@
             "type": "armor",
             "name": "Helmet II",
             "code": "helmet-02",
-            "description": "A crude iron helm, hammered in haste and stained by the blood of its first wearer. It offers cold certainty against the whispers of the grave.",
+            "description": "A crude iron helm, hammered in haste and stained by the blood of its first wearer.",
             "durability": 500,
             "slot": "head",
             "canBeSold": true,
@@ -1675,7 +1675,7 @@
             "type": "armor",
             "name": "Helmet III",
             "code": "helmet-03",
-            "description": "An open-faced helm charred black, its crest still smoking from battles against demons. Wearing it is to feel the scorch of hellfire and the gaze of unseen enemies.",
+            "description": "An open-faced helm charred black, its crest still smoking from battles against demons.",
             "durability": 700,
             "slot": "head",
             "canBeSold": true,
@@ -1758,7 +1758,7 @@
             "type": "armor",
             "name": "Boots III",
             "code": "boots-03",
-            "description": "Boots forged in the black heat of the abyss, their iron plates still whispering with the cries of fallen knights. Each step rings like chains around a condemned soul.",
+            "description": "Boots forged in the black heat of the abyss, their iron plates still whispering with the cries of fallen knights.",
             "durability": 700,
             "slot": "leg",
             "canBeSold": true,
@@ -1789,7 +1789,7 @@
             "type": "armor",
             "name": "Gloves",
             "code": "gloves-01",
-            "description": "Gloves of rough leather, their seams darkened by sweat and old blood. They shield the hands from more than just the cold.",
+            "description": "Gloves of rough leather, their seams darkened by sweat and old blood.",
             "durability": 400,
             "slot": "hand",
             "canBeSold": true,
@@ -1843,7 +1843,7 @@
             "type": "armor",
             "name": "Knight Gloves",
             "code": "gloves-03",
-            "description": "Gauntlets of hardened leather, once worn by a knight whose soul rotted beneath his armor. They still carry the chill of his final breath and the echo of steel on bone.",
+            "description": "Gauntlets of hardened leather, once worn by a knight whose soul rotted beneath his armor.",
             "durability": 700,
             "slot": "hand",
             "canBeSold": true,
@@ -1871,7 +1871,7 @@
             "type": "armor",
             "name": "Light Gloves",
             "code": "lightning-gloves-01",
-            "description": "Gloves woven with silver thread, crackling faintly with arcane lightning. Each strike is charged with the storm's fury.",
+            "description": "Gloves woven with silver thread, crackling faintly with arcane lightning.",
             "durability": 700,
             "slot": "hand",
             "canBeSold": true,
@@ -1928,7 +1928,7 @@
             "type": "armor",
             "name": "Shield II",
             "code": "shield-02",
-            "description": "A weighty slab of iron, dented and scorched by infernal flames. Its face bears the ghostly handprints of those who fell beneath its edge, a grim reminder that it has turned more than steel.",
+            "description": "A weighty slab of iron, dented and scorched by infernal flames.",
             "durability": 500,
             "slot": "weapon",
             "canBeSold": true,
@@ -1956,7 +1956,7 @@
             "type": "armor",
             "name": "Fire Shield",
             "code": "shield-03",
-            "description": "A scorched barrier of blackened steel, humming with imprisoned embers. Flames crawl along its rim like living things, searing any who dare strike its face while sparing its bearer.",
+            "description": "A scorched barrier of blackened steel, humming with imprisoned embers.",
             "durability": 700,
             "slot": "weapon",
             "canBeSold": true,
@@ -1985,7 +1985,7 @@
             "type": "armor",
             "name": "Armor I",
             "code": "basic-armor-01",
-            "description": "A pallid cuirass of stitched hide, soaked in the sweat and blood of countless nameless warriors. It whispers of a fragile shield between a mortal chest and the ravenous void.",
+            "description": "A pallid cuirass of stitched hide, soaked in the sweat and blood of countless nameless warriors.",
             "durability": 400,
             "slot": "body",
             "canBeSold": true,
@@ -2047,7 +2047,7 @@
             "type": "armor",
             "name": "Armor III",
             "code": "armor-02",
-            "description": "A hulking shell of cold metal plates, hammered from the bones of vanquished giants. It groans with each movement, as if the weight of countless dead souls presses upon its wearer.",
+            "description": "A hulking shell of cold metal plates, hammered from the bones of vanquished giants.",
             "durability": 700,
             "slot": "body",
             "canBeSold": true,
@@ -2078,7 +2078,7 @@
             "type": "armor",
             "name": "Armor IV",
             "code": "armor-03",
-            "description": "An ancient suit of plate warped by eldritch wards, its surface etched with runes that hiss like snakes. Fire, ice and lightning hiss and shatter against it, but each ward demands a toll from the flesh within.",
+            "description": "An ancient suit of plate warped by eldritch wards, its surface etched with runes that hiss like snakes.",
             "durability": 1000,
             "slot": "body",
             "canBeSold": true,
@@ -2108,7 +2108,7 @@
         {
             "type": "armor",
             "name": "Mage Hat I",
-            "description": "A pointed hat of woven indigo, its brim embroidered with trembling runes that glow faintly in the darkness. It marks one as a student of the arcane arts, though whether blessing or curse remains unclear.",
+            "description": "A pointed hat of woven indigo, its brim embroidered with trembling runes that glow faintly in the darkness.",
             "code": "sorcerer-hat-01",
             "price": {
                 "coins": 450
@@ -2141,7 +2141,7 @@
         {
             "type": "armor",
             "name": "Mage Hat II",
-            "description": "A tall cone of midnight silk, crowned with an ornament that pulses with inner light. Those who wear it feel the weight of forbidden knowledge pressing against their mind, a constant reminder of the price of power.",
+            "description": "A tall cone of midnight silk, crowned with an ornament that pulses with inner light.",
             "code": "sorcerer-hat-02",
             "price": {
                 "coins": 1200,
@@ -2179,7 +2179,7 @@
         {
             "type": "armor",
             "name": "Mana Neck",
-            "description": "A necklace strung with shards of sapphire, pulsing with arcane energy. It shields the soul from the hungers of the void.",
+            "description": "A necklace strung with shards of sapphire, pulsing with arcane energy.",
             "code": "necklace-01",
             "price": {
                 "coins": 450
@@ -2206,7 +2206,7 @@
         {
             "type": "armor",
             "name": "Initiative Neck",
-            "description": "A chain of black iron, worn by those who would seize fate before it seizes them. It sharpens the mind for the coming storm.",
+            "description": "A chain of black iron, worn by those who would seize fate before it seizes them.",
             "code": "necklace-02",
             "price": {
                 "coins": 450
@@ -2248,7 +2248,7 @@
         {
             "type": "armor",
             "name": "Stamina Neck",
-            "description": "A choker of charred bone and withered flesh, bound by a cord of shadow-sinew. It draws vigor from the lingering heat of ruin, lending its wearer a restless endurance in the heart of decay.",
+            "description": "A choker of charred bone and withered flesh, bound by a cord of shadow-sinew.",
             "code": "necklace-04",
             "price": {
                 "coins": 300
@@ -2269,7 +2269,7 @@
         {
             "type": "armor",
             "name": "Vitality Neck",
-            "description": "A braided collar of blackened sinew and frostbitten marrow, set with a pulse of slow-burning vitality. It whispers of life stolen from the dying earth, keeping the bearer's blood warm against the ruin of night.",
+            "description": "A braided collar of blackened sinew and frostbitten marrow, set with a pulse of slow-burning vitality.",
             "code": "necklace-05",
             "price": {
                 "coins": 500
@@ -2290,7 +2290,7 @@
         {
             "type": "armor",
             "name": "Luck Neck",
-            "description": "A blackened chain of bone and wyrm-tooth, its pendant a blood-black opal that hums with the cruel favor of fate. The bearer feels unseen eyes watching every die cast and every step taken in the shadows.",
+            "description": "A blackened chain of bone and wyrm-tooth, its pendant a blood-black opal that hums with the cruel favor of fate.",
             "code": "necklace-06",
             "price": {
                 "coins": 500
@@ -2311,7 +2311,7 @@
         {
             "type": "armor",
             "name": "Student Cloak",
-            "description": "A novice's mantle of deep violet, its threads faintly shimmering with borrowed magic. It whispers of the wearer's first steps into forbidden knowledge and the price they will yet pay.",
+            "description": "A novice's mantle of deep violet, its threads faintly shimmering with borrowed magic.",
             "code": "sorcerer-cloak-01",
             "price": {
                 "coins": 650
@@ -2344,7 +2344,7 @@
         {
             "type": "armor",
             "name": "Mage Cloak I",
-            "description": "A cloak of twilight shadow, worn by those who have tasted true power. Its weave shifts subtly in candlelight, as if the fabric itself draws from an unseen dimension beyond our own.",
+            "description": "A cloak of twilight shadow, worn by those who have tasted true power.",
             "code": "sorcerer-cloak-02",
             "price": {
                 "coins": 1400
@@ -2383,7 +2383,7 @@
         {
             "type": "armor",
             "name": "Mage Cloak II",
-            "description": "A garment of woven starlight and shadow, worn only by those who have mastered the eldritch arts. Its hem trails wisps of spectral flame, and those who look upon it too long swear they see impossible geometries folded within its folds.",
+            "description": "A garment of woven starlight and shadow, worn only by those who have mastered the eldritch arts.",
             "code": "sorcerer-cloak-03",
             "price": {
                 "coins": 2500,
@@ -2433,7 +2433,7 @@
             "name": "Health Small",
             "type": "disposable",
             "code": "health-potion-01",
-            "description": "A vial of crimson elixir, rumored to be distilled from the blood of saints and sinners alike. Its warmth staves off death, if only for a while.",
+            "description": "A vial of crimson elixir, rumored to be distilled from the blood of saints and sinners alike.",
             "canBeSold": true,
             "canBeThrownAway": true,
             "modification": [
@@ -2463,7 +2463,7 @@
             "name": "Health Big",
             "type": "disposable",
             "code": "health-potion-02",
-            "description": "A vial of thick crimson essence, swirling with raw vitality torn from the dying moments of forgotten beasts. Its power mends grievous wounds, though those who drink it claim to taste the lingering screams of its creation.",
+            "description": "A vial of thick crimson essence, swirling with raw vitality torn from the dying moments of forgotten beasts.",
             "canBeSold": true,
             "canBeThrownAway": true,
             "modification": [
@@ -2523,7 +2523,7 @@
             "name": "Stamina Big",
             "type": "disposable",
             "code": "stamina-potion-02",
-            "description": "A potent draught of midnight hue, brewed from the distilled fury of restless spirits and the marrow of fallen titans. It floods weary limbs with an otherworldly strength, though the body aches long after the power fades.",
+            "description": "A potent draught of midnight hue, brewed from the distilled fury of restless spirits and the marrow of fallen titans.",
             "canBeSold": true,
             "canBeThrownAway": true,
             "modification": [
@@ -2583,7 +2583,7 @@
             "name": "Mana Big",
             "type": "disposable",
             "code": "mana-potion-02",
-            "description": "A vessel of swirling indigo essence, distilled from the shattered minds of mad sorcerers and the dying echoes of forbidden incantations. It floods the mind with eldritch power and arcane clarity, though visions of cosmic truths and gnawing madness linger long in the drinker's darkest hours.",
+            "description": "A vessel of swirling indigo essence, distilled from the shattered minds of mad sorcerers and the dying echoes of forbidden incantations.",
             "canBeSold": true,
             "canBeThrownAway": true,
             "modification": [
@@ -2636,7 +2636,7 @@
             "name": "Agility Big",
             "type": "disposable",
             "code": "agility-potion-02",
-            "description": "A swirling elixir of liquid mercury and captured shadows, forged from the essence of hunted phantoms and the blood of swift predators. It grants unearthly speed and reflexes, turning the drinker into a blur of motion, though the shadows cling to their soul and whisper of relentless pursuit.",
+            "description": "A swirling elixir of liquid mercury and captured shadows, forged from the essence of hunted phantoms and the blood of swift predators.",
             "canBeSold": true,
             "canBeThrownAway": true,
             "modification": [
