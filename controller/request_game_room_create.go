@@ -25,11 +25,7 @@ func (c *GameController) handleCreateGameRoomRequest(playerId engine.PlayerId, r
 	if !hostUser.Unit.CheckRequirements(config.Requirements) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
-	c.rooms.Create(
-		config.Capacity,
-		data.ScenarioId,
-		hostUser,
-	)
+	c.rooms.Create(config, hostUser)
 	c.users.ChangeUserStatus(playerId, users.UserStatusInRoom)
 	roomInfo := c.rooms.GetRoomInfoByPlayerId(playerId)
 	response.Data[DataKeyRoom] = roomInfo

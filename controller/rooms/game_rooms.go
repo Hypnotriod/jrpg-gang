@@ -22,12 +22,11 @@ func NewGameRooms() *GameRooms {
 	return r
 }
 
-func (r *GameRooms) Create(capacity uint, scenarioId engine.GameScenarioId, hostUser users.User) {
+func (r *GameRooms) Create(scenarioConfig engine.GameScenarioConfig, hostUser users.User) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 	room := newGameRoom()
-	room.Capacity = capacity
-	room.ScenarioId = scenarioId
+	room.ScenarioConfig = scenarioConfig
 	room.host = hostUser
 	room.Uid = r.rndGen.NextUid()
 	r.rooms[room.Uid] = room

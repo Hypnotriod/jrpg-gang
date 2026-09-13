@@ -7,9 +7,8 @@ import (
 )
 
 type GameRoom struct {
-	Uid              uint                  `json:"uid"`
-	Capacity         uint                  `json:"capacity"`
-	ScenarioId       engine.GameScenarioId `json:"scenarioId"`
+	Uid              uint                      `json:"uid"`
+	ScenarioConfig   engine.GameScenarioConfig `json:"scenarioConfig"`
 	host             users.User
 	joinedUsers      []users.User
 	blockedPlayerIds []engine.PlayerId
@@ -17,7 +16,7 @@ type GameRoom struct {
 }
 
 func (r *GameRoom) IsFull() bool {
-	return len(r.joinedUsers)+len(r.mercenaries) >= int(r.Capacity)-1
+	return len(r.joinedUsers)+len(r.mercenaries) >= int(r.ScenarioConfig.Capacity)-1
 }
 
 func (r *GameRoom) IsBlocked(playerId engine.PlayerId) bool {

@@ -22,6 +22,7 @@ type GameScenarioConfig struct {
 	Name         string                  `json:"name"`
 	Capacity     uint                    `json:"capacity"`
 	Requirements domain.UnitRequirements `json:"requirements"`
+	Description  string                  `json:"description,omitempty"`
 }
 
 type GameScenario struct {
