@@ -1241,7 +1241,7 @@
                 "physique": 5,
                 "agility": 10,
                 "endurance": 5,
-                "intelligence": 0,
+                "intelligence": 6,
                 "initiative": 5,
                 "luck": 5
             },
@@ -1268,7 +1268,7 @@
         "inventory": {
             "descriptor": [
                 {
-                    "code": "teeth-01",
+                    "code": "cursed-claws-01",
                     "equipped": true
                 }
             ]
@@ -1297,16 +1297,16 @@
                 "experience": 800
             },
             "baseAttributes": {
-                "health": 150,
+                "health": 250,
                 "stamina": 150,
                 "actionPoints": 12
             },
             "attributes": {
                 "strength": 15,
-                "physique": 15,
+                "physique": 20,
                 "agility": 15,
                 "endurance": 30,
-                "intelligence": 0,
+                "intelligence": 10,
                 "initiative": 15,
                 "luck": 5
             },
@@ -1391,7 +1391,7 @@
             },
             "attributes": {
                 "strength": 25,
-                "physique": 18,
+                "physique": 30,
                 "agility": 15,
                 "endurance": 30,
                 "intelligence": 15,
@@ -1606,7 +1606,7 @@
                     "code": "fist-01"
                 },
                 {
-                    "code": "sword-01",
+                    "code": "cursed-sword-01",
                     "equipped": true
                 }
             ]

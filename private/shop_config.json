@@ -294,6 +294,14 @@
             }
         },
         {
+            "code": "cursed-sword-01",
+            "requirements": {
+                "achievements": {
+                    "kill-10-skeletons": 10
+                }
+            }
+        },
+        {
             "code": "sword-magic-01",
             "requirements": {
                 "level": 5

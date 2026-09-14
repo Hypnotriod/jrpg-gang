@@ -130,6 +130,36 @@
         },
         {
             "type": "weapon",
+            "name": "Cursed Claws",
+            "code": "cursed-claws-01",
+            "description": "Hooked talons blackened by black sorcery, each scrape leaves a whispering curse beneath the skin.",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "cutting": 10,
+                    "curse": 4,
+                    "deviation": 3
+                },
+                {
+                    "chance": 15,
+                    "duration": 3,
+                    "bleeding": 2,
+                    "deviation": 1
+                }
+            ],
+            "useCost": {
+                "stamina": 10,
+                "actionPoints": 4
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Teeth",
             "code": "teeth-02",
             "description": "A feral lunge from above, jaws snapping with primal hunger. The shriek of prey echoes in the night.",
@@ -343,6 +373,45 @@
             },
             "price": {
                 "coins": 2000
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Cursed Sword",
+            "code": "cursed-sword-01",
+            "description": "A blade cursed by a forgotten saint, its edge drinks the names of the fallen and leaves only ash in its wake.",
+            "slot": "weapon",
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "physique": 12
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 75,
+                    "cutting": 16,
+                    "crushing": 2,
+                    "curse": 5,
+                    "deviation": 7
+                },
+                {
+                    "duration": 3,
+                    "chance": 15,
+                    "bleeding": 3,
+                    "deviation": 5
+                }
+            ],
+            "useCost": {
+                "stamina": 15,
+                "actionPoints": 4
+            },
+            "price": {
+                "coins": 2200,
+                "ruby": 4
             }
         },
         {
