@@ -380,6 +380,7 @@
             "name": "Cursed Sword",
             "code": "cursed-sword-01",
             "description": "A blade cursed by a forgotten saint, its edge drinks the names of the fallen and leaves only ash in its wake.",
+            "durability": 400,
             "slot": "weapon",
             "canBeThrownAway": true,
             "slotsNumber": 1,
