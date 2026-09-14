@@ -2725,6 +2725,36 @@
             }
         },
         {
+            "name": "Calming Brew",
+            "type": "disposable",
+            "code": "stress-potion-01",
+            "description": "A bitter draught of moon-ash and blackroot, brewed to still the mind in battle and keep the bearer from slipping into madness.",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "modification": [
+                {
+                    "deviation": 5,
+                    "recovery": {
+                        "stress": 30
+                    }
+                },
+                {
+                    "chance": 50,
+                    "duration": 5,
+                    "deviation": 1,
+                    "recovery": {
+                        "stress": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 30
+            },
+            "useCost": {
+                "actionPoints": 4
+            }
+        },
+        {
             "name": "Poison",
             "type": "disposable",
             "code": "poison-01",

@@ -85,6 +85,9 @@
             "code": "antidote-potion-01"
         },
         {
+            "code": "stress-potion-01"
+        },
+        {
             "code": "poison-01",
             "requirements": {
                 "level": 2

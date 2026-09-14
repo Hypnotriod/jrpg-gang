@@ -40,3 +40,7 @@ func (s *UnitState) Saturate(limit UnitBaseAttributes) {
 	s.UnitBaseAttributes.Saturate(limit)
 	s.Stress = min(FULL_CHANCE, s.Stress)
 }
+
+func (r UnitState) IsZero() bool {
+	return r.UnitBaseAttributes.IsZero() && r.Stress == 0
+}
