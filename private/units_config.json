@@ -1256,8 +1256,8 @@
                 "exhaustion": 100,
                 "manaDrain": 0,
                 "bleeding": 100,
-                "fear": 0,
-                "curse": 0,
+                "fear": 100,
+                "curse": 100,
                 "madness": 0
             }
         },
@@ -1410,7 +1410,7 @@
                 "manaDrain": 10,
                 "bleeding": 0,
                 "fear": 100,
-                "curse": 100,
+                "curse": 0,
                 "madness": 100
             }
         },
@@ -1757,7 +1757,21 @@
                 "initiative": 7,
                 "luck": 7
             },
-            "resistance": {}
+            "resistance": {
+                "stabbing": 0,
+                "cutting": 0,
+                "crushing": 0,
+                "fire": 0,
+                "cold": 0,
+                "lightning": 0,
+                "poison": 0,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "bleeding": 0,
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
+            }
         },
         "slots": {
             "head": 1,
@@ -1824,8 +1838,19 @@
                 "luck": 8
             },
             "resistance": {
+                "stabbing": 0,
+                "cutting": 0,
+                "crushing": 0,
                 "fire": 12,
-                "poison": 10
+                "cold": 0,
+                "lightning": 0,
+                "poison": 10,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "bleeding": 0,
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
             }
         },
         "slots": {
@@ -1899,7 +1924,19 @@
                 "luck": 5
             },
             "resistance": {
-                "poison": 100
+                "stabbing": 0,
+                "cutting": 0,
+                "crushing": 0,
+                "fire": 0,
+                "cold": 0,
+                "lightning": 0,
+                "poison": 100,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "bleeding": 0,
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
             }
         },
         "slots": {
