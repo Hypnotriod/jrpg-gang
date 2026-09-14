@@ -1241,7 +1241,7 @@
                 "physique": 5,
                 "agility": 10,
                 "endurance": 5,
-                "intelligence": 6,
+                "intelligence": 0,
                 "initiative": 5,
                 "luck": 5
             },

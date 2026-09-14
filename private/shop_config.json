@@ -427,6 +427,9 @@
             "code": "provision-wine-01"
         },
         {
+            "code": "provision-beer-01"
+        },
+        {
             "code": "provision-salad-01",
             "requirements": {
                 "level": 2

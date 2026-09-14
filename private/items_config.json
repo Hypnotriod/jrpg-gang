@@ -144,7 +144,7 @@
                     "chance": 60,
                     "cutting": 10,
                     "curse": 4,
-                    "deviation": 3
+                    "deviation": 2
                 },
                 {
                     "chance": 15,
@@ -3093,6 +3093,20 @@
             "recovery": {
                 "health": 100,
                 "mana": 100
+            }
+        },
+        {
+            "type": "provision",
+            "name": "Beer",
+            "description": "A bitter brew of malt and midnight, brewed for those who would dull the ache of a haunted heart. One sip stifles the dread, if only for a while.",
+            "code": "provision-beer-01",
+            "canBeThrownAway": true,
+            "canBeSold": true,
+            "price": {
+                "coins": 20
+            },
+            "recovery": {
+                "stress": 50
             }
         }
     ]
