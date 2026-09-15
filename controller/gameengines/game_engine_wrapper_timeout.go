@@ -6,8 +6,8 @@ import (
 )
 
 const NEXT_PHASE_TIMEOUT_SHORT_SEC int = 7
-const NEXT_PHASE_TIMEOUT_MEDIUM_SEC int = 32
-const NEXT_PHASE_TIMEOUT_LONG_SEC int = 62
+const NEXT_PHASE_TIMEOUT_MEDIUM_SEC int = 60 + 2
+const NEXT_PHASE_TIMEOUT_LONG_SEC int = 120 + 2
 
 func (w *GameEngineWrapper) getNextPhaseTimeout() (int, bool) {
 	switch w.engine.GetPhase() {
