@@ -2380,6 +2380,31 @@
         },
         {
             "type": "armor",
+            "name": "Holy Neck",
+            "description": "A tarnished relic of pale silver, its broken halo etched with prayers that burn against the curse and hold madness at the threshold of the soul.",
+            "code": "necklace-07",
+            "price": {
+                "coins": 550
+            },
+            "durability": 500,
+            "slot": "neck",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "modification": [
+                {
+                    "resistance": {
+                        "curse": 5,
+                        "madness": 5
+                    },
+                    "recovery": {
+                        "stress": 4
+                    }
+                }
+            ]
+        },
+        {
+            "type": "armor",
             "name": "Student Cloak",
             "description": "A novice's mantle of deep violet, its threads faintly shimmering with borrowed magic.",
             "code": "sorcerer-cloak-01",

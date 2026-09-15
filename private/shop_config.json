@@ -229,6 +229,12 @@
             }
         },
         {
+            "code": "necklace-07",
+            "requirements": {
+                "level": 3
+            }
+        },
+        {
             "code": "necklace-06",
             "requirements": {
                 "level": 5

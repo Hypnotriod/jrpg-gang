@@ -192,9 +192,9 @@
                 "exhaustion": 7,
                 "manaDrain": 0,
                 "bleeding": 7,
-                "fear": 10,
-                "curse": 10,
-                "madness": 10
+                "fear": 8,
+                "curse": 5,
+                "madness": 5
             }
         },
         "inventory": {
