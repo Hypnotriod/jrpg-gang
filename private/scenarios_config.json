@@ -38,14 +38,14 @@
                             {"type": 0, "code": "tile-floor-04", "factions": [0]}
                         ],
                         [
-                            {"type": 0, "code": "tile-wall-04", "factions": []},
+                            {"type": 1, "code": "tile-wall-04", "factions": []},
                             {"type": 0, "code": "tile-floor-04", "factions": [1]},
-                            {"type": 0, "code": "tile-wall-04", "factions": []}
+                            {"type": 1, "code": "tile-wall-04", "factions": []}
                         ],
                         [
-                            {"type": 0, "code": "tile-wall-04", "factions": []},
+                            {"type": 1, "code": "tile-wall-04", "factions": []},
                             {"type": 0, "code": "tile-floor-04", "factions": [1]},
-                            {"type": 0, "code": "tile-wall-04", "factions": []}
+                            {"type": 1, "code": "tile-wall-04", "factions": []}
                         ],
                         [
                             {"type": 0, "code": "tile-floor-04", "factions": [1]},
