@@ -1857,6 +1857,31 @@
         },
         {
             "type": "armor",
+            "name": "Hand bandage",
+            "code": "hand-bandage-01",
+            "description": "A rough strip of linen, wrapped tight. It offers only the slightest protection against the slow ruin of blood loss.",
+            "durability": 50,
+            "slot": "hand",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 1,
+                "physique": 1
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "bleeding": 1
+                    }
+                }
+            ],
+            "price": {
+                "coins": 25
+            }
+        },
+        {
+            "type": "armor",
             "name": "Gloves",
             "code": "gloves-01",
             "description": "Gloves of rough leather, their seams darkened by sweat and old blood.",
