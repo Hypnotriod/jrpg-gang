@@ -80,6 +80,10 @@ func (e *GameEngine) GetPhase() GamePhase {
 	return e.state.phase
 }
 
+func (e *GameEngine) HasGamePhaseTimer() bool {
+	return e.scenario.Config.Timer
+}
+
 func (e *GameEngine) GetPlayersInfo() []PlayerInfo {
 	result := []PlayerInfo{}
 	for _, unit := range e.actors {

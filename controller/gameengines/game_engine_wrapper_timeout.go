@@ -10,18 +10,20 @@ const NEXT_PHASE_TIMEOUT_MEDIUM_SEC int = 60 + 2
 const NEXT_PHASE_TIMEOUT_LONG_SEC int = 120 + 2
 
 func (w *GameEngineWrapper) getNextPhaseTimeout() (int, bool) {
-	switch w.engine.GetPhase() {
-	case engine.GamePhasePrepareUnit,
-		engine.GamePhaseSpotComplete:
-		return NEXT_PHASE_TIMEOUT_LONG_SEC, true
-	case engine.GamePhaseTakeAction:
-		return NEXT_PHASE_TIMEOUT_MEDIUM_SEC, true
-	case engine.GamePhaseReadyForStartRound,
-		engine.GamePhaseTakeActionAI,
-		engine.GamePhaseRetreatAction,
-		engine.GamePhaseActionComplete,
-		engine.GamePhaseBeforeSpotComplete:
-		return NEXT_PHASE_TIMEOUT_SHORT_SEC, true
+	if w.engine.HasGamePhaseTimer() {
+		switch w.engine.GetPhase() {
+		case engine.GamePhasePrepareUnit,
+			engine.GamePhaseSpotComplete:
+			return NEXT_PHASE_TIMEOUT_LONG_SEC, true
+		case engine.GamePhaseTakeAction:
+			return NEXT_PHASE_TIMEOUT_MEDIUM_SEC, true
+		case engine.GamePhaseReadyForStartRound,
+			engine.GamePhaseTakeActionAI,
+			engine.GamePhaseRetreatAction,
+			engine.GamePhaseActionComplete,
+			engine.GamePhaseBeforeSpotComplete:
+			return NEXT_PHASE_TIMEOUT_SHORT_SEC, true
+		}
 	}
 	return 0, false
 }

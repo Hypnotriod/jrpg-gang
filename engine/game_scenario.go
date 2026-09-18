@@ -21,6 +21,7 @@ type GameScenarioConfig struct {
 	Id           GameScenarioId          `json:"id"`
 	Name         string                  `json:"name"`
 	Capacity     uint                    `json:"capacity"`
+	Timer        bool                    `json:"timer"`
 	Requirements domain.UnitRequirements `json:"requirements"`
 	Description  string                  `json:"description,omitempty"`
 }
@@ -37,6 +38,7 @@ type GameScenario struct {
 func (s *GameScenario) Clone() *GameScenario {
 	r := &GameScenario{}
 	r.Path = s.Path
+	r.Config = s.Config
 	r.Spots = map[GameSpotId]*Spot{}
 	for id, spot := range s.Spots {
 		r.Spots[id] = spot.Clone()

@@ -4,6 +4,7 @@
             "id": "training-01",
             "name": "Training Camp",
             "capacity": 1,
+            "timer": false,
             "description": "A quiet camp where new adventurers learn the art of battle.",
             "requirements": {}
         },
@@ -105,6 +106,7 @@
             "name": "Forgotten Ruins",
             "description": "Dust-choked halls whisper with the memory of fallen kings, and every broken pillar hides a curse. The ruins hold the dead in silence, waiting for the next fool to disturb their rest.",
             "capacity": 4,
+            "timer": true,
             "requirements": {
                 "level": 1
             }
@@ -1448,6 +1450,7 @@
             "name": "Cursed Swamp",
             "description": "The swamp breathes with a rotten, mournful rhythm, swallowing the light and muting the cries of the lost. Every marshy step drags the party closer to the ancient malice festering beneath the water.",
             "capacity": 4,
+            "timer": true,
             "requirements": {
                 "level": 2
             }
@@ -3204,6 +3207,7 @@
             "name": "Dragon's Lair",
             "description": "Beneath a broken moon, the lair stirs with ancient hunger. Ashen winds carry the scent of blood, and every step deeper into the cavern promises a reckoning with something older than fire.",
             "capacity": 4,
+            "timer": true,
             "requirements": {
                 "level": 3
             }
