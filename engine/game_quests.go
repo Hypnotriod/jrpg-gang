@@ -40,7 +40,8 @@ func (q *GameQuests) GetStatus(unit *domain.Unit) *GameQuestsStatus {
 	r.Quests = make([]GameQuestStatus, 0, len(quests))
 	for i := range quests {
 		quest := &quests[i]
-		if quest.Activation.Requirements != nil && !unit.Quests.Test(quest.Activation.Requirements.Quests) {
+		if quest.Activation.Requirements != nil &&
+			(!unit.Quests.Test(quest.Activation.Requirements.Quests) || !unit.Achievements.Test(quest.Activation.Achievements)) {
 			continue
 		}
 		status := unit.Quests[quest.Code]

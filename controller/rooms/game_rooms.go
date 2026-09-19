@@ -205,6 +205,20 @@ func (r *GameRooms) GetAllRoomInfos() []GameRoomInfo {
 	return rooms
 }
 
+func (r *GameRooms) GetAvailableRoomInfos(unit *engine.GameUnit) []GameRoomInfo {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	rooms := []GameRoomInfo{}
+	for i := range r.rooms {
+		if !unit.Quests.Test(r.rooms[i].ScenarioConfig.Requirements.Quests) ||
+			!unit.Achievements.Test(r.rooms[i].ScenarioConfig.Requirements.Achievements) {
+			continue
+		}
+		rooms = append(rooms, toGameRoomInfo(r.rooms[i]))
+	}
+	return rooms
+}
+
 func (r *GameRooms) GetRoomInfoByUid(uid uint) GameRoomInfo {
 	r.mu.RLock()
 	defer r.mu.RUnlock()

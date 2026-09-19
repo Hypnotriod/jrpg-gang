@@ -6,7 +6,11 @@
             "capacity": 1,
             "timer": false,
             "description": "A quiet camp where new adventurers learn the art of battle.",
-            "requirements": {}
+            "requirements": {
+                "quests": {
+                    "quest-training": "active"
+                }
+            }
         },
         "spots": {
             "1-0": {
@@ -108,7 +112,10 @@
             "capacity": 4,
             "timer": true,
             "requirements": {
-                "level": 1
+                "level": 1,
+                "quests": {
+                    "quest-training": "completed"
+                }
             }
         },
         "spots": {
@@ -1452,7 +1459,10 @@
             "capacity": 4,
             "timer": true,
             "requirements": {
-                "level": 2
+                "level": 2,
+                "quests": {
+                    "quest-training": "completed"
+                }
             }
         },
         "spots": {
@@ -3209,7 +3219,10 @@
             "capacity": 4,
             "timer": true,
             "requirements": {
-                "level": 3
+                "level": 3,
+                "quests": {
+                    "quest-training": "completed"
+                }
             }
         },
         "spots": {

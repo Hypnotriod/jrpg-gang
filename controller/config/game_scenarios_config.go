@@ -49,6 +49,20 @@ func (c *GameScenariosConfig) GetAllScenarioConfigs() []engine.GameScenarioConfi
 	return configs
 }
 
+func (c *GameScenariosConfig) GetAvailableScenarioConfigs(unit *engine.GameUnit) []engine.GameScenarioConfig {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	configs := []engine.GameScenarioConfig{}
+	for _, scenario := range c.scenarios {
+		if !unit.Quests.Test(scenario.Config.Requirements.Quests) ||
+			!unit.Achievements.Test(scenario.Config.Requirements.Achievements) {
+			continue
+		}
+		configs = append(configs, scenario.Config)
+	}
+	return configs
+}
+
 func (c *GameScenariosConfig) LoadScenarios(path string, unitsConfig *GameUnitsConfig) error {
 	scenarios, err := util.ReadJsonFile(&[]*engine.GameScenario{}, path)
 	if err != nil {
