@@ -29,7 +29,7 @@ func configs() (authConfig auth.AuthenticatorConfig, hubConfig session.HubConfig
 	allowedOrigins := util.GetEnvSlice("ALLOWED_ORIGINS", []string{"*"})
 	rBuffSize := flag.Int("rBuffSize", 1024, "ws read buffer size")
 	wBuffSize := flag.Int("wBuffSize", 4096, "ws write buffer size")
-	broadcasterPoolSize := flag.Int("broadcasterPoolSize", 64, "broadcaster routines pool size")
+	broadcasterPoolSize := flag.Int("broadcasterPoolSize", 8, "broadcaster routines pool size")
 	broadcastQueueSize := flag.Int("broadcastQueueSize", 4096, "broadcast channel queue size")
 	maxMessageSize := flag.Int64("maxMessageSize", 1024, "max message size sent by peer")
 	userOfflineTimeoutSec := flag.Int64("userOfflineTimeoutSec", 10, "user offline timeout in seconds")
