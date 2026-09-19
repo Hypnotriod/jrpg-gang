@@ -62,14 +62,15 @@ func (b *Battlefield) PlaceUnit(unit *GameUnit, position domain.Position) *domai
 	if !b.checkPositionCanPlaceUnit(position) || !b.checkPositionFaction(position, unit.Faction) {
 		return result.WithResult(domain.ResultNotAccomplished)
 	}
+	unitIsNotPlaced := b.FindUnit(unit.Uid) == nil
 	if unitAtPosition := b.FindUnitByPosition(position); unitAtPosition != nil {
-		if unitAtPosition.PlayerInfo != nil && unitAtPosition.PlayerInfo.IsReady {
+		if unitIsNotPlaced || unitAtPosition.PlayerInfo != nil && unitAtPosition.PlayerInfo.IsReady {
 			return result.WithResult(domain.ResultNotAllowed)
 		}
 		unitAtPosition.Position = unit.Position
 	}
 	unit.Position = position
-	if b.FindUnit(unit.Uid) == nil {
+	if unitIsNotPlaced {
 		b.Units = append(b.Units, unit)
 	}
 	return result.WithResult(domain.ResultAccomplished)
