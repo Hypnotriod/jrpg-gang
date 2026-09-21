@@ -40,3 +40,9 @@ func (m *Mercenaries) Hire(code domain.UnitCode, unit *domain.Unit) *engine.Game
 	defer m.mu.RUnlock()
 	return m.mercenaries.Hire(code, unit)
 }
+
+func (m *Mercenaries) Refund(code domain.UnitCode, unit *domain.Unit) bool {
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	return m.mercenaries.Refund(code, unit)
+}

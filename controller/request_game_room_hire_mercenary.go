@@ -24,8 +24,10 @@ func (c *GameController) handleGameRoomHireMercenaryRequest(playerId engine.Play
 	}
 	roomUid, ok := c.rooms.AddMercenary(user.Id, mercenary)
 	if !ok {
+		c.mercenaries.Refund(data.Code, &user.Unit.Unit)
 		return response.WithStatus(ResponseStatusFailed)
 	}
+	c.persistUser(&user)
 	response.Data[DataKeyRoom] = c.rooms.GetRoomInfoByUid(roomUid)
 	c.broadcastRoomStatus(roomUid)
 	return response.WithStatus(ResponseStatusOk)

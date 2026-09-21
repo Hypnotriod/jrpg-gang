@@ -48,3 +48,16 @@ func (s *GameMercenaries) Hire(code domain.UnitCode, unit *domain.Unit) *GameUni
 	}
 	return NewGameUnit(&mercenary.Unit)
 }
+
+func (s *GameMercenaries) Refund(code domain.UnitCode, unit *domain.Unit) bool {
+	mercenary := util.Find(*s.mercenaries, func(mercenary domain.Mercenary) bool {
+		return mercenary.Code == code
+	})
+	if mercenary == nil {
+		return false
+	}
+	if mercenary.Price != nil {
+		unit.Booty.Accumulate(*mercenary.Price)
+	}
+	return true
+}
