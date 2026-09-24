@@ -164,8 +164,8 @@
         }
     },
     {
-        "code": "quest-kill-20-mosquitoes",
-        "name": "Kill 20 Mosquitoes",
+        "code": "quest-kill-20-fleas",
+        "name": "Kill 20 Fleas",
         "description": "A swarm of bloodthirsty horrors descends upon the shadowed marshes. The Hunters Guild demands you slay twenty of these vampiric fiends before their insatiable hunger drains the life from the land itself. Strike swiftly, for their buzzing heralds the coming of greater plagues.",
         "reward": {
             "coins": 700,
@@ -182,7 +182,7 @@
         "completion": {
             "requirements": {
                 "achievements": {
-                    "kill-20-mosquitoes": 20
+                    "kill-20-fleas": 20
                 }
             }
         }
@@ -369,7 +369,7 @@
             "requirements": {
                 "level": 5,
                 "quests": {
-                    "quest-kill-20-mosquitoes": "completed",
+                    "quest-kill-20-fleas": "completed",
                     "quest-kill-10-toads": "completed"
                 }
             }

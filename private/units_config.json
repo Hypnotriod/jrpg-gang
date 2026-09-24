@@ -793,8 +793,8 @@
         ]
     },
     {
-        "name": "Cacodaemon Green",
-        "code": "cacodaemon-01",
+        "name": "Nature Deamon",
+        "code": "elemental-01",
         "description": "A venomous demon from the abyss, spewing poison and fear.",
         "stats": {
             "progress": {
@@ -808,9 +808,9 @@
                 "actionPoints": 9
             },
             "attributes": {
-                "strength": 10,
-                "physique": 5,
-                "agility": 5,
+                "strength": 16,
+                "physique": 8,
+                "agility": 12,
                 "endurance": 5,
                 "intelligence": 15,
                 "initiative": 5,
@@ -882,8 +882,8 @@
         ]
     },
     {
-        "name": "Cacodaemon Blue",
-        "code": "cacodaemon-02",
+        "name": "Ice Deamon",
+        "code": "elemental-02",
         "description": "A frigid demon of ice, freezing souls with its chilling touch.",
         "stats": {
             "progress": {
@@ -897,9 +897,9 @@
                 "actionPoints": 9
             },
             "attributes": {
-                "strength": 8,
-                "physique": 5,
-                "agility": 3,
+                "strength": 26,
+                "physique": 22,
+                "agility": 8,
                 "endurance": 6,
                 "intelligence": 18,
                 "initiative": 5,
@@ -971,8 +971,8 @@
         ]
     },
     {
-        "name": "Cacodaemon Yellow",
-        "code": "cacodaemon-03",
+        "name": "Fire Deamon",
+        "code": "elemental-03",
         "description": "A blazing demon of fire, incinerating all in its path.",
         "stats": {
             "progress": {
@@ -986,9 +986,9 @@
                 "actionPoints": 9
             },
             "attributes": {
-                "strength": 10,
-                "physique": 5,
-                "agility": 3,
+                "strength": 30,
+                "physique": 18,
+                "agility": 6,
                 "endurance": 6,
                 "intelligence": 15,
                 "initiative": 5,
@@ -1126,7 +1126,7 @@
         ]
     },
     {
-        "name": "Rat",
+        "name": "Giant Rat",
         "code": "rat-01",
         "description": "A filthy, disease-ridden vermin that swarms in the shadows.",
         "stats": {
@@ -1736,8 +1736,8 @@
         ]
     },
     {
-        "name": "Mosquito",
-        "code": "mosquito-01",
+        "name": "Giant Flea",
+        "code": "flea-01",
         "description": "A buzzing bloodsucker, tiny but deadly in swarms.",
         "stats": {
             "progress": {
@@ -1782,7 +1782,7 @@
         "inventory": {
             "descriptor": [
                 {
-                    "code": "mosquito-byte-01"
+                    "code": "flea-byte-01"
                 }
             ]
         },
@@ -1803,14 +1803,14 @@
             {
                 "requirements": {
                     "quests": {
-                        "quest-kill-20-mosquitoes": "active"
+                        "quest-kill-20-fleas": "active"
                     },
                     "achievements": {
-                        "kill-20-mosquitoes": -20
+                        "kill-20-fleas": -20
                     }
                 },
                 "achievements": {
-                    "kill-20-mosquitoes": 1
+                    "kill-20-fleas": 1
                 }
             }
         ]

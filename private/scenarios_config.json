@@ -1594,7 +1594,7 @@
                     ],
                     "unitDescriptor": [
                         {
-                            "code": "mosquito-01",
+                            "code": "flea-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1602,7 +1602,7 @@
                             }
                         },
                          {
-                            "code": "mosquito-01",
+                            "code": "flea-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1610,7 +1610,7 @@
                             }
                         },
                         {
-                            "code": "mosquito-01",
+                            "code": "flea-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1671,7 +1671,7 @@
                     ],
                     "unitDescriptor": [
                         {
-                            "code": "mosquito-01",
+                            "code": "flea-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1687,7 +1687,7 @@
                             }
                         },
                         {
-                            "code": "mosquito-01",
+                            "code": "flea-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1736,7 +1736,7 @@
                     ],
                     "unitDescriptor": [
                         {
-                            "code": "mosquito-01",
+                            "code": "flea-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1752,7 +1752,7 @@
                             }
                         },
                         {
-                            "code": "mosquito-01",
+                            "code": "flea-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -2624,7 +2624,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-01",
+                            "code": "elemental-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2713,7 +2713,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-01",
+                            "code": "elemental-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2802,7 +2802,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-02",
+                            "code": "elemental-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2891,7 +2891,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-02",
+                            "code": "elemental-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -2994,7 +2994,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-01",
+                            "code": "elemental-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3002,7 +3002,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-01",
+                            "code": "elemental-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3097,7 +3097,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-02",
+                            "code": "elemental-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3105,7 +3105,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-02",
+                            "code": "elemental-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3862,7 +3862,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-01",
+                            "code": "elemental-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3940,7 +3940,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-02",
+                            "code": "elemental-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4034,7 +4034,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-01",
+                            "code": "elemental-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4042,7 +4042,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-01",
+                            "code": "elemental-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4308,7 +4308,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4316,7 +4316,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4394,7 +4394,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-01",
+                            "code": "elemental-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4402,7 +4402,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-02",
+                            "code": "elemental-02",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4410,7 +4410,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4496,7 +4496,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4605,7 +4605,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4878,7 +4878,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4886,7 +4886,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4894,7 +4894,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4972,7 +4972,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4980,7 +4980,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -4988,7 +4988,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -5226,7 +5226,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -5242,7 +5242,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -5324,7 +5324,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -5340,7 +5340,7 @@
                             }
                         },
                         {
-                            "code": "cacodaemon-03",
+                            "code": "elemental-03",
                             "faction": 1,
                             "position": {
                                 "x": 3,

@@ -309,6 +309,12 @@
             }
         },
         {
+            "code": "dagger-02",
+            "requirements": {
+                "level": 2
+            }
+        },
+        {
             "code": "scimitar-01",
             "requirements": {
                 "level": 2
@@ -341,13 +347,19 @@
             }
         },
         {
-            "code": "harpoon-01",
+            "code": "halberd-01",
+            "requirements": {
+                "level": 5
+            }
+        },
+        {
+            "code": "axe-02",
             "requirements": {
                 "level": 3
             }
         },
         {
-            "code": "halberd-01",
+            "code": "fire-axe-01",
             "requirements": {
                 "level": 5
             }
@@ -371,27 +383,9 @@
             }
         },
         {
-            "code": "dagger-02",
-            "requirements": {
-                "level": 2
-            }
-        },
-        {
             "code": "sorcerer-staff-02",
             "requirements": {
                 "level": 3
-            }
-        },
-        {
-            "code": "axe-02",
-            "requirements": {
-                "level": 3
-            }
-        },
-        {
-            "code": "fire-axe-01",
-            "requirements": {
-                "level": 5
             }
         },
         {

@@ -54,8 +54,8 @@
         },
         {
             "type": "weapon",
-            "name": "Mosquito Teeth",
-            "code": "mosquito-byte-01",
+            "name": "Flea Teeth",
+            "code": "flea-byte-01",
             "description": "A tiny but vicious proboscis quivering with eldritch hunger, its sting drains not just blood but the very essence of magic from those it pierces.",
             "slot": "weapon",
             "slotsNumber": 1,
@@ -1147,44 +1147,6 @@
         },
         {
             "type": "weapon",
-            "name": "Harpoon",
-            "code": "harpoon-01",
-            "description": "A barbed spear dripping with toxic ichor, meant to drag victims beneath roiling seas of despair.",
-            "durability": 400,
-            "slot": "weapon",
-            "canBeSold": true,
-            "canBeThrownAway": true,
-            "slotsNumber": 2,
-            "requirements": {
-                "physique": 7
-            },
-            "range": {
-                "maximumX": 2,
-                "maximumY": 2
-            },
-            "damage": [
-                {
-                    "chance": 75,
-                    "cutting": 27,
-                    "deviation": 5
-                },
-                {
-                    "duration": 3,
-                    "chance": 25,
-                    "poison": 10,
-                    "deviation": 2
-                }
-            ],
-            "useCost": {
-                "stamina": 10,
-                "actionPoints": 5
-            },
-            "price": {
-                "coins": 1800
-            }
-        },
-        {
-            "type": "weapon",
             "name": "Halberd",
             "code": "halberd-01",
             "description": "A war pike stained with old blood, its blade forged to rend armor and marrow alike.",
@@ -1859,7 +1821,7 @@
             "type": "armor",
             "name": "Hand bandage",
             "code": "hand-bandage-01",
-            "description": "A rough strip of linen, wrapped tight. It offers only the slightest protection against the slow ruin of blood loss.",
+            "description": "Worn leather gloves. They offers only the slightest protection against the slow ruin of blood loss.",
             "durability": 50,
             "slot": "hand",
             "canBeSold": true,
