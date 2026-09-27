@@ -1540,7 +1540,7 @@
     "armor": [
         {
             "type": "armor",
-            "name": "Rusty Helmet",
+            "name": "Cracked Helm",
             "code": "rusty-helmet-01",
             "description": "A battered helm, its iron pitted and stained by the blood of forgotten battles.",
             "price": {
@@ -1566,7 +1566,7 @@
         },
         {
             "type": "armor",
-            "name": "Rusty Boots",
+            "name": "Warn Boots",
             "code": "rusty-boots-01",
             "description": "Boots of cracked leather and rusted buckles, worn by countless miles and misery.",
             "price": {
@@ -1592,7 +1592,7 @@
         },
         {
             "type": "armor",
-            "name": "Rusty Shield",
+            "name": "Cracked Shield",
             "code": "rusty-shield-01",
             "description": "A splintered shield, its surface marred by axe and arrow.",
             "price": {
@@ -1619,7 +1619,7 @@
         },
         {
             "type": "armor",
-            "name": "Rag",
+            "name": "Tattered Rags",
             "code": "rag-armor-01",
             "description": "Tattered rags, barely worthy of the name 'armor.' They offer little more than the illusion of safety.",
             "price": {
@@ -1819,7 +1819,7 @@
         },
         {
             "type": "armor",
-            "name": "Hand bandage",
+            "name": "Worn Gloves",
             "code": "hand-bandage-01",
             "description": "Worn leather gloves. They offers only the slightest protection against the slow ruin of blood loss.",
             "durability": 50,
