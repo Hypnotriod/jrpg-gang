@@ -192,7 +192,7 @@
         "name": "Kill 10 Toads",
         "description": "A foul chorus echoes from the swamp where corrupted toads breed beneath the moon. The Hunters Guild orders you to slay ten of these bloated beasts before their venomous spawn poisons the nearby villages and the stench attracts even darker horrors.",
         "reward": {
-            "coins": 1000,
+            "coins": 800,
             "experience": 2000
         },
         "activation": {
@@ -240,7 +240,7 @@
         "name": "Find Cursed Goblet",
         "description": "The Adventurers Guild seeks a perilous relic: the Cursed Goblet. An artifact of forbidden power lost beneath the Forgotten Ruins. Venture into the third level's shadowed depths to claim it, if the ancient darkness permits your return.",
         "reward": {
-            "coins": 1000,
+            "coins": 800,
             "experience": 2000
         },
         "activation": {
@@ -264,7 +264,7 @@
         "name": "Find Sinister Skull",
         "description": "Deep within the Cursed Swamp lies a relic of pure malice, the Sinister Skull. An artifact that whispers dark incantations to those who draw near. The Adventurers Guild commands you to retrieve it from the fourth level's mire, where death itself seems to breathe.",
         "reward": {
-            "coins": 1200,
+            "coins": 900,
             "experience": 4000
         },
         "activation": {
@@ -288,7 +288,7 @@
         "name": "Find Amulet of Ultimate Evil",
         "description": "The Amulet of Ultimate Evil pulses with forbidden power in the depths of the Forgotten Ruins. This cursed talisman, forged in the fires of damnation, corrupts the soul of any who wear it. The Adventurers Guild demands you retrieve it from the fourth level's labyrinthine shadows, but beware its insidious whispers.",
         "reward": {
-            "coins": 1500,
+            "coins": 1000,
             "ruby": 5,
             "experience": 3000
         },
@@ -313,7 +313,7 @@
         "name": "Kill 10 Skeletons",
         "description": "Bone-chilling winds carry the clatter of rattling armor from the ancient crypts. Skeletal warriors, animated by dark necromancy, patrol the forgotten halls. The Hunters Guild requires you to shatter ten of these undead guardians before their bony grasp claims more victims.",
         "reward": {
-            "coins": 1000,
+            "coins": 1200,
             "experience": 3000
         },
         "activation": {
@@ -337,7 +337,7 @@
         "name": "Kill 10 Zombies",
         "description": "The stench of decay permeates the marshlands as shambling corpses rise from their watery graves. These rotting horrors, driven by unholy hunger, threaten to overrun the villages. The Hunters Guild commands you to destroy ten of these abominations before their plague spreads further.",
         "reward": {
-            "coins": 1200,
+            "coins": 900,
             "experience": 4000
         },
         "activation": {
@@ -361,7 +361,7 @@
         "name": "Kill 10 Goblins",
         "description": "Cackling laughter echoes from the twisted forests where goblin tribes plot their mischief. These cunning green-skinned raiders, armed with crude weapons and wicked traps, terrorize travelers and steal livestock. The Hunters Guild demands you eliminate ten of these pestilent creatures to restore peace to the woodland paths.",
         "reward": {
-            "coins": 1500,
+            "coins": 1000,
             "ruby": 5,
             "experience": 6000
         },
@@ -387,7 +387,7 @@
         "name": "Find Seekers Book",
         "description": "The Seekers Book awaits in the abyssal depths of the Dragon's Lair. A tome bound in shadow itself, containing forbidden knowledge that mortals were never meant to possess. Descend to the fifth level and claim it, if your mind can bear the weight of such terrible truths.",
         "reward": {
-            "coins": 1500,
+            "coins": 1200,
             "experience": 6000
         },
         "activation": {
@@ -411,7 +411,7 @@
         "name": "Find Runes of Chaos",
         "description": "The Runes of Chaos lie hidden within the treacherous mire of the Cursed Swamp. Ancient symbols etched in blood, capable of unraveling reality itself. The Adventurers Guild tasks you with claiming them from the fifth level's suffocating depths, where madness and magic intertwine.",
         "reward": {
-            "coins": 1700,
+            "coins": 1400,
             "ruby": 5,
             "experience": 3000
         },
@@ -436,8 +436,8 @@
         "name": "Kill 10 Daemons",
         "description": "From the depths of the abyss, infernal daemons breach the veil between worlds. Their flaming forms and malevolent auras corrupt everything they touch. The Hunters Guild, in desperation, calls upon you to banish ten of these hellish invaders before their demonic influence consumes the realm.",
         "reward": {
-            "coins": 3000,
-            "ruby": 15,
+            "coins": 1500,
+            "ruby": 8,
             "experience": 10000
         },
         "activation": {
@@ -461,7 +461,7 @@
         "name": "Kill 5 Trolls",
         "description": "The Adventurers Guild calls for the slaughter of five northern trolls before their brute strength tears through the mountain passes. These ancient brutes stalk the snowbound wastes with hunger and malice, leaving broken roads and bloodied villages in their wake. Bring down their hulking forms, and the frontier may yet endure one more winter.",
         "reward": {
-            "coins": 2000,
+            "coins": 1300,
             "ruby": 5,
             "experience": 7000
         },
@@ -486,7 +486,7 @@
         "name": "Find Scroll of Eternal Darkness",
         "description": "The Scroll of Eternal Darkness awaits in the abyssal heart of the Forgotten Ruins. A parchment inscribed with incantations that summon perpetual night. The Adventurers Guild commands you to seize it from the fifth level's eternal gloom, lest its power extinguishes the light forever.",
         "reward": {
-            "coins": 2000,
+            "coins": 1500,
             "ruby": 5,
             "experience": 7000
         },
@@ -511,8 +511,8 @@
         "name": "Defeat the Grim Reaper",
         "description": "Descend into the deepest chasm of the Forgotten Ruins, where cold shadow and the scent of old grave earth cling to every step. There the Grim Reaper waits beneath a veil of black mist, a deathless wraith whose scythe rends both body and soul. Steel your courage and strike true, for only by shattering its endless harvest can the land be spared another night of endless mourning.",
         "reward": {
-            "coins": 2500,
-            "ruby": 10,
+            "coins": 1500,
+            "ruby": 5,
             "experience": 8000
         },
         "activation": {
@@ -536,8 +536,8 @@
         "name": "Find Orb of Dragon King",
         "description": "The Orb of Dragon King rests in the fiery bowels of the Dragon's Lair. A crystalline sphere containing the essence of draconic supremacy, capable of commanding legions of scaled beasts. The Adventurers Guild calls upon you to wrest it from the sixth level's volcanic forge, where ancient wyrms guard their most precious treasure.",
         "reward": {
-            "coins": 4000,
-            "ruby": 20,
+            "coins": 1700,
+            "ruby": 10,
             "experience": 10000
         },
         "activation": {
@@ -564,8 +564,8 @@
         "name": "Defeat the Hydra",
         "description": "Venture into the drowned heart of the Cursed Swamp, where black waters boil with venom and the air hangs heavy with rot. There the Hydra's many eyes gleam like dying embers from beneath a crown of writhing heads, each strike a storm of fangs and acid. Slay this primordial horror before its blood-black tide swallows the marshlands whole and the world's last flicker of hope is lost to its ravenous hunger.",
         "reward": {
-            "coins": 4000,
-            "ruby": 20,
+            "coins": 2000,
+            "ruby": 10,
             "experience": 12000
         },
         "activation": {

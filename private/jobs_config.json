@@ -54,10 +54,9 @@
     {
         "code": "job-mining-01",
         "name": "Prospecting",
-        "description": "Spend your hours with a pickaxe in the haunted mines, seeking ruby and gold hidden in stone steeped with restless shadows.",
+        "description": "Spend your hours with a pickaxe in the haunted mines, seeking gold hidden in stone steeped with restless shadows.",
         "reward": {
-            "coins": 100,
-            "ruby": 1
+            "coins": 100
         },
         "duration": 15,
         "countdown": 86400,
