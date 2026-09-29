@@ -2,6 +2,7 @@ package rooms
 
 import (
 	"jrpg-gang/controller/users"
+	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"slices"
 )
@@ -58,7 +59,15 @@ func (r *GameRoom) GetActors() []*engine.GameUnit {
 		result = append(result, unit)
 	}
 	for i := range r.mercenaries {
-		result = append(result, r.mercenaries[i])
+		result = append(result, r.mercenaries[i].Clone())
+	}
+	return result
+}
+
+func (r *GameRoom) GetMercenaryCodes() []domain.UnitCode {
+	result := []domain.UnitCode{}
+	for i := range r.mercenaries {
+		result = append(result, r.mercenaries[i].Code)
 	}
 	return result
 }

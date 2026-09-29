@@ -432,6 +432,31 @@
         }
     },
     {
+        "code": "quest-kill-grim-reaper",
+        "name": "Defeat the Grim Reaper",
+        "description": "Descend into the deepest chasm of the Forgotten Ruins, where cold shadow and the scent of old grave earth cling to every step. There the Grim Reaper waits beneath a veil of black mist, a deathless wraith whose scythe rends both body and soul. Steel your courage and strike true, for only by shattering its endless harvest can the land be spared another night of endless mourning.",
+        "reward": {
+            "coins": 1500,
+            "ruby": 5,
+            "experience": 8000
+        },
+        "activation": {
+            "requirements": {
+                "level": 5,
+                "quests": {
+                    "quest-training": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-grim-reaper": 1
+                }
+            }
+        }
+    },
+    {
         "code": "quest-kill-10-daemons",
         "name": "Kill 10 Daemons",
         "description": "From the depths of the abyss, infernal daemons breach the veil between worlds. Their flaming forms and malevolent auras corrupt everything they touch. The Hunters Guild, in desperation, calls upon you to banish ten of these hellish invaders before their demonic influence consumes the realm.",
@@ -507,13 +532,13 @@
         }
     },
     {
-        "code": "quest-kill-grim-reaper",
-        "name": "Defeat the Grim Reaper",
-        "description": "Descend into the deepest chasm of the Forgotten Ruins, where cold shadow and the scent of old grave earth cling to every step. There the Grim Reaper waits beneath a veil of black mist, a deathless wraith whose scythe rends both body and soul. Steel your courage and strike true, for only by shattering its endless harvest can the land be spared another night of endless mourning.",
+        "code": "quest-kill-hydra",
+        "name": "Defeat the Hydra",
+        "description": "Venture into the drowned heart of the Cursed Swamp, where black waters boil with venom and the air hangs heavy with rot. There the Hydra's many eyes gleam like dying embers from beneath a crown of writhing heads, each strike a storm of fangs and acid. Slay this primordial horror before its blood-black tide swallows the marshlands whole and the world's last flicker of hope is lost to its ravenous hunger.",
         "reward": {
-            "coins": 1500,
-            "ruby": 5,
-            "experience": 8000
+            "coins": 2000,
+            "ruby": 10,
+            "experience": 12000
         },
         "activation": {
             "requirements": {
@@ -526,7 +551,7 @@
         "completion": {
             "requirements": {
                 "achievements": {
-                    "kill-grim-reaper": 1
+                    "kill-hydra": 1
                 }
             }
         }
@@ -555,31 +580,6 @@
             "requirements": {
                 "achievements": {
                     "artifact-07": 1
-                }
-            }
-        }
-    },
-    {
-        "code": "quest-kill-hydra",
-        "name": "Defeat the Hydra",
-        "description": "Venture into the drowned heart of the Cursed Swamp, where black waters boil with venom and the air hangs heavy with rot. There the Hydra's many eyes gleam like dying embers from beneath a crown of writhing heads, each strike a storm of fangs and acid. Slay this primordial horror before its blood-black tide swallows the marshlands whole and the world's last flicker of hope is lost to its ravenous hunger.",
-        "reward": {
-            "coins": 2000,
-            "ruby": 10,
-            "experience": 12000
-        },
-        "activation": {
-            "requirements": {
-                "level": 8,
-                "quests": {
-                    "quest-training": "completed"
-                }
-            }
-        },
-        "completion": {
-            "requirements": {
-                "achievements": {
-                    "kill-hydra": 1
                 }
             }
         }

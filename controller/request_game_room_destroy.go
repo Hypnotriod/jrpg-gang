@@ -17,6 +17,11 @@ func (c *GameController) handleDestroyGameRoomRequest(playerId engine.PlayerId, 
 	for _, playerId := range playerIds {
 		c.users.ChangeUserStatus(playerId, users.UserStatusInLobby)
 	}
+	host, _ := c.users.Get(playerId)
+	mercenaries := room.GetMercenaryCodes()
+	for _, code := range mercenaries {
+		c.mercenaries.Refund(code, &host.Unit.Unit)
+	}
 	c.broadcastRoomStatus(room.Uid)
 	c.broadcastUserStatus(playerIds)
 	return response.WithStatus(ResponseStatusOk)
