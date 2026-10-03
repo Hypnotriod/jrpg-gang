@@ -255,7 +255,8 @@
             },
             "damage": [
                 {
-                    "chance": 70
+                    "chance": 70,
+                    "acid": 10
                 }
             ],
             "spread": [
@@ -792,6 +793,50 @@
             "price": {
                 "coins": 2000,
                 "ruby": 5
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Curse Staff",
+            "code": "sorcerer-staff-03",
+            "description": "!Cursed acid staff.",
+            "ammunitionKind": "magicCharge",
+            "durability": 500,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "intelligence": 10
+            },
+            "damage": [
+                {
+                    "chance": 75,
+                    "curse": 8,
+                    "deviation": 2
+                }
+            ],
+            "modification": [
+                {
+                    "damage": {
+                        "poison": 8,
+                        "acid": 8
+                    }
+                }
+            ],
+            "range": {
+                "maximumX": 5,
+                "minimumX": 2,
+                "maximumY": 5
+            },
+            "useCost": {
+                "mana": 6,
+                "stamina": 3,
+                "actionPoints": 5
+            },
+            "price": {
+                "coins": 1800,
+                "ruby": 4
             }
         },
         {

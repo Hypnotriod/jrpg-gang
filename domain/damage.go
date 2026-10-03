@@ -59,7 +59,7 @@ func (d *Damage) Reduce(damage Damage) {
 }
 
 func (d *Damage) PhysicalDamage() float32 {
-	return d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lightning
+	return d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lightning + d.Acid
 }
 
 func (d *Damage) HasPhysicalEffect() bool {
@@ -68,13 +68,13 @@ func (d *Damage) HasPhysicalEffect() bool {
 		d.Crushing != 0 ||
 		d.Fire != 0 ||
 		d.Cold != 0 ||
-		d.Lightning != 0
+		d.Lightning != 0 ||
+		d.Acid != 0
 }
 
 func (d *Damage) HasEffect() bool {
 	return d.HasPhysicalEffect() ||
 		d.Poison != 0 ||
-		d.Acid != 0 ||
 		d.Exhaustion != 0 ||
 		d.ManaDrain != 0 ||
 		d.Bleeding != 0 ||

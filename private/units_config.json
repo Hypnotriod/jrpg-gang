@@ -414,10 +414,6 @@
             {
                 "weight": 1,
                 "coins": 25
-            },
-            {
-                "weight": 1,
-                "ruby": 1
             }
         ],
         "questTriggers": [
@@ -495,6 +491,14 @@
                 },
                 {
                     "code": "rusty-helmet-01",
+                    "equipped": true
+                },
+                {
+                    "code": "rag-armor-01",
+                    "equipped": true
+                },
+                {
+                    "code": "rusty-boots-01",
                     "equipped": true
                 }
             ]
@@ -869,6 +873,10 @@
             {
                 "weight": 1,
                 "coins": 10
+            },
+            {
+                "weight": 1,
+                "ruby": 1
             }
         ],
         "questTriggers": [
@@ -959,6 +967,10 @@
             {
                 "weight": 1,
                 "coins": 12
+            },
+            {
+                "weight": 1,
+                "ruby": 1
             }
         ],
         "questTriggers": [
@@ -987,7 +999,7 @@
                 "experience": 250
             },
             "baseAttributes": {
-                "health": 90,
+                "health": 120,
                 "stamina": 100,
                 "mana": 100,
                 "actionPoints": 9
@@ -1050,6 +1062,10 @@
             {
                 "weight": 1,
                 "coins": 14
+            },
+            {
+                "weight": 1,
+                "ruby": 1
             }
         ],
         "questTriggers": [
@@ -1897,10 +1913,6 @@
             {
                 "weight": 10,
                 "coins": 3
-            },
-            {
-                "weight": 1,
-                "ruby": 1
             }
         ],
         "questTriggers": [
@@ -2058,6 +2070,10 @@
                     "equipped": true
                 },
                 {
+                    "code": "rag-armor-01",
+                    "equipped": true
+                },
+                {
                     "code": "rusty-boots-01",
                     "equipped": true
                 }
@@ -2104,7 +2120,7 @@
             "baseAttributes": {
                 "health": 180,
                 "stamina": 120,
-                "actionPoints": 10
+                "actionPoints": 9
             },
             "attributes": {
                 "strength": 14,
@@ -2150,6 +2166,10 @@
                     "equipped": true
                 },
                 {
+                    "code": "rag-armor-01",
+                    "equipped": true
+                },
+                {
                     "code": "boots-01",
                     "equipped": true
                 }
@@ -2180,6 +2200,107 @@
                 },
                 "achievements": {
                     "kill-20-orcs": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Orc Necromancer",
+        "code": "orc-necromancer-01",
+        "description": "!Orc Necromancer.",
+        "stats": {
+            "progress": {
+                "level": 5,
+                "experience": 200
+            },
+            "baseAttributes": {
+                "health": 100,
+                "stamina": 120,
+                "actionPoints": 10
+            },
+            "attributes": {
+                "strength": 3,
+                "physique": 4,
+                "agility": 10,
+                "endurance": 6,
+                "intelligence": 12,
+                "initiative": 8,
+                "luck": 8
+            },
+            "resistance": {
+                "stabbing": 3,
+                "cutting": 3,
+                "crushing": 3,
+                "fire": 15,
+                "cold": 10,
+                "lightning": 15,
+                "poison": 10,
+                "acid": 15,
+                "exhaustion": 5,
+                "manaDrain": 0,
+                "bleeding": 0,
+                "fear": 4,
+                "curse": 12,
+                "madness": 0
+            }
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "dagger-01"
+                },
+                {
+                    "code": "sorcerer-staff-03",
+                    "equipped": true
+                },
+                {
+                    "code": "acid-charge-01",
+                    "quantity": 10,
+                    "equipped": true
+                },
+                {
+                    "code": "necklace-03",
+                    "equipped": true
+                },
+                {
+                    "code": "rusty-boots-01",
+                    "equipped": true
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 6
+            },
+            {
+                "weight": 1,
+                "coins": 8
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-5-orc-necromancers": "active"
+                    },
+                    "achievements": {
+                        "kill-5-orc-necromancers": -5
+                    }
+                },
+                "achievements": {
+                    "kill-5-orc-necromancers": 1
                 }
             }
         ]

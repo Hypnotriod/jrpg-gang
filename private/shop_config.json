@@ -403,6 +403,14 @@
             }
         },
         {
+            "code": "sorcerer-staff-03",
+            "requirements": {
+                "achievements": {
+                    "kill-5-orc-necromancers": 5
+                }
+            }
+        },
+        {
             "code": "scythe-01",
             "requirements": {
                 "achievements": {

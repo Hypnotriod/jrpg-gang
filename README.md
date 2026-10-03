@@ -73,7 +73,7 @@ Hosted at: [hypnotriod.github.io/jrpg-gang-html-client](https://hypnotriod.githu
 * `Provision`  - a *food* item. Can have a quantity. Deals `Recovery`. Can only be used in the `Resting Phase`.
 
 ## Math:
-* `Physical Damage / Resistance`: **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **Lightning**
+* `Physical Damage / Resistance`: **Stabbing** + **Cutting** + **Crushing** + **Fire** + **Cold** + **Lightning** + **Acid**
 * `Attack chance`: (**unit agility** - **unit stress**) - (**target agility** - **target stress**) + **base chance** | minimum `1`, maximum `95`
 * `Attack chance` when `Stunned`: (**unit agility** - **unit stress**) + **target stress** + **base chance** | minimum `1`, maximum `95`
 * `Critical attack chance`: (**unit luck** - **unit stress**) - (**target luck** - **target stress**) | minimum `1`, maximum `95`
