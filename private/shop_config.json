@@ -223,6 +223,14 @@
             }
         },
         {
+            "code": "helmet-horns-01",
+            "requirements": {
+                "achievements": {
+                    "kill-orc-commander": 1
+                }
+            }
+        },
+        {
             "code": "necklace-01",
             "requirements": {
                 "level": 3
@@ -399,6 +407,14 @@
             "requirements": {
                 "achievements": {
                     "kill-grim-reaper": 1
+                }
+            }
+        },
+        {
+            "code": "bloody-hammer-01",
+            "requirements": {
+                "achievements": {
+                    "kill-orc-commander": 1
                 }
             }
         },

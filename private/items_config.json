@@ -1109,6 +1109,39 @@
         },
         {
             "type": "weapon",
+            "name": "Bloody Hammer",
+            "code": "bloody-hammer-01",
+            "description": "!Bloody Hammer belonged to the Orc Commander.",
+            "durability": 500,
+            "slot": "weapon",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 15,
+                "physique": 15
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "useCost": {
+                "stamina": 25,
+                "actionPoints": 5
+            },
+            "damage": [
+                {
+                    "chance": 75,
+                    "crushing": 50,
+                    "deviation": 5
+                }
+            ],
+            "price": {
+                "coins": 3500
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Scimitar",
             "code": "scimitar-01",
             "description": "A curved blade honed on the bones of desert wraiths, thirsty for flesh and whispering old curses.",
@@ -1707,7 +1740,7 @@
             "type": "armor",
             "name": "Helmet III",
             "code": "helmet-03",
-            "description": "An open-faced helm charred black, its crest still smoking from battles against demons.",
+            "description": "!Shiny helm with closed face.",
             "durability": 700,
             "slot": "head",
             "canBeSold": true,
@@ -1730,6 +1763,35 @@
             "price": {
                 "coins": 1600,
                 "ruby": 10
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Horned helmet",
+            "code": "helmet-horns-01",
+            "description": "!An open-faced helm with horns belonged to the Orc Commander.",
+            "durability": 300,
+            "slot": "head",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 7,
+                "physique": 7
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 2,
+                        "cutting": 2,
+                        "crushing": 8,
+                        "exhaustion": 8,
+                        "bleeding": 8
+                    }
+                }
+            ],
+            "price": {
+                "coins": 1200
             }
         },
         {
