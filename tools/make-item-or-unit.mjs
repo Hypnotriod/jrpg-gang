@@ -404,6 +404,7 @@ async function makeDamage(header) {
         cold: await makeNumber('cold'),
         lightning: await makeNumber('lightning'),
         poison: await makeNumber('poison'),
+        acid: await makeNumber('acid'),
         exhaustion: await makeNumber('exhaustion'),
         manaDrain: await makeNumber('manaDrain'),
         bleeding: await makeNumber('bleeding'),

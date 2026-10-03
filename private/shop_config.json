@@ -37,7 +37,7 @@
             }
         },
         {
-            "code": "poison-charge-01",
+            "code": "acid-charge-01",
             "requirements": {
                 "level": 2
             }

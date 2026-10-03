@@ -12,6 +12,7 @@ type Damage struct {
 	Cold           float32 `json:"cold,omitzero" bson:"cold,omitempty"`             // affects health
 	Lightning      float32 `json:"lightning,omitzero" bson:"lightning,omitempty"`   // affects health
 	Poison         float32 `json:"poison,omitzero" bson:"poison,omitempty"`         // affects health
+	Acid           float32 `json:"acid,omitzero" bson:"acid,omitempty"`             // affects health
 	Exhaustion     float32 `json:"exhaustion,omitzero" bson:"exhaustion,omitempty"` // affects stamina
 	ManaDrain      float32 `json:"manaDrain,omitzero" bson:"manaDrain,omitempty"`   // affects mana
 	Bleeding       float32 `json:"bleeding,omitzero" bson:"bleeding,omitempty"`     // affects health
@@ -31,6 +32,7 @@ func (d *Damage) Accumulate(damage Damage) {
 	d.Cold += damage.Cold
 	d.Lightning += damage.Lightning
 	d.Poison += damage.Poison
+	d.Acid += damage.Acid
 	d.Exhaustion += damage.Exhaustion
 	d.ManaDrain += damage.ManaDrain
 	d.Bleeding += damage.Bleeding
@@ -47,6 +49,7 @@ func (d *Damage) Reduce(damage Damage) {
 	d.Cold -= damage.Cold
 	d.Lightning -= damage.Lightning
 	d.Poison -= damage.Poison
+	d.Acid -= damage.Acid
 	d.Exhaustion -= damage.Exhaustion
 	d.ManaDrain -= damage.ManaDrain
 	d.Bleeding -= damage.Bleeding
@@ -71,6 +74,7 @@ func (d *Damage) HasPhysicalEffect() bool {
 func (d *Damage) HasEffect() bool {
 	return d.HasPhysicalEffect() ||
 		d.Poison != 0 ||
+		d.Acid != 0 ||
 		d.Exhaustion != 0 ||
 		d.ManaDrain != 0 ||
 		d.Bleeding != 0 ||
@@ -100,6 +104,7 @@ func (d *Damage) Enchance(attributes UnitAttributes, damage Damage) {
 	d.Cold = util.AccumulateIfNotZeros(d.Cold, damage.Cold)
 	d.Lightning = util.AccumulateIfNotZeros(d.Lightning, damage.Lightning)
 	d.Poison = util.AccumulateIfNotZeros(d.Poison, damage.Poison)
+	d.Acid = util.AccumulateIfNotZeros(d.Acid, damage.Acid)
 	d.Exhaustion = util.AccumulateIfNotZeros(d.Exhaustion, damage.Exhaustion)
 	d.ManaDrain = util.AccumulateIfNotZeros(d.ManaDrain, damage.ManaDrain)
 	d.Bleeding = util.AccumulateIfNotZeros(d.Bleeding, damage.Bleeding)
@@ -116,6 +121,7 @@ func (d *Damage) MultiplyAll(factor float32) {
 	d.Cold = util.MultiplyWithRounding(d.Cold, factor)
 	d.Lightning = util.MultiplyWithRounding(d.Lightning, factor)
 	d.Poison = util.MultiplyWithRounding(d.Poison, factor)
+	d.Acid = util.MultiplyWithRounding(d.Acid, factor)
 	d.Exhaustion = util.MultiplyWithRounding(d.Exhaustion, factor)
 	d.ManaDrain = util.MultiplyWithRounding(d.ManaDrain, factor)
 	d.Bleeding = util.MultiplyWithRounding(d.Bleeding, factor)
@@ -132,6 +138,7 @@ func (d *Damage) EnchanceAll(value float32) {
 	d.Cold = util.AccumulateIfNotZeros(d.Cold, value)
 	d.Lightning = util.AccumulateIfNotZeros(d.Lightning, value)
 	d.Poison = util.AccumulateIfNotZeros(d.Poison, value)
+	d.Acid = util.AccumulateIfNotZeros(d.Acid, value)
 	d.Exhaustion = util.AccumulateIfNotZeros(d.Exhaustion, value)
 	d.ManaDrain = util.AccumulateIfNotZeros(d.ManaDrain, value)
 	d.Bleeding = util.AccumulateIfNotZeros(d.Bleeding, value)
@@ -148,6 +155,7 @@ func (d *Damage) Normalize() {
 	d.Cold = max(d.Cold, 0)
 	d.Lightning = max(d.Lightning, 0)
 	d.Poison = max(d.Poison, 0)
+	d.Acid = max(d.Acid, 0)
 	d.Exhaustion = max(d.Exhaustion, 0)
 	d.ManaDrain = max(d.ManaDrain, 0)
 	d.Bleeding = max(d.Bleeding, 0)
@@ -157,7 +165,7 @@ func (d *Damage) Normalize() {
 }
 
 func (d *Damage) Apply(state *UnitState) {
-	state.Health -= d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lightning + d.Poison + d.Bleeding
+	state.Health -= d.Stabbing + d.Cutting + d.Crushing + d.Fire + d.Cold + d.Lightning + d.Poison + d.Acid + d.Bleeding
 	state.Stamina -= d.Exhaustion
 	state.Mana -= d.ManaDrain
 	state.Stress += d.Fear + d.Curse + d.Madness
@@ -175,6 +183,7 @@ func (d Damage) IsZero() bool {
 		d.Cold == 0 &&
 		d.Lightning == 0 &&
 		d.Poison == 0 &&
+		d.Acid == 0 &&
 		d.Exhaustion == 0 &&
 		d.ManaDrain == 0 &&
 		d.Bleeding == 0 &&

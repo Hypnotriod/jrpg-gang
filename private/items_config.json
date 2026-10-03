@@ -3036,22 +3036,22 @@
             }
         },
         {
-            "name": "Poison Charge",
+            "name": "Acid Charge",
             "type": "ammunition",
-            "code": "poison-charge-01",
+            "code": "acid-charge-01",
             "description": "A glass vial brimming with venomous mist, meant for a sorcerer's staff. Its touch brings a slow, inevitable demise.",
             "kind": "magicCharge",
             "canBeSold": true,
             "canBeThrownAway": true,
             "damage": [
                 {
-                    "poison": 24,
+                    "acid": 24,
                     "deviation": 3
                 },
                 {
                     "duration": 3,
                     "chance": 15,
-                    "poison": 5,
+                    "acid": 5,
                     "deviation": 2
                 }
             ],

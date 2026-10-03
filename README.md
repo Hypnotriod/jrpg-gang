@@ -33,6 +33,7 @@ Hosted at: [hypnotriod.github.io/jrpg-gang-html-client](https://hypnotriod.githu
 * `cold`       - affects the **health** attribute
 * `lightning`  - affects the **health** attribute
 * `poison`     - affects the **health** attribute
+* `acid`       - affects the **health** attribute
 * `bleeding`   - affects the **health** attribute
 * `exhaustion` - affects the **stamina** attribute
 * `manaDrain`  - affects the **mana** attribute
