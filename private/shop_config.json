@@ -43,6 +43,12 @@
             }
         },
         {
+            "code": "magic-crystal-01",
+            "requirements": {
+                "level": 5
+            }
+        },
+        {
             "code": "health-potion-01"
         },
         {

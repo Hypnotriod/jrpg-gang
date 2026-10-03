@@ -457,9 +457,9 @@
         }
     },
     {
-        "code": "quest-kill-10-daemons",
-        "name": "Kill 10 Daemons",
-        "description": "From the depths of the abyss, infernal daemons breach the veil between worlds. Their flaming forms and malevolent auras corrupt everything they touch. The Hunters Guild, in desperation, calls upon you to banish ten of these hellish invaders before their demonic influence consumes the realm.",
+        "code": "quest-kill-10-demons",
+        "name": "Kill 10 Demons",
+        "description": "From the depths of the abyss, infernal demons breach the veil between worlds. Their flaming forms and malevolent auras corrupt everything they touch. The Hunters Guild, in desperation, calls upon you to banish ten of these hellish invaders before their demonic influence consumes the realm.",
         "reward": {
             "coins": 1500,
             "ruby": 8,
@@ -476,7 +476,7 @@
         "completion": {
             "requirements": {
                 "achievements": {
-                    "kill-10-daemons": 10
+                    "kill-10-demons": 10
                 }
             }
         }

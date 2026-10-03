@@ -793,7 +793,7 @@
         ]
     },
     {
-        "name": "Nature Deamon",
+        "name": "Nature Demon",
         "code": "elemental-01",
         "description": "A venomous demon from the abyss, spewing poison and fear.",
         "stats": {
@@ -869,20 +869,20 @@
             {
                 "requirements": {
                     "quests": {
-                        "quest-kill-10-daemons": "active"
+                        "quest-kill-10-demons": "active"
                     },
                     "achievements": {
-                        "kill-10-daemons": -10
+                        "kill-10-demons": -10
                     }
                 },
                 "achievements": {
-                    "kill-10-daemons": 1
+                    "kill-10-demons": 1
                 }
             }
         ]
     },
     {
-        "name": "Ice Deamon",
+        "name": "Ice Demon",
         "code": "elemental-02",
         "description": "A frigid demon of ice, freezing souls with its chilling touch.",
         "stats": {
@@ -958,20 +958,20 @@
             {
                 "requirements": {
                     "quests": {
-                        "quest-kill-10-daemons": "active"
+                        "quest-kill-10-demons": "active"
                     },
                     "achievements": {
-                        "kill-10-daemons": -10
+                        "kill-10-demons": -10
                     }
                 },
                 "achievements": {
-                    "kill-10-daemons": 1
+                    "kill-10-demons": 1
                 }
             }
         ]
     },
     {
-        "name": "Fire Deamon",
+        "name": "Fire Demon",
         "code": "elemental-03",
         "description": "A blazing demon of fire, incinerating all in its path.",
         "stats": {
@@ -1048,14 +1048,14 @@
             {
                 "requirements": {
                     "quests": {
-                        "quest-kill-10-daemons": "active"
+                        "quest-kill-10-demons": "active"
                     },
                     "achievements": {
-                        "kill-10-daemons": -10
+                        "kill-10-demons": -10
                     }
                 },
                 "achievements": {
-                    "kill-10-daemons": 1
+                    "kill-10-demons": 1
                 }
             }
         ]

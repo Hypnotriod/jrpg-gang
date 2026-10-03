@@ -420,6 +420,7 @@
             "name": "Light Sword",
             "code": "sword-magic-01",
             "description": "A sword crackling with lightning, its blade a beacon of wrath in the storm.",
+            "ammunitionKind": "magicCrystal",
             "durability": 700,
             "slot": "weapon",
             "canBeSold": true,
@@ -455,13 +456,11 @@
             ],
             "useCost": {
                 "stamina": 12,
-                "mana": 1,
                 "actionPoints": 4
             },
             "price": {
                 "coins": 3000,
-                "ruby": 10,
-                "actionPoints": 5
+                "ruby": 10
             }
         },
         {
@@ -872,6 +871,7 @@
             "name": "Fire Axe",
             "code": "fire-axe-01",
             "description": "A massive axe forged in the heart of a volcano, its blade still glowing with infernal heat.",
+            "ammunitionKind": "magicCrystal",
             "durability": 800,
             "slot": "weapon",
             "canBeSold": true,
@@ -3091,6 +3091,18 @@
             ],
             "price": {
                 "coins": 3
+            }
+        },
+        {
+            "name": "Magic Crystal",
+            "type": "ammunition",
+            "code": "magic-crystal-01",
+            "description": "A shard of cold, resonant crystal. It channels arcane power into the hands of those who dare to wield forbidden magic weapon.",
+            "kind": "magicCrystal",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "price": {
+                "coins": 5
             }
         }
     ],
