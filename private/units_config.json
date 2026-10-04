@@ -811,7 +811,7 @@
                 "experience": 200
             },
             "baseAttributes": {
-                "health": 100,
+                "health": 140,
                 "stamina": 100,
                 "mana": 100,
                 "actionPoints": 9
@@ -821,7 +821,7 @@
                 "physique": 8,
                 "agility": 12,
                 "endurance": 5,
-                "intelligence": 15,
+                "intelligence": 10,
                 "initiative": 5,
                 "luck": 5
             },
@@ -905,7 +905,7 @@
                 "experience": 250
             },
             "baseAttributes": {
-                "health": 120,
+                "health": 160,
                 "stamina": 100,
                 "mana": 100,
                 "actionPoints": 9
@@ -999,7 +999,7 @@
                 "experience": 250
             },
             "baseAttributes": {
-                "health": 120,
+                "health": 150,
                 "stamina": 100,
                 "mana": 100,
                 "actionPoints": 9
@@ -1103,7 +1103,7 @@
                 "physique": 5,
                 "agility": 3,
                 "endurance": 6,
-                "intelligence": 8,
+                "intelligence": 12,
                 "initiative": 5,
                 "luck": 5
             },
@@ -1705,7 +1705,7 @@
                 "poison": 0,
                 "acid": 25,
                 "exhaustion": 15,
-                "manaDrain": 25,
+                "manaDrain": 5,
                 "bleeding": 15,
                 "fear": 100,
                 "curse": 100,
@@ -1786,6 +1786,7 @@
                 "physique": 2,
                 "agility": 12,
                 "endurance": 6,
+                "intelligence": 0,
                 "initiative": 7,
                 "luck": 7
             },
@@ -1867,6 +1868,7 @@
                 "physique": 8,
                 "agility": 3,
                 "endurance": 9,
+                "intelligence": 0,
                 "initiative": 3,
                 "luck": 8
             },
@@ -1950,6 +1952,7 @@
                 "physique": 5,
                 "agility": 12,
                 "endurance": 6,
+                "intelligence": 0,
                 "initiative": 5,
                 "luck": 5
             },
@@ -2022,7 +2025,7 @@
                 "experience": 180
             },
             "baseAttributes": {
-                "health": 140,
+                "health": 120,
                 "stamina": 120,
                 "actionPoints": 10
             },
@@ -2118,7 +2121,7 @@
                 "experience": 220
             },
             "baseAttributes": {
-                "health": 180,
+                "health": 160,
                 "stamina": 120,
                 "actionPoints": 9
             },
@@ -2315,7 +2318,7 @@
                 "experience": 2500
             },
             "baseAttributes": {
-                "health": 500,
+                "health": 450,
                 "stamina": 250,
                 "actionPoints": 10
             },
@@ -2405,6 +2408,258 @@
                 },
                 "achievements": {
                     "kill-orc-commander": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Griffin",
+        "code": "griffin-01",
+        "description": "!Griffin.",
+        "stats": {
+            "progress": {
+                "level": 5,
+                "experience": 150
+            },
+            "baseAttributes": {
+                "health": 130,
+                "stamina": 100,
+                "actionPoints": 9
+            },
+            "attributes": {
+                "strength": 22,
+                "physique": 16,
+                "agility": 12,
+                "endurance": 10,
+                "intelligence": 0,
+                "initiative": 8,
+                "luck": 8
+            },
+            "resistance": {
+                "stabbing": 8,
+                "cutting": 8,
+                "crushing": 8,
+                "fire": 15,
+                "cold": 10,
+                "lightning": 10,
+                "poison": 0,
+                "acid": 0,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "bleeding": 0,
+                "fear": 100,
+                "curse": 0,
+                "madness": 100
+            }
+        },
+        "slots": {
+            "head": 1,
+            "body": 1,
+            "leg": 4,
+            "tail": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "claws-01"
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 6
+            },
+            {
+                "weight": 1,
+                "coins": 8
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-5-griffins": "active"
+                    },
+                    "achievements": {
+                        "kill-5-griffins": -5
+                    }
+                },
+                "achievements": {
+                    "kill-5-griffins": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Manticore",
+        "code": "manticore-01",
+        "description": "!Manticore.",
+        "stats": {
+            "progress": {
+                "level": 6,
+                "experience": 160
+            },
+            "baseAttributes": {
+                "health": 140,
+                "stamina": 90,
+                "actionPoints": 9
+            },
+            "attributes": {
+                "strength": 20,
+                "physique": 18,
+                "agility": 9,
+                "endurance": 8,
+                "intelligence": 0,
+                "initiative": 7,
+                "luck": 7
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 5,
+                "fire": 5,
+                "cold": 5,
+                "lightning": 15,
+                "poison": 10,
+                "acid": 5,
+                "exhaustion": 5,
+                "manaDrain": 0,
+                "bleeding": 5,
+                "fear": 100,
+                "curse": 0,
+                "madness": 0
+            }
+        },
+        "slots": {
+            "head": 1,
+            "body": 1,
+            "leg": 4,
+            "tail": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "claws-01"
+                },
+                {
+                    "code": "poison-tail-01"
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 6
+            },
+            {
+                "weight": 1,
+                "coins": 8
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-5-manticores": "active"
+                    },
+                    "achievements": {
+                        "kill-5-manticores": -5
+                    }
+                },
+                "achievements": {
+                    "kill-5-manticores": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Demonic Boar",
+        "code": "boar-demon-01",
+        "description": "!Demonic Boar.",
+        "stats": {
+            "progress": {
+                "level": 5,
+                "experience": 150
+            },
+            "baseAttributes": {
+                "health": 150,
+                "stamina": 120,
+                "actionPoints": 9
+            },
+            "attributes": {
+                "strength": 18,
+                "physique": 12,
+                "agility": 6,
+                "endurance": 15,
+                "intelligence": 0,
+                "initiative": 4,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 5,
+                "cutting": 5,
+                "crushing": 100,
+                "fire": 100,
+                "cold": 10,
+                "lightning": 10,
+                "poison": 0,
+                "acid": 0,
+                "exhaustion": 10,
+                "manaDrain": 0,
+                "bleeding": 0,
+                "fear": 100,
+                "curse": 0,
+                "madness": 0
+            }
+        },
+        "slots": {
+            "head": 1,
+            "body": 1,
+            "leg": 4,
+            "tail": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "teeth-01"
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 5
+            },
+            {
+                "weight": 1,
+                "coins": 7
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-5-demonic-boars": "active"
+                    },
+                    "achievements": {
+                        "kill-5-demonic-boars": -5
+                    }
+                },
+                "achievements": {
+                    "kill-5-demonic-boars": 1
                 }
             }
         ]

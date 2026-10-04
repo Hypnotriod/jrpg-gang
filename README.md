@@ -14,7 +14,7 @@ Hosted at: [hypnotriod.github.io/jrpg-gang-html-client](https://hypnotriod.githu
 * `physique`     - affects **stun chance**. For every 10 points, adds 1 point to all **physical resistances**
 * `agility`      - affects **attack/dodge chance**
 * `endurance`    - affects **stamina** recovery
-* `intelligence` - enhances **fire**, **cold**, **lightning**, **exhaustion**, **manaDrain**, **fear**, **curse**, and **madness** damage.
+* `intelligence` - enhances **fire**, **cold**, **lightning**, **acid**, **exhaustion**, **manaDrain**, **fear**, **curse**, and **madness** damage.
 * `initiative`   - affects **turn order**. For every 10 points, adds **1 action point**
 * `luck`         - affects **critical chance**
 
@@ -78,7 +78,7 @@ Hosted at: [hypnotriod.github.io/jrpg-gang-html-client](https://hypnotriod.githu
 * `Attack chance` when `Stunned`: (**unit agility** - **unit stress**) + **target stress** + **base chance** | minimum `1`, maximum `95`
 * `Critical attack chance`: (**unit luck** - **unit stress**) - (**target luck** - **target stress**) | minimum `1`, maximum `95`
 * `Modification chance`: (**unit intelligence** - **unit stress**) + **base chance** | minimum `1`, maximum `100`
-* `Stun Chance`: (**physical damage** - **unit stress**) - (**target physique** - **target stress**) | minimum `1`, maximum `95`
+* `Stun Chance`: (**physical damage** * 100 / max(100, **target health**) - **unit stress**) - (**target physique** - **target stress**) | minimum `1`, maximum `95`
 * `Retreat Chance`: **unit stress** | minimum `0`, maximum `95`
 * `Critical Miss Chance`: **unit stress** | minimum `0`, maximum `95`
 

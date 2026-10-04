@@ -39,7 +39,9 @@
         {
             "code": "acid-charge-01",
             "requirements": {
-                "level": 2
+                "achievements": {
+                    "kill-hydra": 1
+                }
             }
         },
         {
@@ -326,6 +328,12 @@
             "code": "dagger-02",
             "requirements": {
                 "level": 2
+            }
+        },
+        {
+            "code": "poison-dagger-01",
+            "requirements": {
+                "level": 3
             }
         },
         {

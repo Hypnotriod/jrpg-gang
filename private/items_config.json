@@ -25,35 +25,6 @@
         },
         {
             "type": "weapon",
-            "name": "Poison Teeth",
-            "code": "poison-teeth-01",
-            "description": "Fangs dripping with virulent venom, their bite a slow dance with death and despair wrought in poison.",
-            "slot": "weapon",
-            "slotsNumber": 1,
-            "range": {
-                "maximumX": 1,
-                "maximumY": 2
-            },
-            "damage": [
-                {
-                    "chance": 60,
-                    "stabbing": 8,
-                    "deviation": 3
-                },
-                {
-                    "chance": 25,
-                    "duration": 3,
-                    "poison": 7,
-                    "deviation": 1
-                }
-            ],
-            "useCost": {
-                "stamina": 10,
-                "actionPoints": 4
-            }
-        },
-        {
-            "type": "weapon",
             "name": "Flea Teeth",
             "code": "flea-byte-01",
             "description": "A tiny but vicious proboscis quivering with eldritch hunger, its sting drains not just blood but the very essence of magic from those it pierces.",
@@ -113,7 +84,7 @@
             "damage": [
                 {
                     "chance": 60,
-                    "cutting": 8,
+                    "stabbing": 8,
                     "deviation": 3
                 },
                 {
@@ -121,6 +92,124 @@
                     "duration": 3,
                     "bleeding": 2,
                     "deviation": 1
+                }
+            ],
+            "useCost": {
+                "stamina": 10,
+                "actionPoints": 4
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Teeth",
+            "code": "teeth-02",
+            "description": "A feral lunge from above, jaws snapping with primal hunger. The shriek of prey echoes in the night.",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "range": {
+                "maximumX": 2,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "stabbing": 8,
+                    "deviation": 3
+                },
+                {
+                    "chance": 15,
+                    "duration": 3,
+                    "bleeding": 2,
+                    "deviation": 1
+                }
+            ],
+            "useCost": {
+                "stamina": 10,
+                "actionPoints": 5
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Poisoned Teeth",
+            "code": "poison-teeth-01",
+            "description": "Fangs dripping with virulent venom, their bite a slow dance with death and despair wrought in poison.",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "stabbing": 8,
+                    "deviation": 3
+                },
+                {
+                    "chance": 25,
+                    "duration": 3,
+                    "poison": 7,
+                    "deviation": 1
+                }
+            ],
+            "useCost": {
+                "stamina": 10,
+                "actionPoints": 4
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Poisoned Tail",
+            "code": "poison-tail-01",
+            "description": "Animal poisoned tail.",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "range": {
+                "minimumX": 2,
+                "maximumX": 2,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "stabbing": 8,
+                    "poison": 8,
+                    "deviation": 3
+                },
+                {
+                    "chance": 25,
+                    "duration": 3,
+                    "poison": 12,
+                    "deviation": 4
+                }
+            ],
+            "useCost": {
+                "stamina": 10,
+                "actionPoints": 4
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Claws",
+            "code": "claws-01",
+            "description": "!Animal claws.",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 60,
+                    "cutting": 8,
+                    "deviation": 3
+                },
+                {
+                    "chance": 15,
+                    "duration": 3,
+                    "bleeding": 4,
+                    "deviation": 4
                 }
             ],
             "useCost": {
@@ -156,35 +245,6 @@
             "useCost": {
                 "stamina": 10,
                 "actionPoints": 4
-            }
-        },
-        {
-            "type": "weapon",
-            "name": "Teeth",
-            "code": "teeth-02",
-            "description": "A feral lunge from above, jaws snapping with primal hunger. The shriek of prey echoes in the night.",
-            "slot": "weapon",
-            "slotsNumber": 1,
-            "range": {
-                "maximumX": 2,
-                "maximumY": 2
-            },
-            "damage": [
-                {
-                    "chance": 60,
-                    "cutting": 8,
-                    "deviation": 3
-                },
-                {
-                    "chance": 15,
-                    "duration": 3,
-                    "bleeding": 2,
-                    "deviation": 1
-                }
-            ],
-            "useCost": {
-                "stamina": 10,
-                "actionPoints": 5
             }
         },
         {
@@ -658,7 +718,7 @@
             "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
-                "physique": 5,
+                "physique": 3,
                 "agility": 5
             },
             "range": {
@@ -705,7 +765,7 @@
                 {
                     "chance": 80,
                     "cutting": 24,
-                    "deviation": 2
+                    "deviation": 4
                 },
                 {
                     "duration": 3,
@@ -720,6 +780,43 @@
             },
             "price": {
                 "coins": 1000
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Poison Dagger",
+            "code": "poison-dagger-01",
+            "description": "!Poisoned dagger.",
+            "slot": "weapon",
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "physique": 6,
+                "agility": 8
+            },
+            "range": {
+                "maximumX": 1,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "chance": 75,
+                    "cutting": 18,
+                    "deviation": 6
+                },
+                {
+                    "duration": 3,
+                    "poison": 12,
+                    "deviation": 6
+                }
+            ],
+            "useCost": {
+                "stamina": 7,
+                "actionPoints": 4
+            },
+            "price": {
+                "coins": 1100,
+                "ruby": 3
             }
         },
         {
