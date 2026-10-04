@@ -2018,7 +2018,7 @@
     {
         "name": "Orc Raider",
         "code": "orc-01",
-        "description": "!Orc Raider.",
+        "description": "A brutal raider of the black marshes, dragging terror through the night with iron and malice.",
         "stats": {
             "progress": {
                 "level": 5,
@@ -2114,7 +2114,7 @@
     {
         "name": "Orc Berserker",
         "code": "orc-02",
-        "description": "!Orc Berserker.",
+        "description": "A bloodthirsty warrior who tears through battle like a storm unleashed from the grave.",
         "stats": {
             "progress": {
                 "level": 6,
@@ -2210,7 +2210,7 @@
     {
         "name": "Orc Necromancer",
         "code": "orc-necromancer-01",
-        "description": "!Orc Necromancer.",
+        "description": "A whispering tyrant of the fallen, binding the dead to his will with ancient, forbidden rites.",
         "stats": {
             "progress": {
                 "level": 5,
@@ -2311,7 +2311,7 @@
     {
         "name": "Orc Commander",
         "code": "orc-commander-01",
-        "description": "!The Orc Commander.",
+        "description": "A ruthless warlord who turns shattered siege lines into a tide of fear and iron.",
         "stats": {
             "progress": {
                 "level": 7,
@@ -2415,7 +2415,7 @@
     {
         "name": "Griffin",
         "code": "griffin-01",
-        "description": "!Griffin.",
+        "description": "A sky-born predator with a hunter's gaze and a feathered shadow that falls across the doomed.",
         "stats": {
             "progress": {
                 "level": 5,
@@ -2498,7 +2498,7 @@
     {
         "name": "Manticore",
         "code": "manticore-01",
-        "description": "!Manticore.",
+        "description": "A monstrous beast of iron claws and cruel appetite, stalking the wilderness with a smile of hunger.",
         "stats": {
             "progress": {
                 "level": 6,
@@ -2584,7 +2584,7 @@
     {
         "name": "Demonic Boar",
         "code": "boar-demon-01",
-        "description": "!Demonic Boar.",
+        "description": "A nightmare of tusks and flame, charging through the dark with the fury of a thousand damned.",
         "stats": {
             "progress": {
                 "level": 5,
@@ -2667,7 +2667,7 @@
     {
         "name": "Demonic Wolf",
         "code": "wolf-demon-01",
-        "description": "!Demonic Wolf.",
+        "description": "A ravenous predator of the moonless wilds, its eyes burning with hunger and old corruption.",
         "stats": {
             "progress": {
                 "level": 6,
@@ -2750,7 +2750,7 @@
     {
         "name": "Wendigo",
         "code": "wendigo-01",
-        "description": "!Wendigo.",
+        "description": "A gaunt omen of winter's hunger, stalking the frost with the empty appetite of a soul long dead.",
         "stats": {
             "progress": {
                 "level": 7,
@@ -2838,7 +2838,7 @@
     {
         "name": "Forest Witch",
         "code": "forest-witch-01",
-        "description": "!The Forest Witch.",
+        "description": "A reclusive sorceress of the blackwood, weaving curses between the roots of the ancient dead.",
         "stats": {
             "progress": {
                 "level": 8,
