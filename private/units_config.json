@@ -2676,7 +2676,7 @@
             "baseAttributes": {
                 "health": 220,
                 "stamina": 150,
-                "actionPoints": 9
+                "actionPoints": 12
             },
             "attributes": {
                 "strength": 24,
