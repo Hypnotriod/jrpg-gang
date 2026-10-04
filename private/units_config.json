@@ -2389,11 +2389,11 @@
             },
             {
                 "weight": 1,
-                "coins": 30
+                "coins": 50
             },
             {
                 "weight": 1,
-                "coins": 50
+                "coins": 100
             }
         ],
         "questTriggers": [
@@ -2522,7 +2522,7 @@
                 "stabbing": 5,
                 "cutting": 5,
                 "crushing": 5,
-                "fire": 5,
+                "fire": 15,
                 "cold": 5,
                 "lightning": 15,
                 "poison": 10,
@@ -2609,10 +2609,10 @@
                 "cutting": 5,
                 "crushing": 100,
                 "fire": 100,
-                "cold": 10,
+                "cold": 5,
                 "lightning": 10,
-                "poison": 0,
-                "acid": 0,
+                "poison": 10,
+                "acid": 10,
                 "exhaustion": 10,
                 "manaDrain": 0,
                 "bleeding": 0,
@@ -2660,6 +2660,285 @@
                 },
                 "achievements": {
                     "kill-5-demonic-boars": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Demonic Wolf",
+        "code": "wolf-demon-01",
+        "description": "!Demonic Wolf.",
+        "stats": {
+            "progress": {
+                "level": 6,
+                "experience": 180
+            },
+            "baseAttributes": {
+                "health": 220,
+                "stamina": 150,
+                "actionPoints": 9
+            },
+            "attributes": {
+                "strength": 24,
+                "physique": 18,
+                "agility": 15,
+                "endurance": 15,
+                "intelligence": 0,
+                "initiative": 10,
+                "luck": 3
+            },
+            "resistance": {
+                "stabbing": 12,
+                "cutting": 12,
+                "crushing": 12,
+                "fire": 100,
+                "cold": 100,
+                "lightning": 100,
+                "poison": 0,
+                "acid": 10,
+                "exhaustion": 10,
+                "manaDrain": 0,
+                "bleeding": 0,
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
+            }
+        },
+        "slots": {
+            "head": 1,
+            "body": 1,
+            "leg": 4,
+            "tail": 1,
+            "weapon": 1
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "claws-01"
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 10
+            },
+            {
+                "weight": 1,
+                "coins": 15
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-5-demonic-wolfs": "active"
+                    },
+                    "achievements": {
+                        "kill-5-demonic-wolfs": -5
+                    }
+                },
+                "achievements": {
+                    "kill-5-demonic-wolfs": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Wendigo",
+        "code": "wendigo-01",
+        "description": "!Wendigo.",
+        "stats": {
+            "progress": {
+                "level": 7,
+                "experience": 220
+            },
+            "baseAttributes": {
+                "health": 180,
+                "stamina": 120,
+                "actionPoints": 9
+            },
+            "attributes": {
+                "strength": 22,
+                "physique": 12,
+                "agility": 14,
+                "endurance": 15,
+                "intelligence": 12,
+                "initiative": 8,
+                "luck": 8
+            },
+            "resistance": {
+                "stabbing": 8,
+                "cutting": 8,
+                "crushing": 8,
+                "fire": 12,
+                "cold": 100,
+                "lightning": 12,
+                "poison": 100,
+                "acid": 100,
+                "exhaustion": 100,
+                "manaDrain": 0,
+                "bleeding": 100,
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
+            }
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "cursed-claws-01"
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 1
+            },
+            {
+                "weight": 1,
+                "coins": 12
+            },
+            {
+                "weight": 1,
+                "coins": 18
+            },
+            {
+                "weight": 1,
+                "ruby": 1
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-5-wendigo": "active"
+                    },
+                    "achievements": {
+                        "kill-5-wendigo": -5
+                    }
+                },
+                "achievements": {
+                    "kill-5-wendigo": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Forest Witch",
+        "code": "forest-witch-01",
+        "description": "!The Forest Witch.",
+        "stats": {
+            "progress": {
+                "level": 8,
+                "experience": 2000
+            },
+            "baseAttributes": {
+                "health": 300,
+                "stamina": 50,
+                "mana": 140,
+                "actionPoints": 10
+            },
+            "attributes": {
+                "strength": 4,
+                "physique": 2,
+                "agility": 5,
+                "endurance": 4,
+                "intelligence": 18,
+                "initiative": 9,
+                "luck": 12
+            },
+            "resistance": {
+                "stabbing": 4,
+                "cutting": 4,
+                "crushing": 4,
+                "fire": 5,
+                "cold": 100,
+                "lightning": 10,
+                "poison": 100,
+                "acid": 100,
+                "exhaustion": 100,
+                "manaDrain": 10,
+                "bleeding": 100,
+                "fear": 100,
+                "curse": 100,
+                "madness": 100
+            }
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "cursed-claws-01"
+                },
+                {
+                    "code": "sorcerer-staff-02",
+                    "equipped": true
+                },
+                {
+                    "code": "lightning-charge-01",
+                    "equipped": true,
+                    "quantity": 20
+                },
+                {
+                    "code": "sorcerer-hat-01",
+                    "equipped": true
+                },
+                {
+                    "code": "necklace-01",
+                    "equipped": true
+                },
+                {
+                    "code": "sorcerer-cloak-01",
+                    "equipped": true
+                },
+                {
+                    "code": "rusty-boots-01",
+                    "equipped": true
+                }
+            ]
+        },
+        "drop": [
+            {
+                "weight": 1,
+                "coins": 500
+            },
+            {
+                "weight": 1,
+                "coins": 300,
+                "ruby": 5
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-forest-witch": "active"
+                    },
+                    "achievements": {
+                        "kill-forest-witch": -1
+                    }
+                },
+                "achievements": {
+                    "kill-forest-witch": 1
                 }
             }
         ]
