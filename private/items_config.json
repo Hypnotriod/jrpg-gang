@@ -149,7 +149,7 @@
                     "chance": 25,
                     "duration": 3,
                     "poison": 7,
-                    "deviation": 1
+                    "deviation": 2
                 }
             ],
             "useCost": {
@@ -245,6 +245,31 @@
             "useCost": {
                 "stamina": 10,
                 "actionPoints": 4
+            }
+        },
+        {
+            "type": "weapon",
+            "name": "Cursed Eyed Hand",
+            "code": "cursed-hand-eye-01",
+            "description": "A grotesque hand stitched with cursed sight, its gaze watching the living long after death.",
+            "slot": "weapon",
+            "slotsNumber": 1,
+            "range": {
+                "maximumX": 5,
+                "minimumX": 2,
+                "maximumY": 2
+            },
+            "damage": [
+                {
+                    "manaDrain": 8,
+                    "exhaustion": 8,
+                    "madness": 8,
+                    "deviation": 3
+                }
+            ],
+            "useCost": {
+                "mana": 8,
+                "actionPoints": 5
             }
         },
         {

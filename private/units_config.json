@@ -1422,7 +1422,7 @@
                 "physique": 30,
                 "agility": 15,
                 "endurance": 30,
-                "intelligence": 15,
+                "intelligence": 12,
                 "initiative": 8,
                 "luck": 5
             },
@@ -1462,7 +1462,7 @@
                 },
                 {
                     "code": "acid-charge-01",
-                    "quantity": 100,
+                    "quantity": 30,
                     "equipped": true
                 }
             ]
@@ -2750,7 +2750,7 @@
     {
         "name": "Wendigo",
         "code": "wendigo-01",
-        "description": "A gaunt omen of winter's hunger, stalking the frost with the empty appetite of a soul long dead.",
+        "description": "A gaunt omen of madness hunger, stalking its prey with the empty appetite of a soul long dead.",
         "stats": {
             "progress": {
                 "level": 7,
@@ -2759,6 +2759,7 @@
             "baseAttributes": {
                 "health": 180,
                 "stamina": 120,
+                "mana": 80,
                 "actionPoints": 9
             },
             "attributes": {
@@ -2780,7 +2781,7 @@
                 "poison": 100,
                 "acid": 100,
                 "exhaustion": 100,
-                "manaDrain": 0,
+                "manaDrain": 10,
                 "bleeding": 100,
                 "fear": 100,
                 "curse": 100,
@@ -2799,6 +2800,10 @@
             "descriptor": [
                 {
                     "code": "cursed-claws-01"
+                },
+                {
+                    "code": "cursed-hand-eye-01",
+                    "equipped": true
                 }
             ]
         },
