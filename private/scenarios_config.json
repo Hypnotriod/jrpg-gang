@@ -3213,6 +3213,1322 @@
     },
     {
         "config": {
+            "id": "scenario-orcs-camp",
+            "name": "Orcs Camp",
+            "description": "!Orcs Camp.",
+            "capacity": 4,
+            "timer": true,
+            "requirements": {
+                "level": 4,
+                "quests": {
+                    "quest-training": "completed"
+                }
+            }
+        },
+        "spots": {
+            "1-0": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 100
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 125
+                    }
+                ],
+                "experience": 70,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "achievements": {
+                                "first-blood": -1
+                            }
+                        },
+                        "achievements": {
+                            "first-blood": 1
+                        }
+                    }
+                ],
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        }
+                    ]
+                }
+            },
+            "1-1": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 125
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 150
+                    }
+                ],
+                "experience": 75,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                         {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "1-2": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 125
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 150
+                    }
+                ],
+                "experience": 75,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        }
+                    ]
+                }
+            },
+            "2-0": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 150
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 175
+                    }
+                ],
+                "experience": 100,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "boar-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        }
+                    ]
+                }
+            },
+            "2-1": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 150
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 175
+                    }
+                ],
+                "experience": 100,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        }
+                    ]
+                }
+            },
+            "2-2": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 125
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 150
+                    }
+                ],
+                "experience": 125,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "3-0": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 125
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 175
+                    }
+                ],
+                "experience": 100,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "boar-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "boar-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "3-1": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 150
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 175
+                    }
+                ],
+                "experience": 100,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "boar-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "boar-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "3-2": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 125
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 150
+                    }
+                ],
+                "experience": 100,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "boar-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "wolf-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "goblin-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "4-0": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 200
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 225
+                    }
+                ],
+                "experience": 250,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "wolf-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "wolf-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "4-1": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 250
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 350
+                    }
+                ],
+                "experience": 250,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "boar-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "wolf-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "boar-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "5-0": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 350
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 400
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 500,
+                        "ruby": 5
+                    }
+                ],
+                "experience": 600,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "troll-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "5-1": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 400
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 500
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 550,
+                        "ruby": 5
+                    }
+                ],
+                "experience": 600,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "wolf-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "wolf-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "wolf-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-02",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "6-0": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 450,
+                        "ruby": 8
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 550,
+                        "ruby": 10
+                    }
+                ],
+                "experience": 700,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 1, "code": "tile-wall-05", "factions": []},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "boar-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-commander-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "boar-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            },
+            "6-1": {
+                "name": "Orcs Camp",
+                "code": "orcs-camp-01",
+                "booty": [
+                    {
+                        "weight": 2,
+                        "coins": 450,
+                        "ruby": 8
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 550,
+                        "ruby": 10
+                    }
+                ],
+                "experience": 700,
+                "battlefield": {
+                    "matrix": [
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [0]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ],
+                        [
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]},
+                            {"type": 0, "code": "tile-floor-04", "factions": [1]}
+                        ]
+                    ],
+                    "unitDescriptor": [
+                        {
+                            "code": "wolf-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-commander-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "wolf-demon-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 2,
+                                "y": 2
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 1
+                            }
+                        },
+                        {
+                            "code": "orc-necromancer-01",
+                            "faction": 1,
+                            "position": {
+                                "x": 3,
+                                "y": 2
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "path": [
+            [
+                {
+                    "weight": 1,
+                    "spotId": "1-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "1-1"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "1-2"
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotId": "2-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "2-1"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "2-2"
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotId": "3-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "3-1"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "3-2"
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotId": "4-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "4-1"
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotId": "5-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "5-1"
+                }
+            ],
+            [
+                {
+                    "weight": 1,
+                    "spotId": "6-0"
+                },
+                {
+                    "weight": 1,
+                    "spotId": "6-1"
+                }
+            ]
+        ]
+    },
+    {
+        "config": {
             "id": "scenario-dragons-lair",
             "name": "Dragon's Lair",
             "description": "Beneath a broken moon, the lair stirs with ancient hunger. Ashen winds carry the scent of blood, and every step deeper into the cavern promises a reckoning with something older than fire.",
