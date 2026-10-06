@@ -579,7 +579,7 @@
     },
     {
         "code": "quest-kill-5-demonic-wolfs",
-        "name": "Kill 5 Demonic Wolfs",
+        "name": "Kill 5 Demonic Wolves",
         "description": "The moonlit trails are haunted by demonic wolves with eyes like dying embers. Slay five of the pack to quiet the whispering terror in the forest shadows.",
         "reward": {
             "coins": 1600,
@@ -630,7 +630,7 @@
     },
     {
         "code": "quest-kill-20-orcs",
-        "name": "Kill 20 Orks",
+        "name": "Kill 20 Orcs",
         "description": "The orc hordes are gathering in the dark, their war drums shaking the earth. Cut down twenty raiders before their invasion turns the realm into a slaughter field.",
         "reward": {
             "coins": 1500,
@@ -887,7 +887,7 @@
         },
         "activation": {
             "requirements": {
-                "level": 8,
+                "level": 9,
                 "quests": {
                     "quest-find-artifact-03": "completed",
                     "quest-find-artifact-04": "completed",
