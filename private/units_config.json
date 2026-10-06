@@ -1837,14 +1837,14 @@
             {
                 "requirements": {
                     "quests": {
-                        "quest-kill-20-fleas": "active"
+                        "quest-kill-10-fleas": "active"
                     },
                     "achievements": {
-                        "kill-20-fleas": -20
+                        "kill-10-fleas": -10
                     }
                 },
                 "achievements": {
-                    "kill-20-fleas": 1
+                    "kill-10-fleas": 1
                 }
             }
         ]
@@ -2483,14 +2483,14 @@
             {
                 "requirements": {
                     "quests": {
-                        "quest-kill-5-griffins": "active"
+                        "quest-kill-10-griffins": "active"
                     },
                     "achievements": {
-                        "kill-5-griffins": -5
+                        "kill-10-griffins": -10
                     }
                 },
                 "achievements": {
-                    "kill-5-griffins": 1
+                    "kill-10-griffins": 1
                 }
             }
         ]
@@ -2569,14 +2569,14 @@
             {
                 "requirements": {
                     "quests": {
-                        "quest-kill-5-manticores": "active"
+                        "quest-kill-10-manticores": "active"
                     },
                     "achievements": {
-                        "kill-5-manticores": -5
+                        "kill-10-manticores": -10
                     }
                 },
                 "achievements": {
-                    "kill-5-manticores": 1
+                    "kill-10-manticores": 1
                 }
             }
         ]

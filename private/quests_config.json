@@ -164,9 +164,9 @@
         }
     },
     {
-        "code": "quest-kill-20-fleas",
-        "name": "Kill 20 Fleas",
-        "description": "A swarm of bloodthirsty horrors descends upon the shadowed marshes. The Hunters Guild demands you slay twenty of these vampiric fiends before their insatiable hunger drains the life from the land itself. Strike swiftly, for their buzzing heralds the coming of greater plagues.",
+        "code": "quest-kill-10-fleas",
+        "name": "Kill 10 Fleas",
+        "description": "A swarm of bloodthirsty horrors descends upon the shadowed marshes. The Hunters Guild demands you slay ten of these vampiric fiends before their insatiable hunger drains the life from the land itself. Strike swiftly, for their buzzing heralds the coming of greater plagues.",
         "reward": {
             "coins": 700,
             "experience": 1500
@@ -182,7 +182,7 @@
         "completion": {
             "requirements": {
                 "achievements": {
-                    "kill-20-fleas": 20
+                    "kill-10-fleas": 10
                 }
             }
         }
@@ -284,6 +284,30 @@
         }
     },
     {
+        "code": "quest-find-artifact-09",
+        "name": "Find Eldritch Heart",
+        "description": "The Adventurers Guild sends you into the black heart of the Demonic Forest to recover the Eldritch Heart, a living relic pulsing with forbidden power beneath the fourth floor's twisted roots and moonless shadows.",
+        "reward": {
+            "coins": 1000,
+            "experience": 5000
+        },
+        "activation": {
+            "requirements": {
+                "level": 4,
+                "quests": {
+                    "quest-training": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "artifact-09": 1
+                }
+            }
+        }
+    },
+    {
         "code": "quest-find-artifact-04",
         "name": "Find Amulet of Ultimate Evil",
         "description": "The Amulet of Ultimate Evil pulses with forbidden power in the depths of the Forgotten Ruins. This cursed talisman, forged in the fires of damnation, corrupts the soul of any who wear it. The Adventurers Guild demands you retrieve it from the fourth level's labyrinthine shadows, but beware its insidious whispers.",
@@ -369,7 +393,7 @@
             "requirements": {
                 "level": 5,
                 "quests": {
-                    "quest-kill-20-fleas": "completed",
+                    "quest-kill-10-fleas": "completed",
                     "quest-kill-10-toads": "completed"
                 }
             }
@@ -392,7 +416,7 @@
         },
         "activation": {
             "requirements": {
-                "level": 5,
+                "level": 8,
                 "quests": {
                     "quest-training": "completed"
                 }
@@ -413,7 +437,7 @@
         "reward": {
             "coins": 1400,
             "ruby": 5,
-            "experience": 3000
+            "experience": 4000
         },
         "activation": {
             "requirements": {
@@ -427,6 +451,30 @@
             "requirements": {
                 "achievements": {
                     "artifact-05": 1
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-find-artifact-11",
+        "name": "Find Golden Apple",
+        "description": "The witch's Golden Apple is said to bloom in the deepest, most cursed reaches of the Demonic Forest. Brave the fifth floor, where thorned ruins and sorcerous fog hide a prize that could awaken something ancient and hungry.",
+        "reward": {
+            "coins": 1500,
+            "experience": 5000
+        },
+        "activation": {
+            "requirements": {
+                "level": 5,
+                "quests": {
+                    "quest-find-artifact-09": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "artifact-11": 1
                 }
             }
         }
@@ -452,6 +500,180 @@
             "requirements": {
                 "achievements": {
                     "kill-grim-reaper": 1
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-10-griffins",
+        "name": "Kill 10 Griffins",
+        "description": "The Hunters Guild demands the slaughter of ten griffins circling the storm-battered cliffs, their talons sharp as cursed iron and their cries like harbingers of doom.",
+        "reward": {
+            "coins": 1200,
+            "experience": 6000
+        },
+        "activation": {
+            "requirements": {
+                "level": 5,
+                "quests": {
+                    "quest-kill-10-slimes": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-10-griffins": 10
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-10-manticores",
+        "name": "Kill 10 Manticores",
+        "description": "A brood of manticores prowls the shattered wastelands, their venomous spines and lion's maws leaving a trail of dread. Eradicate ten before the beasts turn the frontier into a graveyard.",
+        "reward": {
+            "coins": 1300,
+            "experience": 6500
+        },
+        "activation": {
+            "requirements": {
+                "level": 5,
+                "quests": {
+                    "quest-kill-10-slimes": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-10-manticores": 10
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-5-demonic-boars",
+        "name": "Kill 5 Demonic Boars",
+        "description": "The Demonic Boars of the wild taint the earth with black tusks and infernal rage. Hunt five of these savage monsters before their stampede tears through the last surviving villages.",
+        "reward": {
+            "coins": 1500,
+            "ruby": 5,
+            "experience": 8000
+        },
+        "activation": {
+            "requirements": {
+                "level": 5,
+                "quests": {
+                    "quest-kill-10-griffins": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-5-demonic-boars": 5
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-5-demonic-wolfs",
+        "name": "Kill 5 Demonic Wolfs",
+        "description": "The moonlit trails are haunted by demonic wolves with eyes like dying embers. Slay five of the pack to quiet the whispering terror in the forest shadows.",
+        "reward": {
+            "coins": 1600,
+            "ruby": 5,
+            "experience": 8000
+        },
+        "activation": {
+            "requirements": {
+                "level": 5,
+                "quests": {
+                    "quest-kill-10-manticores": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-5-demonic-wolfs": 5
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-5-wendigo",
+        "name": "Kill 5 Wendigo",
+        "description": "Hungry spirits wander the frostbitten woods in the shape of Wendigo, their hunger for flesh a curse as old as the night. Cut down five and deny the wilderness another feast.",
+        "reward": {
+            "coins": 1700,
+            "ruby": 5,
+            "experience": 9000
+        },
+        "activation": {
+            "requirements": {
+                "level": 6,
+                "quests": {
+                    "quest-kill-5-demonic-boars": "completed",
+                    "quest-kill-5-demonic-wolfs": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-5-wendigo": 5
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-20-orcs",
+        "name": "Kill 20 Orks",
+        "description": "The orc hordes are gathering in the dark, their war drums shaking the earth. Cut down twenty raiders before their invasion turns the realm into a slaughter field.",
+        "reward": {
+            "coins": 1500,
+            "ruby": 5,
+            "experience": 8000
+        },
+        "activation": {
+            "requirements": {
+                "level": 6,
+                "quests": {
+                    "quest-kill-10-goblins": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-20-orcs": 20
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-5-orc-necromancers",
+        "name": "Kill 5 Orc Necromancers",
+        "description": "Dark sorcery twists the orc camp into a graveyard of bone and ash. Destroy five necromancers before they raise the dead to serve the horde's dread ambitions.",
+        "reward": {
+            "coins": 1300,
+            "ruby": 5,
+            "experience": 7000
+        },
+        "activation": {
+            "requirements": {
+                "level": 6,
+                "quests": {
+                    "quest-kill-10-goblins": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-5-orc-necromancers": 5
                 }
             }
         }
@@ -507,6 +729,30 @@
         }
     },
     {
+        "code": "quest-find-artifact-08",
+        "name": "Find Bloody Goblet",
+        "description": "The Adventurers Guild sends you into the Orcs Camp to recover the Bloody Goblet, a relic stained with forgotten oaths and the blood of fallen kings hidden on the fourth floor.",
+        "reward": {
+            "coins": 1500,
+            "experience": 6000
+        },
+        "activation": {
+            "requirements": {
+                "level": 6,
+                "quests": {
+                    "quest-training": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "artifact-08": 1
+                }
+            }
+        }
+    },
+    {
         "code": "quest-find-artifact-06",
         "name": "Find Scroll of Eternal Darkness",
         "description": "The Scroll of Eternal Darkness awaits in the abyssal heart of the Forgotten Ruins. A parchment inscribed with incantations that summon perpetual night. The Adventurers Guild commands you to seize it from the fifth level's eternal gloom, lest its power extinguishes the light forever.",
@@ -542,7 +788,7 @@
         },
         "activation": {
             "requirements": {
-                "level": 7,
+                "level": 6,
                 "quests": {
                     "quest-training": "completed"
                 }
@@ -552,6 +798,80 @@
             "requirements": {
                 "achievements": {
                     "kill-hydra": 1
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-find-artifact-10",
+        "name": "Find Magic Chest",
+        "description": "A forgotten treasure chest rests behind the iron walls of the Orcs Camp, its runes crackling with eldritch power. Seize the Magic Chest from the fifth floor before the war host claims it for their dark rituals.",
+        "reward": {
+            "coins": 1700,
+            "experience": 7000
+        },
+        "activation": {
+            "requirements": {
+                "level": 6,
+                "quests": {
+                    "quest-find-artifact-08": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "artifact-10": 1
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-forest-witch",
+        "name": "Defeat the Forest Witch",
+        "description": "Beneath the roots of the Demonic Forest, the Forest Witch stirs a ritual of blood and thunder. Defeat her before she summons a legion of demons to devour the world in shadow.",
+        "reward": {
+            "coins": 3000,
+            "ruby": 15,
+            "experience": 16000
+        },
+        "activation": {
+            "requirements": {
+                "level": 7,
+                "quests": {
+                    "quest-training": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-forest-witch": 1
+                }
+            }
+        }
+    },
+    {
+        "code": "quest-kill-orc-commander",
+        "name": "Defeat the Orc Commander",
+        "description": "Break through the Orcs Camp and slay the Orc Commander, the iron-handed tyrant who keeps the war host united. If he stands, the horde's march will drown the realm in fire and fear.",
+        "reward": {
+            "coins": 3000,
+            "ruby": 15,
+            "experience": 16000
+        },
+        "activation": {
+            "requirements": {
+                "level": 8,
+                "quests": {
+                    "quest-training": "completed"
+                }
+            }
+        },
+        "completion": {
+            "requirements": {
+                "achievements": {
+                    "kill-orc-commander": 1
                 }
             }
         }

@@ -577,7 +577,7 @@
                             }
                         },
                         {
-                            "code": "rat-01",
+                            "code": "slime-02",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -585,7 +585,7 @@
                             }
                         },
                         {
-                            "code": "slime-01",
+                            "code": "rat-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -1753,7 +1753,7 @@
                     ],
                     "unitDescriptor": [
                         {
-                            "code": "snake-01",
+                            "code": "flea-01",
                             "faction": 1,
                             "position": {
                                 "x": 2,
@@ -1769,7 +1769,7 @@
                             }
                         },
                         {
-                            "code": "snake-01",
+                            "code": "flea-01",
                             "faction": 1,
                             "position": {
                                 "x": 3,
@@ -3451,11 +3451,11 @@
         "config": {
             "id": "scenario-demonic-forest",
             "name": "Demonic Forest",
-            "description": "!Demonic Forest.",
+            "description": "A haunted woodland of twisted black pines, blood-red thorns, and whispering ruins swallowed by eternal night. Every path reeks of old sorcery, and the trees seem to lean closer as if hungry for the living.",
             "capacity": 4,
             "timer": true,
             "requirements": {
-                "level": 3,
+                "level": 4,
                 "quests": {
                     "quest-training": "completed"
                 }
@@ -4282,6 +4282,21 @@
                     }
                 ],
                 "experience": 250,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-09": "active"
+                            },
+                            "achievements": {
+                                "artifact-09": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-09": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -4470,6 +4485,21 @@
                     }
                 ],
                 "experience": 600,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-11": "active"
+                            },
+                            "achievements": {
+                                "artifact-11": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-11": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -5029,11 +5059,11 @@
         "config": {
             "id": "scenario-orcs-camp",
             "name": "Orcs Camp",
-            "description": "!Orcs Camp.",
+            "description": "A brutal war camp carved into the black earth, where iron braziers burn beneath a sky choked with ash and fog. Savage orcs brood around crude huts, sharpening blades and muttering ominous prayers to the dark gods of the wild.",
             "capacity": 4,
             "timer": true,
             "requirements": {
-                "level": 4,
+                "level": 6,
                 "quests": {
                     "quest-training": "completed"
                 }
@@ -5820,6 +5850,21 @@
                     }
                 ],
                 "experience": 250,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-08": "active"
+                            },
+                            "achievements": {
+                                "artifact-08": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-08": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -6008,6 +6053,21 @@
                     }
                 ],
                 "experience": 600,
+                "questTriggers": [
+                    {
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-10": "active"
+                            },
+                            "achievements": {
+                                "artifact-10": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-10": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -6373,7 +6433,7 @@
             "capacity": 4,
             "timer": true,
             "requirements": {
-                "level": 5,
+                "level": 8,
                 "quests": {
                     "quest-training": "completed"
                 }
