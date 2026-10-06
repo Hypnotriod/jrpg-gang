@@ -368,7 +368,7 @@
             "requirements": {
                 "level": 5,
                 "quests": {
-                    "quest-kill-20-rats": "completed"
+                    "quest-kill-10-rats": "completed"
                 }
             }
         },
@@ -394,7 +394,7 @@
                 "level": 5,
                 "quests": {
                     "quest-kill-10-fleas": "completed",
-                    "quest-kill-10-toads": "completed"
+                    "quest-kill-10-rats": "completed"
                 }
             }
         },
@@ -641,7 +641,8 @@
             "requirements": {
                 "level": 6,
                 "quests": {
-                    "quest-kill-10-goblins": "completed"
+                    "quest-kill-10-fleas": "completed",
+                    "quest-kill-10-rats": "completed"
                 }
             }
         },

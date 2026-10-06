@@ -154,7 +154,7 @@
             "level": 4
         },
         "price": {
-            "coins": 150
+            "coins": 200
         }
     },
     {
@@ -210,6 +210,10 @@
                     "equipped": true
                 },
                 {
+                    "code": "necklace-07",
+                    "equipped": true
+                },
+                {
                     "code": "armor-02",
                     "equipped": true
                 },
@@ -235,7 +239,7 @@
             "level": 7
         },
         "price": {
-            "coins": 300,
+            "coins": 400,
             "ruby": 1
         }
     }
