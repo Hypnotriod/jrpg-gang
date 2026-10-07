@@ -1013,7 +1013,7 @@
             },
             "useCost": {
                 "stamina": 14,
-                "actionPoints": 5
+                "actionPoints": 4
             },
             "damage": [
                 {
