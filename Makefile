@@ -19,7 +19,7 @@ image-build:
 gcloud-setup:
 	gcloud components update
 	gcloud auth login
-	gcloud auth configure-docker
+	gcloud auth configure-docker ${REGION}-docker.pkg.dev
 
 gcloud-image-build:
 	docker build . -t ${ARTIFACT_REGISTRY_IMAGE}
