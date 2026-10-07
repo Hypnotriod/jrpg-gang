@@ -22,6 +22,14 @@
             }
         },
         {
+            "code": "arrow-poison-01",
+            "requirements": {
+                "achievements": {
+                    "kill-20-rats": 20
+                }
+            }
+        },
+        {
             "code": "fire-charge-01"
         },
         {
@@ -333,7 +341,9 @@
         {
             "code": "poison-dagger-01",
             "requirements": {
-                "level": 3
+                "achievements": {
+                    "kill-20-rats": 20
+                }
             }
         },
         {

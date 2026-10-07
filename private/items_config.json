@@ -896,9 +896,10 @@
             "modification": [
                 {
                     "damage": {
-                        "lightning": 8,
-                        "fire": 8,
-                        "cold": 8
+                        "lightning": 5,
+                        "fire": 5,
+                        "cold": 5,
+                        "acid": 5
                     }
                 }
             ],
@@ -941,7 +942,6 @@
             "modification": [
                 {
                     "damage": {
-                        "poison": 8,
                         "acid": 8
                     }
                 }
@@ -1488,7 +1488,8 @@
             "description": "A ritual of blood and will, mending grievous wounds and staving off the cold embrace of death.",
             "code": "magic-health-02",
             "price": {
-                "coins": 700
+                "coins": 700,
+                "ruby": 2
             },
             "requirements": {
                 "intelligence": 12
@@ -1646,7 +1647,8 @@
             "code": "magic-shield-01",
             "description": "A shimmering ward of spectral force that hardens flesh against piercing blows and crushing strikes.",
             "price": {
-                "coins": 1000
+                "coins": 1000,
+                "ruby": 3
             },
             "requirements": {
                 "intelligence": 12
@@ -2382,7 +2384,9 @@
                         "crushing": 9,
                         "fire": 4,
                         "cold": 4,
-                        "lightning": 4
+                        "lightning": 4,
+                        "acid": 4,
+                        "bleeding": 3
                     }
                 }
             ],
@@ -2419,7 +2423,8 @@
                     "damage": {
                         "lightning": 3,
                         "fire": 3,
-                        "cold": 3
+                        "cold": 3,
+                        "acid": 3
                     }
                 }
             ]
@@ -2450,14 +2455,16 @@
                         "fire": 2,
                         "cold": 2,
                         "lightning": 2,
+                        "acid": 2,
                         "poison": 2,
                         "exhaustion": 2,
                         "manaDrain": 2
                     },
                     "damage": {
-                        "lightning": 4,
-                        "fire": 4,
-                        "cold": 4
+                        "lightning": 3,
+                        "fire": 3,
+                        "cold": 3,
+                        "acid": 3
                     }
                 }
             ]
@@ -2686,7 +2693,8 @@
                     "damage": {
                         "lightning": 5,
                         "fire": 5,
-                        "cold": 5
+                        "cold": 5,
+                        "acid": 5
                     }
                 }
             ]
@@ -2720,6 +2728,7 @@
                         "fire": 4,
                         "cold": 4,
                         "lightning": 4,
+                        "acid": 4,
                         "poison": 3,
                         "exhaustion": 3,
                         "manaDrain": 3,
@@ -2733,7 +2742,8 @@
                     "damage": {
                         "lightning": 8,
                         "fire": 8,
-                        "cold": 8
+                        "cold": 8,
+                        "acid": 8
                     }
                 }
             ]
@@ -3141,7 +3151,6 @@
                 {
                     "duration": 3,
                     "chance": 15,
-                    "bleeding": 3,
                     "fire": 3,
                     "deviation": 2
                 }
@@ -3167,7 +3176,6 @@
                 {
                     "duration": 3,
                     "chance": 15,
-                    "bleeding": 3,
                     "cold": 3,
                     "deviation": 2
                 }
@@ -3193,13 +3201,35 @@
                 {
                     "duration": 3,
                     "chance": 15,
-                    "bleeding": 3,
                     "lightning": 3,
                     "deviation": 2
                 }
             ],
             "price": {
                 "coins": 5
+            }
+        },
+        {
+            "name": "Poison Arrow",
+            "type": "ammunition",
+            "code": "arrow-poison-01",
+            "description": "A slender shaft crowned with venom, carrying a slow and merciless death into the dark.",
+            "kind": "arrow",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "damage": [
+                {
+                    "stabbing": 18,
+                    "deviation": 3
+                },
+                {
+                    "duration": 3,
+                    "poison": 18,
+                    "deviation": 3
+                }
+            ],
+            "price": {
+                "coins": 4
             }
         },
         {
