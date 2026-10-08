@@ -15,6 +15,7 @@ func (r *UnitResistance) AccumulatePhysical(value float32) {
 	r.Fire += value
 	r.Cold += value
 	r.Lightning += value
+	r.Acid += value
 }
 
 func (r *UnitResistance) PhysicalAbsorption(damage Damage) float32 {
@@ -23,7 +24,8 @@ func (r *UnitResistance) PhysicalAbsorption(damage Damage) float32 {
 		min(r.Crushing, damage.Crushing) +
 		min(r.Fire, damage.Fire) +
 		min(r.Cold, damage.Cold) +
-		min(r.Lightning, damage.Lightning)
+		min(r.Lightning, damage.Lightning) +
+		min(r.Acid, damage.Acid)
 }
 
 func (r UnitResistance) IsZero() bool {
