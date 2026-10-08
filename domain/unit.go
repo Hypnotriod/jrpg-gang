@@ -295,8 +295,8 @@ func (u *Unit) CalculateModificationChance(modification UnitModificationImpact) 
 }
 
 func (u *Unit) CalculateStunChance(target *Unit, damage Damage) float32 {
-	damageFactor := damage.PhysicalDamage() * 100 / max(100, target.State.Health)
-	chance := (damageFactor - u.State.Stress) - (target.TotalPhysique() - target.State.Stress)
+	chance := (damage.PhysicalDamage() - u.State.Stress) - (target.TotalPhysique() - target.State.Stress)
+	chance *= 100 / max(100, target.State.Health)
 	return min(max(chance, MINIMUM_CHANCE), MAXIMUM_CHANCE)
 }
 
