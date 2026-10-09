@@ -863,6 +863,11 @@
                     {
                         "weight": 1,
                         "coins": 200
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 200,
+                        "ruby": 2
                     }
                 ],
                 "experience": 70,
@@ -959,6 +964,11 @@
                     {
                         "weight": 1,
                         "coins": 200
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 200,
+                        "ruby": 2
                     }
                 ],
                 "experience": 80,
@@ -1039,7 +1049,12 @@
                     },
                     {
                         "weight": 1,
-                        "coins": 200
+                        "coins": 225
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 225,
+                        "ruby": 3
                     }
                 ],
                 "experience": 85,
@@ -1128,7 +1143,12 @@
                     },
                     {
                         "weight": 1,
-                        "coins": 200
+                        "coins": 225
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 225,
+                        "ruby": 3
                     }
                 ],
                 "experience": 90,
@@ -1218,6 +1238,11 @@
                     {
                         "weight": 1,
                         "coins": 250
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 250,
+                        "ruby": 4
                     }
                 ],
                 "experience": 100,
@@ -1307,6 +1332,11 @@
                     {
                         "weight": 1,
                         "coins": 250
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 250,
+                        "ruby": 4
                     }
                 ],
                 "experience": 125,
@@ -2607,6 +2637,11 @@
                     {
                         "weight": 1,
                         "coins": 300
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 300,
+                        "ruby": 2
                     }
                 ],
                 "experience": 275,
@@ -2696,6 +2731,11 @@
                     {
                         "weight": 1,
                         "coins": 300
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 300,
+                        "ruby": 2
                     }
                 ],
                 "experience": 275,
@@ -2800,6 +2840,11 @@
                     {
                         "weight": 1,
                         "coins": 350
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 350,
+                        "ruby": 3
                     }
                 ],
                 "experience": 325,
@@ -2889,6 +2934,11 @@
                     {
                         "weight": 1,
                         "coins": 350
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 350,
+                        "ruby": 3
                     }
                 ],
                 "experience": 325,
@@ -2978,6 +3028,11 @@
                     {
                         "weight": 1,
                         "coins": 450
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 450,
+                        "ruby": 4
                     }
                 ],
                 "experience": 400,
@@ -3067,6 +3122,11 @@
                     {
                         "weight": 1,
                         "coins": 450
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 450,
+                        "ruby": 4
                     }
                 ],
                 "experience": 400,
@@ -5758,6 +5818,11 @@
                     {
                         "weight": 1,
                         "coins": 225
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 250,
+                        "ruby": 2
                     }
                 ],
                 "experience": 250,
@@ -5847,6 +5912,11 @@
                     {
                         "weight": 1,
                         "coins": 350
+                    },
+                    {
+                        "weight": 1,
+                        "coins": 350,
+                        "ruby": 2
                     }
                 ],
                 "experience": 250,

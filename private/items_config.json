@@ -1990,6 +1990,37 @@
         },
         {
             "type": "armor",
+            "name": "Agile Boots",
+            "code": "agile-boots-01",
+            "description": "Light as a whisper and sure on treacherous ground, these boots carry their wearer swiftly through the gloom.",
+            "durability": 500,
+            "slot": "leg",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "strength": 2,
+                "physique": 2
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 2,
+                        "cutting": 2,
+                        "crushing": 2
+                    },
+                    "attributes": {
+                        "agility": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 650,
+                "ruby": 1
+            }
+        },
+        {
+            "type": "armor",
             "name": "Boots II",
             "code": "boots-02",
             "description": "Boots of supple leather, crafted for nobles but stained by the road. They whisper of both privilege and peril.",
@@ -2283,9 +2314,6 @@
             },
             "modification": [
                 {
-                    "attributes": {
-                        "agility": -1
-                    },
                     "resistance": {
                         "stabbing": 2,
                         "cutting": 2,
@@ -2308,14 +2336,13 @@
             "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
-                "strength": 5,
-                "physique": 5
+                "strength": 4,
+                "physique": 4
             },
             "modification": [
                 {
                     "attributes": {
-                        "agility": -2,
-                        "initiative": -1
+                        "agility": -1
                     },
                     "resistance": {
                         "stabbing": 4,
@@ -2346,8 +2373,8 @@
             "modification": [
                 {
                     "attributes": {
-                        "agility": -4,
-                        "initiative": -2
+                        "agility": -2,
+                        "initiative": -1
                     },
                     "resistance": {
                         "stabbing": 6,
@@ -2380,9 +2407,9 @@
                         "stabbing": 9,
                         "cutting": 10,
                         "crushing": 9,
-                        "fire": 4,
+                        "fire": 5,
                         "cold": 4,
-                        "lightning": 4,
+                        "lightning": 5,
                         "acid": 4,
                         "bleeding": 3
                     }
@@ -2391,6 +2418,108 @@
             "price": {
                 "coins": 4000,
                 "ruby": 20
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Armor V",
+            "code": "armor-04",
+            "description": "A pristine, gleaming cuirass of masterwork steel, the finest protection a champion can claim in a realm steeped in shadow.",
+            "durability": 1200,
+            "slot": "body",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 15,
+                "physique": 15
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 14,
+                        "cutting": 15,
+                        "crushing": 14,
+                        "fire": 9,
+                        "cold": 9,
+                        "lightning": 9,
+                        "acid": 9,
+                        "bleeding": 6
+                    }
+                }
+            ],
+            "price": {
+                "coins": 7000,
+                "ruby": 30
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Cursed Armor",
+            "code": "cursed-armor-01",
+            "description": "A corroded suit of mail that clings to its wearer with the cold malice of an ancient curse.",
+            "durability": 600,
+            "slot": "body",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 4,
+                "physique": 4
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 5,
+                        "cutting": 5,
+                        "crushing": 5,
+                        "curse": 8,
+                        "madness": 8,
+                        "bleeding": 8
+                    },
+                    "baseAttributes": {
+                        "actionPoints": -1,
+                        "health": -10
+                    }
+                }
+            ],
+            "price": {
+                "coins": 1800
+            }
+        },
+        {
+            "type": "armor",
+            "name": "Shadow Hood",
+            "code": "shadow-hood-01",
+            "description": "A dark hood that veils the wearer's face, swallowing their features in a fold of shadow.",
+            "durability": 500,
+            "slot": "head",
+            "canBeSold": true,
+            "canBeThrownAway": true,
+            "slotsNumber": 1,
+            "requirements": {
+                "strength": 3,
+                "physique": 3
+            },
+            "modification": [
+                {
+                    "resistance": {
+                        "stabbing": 3,
+                        "cutting": 2,
+                        "bleeding": 4,
+                        "poison": 4,
+                        "acid": 4
+                    },
+                    "damage": {
+                        "poison": 8
+                    },
+                    "recovery": {
+                        "stamina": 2
+                    }
+                }
+            ],
+            "price": {
+                "coins": 600
             }
         },
         {

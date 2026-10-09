@@ -110,31 +110,7 @@
             }
         },
         {
-            "code": "hand-bandage-01"
-        },
-        {
-            "code": "rag-armor-01"
-        },
-        {
             "code": "rusty-helmet-01"
-        },
-        {
-            "code": "rusty-boots-01"
-        },
-        {
-            "code": "rusty-shield-01"
-        },
-        {
-            "code": "gloves-01",
-            "requirements": {
-                "level": 2
-            }
-        },
-        {
-            "code": "basic-armor-01",
-            "requirements": {
-                "level": 2
-            }
         },
         {
             "code": "helmet-01",
@@ -143,13 +119,101 @@
             }
         },
         {
-            "code": "boots-01",
+            "code": "helmet-02",
+            "requirements": {
+                "level": 3
+            }
+        },
+        {
+            "code": "helmet-03",
+            "requirements": {
+                "level": 4
+            }
+        },
+        {
+            "code": "helmet-horns-01",
+            "requirements": {
+                "achievements": {
+                    "kill-orc-commander": 1
+                }
+            }
+        },
+        {
+            "code": "shadow-hood-01",
             "requirements": {
                 "level": 2
             }
         },
         {
-            "code": "shield-01",
+            "code": "sorcerer-hat-01"
+        },
+        {
+            "code": "sorcerer-hat-02",
+            "requirements": {
+                "level": 3
+            }
+        },
+        {
+            "code": "rag-armor-01"
+        },
+        {
+            "code": "basic-armor-01",
+            "requirements": {
+                "level": 2
+            }
+        },
+        {
+            "code": "armor-01",
+            "requirements": {
+                "level": 3
+            }
+        },
+        {
+            "code": "armor-02",
+            "requirements": {
+                "level": 4
+            }
+        },
+        {
+            "code": "armor-03",
+            "requirements": {
+                "level": 6
+            }
+        },
+        {
+            "code": "armor-04",
+            "requirements": {
+                "level": 9
+            }
+        },
+        {
+            "code": "cursed-armor-01",
+            "requirements": {
+                "achievements": {
+                    "kill-10-skeletons": 10
+                }
+            }
+        },
+        {
+            "code": "sorcerer-cloak-01"
+        },
+        {
+            "code": "sorcerer-cloak-02",
+            "requirements": {
+                "level": 3
+            }
+        },
+        {
+            "code": "sorcerer-cloak-03",
+            "requirements": {
+                "level": 6
+            }
+        },
+        {
+            "code": "hand-bandage-01"
+        },
+        {
+            "code": "gloves-01",
             "requirements": {
                 "level": 2
             }
@@ -161,55 +225,7 @@
             }
         },
         {
-            "code": "armor-01",
-            "requirements": {
-                "level": 3
-            }
-        },
-        {
-            "code": "helmet-02",
-            "requirements": {
-                "level": 3
-            }
-        },
-        {
-            "code": "boots-02",
-            "requirements": {
-                "level": 3
-            }
-        },
-        {
-            "code": "shield-02",
-            "requirements": {
-                "level": 3
-            }
-        },
-        {
             "code": "gloves-03",
-            "requirements": {
-                "level": 4
-            }
-        },
-        {
-            "code": "armor-02",
-            "requirements": {
-                "level": 4
-            }
-        },
-        {
-            "code": "helmet-03",
-            "requirements": {
-                "level": 4
-            }
-        },
-        {
-            "code": "boots-03",
-            "requirements": {
-                "level": 4
-            }
-        },
-        {
-            "code": "shield-03",
             "requirements": {
                 "level": 4
             }
@@ -221,17 +237,51 @@
             }
         },
         {
-            "code": "armor-03",
+            "code": "rusty-boots-01"
+        },
+        {
+            "code": "boots-01",
             "requirements": {
-                "level": 6
+                "level": 2
             }
         },
         {
-            "code": "helmet-horns-01",
+            "code": "boots-02",
             "requirements": {
-                "achievements": {
-                    "kill-orc-commander": 1
-                }
+                "level": 3
+            }
+        },
+        {
+            "code": "boots-03",
+            "requirements": {
+                "level": 4
+            }
+        },
+        {
+            "code": "agile-boots-01",
+            "requirements": {
+                "level": 3
+            }
+        },
+        {
+            "code": "rusty-shield-01"
+        },
+        {
+            "code": "shield-01",
+            "requirements": {
+                "level": 2
+            }
+        },
+        {
+            "code": "shield-02",
+            "requirements": {
+                "level": 3
+            }
+        },
+        {
+            "code": "shield-03",
+            "requirements": {
+                "level": 4
             }
         },
         {
@@ -274,30 +324,6 @@
             "code": "necklace-06",
             "requirements": {
                 "level": 5
-            }
-        },
-        {
-            "code": "sorcerer-hat-01"
-        },
-        {
-            "code": "sorcerer-hat-02",
-            "requirements": {
-                "level": 3
-            }
-        },
-        {
-            "code": "sorcerer-cloak-01"
-        },
-        {
-            "code": "sorcerer-cloak-02",
-            "requirements": {
-                "level": 3
-            }
-        },
-        {
-            "code": "sorcerer-cloak-03",
-            "requirements": {
-                "level": 6
             }
         },
         {
