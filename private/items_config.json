@@ -2010,13 +2010,14 @@
                         "crushing": 2
                     },
                     "attributes": {
-                        "agility": 2
+                        "agility": 2,
+                        "initiative": 2
                     }
                 }
             ],
             "price": {
-                "coins": 650,
-                "ruby": 1
+                "coins": 800,
+                "ruby": 2
             }
         },
         {
