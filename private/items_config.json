@@ -2164,8 +2164,8 @@
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
-                "strength": 3,
-                "physique": 3
+                "strength": 2,
+                "physique": 2
             },
             "modification": [
                 {
