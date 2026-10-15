@@ -1085,8 +1085,8 @@
         ]
     },
     {
-        "name": "Fire Scull",
-        "code": "scull-01",
+        "name": "Fire Skull",
+        "code": "skull-01",
         "description": "A flaming skull animated by dark magic, burning with unholy fire.",
         "stats": {
             "progress": {
@@ -1147,6 +1147,21 @@
             {
                 "weight": 1,
                 "coins": 20
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-5-fire-skulls": "active"
+                    },
+                    "achievements": {
+                        "kill-5-fire-skulls": -5
+                    }
+                },
+                "achievements": {
+                    "kill-5-fire-skulls": 1
+                }
             }
         ]
     },
@@ -1249,7 +1264,7 @@
         ]
     },
     {
-        "name": "Ghost",
+        "name": "Cursing Ghost",
         "code": "ghost-01",
         "description": "A spectral apparition, haunting the living with ethereal terror.",
         "stats": {
@@ -1311,6 +1326,21 @@
             {
                 "weight": 1,
                 "coins": 6
+            }
+        ],
+        "questTriggers": [
+            {
+                "requirements": {
+                    "quests": {
+                        "quest-kill-10-ghosts": "active"
+                    },
+                    "achievements": {
+                        "kill-10-ghosts": -10
+                    }
+                },
+                "achievements": {
+                    "kill-10-ghosts": 1
+                }
             }
         ]
     },

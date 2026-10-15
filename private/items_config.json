@@ -921,7 +921,7 @@
             "type": "weapon",
             "name": "Curse Staff",
             "code": "sorcerer-staff-03",
-            "description": "A staff of acid scull, crackling with the taint of a forgotten rite.",
+            "description": "A staff of acid skull, crackling with the taint of a forgotten rite.",
             "ammunitionKind": "magicCharge",
             "durability": 500,
             "slot": "weapon",
