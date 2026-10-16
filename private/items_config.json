@@ -811,6 +811,7 @@
             "name": "Poison Dagger",
             "code": "poison-dagger-01",
             "description": "A wicked blade dipped in venom, its edge whispering of rot, ruin, and slow death.",
+            "durability": 400,
             "slot": "weapon",
             "canBeThrownAway": true,
             "slotsNumber": 1,
