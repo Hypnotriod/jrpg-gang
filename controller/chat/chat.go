@@ -20,8 +20,8 @@ type BroadcastChatParticipantFunc func(playerIds []engine.PlayerId, playerId eng
 type ChatConfig struct {
 	MaxMessages         uint          `json:"maxMessages"`
 	MaxMessageLength    uint          `json:"maxMessageLength"`
-	MessageRate         uint          `json:"messagerate"`
-	MessageRateDuration time.Duration `json:"messagerateDuration"`
+	MessageRate         uint          `json:"messageRate"`
+	MessageRateDuration time.Duration `json:"messageRateDuration"`
 }
 
 type ChatMessage struct {
