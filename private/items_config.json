@@ -874,6 +874,43 @@
         },
         {
             "type": "weapon",
+            "name": "Beginner Staff",
+            "code": "sorcerer-staff-04",
+            "description": "A novice's staff crowned with a green emerald, its faint glow stirring with dormant sorcery.",
+            "ammunitionKind": "magicCharge",
+            "slot": "weapon",
+            "canBeThrownAway": true,
+            "slotsNumber": 2,
+            "requirements": {
+                "intelligence": 10
+            },
+            "modification": [
+                {
+                    "damage": {
+                        "lightning": 4,
+                        "fire": 4,
+                        "cold": 4
+                    }
+                }
+            ],
+            "damage": [
+                {
+                    "chance": 80
+                }
+            ],
+            "range": {
+                "maximumX": 5,
+                "minimumX": 2,
+                "maximumY": 5
+            },
+            "useCost": {
+                "mana": 6,
+                "stamina": 3,
+                "actionPoints": 4
+            }
+        },
+        {
+            "type": "weapon",
             "name": "Scare Staff",
             "code": "sorcerer-staff-02",
             "description": "A staff crowned with a skull, radiating dread and the promise of nightmares.",
@@ -896,10 +933,10 @@
             "modification": [
                 {
                     "damage": {
-                        "lightning": 5,
-                        "fire": 5,
-                        "cold": 5,
-                        "acid": 5
+                        "lightning": 7,
+                        "fire": 7,
+                        "cold": 7,
+                        "acid": 7
                     }
                 }
             ],
@@ -909,8 +946,8 @@
                 "maximumY": 5
             },
             "useCost": {
-                "mana": 7,
-                "stamina": 3,
+                "mana": 8,
+                "stamina": 4,
                 "actionPoints": 5
             },
             "price": {

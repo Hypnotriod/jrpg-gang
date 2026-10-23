@@ -435,9 +435,15 @@
             }
         },
         {
-            "code": "sorcerer-staff-02",
+            "code": "sorcerer-staff-04",
             "requirements": {
                 "level": 3
+            }
+        },
+        {
+            "code": "sorcerer-staff-02",
+            "requirements": {
+                "level": 5
             }
         },
         {
