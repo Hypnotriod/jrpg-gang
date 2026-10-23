@@ -878,6 +878,7 @@
             "code": "sorcerer-staff-04",
             "description": "A novice's staff crowned with a green emerald, its faint glow stirring with dormant sorcery.",
             "ammunitionKind": "magicCharge",
+            "durability": 300,
             "slot": "weapon",
             "canBeThrownAway": true,
             "slotsNumber": 2,
