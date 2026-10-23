@@ -907,6 +907,9 @@
                 "mana": 6,
                 "stamina": 3,
                 "actionPoints": 4
+            },
+            "price": {
+                "coins": 1000
             }
         },
         {
