@@ -83,6 +83,8 @@ func (s *GameShop) ExecuteAction(action domain.Action, unit *domain.Unit, rndGen
 		return s.sell(action, unit, rndGen)
 	case domain.ActionRepair:
 		return s.repair(action, unit)
+	case domain.ActionRepairAll:
+		return s.repairAll(action, unit)
 	}
 	return domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 }
@@ -222,7 +224,27 @@ func (s *GameShop) repair(action domain.Action, unit *domain.Unit) *domain.Actio
 		return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
 	}
 	unit.Booty.Reduce(price, 1)
-	equipment.Wearout = 0
+	equipment.ResetWearout()
+	return result.WithResult(domain.ResultAccomplished)
+}
+
+func (s *GameShop) repairAll(action domain.Action, unit *domain.Unit) *domain.ActionResult {
+	var price domain.UnitBooty
+	result := domain.NewActionResult()
+	equipment := unit.Inventory.GetWornEquipment()
+	if len(equipment) == 0 {
+		return result.WithResult(domain.ResultNotFound)
+	}
+	for _, e := range equipment {
+		price.Accumulate(s.calculateRepairPrice(e))
+	}
+	if !price.Check(unit.Booty, 1) {
+		return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
+	}
+	unit.Booty.Reduce(price, 1)
+	for _, e := range equipment {
+		e.ResetWearout()
+	}
 	return result.WithResult(domain.ResultAccomplished)
 }
 

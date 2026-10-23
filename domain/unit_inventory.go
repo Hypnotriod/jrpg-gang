@@ -74,6 +74,23 @@ func (i *UnitInventory) GetEquipment(equipped bool) []*Equipment {
 	return equipment
 }
 
+func (i *UnitInventory) GetWornEquipment() []*Equipment {
+	equipment := []*Equipment{}
+	for n := range i.Weapon {
+		item := &i.Weapon[n].Equipment
+		if item.Wearout != 0 {
+			equipment = append(equipment, item)
+		}
+	}
+	for n := range i.Armor {
+		item := &i.Armor[n].Equipment
+		if item.Wearout != 0 {
+			equipment = append(equipment, item)
+		}
+	}
+	return equipment
+}
+
 func (i *UnitInventory) GetEquippedWeapon() *Weapon {
 	for n := range i.Weapon {
 		if i.Weapon[n].Equipped {

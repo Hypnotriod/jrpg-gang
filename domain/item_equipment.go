@@ -28,6 +28,10 @@ func (e *Equipment) IncreaseWearout() {
 	}
 }
 
+func (e *Equipment) ResetWearout() {
+	e.Wearout = 0
+}
+
 func (e *Equipment) IsBroken() bool {
 	return e.Durability != 0 && e.Wearout >= e.Durability
 }

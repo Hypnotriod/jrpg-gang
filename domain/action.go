@@ -14,6 +14,7 @@ const (
 	ActionDeactivate AtionType = "deactivate"
 	ActionComplete   AtionType = "complete"
 	ActionRepair     AtionType = "repair"
+	ActionRepairAll  AtionType = "repairAll"
 	ActionThrowAway  AtionType = "throwAway"
 	ActionSkip       AtionType = "skip"
 	ActionWait       AtionType = "wait"
