@@ -1888,7 +1888,7 @@
         },
         {
             "type": "armor",
-            "name": "Helmet I",
+            "name": "Bronze Helmet",
             "code": "helmet-01",
             "description": "A sturdy helmet, forged for those who expect to meet death and wish to spit in its face.",
             "durability": 400,
@@ -1916,7 +1916,7 @@
         },
         {
             "type": "armor",
-            "name": "Helmet II",
+            "name": "Iron Helmet",
             "code": "helmet-02",
             "description": "A crude iron helm, hammered in haste and stained by the blood of its first wearer.",
             "durability": 500,
@@ -1947,7 +1947,7 @@
         },
         {
             "type": "armor",
-            "name": "Helmet III",
+            "name": "Knight Helmet",
             "code": "helmet-03",
             "description": "A polished helm with a sealed face, forged to look noble even in the gloom of the grave.",
             "durability": 700,
@@ -1976,7 +1976,7 @@
         },
         {
             "type": "armor",
-            "name": "Horned helmet",
+            "name": "Horned Helmet",
             "code": "helmet-horns-01",
             "description": "A horned helm with an open face, worn by those who sought to look fearsome in the dark.",
             "durability": 300,
@@ -2005,7 +2005,7 @@
         },
         {
             "type": "armor",
-            "name": "Boots I",
+            "name": "Leather Boots",
             "code": "boots-01",
             "description": "Boots of thick hide, their soles worn thin by endless marches through mud and blood.",
             "durability": 400,
@@ -2014,8 +2014,8 @@
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
-                "strength": 3,
-                "physique": 3
+                "strength": 2,
+                "physique": 2
             },
             "modification": [
                 {
@@ -2064,7 +2064,7 @@
         },
         {
             "type": "armor",
-            "name": "Boots II",
+            "name": "Sturdy Boots",
             "code": "boots-02",
             "description": "Boots of supple leather, crafted for nobles but stained by the road. They whisper of both privilege and peril.",
             "durability": 500,
@@ -2073,8 +2073,8 @@
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
-                "strength": 4,
-                "physique": 4
+                "strength": 3,
+                "physique": 3
             },
             "modification": [
                 {
@@ -2091,7 +2091,7 @@
         },
         {
             "type": "armor",
-            "name": "Boots III",
+            "name": "Iron Boots",
             "code": "boots-03",
             "description": "Boots forged in the black heat of the abyss, their iron plates still whispering with the cries of fallen knights.",
             "durability": 700,
@@ -2147,7 +2147,7 @@
         },
         {
             "type": "armor",
-            "name": "Gloves",
+            "name": "Leather Gloves",
             "code": "gloves-01",
             "description": "Gloves of rough leather, their seams darkened by sweat and old blood.",
             "durability": 400,
@@ -2156,8 +2156,8 @@
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
-                "strength": 3,
-                "physique": 3
+                "strength": 1,
+                "physique": 1
             },
             "modification": [
                 {
@@ -2183,8 +2183,8 @@
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "requirements": {
-                "strength": 4,
-                "physique": 4
+                "strength": 3,
+                "physique": 3
             },
             "modification": [
                 {
@@ -2259,7 +2259,7 @@
         },
         {
             "type": "armor",
-            "name": "Shield I",
+            "name": "Sturdy Shield",
             "code": "shield-01",
             "description": "A broad shield, its face scarred by a hundred blows. It stands as a bulwark between its bearer and the abyss.",
             "durability": 400,
@@ -2286,7 +2286,7 @@
         },
         {
             "type": "armor",
-            "name": "Shield II",
+            "name": "Knight Shield",
             "code": "shield-02",
             "description": "A weighty slab of iron, dented and scorched by infernal flames.",
             "durability": 500,
@@ -2343,7 +2343,7 @@
         },
         {
             "type": "armor",
-            "name": "Armor I",
+            "name": "Leather Armor",
             "code": "basic-armor-01",
             "description": "A pallid cuirass of stitched hide, soaked in the sweat and blood of countless nameless warriors.",
             "durability": 400,
@@ -2370,7 +2370,7 @@
         },
         {
             "type": "armor",
-            "name": "Armor II",
+            "name": "Sturdy Armor",
             "code": "armor-01",
             "description": "A cuirass of boiled leather, bearing the scars of many battles. It creaks with every breath, a reminder of survival.",
             "durability": 500,
@@ -2401,7 +2401,7 @@
         },
         {
             "type": "armor",
-            "name": "Armor III",
+            "name": "Plate Armor",
             "code": "armor-02",
             "description": "A hulking shell of cold metal plates, hammered from the bones of vanquished giants.",
             "durability": 700,
@@ -2432,7 +2432,7 @@
         },
         {
             "type": "armor",
-            "name": "Armor IV",
+            "name": "Knight Armor",
             "code": "armor-03",
             "description": "An ancient suit of plate warped by eldritch wards, its surface etched with runes that hiss like snakes.",
             "durability": 1000,
@@ -2465,7 +2465,7 @@
         },
         {
             "type": "armor",
-            "name": "Armor V",
+            "name": "Royal Armor",
             "code": "armor-04",
             "description": "A pristine, gleaming cuirass of masterwork steel, the finest protection a champion can claim in a realm steeped in shadow.",
             "durability": 1200,
@@ -2541,8 +2541,8 @@
             "canBeThrownAway": true,
             "slotsNumber": 1,
             "requirements": {
-                "strength": 3,
-                "physique": 3
+                "strength": 1,
+                "physique": 1
             },
             "modification": [
                 {
@@ -2567,7 +2567,7 @@
         },
         {
             "type": "armor",
-            "name": "Mage Hat I",
+            "name": "Witch Hat",
             "description": "A pointed hat of woven indigo, its brim embroidered with trembling runes that glow faintly in the darkness.",
             "code": "sorcerer-hat-01",
             "price": {
@@ -2601,8 +2601,8 @@
         },
         {
             "type": "armor",
-            "name": "Mage Hat II",
-            "description": "A tall cone of midnight silk, crowned with an ornament that pulses with inner light.",
+            "name": "Moonlight Hat",
+            "description": "A tall cone of midnight silk, crowned with an emerald that pulses with inner light.",
             "code": "sorcerer-hat-02",
             "price": {
                 "coins": 1200,
@@ -2831,7 +2831,7 @@
         },
         {
             "type": "armor",
-            "name": "Mage Cloak I",
+            "name": "Fine Cloak",
             "description": "A cloak of twilight shadow, worn by those who have tasted true power.",
             "code": "sorcerer-cloak-02",
             "price": {
@@ -2871,7 +2871,7 @@
         },
         {
             "type": "armor",
-            "name": "Mage Cloak II",
+            "name": "Master Cloak",
             "description": "A garment of woven starlight and shadow, worn only by those who have mastered the eldritch arts.",
             "code": "sorcerer-cloak-03",
             "price": {
