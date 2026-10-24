@@ -177,3 +177,8 @@ func (e *GameEngine) getActiveUnit() *GameUnit {
 	}
 	return nil
 }
+
+func (u *GameEngine) CheckRandomChance(percents float32) bool {
+	rnd := u.rndGen.PickIndex(int(domain.FULL_CHANCE))
+	return float32(rnd) < percents
+}

@@ -10,6 +10,7 @@ type QuestTrigger struct {
 	Requirements *UnitRequirements `json:"requirements,omitempty"`
 	Achievements UnitAchievements  `json:"achievements,omitempty"`
 	Quests       UnitQuests        `json:"quests,omitempty"`
+	Chance       float32           `json:"chance,omitempty"`
 }
 
 func (t *QuestTrigger) Clone() *QuestTrigger {

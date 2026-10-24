@@ -209,6 +209,9 @@ func (e *GameEngine) applySpotAchievements(spotCompleteResult *SpotCompleteResul
 	triggers := e.scenario.CurrentSpot().QuestTriggers
 	leftUnits := e.battlefield().GetUnitsByFaction(GameUnitFactionLeft)
 	for _, trigger := range triggers {
+		if trigger.Chance != 0 && !e.CheckRandomChance(trigger.Chance) {
+			continue
+		}
 		for _, unit := range leftUnits {
 			if trigger.Requirements != nil && !unit.CheckRequirements(*trigger.Requirements) {
 				continue

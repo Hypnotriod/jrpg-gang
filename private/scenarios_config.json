@@ -479,6 +479,22 @@
                     }
                 ],
                 "experience": 35,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-01": "active"
+                            },
+                            "achievements": {
+                                "artifact-01": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-01": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -544,6 +560,22 @@
                     }
                 ],
                 "experience": 40,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-01": "active"
+                            },
+                            "achievements": {
+                                "artifact-01": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-01": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -611,6 +643,7 @@
                 "experience": 40,
                 "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-01": "active"
@@ -699,6 +732,7 @@
                 "experience": 50,
                 "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-04": "active"
@@ -793,6 +827,22 @@
                     }
                 ],
                 "experience": 50,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-04": "active"
+                            },
+                            "achievements": {
+                                "artifact-04": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-04": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -873,6 +923,7 @@
                 "experience": 70,
                 "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-06": "active"
@@ -972,6 +1023,22 @@
                     }
                 ],
                 "experience": 80,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-06": "active"
+                            },
+                            "achievements": {
+                                "artifact-06": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-06": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -2447,6 +2514,22 @@
                     }
                 ],
                 "experience": 250,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-02": "active"
+                            },
+                            "achievements": {
+                                "artifact-02": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-02": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -2538,6 +2621,7 @@
                 "experience": 250,
                 "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-02": "active"
@@ -2645,6 +2729,22 @@
                     }
                 ],
                 "experience": 275,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-05": "active"
+                            },
+                            "achievements": {
+                                "artifact-05": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-05": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -2741,6 +2841,7 @@
                 "experience": 275,
                 "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-05": "active"
@@ -4253,6 +4354,22 @@
                     }
                 ],
                 "experience": 250,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-09": "active"
+                            },
+                            "achievements": {
+                                "artifact-09": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-09": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -4344,6 +4461,7 @@
                 "experience": 250,
                 "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-09": "active"
@@ -4451,6 +4569,22 @@
                     }
                 ],
                 "experience": 600,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-11": "active"
+                            },
+                            "achievements": {
+                                "artifact-11": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-11": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -4547,6 +4681,7 @@
                 "experience": 600,
                 "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-11": "active"
@@ -5826,6 +5961,22 @@
                     }
                 ],
                 "experience": 250,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-08": "active"
+                            },
+                            "achievements": {
+                                "artifact-08": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-08": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -5922,6 +6073,7 @@
                 "experience": 250,
                 "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-08": "active"
@@ -6029,6 +6181,22 @@
                     }
                 ],
                 "experience": 600,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-10": "active"
+                            },
+                            "achievements": {
+                                "artifact-10": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-10": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -6125,6 +6293,7 @@
                 "experience": 600,
                 "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-10": "active"
@@ -7718,6 +7887,22 @@
                     }
                 ],
                 "experience": 250,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-03": "active"
+                            },
+                            "achievements": {
+                                "artifact-03": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-03": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -7814,6 +7999,7 @@
                 "experience": 250,
                 "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-03": "active"
@@ -7921,6 +8107,22 @@
                     }
                 ],
                 "experience": 250,
+                "questTriggers": [
+                    {
+                        "chance": 50,
+                        "requirements": {
+                            "quests": {
+                                "quest-find-artifact-07": "active"
+                            },
+                            "achievements": {
+                                "artifact-07": -1
+                            }
+                        },
+                        "achievements": {
+                            "artifact-07": 1
+                        }
+                    }
+                ],
                 "battlefield": {
                     "matrix": [
                         [
@@ -8015,8 +8217,9 @@
                     }
                 ],
                 "experience": 250,
-                 "questTriggers": [
+                "questTriggers": [
                     {
+                        "chance": 50,
                         "requirements": {
                             "quests": {
                                 "quest-find-artifact-07": "active"
