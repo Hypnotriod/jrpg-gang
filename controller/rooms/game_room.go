@@ -26,8 +26,8 @@ func (r *GameRoom) IsBlocked(playerId engine.PlayerId) bool {
 
 func (r *GameRoom) GetPlayerIds() []engine.PlayerId {
 	result := []engine.PlayerId{}
-	for _, u := range r.joinedUsers {
-		result = append(result, u.Id)
+	for i := range r.joinedUsers {
+		result = append(result, r.joinedUsers[i].Id)
 	}
 	result = append(result, r.host.Id)
 	return result

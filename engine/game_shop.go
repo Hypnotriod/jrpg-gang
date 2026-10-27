@@ -36,28 +36,33 @@ func (s *GameShop) GetStatus(unit *domain.Unit) *GameShopStatus {
 	r.Repair = map[uint]domain.UnitBooty{}
 	for i := range unit.Inventory.Magic {
 		if unit.Inventory.Magic[i].CanBeSold {
-			r.Purchase[unit.Inventory.Magic[i].Uid] = s.calculatePurchasePrice(&unit.Inventory.Magic[i].Item, 1, 1)
+			r.Purchase[unit.Inventory.Magic[i].Uid] = s.calculatePurchasePrice(unit.Inventory.Magic[i].Price, 1, 1)
 		}
 	}
 	for i := range unit.Inventory.Disposable {
 		if unit.Inventory.Disposable[i].CanBeSold {
-			r.Purchase[unit.Inventory.Disposable[i].Uid] = s.calculatePurchasePrice(&unit.Inventory.Disposable[i].Item, 1, 1)
+			r.Purchase[unit.Inventory.Disposable[i].Uid] = s.calculatePurchasePrice(unit.Inventory.Disposable[i].Price, 1, 1)
 		}
 	}
 	for i := range unit.Inventory.Ammunition {
 		if unit.Inventory.Ammunition[i].CanBeSold {
-			r.Purchase[unit.Inventory.Ammunition[i].Uid] = s.calculatePurchasePrice(&unit.Inventory.Ammunition[i].Item, 1, 1)
+			r.Purchase[unit.Inventory.Ammunition[i].Uid] = s.calculatePurchasePrice(unit.Inventory.Ammunition[i].Price, 1, 1)
 		}
 	}
 	for i := range unit.Inventory.Provision {
 		if unit.Inventory.Provision[i].CanBeSold {
-			r.Purchase[unit.Inventory.Provision[i].Uid] = s.calculatePurchasePrice(&unit.Inventory.Provision[i].Item, 1, 1)
+			r.Purchase[unit.Inventory.Provision[i].Uid] = s.calculatePurchasePrice(unit.Inventory.Provision[i].Price, 1, 1)
+		}
+	}
+	for i := range unit.Inventory.EquipmentUpgrade {
+		if unit.Inventory.EquipmentUpgrade[i].CanBeSold {
+			r.Purchase[unit.Inventory.EquipmentUpgrade[i].Uid] = s.calculatePurchasePrice(unit.Inventory.EquipmentUpgrade[i].Price, 1, 1)
 		}
 	}
 	for i := range unit.Inventory.Armor {
 		if unit.Inventory.Armor[i].CanBeSold {
 			r.Purchase[unit.Inventory.Armor[i].Uid] = s.calculatePurchasePrice(
-				&unit.Inventory.Armor[i].Item, 1, s.calculateWearoutFactor(&unit.Inventory.Armor[i].Equipment))
+				unit.Inventory.Armor[i].TotalPrice(), 1, s.calculateWearoutFactor(&unit.Inventory.Armor[i].Equipment))
 		}
 		if unit.Inventory.Armor[i].Durability != 0 {
 			r.Repair[unit.Inventory.Armor[i].Uid] = s.calculateRepairPrice(&unit.Inventory.Armor[i].Equipment)
@@ -66,7 +71,7 @@ func (s *GameShop) GetStatus(unit *domain.Unit) *GameShopStatus {
 	for i := range unit.Inventory.Weapon {
 		if unit.Inventory.Weapon[i].CanBeSold {
 			r.Purchase[unit.Inventory.Weapon[i].Uid] = s.calculatePurchasePrice(
-				&unit.Inventory.Weapon[i].Item, 1, s.calculateWearoutFactor(&unit.Inventory.Weapon[i].Equipment))
+				unit.Inventory.Weapon[i].TotalPrice(), 1, s.calculateWearoutFactor(&unit.Inventory.Weapon[i].Equipment))
 		}
 		if unit.Inventory.Weapon[i].Durability != 0 {
 			r.Repair[unit.Inventory.Weapon[i].Uid] = s.calculateRepairPrice(&unit.Inventory.Weapon[i].Equipment)
@@ -104,9 +109,13 @@ func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.Rnd
 		return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
 	}
 	if itemRef := s.items.FindWeapon(action.ItemUid); itemRef != nil {
+		totalPrice := itemRef.TotalPrice()
+		if !totalPrice.Check(unit.Booty, action.Quantity) {
+			return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
+		}
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
-		unit.Booty.Reduce(item.Price, 1)
+		unit.Booty.Reduce(totalPrice, 1)
 		unit.Inventory.Add(&itemClone)
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
@@ -118,9 +127,13 @@ func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.Rnd
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
 	if itemRef := s.items.FindArmor(action.ItemUid); itemRef != nil {
+		totalPrice := itemRef.TotalPrice()
+		if !totalPrice.Check(unit.Booty, action.Quantity) {
+			return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
+		}
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
-		unit.Booty.Reduce(item.Price, 1)
+		unit.Booty.Reduce(totalPrice, 1)
 		unit.Inventory.Add(&itemClone)
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
@@ -148,6 +161,13 @@ func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.Rnd
 		unit.Inventory.Add(&itemClone)
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
+	if itemRef := s.items.FindEquipmentUpgrade(action.ItemUid); itemRef != nil {
+		itemClone := *itemRef
+		itemClone.Uid = rndGen.NextUid()
+		unit.Booty.Reduce(item.Price, 1)
+		unit.Inventory.Add(&itemClone)
+		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
+	}
 	return domain.NewActionResult().WithResult(domain.ResultNotFound)
 }
 
@@ -164,6 +184,7 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 	if !item.CanBeSold || item.Type == domain.ItemTypeMagic {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
+	itemPrice := item.Price
 	if item.Type == domain.ItemTypeAmmunition {
 		if unit.Inventory.RemoveAmmunition(action.ItemUid, action.Quantity) == nil {
 			return result.WithResult(domain.ResultNotEnoughResources)
@@ -178,6 +199,10 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 		}
 	} else if action.Quantity != 1 {
 		return result.WithResult(domain.ResultNotAllowed)
+	} else if item.Type == domain.ItemTypeEquipmentUpgrade {
+		if unit.Inventory.RemoveEquipmentUpgrade(action.ItemUid) == nil {
+			return result.WithResult(domain.ResultNotFound)
+		}
 	} else {
 		equipment := unit.Inventory.RemoveEquipment(action.ItemUid)
 		if equipment == nil {
@@ -188,8 +213,9 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 		} else {
 			wearoutFactor = 1 - equipment.Wearout/equipment.Durability
 		}
+		itemPrice = equipment.TotalPrice()
 	}
-	price := s.calculatePurchasePrice(item, action.Quantity, wearoutFactor)
+	price := s.calculatePurchasePrice(itemPrice, action.Quantity, wearoutFactor)
 	unit.Booty.Accumulate(price)
 	result.Booty = &price
 	return result.WithResult(domain.ResultAccomplished)
@@ -202,8 +228,7 @@ func (s *GameShop) calculateWearoutFactor(equipment *domain.Equipment) float32 {
 	return 1 - equipment.Wearout/equipment.Durability
 }
 
-func (s *GameShop) calculatePurchasePrice(item *domain.Item, quantity uint, wearoutFactor float32) domain.UnitBooty {
-	price := item.Price
+func (s *GameShop) calculatePurchasePrice(price domain.UnitBooty, quantity uint, wearoutFactor float32) domain.UnitBooty {
 	price.MultiplyAll(PURCHASE_ITEM_PRICE_FACTOR * wearoutFactor)
 	price.MultiplyAll((float32(quantity)))
 	return price
@@ -249,7 +274,7 @@ func (s *GameShop) repairAll(action domain.Action, unit *domain.Unit) *domain.Ac
 }
 
 func (s *GameShop) calculateRepairPrice(equipment *domain.Equipment) domain.UnitBooty {
-	price := equipment.Price
+	price := equipment.TotalPrice()
 	price.MultiplyAll(REPAIR_ITEM_PRICE_FACTOR * equipment.Wearout / equipment.Durability)
 	return price
 }
@@ -288,6 +313,10 @@ func (s *GameShop) filterItemsByRequirements(unit *domain.Unit) *domain.UnitInve
 		return !ok || requirements.Check(unit, attributes)
 	})
 	r.Provision = util.Filter(s.items.Provision, func(item domain.Provision) bool {
+		requirements, ok := s.requirements[item.Code]
+		return !ok || requirements.Check(unit, attributes)
+	})
+	r.EquipmentUpgrade = util.Filter(s.items.EquipmentUpgrade, func(item domain.EquipmentUpgrade) bool {
 		requirements, ok := s.requirements[item.Code]
 		return !ok || requirements.Check(unit, attributes)
 	})

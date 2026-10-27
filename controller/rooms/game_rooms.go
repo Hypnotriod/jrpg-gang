@@ -47,8 +47,8 @@ func (r *GameRooms) PopByHostId(hostId engine.PlayerId) (*GameRoom, bool) {
 	if room.host.Id != hostId {
 		return nil, false
 	}
-	for _, u := range room.joinedUsers {
-		delete(r.playerIdToRoomUid, u.Id)
+	for i := range room.joinedUsers {
+		delete(r.playerIdToRoomUid, room.joinedUsers[i].Id)
 	}
 	delete(r.playerIdToRoomUid, hostId)
 	delete(r.rooms, roomUid)

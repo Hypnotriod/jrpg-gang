@@ -30,9 +30,14 @@ func (a *Ammunition) EnchanceDamageImpact(damage []DamageImpact, pickDeviation f
 	}
 	if instantDamage.Deviation != 0 {
 		instantDamage.EnchanceAll(pickDeviation(instantDamage.Deviation))
+		instantDamage.Deviation = 0
 	}
 	for _, imp := range damage {
 		if imp.Duration == 0 {
+			if imp.Deviation != 0 {
+				imp.EnchanceAll(pickDeviation(imp.Deviation))
+				imp.Deviation = 0
+			}
 			imp.Damage.Accumulate(instantDamage.Damage)
 			imp.EnchanceChance(instantDamage.Chance)
 			instantDamageEnchanced = true

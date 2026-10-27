@@ -341,7 +341,8 @@
             "damage": [
                 {
                     "chance": 70,
-                    "acid": 10
+                    "acid": 8,
+                    "deviation": 4
                 }
             ],
             "spread": [
@@ -1511,7 +1512,6 @@
                 "mana": 15,
                 "actionPoints": 5
             },
-            "damage": [],
             "modification": [
                 {
                     "deviation": 5,
@@ -1542,7 +1542,6 @@
                 "mana": 30,
                 "actionPoints": 6
             },
-            "damage": [],
             "modification": [
                 {
                     "deviation": 5,

@@ -3,13 +3,14 @@ package domain
 type ItemType string
 
 const (
-	ItemTypeArmor      ItemType = "armor"
-	ItemTypeWeapon     ItemType = "weapon"
-	ItemTypeMagic      ItemType = "magic"
-	ItemTypeDisposable ItemType = "disposable"
-	ItemTypeAmmunition ItemType = "ammunition"
-	ItemTypeProvision  ItemType = "provision"
-	ItemTypeNone       ItemType = "none"
+	ItemTypeArmor            ItemType = "armor"
+	ItemTypeWeapon           ItemType = "weapon"
+	ItemTypeMagic            ItemType = "magic"
+	ItemTypeDisposable       ItemType = "disposable"
+	ItemTypeAmmunition       ItemType = "ammunition"
+	ItemTypeProvision        ItemType = "provision"
+	ItemTypeEquipmentUpgrade ItemType = "equipmentUpgrade"
+	ItemTypeNone             ItemType = "none"
 )
 
 type ItemCode string

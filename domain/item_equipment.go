@@ -13,13 +13,23 @@ const (
 
 type Equipment struct {
 	Item
-	Wearout      float32            `json:"wearout"`
-	Durability   float32            `json:"durability"`
-	Slot         EquipmentSlot      `json:"slot"`
-	SlotsNumber  uint               `json:"slotsNumber"`
-	Equipped     bool               `json:"equipped,omitzero"`
-	Requirements *UnitRequirements  `json:"requirements,omitempty"`
-	Modification []UnitModification `json:"modification,omitempty"`
+	Wearout       float32            `json:"wearout"`
+	Durability    float32            `json:"durability"`
+	Slot          EquipmentSlot      `json:"slot"`
+	SlotsNumber   uint               `json:"slotsNumber"`
+	Equipped      bool               `json:"equipped,omitzero"`
+	Requirements  *UnitRequirements  `json:"requirements,omitempty"`
+	Modification  []UnitModification `json:"modification,omitempty"`
+	Upgrades      []EquipmentUpgrade `json:"upgrades,omitempty"`
+	UpgradesLimit uint               `json:"upgradesLimit,omitzero"`
+}
+
+func (e *Equipment) TotalPrice() UnitBooty {
+	price := e.Price
+	for i := range e.Upgrades {
+		price.Accumulate(e.Upgrades[i].Price)
+	}
+	return price
 }
 
 func (e *Equipment) IncreaseWearout() {

@@ -71,3 +71,13 @@ func Map[T any, J any](values []T, mapper func(value T) J) []J {
 	}
 	return result
 }
+
+func FilteredMap[T any, J any](values []T, mapper func(value T) (J, bool)) []J {
+	result := make([]J, 0, len(values))
+	for i := range values {
+		if item, ok := mapper(values[i]); ok {
+			result = append(result, item)
+		}
+	}
+	return result
+}

@@ -19,6 +19,7 @@ func (u *Unit) UseInventoryItemOnTarget(target *Unit, uid uint, result *ActionRe
 }
 
 func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Weapon) *ActionResult {
+	useCost := weapon.TotalUseCost()
 	if !action.UseCostReduced {
 		if !weapon.Equipped {
 			return action.WithResult(ResultNotEquipped)
@@ -26,11 +27,11 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 		if !u.CanReach(target, weapon.Range) {
 			return action.WithResult(ResultNotReachable)
 		}
-		if !u.CheckUseCost(weapon.UseCost) {
+		if !u.CheckUseCost(useCost) {
 			return action.WithResult(ResultCantUse)
 		}
 	}
-	var damage []DamageImpact = weapon.Damage
+	damage := weapon.TotalDamage(u.PickDeviation)
 	if weapon.RequiresAmmunition() {
 		ammunition := u.Inventory.FindEquippedAmmunition()
 		if ammunition == nil {
@@ -52,7 +53,7 @@ func (u *Unit) useWeaponOnTarget(action *ActionResult, target *Unit, weapon *Wea
 	}
 	target, instDmg, tmpImp := u.Attack(target, damage)
 	if !action.UseCostReduced {
-		u.State.Reduce(weapon.UseCost)
+		u.State.Reduce(useCost)
 		action.UseCostReduced = true
 	}
 	if !action.WearoutIncreased && (len(instDmg) != 0 || len(tmpImp) != 0) {

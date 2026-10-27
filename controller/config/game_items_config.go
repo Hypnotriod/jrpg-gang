@@ -39,14 +39,14 @@ func (c *GameItemsConfig) prepare(items *domain.UnitInventory) {
 func (c *GameItemsConfig) PopulateFromDescriptor(inventory *domain.UnitInventory) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	for n := range inventory.Descriptor {
-		desc := inventory.Descriptor[n]
+	for _, desc := range inventory.Descriptor {
 		if item, ok := c.codeToItem[desc.Code]; ok {
 			switch v := item.(type) {
 			case *domain.Weapon:
 				itemClone := *v
 				itemClone.Equipped = desc.Equipped
 				itemClone.Wearout = desc.Wearout
+				c.populateEquipmentUpgrades(&itemClone.Equipment, desc)
 				inventory.Add(&itemClone)
 			case *domain.Magic:
 				itemClone := *v
@@ -55,6 +55,7 @@ func (c *GameItemsConfig) PopulateFromDescriptor(inventory *domain.UnitInventory
 				itemClone := *v
 				itemClone.Equipped = desc.Equipped
 				itemClone.Wearout = desc.Wearout
+				c.populateEquipmentUpgrades(&itemClone.Equipment, desc)
 				inventory.Add(&itemClone)
 			case *domain.Disposable:
 				itemClone := *v
@@ -69,7 +70,23 @@ func (c *GameItemsConfig) PopulateFromDescriptor(inventory *domain.UnitInventory
 				itemClone := *v
 				itemClone.Quantity = desc.Quantity
 				inventory.Add(&itemClone)
+			case *domain.EquipmentUpgrade:
+				itemClone := *v
+				inventory.Add(&itemClone)
 			}
 		}
 	}
+}
+
+func (c *GameItemsConfig) populateEquipmentUpgrades(equipment *domain.Equipment, descriptor domain.UnitInventoryDescriptor) {
+	equipment.Upgrades = util.FilteredMap(descriptor.Upgrades, func(code domain.ItemCode) (domain.EquipmentUpgrade, bool) {
+		item, ok := c.codeToItem[code]
+		if !ok {
+			return domain.EquipmentUpgrade{}, false
+		}
+		if upgrade, ok := item.(*domain.EquipmentUpgrade); ok {
+			return *upgrade, true
+		}
+		return domain.EquipmentUpgrade{}, false
+	})
 }

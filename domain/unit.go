@@ -65,12 +65,17 @@ func (u *Unit) ClearImpact() {
 
 func (u *Unit) TotalAgility() float32 {
 	agility := u.Stats.Attributes.Agility
-	for _, ench := range u.Modification {
-		agility += ench.Attributes.Agility
+	for i := range u.Modification {
+		agility += u.Modification[i].Attributes.Agility
 	}
 	for _, item := range u.Inventory.GetEquipment(true) {
-		for _, ench := range item.Modification {
-			agility += ench.Attributes.Agility
+		for i := range item.Modification {
+			agility += item.Modification[i].Attributes.Agility
+		}
+		for i := range item.Upgrades {
+			if item.Upgrades[i].Modification != nil {
+				agility += item.Upgrades[i].Modification.Attributes.Agility
+			}
 		}
 	}
 	return max(agility, 0)
@@ -78,12 +83,17 @@ func (u *Unit) TotalAgility() float32 {
 
 func (u *Unit) TotalPhysique() float32 {
 	physique := u.Stats.Attributes.Physique
-	for _, ench := range u.Modification {
-		physique += ench.Attributes.Physique
+	for i := range u.Modification {
+		physique += u.Modification[i].Attributes.Physique
 	}
 	for _, item := range u.Inventory.GetEquipment(true) {
-		for _, ench := range item.Modification {
-			physique += ench.Attributes.Physique
+		for i := range item.Modification {
+			physique += item.Modification[i].Attributes.Physique
+		}
+		for i := range item.Upgrades {
+			if item.Upgrades[i].Modification != nil {
+				physique += item.Upgrades[i].Modification.Attributes.Physique
+			}
 		}
 	}
 	return max(physique, 0)
@@ -91,12 +101,17 @@ func (u *Unit) TotalPhysique() float32 {
 
 func (u *Unit) TotalIntelligence() float32 {
 	intelligence := u.Stats.Attributes.Intelligence
-	for _, ench := range u.Modification {
-		intelligence += ench.Attributes.Intelligence
+	for i := range u.Modification {
+		intelligence += u.Modification[i].Attributes.Intelligence
 	}
 	for _, item := range u.Inventory.GetEquipment(true) {
-		for _, ench := range item.Modification {
-			intelligence += ench.Attributes.Intelligence
+		for i := range item.Modification {
+			intelligence += item.Modification[i].Attributes.Intelligence
+		}
+		for i := range item.Upgrades {
+			if item.Upgrades[i].Modification != nil {
+				intelligence += item.Upgrades[i].Modification.Attributes.Intelligence
+			}
 		}
 	}
 	return max(intelligence, 0)
@@ -104,12 +119,17 @@ func (u *Unit) TotalIntelligence() float32 {
 
 func (u *Unit) TotalLuck() float32 {
 	luck := u.Stats.Attributes.Luck
-	for _, ench := range u.Modification {
-		luck += ench.Attributes.Luck
+	for i := range u.Modification {
+		luck += u.Modification[i].Attributes.Luck
 	}
 	for _, item := range u.Inventory.GetEquipment(true) {
-		for _, ench := range item.Modification {
-			luck += ench.Attributes.Luck
+		for i := range item.Modification {
+			luck += item.Modification[i].Attributes.Luck
+		}
+		for i := range item.Upgrades {
+			if item.Upgrades[i].Modification != nil {
+				luck += item.Upgrades[i].Modification.Attributes.Luck
+			}
 		}
 	}
 	return max(luck, 0)
@@ -118,12 +138,17 @@ func (u *Unit) TotalLuck() float32 {
 func (u *Unit) TotalActionPoints() float32 {
 	actionPoints := u.Stats.BaseAttributes.ActionPoints
 	actionPoints += float32(uint(u.TotalInitiative() * INITIATIVE_TO_ACTION_POINTS_FACTOR))
-	for _, ench := range u.Modification {
-		actionPoints += ench.BaseAttributes.ActionPoints
+	for i := range u.Modification {
+		actionPoints += u.Modification[i].BaseAttributes.ActionPoints
 	}
 	for _, item := range u.Inventory.GetEquipment(true) {
-		for _, ench := range item.Modification {
-			actionPoints += ench.BaseAttributes.ActionPoints
+		for i := range item.Modification {
+			actionPoints += item.Modification[i].BaseAttributes.ActionPoints
+		}
+		for i := range item.Upgrades {
+			if item.Upgrades[i].Modification != nil {
+				actionPoints += item.Upgrades[i].Modification.BaseAttributes.ActionPoints
+			}
 		}
 	}
 	return max(actionPoints, MINIMUM_BASE_ATTRIBUTE_ACTION_POINTS)
@@ -131,12 +156,17 @@ func (u *Unit) TotalActionPoints() float32 {
 
 func (u *Unit) TotalInitiative() float32 {
 	initiative := u.Stats.Attributes.Initiative
-	for _, ench := range u.Modification {
-		initiative += ench.Attributes.Initiative
+	for i := range u.Modification {
+		initiative += u.Modification[i].Attributes.Initiative
 	}
 	for _, item := range u.Inventory.GetEquipment(true) {
-		for _, ench := range item.Modification {
-			initiative += ench.Attributes.Initiative
+		for i := range item.Modification {
+			initiative += item.Modification[i].Attributes.Initiative
+		}
+		for i := range item.Upgrades {
+			if item.Upgrades[i].Modification != nil {
+				initiative += item.Upgrades[i].Modification.Attributes.Initiative
+			}
 		}
 	}
 	return max(initiative, 0)
@@ -154,8 +184,8 @@ func (u *Unit) TurnOrderInitiative() float32 {
 
 func (u *Unit) TotalUnitModification() *UnitModification {
 	modification := &UnitModification{}
-	for _, ench := range u.Modification {
-		modification.Accumulate(ench.UnitModification)
+	for i := range u.Modification {
+		modification.Accumulate(u.Modification[i].UnitModification)
 	}
 	return modification
 }
@@ -163,8 +193,13 @@ func (u *Unit) TotalUnitModification() *UnitModification {
 func (u *Unit) TotalEquipmentModification() *UnitModification {
 	modification := &UnitModification{}
 	for _, item := range u.Inventory.GetEquipment(true) {
-		for _, ench := range item.Modification {
-			modification.Accumulate(ench)
+		for i := range item.Modification {
+			modification.Accumulate(item.Modification[i])
+		}
+		for i := range item.Upgrades {
+			if item.Upgrades[i].Modification != nil {
+				modification.Accumulate(*item.Upgrades[i].Modification)
+			}
 		}
 	}
 	return modification
@@ -244,7 +279,7 @@ func (u *Unit) CanReach(target *Unit, actionRange ActionRange) bool {
 }
 
 func (u *Unit) CanUseWeapon(weapon *Weapon, checkUseCost bool) bool {
-	if checkUseCost && !u.CheckUseCost(weapon.UseCost) {
+	if checkUseCost && !u.CheckUseCost(weapon.TotalUseCost()) {
 		return false
 	}
 	if weapon.RequiresAmmunition() {

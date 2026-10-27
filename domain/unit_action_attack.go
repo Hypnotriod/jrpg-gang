@@ -10,7 +10,11 @@ func (u *Unit) Attack(target *Unit, damage []DamageImpact) (*Unit, []Damage, []D
 	for n, imp := range damage {
 		if imp.Chance != 0 && !u.CheckRandomChance(u.CalculateAttackChance(target, imp)) {
 			if n != 0 || !u.CheckRandomChance(u.CalculateCriticalMissChance()) {
-				break
+				if imp.Duration != 0 {
+					continue
+				} else {
+					break
+				}
 			}
 			imp.Damage.IsCriticalMiss = true
 			target = u
