@@ -90,6 +90,10 @@ func (s *GameShop) ExecuteAction(action domain.Action, unit *domain.Unit, rndGen
 		return s.repair(action, unit)
 	case domain.ActionRepairAll:
 		return s.repairAll(action, unit)
+	case domain.ActionUpgrade:
+		return s.upgrade(action, unit)
+	case domain.ActionBuyAndUpgrade:
+		return s.buyAndUpgrade(action, unit, rndGen)
 	}
 	return domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 }
@@ -236,17 +240,16 @@ func (s *GameShop) calculatePurchasePrice(price domain.UnitBooty, quantity uint,
 
 func (s *GameShop) repair(action domain.Action, unit *domain.Unit) *domain.ActionResult {
 	result := domain.NewActionResult()
-	item := unit.Inventory.FindItem(action.ItemUid)
-	if item == nil {
+	equipment := unit.Inventory.FindEquipment(action.ItemUid)
+	if equipment == nil {
 		return result.WithResult(domain.ResultNotFound)
 	}
-	equipment := unit.Inventory.FindEquipment(action.ItemUid)
-	if equipment == nil || equipment.Wearout == 0 || equipment.Durability == 0 {
+	if equipment.Wearout == 0 || equipment.Durability == 0 {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
 	price := s.calculateRepairPrice(equipment)
 	if !price.Check(unit.Booty, 1) {
-		return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
+		return result.WithResult(domain.ResultNotEnoughResources)
 	}
 	unit.Booty.Reduce(price, 1)
 	equipment.ResetWearout()
@@ -264,12 +267,53 @@ func (s *GameShop) repairAll(action domain.Action, unit *domain.Unit) *domain.Ac
 		price.Accumulate(s.calculateRepairPrice(e))
 	}
 	if !price.Check(unit.Booty, 1) {
-		return domain.NewActionResult().WithResult(domain.ResultNotEnoughResources)
+		return result.WithResult(domain.ResultNotEnoughResources)
 	}
 	unit.Booty.Reduce(price, 1)
 	for _, e := range equipment {
 		e.ResetWearout()
 	}
+	return result.WithResult(domain.ResultAccomplished)
+}
+
+func (s *GameShop) upgrade(action domain.Action, unit *domain.Unit) *domain.ActionResult {
+	result := domain.NewActionResult()
+	equipment := unit.Inventory.FindEquipment(action.ItemUid)
+	upgrade := unit.Inventory.FindEquipmentUpgrade(action.Uid)
+	if upgrade == nil || equipment == nil {
+		return result.WithResult(domain.ResultNotFound)
+	}
+	if len(equipment.Upgrades) >= int(equipment.UpgradesLimit) {
+		return result.WithResult(domain.ResultNotAllowed)
+	}
+	if (upgrade.Damage != nil || upgrade.UseCost != nil) && equipment.Type != domain.ItemTypeWeapon {
+		return result.WithResult(domain.ResultNotAllowed)
+	}
+	equipment.Upgrades = append(equipment.Upgrades, *upgrade)
+	unit.Inventory.RemoveEquipmentUpgrade(action.Uid)
+	return result.WithResult(domain.ResultAccomplished)
+}
+
+func (s *GameShop) buyAndUpgrade(action domain.Action, unit *domain.Unit, rndGen *util.RndGen) *domain.ActionResult {
+	result := domain.NewActionResult()
+	equipment := unit.Inventory.FindEquipment(action.ItemUid)
+	upgrade := s.items.FindEquipmentUpgrade(action.Uid)
+	if upgrade == nil || equipment == nil {
+		return result.WithResult(domain.ResultNotFound)
+	}
+	if !upgrade.Price.Check(unit.Booty, 1) {
+		return result.WithResult(domain.ResultNotEnoughResources)
+	}
+	if len(equipment.Upgrades) >= int(equipment.UpgradesLimit) {
+		return result.WithResult(domain.ResultNotAllowed)
+	}
+	if (upgrade.Damage != nil || upgrade.UseCost != nil) && equipment.Type != domain.ItemTypeWeapon {
+		return result.WithResult(domain.ResultNotAllowed)
+	}
+	upgradeClone := *upgrade
+	upgradeClone.Uid = rndGen.NextUid()
+	unit.Booty.Reduce(upgrade.Price, 1)
+	equipment.Upgrades = append(equipment.Upgrades, upgradeClone)
 	return result.WithResult(domain.ResultAccomplished)
 }
 
