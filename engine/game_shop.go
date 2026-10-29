@@ -301,6 +301,9 @@ func (s *GameShop) buyAndUpgrade(action domain.Action, unit *domain.Unit, rndGen
 	if upgrade == nil || equipment == nil {
 		return result.WithResult(domain.ResultNotFound)
 	}
+	if requirements, ok := s.requirements[upgrade.Code]; ok && !unit.CheckRequirements(requirements) {
+		return domain.NewActionResult().WithResult(domain.ResultNotAllowed)
+	}
 	if !upgrade.Price.Check(unit.Booty, 1) {
 		return result.WithResult(domain.ResultNotEnoughResources)
 	}
