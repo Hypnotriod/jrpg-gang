@@ -13,15 +13,15 @@ const (
 
 type Equipment struct {
 	Item
-	Wearout       float32            `json:"wearout"`
-	Durability    float32            `json:"durability"`
-	Slot          EquipmentSlot      `json:"slot"`
-	SlotsNumber   uint               `json:"slotsNumber"`
-	Equipped      bool               `json:"equipped,omitzero"`
-	Requirements  *UnitRequirements  `json:"requirements,omitempty"`
-	Modification  []UnitModification `json:"modification,omitempty"`
-	Upgrades      []EquipmentUpgrade `json:"upgrades,omitempty"`
-	UpgradesLimit uint               `json:"upgradesLimit,omitzero"`
+	Wearout        float32            `json:"wearout"`
+	Durability     float32            `json:"durability"`
+	Slot           EquipmentSlot      `json:"slot"`
+	SlotsNumber    uint               `json:"slotsNumber"`
+	Equipped       bool               `json:"equipped,omitzero"`
+	Requirements   *UnitRequirements  `json:"requirements,omitempty"`
+	Modification   []UnitModification `json:"modification,omitempty"`
+	Upgrades       []EquipmentUpgrade `json:"upgrades,omitempty"`
+	UpgradesNumber uint               `json:"upgradesNumber,omitzero"`
 }
 
 func (e *Equipment) TotalPrice() UnitBooty {

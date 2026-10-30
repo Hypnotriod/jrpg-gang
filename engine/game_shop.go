@@ -283,7 +283,7 @@ func (s *GameShop) upgrade(action domain.Action, unit *domain.Unit) *domain.Acti
 	if upgrade == nil || equipment == nil {
 		return result.WithResult(domain.ResultNotFound)
 	}
-	if len(equipment.Upgrades) >= int(equipment.UpgradesLimit) {
+	if len(equipment.Upgrades) >= int(equipment.UpgradesNumber) {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
 	if (upgrade.Damage != nil || upgrade.UseCost != nil) && equipment.Type != domain.ItemTypeWeapon {
@@ -307,7 +307,7 @@ func (s *GameShop) buyAndUpgrade(action domain.Action, unit *domain.Unit, rndGen
 	if !upgrade.Price.Check(unit.Booty, 1) {
 		return result.WithResult(domain.ResultNotEnoughResources)
 	}
-	if len(equipment.Upgrades) >= int(equipment.UpgradesLimit) {
+	if len(equipment.Upgrades) >= int(equipment.UpgradesNumber) {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
 	if (upgrade.Damage != nil || upgrade.UseCost != nil) && equipment.Type != domain.ItemTypeWeapon {
