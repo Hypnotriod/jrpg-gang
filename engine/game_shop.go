@@ -289,6 +289,9 @@ func (s *GameShop) upgrade(action domain.Action, unit *domain.Unit) *domain.Acti
 	if (upgrade.Damage != nil || upgrade.UseCost != nil) && equipment.Type != domain.ItemTypeWeapon {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
+	if upgrade.Requirements != nil && !unit.CheckRequirements(*upgrade.Requirements) {
+		return result.WithResult(domain.ResultCantUse)
+	}
 	equipment.Upgrades = append(equipment.Upgrades, *upgrade)
 	unit.Inventory.RemoveEquipmentUpgrade(action.Uid)
 	return result.WithResult(domain.ResultAccomplished)
@@ -312,6 +315,9 @@ func (s *GameShop) buyAndUpgrade(action domain.Action, unit *domain.Unit, rndGen
 	}
 	if (upgrade.Damage != nil || upgrade.UseCost != nil) && equipment.Type != domain.ItemTypeWeapon {
 		return result.WithResult(domain.ResultNotAllowed)
+	}
+	if upgrade.Requirements != nil && !unit.CheckRequirements(*upgrade.Requirements) {
+		return result.WithResult(domain.ResultCantUse)
 	}
 	upgradeClone := *upgrade
 	upgradeClone.Uid = rndGen.NextUid()
