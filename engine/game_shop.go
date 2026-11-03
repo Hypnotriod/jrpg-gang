@@ -54,9 +54,9 @@ func (s *GameShop) GetStatus(unit *domain.Unit) *GameShopStatus {
 			r.Purchase[unit.Inventory.Provision[i].Uid] = s.calculatePurchasePrice(unit.Inventory.Provision[i].Price, 1, 1)
 		}
 	}
-	for i := range unit.Inventory.EquipmentUpgrade {
-		if unit.Inventory.EquipmentUpgrade[i].CanBeSold {
-			r.Purchase[unit.Inventory.EquipmentUpgrade[i].Uid] = s.calculatePurchasePrice(unit.Inventory.EquipmentUpgrade[i].Price, 1, 1)
+	for i := range unit.Inventory.Upgrade {
+		if unit.Inventory.Upgrade[i].CanBeSold {
+			r.Purchase[unit.Inventory.Upgrade[i].Uid] = s.calculatePurchasePrice(unit.Inventory.Upgrade[i].Price, 1, 1)
 		}
 	}
 	for i := range unit.Inventory.Armor {
@@ -165,7 +165,7 @@ func (s *GameShop) buy(action domain.Action, unit *domain.Unit, rndGen *util.Rnd
 		unit.Inventory.Add(&itemClone)
 		return domain.NewActionResult().WithResult(domain.ResultAccomplished)
 	}
-	if itemRef := s.items.FindEquipmentUpgrade(action.ItemUid); itemRef != nil {
+	if itemRef := s.items.FindUpgrade(action.ItemUid); itemRef != nil {
 		itemClone := *itemRef
 		itemClone.Uid = rndGen.NextUid()
 		unit.Booty.Reduce(item.Price, 1)
@@ -203,8 +203,8 @@ func (s *GameShop) sell(action domain.Action, unit *domain.Unit, rndGen *util.Rn
 		}
 	} else if action.Quantity != 1 {
 		return result.WithResult(domain.ResultNotAllowed)
-	} else if item.Type == domain.ItemTypeEquipmentUpgrade {
-		if unit.Inventory.RemoveEquipmentUpgrade(action.ItemUid) == nil {
+	} else if item.Type == domain.ItemTypeUpgrade {
+		if unit.Inventory.RemoveUpgrade(action.ItemUid) == nil {
 			return result.WithResult(domain.ResultNotFound)
 		}
 	} else {
@@ -279,28 +279,28 @@ func (s *GameShop) repairAll(action domain.Action, unit *domain.Unit) *domain.Ac
 func (s *GameShop) upgrade(action domain.Action, unit *domain.Unit) *domain.ActionResult {
 	result := domain.NewActionResult()
 	equipment := unit.Inventory.FindEquipment(action.ItemUid)
-	upgrade := unit.Inventory.FindEquipmentUpgrade(action.Uid)
+	upgrade := unit.Inventory.FindUpgrade(action.Uid)
 	if upgrade == nil || equipment == nil {
 		return result.WithResult(domain.ResultNotFound)
 	}
 	if len(equipment.Upgrades) >= int(equipment.UpgradesNumber) {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
-	if (upgrade.Damage != nil || upgrade.UseCost != nil) && equipment.Type != domain.ItemTypeWeapon {
+	if equipment.Type != domain.ItemType(upgrade.Kind) {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
 	if upgrade.Requirements != nil && !unit.CheckRequirements(*upgrade.Requirements) {
 		return result.WithResult(domain.ResultCantUse)
 	}
 	equipment.Upgrades = append(equipment.Upgrades, *upgrade)
-	unit.Inventory.RemoveEquipmentUpgrade(action.Uid)
+	unit.Inventory.RemoveUpgrade(action.Uid)
 	return result.WithResult(domain.ResultAccomplished)
 }
 
 func (s *GameShop) buyAndUpgrade(action domain.Action, unit *domain.Unit, rndGen *util.RndGen) *domain.ActionResult {
 	result := domain.NewActionResult()
 	equipment := unit.Inventory.FindEquipment(action.ItemUid)
-	upgrade := s.items.FindEquipmentUpgrade(action.Uid)
+	upgrade := s.items.FindUpgrade(action.Uid)
 	if upgrade == nil || equipment == nil {
 		return result.WithResult(domain.ResultNotFound)
 	}
@@ -313,7 +313,7 @@ func (s *GameShop) buyAndUpgrade(action domain.Action, unit *domain.Unit, rndGen
 	if len(equipment.Upgrades) >= int(equipment.UpgradesNumber) {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
-	if (upgrade.Damage != nil || upgrade.UseCost != nil) && equipment.Type != domain.ItemTypeWeapon {
+	if equipment.Type != domain.ItemType(upgrade.Kind) {
 		return result.WithResult(domain.ResultNotAllowed)
 	}
 	if upgrade.Requirements != nil && !unit.CheckRequirements(*upgrade.Requirements) {
@@ -369,7 +369,7 @@ func (s *GameShop) filterItemsByRequirements(unit *domain.Unit) *domain.UnitInve
 		requirements, ok := s.requirements[item.Code]
 		return !ok || requirements.Check(unit, attributes)
 	})
-	r.EquipmentUpgrade = util.Filter(s.items.EquipmentUpgrade, func(item domain.EquipmentUpgrade) bool {
+	r.Upgrade = util.Filter(s.items.Upgrade, func(item domain.Upgrade) bool {
 		requirements, ok := s.requirements[item.Code]
 		return !ok || requirements.Check(unit, attributes)
 	})

@@ -14,14 +14,14 @@ type UnitInventoryDescriptor struct {
 }
 
 type UnitInventory struct {
-	Descriptor       []UnitInventoryDescriptor `json:"descriptor,omitempty" bson:"descriptor,omitempty"`
-	Weapon           []Weapon                  `json:"weapon,omitempty" bson:"-"`
-	Magic            []Magic                   `json:"magic,omitempty" bson:"-"`
-	Armor            []Armor                   `json:"armor,omitempty" bson:"-"`
-	Disposable       []Disposable              `json:"disposable,omitempty" bson:"-"`
-	Ammunition       []Ammunition              `json:"ammunition,omitempty" bson:"-"`
-	Provision        []Provision               `json:"provision,omitempty" bson:"-"`
-	EquipmentUpgrade []EquipmentUpgrade        `json:"equipmentUpgrade,omitempty" bson:"-"`
+	Descriptor []UnitInventoryDescriptor `json:"descriptor,omitempty" bson:"descriptor,omitempty"`
+	Weapon     []Weapon                  `json:"weapon,omitempty" bson:"-"`
+	Magic      []Magic                   `json:"magic,omitempty" bson:"-"`
+	Armor      []Armor                   `json:"armor,omitempty" bson:"-"`
+	Disposable []Disposable              `json:"disposable,omitempty" bson:"-"`
+	Ammunition []Ammunition              `json:"ammunition,omitempty" bson:"-"`
+	Provision  []Provision               `json:"provision,omitempty" bson:"-"`
+	Upgrade    []Upgrade                 `json:"upgrade,omitempty" bson:"-"`
 }
 
 func (i *UnitInventory) Clone() *UnitInventory {
@@ -32,7 +32,7 @@ func (i *UnitInventory) Clone() *UnitInventory {
 	r.Disposable = append(r.Disposable, i.Disposable...)
 	r.Ammunition = append(r.Ammunition, i.Ammunition...)
 	r.Provision = append(r.Provision, i.Provision...)
-	r.EquipmentUpgrade = append(r.EquipmentUpgrade, i.EquipmentUpgrade...)
+	r.Upgrade = append(r.Upgrade, i.Upgrade...)
 	return r
 }
 
@@ -149,11 +149,11 @@ func (i *UnitInventory) Add(item any) bool {
 	case *Armor:
 		i.Armor = append(i.Armor, *v)
 		return true
-	case EquipmentUpgrade:
-		i.EquipmentUpgrade = append(i.EquipmentUpgrade, v)
+	case Upgrade:
+		i.Upgrade = append(i.Upgrade, v)
 		return true
-	case *EquipmentUpgrade:
-		i.EquipmentUpgrade = append(i.EquipmentUpgrade, *v)
+	case *Upgrade:
+		i.Upgrade = append(i.Upgrade, *v)
 		return true
 	case Disposable:
 		if s := i.FindDisposableByCode(v.Code); s != nil {
@@ -232,9 +232,9 @@ func (i *UnitInventory) Find(uid uint) any {
 			return &i.Provision[n]
 		}
 	}
-	for n := range i.EquipmentUpgrade {
-		if i.EquipmentUpgrade[n].Uid == uid {
-			return &i.EquipmentUpgrade[n]
+	for n := range i.Upgrade {
+		if i.Upgrade[n].Uid == uid {
+			return &i.Upgrade[n]
 		}
 	}
 	return nil
@@ -260,8 +260,8 @@ func (i *UnitInventory) GetItems() []*Item {
 	for n := range i.Provision {
 		r = append(r, &i.Provision[n].Item)
 	}
-	for n := range i.EquipmentUpgrade {
-		r = append(r, &i.EquipmentUpgrade[n].Item)
+	for n := range i.Upgrade {
+		r = append(r, &i.Upgrade[n].Item)
 	}
 	return r
 }
@@ -297,9 +297,9 @@ func (i *UnitInventory) FindItem(uid uint) *Item {
 			return &i.Provision[n].Item
 		}
 	}
-	for n := range i.EquipmentUpgrade {
-		if i.EquipmentUpgrade[n].Uid == uid {
-			return &i.EquipmentUpgrade[n].Item
+	for n := range i.Upgrade {
+		if i.Upgrade[n].Uid == uid {
+			return &i.Upgrade[n].Item
 		}
 	}
 	return nil
@@ -439,17 +439,17 @@ func (i *UnitInventory) RemoveEquipment(uid uint) *Equipment {
 	return nil
 }
 
-func (i *UnitInventory) RemoveEquipmentUpgrade(uid uint) *EquipmentUpgrade {
-	var result *EquipmentUpgrade
-	var filtered []EquipmentUpgrade
-	for n := range i.EquipmentUpgrade {
-		if i.EquipmentUpgrade[n].Uid != uid {
-			filtered = append(filtered, i.EquipmentUpgrade[n])
+func (i *UnitInventory) RemoveUpgrade(uid uint) *Upgrade {
+	var result *Upgrade
+	var filtered []Upgrade
+	for n := range i.Upgrade {
+		if i.Upgrade[n].Uid != uid {
+			filtered = append(filtered, i.Upgrade[n])
 		} else {
-			result = &i.EquipmentUpgrade[n]
+			result = &i.Upgrade[n]
 		}
 	}
-	i.EquipmentUpgrade = filtered
+	i.Upgrade = filtered
 	return result
 }
 
@@ -653,22 +653,22 @@ func (i *UnitInventory) FilterProvision() {
 	i.Provision = filtered
 }
 
-func (i *UnitInventory) FindEquipmentUpgrade(uid uint) *EquipmentUpgrade {
-	for n := range i.EquipmentUpgrade {
-		if i.EquipmentUpgrade[n].Uid == uid {
-			return &i.EquipmentUpgrade[n]
+func (i *UnitInventory) FindUpgrade(uid uint) *Upgrade {
+	for n := range i.Upgrade {
+		if i.Upgrade[n].Uid == uid {
+			return &i.Upgrade[n]
 		}
 	}
 	return nil
 }
 
-func (i *UnitInventory) FindEquipmentUpgradeByCode(code ItemCode) *EquipmentUpgrade {
+func (i *UnitInventory) FindUpgradeByCode(code ItemCode) *Upgrade {
 	if code == ItemCodeEmpty {
 		return nil
 	}
-	for n := range i.EquipmentUpgrade {
-		if i.EquipmentUpgrade[n].Code == code {
-			return &i.EquipmentUpgrade[n]
+	for n := range i.Upgrade {
+		if i.Upgrade[n].Code == code {
+			return &i.Upgrade[n]
 		}
 	}
 	return nil
@@ -692,8 +692,8 @@ func (i *UnitInventory) GetItemType(uid uint) ItemType {
 		return ItemTypeAmmunition
 	case *Provision:
 		return ItemTypeProvision
-	case *EquipmentUpgrade:
-		return ItemTypeEquipmentUpgrade
+	case *Upgrade:
+		return ItemTypeUpgrade
 	}
 	return ItemTypeNone
 }
@@ -717,8 +717,8 @@ func (i *UnitInventory) PopulateUids(rndGen *util.RndGen) {
 	for n := range i.Provision {
 		i.Provision[n].Uid = rndGen.NextUid()
 	}
-	for n := range i.EquipmentUpgrade {
-		i.EquipmentUpgrade[n].Uid = rndGen.NextUid()
+	for n := range i.Upgrade {
+		i.Upgrade[n].Uid = rndGen.NextUid()
 	}
 }
 
@@ -753,8 +753,8 @@ func (i *UnitInventory) Merge(inventory *UnitInventory, rndGen *util.RndGen) {
 		itemClone.Uid = rndGen.NextUid()
 		i.Add(itemClone)
 	}
-	for n := range inventory.EquipmentUpgrade {
-		itemClone := inventory.EquipmentUpgrade[n]
+	for n := range inventory.Upgrade {
+		itemClone := inventory.Upgrade[n]
 		itemClone.Uid = rndGen.NextUid()
 		i.Add(itemClone)
 	}
@@ -779,8 +779,8 @@ func (i *UnitInventory) PopulateCodeToItemMap(codeToItem *map[ItemCode]any) {
 	for n := range i.Provision {
 		(*codeToItem)[i.Provision[n].Code] = &i.Provision[n]
 	}
-	for n := range i.EquipmentUpgrade {
-		(*codeToItem)[i.EquipmentUpgrade[n].Code] = &i.EquipmentUpgrade[n]
+	for n := range i.Upgrade {
+		(*codeToItem)[i.Upgrade[n].Code] = &i.Upgrade[n]
 	}
 }
 
@@ -798,7 +798,7 @@ func (i *UnitInventory) UpdateDescriptor() {
 			Code:     item.Code,
 			Equipped: item.Equipped,
 			Wearout:  item.Wearout,
-			Upgrades: util.Map(item.Upgrades, func(upgrade EquipmentUpgrade) ItemCode {
+			Upgrades: util.Map(item.Upgrades, func(upgrade Upgrade) ItemCode {
 				return upgrade.Code
 			}),
 		})
@@ -819,7 +819,7 @@ func (i *UnitInventory) UpdateDescriptor() {
 			Code:     item.Code,
 			Equipped: item.Equipped,
 			Wearout:  item.Wearout,
-			Upgrades: util.Map(item.Upgrades, func(upgrade EquipmentUpgrade) ItemCode {
+			Upgrades: util.Map(item.Upgrades, func(upgrade Upgrade) ItemCode {
 				return upgrade.Code
 			}),
 		})
@@ -830,7 +830,7 @@ func (i *UnitInventory) UpdateDescriptor() {
 			Quantity: item.Quantity,
 		})
 	}
-	for _, item := range i.EquipmentUpgrade {
+	for _, item := range i.Upgrade {
 		i.Descriptor = append(i.Descriptor, UnitInventoryDescriptor{
 			Code: item.Code,
 		})

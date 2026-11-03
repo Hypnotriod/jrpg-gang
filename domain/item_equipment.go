@@ -20,7 +20,7 @@ type Equipment struct {
 	Equipped       bool               `json:"equipped,omitzero"`
 	Requirements   *UnitRequirements  `json:"requirements,omitempty"`
 	Modification   []UnitModification `json:"modification,omitempty"`
-	Upgrades       []EquipmentUpgrade `json:"upgrades,omitempty"`
+	Upgrades       []Upgrade          `json:"upgrades,omitempty"`
 	UpgradesNumber uint               `json:"upgradesNumber,omitzero"`
 }
 
