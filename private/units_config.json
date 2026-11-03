@@ -731,9 +731,9 @@
                 "luck": 5
             },
             "resistance": {
-                "stabbing": 0,
-                "cutting": 0,
-                "crushing": 0,
+                "stabbing": 1,
+                "cutting": 1,
+                "crushing": 1,
                 "fire": 0,
                 "cold": 0,
                 "lightning": 0,
@@ -1108,8 +1108,8 @@
                 "luck": 5
             },
             "resistance": {
-                "stabbing": 5,
-                "cutting": 5,
+                "stabbing": 8,
+                "cutting": 8,
                 "crushing": 0,
                 "fire": 100,
                 "cold": 0,
@@ -1189,9 +1189,9 @@
                 "luck": 5
             },
             "resistance": {
-                "stabbing": 5,
-                "cutting": 5,
-                "crushing": 5,
+                "stabbing": 3,
+                "cutting": 3,
+                "crushing": 3,
                 "fire": 0,
                 "cold": 5,
                 "lightning": 0,
@@ -1552,9 +1552,9 @@
                 "luck": 0
             },
             "resistance": {
-                "stabbing": 0,
-                "cutting": 0,
-                "crushing": 0,
+                "stabbing": 3,
+                "cutting": 3,
+                "crushing": 8,
                 "fire": 0,
                 "cold": 10,
                 "lightning": 10,
@@ -1903,9 +1903,9 @@
                 "luck": 8
             },
             "resistance": {
-                "stabbing": 0,
-                "cutting": 0,
-                "crushing": 0,
+                "stabbing": 2,
+                "cutting": 2,
+                "crushing": 2,
                 "fire": 12,
                 "cold": 0,
                 "lightning": 0,
@@ -2718,9 +2718,9 @@
                 "luck": 3
             },
             "resistance": {
-                "stabbing": 12,
-                "cutting": 12,
-                "crushing": 12,
+                "stabbing": 8,
+                "cutting": 8,
+                "crushing": 8,
                 "fire": 100,
                 "cold": 100,
                 "lightning": 100,
@@ -2802,9 +2802,9 @@
                 "luck": 8
             },
             "resistance": {
-                "stabbing": 8,
-                "cutting": 8,
-                "crushing": 8,
+                "stabbing": 6,
+                "cutting": 6,
+                "crushing": 6,
                 "fire": 12,
                 "cold": 100,
                 "lightning": 12,
