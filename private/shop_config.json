@@ -330,13 +330,13 @@
             "code": "pitchfork-01"
         },
         {
+            "code": "wooden-staff-01"
+        },
+        {
             "code": "rusty-axe-01"
         },
         {
             "code": "rusty-mace-01"
-        },
-        {
-            "code": "wooden-staff-01"
         },
         {
             "code": "club-01",
@@ -535,6 +535,69 @@
             "requirements": {
                 "level": 2
             }
+        },
+        {
+            "code": "weapon-upgrade-01"
+        },
+        {
+            "code": "weapon-upgrade-02"
+        },
+        {
+            "code": "weapon-upgrade-03"
+        },
+        {
+            "code": "weapon-upgrade-04"
+        },
+        {
+            "code": "weapon-upgrade-05"
+        },
+        {
+            "code": "weapon-upgrade-06"
+        },
+        {
+            "code": "weapon-upgrade-07"
+        },
+        {
+            "code": "weapon-upgrade-08"
+        },
+        {
+            "code": "weapon-upgrade-09"
+        },
+        {
+            "code": "armor-upgrade-01"
+        },
+        {
+            "code": "armor-upgrade-02"
+        },
+        {
+            "code": "armor-upgrade-03"
+        },
+        {
+            "code": "armor-upgrade-04"
+        },
+        {
+            "code": "armor-upgrade-05"
+        },
+        {
+            "code": "armor-upgrade-06"
+        },
+        {
+            "code": "armor-upgrade-07"
+        },
+        {
+            "code": "armor-upgrade-08"
+        },
+        {
+            "code": "armor-upgrade-09"
+        },
+        {
+            "code": "armor-upgrade-10"
+        },
+        {
+            "code": "armor-upgrade-11"
+        },
+        {
+            "code": "armor-upgrade-12"
         }
     ]
 }

@@ -433,6 +433,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 8
             },
@@ -471,6 +472,7 @@
             "slot": "weapon",
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 12
             },
@@ -512,6 +514,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 8,
                 "intelligence": 4
@@ -559,6 +562,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 5
             },
@@ -625,6 +629,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 5,
                 "agility": 8
@@ -660,6 +665,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 6,
                 "agility": 10
@@ -701,6 +707,7 @@
             "slot": "weapon",
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 6,
                 "agility": 12
@@ -778,6 +785,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 5,
                 "agility": 7
@@ -816,6 +824,7 @@
             "slot": "weapon",
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 6,
                 "agility": 8
@@ -883,6 +892,7 @@
             "slot": "weapon",
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "intelligence": 10
             },
@@ -925,6 +935,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "intelligence": 12
             },
@@ -971,6 +982,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "intelligence": 10
             },
@@ -1047,6 +1059,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 14
             },
@@ -1085,6 +1098,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 16,
                 "physique": 12
@@ -1127,6 +1141,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 12,
                 "agility": 10
@@ -1163,11 +1178,12 @@
             "name": "Rusty Mace",
             "code": "rusty-mace-01",
             "description": "A corroded mace, heavy and cruel. Its blows shatter bone and hope alike.",
-            "durability": 50,
+            "durability": 150,
             "slot": "weapon",
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 5
             },
@@ -1202,11 +1218,12 @@
             "name": "Rusty Axe",
             "code": "rusty-axe-01",
             "description": "A battered axe, its edge jagged and eager to bite into flesh.",
-            "durability": 50,
+            "durability": 150,
             "slot": "weapon",
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 5
             },
@@ -1246,6 +1263,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 8,
                 "physique": 7
@@ -1286,6 +1304,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 5
             },
@@ -1325,6 +1344,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 15,
                 "physique": 15
@@ -1358,6 +1378,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 4
             },
@@ -1396,6 +1417,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 8,
                 "physique": 10
@@ -1435,6 +1457,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 2,
                 "agility": 2
@@ -1455,7 +1478,7 @@
                 "actionPoints": 4
             },
             "price": {
-                "coins": 300
+                "coins": 150
             }
         },
         {
@@ -1468,6 +1491,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "physique": 2,
                 "agility": 2
@@ -1792,6 +1816,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 2,
                 "physique": 2
@@ -1818,6 +1843,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 2,
                 "physique": 2
@@ -1844,6 +1870,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 3,
                 "physique": 3
@@ -1871,6 +1898,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 1,
                 "physique": 1
@@ -1895,6 +1923,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 3,
                 "physique": 3
@@ -1923,6 +1952,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 5,
                 "physique": 5
@@ -1954,6 +1984,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 8,
                 "physique": 8
@@ -1983,6 +2014,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 7,
                 "physique": 7
@@ -2012,6 +2044,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 2,
                 "physique": 2
@@ -2039,6 +2072,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 2,
                 "physique": 2
@@ -2071,6 +2105,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 3,
                 "physique": 3
@@ -2098,6 +2133,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 7,
                 "physique": 7
@@ -2129,6 +2165,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 1,
                 "physique": 1
@@ -2154,6 +2191,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 1,
                 "physique": 1
@@ -2181,6 +2219,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 3,
                 "physique": 3
@@ -2208,6 +2247,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 7,
                 "physique": 7
@@ -2236,6 +2276,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 2,
                 "physique": 2
@@ -2266,6 +2307,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 5,
                 "physique": 5
@@ -2293,6 +2335,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 7,
                 "physique": 7
@@ -2321,6 +2364,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 10,
                 "physique": 10
@@ -2350,6 +2394,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 3,
                 "physique": 3
@@ -2377,6 +2422,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 4,
                 "physique": 4
@@ -2408,6 +2454,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 5,
                 "physique": 5
@@ -2439,6 +2486,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 10,
                 "physique": 10
@@ -2472,6 +2520,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 15,
                 "physique": 15
@@ -2505,6 +2554,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 4,
                 "physique": 4
@@ -2539,6 +2589,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "strength": 1,
                 "physique": 1
@@ -2577,6 +2628,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "intelligence": 8
             },
@@ -2612,6 +2664,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "intelligence": 12
             },
@@ -2808,6 +2861,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "intelligence": 8
             },
@@ -2841,6 +2895,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "intelligence": 10
             },
@@ -2882,6 +2937,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "intelligence": 14
             },
@@ -3590,6 +3646,415 @@
             },
             "recovery": {
                 "stress": 50
+            }
+        }
+    ],
+    "upgrade": [
+        {
+            "type": "upgrade",
+            "name": "Grave-Eyed Aim",
+            "code": "weapon-upgrade-01",
+            "kind": "weapon",
+            "description": "A runic sight steadies the killing hand, guiding each strike toward its mark.",
+            "requirements": {
+                "level": 1
+            },
+            "price": {
+                "coins": 300
+            },
+            "damage": [
+                {
+                    "chance": 5
+                }
+            ]
+        },
+        {
+            "type": "upgrade",
+            "name": "Withering Hex",
+            "code": "weapon-upgrade-02",
+            "kind": "weapon",
+            "description": "A wasting curse clings to each wound, sapping the victim's strength long after the blow.",
+            "requirements": {
+                "level": 1
+            },
+            "price": {
+                "coins": 350
+            },
+            "damage": [
+                {
+                    "duration": 3,
+                    "exhaustion": 5,
+                    "deviation": 2
+                }
+            ]
+        },
+        {
+            "type": "upgrade",
+            "name": "Miasma Brand",
+            "code": "weapon-upgrade-03",
+            "kind": "weapon",
+            "description": "A venomous brand seeps into the blood, poisoning the living with every strike.",
+            "requirements": {
+                "level": 2
+            },
+            "price": {
+                "coins": 400
+            },
+            "damage": [
+                {
+                    "duration": 3,
+                    "poison": 8,
+                    "deviation": 4
+                }
+            ]
+        },
+        {
+            "type": "upgrade",
+            "name": "Red Tithe",
+            "code": "weapon-upgrade-04",
+            "kind": "weapon",
+            "description": "A bloodthirsty sigil leaves wounds that refuse to close, feeding the blade with every drop.",
+            "requirements": {
+                "level": 2
+            },
+            "price": {
+                "coins": 400
+            },
+            "damage": [
+                {
+                    "duration": 3,
+                    "bleeding": 2,
+                    "deviation": 3
+                }
+            ]
+        },
+        {
+            "type": "upgrade",
+            "name": "Hollowing Rune",
+            "code": "weapon-upgrade-05",
+            "kind": "weapon",
+            "description": "A hungry rune drinks the victim's magic, leaving the spirit barren and dim.",
+            "requirements": {
+                "level": 3
+            },
+            "price": {
+                "coins": 400,
+                "ruby": 1
+            },
+            "damage": [
+                {
+                    "duration": 3,
+                    "manaDrain": 8,
+                    "deviation": 4
+                }
+            ]
+        },
+        {
+            "type": "upgrade",
+            "name": "Cinderbrand Sigil",
+            "code": "weapon-upgrade-06",
+            "kind": "weapon",
+            "description": "A brand of the underworld sets each wound smoldering with unholy flame.",
+            "requirements": {
+                "level": 5
+            },
+            "price": {
+                "coins": 800,
+                "ruby": 2
+            },
+            "damage": [
+                {
+                    "duration": 3,
+                    "fire": 6,
+                    "deviation": 2
+                }
+            ]
+        },
+        {
+            "type": "upgrade",
+            "name": "Gravefrost Mark",
+            "code": "weapon-upgrade-07",
+            "kind": "weapon",
+            "description": "A mark of the frozen grave draws warmth from flesh and leaves the blood brittle.",
+            "requirements": {
+                "level": 5
+            },
+            "price": {
+                "coins": 800,
+                "ruby": 2
+            },
+            "damage": [
+                {
+                    "duration": 3,
+                    "cold": 6,
+                    "deviation": 2
+                }
+            ]
+        },
+        {
+            "type": "upgrade",
+            "name": "Stormwrath Sigil",
+            "code": "weapon-upgrade-08",
+            "kind": "weapon",
+            "description": "A stormbound sigil sends black lightning coursing through the wounded.",
+            "requirements": {
+                "level": 5
+            },
+            "price": {
+                "coins": 800,
+                "ruby": 2
+            },
+            "damage": [
+                {
+                    "duration": 3,
+                    "lightning": 6,
+                    "deviation": 2
+                }
+            ]
+        },
+        {
+            "type": "upgrade",
+            "name": "Caustic Blight",
+            "code": "weapon-upgrade-09",
+            "kind": "weapon",
+            "description": "A seeping blight eats through flesh and armor with the patience of a hungry grave.",
+            "requirements": {
+                "level": 5
+            },
+            "price": {
+                "coins": 900,
+                "ruby": 2
+            },
+            "damage": [
+                {
+                    "duration": 3,
+                    "acid": 6,
+                    "deviation": 2
+                }
+            ]
+        },
+        {
+            "type": "upgrade",
+            "name": "Venom Ward",
+            "code": "armor-upgrade-01",
+            "kind": "armor",
+            "description": "A seal of blackened bone turns aside venom before it can claim the bearer.",
+            "requirements": {
+                "level": 1
+            },
+            "price": {
+                "coins": 450
+            },
+            "modification": {
+                "resistance": {
+                    "poison": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Bloodseal Sigil",
+            "code": "armor-upgrade-02",
+            "kind": "armor",
+            "description": "A blood-fed sigil binds torn flesh and stills the body's failing tide.",
+            "requirements": {
+                "level": 1
+            },
+            "price": {
+                "coins": 350
+            },
+            "modification": {
+                "resistance": {
+                    "bleeding": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Vitality Sigil",
+            "code": "armor-upgrade-03",
+            "kind": "armor",
+            "description": "A rune carved from a martyr's heart fortifies the flesh against mortal wounds.",
+            "requirements": {
+                "level": 1
+            },
+            "price": {
+                "coins": 250
+            },
+            "modification": {
+                "baseAttributes": {
+                    "health": 5
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Endurance Sigil",
+            "code": "armor-upgrade-04",
+            "kind": "armor",
+            "description": "A bone-bound charm lends strength to endure the long and merciless struggle.",
+            "requirements": {
+                "level": 1
+            },
+            "price": {
+                "coins": 200
+            },
+            "modification": {
+                "baseAttributes": {
+                    "stamina": 5
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Arcane Reservoir",
+            "code": "armor-upgrade-05",
+            "kind": "armor",
+            "description": "A vessel of captive dusk deepens the bearer's well of sorcery.",
+            "requirements": {
+                "level": 1
+            },
+            "price": {
+                "coins": 300
+            },
+            "modification": {
+                "baseAttributes": {
+                    "mana": 5
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Dread Ward",
+            "code": "armor-upgrade-06",
+            "kind": "armor",
+            "description": "A grim charm steels the heart against terrors that would unmake the will.",
+            "requirements": {
+                "level": 2
+            },
+            "price": {
+                "coins": 600,
+                "ruby": 1
+            },
+            "modification": {
+                "resistance": {
+                    "fear": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Hexbreaker Seal",
+            "code": "armor-upgrade-07",
+            "kind": "armor",
+            "description": "A forbidden seal blunts the reach of curses whispered from beyond the grave.",
+            "requirements": {
+                "level": 2
+            },
+            "price": {
+                "coins": 650,
+                "ruby": 1
+            },
+            "modification": {
+                "resistance": {
+                    "curse": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Sane Mind",
+            "code": "armor-upgrade-08",
+            "kind": "armor",
+            "description": "A silver thread anchors thought when the void claws at the mind.",
+            "requirements": {
+                "level": 2
+            },
+            "price": {
+                "coins": 650,
+                "ruby": 1
+            },
+            "modification": {
+                "resistance": {
+                    "madness": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Corrosion Ward",
+            "code": "armor-upgrade-09",
+            "kind": "armor",
+            "description": "A tarnished rune shields the bearer from the slow ruin of caustic fluids.",
+            "requirements": {
+                "level": 3
+            },
+            "price": {
+                "coins": 500
+            },
+            "modification": {
+                "resistance": {
+                    "acid": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Primal Aegis",
+            "code": "armor-upgrade-10",
+            "kind": "armor",
+            "description": "A ward of storm, frost, and flame hardens the bearer against elemental fury.",
+            "requirements": {
+                "level": 5
+            },
+            "price": {
+                "coins": 1000,
+                "ruby": 2
+            },
+            "modification": {
+                "resistance": {
+                    "fire": 2,
+                    "cold": 2,
+                    "lightning": 2
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Predator's Instinct",
+            "code": "armor-upgrade-11",
+            "kind": "armor",
+            "description": "A hunter's mark quickens the bearer to act before the first blood falls.",
+            "requirements": {
+                "level": 5
+            },
+            "price": {
+                "coins": 1500,
+                "ruby": 5
+            },
+            "modification": {
+                "attributes": {
+                    "initiative": 2
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Gravebound Swiftness",
+            "code": "armor-upgrade-12",
+            "kind": "armor",
+            "description": "A pact with the restless dead quickens the bearer's hand, granting greater freedom to act amid the din of battle.",
+            "requirements": {
+                "level": 10
+            },
+            "price": {
+                "coins": 6000,
+                "ruby": 15
+            },
+            "modification": {
+                "baseAttributes": {
+                    "actionPoints": 1
+                }
             }
         }
     ]
