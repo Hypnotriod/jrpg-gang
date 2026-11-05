@@ -890,6 +890,7 @@
             "ammunitionKind": "magicCharge",
             "durability": 300,
             "slot": "weapon",
+            "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 2,
             "upgradesNumber": 1,
