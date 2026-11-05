@@ -3766,8 +3766,8 @@
             "damage": [
                 {
                     "duration": 3,
-                    "fire": 6,
-                    "deviation": 2
+                    "fire": 5,
+                    "deviation": 3
                 }
             ]
         },
@@ -3787,8 +3787,8 @@
             "damage": [
                 {
                     "duration": 3,
-                    "cold": 6,
-                    "deviation": 2
+                    "cold": 5,
+                    "deviation": 3
                 }
             ]
         },
@@ -3808,8 +3808,8 @@
             "damage": [
                 {
                     "duration": 3,
-                    "lightning": 6,
-                    "deviation": 2
+                    "lightning": 5,
+                    "deviation": 3
                 }
             ]
         },
@@ -3829,8 +3829,8 @@
             "damage": [
                 {
                     "duration": 3,
-                    "acid": 6,
-                    "deviation": 2
+                    "acid": 5,
+                    "deviation": 3
                 }
             ]
         },

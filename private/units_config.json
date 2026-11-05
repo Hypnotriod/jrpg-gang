@@ -2721,7 +2721,7 @@
                 "stabbing": 8,
                 "cutting": 8,
                 "crushing": 8,
-                "fire": 100,
+                "fire": 3,
                 "cold": 100,
                 "lightning": 100,
                 "acid": 10,
