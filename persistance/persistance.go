@@ -124,6 +124,7 @@ func (p *Persistance) GetOrCreateUser(credentials auth.UserCredentials) *model.U
 		return nil
 	}
 	if user != nil {
+		user.Picture = credentials.Picture
 		return user
 	}
 	userToPersist := &model.UserModel{

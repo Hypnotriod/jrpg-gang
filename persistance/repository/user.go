@@ -33,6 +33,7 @@ func (r *UserRepository) UpdateOneWithUnit(ctx context.Context, user *model.User
 	fields := primitive.D{
 		{Key: "class", Value: user.Class},
 		{Key: "nickname", Value: user.Nickname},
+		{Key: "picture", Value: user.Picture},
 		{Key: "units." + string(user.Class), Value: user.Unit},
 	}
 	return r.UpdateOne(ctx, filter, fields)
