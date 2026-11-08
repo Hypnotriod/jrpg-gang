@@ -3880,7 +3880,7 @@
                 "level": 1
             },
             "price": {
-                "coins": 250
+                "coins": 300
             },
             "modification": {
                 "baseAttributes": {
@@ -3916,11 +3916,65 @@
                 "level": 1
             },
             "price": {
-                "coins": 300
+                "coins": 250
             },
             "modification": {
                 "baseAttributes": {
                     "mana": 5
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Lifeblood Charm",
+            "code": "armor-upgrade-13",
+            "kind": "armor",
+            "description": "A charm steeped in sacrificial blood draws vitality back into the wounded with each passing moment.",
+            "requirements": {
+                "level": 2
+            },
+            "price": {
+                "coins": 350
+            },
+            "modification": {
+                "recovery": {
+                    "health": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Tireless Oath",
+            "code": "armor-upgrade-14",
+            "kind": "armor",
+            "description": "An oath sworn over a warrior's bones restores the strength to endure the endless struggle.",
+            "requirements": {
+                "level": 2
+            },
+            "price": {
+                "coins": 250
+            },
+            "modification": {
+                "recovery": {
+                    "stamina": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Aetheric Well",
+            "code": "armor-upgrade-15",
+            "kind": "armor",
+            "description": "A vessel etched with forbidden runes draws arcane power from the darkness between worlds.",
+            "requirements": {
+                "level": 2
+            },
+            "price": {
+                "coins": 300
+            },
+            "modification": {
+                "recovery": {
+                    "mana": 3
                 }
             }
         },
@@ -3931,7 +3985,7 @@
             "kind": "armor",
             "description": "A grim charm steels the heart against terrors that would unmake the will.",
             "requirements": {
-                "level": 2
+                "level": 3
             },
             "price": {
                 "coins": 600,
@@ -3950,7 +4004,7 @@
             "kind": "armor",
             "description": "A forbidden seal blunts the reach of curses whispered from beyond the grave.",
             "requirements": {
-                "level": 2
+                "level": 3
             },
             "price": {
                 "coins": 650,
@@ -3969,7 +4023,7 @@
             "kind": "armor",
             "description": "A silver thread anchors thought when the void claws at the mind.",
             "requirements": {
-                "level": 2
+                "level": 3
             },
             "price": {
                 "coins": 650,
