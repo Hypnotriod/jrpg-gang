@@ -2705,6 +2705,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "requirements": {
                 "intelligence": 8
             },
@@ -2732,6 +2733,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "modification": [
                 {
                     "attributes": {
@@ -2753,6 +2755,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "modification": [
                 {
                     "attributes": {
@@ -2774,6 +2777,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "modification": [
                 {
                     "recovery": {
@@ -2795,6 +2799,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "modification": [
                 {
                     "recovery": {
@@ -2816,6 +2821,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "modification": [
                 {
                     "attributes": {
@@ -2837,6 +2843,7 @@
             "canBeSold": true,
             "canBeThrownAway": true,
             "slotsNumber": 1,
+            "upgradesNumber": 1,
             "modification": [
                 {
                     "resistance": {
@@ -3927,7 +3934,7 @@
         {
             "type": "upgrade",
             "name": "Lifeblood Charm",
-            "code": "armor-upgrade-13",
+            "code": "armor-upgrade-06",
             "kind": "armor",
             "description": "A charm steeped in sacrificial blood draws vitality back into the wounded with each passing moment.",
             "requirements": {
@@ -3945,7 +3952,7 @@
         {
             "type": "upgrade",
             "name": "Tireless Oath",
-            "code": "armor-upgrade-14",
+            "code": "armor-upgrade-07",
             "kind": "armor",
             "description": "An oath sworn over a warrior's bones restores the strength to endure the endless struggle.",
             "requirements": {
@@ -3963,7 +3970,7 @@
         {
             "type": "upgrade",
             "name": "Aetheric Well",
-            "code": "armor-upgrade-15",
+            "code": "armor-upgrade-08",
             "kind": "armor",
             "description": "A vessel etched with forbidden runes draws arcane power from the darkness between worlds.",
             "requirements": {
@@ -3981,7 +3988,7 @@
         {
             "type": "upgrade",
             "name": "Dread Ward",
-            "code": "armor-upgrade-06",
+            "code": "armor-upgrade-09",
             "kind": "armor",
             "description": "A grim charm steels the heart against terrors that would unmake the will.",
             "requirements": {
@@ -4000,7 +4007,7 @@
         {
             "type": "upgrade",
             "name": "Hexbreaker Seal",
-            "code": "armor-upgrade-07",
+            "code": "armor-upgrade-10",
             "kind": "armor",
             "description": "A forbidden seal blunts the reach of curses whispered from beyond the grave.",
             "requirements": {
@@ -4019,7 +4026,7 @@
         {
             "type": "upgrade",
             "name": "Sane Mind",
-            "code": "armor-upgrade-08",
+            "code": "armor-upgrade-11",
             "kind": "armor",
             "description": "A silver thread anchors thought when the void claws at the mind.",
             "requirements": {
@@ -4037,8 +4044,62 @@
         },
         {
             "type": "upgrade",
+            "name": "Cinder Ward",
+            "code": "armor-upgrade-12",
+            "kind": "armor",
+            "description": "A ward of smoldering ash turns aside the infernal flames that would consume the bearer.",
+            "requirements": {
+                "level": 3
+            },
+            "price": {
+                "coins": 450
+            },
+            "modification": {
+                "resistance": {
+                    "fire": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Gravefrost Aegis",
+            "code": "armor-upgrade-13",
+            "kind": "armor",
+            "description": "A chill drawn from the grave shields the bearer from merciless frost.",
+            "requirements": {
+                "level": 3
+            },
+            "price": {
+                "coins": 450
+            },
+            "modification": {
+                "resistance": {
+                    "cold": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
+            "name": "Stormbound Seal",
+            "code": "armor-upgrade-14",
+            "kind": "armor",
+            "description": "A seal of blackened iron grounds the wrath of the storm before it strikes the bearer.",
+            "requirements": {
+                "level": 3
+            },
+            "price": {
+                "coins": 500
+            },
+            "modification": {
+                "resistance": {
+                    "lightning": 3
+                }
+            }
+        },
+        {
+            "type": "upgrade",
             "name": "Corrosion Ward",
-            "code": "armor-upgrade-09",
+            "code": "armor-upgrade-15",
             "kind": "armor",
             "description": "A tarnished rune shields the bearer from the slow ruin of caustic fluids.",
             "requirements": {
@@ -4055,29 +4116,8 @@
         },
         {
             "type": "upgrade",
-            "name": "Primal Aegis",
-            "code": "armor-upgrade-10",
-            "kind": "armor",
-            "description": "A ward of storm, frost, and flame hardens the bearer against elemental fury.",
-            "requirements": {
-                "level": 5
-            },
-            "price": {
-                "coins": 1000,
-                "ruby": 2
-            },
-            "modification": {
-                "resistance": {
-                    "fire": 2,
-                    "cold": 2,
-                    "lightning": 2
-                }
-            }
-        },
-        {
-            "type": "upgrade",
             "name": "Predator's Instinct",
-            "code": "armor-upgrade-11",
+            "code": "armor-upgrade-16",
             "kind": "armor",
             "description": "A hunter's mark quickens the bearer to act before the first blood falls.",
             "requirements": {
@@ -4096,7 +4136,7 @@
         {
             "type": "upgrade",
             "name": "Gravebound Swiftness",
-            "code": "armor-upgrade-12",
+            "code": "armor-upgrade-17",
             "kind": "armor",
             "description": "A pact with the restless dead quickens the bearer's hand, granting greater freedom to act amid the din of battle.",
             "requirements": {
