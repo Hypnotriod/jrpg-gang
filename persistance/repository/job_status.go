@@ -41,3 +41,8 @@ func (r *JobStatusRepository) UpdateOrInsertOne(ctx context.Context, model *mode
 	}
 	return 0, false
 }
+
+func (r *JobStatusRepository) DeleteByUserId(ctx context.Context, userId model.UserId) (int64, bool) {
+	filter := primitive.D{{Key: "user_id", Value: userId}}
+	return r.DeleteOne(ctx, filter)
+}

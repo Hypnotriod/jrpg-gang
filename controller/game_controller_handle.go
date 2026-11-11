@@ -120,8 +120,9 @@ func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []by
 	}
 	switch request.Type {
 	case RequestLeave:
-		c.Leave(playerId)
-		return response.WithStatus(ResponseStatusOk)
+		return c.handleLeaveRequest(playerId, request, response)
+	case RequestDeleteAccount:
+		return c.handleDeleteAccountRequest(playerId, request, response)
 	case RequestJobsStatus:
 		return c.handleJobStatusRequest(playerId, request, response)
 	case RequestShopStatus:

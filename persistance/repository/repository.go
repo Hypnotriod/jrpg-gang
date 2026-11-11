@@ -100,14 +100,17 @@ func (r *MongoDBRepository[T, P]) FindOne(ctx context.Context, filter bson.D, ac
 	return accumulator, true
 }
 
-func (r *MongoDBRepository[T, P]) DeleteOneById(ctx context.Context, id ObjectId) (int64, bool) {
-	objectId, err := primitive.ObjectIDFromHex(string(id))
+func (r *MongoDBRepository[T, P]) DeleteOne(ctx context.Context, filter bson.D) (int64, bool) {
+	result, err := r.collection.DeleteOne(ctx, filter)
 	if err != nil {
-		log.Error("Mongodb: DeleteOneById: ", id, " from collection:", r.collection.Name(), " fail: ", err)
+		log.Error("Mongodb: DeleteOne: ", filter, " from collection:", r.collection.Name(), " fail: ", err)
 		return 0, false
 	}
+	return result.DeletedCount, true
+}
 
-	filter := bson.D{{Key: "_id", Value: objectId}}
+func (r *MongoDBRepository[T, P]) DeleteOneById(ctx context.Context, id primitive.ObjectID) (int64, bool) {
+	filter := bson.D{{Key: "_id", Value: id}}
 	result, err := r.collection.DeleteOne(ctx, filter)
 	if err != nil {
 		log.Error("Mongodb: DeleteOneById: ", id, " from collection:", r.collection.Name(), " fail: ", err)

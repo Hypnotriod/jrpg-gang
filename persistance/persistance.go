@@ -162,3 +162,16 @@ func (p *Persistance) GetJobStatus(userId model.UserId) *model.JobStatusModel {
 	jobStatus, _ := p.db.JobStatusRepository.FindByUserId(ctx, userId)
 	return jobStatus
 }
+
+func (p *Persistance) DeleteUserByEmail(email model.UserEmail) bool {
+	ctx, cancel := p.db.requestContext()
+	defer cancel()
+	userModel, ok := p.db.UsersRepository.FindByEmail(ctx, model.UserEmail(email))
+	if !ok {
+		return false
+	}
+	userId := model.UserId(userModel.Id.Hex())
+	p.db.JobStatusRepository.DeleteByUserId(ctx, userId)
+	deleted, ok := p.db.UsersRepository.DeleteOneById(ctx, userModel.Id)
+	return deleted != 0 && ok
+}
