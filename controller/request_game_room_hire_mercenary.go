@@ -17,6 +17,9 @@ func (c *GameController) handleGameRoomHireMercenaryRequest(playerId engine.Play
 	if !c.rooms.ExistsForHostId(playerId) {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
+	if !c.rooms.CanAddMercenary(playerId, data.Code) {
+		return response.WithStatus(ResponseStatusNotAllowed)
+	}
 	user, _ := c.users.Get(playerId)
 	mercenary := c.mercenaries.Hire(data.Code, &user.Unit.Unit)
 	if mercenary == nil {

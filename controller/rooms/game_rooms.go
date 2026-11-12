@@ -2,8 +2,10 @@ package rooms
 
 import (
 	"jrpg-gang/controller/users"
+	"jrpg-gang/domain"
 	"jrpg-gang/engine"
 	"jrpg-gang/util"
+	"slices"
 	"sync"
 )
 
@@ -118,6 +120,25 @@ func (r *GameRooms) KickUser(roomUid uint, playerId engine.PlayerId) bool {
 	room.joinedUsers = restUsers
 	room.blockedPlayerIds = append(room.blockedPlayerIds, playerId)
 	return true
+}
+
+func (r *GameRooms) CanAddMercenary(playerId engine.PlayerId, code domain.UnitCode) bool {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	roomUid, ok := r.playerIdToRoomUid[playerId]
+	if !ok {
+		return false
+	}
+	room, ok := r.rooms[roomUid]
+	if !ok {
+		return false
+	}
+	if room.IsFull() {
+		return false
+	}
+	return !slices.ContainsFunc(room.mercenaries, func(unit *engine.GameUnit) bool {
+		return unit.Code == code
+	})
 }
 
 func (r *GameRooms) AddMercenary(playerId engine.PlayerId, mercenary *engine.GameUnit) (uint, bool) {
