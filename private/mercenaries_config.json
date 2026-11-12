@@ -77,6 +77,95 @@
         }
     },
     {
+        "name": "Archer",
+        "code": "archer-01",
+        "class": "opportunist",
+        "booty": {},
+        "achievements": {},
+        "quests": {},
+        "description": "Once a humble hunter, now a cunning rogue in the alleys of shadow, stalking the darkness with a bow and a ruthless eye.",
+        "stats": {
+            "progress": {
+                "level": 3
+            },
+            "baseAttributes": {
+                "health": 50,
+                "stamina": 50,
+                "actionPoints": 9
+            },
+            "attributes": {
+                "strength": 5,
+                "physique": 5,
+                "agility": 8,
+                "endurance": 8,
+                "intelligence": 2,
+                "initiative": 7,
+                "luck": 5
+            },
+            "resistance": {
+                "stabbing": 3,
+                "cutting": 3,
+                "crushing": 3,
+                "fire": 0,
+                "cold": 0,
+                "lightning": 0,
+                "acid": 3,
+                "poison": 5,
+                "exhaustion": 0,
+                "manaDrain": 0,
+                "bleeding": 5,
+                "fear": 0,
+                "curse": 0,
+                "madness": 0
+            }
+        },
+        "inventory": {
+            "descriptor": [
+                {
+                    "code": "fist-01"
+                },
+                {
+                    "code": "bow-01",
+                    "equipped": true
+                },
+                {
+                    "code": "dagger-01"
+                },
+                {
+                    "code": "arrow-01",
+                    "equipped": true,
+                    "quantity": 45
+                },
+                {
+                    "code": "rag-armor-01",
+                    "equipped": true
+                },
+                {
+                    "code": "shadow-hood-01",
+                    "equipped": true
+                },
+                {
+                    "code": "rusty-boots-01",
+                    "equipped": true
+                }
+            ]
+        },
+        "slots": {
+            "head": 1,
+            "neck": 1,
+            "body": 1,
+            "hand": 2,
+            "leg": 2,
+            "weapon": 2
+        },
+        "requirements": {
+            "level": 2
+        },
+        "price": {
+            "coins": 200
+        }
+    },
+    {
         "name": "Soldier",
         "code": "soldier-01",
         "class": "opportunist",
@@ -89,12 +178,12 @@
                 "level": 5
             },
             "baseAttributes": {
-                "health": 120,
+                "health": 100,
                 "stamina": 100,
                 "actionPoints": 10
             },
             "attributes": {
-                "strength": 10,
+                "strength": 8,
                 "physique": 10,
                 "agility": 7,
                 "endurance": 12,
@@ -154,7 +243,7 @@
             "level": 4
         },
         "price": {
-            "coins": 200
+            "coins": 300
         }
     },
     {
@@ -170,17 +259,17 @@
                 "level": 10
             },
             "baseAttributes": {
-                "health": 180,
-                "stamina": 150,
+                "health": 150,
+                "stamina": 125,
                 "actionPoints": 9
             },
             "attributes": {
-                "strength": 18,
-                "physique": 15,
+                "strength": 15,
+                "physique": 12,
                 "agility": 12,
-                "endurance": 16,
+                "endurance": 12,
                 "intelligence": 9,
-                "initiative": 11,
+                "initiative": 6,
                 "luck": 5
             },
             "resistance": {
@@ -239,7 +328,7 @@
             "level": 7
         },
         "price": {
-            "coins": 400,
+            "coins": 500,
             "ruby": 1
         }
     }
