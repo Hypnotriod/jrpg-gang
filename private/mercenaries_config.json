@@ -129,7 +129,7 @@
                     "equipped": true
                 },
                 {
-                    "code": "dagger-01"
+                    "code": "dagger-02"
                 },
                 {
                     "code": "arrow-01",
@@ -162,7 +162,7 @@
             "level": 2
         },
         "price": {
-            "coins": 200
+            "coins": 180
         }
     },
     {
@@ -243,7 +243,7 @@
             "level": 4
         },
         "price": {
-            "coins": 300
+            "coins": 250
         }
     },
     {
@@ -328,7 +328,7 @@
             "level": 7
         },
         "price": {
-            "coins": 500,
+            "coins": 450,
             "ruby": 1
         }
     }
