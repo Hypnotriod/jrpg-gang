@@ -18,6 +18,7 @@ const (
 	RequestJoinGameRoom         RequestType = "joinRoom"
 	RequestKickFromGameRoom     RequestType = "kickFromRoom"
 	RequestHireMercenary        RequestType = "hireMercenary"
+	RequestDismissMercenary     RequestType = "dismissMercenary"
 	RequestLeaveGameRoom        RequestType = "leaveRoom"
 	RequestLobbyStatus          RequestType = "lobbyStatus"
 	RequestMercenariesStatus    RequestType = "mercenariesStatus"
@@ -58,7 +59,7 @@ type ParsebleRequestData interface {
 	*Request | *GameActionRequestData | *CreateGameRoomRequestData | *KickFromGameRoomRequestData | *JoinRequestData |
 		*JoinGameRoomRequestData | *ShopActionRequestData | *ConfiguratorActionRequestData |
 		*GameNextPhaseRequestData | *ApplyForAJobRequestData | *SwitchUnitRequestData | *SetPlayerInfoRequestData |
-		*ChatMessageRequestData | *QuestsActionRequestData | *GameRoomHireMercenaryRequestData
+		*ChatMessageRequestData | *QuestsActionRequestData | *GameRoomHireMercenaryRequestData | *GameRoomDismissMercenaryRequestData
 }
 
 func parseRequestData[T ParsebleRequestData](data T, requestRaw []byte) T {

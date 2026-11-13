@@ -159,6 +159,29 @@ func (r *GameRooms) AddMercenary(playerId engine.PlayerId, mercenary *engine.Gam
 	return roomUid, true
 }
 
+func (r *GameRooms) RemoveMercenary(playerId engine.PlayerId, code domain.UnitCode) (uint, bool) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	roomUid, ok := r.playerIdToRoomUid[playerId]
+	if !ok {
+		return roomUid, false
+	}
+	room, ok := r.rooms[roomUid]
+	if !ok {
+		return roomUid, false
+	}
+	contains := slices.ContainsFunc(room.mercenaries, func(mercenary *engine.GameUnit) bool {
+		return mercenary.Code == code
+	})
+	if !contains {
+		return roomUid, false
+	}
+	room.mercenaries = util.Filter(room.mercenaries, func(mercenary *engine.GameUnit) bool {
+		return mercenary.Code != code
+	})
+	return roomUid, true
+}
+
 func (r *GameRooms) Has(uid uint) bool {
 	r.mu.RLock()
 	defer r.mu.RUnlock()

@@ -185,6 +185,8 @@ func (c *GameController) HandleRequest(playerId engine.PlayerId, requestRaw []by
 		return c.handleKickFromGameRoomRequest(playerId, request, response)
 	case RequestHireMercenary:
 		return c.handleGameRoomHireMercenaryRequest(playerId, request, response)
+	case RequestDismissMercenary:
+		return c.handleGameRoomDismissMercenaryRequest(playerId, request, response)
 	case RequestLeaveGameRoom:
 		return c.handleLeaveGameRoomRequest(playerId, request, response)
 	case RequestStartGame:
