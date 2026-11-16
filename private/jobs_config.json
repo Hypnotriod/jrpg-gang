@@ -45,10 +45,10 @@
         "reward": {
             "coins": 55
         },
-        "duration": 8,
+        "duration": 9,
         "countdown": 1200,
         "requirements": {
-            "initiative": 3
+            "endurance": 4
         }
     },
     {
@@ -58,7 +58,7 @@
         "reward": {
             "coins": 100
         },
-        "duration": 8,
+        "duration": 10,
         "countdown": 3600,
         "requirements": {
             "luck": 6
@@ -95,7 +95,8 @@
         "name": "Prospecting",
         "description": "Spend your hours with a pickaxe in the haunted mines, seeking gold hidden in stone steeped with restless shadows.",
         "reward": {
-            "coins": 150
+            "coins": 150,
+            "ruby": 1
         },
         "duration": 15,
         "countdown": 3600,
