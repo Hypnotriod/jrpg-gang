@@ -1,5 +1,18 @@
 [
     {
+        "code": "job-begging-01",
+        "name": "Begging",
+        "description": "Plead for scraps beneath the soot-blackened streets, trading what little pride remains for a handful of coin.",
+        "reward": {
+            "coins": 20
+        },
+        "duration": 5,
+        "countdown": 300,
+        "requirements": {
+            "intelligence": 2
+        }
+    },
+    {
         "code": "job-clean-01",
         "name": "Tavern floor scouring",
         "description": "Scrub the ale-stained floorboards of the local tavern, banishing the grime and echoes of last night's revelry. A humble task for those seeking coin and humility.",
@@ -20,9 +33,35 @@
             "coins": 40
         },
         "duration": 8,
-        "countdown": 1200,
+        "countdown": 900,
         "requirements": {
             "agility": 3
+        }
+    },
+    {
+        "code": "job-laundry-01",
+        "name": "Laundry",
+        "description": "Scrub the blood and filth from the garments of the wealthy, while the river carries their sins downstream.",
+        "reward": {
+            "coins": 55
+        },
+        "duration": 8,
+        "countdown": 1200,
+        "requirements": {
+            "initiative": 3
+        }
+    },
+    {
+        "code": "job-gather-herbs-01",
+        "name": "Gathering Herbs",
+        "description": "Gather bitter herbs from the blighted wilds for the village witch, where every root may heal or curse the hand that plucks it.",
+        "reward": {
+            "coins": 100
+        },
+        "duration": 8,
+        "countdown": 3600,
+        "requirements": {
+            "luck": 6
         }
     },
     {
@@ -30,7 +69,7 @@
         "name": "Library attendant",
         "description": "Assist a reclusive scholar in his dust-choked library, sorting ancient tomes and deciphering cryptic manuscripts. Knowledge and coin await the diligent.",
         "reward": {
-            "coins": 100
+            "coins": 150
         },
         "duration": 12,
         "countdown": 3600,
@@ -43,10 +82,10 @@
         "name": "Chickens on the loose",
         "description": "Round up every chicken that fled the farmer's hoop before their frantic clucks draw darker things from the hedgerow.",
         "reward": {
-            "coins": 100
+            "coins": 125
         },
         "duration": 12,
-        "countdown": 86400,
+        "countdown": 3600,
         "requirements": {
             "agility": 10
         }
@@ -56,10 +95,10 @@
         "name": "Prospecting",
         "description": "Spend your hours with a pickaxe in the haunted mines, seeking gold hidden in stone steeped with restless shadows.",
         "reward": {
-            "coins": 100
+            "coins": 150
         },
         "duration": 15,
-        "countdown": 86400,
+        "countdown": 3600,
         "requirements": {
             "physique": 10
         }
@@ -72,7 +111,7 @@
             "coins": 250
         },
         "duration": 12,
-        "countdown": 86400,
+        "countdown": 3600,
         "requirements": {
             "strength": 15
         }
@@ -85,7 +124,7 @@
             "coins": 200
         },
         "duration": 12,
-        "countdown": 86400,
+        "countdown": 3600,
         "requirements": {
             "luck": 10
         }
