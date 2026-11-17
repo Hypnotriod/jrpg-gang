@@ -73,7 +73,7 @@
             "level": 1
         },
         "price": {
-            "coins": 45
+            "coins": 35
         }
     },
     {
@@ -162,7 +162,7 @@
             "level": 2
         },
         "price": {
-            "coins": 180
+            "coins": 110
         }
     },
     {
@@ -243,7 +243,7 @@
             "level": 4
         },
         "price": {
-            "coins": 250
+            "coins": 200
         }
     },
     {
@@ -328,7 +328,7 @@
             "level": 7
         },
         "price": {
-            "coins": 450,
+            "coins": 400,
             "ruby": 1
         }
     }
