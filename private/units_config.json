@@ -403,6 +403,11 @@
                 }
             ]
         },
+        "ai": {
+            "weaponPreference": {
+                "club-01": 1
+            }
+        },
         "drop": [
             {
                 "weight": 1
@@ -502,6 +507,11 @@
                     "equipped": true
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "rusty-mace-01": 1
+            }
         },
         "drop": [
             {
@@ -862,6 +872,11 @@
                 }
             ]
         },
+        "ai": {
+            "weaponPreference": {
+                "sight-01": 1
+            }
+        },
         "drop": [
             {
                 "weight": 1
@@ -956,6 +971,11 @@
                 }
             ]
         },
+        "ai": {
+            "weaponPreference": {
+                "sight-01": 1
+            }
+        },
         "drop": [
             {
                 "weight": 1
@@ -1049,6 +1069,11 @@
                     "equipped": true
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "sight-01": 1
+            }
         },
         "drop": [
             {
@@ -1403,6 +1428,11 @@
                 }
             ]
         },
+        "ai": {
+            "weaponPreference": {
+                "scythe-01": 1
+            }
+        },
         "drop": [
             {
                 "weight": 1
@@ -1496,6 +1526,11 @@
                     "equipped": true
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "sight-02": 1
+            }
         },
         "drop": [
             {
@@ -1672,6 +1707,11 @@
                 }
             ]
         },
+        "ai": {
+            "weaponPreference": {
+                "cursed-sword-01": 1
+            }
+        },
         "drop": [
             {
                 "weight": 1
@@ -1765,6 +1805,11 @@
                     "equipped": true
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "throat-01": 1
+            }
         },
         "drop": [
             {
@@ -2112,6 +2157,11 @@
                 }
             ]
         },
+        "ai": {
+            "weaponPreference": {
+                "rusty-axe-01": 1
+            }
+        },
         "drop": [
             {
                 "weight": 1
@@ -2207,6 +2257,11 @@
                     "equipped": true
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "axe-01": 1
+            }
         },
         "drop": [
             {
@@ -2308,6 +2363,11 @@
                     "equipped": true
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "sorcerer-staff-03": 1
+            }
         },
         "drop": [
             {
@@ -2412,6 +2472,11 @@
                     "equipped": true
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "bloody-hammer-01": 1
+            }
         },
         "drop": [
             {
@@ -2581,6 +2646,11 @@
                     "code": "poison-tail-01"
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "poison-tail-01": 1
+            }
         },
         "drop": [
             {
@@ -2837,6 +2907,11 @@
                 }
             ]
         },
+        "ai": {
+            "weaponPreference": {
+                "cursed-hand-eye-01": 1
+            }
+        },
         "drop": [
             {
                 "weight": 1
@@ -2950,6 +3025,11 @@
                     "equipped": true
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "sorcerer-staff-02": 1
+            }
         },
         "drop": [
             {

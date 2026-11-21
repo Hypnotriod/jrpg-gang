@@ -140,6 +140,11 @@ func (e *GameEngine) aiTryToAttack(event *GameEvent, unit *GameUnit, targets []R
 	sort.SliceStable(targets, func(a, b int) bool {
 		weaponA := unit.Inventory.FindWeapon(targets[a].WeaponUid)
 		weaponB := unit.Inventory.FindWeapon(targets[b].WeaponUid)
+		if unit.Ai != nil && len(unit.Ai.WeaponPreference) != 0 {
+			preferenceA := unit.Ai.WeaponPreference[weaponA.Code]
+			preferenceB := unit.Ai.WeaponPreference[weaponB.Code]
+			return preferenceA > preferenceB
+		}
 		return (weaponA.Equipped && !weaponB.Equipped)
 	})
 	for _, t := range targets {

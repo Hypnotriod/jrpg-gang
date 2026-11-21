@@ -61,6 +61,11 @@
                 }
             ]
         },
+        "ai": {
+            "weaponPreference": {
+                "pitchfork-01": 1
+            }
+        },
         "slots": {
             "head": 1,
             "neck": 1,
@@ -150,6 +155,12 @@
                 }
             ]
         },
+        "ai": {
+            "weaponPreference": {
+                "bow-01": 2,
+                "dagger-02": 1
+            }
+        },
         "slots": {
             "head": 1,
             "neck": 1,
@@ -230,6 +241,11 @@
                     "equipped": true
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "halberd-01": 1
+            }
         },
         "slots": {
             "head": 1,
@@ -315,6 +331,11 @@
                     "equipped": true
                 }
             ]
+        },
+        "ai": {
+            "weaponPreference": {
+                "sword-02": 1
+            }
         },
         "slots": {
             "head": 1,
