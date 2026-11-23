@@ -2304,7 +2304,7 @@
             "baseAttributes": {
                 "health": 100,
                 "stamina": 120,
-                "mana": 200,
+                "mana": 60,
                 "actionPoints": 10
             },
             "attributes": {
@@ -2957,8 +2957,8 @@
             },
             "baseAttributes": {
                 "health": 300,
-                "stamina": 50,
-                "mana": 140,
+                "stamina": 70,
+                "mana": 200,
                 "actionPoints": 10
             },
             "attributes": {
@@ -3007,7 +3007,7 @@
                 {
                     "code": "lightning-charge-01",
                     "equipped": true,
-                    "quantity": 20
+                    "quantity": 30
                 },
                 {
                     "code": "sorcerer-hat-01",
