@@ -2605,7 +2605,7 @@
                 "actionPoints": 9
             },
             "attributes": {
-                "strength": 20,
+                "strength": 16,
                 "physique": 18,
                 "agility": 9,
                 "endurance": 8,
@@ -2779,7 +2779,7 @@
                 "actionPoints": 12
             },
             "attributes": {
-                "strength": 24,
+                "strength": 20,
                 "physique": 18,
                 "agility": 15,
                 "endurance": 15,
