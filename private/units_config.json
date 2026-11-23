@@ -2304,6 +2304,7 @@
             "baseAttributes": {
                 "health": 100,
                 "stamina": 120,
+                "mana": 200,
                 "actionPoints": 10
             },
             "attributes": {
