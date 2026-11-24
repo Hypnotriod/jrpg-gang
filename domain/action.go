@@ -22,6 +22,7 @@ const (
 	ActionWait          AtionType = "wait"
 	ActionLevelUp       AtionType = "levelUp"
 	ActionSkillUp       AtionType = "skillUp"
+	ActionCustomize     AtionType = "customize"
 )
 
 type ActionProperty string
@@ -40,12 +41,13 @@ const (
 )
 
 type Action struct {
-	Action    AtionType      `json:"action"`
-	Uid       uint           `json:"uid,omitzero"`
-	TargetUid uint           `json:"targetUid,omitzero"`
-	ItemUid   uint           `json:"itemUid,omitzero"`
-	Quantity  uint           `json:"quantity,omitzero"`
-	Property  ActionProperty `json:"property,omitempty"`
-	QuestCode QuestCode      `json:"questCode,omitempty"`
-	Position  *Position      `json:"position,omitempty"`
+	Action        AtionType          `json:"action"`
+	Uid           uint               `json:"uid,omitzero"`
+	TargetUid     uint               `json:"targetUid,omitzero"`
+	ItemUid       uint               `json:"itemUid,omitzero"`
+	Quantity      uint               `json:"quantity,omitzero"`
+	Property      ActionProperty     `json:"property,omitempty"`
+	QuestCode     QuestCode          `json:"questCode,omitempty"`
+	Position      *Position          `json:"position,omitempty"`
+	Customization *UnitCustomization `json:"customization,omitempty"`
 }

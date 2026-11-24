@@ -85,6 +85,7 @@ func NewUser(
 	u.Class = class
 	u.Code = unit.Code
 	u.Level = unit.Stats.Progress.Level
+	u.Customization = unit.Customization.Clone()
 	u.Status = UserStatusNotJoined
 	u.Unit = unit
 	u.Unit.PrepareForUser()

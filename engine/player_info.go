@@ -9,17 +9,29 @@ const (
 )
 
 type PlayerInfo struct {
-	Id        PlayerId         `json:"playerId"`
-	Nickname  string           `json:"nickname"`
-	Class     domain.UnitClass `json:"class"`
-	Code      domain.UnitCode  `json:"code"`
-	Level     uint             `json:"level"`
-	UnitUid   uint             `json:"unitUid,omitzero"`
-	IsOffline bool             `json:"isOffline,omitzero"`
-	IsReady   bool             `json:"isReady,omitzero"`
-	IsGuest   bool             `json:"isGuest,omitzero"`
+	Id            PlayerId                  `json:"playerId"`
+	Nickname      string                    `json:"nickname"`
+	Class         domain.UnitClass          `json:"class"`
+	Code          domain.UnitCode           `json:"code"`
+	Level         uint                      `json:"level"`
+	UnitUid       uint                      `json:"unitUid,omitzero"`
+	Customization *domain.UnitCustomization `json:"customization,omitempty"`
+	IsOffline     bool                      `json:"isOffline,omitzero"`
+	IsReady       bool                      `json:"isReady,omitzero"`
+	IsGuest       bool                      `json:"isGuest,omitzero"`
 }
 
-func (p PlayerInfo) Clone() *PlayerInfo {
-	return &p
+func (p *PlayerInfo) Clone() *PlayerInfo {
+	return &PlayerInfo{
+		Id:            p.Id,
+		Nickname:      p.Nickname,
+		Class:         p.Class,
+		Code:          p.Code,
+		Level:         p.Level,
+		UnitUid:       p.UnitUid,
+		Customization: p.Customization.Clone(),
+		IsOffline:     p.IsOffline,
+		IsReady:       p.IsReady,
+		IsGuest:       p.IsGuest,
+	}
 }

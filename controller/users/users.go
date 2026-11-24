@@ -167,8 +167,19 @@ func (u *Users) UpdateWithNewGameUnit(playerId engine.PlayerId, unit *engine.Gam
 	user.Class = unit.Class
 	user.Code = unit.Code
 	user.Level = unit.Stats.Progress.Level
+	user.Customization = unit.Customization.Clone()
 	user.Unit.PrepareForUser()
 	user.Unit.Inventory.PopulateUids(user.RndGen)
+}
+
+func (u *Users) UpdateWithCustomization(playerId engine.PlayerId, customization *domain.UnitCustomization) {
+	u.mu.Lock()
+	defer u.mu.Unlock()
+	user, ok := u.users[playerId]
+	if !ok {
+		return
+	}
+	user.Customization = customization
 }
 
 func (u *Users) AccumulateBooty(playerId engine.PlayerId, booty domain.UnitBooty) {

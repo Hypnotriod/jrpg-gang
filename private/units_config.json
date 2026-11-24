@@ -2344,6 +2344,9 @@
         "inventory": {
             "descriptor": [
                 {
+                    "code": "fist-01"
+                },
+                {
                     "code": "dagger-01"
                 },
                 {
@@ -2367,7 +2370,8 @@
         },
         "ai": {
             "weaponPreference": {
-                "sorcerer-staff-03": 1
+                "sorcerer-staff-03": 2,
+                "dagger-01": 1
             }
         },
         "drop": [

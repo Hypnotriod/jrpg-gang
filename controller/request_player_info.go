@@ -9,6 +9,7 @@ import (
 )
 
 type SetPlayerInfoRequestData struct {
+	domain.UnitCustomization
 	Token    auth.AuthenticationToken `json:"token"`
 	Nickname string                   `json:"nickname"`
 	Class    domain.UnitClass         `json:"class"`
@@ -44,6 +45,7 @@ func (c *GameController) handleSetPlayerInfoRequest(request *Request, response *
 	if unit == nil {
 		return response.WithStatus(ResponseStatusNotAllowed)
 	}
+	unit.Customization = &data.UnitCustomization
 	if !c.persistance.SetUserInfoToAuthCache(data.Token, nickname, data.Class, &unit.Unit) {
 		return response.WithStatus(ResponseStatusNotFound)
 	}

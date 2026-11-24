@@ -23,9 +23,13 @@ func (c *GameController) handleConfiguratorActionRequest(playerId engine.PlayerI
 		c.users.UpdateOnLevelUp(playerId, &user.Unit.Unit)
 	}
 	if actionResult.Result == domain.ResultAccomplished {
+		if data.Action.Action == domain.ActionCustomize {
+			c.users.UpdateWithCustomization(playerId, user.Unit.Customization.Clone())
+		}
 		if data.Action.Action == domain.ActionThrowAway ||
 			data.Action.Action == domain.ActionLevelUp ||
-			data.Action.Action == domain.ActionSkillUp {
+			data.Action.Action == domain.ActionSkillUp ||
+			data.Action.Action == domain.ActionCustomize {
 			c.persistUser(&user)
 		}
 		response.Data[DataKeyUnit] = user.Unit

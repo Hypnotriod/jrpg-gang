@@ -17,23 +17,24 @@ const (
 )
 
 type Unit struct {
-	rng          *rand.Rand
-	Uid          uint                     `json:"uid,omitzero" bson:"-"`
-	Name         string                   `json:"name" bson:"name"`
-	Code         UnitCode                 `json:"code,omitempty" bson:"code,omitempty"`
-	Class        UnitClass                `json:"class,omitempty" bson:"class,omitempty"`
-	Booty        UnitBooty                `json:"booty" bson:"booty"`
-	State        UnitState                `json:"state" bson:"-"`
-	Stats        UnitStats                `json:"stats" bson:"stats"`
-	Damage       []DamageImpact           `json:"damage,omitempty" bson:"-"`
-	Modification []UnitModificationImpact `json:"modification,omitempty" bson:"-"`
-	Inventory    UnitInventory            `json:"inventory" bson:"inventory"`
-	Slots        map[EquipmentSlot]uint   `json:"slots" bson:"slots"`
-	Achievements UnitAchievements         `json:"achievements" bson:"achievements"`
-	Quests       UnitQuests               `json:"quests" bson:"quests"`
-	Position     Position                 `json:"position" bson:"-"`
-	Description  string                   `json:"description,omitempty" bson:"-"`
-	Ai           *UnitAI                  `json:"ai,omitempty"`
+	rng           *rand.Rand
+	Uid           uint                     `json:"uid,omitzero" bson:"-"`
+	Name          string                   `json:"name" bson:"name"`
+	Code          UnitCode                 `json:"code,omitempty" bson:"code,omitempty"`
+	Class         UnitClass                `json:"class,omitempty" bson:"class,omitempty"`
+	Booty         UnitBooty                `json:"booty" bson:"booty"`
+	State         UnitState                `json:"state" bson:"-"`
+	Stats         UnitStats                `json:"stats" bson:"stats"`
+	Damage        []DamageImpact           `json:"damage,omitempty" bson:"-"`
+	Modification  []UnitModificationImpact `json:"modification,omitempty" bson:"-"`
+	Inventory     UnitInventory            `json:"inventory" bson:"inventory"`
+	Slots         map[EquipmentSlot]uint   `json:"slots" bson:"slots"`
+	Achievements  UnitAchievements         `json:"achievements" bson:"achievements"`
+	Quests        UnitQuests               `json:"quests" bson:"quests"`
+	Position      Position                 `json:"position" bson:"-"`
+	Description   string                   `json:"description,omitempty" bson:"-"`
+	Ai            *UnitAI                  `json:"ai,omitempty" bson:"-"`
+	Customization *UnitCustomization       `json:"customization,omitempty" bson:"customization,omitempty"`
 }
 
 func (u *Unit) Clone() *Unit {
@@ -57,6 +58,7 @@ func (u *Unit) Clone() *Unit {
 	r.Position = u.Position
 	r.Description = u.Description
 	r.Ai = u.Ai.Clone()
+	r.Customization = u.Customization.Clone()
 	return r
 }
 

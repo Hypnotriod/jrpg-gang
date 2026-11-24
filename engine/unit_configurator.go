@@ -22,6 +22,8 @@ func (c *UnitConfigurator) ExecuteAction(action domain.Action, unit *domain.Unit
 		return unit.LevelUp()
 	case domain.ActionSkillUp:
 		return unit.SkillUp(action.Property)
+	case domain.ActionCustomize:
+		return unit.Customize(action.Customization)
 	}
 	return domain.NewActionResult().WithResult(domain.ResultNotAccomplished)
 }
