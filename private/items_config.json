@@ -406,7 +406,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "cutting": 18,
                     "crushing": 3,
                     "deviation": 2
@@ -610,7 +610,7 @@
             },
             "damage": [
                 {
-                    "chance": 70
+                    "chance": 75
                 }
             ],
             "useCost": {
@@ -759,7 +759,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "cutting": 14,
                     "deviation": 2
                 },
@@ -868,7 +868,7 @@
             },
             "damage": [
                 {
-                    "chance": 70
+                    "chance": 75
                 }
             ],
             "range": {
@@ -1037,7 +1037,7 @@
             },
             "damage": [
                 {
-                    "chance": 65,
+                    "chance": 70,
                     "cutting": 22,
                     "crushing": 2,
                     "deviation": 5
@@ -1198,7 +1198,7 @@
             },
             "damage": [
                 {
-                    "chance": 60,
+                    "chance": 65,
                     "cutting": 2,
                     "crushing": 27,
                     "deviation": 5
@@ -1238,7 +1238,7 @@
             },
             "damage": [
                 {
-                    "chance": 65,
+                    "chance": 70,
                     "cutting": 24,
                     "crushing": 4,
                     "deviation": 2
