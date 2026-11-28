@@ -1751,7 +1751,7 @@
             },
             "damage": [
                 {
-                    "chance": 70,
+                    "chance": 75,
                     "lightning": 17,
                     "deviation": 5
                 },
